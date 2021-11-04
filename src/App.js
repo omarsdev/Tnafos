@@ -1,11 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { Login, NotFound, Register, Home, Search, Dashboard } from "./pages";
+import { HomepageLayout, NotFound, Search, DashboardLayout } from "./pages";
 import { UserDataContextProvider } from "./context";
 
 import { ChakraProvider } from "@chakra-ui/react";
-import "tailwindcss/tailwind.css";
 
 const App = () => {
   return (
@@ -13,10 +12,10 @@ const App = () => {
       <UserDataContextProvider>
         <Router>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route exact path="/" component={HomepageLayout} />
+            {/* <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} /> */}
+            <Route path="/dashboard" component={DashboardLayout} />
             <Route path="/:search" component={Search} />
             <Route path="*" component={NotFound} />
           </Switch>
