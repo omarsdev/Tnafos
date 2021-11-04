@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.17",
     "@chakra-ui/react": "^1.6.10",
     "@craco/craco": "^5.9.0",
     "@hookform/resolvers": "^2.8.2",
@@ -20,8 +21,8 @@
   },
   "scripts": {
     "start": "craco start",
-     "build": "craco build",
-     "test": "craco test",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
