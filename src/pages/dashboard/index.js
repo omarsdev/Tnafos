@@ -1,3 +1,3 @@
 export * from './DashboardLayout';
-export * from './DashboardContent';
+export * from './DasboardContent';
 export * from './components/index';
