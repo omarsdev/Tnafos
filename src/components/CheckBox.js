@@ -12,6 +12,7 @@ export const CheckBox = ({ name, value, setValue, register, ...rest }) => {
       _focusVisible={{ shadow: "outline" }}
       _focus={{ shadow: "none" }}
       colorScheme="#F8B916"
+      defaultIsChecked
       {...register(`${name}`)}
       {...rest}
     >
@@ -22,6 +23,7 @@ export const CheckBox = ({ name, value, setValue, register, ...rest }) => {
       _focusVisible={{ shadow: "outline" }}
       _focus={{ shadow: "none" }}
       colorScheme="#F8B916"
+      defaultIsChecked
       isChecked={value}
       onChange={onCheckHandler}
       {...rest}
