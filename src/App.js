@@ -1,20 +1,47 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { HomepageLayout, NotFound, Search, DashboardLayout } from "./pages";
+import {
+  HomepageLayout,
+  NotFound,
+  Search,
+  DashboardLayout,
+  Login,
+  Register,
+} from "./pages";
 import { UserDataContextProvider } from "./context";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+
+import { withFocusVisible } from "@v1v2/chakra";
+
+const theme = extendTheme(
+  {
+    components: {
+      Checkbox: {
+        baseStyle: {
+          control: {
+            bg: "white",
+            _checked: {
+              bg: "#F8B916",
+            },
+          },
+        },
+      },
+    },
+  },
+  withFocusVisible()
+);
 
 const App = () => {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <UserDataContextProvider>
         <Router>
           <Switch>
             <Route exact path="/" component={HomepageLayout} />
-            {/* <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} /> */}
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
             <Route path="/dashboard" component={DashboardLayout} />
             <Route path="/:search" component={Search} />
             <Route path="*" component={NotFound} />
