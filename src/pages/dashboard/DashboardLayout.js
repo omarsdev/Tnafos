@@ -67,7 +67,6 @@ export const DashboardLayout = () => {
     <>
     {userData ? (
       <Container>
-        <Flex>
           {/* <Box> */}
         <Sidebar/>
           {/* </Box> */}
@@ -126,7 +125,6 @@ export const DashboardLayout = () => {
               <Route path={`${match.path}/settings`} component={Settings} />
             </Switch>
           </div>
-        </Flex>
       </Container>
     ):(
         <h1>loading</h1>
