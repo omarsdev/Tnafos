@@ -9,7 +9,7 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-import { getMyServices } from "../../../../../../utils";
+import { getMyServices } from "../../utils";
 import { UpdateService } from "./";
 
 export const MyService = () => {

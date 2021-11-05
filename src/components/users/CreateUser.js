@@ -1,7 +1,7 @@
 import { Container, Heading, VStack, Box, Checkbox, Button, Input} from '@chakra-ui/react';
 import React, {useState} from 'react';
 import { Link, useHistory } from "react-router-dom";
-import { createNewUser } from "../../../../../../utils";
+import { createNewUser } from "../../utils";
 
 
 export const CreateUser = () => {

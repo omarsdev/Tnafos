@@ -1,7 +1,7 @@
 import { VStack, HStack, Button, Input } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { getMyServices, updateService } from "../../../../../../utils";
+import { getMyServices, updateService } from "../../utils";
 
 export const UpdateService = () => {
   const { uuid } = useParams();

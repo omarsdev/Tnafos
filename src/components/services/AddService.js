@@ -1,7 +1,7 @@
 import { HStack, VStack, Button, Input} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createService } from "../../../../../../utils";
+import { createService } from "../../utils";
 
 export const AddService = () => {
   const [input, setInput] = useState({

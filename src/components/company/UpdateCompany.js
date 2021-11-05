@@ -1,7 +1,7 @@
 import { Box, Container, VStack, HStack,Button, Input } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { showCompany, updateCompany } from "../../../../../../utils";
+import { showCompany, updateCompany } from "../../utils";
 
 export const UpdateCompany = () => {
   const history = useHistory();

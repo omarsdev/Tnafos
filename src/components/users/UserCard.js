@@ -9,7 +9,7 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-import { getUser } from "../../../../../../utils";
+import { getUser } from "../../utils";
 import { UpdateUser } from "./";
 
 export const UserCard = () => {

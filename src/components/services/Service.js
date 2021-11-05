@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AddService, MyService } from "./";
 import { IconButton, Box, HStack, VStack } from "@chakra-ui/react";
 import { Link, useParams, useRouteMatch, Route, Switch } from "react-router-dom";
-import { showServicesList } from "../../../../../../utils";
+import { showServicesList } from "../../utils";
 import { ServiceCard } from "./";
 import { SmallAddIcon } from "@chakra-ui/icons";
 

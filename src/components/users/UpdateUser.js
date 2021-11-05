@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { getUser, updateUserInfo } from "../../../../../../utils";
+import { getUser, updateUserInfo } from "../../utils";
 import {
   Button,
   Input,
