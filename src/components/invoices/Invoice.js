@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Invioce = () => {
+export const Invoice = () => {
     return (
         <div>
            invoices ... 

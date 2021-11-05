@@ -16,8 +16,8 @@ const App = () => {
             {/* <Route path="/register" component={Register} />
             <Route path="/login" component={Login} /> */}
             <Route path="/dashboard" component={DashboardLayout} />
-            <Route path="/:search" component={Search} />
-            <Route path="*" component={NotFound} />
+            {/* <Route path="/:search" component={Search} />
+            <Route path="*" component={NotFound} /> */}
           </Switch>
         </Router>
       </UserDataContextProvider>
