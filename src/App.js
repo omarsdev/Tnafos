@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import {
-  HomepageLayout,
+  Homepage,
   NotFound,
   Search,
   DashboardLayout,
@@ -39,7 +39,7 @@ const App = () => {
       <UserDataContextProvider>
         <Router>
           <Switch>
-            <Route exact path="/" component={HomepageLayout} />
+            <Route exact path="/" component={Homepage} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/dashboard" component={DashboardLayout} />

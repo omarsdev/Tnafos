@@ -26,8 +26,8 @@ export const SecondaryButton = ({ name, ...buttonProps }) => {
       ref={ref}
       isLoading={loading}
       loadingText="Loading"
-      width="150px"
-      height="50px"
+      width="120px"
+      height="40px"
       borderColor="#F8B916"
       borderWidth="2px"
       backgroundColor="white"

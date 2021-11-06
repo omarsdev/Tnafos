@@ -27,8 +27,8 @@ export const PrimaryButton = ({ name, buttonType, ...buttonProps }) => {
       ref={ref}
       isLoading={loading}
       loadingText="Loading"
-      width="150px"
-      height="50px"
+      width="120px"
+      height="40px"
       backgroundColor="#F8B916"
       _hover={{ bg: "#D59B06" }}
       borderRadius="30px"

@@ -5,3 +5,5 @@ export * from "./button/PrimaryButton";
 export * from "./button/SecondaryButton";
 
 export * from "./CheckBox";
+
+export * from "./Navbar";
