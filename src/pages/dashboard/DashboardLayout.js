@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { DashboardContent } from "./DasboardContent";
 import { Navbar, Sidebar } from "./components/index";
-import { Container, HStack, VStack } from "@chakra-ui/react";
+import { Box, HStack, VStack } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useRouteMatch, useHistory, Route, Switch } from "react-router-dom";
 import { UserDataContext } from "../../context";
@@ -26,13 +26,6 @@ export const DashboardLayout = () => {
   // const [userData, setUserData] = userDataProvider;
   // const [clientToken, setClientToken] = userTokenProvider;
 
-  const history = useHistory();
-
-  const handlerLogOut = () => {
-    removeUserSession();
-    history.push("/home");
-  };
-
   // const getUser = async () => {
   //   if (!userData) {
   //     //* grab token wether from local storage or context
@@ -55,41 +48,38 @@ export const DashboardLayout = () => {
   //   // checkCopmany();
   // }, []);
 
-  const handleLogOut = () => {
-    removeUserSession();
-    history.push("/login");
-  };
-
   //*  note: we picked user information below from the (userData) variable that we've stored in context provider
   return (
     <>
       {/* {userData ?*/}
-      <HStack className="h-full w-full">
-        <Sidebar />
-        <VStack className="chakra-stack h-screen w-full">
-          <Navbar />
-          <DashboardContent />
-        </VStack>
-      </HStack>
-      {/* {body} */}
-      <Switch>
-        <Route exact path={match.path} />
-        <Route path={`${match.path}/company`} component={Company} />
-        <Route path={`${match.path}/user`} component={User} />
-        <Route path={`${match.path}/service`} component={Service} />
-        <Route
-          path={`${match.path}/purchase-requests`}
-          component={PurchaseRequest}
-        />
-        <Route path={`${match.path}/payment`} component={Payment} />
-        <Route path={`${match.path}/invoice`} component={Invoice} />
-        <Route path={`${match.path}/estimate`} component={Estimate} />
-        <Route path={`${match.path}/client`} component={Client} />
-        <Route path={`${match.path}/settings`} component={Settings} />
-      </Switch>
-      {/* ) : (
+      <Box className="h-screen">
+        <HStack>
+          <Sidebar />
+          <VStack className="chakra-stack h-screen  w-full">
+            <Navbar className="w-full" />
+            <DashboardContent />
+          </VStack>
+        </HStack>
+        {/* {body} */}
+        <Switch>
+          <Route exact path={match.path} />
+          <Route path={`${match.path}/company`} component={Company} />
+          <Route path={`${match.path}/user`} component={User} />
+          <Route path={`${match.path}/service`} component={Service} />
+          <Route
+            path={`${match.path}/purchase-requests`}
+            component={PurchaseRequest}
+          />
+          <Route path={`${match.path}/payment`} component={Payment} />
+          <Route path={`${match.path}/invoice`} component={Invoice} />
+          <Route path={`${match.path}/estimate`} component={Estimate} />
+          <Route path={`${match.path}/client`} component={Client} />
+          <Route path={`${match.path}/settings`} component={Settings} />
+        </Switch>
+        {/* ) : (
         <h1>loading</h1>
       )} */}
+      </Box>
     </>
   );
 };

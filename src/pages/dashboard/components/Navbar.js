@@ -12,9 +12,18 @@ import {
 } from "@chakra-ui/react";
 import { useRouteMatch, Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
+import { removeUserSession } from "../../../utils";
+import { useHistory } from "react-router-dom";
 
 export const Navbar = () => {
   const match = useRouteMatch();
+  const history = useHistory();
+
+  const handlerLogOut = () => {
+    removeUserSession();
+    history.go(0);
+  };
+
   return (
     <Box
       bg="white"
@@ -44,10 +53,7 @@ export const Navbar = () => {
             <Link to={`${match.url}/user/profile`}>
               <MenuItem className="hover:bg-gray-200">My Profile</MenuItem>
             </Link>
-            <MenuItem
-              // onClick={handlerLogOut}
-              className="hover:bg-gray-200"
-            >
+            <MenuItem onClick={handlerLogOut} className="hover:bg-gray-200">
               Log out
             </MenuItem>
           </MenuList>

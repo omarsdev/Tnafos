@@ -1,18 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+
+#root {
+  min-width: 100vw;
+  min-height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100%;
+  height: 100vh;
+  font-family: "Tajawal", serif;
+  padding: 0;
+  margin: 0;
+}
+
 /* ./src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 /* google fonts */
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 
 body {
   margin: 0;
-  font-family: 'Tajawal', sans-serif;
+  font-family: "Tajawal", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
