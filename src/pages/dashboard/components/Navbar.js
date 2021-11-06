@@ -1,13 +1,14 @@
 import React from "react";
 import {
   Box,
-  IconButton,
+  Button,
   Image,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   HStack,
+  Text,
 } from "@chakra-ui/react";
 import { useRouteMatch, Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
@@ -17,13 +18,14 @@ export const Navbar = () => {
   return (
     <Box
       bg="white"
-      className="flex flex-row-reverse h-129.5 opacity-100 shadow-xl w-1920"
+      className="flex flex-row-reverse opacity-100 shadow-xl w-full h-24"
     >
       <Box className="flex flex-row items-center">
-        <HStack className="font-medium h-25 justify-center my-auto text-gray-700 text-md w-81">
+        <HStack className="font-medium h-10 justify-center my-auto text-gray-700 text-md w-32">
           {/* <span className="my-auto mr-7">
                       {userData.first_name} {userData.last_name}
                     </span> */}
+          <Text>User name</Text>
         </HStack>
         <Image
           className="object-cover border rounded-full h-14 w-14 border-CPrimary css-0 rounded-ful"
@@ -33,11 +35,12 @@ export const Navbar = () => {
         />
         <Menu>
           <MenuButton
-            as={IconButton}
+            as={Button}
             rightIcon={<FaChevronDown />}
-            className="w-12 h-6 my-auto mr-5"
+            bg="transparent"
+            _hover="transparent"
           />
-          <MenuList className="h-12 mt-5 bg-white border border-gray-300 rounded opacity-50 w-28">
+          <MenuList w="28">
             <Link to={`${match.url}/user/profile`}>
               <MenuItem className="hover:bg-gray-200">My Profile</MenuItem>
             </Link>

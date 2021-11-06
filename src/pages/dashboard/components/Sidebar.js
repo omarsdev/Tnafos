@@ -64,68 +64,94 @@ const NavItem = ({ to, icon, title, submenu, heading }) => {
   );
 };
 
-export const Sidebar = (id) => {
-  //   const [navIndexClick, setNavIndexClick] = useState(null);
+export const Sidebar = () => {
   let match = useRouteMatch();
 
   return (
-    <Box className="bg-CBlack h-1080 w-260">
-      <Box>
-        <HStack>
-          <img src="/imgs/Tnafos-logo.svg" alt="Tnafos-logo" />
+    <Box className="bg-gray-800 h-screen max-h-screen w-44">
+      <Box className="h-24 items-center w-full">
+        <HStack className="flex flex-row h-18 items-center justify-center p-5">
+          <Box className="">
+            <Image src="/assets/icons/TnafosLogo" alt="Tnafos-logo" />
+          </Box>
           <VStack spacing={0} align="stretch">
-            <Text>tnafos</Text>
-            <Text>تنافس</Text>
+            <Text className="h-8 w-20 text-CWhite">tnafos</Text>
+            <Text className="h-8 w-20 text-CWhite">تنافس</Text>
           </VStack>
         </HStack>
       </Box>
 
-      <Box>
-        <List>
+      <Box className="css-0 h-full w-auto">
+        <List className="gap-y-2">
           {SidebarMenu.map((item, idxxx) => (
             <Box key={idxxx}>
               <Divider />
               <ListItem>
                 <Box>
-                  <Text fontSize="xs">{item.heading}</Text>
+                  <Text className="text-CWhite p-1" fontSize="xs">
+                    {item.heading}
+                  </Text>
                   {item.id === 0 ? (
                     <Link to={`${match.url}`} key={idxxx}>
-                      <HStack>
-                        {item.icon && <Text>{item.icon}</Text>}
-                        {item.title && <Text>{item.title}</Text>}
+                      <HStack className="py-2">
+                        {item.icon && (
+                          <Text className="text-CWhite">{item.icon}</Text>
+                        )}
+                        {item.title && (
+                          <Text className="text-CWhite">{item.title}</Text>
+                        )}
                       </HStack>
                     </Link>
                   ) : (
-                    <Box>
+                    <Box color="gray.800">
                       {item.navitem &&
                         item.navitem.map((ele, idx) => (
                           <List key={idx}>
-                            <ListItem>
+                            <ListItem color="gray.800">
                               {ele.to && !ele.submenu ? (
                                 <Link
                                   to={`${match.url}${ele.to}`}
                                   className="font-medium"
                                   key={idx}
                                 >
-                                  <Button>
+                                  <Button
+                                    bg="transparent"
+                                    width="60%"
+                                    height="10"
+                                    fontSize="sm"
+                                    _hover="transparent"
+                                  >
                                     <HStack>
-                                      <Text>{ele.icon}</Text>
-                                      <Text>{ele.title}</Text>
+                                      <Text className="text-CWhite">
+                                        {ele.icon}
+                                      </Text>
+                                      <Text className="text-CWhite">
+                                        {ele.title}
+                                      </Text>
                                     </HStack>
                                   </Button>
                                 </Link>
                               ) : (
-                                <Menu>
+                                <Menu placement="bottom">
                                   <>
                                     <MenuButton
                                       as={Button}
                                       rightIcon={<FaAngleDown />}
+                                      className="text-CWhite"
+                                      bg="transparent"
+                                      width="100%"
+                                      height="10"
+                                      fontSize="sm"
+                                      _hover="transparent"
                                     >
-                                      {ele.title}
+                                      <HStack>
+                                        <Text>{ele.icon}</Text>
+                                        <Text>{ele.title}</Text>
+                                      </HStack>
                                     </MenuButton>
-                                    <MenuList>
+                                    <MenuList w="20">
                                       {ele.submenu.map((element, index) => (
-                                        <MenuItem key={index}>
+                                        <MenuItem key={index} width="100%">
                                           <Link
                                             to={`${match.url}${element.to}`}
                                           >
