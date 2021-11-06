@@ -72,7 +72,7 @@ export const Sidebar = (id) => {
     <Box className="bg-CBlack h-1080 w-260">
       <Box>
         <HStack>
-          <Image src="assets/icons/TnafosLogo" alt="Tnafos-logo" />
+          <img src="/imgs/Tnafos-logo.svg" alt="Tnafos-logo" />
           <VStack spacing={0} align="stretch">
             <Text>tnafos</Text>
             <Text>تنافس</Text>
