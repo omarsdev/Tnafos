@@ -68,7 +68,7 @@ export const Sidebar = () => {
   let match = useRouteMatch();
 
   return (
-    <Box className="bg-gray-800 h-screen">
+    <Box className="bg-gray-800 w-44 h-screen">
       <Box className="h-24 items-center w-full">
         <HStack className="flex flex-row h-18 items-center justify-center p-5">
           <Box className="">

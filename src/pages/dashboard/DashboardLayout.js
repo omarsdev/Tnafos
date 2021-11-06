@@ -52,7 +52,7 @@ export const DashboardLayout = () => {
   return (
     <>
       {/* {userData ?*/}
-      <Box className="h-screen">
+      <Box>
         <HStack>
           <Sidebar />
           <VStack className="chakra-stack h-screen  w-full">
