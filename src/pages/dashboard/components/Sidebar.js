@@ -69,7 +69,7 @@ export const Sidebar = (id) => {
   let match = useRouteMatch();
 
   return (
-    <Box>
+    <Box className="bg-CBlack h-1080 w-260">
       <Box>
         <HStack>
           <Image src="assets/icons/TnafosLogo" alt="Tnafos-logo" />
