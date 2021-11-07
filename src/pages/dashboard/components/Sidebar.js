@@ -117,12 +117,12 @@ export const Sidebar = () => {
                                   className="font-medium"
                                   key={idx}
                                 >
-                                  <Button
-                                    bg="transparent"
-                                    width="60%"
-                                    height="10"
-                                    fontSize="sm"
-                                    _hover="transparent"
+                                  <Box
+                                    // bg="transparent"
+                                    // width="60%"
+                                    // height="10"
+                                    // fontSize="sm"
+                                    // _hover="transparent"
                                   >
                                     <HStack>
                                       <Text className="text-CWhite">
@@ -132,20 +132,20 @@ export const Sidebar = () => {
                                         {ele.title}
                                       </Text>
                                     </HStack>
-                                  </Button>
+                                  </Box>
                                 </Link>
                               ) : (
                                 <Menu placement="bottom">
                                   <>
                                     <MenuButton
-                                      as={Button}
-                                      rightIcon={<FaAngleDown />}
+                                      // as={Button}
+                                      // rightIcon={<FaAngleDown />}
                                       className="text-CWhite"
-                                      bg="transparent"
-                                      width="100%"
-                                      height="10"
-                                      fontSize="sm"
-                                      _hover="transparent"
+                                      // bg="transparent"
+                                      // width="100%"
+                                      // height="10"
+                                      // fontSize="sm"
+                                      // _hover="transparent"
                                     >
                                       <HStack>
                                         <Text>{ele.icon}</Text>
