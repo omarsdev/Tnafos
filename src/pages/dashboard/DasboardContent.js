@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/layout";
 import React from "react";
 import { useRouteMatch, Route, Switch } from "react-router-dom";
 import {
@@ -16,8 +17,7 @@ export const DashboardContent = () => {
   let match = useRouteMatch();
   return (
     <>
-      <div className="h-3/4 w-full">
-        content here is related to dashboard's sub pages...
+      <Box>
         {/* {body} */}
         <Switch>
           <Route exact path={match.path} />
@@ -34,7 +34,7 @@ export const DashboardContent = () => {
           <Route path={`${match.path}/client`} component={Client} />
           <Route path={`${match.path}/settings`} component={Settings} />
         </Switch>
-      </div>
+      </Box>
     </>
   );
 };

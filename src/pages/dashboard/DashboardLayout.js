@@ -43,7 +43,6 @@ export const DashboardLayout = () => {
             <DashboardContent className="h-3/4 w-full" />
           </VStack>
         </HStack>
-
         {/* ) : (
         <h1>loading</h1>
       )} */}

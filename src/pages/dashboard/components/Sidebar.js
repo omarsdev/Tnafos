@@ -116,7 +116,7 @@ export const Sidebar = () => {
                                     width="60%"
                                     height="10"
                                     _hover="transparent"
-                                    fontSize="md"
+                                    // fontSize="md"
                                   >
                                     <HStack>
                                       <Text className="text-CWhite font-medium">
@@ -150,6 +150,7 @@ export const Sidebar = () => {
                                       width="100%"
                                       height="10"
                                       fontSize="md"
+                                      fontWeight="light"
                                       _hover="transparent"
                                     >
                                       <HStack>
