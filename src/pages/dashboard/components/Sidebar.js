@@ -84,7 +84,7 @@ export const Sidebar = () => {
         <TnafosSearchLogo />
       </Box>
 
-      <Box className="css-0 h-full w-auto">
+      <Box className="css-0  w-auto">
         <List className="gap-y-2">
           {SidebarMenu.map((item, idxxx) => (
             <Box key={idxxx}>
@@ -118,11 +118,11 @@ export const Sidebar = () => {
                                   key={idx}
                                 >
                                   <Box
-                                    // bg="transparent"
-                                    // width="60%"
-                                    // height="10"
-                                    // fontSize="sm"
-                                    // _hover="transparent"
+                                  // bg="transparent"
+                                  // width="60%"
+                                  // height="10"
+                                  // fontSize="sm"
+                                  // _hover="transparent"
                                   >
                                     <HStack>
                                       <Text className="text-CWhite">
