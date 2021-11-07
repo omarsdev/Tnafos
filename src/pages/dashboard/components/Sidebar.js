@@ -11,16 +11,14 @@ import {
   UnorderedList,
   Button,
   Divider,
-  Image,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleDown, FaAngleRight, FaHome } from "react-icons/fa";
 import { Link, useRouteMatch } from "react-router-dom";
 import { SidebarMenu } from "../../../config";
-import { FaHome, FaAngleRight } from "react-icons/fa";
 
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
@@ -70,18 +68,9 @@ export const Sidebar = () => {
   let match = useRouteMatch();
 
   return (
-    <Box className="bg-gray-800 w-48 h-screen">
-      <Box className="h-24 items-center w-full">
-        {/* <HStack className="flex flex-row h-18 items-center justify-center p-5">
-          <Box className="">
-            <Image src="/assets/icons/svg/TnafosLogo.svg" alt="Tnafos-logo" />
-          </Box>
-          <VStack spacing={0} align="stretch">
-            <Text className="h-8 w-20 text-CWhite">tnafos</Text>
-            <Text className="h-8 w-20 text-CWhite">تنافس</Text>
-          </VStack>
-        </HStack> */}
-        <TnafosSearchLogo />
+    <Box className="bg-gray-800 w-52 h-screen">
+      <Box className="h-28 w-full">
+        <TnafosSearchLogo className="h-24 ml-3 w-28" />
       </Box>
 
       <Box className="css-0  w-auto">
@@ -91,7 +80,10 @@ export const Sidebar = () => {
               <Divider />
               <ListItem>
                 <Box>
-                  <Text className="text-CWhite p-1" fontSize="xs">
+                  <Text
+                    className="text-CWhite p-1 font-extralight"
+                    fontSize="xs"
+                  >
                     {item.heading}
                   </Text>
                   {item.id === 0 ? (
@@ -120,11 +112,12 @@ export const Sidebar = () => {
                                   <Box
                                     paddingY="2"
                                     paddingX="1"
-                                    // bg="transparent"
-                                    // width="60%"
-                                    // height="10"
-                                    // fontSize="sm"
-                                    // _hover="transparent"
+                                    bg="transparent"
+                                    width="60%"
+                                    height="10"
+                                    fontSize="sm"
+                                    _hover="transparent"
+                                    fontSize="md"
                                   >
                                     <HStack>
                                       <Text className="text-CWhite">
@@ -137,37 +130,55 @@ export const Sidebar = () => {
                                   </Box>
                                 </Link>
                               ) : (
-                                <Menu placement="bottom">
-                                  <>
-                                    <MenuButton
-                                      paddingY="2"
-                                      paddingX="1"
-                                      // as={Button}
-                                      // rightIcon={<FaAngleDown />}
-                                      className="text-CWhite"
-                                      // bg="transparent"
-                                      // width="100%"
-                                      // height="10"
-                                      // fontSize="sm"
-                                      // _hover="transparent"
-                                    >
-                                      <HStack>
-                                        <Text>{ele.icon}</Text>
-                                        <Text>{ele.title}</Text>
-                                      </HStack>
-                                    </MenuButton>
-                                    <MenuList w="20">
-                                      {ele.submenu.map((element, index) => (
-                                        <MenuItem key={index} width="100%">
-                                          <Link
-                                            to={`${match.url}${element.to}`}
-                                          >
-                                            {element.title}
-                                          </Link>
-                                        </MenuItem>
-                                      ))}
-                                    </MenuList>
-                                  </>
+                                <Menu
+                                  isLazy
+                                  placement="bottom"
+                                  preventOverflow="true"
+                                >
+                                  {(isOpen) => (
+                                    <>
+                                      <MenuButton
+                                        isActive={isOpen}
+                                        paddingY="2"
+                                        paddingX="1"
+                                        as={Button}
+                                        _expanded={{
+                                          bg: "gray.600",
+                                        }}
+                                        _focus={{ border: "hidden" }}
+                                        rightIcon={
+                                          isOpen ? (
+                                            <FaAngleDown />
+                                          ) : (
+                                            <FaAngleRight />
+                                          )
+                                        }
+                                        className="text-CWhite"
+                                        bg="transparent"
+                                        width="100%"
+                                        height="10"
+                                        fontSize="sm"
+                                        _hover="transparent"
+                                        fontSize="md"
+                                      >
+                                        <HStack>
+                                          <Text>{ele.icon}</Text>
+                                          <Text>{ele.title}</Text>
+                                        </HStack>
+                                      </MenuButton>
+                                      <MenuList overflow="hidden">
+                                        {ele.submenu.map((element, index) => (
+                                          <MenuItem key={index} width="100%">
+                                            <Link
+                                              to={`${match.url}${element.to}`}
+                                            >
+                                              {element.title}
+                                            </Link>
+                                          </MenuItem>
+                                        ))}
+                                      </MenuList>
+                                    </>
+                                  )}
                                 </Menu>
                               )}
                             </ListItem>

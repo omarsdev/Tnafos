@@ -29,7 +29,7 @@ export const Navbar = () => {
       bg="white"
       className="flex flex-row-reverse opacity-100 shadow-xl w-full h-24"
     >
-      <Box className="flex flex-row items-center">
+      <Box className="flex flex-row items-center mr-5">
         <HStack className="font-medium h-10 justify-center my-auto text-gray-700 text-md w-32">
           {/* <span className="my-auto mr-7">
                       {userData.first_name} {userData.last_name}
