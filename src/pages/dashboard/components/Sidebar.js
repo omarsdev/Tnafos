@@ -70,7 +70,7 @@ export const Sidebar = () => {
   let match = useRouteMatch();
 
   return (
-    <Box className="bg-gray-800 w-44 h-screen">
+    <Box className="bg-gray-800 w-48 h-screen">
       <Box className="h-24 items-center w-full">
         {/* <HStack className="flex flex-row h-18 items-center justify-center p-5">
           <Box className="">
@@ -96,7 +96,7 @@ export const Sidebar = () => {
                   </Text>
                   {item.id === 0 ? (
                     <Link to={`${match.url}`} key={idxxx}>
-                      <HStack className="py-2">
+                      <HStack paddingX="1" className="py-2">
                         {item.icon && (
                           <Text className="text-CWhite">{item.icon}</Text>
                         )}
@@ -118,6 +118,8 @@ export const Sidebar = () => {
                                   key={idx}
                                 >
                                   <Box
+                                    paddingY="2"
+                                    paddingX="1"
                                     // bg="transparent"
                                     // width="60%"
                                     // height="10"
@@ -138,6 +140,8 @@ export const Sidebar = () => {
                                 <Menu placement="bottom">
                                   <>
                                     <MenuButton
+                                      paddingY="2"
+                                      paddingX="1"
                                       // as={Button}
                                       // rightIcon={<FaAngleDown />}
                                       className="text-CWhite"
