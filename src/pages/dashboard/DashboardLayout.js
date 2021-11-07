@@ -55,7 +55,7 @@ export const DashboardLayout = () => {
       <Box>
         <HStack spacing={0}>
           <Sidebar />
-          <VStack className="chakra-stack h-screen  w-full">
+          <VStack className="chakra-stack h-screen w-full">
             <Navbar className="w-full" />
             <DashboardContent />
           </VStack>
