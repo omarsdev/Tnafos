@@ -84,7 +84,7 @@ export const Sidebar = () => {
         <TnafosSearchLogo />
       </Box>
 
-      <Box className="css-0 h-full w-auto">
+      <Box className="css-0  w-auto">
         <List className="gap-y-2">
           {SidebarMenu.map((item, idxxx) => (
             <Box key={idxxx}>
