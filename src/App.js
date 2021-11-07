@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   Homepage,
   NotFound,
-  Search,
+  SearchLayout,
   DashboardLayout,
   Login,
   Register,
@@ -43,7 +43,7 @@ const App = () => {
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/dashboard" component={DashboardLayout} />
-            <Route path="/:search" component={Search} />
+            <Route path="/:search" component={SearchLayout} />
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>
