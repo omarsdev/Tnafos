@@ -22,6 +22,8 @@ import { Link, useRouteMatch } from "react-router-dom";
 import { SidebarMenu } from "../../../config";
 import { FaHome, FaAngleRight } from "react-icons/fa";
 
+import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
+
 const Heading = (heading) => {
   return <span>{SidebarMenu.heading}</span>;
 };
@@ -70,7 +72,7 @@ export const Sidebar = () => {
   return (
     <Box className="bg-gray-800 w-44 h-screen">
       <Box className="h-24 items-center w-full">
-        <HStack className="flex flex-row h-18 items-center justify-center p-5">
+        {/* <HStack className="flex flex-row h-18 items-center justify-center p-5">
           <Box className="">
             <Image src="/assets/icons/svg/TnafosLogo.svg" alt="Tnafos-logo" />
           </Box>
@@ -78,7 +80,8 @@ export const Sidebar = () => {
             <Text className="h-8 w-20 text-CWhite">tnafos</Text>
             <Text className="h-8 w-20 text-CWhite">تنافس</Text>
           </VStack>
-        </HStack>
+        </HStack> */}
+        <TnafosSearchLogo />
       </Box>
 
       <Box className="css-0 h-full w-auto">
