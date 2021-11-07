@@ -70,10 +70,10 @@ export const Sidebar = () => {
   return (
     <Box className="bg-gray-800 w-52 h-screen">
       <Box className="h-28 w-full">
-        <TnafosSearchLogo className="h-24 ml-3 w-28" />
+        <TnafosSearchLogo />
       </Box>
 
-      <Box className="css-0  w-auto">
+      <Box className="css-0 w-auto">
         <List className="gap-y-2">
           {SidebarMenu.map((item, idxxx) => (
             <Box key={idxxx}>
@@ -106,7 +106,7 @@ export const Sidebar = () => {
                               {ele.to && !ele.submenu ? (
                                 <Link
                                   to={`${match.url}${ele.to}`}
-                                  className="font-medium"
+                                  // className="font-medium"
                                   key={idx}
                                 >
                                   <Box
@@ -115,12 +115,11 @@ export const Sidebar = () => {
                                     bg="transparent"
                                     width="60%"
                                     height="10"
-                                    fontSize="sm"
                                     _hover="transparent"
                                     fontSize="md"
                                   >
                                     <HStack>
-                                      <Text className="text-CWhite">
+                                      <Text className="text-CWhite font-medium">
                                         {ele.icon}
                                       </Text>
                                       <Text className="text-CWhite">
@@ -133,52 +132,43 @@ export const Sidebar = () => {
                                 <Menu
                                   isLazy
                                   placement="bottom"
+                                  size="20"
                                   preventOverflow="true"
                                 >
-                                  {(isOpen) => (
-                                    <>
-                                      <MenuButton
-                                        isActive={isOpen}
-                                        paddingY="2"
-                                        paddingX="1"
-                                        as={Button}
-                                        _expanded={{
-                                          bg: "gray.600",
-                                        }}
-                                        _focus={{ border: "hidden" }}
-                                        rightIcon={
-                                          isOpen ? (
-                                            <FaAngleDown />
-                                          ) : (
-                                            <FaAngleRight />
-                                          )
-                                        }
-                                        className="text-CWhite"
-                                        bg="transparent"
-                                        width="100%"
-                                        height="10"
-                                        fontSize="sm"
-                                        _hover="transparent"
-                                        fontSize="md"
-                                      >
-                                        <HStack>
-                                          <Text>{ele.icon}</Text>
-                                          <Text>{ele.title}</Text>
-                                        </HStack>
-                                      </MenuButton>
-                                      <MenuList overflow="hidden">
-                                        {ele.submenu.map((element, index) => (
-                                          <MenuItem key={index} width="100%">
-                                            <Link
-                                              to={`${match.url}${element.to}`}
-                                            >
-                                              {element.title}
-                                            </Link>
-                                          </MenuItem>
-                                        ))}
-                                      </MenuList>
-                                    </>
-                                  )}
+                                  <>
+                                    <MenuButton
+                                      paddingY="2"
+                                      paddingX="1"
+                                      as={Button}
+                                      _expanded={{
+                                        bg: "gray.600",
+                                      }}
+                                      _focus={{ border: "hidden" }}
+                                      rightIcon={<FaAngleRight />}
+                                      className="text-CWhite"
+                                      bg="transparent"
+                                      width="100%"
+                                      height="10"
+                                      fontSize="md"
+                                      _hover="transparent"
+                                    >
+                                      <HStack>
+                                        <Text>{ele.icon}</Text>
+                                        <Text>{ele.title}</Text>
+                                      </HStack>
+                                    </MenuButton>
+                                    <MenuList overflow="hidden" width="40">
+                                      {ele.submenu.map((element, index) => (
+                                        <MenuItem key={index} width="100%">
+                                          <Link
+                                            to={`${match.url}${element.to}`}
+                                          >
+                                            {element.title}
+                                          </Link>
+                                        </MenuItem>
+                                      ))}
+                                    </MenuList>
+                                  </>
                                 </Menu>
                               )}
                             </ListItem>
