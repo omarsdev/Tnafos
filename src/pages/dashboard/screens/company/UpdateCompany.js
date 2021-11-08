@@ -1,53 +1,63 @@
-import { Container, VStack, Input, Button } from "@chakra-ui/react";
-import React, { useState } from "react";
+import {
+  Box,
+  Container,
+  VStack,
+  HStack,
+  Button,
+  Input,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createCompany } from "../../utils";
+import { showCompany, updateCompany } from "../../../../utils";
 
-export const CreateCompany = () => {
-  const [input, setInput] = useState({
-    name: "",
-    type: "",
-    cr: "",
-    vat: "",
-    establishment_year: "",
-    total_employees: "",
-    bio: "",
-    telephone: "",
-    fax: "",
-    email: "",
-    website: "",
-    country_id: "",
-    city: "",
-    po_box: "",
-    zip_code: "",
-    address: "",
-    location: "",
-    logo: "",
-    category_id: "",
-  });
-
+export const UpdateCompany = () => {
   const history = useHistory();
+
+  const [input, setInput] = useState(null);
+  //   const [errors, setErrors] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
+  const fetchData = async () => {
+    const Data = await showCompany();
+    if (Data.success) {
+      let company = Data.data;
+      delete company.country;
+      delete company.admin;
+      delete company.category;
+      setInput(company);
+      console.log(company);
+    }
+  };
 
-  const handleCreate = async (e) => {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    const response = await createCompany(input);
-    console.log(response);
+    const resp = await updateCompany(input);
+    if (resp.success) {
+      history.push(`/dashboard/company`);
+    } else {
+      console.log(resp);
+      //   setErrors(resp);
+    }
+  };
+
+  const handleCancel = () => {
     history.push("/dashboard/company");
   };
 
-
-
-  
-    return (
-        <Container>
-          <form onSubmit={(ev)=>handleCreate(ev)}>
-            <VStack>
-              <label className="block">
+  return (
+    input && (
+      <Container>
+        <Box>Update your company info in the form below</Box>
+        <form onSubmit={(ev) => handleUpdate(ev)}>
+          <VStack>
+            <label className="block">
               Company Name
               <Input
                 size="md"
@@ -55,9 +65,9 @@ export const CreateCompany = () => {
                 name="name"
                 value={input.name}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Type
               <Input
                 size="md"
@@ -65,9 +75,9 @@ export const CreateCompany = () => {
                 name="type"
                 value={input.type}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               CR Number
               <Input
                 size="md"
@@ -75,9 +85,9 @@ export const CreateCompany = () => {
                 name="cr"
                 value={input.cr}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               VAT Number
               <Input
                 size="md"
@@ -85,9 +95,9 @@ export const CreateCompany = () => {
                 name="vat"
                 value={input.vat}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Establishment Year
               <Input
                 size="md"
@@ -95,9 +105,9 @@ export const CreateCompany = () => {
                 name="establishment_year"
                 value={input.establishment_year}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Total Employees
               <Input
                 size="md"
@@ -105,9 +115,9 @@ export const CreateCompany = () => {
                 name="total_employees"
                 value={input.total_employees}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Bio
               <Input
                 size="md"
@@ -115,9 +125,9 @@ export const CreateCompany = () => {
                 name="bio"
                 value={input.bio}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Telephone
               <Input
                 size="md"
@@ -125,9 +135,9 @@ export const CreateCompany = () => {
                 name="telephone"
                 value={input.telephone}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Fax
               <Input
                 size="md"
@@ -135,9 +145,9 @@ export const CreateCompany = () => {
                 name="fax"
                 value={input.fax}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               e-mail
               <Input
                 size="md"
@@ -145,9 +155,9 @@ export const CreateCompany = () => {
                 name="email"
                 value={input.email}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Website
               <Input
                 size="md"
@@ -155,9 +165,9 @@ export const CreateCompany = () => {
                 name="website"
                 value={input.website}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Country-Id
               <Input
                 size="md"
@@ -165,9 +175,9 @@ export const CreateCompany = () => {
                 name="country_id"
                 value={input.country_id}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               City
               <Input
                 size="md"
@@ -175,9 +185,9 @@ export const CreateCompany = () => {
                 name="city"
                 value={input.city}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               po_box
               <Input
                 size="md"
@@ -185,9 +195,9 @@ export const CreateCompany = () => {
                 name="po_box"
                 value={input.po_box}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               ZIP_code
               <Input
                 size="md"
@@ -195,9 +205,9 @@ export const CreateCompany = () => {
                 name="zip_code"
                 value={input.zip_code}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Address
               <Input
                 size="md"
@@ -205,9 +215,9 @@ export const CreateCompany = () => {
                 name="address"
                 value={input.address}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Location:
               <Input
                 size="md"
@@ -215,9 +225,9 @@ export const CreateCompany = () => {
                 name="location"
                 value={input.location}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Logo:
               <Input
                 size="md"
@@ -225,9 +235,9 @@ export const CreateCompany = () => {
                 name="logo"
                 value={input.logo}
               />
-              </label>
+            </label>
 
-              <label className="block">
+            <label className="block">
               Category-Id
               <Input
                 size="md"
@@ -235,11 +245,14 @@ export const CreateCompany = () => {
                 name="category_id"
                 value={input.category_id}
               />
-              </label>
-
-              <Button>CREATE COMPANY</Button>
-            </VStack>
-          </form>
-        </Container>
+            </label>
+          </VStack>
+          <HStack>
+            <Button>UPDATE</Button>
+            <Button onClick={handleCancel}>CANCEL</Button>
+          </HStack>
+        </form>
+      </Container>
     )
-}
+  );
+};

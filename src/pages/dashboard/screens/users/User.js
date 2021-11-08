@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch, useParams } from "react-router-dom";
-import { showUsersList } from "../../utils";
+import { showUsersList } from "../../../../utils";
 import { UserCard, CreateUser, MyProfile, CardComponent } from "./";
 import {
   Box,
@@ -27,7 +27,7 @@ export const User = () => {
   }, []);
   return (
     <>
-      <Box width="100%">
+      <Box width="full">
         <HStack className="w-full h-3/4">
           <Box bg="" w="75%" p={4} color="black">
             Users

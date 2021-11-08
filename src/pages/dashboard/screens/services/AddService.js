@@ -1,7 +1,7 @@
-import { HStack, VStack, Button, Input} from "@chakra-ui/react";
+import { HStack, VStack, Button, Input } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createService } from "../../utils";
+import { createService } from "../../../../utils";
 
 export const AddService = () => {
   const [input, setInput] = useState({
@@ -33,12 +33,10 @@ export const AddService = () => {
     history.push("/dashboard/service");
   };
 
-
-
-    return (
-        <form onSubmit={(ev)=>handleAddService(ev)}>
-          <VStack>
-          <label>
+  return (
+    <form onSubmit={(ev) => handleAddService(ev)}>
+      <VStack>
+        <label>
           name:
           <Input
             size="md"
@@ -87,13 +85,12 @@ export const AddService = () => {
             value={input.type}
           />
         </label>
-        </VStack>
+      </VStack>
 
-
-        <HStack>
-          <Button>CREATE</Button>
-          <Button onClick={handleCancel}>CANCEL</Button>
-        </HStack>
-        </form>
-    )
-}
+      <HStack>
+        <Button>CREATE</Button>
+        <Button onClick={handleCancel}>CANCEL</Button>
+      </HStack>
+    </form>
+  );
+};

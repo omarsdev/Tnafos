@@ -9,11 +9,11 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-import { getUser } from "../../utils";
+import { getUser } from "../../../../utils";
 import { UpdateUser } from "./";
 
 export const UserCard = () => {
-    const [card, setCard] = useState(null);
+  const [card, setCard] = useState(null);
   const { uuid } = useParams();
   const history = useHistory();
   const match = useRouteMatch();
@@ -33,25 +33,25 @@ export const UserCard = () => {
     Details();
   }, []);
 
-    return (
-        <>
-        <Switch>
+  return (
+    <>
+      <Switch>
         <Route exact path={`${match.path}`}>
+          <Box>
+            <Link>
+              <IconButton colorScheme="blue" icon={<EditIcon />} />
+            </Link>
             <Box>
-                <Link>
-                    <IconButton colorScheme="blue" icon={<EditIcon />}/>
-                </Link>
-                <Box>
-                  <Box>First Name: {card?.first_name}</Box>
-                  <Box>Last Name:{card?.last_name}</Box>
-                  <Box>Telephone: {card?.phone_number}</Box>
-                  <Box>E-mail: {card?.email}</Box>
-                  <Box>Id :{card?.uuid}</Box>
-                </Box>
+              <Box>First Name: {card?.first_name}</Box>
+              <Box>Last Name:{card?.last_name}</Box>
+              <Box>Telephone: {card?.phone_number}</Box>
+              <Box>E-mail: {card?.email}</Box>
+              <Box>Id :{card?.uuid}</Box>
             </Box>
+          </Box>
         </Route>
         <Route path={`${match.path}/updateuser`} component={UpdateUser} />
-        </Switch>
-        </>
-    )
-}
+      </Switch>
+    </>
+  );
+};
