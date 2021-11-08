@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 
-export const User = () => {
+export const UserHome = () => {
   const [usersList, setUsersList] = useState([]);
 
   const match = useRouteMatch();

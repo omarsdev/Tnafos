@@ -1,12 +1,11 @@
 import {
-  Container,
   Heading,
-  VStack,
   Box,
   Checkbox,
   Button,
   Input,
   HStack,
+  Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -49,13 +48,32 @@ export const CreateUser = () => {
   };
 
   return (
-    <Box borderRadius="lg" overflow="hidden" borderWidth="1px">
-      <Heading>Add new User</Heading>
+    <Box
+      borderRadius="lg"
+      overflow="hidden"
+      borderWidth="1px"
+      w="2xl"
+      px="15"
+      pt="5"
+      h="2xl"
+    >
+      <Box>
+        <Heading
+          color="black"
+          fontWeight="medium"
+          fontSize="x-large"
+          fontFamily="inhirit"
+          alignItems="baseline"
+        >
+          Add new User
+        </Heading>
+      </Box>
       <form on onSubmit={(ev) => addUser(ev)}>
         <label className="w-32 text-right">
           First Name :
           <Input
-            size="md"
+            size="sm"
+            borderRadius="lg"
             type="text"
             name="first_name"
             required
@@ -68,7 +86,8 @@ export const CreateUser = () => {
         <label className="w-32 text-right">
           Last Name:
           <Input
-            size="md"
+            size="sm"
+            borderRadius="lg"
             type="text"
             name="last_name"
             value={input.last_name}
@@ -82,7 +101,8 @@ export const CreateUser = () => {
         <label className="w-32 text-right">
           Phone Number:
           <Input
-            size="md"
+            size="sm"
+            borderRadius="lg"
             type="text"
             name="phone_number"
             value={input.phone_number}
@@ -95,7 +115,8 @@ export const CreateUser = () => {
         <label className="w-32 text-right">
           Email:
           <Input
-            size="md"
+            size="sm"
+            borderRadius="lg"
             type="email"
             name="email"
             value={input.email}
@@ -103,13 +124,16 @@ export const CreateUser = () => {
             onChange={(ev) => handleChange(ev)}
             autoComplete="off"
             placeholder="info@company.com"
+            onFocus="off"
+            _autofill="off"
           />
         </label>
 
         <label className="w-32 text-right">
           Password:
           <Input
-            size="md"
+            size="sm"
+            borderRadius="lg"
             type="password"
             name="password"
             value={input.password}
@@ -122,33 +146,46 @@ export const CreateUser = () => {
         <label className="w-32 text-right">
           Confirm Password:
           <Input
-            size="md"
+            size="sm"
+            borderRadius="lg"
             type="password"
             name="password_confirmation"
             value={input.password_confirmation}
             required
             onChange={(ev) => handleChange(ev)}
             autoComplete="off"
+            onFocus="off"
+            _autofill="off"
           />
         </label>
 
-        <VStack>
-          <Box>Terms and Conditions agreement</Box>
+        <Box className="flex flex-col items-center gap-2">
+          <Heading fontSize="md" color="gray.500" fontWeight="normal">
+            Terms and Conditions agreement
+          </Heading>
           <Checkbox
-            size="md"
-            colorScheme="orange"
+            size="sm"
+            colorScheme="blue"
             onChange={(e) => {
               setCheck(e.target.checked);
             }}
           >
             I agree to Tnafos
           </Checkbox>
-          <Link to="#" className="text-blue-700 hover:underline">
-            terms of service
-          </Link>{" "}
-          and
-          <Link className="text-blue-700 hover:underline">Privacy policy</Link>
-          <Box>Decleration of Valid Information</Box>
+          <HStack>
+            <Link to="#" className="text-blue-700 hover:underline">
+              <Text>terms of service</Text>
+            </Link>{" "}
+            <Text>and</Text>
+            <Link className="text-blue-700 hover:underline">
+              Privacy policy
+            </Link>
+          </HStack>
+          <Box>
+            <Heading fontSize="md" color="gray.500" fontWeight="normal">
+              Decleration of Valid Information
+            </Heading>
+          </Box>
           <Checkbox
             onChange={(e) => {
               setCheck(e.target.checked);
@@ -157,14 +194,15 @@ export const CreateUser = () => {
             I confirm that the information given in this form is true, complete
             and accurate.
           </Checkbox>
-        </VStack>
-
-        <HStack spacing="10px">
-          <Button colorScheme="blue">SAVE</Button>
-          <Button colorScheme="gray" onClick={handleCancel}>
-            CANCEL
-          </Button>
-        </HStack>
+          <HStack spacing="10px">
+            <Button colorScheme="blue" size="sm">
+              SAVE
+            </Button>
+            <Button colorScheme="gray" size="sm" onClick={handleCancel}>
+              CANCEL
+            </Button>
+          </HStack>
+        </Box>
       </form>
     </Box>
   );
