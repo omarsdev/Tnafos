@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-  Route,
-  Switch,
-  useRouteMatch,
-  useParams,
-  Link,
-} from "react-router-dom";
+import { useRouteMatch, useParams, Link } from "react-router-dom";
 import { showUsersList } from "../../../../utils";
-import { UserCard, CreateUser, MyProfile, CardComponent, UserHome } from "./";
+import { CardComponent } from "./";
 import {
   Box,
   IconButton,
@@ -72,14 +66,6 @@ export const User = () => {
               ))}
         </Grid>
       </Box>
-
-      {/* Body*/}
-      <Switch>
-        <Route exact path={`${match.path}`} component={UserHome} />
-        <Route path={`${match.path}/createuser`} component={CreateUser} />
-        <Route path={`${match.path}/profile`} component={MyProfile} />
-        <Route path={`${match.path}/:uuid`} component={UserCard} />
-      </Switch>
     </>
   );
 };

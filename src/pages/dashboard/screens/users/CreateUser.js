@@ -6,6 +6,7 @@ import {
   Checkbox,
   Button,
   Input,
+  HStack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -48,7 +49,7 @@ export const CreateUser = () => {
   };
 
   return (
-    <Container>
+    <Box borderRadius="lg" overflow="hidden" borderWidth="1px">
       <Heading>Add new User</Heading>
       <form on onSubmit={(ev) => addUser(ev)}>
         <label className="w-32 text-right">
@@ -158,9 +159,13 @@ export const CreateUser = () => {
           </Checkbox>
         </VStack>
 
-        <Button>SAVE</Button>
-        <Button onClick={handleCancel}>CANCEL</Button>
+        <HStack spacing="10px">
+          <Button colorScheme="blue">SAVE</Button>
+          <Button colorScheme="gray" onClick={handleCancel}>
+            CANCEL
+          </Button>
+        </HStack>
       </form>
-    </Container>
+    </Box>
   );
 };
