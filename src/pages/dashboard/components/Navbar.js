@@ -27,7 +27,8 @@ export const Navbar = () => {
   return (
     <Box
       bg="white"
-      className="flex flex-row-reverse opacity-100 shadow-xl w-full h-24"
+      className="flex flex-row-reverse opacity-100 shadow-xl w-full"
+      height="20"
     >
       <Box className="flex flex-row items-center mr-5">
         <HStack className="font-medium h-10 justify-center my-auto text-gray-700 text-md w-32">
@@ -37,10 +38,10 @@ export const Navbar = () => {
           <Text>User name</Text>
         </HStack>
         <Image
-          className="object-cover border rounded-full h-14 w-14 border-CPrimary css-0 rounded-ful"
+          className="object-cover border rounded-full h-16 w-16 border-CPrimary css-0 rounded-ful"
           src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
           alt="User Profile Photo"
-          style={{ width: "70px", height: "70px" }}
+          // style={{ width: "70px", height: "70px" }}
         />
         <Menu>
           <MenuButton

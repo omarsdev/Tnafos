@@ -52,34 +52,32 @@ export const DashboardLayout = () => {
   return (
     <>
       {/* {userData ?*/}
-      <Box>
-        <HStack spacing={0}>
-          <Sidebar />
-          <VStack className="chakra-stack w-full" spacing={0}>
-            <Navbar />
+      <HStack spacing={0}>
+        <Sidebar />
+        <VStack className="chakra-stack w-full h-screen" spacing={0}>
+          <Navbar />
 
-            {/* {body} */}
-            <Switch>
-              <Route exact path={match.path} component={DashboardContent} />
-              <Route path={`${match.path}/company`} component={Company} />
-              <Route path={`${match.path}/user`} component={User} />
-              <Route path={`${match.path}/service`} component={Service} />
-              <Route
-                path={`${match.path}/purchase-requests`}
-                component={PurchaseRequest}
-              />
-              <Route path={`${match.path}/payment`} component={Payment} />
-              <Route path={`${match.path}/invoice`} component={Invoice} />
-              <Route path={`${match.path}/estimate`} component={Estimate} />
-              <Route path={`${match.path}/client`} component={Client} />
-              <Route path={`${match.path}/settings`} component={Settings} />
-            </Switch>
-          </VStack>
-        </HStack>
-        {/* ) : (
+          {/* {body} */}
+          <Switch>
+            <Route exact path={match.path} component={DashboardContent} />
+            <Route path={`${match.path}/company`} component={Company} />
+            <Route path={`${match.path}/user`} component={User} />
+            <Route path={`${match.path}/service`} component={Service} />
+            <Route
+              path={`${match.path}/purchase-requests`}
+              component={PurchaseRequest}
+            />
+            <Route path={`${match.path}/payment`} component={Payment} />
+            <Route path={`${match.path}/invoice`} component={Invoice} />
+            <Route path={`${match.path}/estimate`} component={Estimate} />
+            <Route path={`${match.path}/client`} component={Client} />
+            <Route path={`${match.path}/settings`} component={Settings} />
+          </Switch>
+        </VStack>
+      </HStack>
+      {/* ) : (
         <h1>loading</h1>
       )} */}
-      </Box>
     </>
   );
 };

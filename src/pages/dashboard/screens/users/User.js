@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useRouteMatch, useParams } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useRouteMatch,
+  useParams,
+  Link,
+} from "react-router-dom";
 import { showUsersList } from "../../../../utils";
 import { UserCard, CreateUser, MyProfile, CardComponent } from "./";
 import {
   Box,
   IconButton,
-  VStack,
   Button,
   HStack,
-  Link,
+  Heading,
+  Grid,
 } from "@chakra-ui/react";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 
@@ -27,37 +33,48 @@ export const User = () => {
   }, []);
   return (
     <>
-      <Box width="full">
-        <HStack className="w-full h-3/4">
-          <Box bg="" w="75%" p={4} color="black">
+      <Box w="full" h="fit-content">
+        <HStack h="16" w="full" p="2" spacing="700px">
+          <Heading
+            color="black"
+            fontWeight="medium"
+            fontSize="x-large"
+            fontFamily="inhirit"
+            alignItems="baseline"
+          >
             Users
-          </Box>
+          </Heading>
+
           <Link to={`${match.url}/createuser`}>
             <IconButton
               as={Button}
               colorScheme="yellow"
               size="lg"
               icon={<PlusSquareIcon />}
+              rounded="full"
             ></IconButton>
           </Link>
         </HStack>
-        <Box>
+
+        <Grid templateColumns="repeat(5, 1fr)" gap={4} p="10px">
           {usersList.length === 0
             ? null
             : usersList.map((el, idx) => (
-                <Link key={idx} to={`${match.url}/${el.uuid}`}>
-                  <CardComponent userData={el} />
-                </Link>
+                <Box flexDirection="row" spacing="10px">
+                  <Link key={idx} to={`${match.url}/${el.uuid}`}>
+                    <CardComponent userData={el} />
+                  </Link>
+                </Box>
               ))}
-        </Box>
-      </Box>
+        </Grid>
 
-      <Switch>
-        <Route exact path={`${match.path}`} />
-        <Route path={`${match.path}/createuser`} component={CreateUser} />
-        <Route path={`${match.path}/profile`} component={MyProfile} />
-        <Route path={`${match.path}/:uuid`} component={UserCard} />
-      </Switch>
+        <Switch>
+          <Route exact path={`${match.path}`} />
+          <Route path={`${match.path}/createuser`} component={CreateUser} />
+          <Route path={`${match.path}/profile`} component={MyProfile} />
+          <Route path={`${match.path}/:uuid`} component={UserCard} />
+        </Switch>
+      </Box>
     </>
   );
 };
