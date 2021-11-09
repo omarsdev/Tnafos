@@ -12,7 +12,7 @@ import {
 
 import { Link, useRouteMatch } from "react-router-dom";
 
-import { AuthStructure } from "./components/AuthStructure";
+import { AuthLayout } from "../AuthLayout";
 import LoginImage from "assets/images/login.jpg";
 
 export const Login = () => {
@@ -28,7 +28,7 @@ export const Login = () => {
 
   return (
     <div>
-      <AuthStructure BGImage={LoginImage}>
+      <AuthLayout BGImage={LoginImage}>
         <div className="w-full h-full flex flex-col justify-center items-center ">
           <Stack spacing={4}>
             <h1 className="select-none text-4xl">Welcome Back!</h1>
@@ -70,7 +70,7 @@ export const Login = () => {
             </Flex>
           </Stack>
         </div>
-      </AuthStructure>
+      </AuthLayout>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { Button } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 
-export const PrimaryButton = ({ name, buttonType, ...buttonProps }) => {
+export const PrimaryButton = ({ name, buttonType, Logo, ...buttonProps }) => {
   const [loading, setLoading] = useState(false);
 
   let ref = useRef(null);
@@ -39,6 +39,11 @@ export const PrimaryButton = ({ name, buttonType, ...buttonProps }) => {
       type={buttonType ? buttonType : "button"}
       {...buttonProps}
     >
+      {Logo && (
+        <Box mx={15}>
+          <Logo />
+        </Box>
+      )}
       {name}
     </Button>
   );

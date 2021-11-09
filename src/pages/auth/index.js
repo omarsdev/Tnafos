@@ -1,2 +1,2 @@
-export * from "./Login";
-export * from "./Register";
+export * from "./screens/Login";
+export * from "./screens/Register";

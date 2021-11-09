@@ -19,7 +19,7 @@ import {
   CheckBox,
 } from "components";
 
-import { AuthStructure } from "./components/AuthStructure";
+import { AuthLayout } from "../AuthLayout";
 import RegisterImage from "assets/images/register.jpg";
 import { useForm } from "react-hook-form";
 
@@ -36,7 +36,7 @@ export const Register = () => {
 
   return (
     <div>
-      <AuthStructure BGImage={RegisterImage}>
+      <AuthLayout BGImage={RegisterImage}>
         <Center h="100vh">
           <Stack spacing={4}>
             <h1 className="select-none text-4xl">Ready To</h1>
@@ -124,7 +124,7 @@ export const Register = () => {
             </form>
           </Stack>
         </Center>
-      </AuthStructure>
+      </AuthLayout>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import {
   DashboardLayout,
   Login,
   Register,
+  E404,
 } from "./pages";
 import { UserDataContextProvider } from "./context";
 
@@ -44,7 +45,7 @@ const App = () => {
             <Route path="/login" component={Login} />
             <Route path="/dashboard" component={DashboardLayout} />
             <Route path="/:search" component={SearchLayout} />
-            <Route path="*" component={NotFound} />
+            <Route path="*" component={E404} />
           </Switch>
         </Router>
       </UserDataContextProvider>

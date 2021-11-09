@@ -6,7 +6,7 @@ import { Image } from "@chakra-ui/react";
 
 import { TnafosLogoTitle } from "assets/icons";
 
-export const AuthStructure = ({ BGImage, children }) => {
+export const AuthLayout = ({ BGImage, children }) => {
   const history = useHistory();
 
   const handleLogoClick = () => {
