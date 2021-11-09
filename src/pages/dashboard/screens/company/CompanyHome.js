@@ -13,7 +13,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-export const Company = () => {
+export const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState({});
 
   const company = async () => {
@@ -29,10 +29,22 @@ export const Company = () => {
   const match = useRouteMatch();
 
   return (
-    <Switch>
-      <Route exact path={`${match.path}`} />
-      <Route path={`${match.path}/update`} component={UpdateCompany} />
-      <Route path={`${match.path}/create`} component={CreateCompany} />
-    </Switch>
+    <Box>
+      <Heading>Company</Heading>
+      <HStack>
+        <CompanyCard Data={companyInfo} />
+
+        <Stack>
+          <Heading>Options</Heading>
+          <Box>
+            <Link to={`${match.url}/update`}>
+              <Button>UPDATE</Button>
+            </Link>
+          </Box>
+        </Stack>
+
+        <Box>Review</Box>
+      </HStack>
+    </Box>
   );
 };
