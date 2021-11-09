@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { AddService, MyService } from "./";
-import { IconButton, Box, HStack, VStack } from "@chakra-ui/react";
 import {
-  Link,
-  useParams,
-  useRouteMatch,
-  Route,
-  Switch,
-} from "react-router-dom";
+  IconButton,
+  Box,
+  Heading,
+  Button,
+  GridItem,
+  Grid,
+} from "@chakra-ui/react";
+import { Link, useParams, useRouteMatch } from "react-router-dom";
 import { showServicesList } from "../../../../utils";
 import { ServiceCard } from "./";
-import { SmallAddIcon } from "@chakra-ui/icons";
-import { ServiceHome } from "./ServiceHome";
+import { AiOutlinePlus } from "react-icons/ai";
 
 export const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -30,18 +29,34 @@ export const ServiceHome = () => {
   const { uuid } = useParams();
 
   return (
-    <VStack>
-      <HStack>
-        <Box bg="white" w="75%" color="black">
-          Services
-        </Box>
-        <Box bg="white" w="25%">
+    <Box w="full" h="fit-content">
+      <Grid h="16" templateColumns="repeat(5, 1fr)" gap="5" p="5">
+        <GridItem colSpan={4}>
+          <Heading
+            color="black"
+            fontWeight="medium"
+            fontSize="xx-large"
+            fontFamily="inhirit"
+            alignItems="baseline"
+          >
+            Services
+          </Heading>
+        </GridItem>
+
+        <GridItem colSpan={1} pl="50px">
           <Link to={`${match.url}/addservice`}>
-            <IconButton icon={<SmallAddIcon />} />
+            <IconButton
+              as={Button}
+              colorScheme="yellow"
+              size="lg"
+              icon={<AiOutlinePlus />}
+              rounded="full"
+            ></IconButton>
           </Link>
-        </Box>
-      </HStack>
-      <Box>
+        </GridItem>
+      </Grid>
+
+      <Grid templateColumns="repeat(5, 1fr)" gap={4} p="30px">
         {servicesList.length === 0
           ? null
           : servicesList.map((service, idx) => (
@@ -49,7 +64,7 @@ export const ServiceHome = () => {
                 <ServiceCard info={service} />
               </Link>
             ))}
-      </Box>
-    </VStack>
+      </Grid>
+    </Box>
   );
 };

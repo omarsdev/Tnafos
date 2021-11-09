@@ -198,7 +198,7 @@ export const CreateUser = () => {
             <Button colorScheme="blue" size="sm">
               SAVE
             </Button>
-            <Button colorScheme="gray" size="sm" onClick={handleCancel}>
+            <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>
               CANCEL
             </Button>
           </HStack>

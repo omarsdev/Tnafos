@@ -49,7 +49,7 @@ export const SidebarMenu = [
         id: 2,
         title: "Services",
         icon: <FiHome />,
-        to: "/services",
+        to: "/service",
         // submenu: [
         //   {
         //     title: "Incoming",
