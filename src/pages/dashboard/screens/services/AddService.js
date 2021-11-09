@@ -116,11 +116,7 @@ export const AddService = () => {
           />
         </label>
         <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
-          <Button
-            colorScheme="blue"
-            size="sm"
-            onClick={(ev) => handleAddService(ev)}
-          >
+          <Button colorScheme="blue" size="sm">
             ADD SERVICE
           </Button>
           <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>

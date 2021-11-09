@@ -215,11 +215,7 @@ export const MyService = () => {
                     </label>
 
                     <HStack mt="10">
-                      <Button
-                        onClick={(ev) => handleUpdate(ev)}
-                        colorScheme="blue"
-                        size="md"
-                      >
+                      <Button colorScheme="blue" size="md">
                         UPDATE SERVICE
                       </Button>
                       <Button

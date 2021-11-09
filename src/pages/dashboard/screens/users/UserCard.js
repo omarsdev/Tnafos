@@ -234,12 +234,7 @@ export const UserCard = () => {
                       />
                     </label>
                     <HStack>
-                      <Button
-                        onClick={(ev) => handleUpdate(ev)}
-                        colorScheme="blue"
-                      >
-                        UPDATE
-                      </Button>
+                      <Button colorScheme="blue">UPDATE</Button>
                       <Button onClick={handleCancel}>CANCEL</Button>
                     </HStack>
                   </form>
