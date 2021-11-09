@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch, Link } from "react-router-dom";
-import { CreateCompany, UpdateCompany } from "./";
+import { CompanyHome, CreateCompany, UpdateCompany } from "./";
 import { RepeatIcon, StarIcon } from "@chakra-ui/icons";
 import { showCompany } from "../../../../utils";
 import { CompanyCard } from "./";
@@ -30,7 +30,7 @@ export const Company = () => {
 
   return (
     <Switch>
-      <Route exact path={`${match.path}`} />
+      <Route exact path={`${match.path}`} component={CompanyHome} />
       <Route path={`${match.path}/update`} component={UpdateCompany} />
       <Route path={`${match.path}/create`} component={CreateCompany} />
     </Switch>

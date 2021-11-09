@@ -45,7 +45,7 @@ export const AddService = () => {
     >
       <Box>
         <Heading
-          color="black"
+          color="yellow.500"
           fontWeight="medium"
           fontSize="x-large"
           fontFamily="inhirit"
