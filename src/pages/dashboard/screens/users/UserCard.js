@@ -29,7 +29,6 @@ import {
   Link,
 } from "react-router-dom";
 import { getUser, updateUserInfo } from "../../../../utils";
-// import { UpdateUser } from "./";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);
@@ -244,7 +243,6 @@ export const UserCard = () => {
             </Drawer>
           ) : null}
         </Route>
-        {/* <Route path={`${match.path}/updateuser`} component={UpdateUser} /> */}
       </Switch>
     </>
   );
