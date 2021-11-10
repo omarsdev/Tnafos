@@ -54,7 +54,7 @@ export const UpdateCompany = () => {
   return (
     input && (
       <Container>
-        <Box>Update your company info in the form below</Box>
+        <Box>Update your company info</Box>
         <form onSubmit={(ev) => handleUpdate(ev)}>
           <VStack>
             <label className="block">
