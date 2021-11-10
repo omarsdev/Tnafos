@@ -31,7 +31,6 @@ export const Company = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`} component={CompanyHome} />
-      <Route path={`${match.path}/update`} component={UpdateCompany} />
       <Route path={`${match.path}/create`} component={CreateCompany} />
     </Switch>
   );

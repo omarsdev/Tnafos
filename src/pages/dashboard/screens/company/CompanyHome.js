@@ -28,7 +28,7 @@ import { FaStar, FaSync } from "react-icons/fa";
 export const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
-  //   const match = useRouteMatch();
+
   const [input, setInput] = useState(null);
   const history = useHistory();
   //   const [errors, setErrors] = useState(null);
@@ -74,95 +74,95 @@ export const CompanyHome = () => {
 
   return (
     <>
-      <Heading
-        color="black"
-        fontWeight="medium"
-        fontSize="xx-large"
-        fontFamily="inhirit"
-        alignItems="baseline"
-        py="4"
-        px="5"
-        w="full"
-        textColor="gray.600"
-      >
-        Company
-      </Heading>
+      {/* Company Home Content */}
+      <Box w="full" h="fit-content">
+        <Heading
+          color="black"
+          fontWeight="medium"
+          fontSize="xx-large"
+          fontFamily="inhirit"
+          py="4"
+          px="5"
+          w="full"
+          textColor="gray.600"
+        >
+          Company
+        </Heading>
 
-      <HStack w="full" spacing={44}>
-        <CompanyCard Data={companyInfo} />
-        <Box>
-          <Box my="10" width="44">
-            {/* <Link to={`${match.url}/update`}> */}
-            <Button
-              onClick={onOpen}
-              leftIcon={<FiEdit />}
-              rounded={"lg"}
-              size={"md"}
-              fontWeight={"normal"}
-              px={4}
-              colorScheme={"red"}
-              bg={"orange.300"}
-              _hover={{ bg: "orange.400" }}
-            >
-              Update Company
-            </Button>
-            {/* </Link> */}
-          </Box>
-          <Box
-            width="44"
-            bg={useColorModeValue("white", "gray.900")}
-            border="silver"
-            borderRadius="2xl"
-            boxShadow="2xl"
-            borderWidth="2px"
-            rounded="lg"
-            textAlign={"center"}
-            h="32"
-          >
-            <Text
-              fontSize="LG"
-              bg="gray.100"
-              roundedTop="lg"
-              textColor="gray.700"
-              fontFamily="inherit"
-              fontWeight="medium"
-              paddingY="1"
-            >
-              Review
-            </Text>
-            <Divider />
-            <VStack spacing={0}>
-              <HStack>
-                <Text
-                  textColor="orange.300"
-                  fontSize="lg"
-                  alignItems="baseline"
-                  fontWeight="medium"
-                  py="3"
-                >
-                  rating
-                </Text>
-                <Icon textColor="orange.300">
-                  <FaStar size="medium" />
-                </Icon>
-              </HStack>
+        <HStack w="full" spacing={44}>
+          <CompanyCard Data={companyInfo} />
+          <Box>
+            <Box my="10" width="44">
               <Button
-                leftIcon={<FaSync />}
-                rounded="full"
+                onClick={onOpen}
+                leftIcon={<FiEdit />}
+                rounded={"lg"}
+                size={"md"}
                 fontWeight={"normal"}
                 px={4}
-                colorScheme={"white"}
-                size="sm"
-                textColor="gray.600"
-                borderColor="orange.300"
-                borderWidth="2px"
+                colorScheme={"red"}
+                bg={"orange.300"}
+                _hover={{ bg: "orange.400" }}
               >
-                VIEW ALL
+                Update Company
               </Button>
-            </VStack>
+            </Box>
+            <Box
+              width="44"
+              bg={useColorModeValue("white", "gray.900")}
+              border="silver"
+              borderRadius="2xl"
+              boxShadow="2xl"
+              borderWidth="2px"
+              rounded="lg"
+              textAlign={"center"}
+              h="32"
+            >
+              <Text
+                fontSize="LG"
+                bg="gray.100"
+                roundedTop="lg"
+                textColor="gray.700"
+                fontFamily="inherit"
+                fontWeight="medium"
+                paddingY="1"
+              >
+                Review
+              </Text>
+              <Divider />
+              <VStack spacing={0}>
+                <HStack>
+                  <Text
+                    textColor="orange.300"
+                    fontSize="lg"
+                    alignItems="baseline"
+                    fontWeight="medium"
+                    py="3"
+                  >
+                    rating
+                  </Text>
+                  <Icon textColor="orange.300">
+                    <FaStar size="medium" />
+                  </Icon>
+                </HStack>
+                <Button
+                  leftIcon={<FaSync />}
+                  rounded="full"
+                  fontWeight={"normal"}
+                  px={4}
+                  colorScheme={"white"}
+                  size="sm"
+                  textColor="gray.600"
+                  borderColor="orange.300"
+                  borderWidth="2px"
+                >
+                  VIEW ALL
+                </Button>
+              </VStack>
+            </Box>
           </Box>
-        </Box>
-      </HStack>
+        </HStack>
+      </Box>
 
       {/* company update */}
       <Modal isOpen={isOpen} onClose={onClose}>
