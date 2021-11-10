@@ -13,7 +13,6 @@ export const CompanyCard = ({ Data }) => {
       w="fit-content"
       size="sm"
       ml="10"
-      overflow="hidden"
     >
       <Thead bg="orange.50">
         <Th
