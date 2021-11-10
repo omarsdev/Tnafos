@@ -33,9 +33,12 @@ export const UserHome = () => {
             <Heading
               color="black"
               fontWeight="medium"
-              fontSize="x-large"
+              fontSize="xx-large"
               fontFamily="inhirit"
               alignItems="baseline"
+              py="4"
+              px="5"
+              textColor="gray.600"
             >
               Users
             </Heading>
