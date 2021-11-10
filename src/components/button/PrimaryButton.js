@@ -2,7 +2,13 @@ import React, { useRef, useEffect, useState } from "react";
 
 import { Box, Button } from "@chakra-ui/react";
 
-export const PrimaryButton = ({ name, buttonType, Logo, ...buttonProps }) => {
+export const PrimaryButton = ({
+  name,
+  buttonType,
+  Logo,
+  loadingButton,
+  ...buttonProps
+}) => {
   const [loading, setLoading] = useState(false);
 
   let ref = useRef(null);
@@ -25,7 +31,11 @@ export const PrimaryButton = ({ name, buttonType, Logo, ...buttonProps }) => {
     <Button
       className="info-box"
       ref={ref}
-      isLoading={loading}
+      isLoading={
+        loadingButton !== null || loadingButton !== "undefined"
+          ? loadingButton
+          : loading
+      }
       loadingText="Loading"
       width="120px"
       height="40px"

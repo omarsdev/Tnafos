@@ -14,6 +14,7 @@ export const PasswordInput = ({
   setValue,
   placeHolder,
   name,
+  error,
   ...rest
 }) => {
   const [show, setShow] = React.useState(false);
@@ -26,7 +27,7 @@ export const PasswordInput = ({
       {!value && !setValue ? (
         <ChakraInput
           focusBorderColor="#F8B916"
-          borderColor="#AEAEAE"
+          borderColor={!error ? "#AEAEAE" : "red"}
           backgroundColor="#fff"
           className="rounded-3xl select-none"
           w="381px"
@@ -39,7 +40,7 @@ export const PasswordInput = ({
       ) : (
         <ChakraInput
           focusBorderColor="#F8B916"
-          borderColor="#AEAEAE"
+          borderColor={!error ? "#AEAEAE" : "red"}
           backgroundColor="#fff"
           className="rounded-3xl select-none"
           w="381px"

@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import { Flex, Spacer, HStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { SecondaryButton, PrimaryButton } from "components";
+import { UserDataContext } from "context";
 
 export const Navbar = () => {
-  const userToken = false;
+  const { dataProviderValue } = useContext(UserDataContext);
+  const { userData } = dataProviderValue;
 
   return (
     <Flex mx={10} py={5} h={"8vh"}>
       <Spacer />
       <HStack spacing={5}>
-        {userToken ? (
+        {!userData ? (
           <Link to="/register">
             <SecondaryButton name="Register" />
           </Link>
@@ -22,7 +24,7 @@ export const Navbar = () => {
           </Link>
         )}
 
-        {userToken ? (
+        {!userData ? (
           <Link to="/login">
             <PrimaryButton name="Login" />
           </Link>

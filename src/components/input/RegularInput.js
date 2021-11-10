@@ -10,6 +10,7 @@ export const RegularInput = ({
   inputType,
   width,
   name,
+  error,
   ...rest
 }) => {
   const handleChange = (event) => setValue(event.target.value);
@@ -19,7 +20,7 @@ export const RegularInput = ({
       className="rounded-3xl select-none"
       borderRadius="25"
       focusBorderColor="#F8B916"
-      borderColor="#AEAEAE"
+      borderColor={!error ? "#AEAEAE" : "red"}
       backgroundColor="#fff"
       paddingLeft={inputType === "tel" && "80px"}
       placeholder={placeHolder}
@@ -34,7 +35,7 @@ export const RegularInput = ({
       className="rounded-3xl select-none"
       borderRadius="25"
       focusBorderColor="#F8B916"
-      borderColor="#AEAEAE"
+      borderColor={!error ? "#AEAEAE" : "red"}
       backgroundColor="#fff"
       paddingLeft={inputType === "tel" && "80px"}
       placeholder={placeHolder}

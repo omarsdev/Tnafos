@@ -1,29 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-import { Stack, Flex, Spacer, Icon, Box } from "@chakra-ui/react";
+import { Stack, Flex, Spacer, Box, Center, Text } from "@chakra-ui/react";
+import { Link, useHistory } from "react-router-dom";
 
+import { UserDataContext } from "context";
 import {
   RegularInput,
   PasswordInput,
   PrimaryButton,
-  SecondaryButton,
   CheckBox,
 } from "components";
-
-import { Link, useRouteMatch } from "react-router-dom";
-
 import { AuthLayout } from "../AuthLayout";
 import LoginImage from "assets/images/login.jpg";
 
+import { apiAuth } from "api";
+
 export const Login = () => {
-  const match = useRouteMatch();
+  const { tokenProviderValue } = useContext(UserDataContext);
+  const { setUserToken } = tokenProviderValue;
+
+  const history = useHistory();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleLogin = () => {
-    console.log(email, password, rememberMe);
+  const [loadingButton, setLoadingButton] = useState(false);
+
+  const handleLogin = async () => {
+    setError(null);
+    setLoadingButton(true);
+    const res = await apiAuth({ password: password, email: email }, "login");
+    if (res.success) {
+      if (rememberMe) {
+        localStorage.setItem("token", res.token);
+      } else {
+        setUserToken(res.token);
+      }
+      // console.log(res.token)
+      history.push("/dashboard");
+    } else {
+      setError(res.error);
+      setLoadingButton(false);
+    }
   };
 
   return (
@@ -59,7 +79,11 @@ export const Login = () => {
             </Flex>
 
             <Flex>
-              <PrimaryButton name="Login" onClick={handleLogin} />
+              <PrimaryButton
+                name="Login"
+                onClick={handleLogin}
+                loadingButton={loadingButton}
+              />
               <Spacer />
 
               <Link to="/register">
@@ -68,6 +92,11 @@ export const Login = () => {
                 </Box>
               </Link>
             </Flex>
+            {error && (
+              <Center>
+                <Text className="text-red-600 text-xl">{error?.message}</Text>
+              </Center>
+            )}
           </Stack>
         </div>
       </AuthLayout>
