@@ -2,6 +2,7 @@ import { Box, Input, Button, Grid, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createCompany } from "../../../../utils";
+import { RegularInput } from "../../../../components";
 
 export const CreateCompany = () => {
   const [input, setInput] = useState({
@@ -28,10 +29,10 @@ export const CreateCompany = () => {
 
   const history = useHistory();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({ ...input, [name]: value });
+  // };
 
   const handleCreate = async (e) => {
     e.preventDefault();
@@ -54,10 +55,9 @@ export const CreateCompany = () => {
       <form>
         <label className="block">
           Company Name
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="name"
             value={input.name}
           />
@@ -65,10 +65,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Type
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="type"
             value={input.type}
           />
@@ -76,10 +75,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           CR Number
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="cr"
             value={input.cr}
           />
@@ -87,10 +85,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           VAT Number
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="vat"
             value={input.vat}
           />
@@ -98,10 +95,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Establishment Year
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="establishment_year"
             value={input.establishment_year}
           />
@@ -109,10 +105,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Total Employees
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="total_employees"
             value={input.total_employees}
           />
@@ -120,10 +115,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Bio
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="bio"
             value={input.bio}
           />
@@ -131,10 +125,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Telephone
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="telephone"
             value={input.telephone}
           />
@@ -142,10 +135,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Fax
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="fax"
             value={input.fax}
           />
@@ -153,10 +145,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           e-mail
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="email"
             value={input.email}
           />
@@ -164,10 +155,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Website
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="website"
             value={input.website}
           />
@@ -175,10 +165,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Country-Id
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="country_id"
             value={input.country_id}
           />
@@ -186,10 +175,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           City
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="city"
             value={input.city}
           />
@@ -197,10 +185,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           po_box
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="po_box"
             value={input.po_box}
           />
@@ -208,10 +195,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           ZIP_code
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="zip_code"
             value={input.zip_code}
           />
@@ -219,10 +205,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Address
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="address"
             value={input.address}
           />
@@ -230,10 +215,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Location:
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="location"
             value={input.location}
           />
@@ -241,10 +225,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Logo:
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="logo"
             value={input.logo}
           />
@@ -252,10 +235,9 @@ export const CreateCompany = () => {
 
         <label className="block">
           Category-Id
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="category_id"
             value={input.category_id}
           />

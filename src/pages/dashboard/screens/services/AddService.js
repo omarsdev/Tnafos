@@ -2,6 +2,7 @@ import { HStack, VStack, Button, Input, Box, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createService } from "../../../../utils";
+import { RegularInput } from "../../../../components";
 
 export const AddService = () => {
   const [input, setInput] = useState({
@@ -14,10 +15,10 @@ export const AddService = () => {
   const history = useHistory();
   // const [errors, setErrors] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({ ...input, [name]: value });
+  // };
 
   const handleAddService = async (e) => {
     e.preventDefault();
@@ -58,10 +59,9 @@ export const AddService = () => {
       <form onSubmit={(ev) => handleAddService(ev)}>
         <label className="ml-3 font-normal text-gray-600 text-lg">
           name:
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="name"
             value={input.name}
             m={2}
@@ -70,10 +70,9 @@ export const AddService = () => {
 
         <label className="ml-3 font-normal text-gray-600 text-lg">
           description :
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="description"
             value={input.description}
             m={2}
@@ -82,10 +81,9 @@ export const AddService = () => {
 
         <label className="ml-3 font-normal text-gray-600 text-lg">
           category_id :
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="category_id"
             value={input.category_id}
             m={2}
@@ -94,10 +92,9 @@ export const AddService = () => {
 
         <label className="ml-3 font-normal text-gray-600 text-lg">
           price :
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="price"
             value={input.price}
             m={2}
@@ -106,10 +103,9 @@ export const AddService = () => {
 
         <label className="ml-3 font-normal text-gray-600 text-lg">
           type :
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
-            onChange={(ev) => handleChange(ev)}
             name="type"
             value={input.type}
             m={2}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouteMatch, Link, useHistory } from "react-router-dom";
 import { showCompany, updateCompany } from "../../../../utils";
+import { RegularInput } from "../../../../components";
 import { CompanyCard } from "./";
 import {
   HStack,
@@ -11,7 +12,6 @@ import {
   Button,
   VStack,
   Divider,
-  Input,
   Icon,
   useDisclosure,
   Modal,
@@ -175,49 +175,28 @@ export const CompanyHome = () => {
               <form onSubmit={(ev) => handleUpdate(ev)}>
                 <label className="block">
                   Company Name
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="name"
-                    value={input.name}
-                  />
+                  <RegularInput size="md" name="name" value={input.name} />
                 </label>
 
                 <label className="block">
                   Type
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="type"
-                    value={input.type}
-                  />
+                  <RegularInput size="md" name="type" value={input.type} />
                 </label>
 
                 <label className="block">
                   CR Number
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="cr"
-                    value={input.cr}
-                  />
+                  <RegularInput size="md" name="cr" value={input.cr} />
                 </label>
 
                 <label className="block">
                   VAT Number
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="vat"
-                    value={input.vat}
-                  />
+                  <RegularInput size="md" name="vat" value={input.vat} />
                 </label>
 
                 <label className="block">
                   Establishment Year
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="establishment_year"
                     value={input.establishment_year}
                   />
@@ -225,9 +204,8 @@ export const CompanyHome = () => {
 
                 <label className="block">
                   Total Employees
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="total_employees"
                     value={input.total_employees}
                   />
@@ -235,19 +213,13 @@ export const CompanyHome = () => {
 
                 <label className="block">
                   Bio
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="bio"
-                    value={input.bio}
-                  />
+                  <RegularInput size="md" name="bio" value={input.bio} />
                 </label>
 
                 <label className="block">
                   Telephone
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="telephone"
                     value={input.telephone}
                   />
@@ -255,29 +227,18 @@ export const CompanyHome = () => {
 
                 <label className="block">
                   Fax
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="fax"
-                    value={input.fax}
-                  />
+                  <RegularInput size="md" name="fax" value={input.fax} />
                 </label>
 
                 <label className="block">
                   e-mail
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="email"
-                    value={input.email}
-                  />
+                  <RegularInput size="md" name="email" value={input.email} />
                 </label>
 
                 <label className="block">
                   Website
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="website"
                     value={input.website}
                   />
@@ -285,9 +246,8 @@ export const CompanyHome = () => {
 
                 <label className="block">
                   Country-Id
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="country_id"
                     value={input.country_id}
                   />
@@ -295,29 +255,18 @@ export const CompanyHome = () => {
 
                 <label className="block">
                   City
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="city"
-                    value={input.city}
-                  />
+                  <RegularInput size="md" name="city" value={input.city} />
                 </label>
 
                 <label className="block">
                   po_box
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="po_box"
-                    value={input.po_box}
-                  />
+                  <RegularInput size="md" name="po_box" value={input.po_box} />
                 </label>
 
                 <label className="block">
                   ZIP_code
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="zip_code"
                     value={input.zip_code}
                   />
@@ -325,9 +274,8 @@ export const CompanyHome = () => {
 
                 <label className="block">
                   Address
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="address"
                     value={input.address}
                   />
@@ -335,9 +283,8 @@ export const CompanyHome = () => {
 
                 <label className="block">
                   Location:
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="location"
                     value={input.location}
                   />
@@ -345,19 +292,13 @@ export const CompanyHome = () => {
 
                 <label className="block">
                   Logo:
-                  <Input
-                    size="md"
-                    onChange={(ev) => handleChange(ev)}
-                    name="logo"
-                    value={input.logo}
-                  />
+                  <RegularInput size="md" name="logo" value={input.logo} />
                 </label>
 
                 <label className="block">
                   Category-Id
-                  <Input
+                  <RegularInput
                     size="md"
-                    onChange={(ev) => handleChange(ev)}
                     name="category_id"
                     value={input.category_id}
                   />

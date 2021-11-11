@@ -28,6 +28,7 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import { getMyServices, updateService } from "../../../../utils";
+import { RegularInput } from "../../../../components";
 
 export const MyService = () => {
   const [service, setService] = useState(null);
@@ -41,10 +42,10 @@ export const MyService = () => {
   const [input, setInput] = useState(null);
   const [errors, setErrors] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({ ...input, [name]: value });
+  // };
 
   const fetchData = async () => {
     const Data = await getMyServices(uuid);
@@ -184,15 +185,12 @@ export const MyService = () => {
                   <form onSubmit={(ev) => handleUpdate(ev)}>
                     <label className="w-32 text-right">
                       Price:
-                      <Input
+                      <RegularInput
                         size="md"
                         type="text"
                         name="price"
                         value={input.name}
                         required
-                        onChange={(ev) => handleChange(ev)}
-                        autoComplete="off"
-                        autoFocus="off"
                         m={"15px"}
                         w="52"
                       />
@@ -200,15 +198,12 @@ export const MyService = () => {
 
                     <label className="w-32 text-right">
                       Type:
-                      <Input
+                      <RegularInput
                         size="md"
                         type="text"
                         name="type"
                         value={input.name}
                         required
-                        onChange={(ev) => handleChange(ev)}
-                        autoComplete="off"
-                        autoFocus="off"
                         m={"15px"}
                         w="52"
                       />

@@ -3,7 +3,6 @@ import {
   Box,
   Text,
   Button,
-  Input,
   HStack,
   Drawer,
   DrawerBody,
@@ -29,6 +28,7 @@ import {
   Link,
 } from "react-router-dom";
 import { getUser, updateUserInfo } from "../../../../utils";
+import { RegularInput } from "../../../../components";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);
@@ -52,10 +52,10 @@ export const UserCard = () => {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({ ...input, [name]: value });
+  // };
 
   const fetchData = async () => {
     const Data = await getUser(uuid);
@@ -181,55 +181,45 @@ export const UserCard = () => {
                   <form onSubmit={(ev) => handleUpdate(ev)}>
                     <label className="w-32 text-right">
                       First Name :
-                      <Input
+                      <RegularInput
                         size="md"
                         type="text"
                         name="first_name"
                         value={input.first_name}
                         required
-                        onChange={(ev) => handleChange(ev)}
-                        autoComplete="off"
-                        autoFocus="off"
                       />
                     </label>
 
                     <label className="w-32 text-right">
                       Last Name:
-                      <Input
+                      <RegularInput
                         size="md"
                         type="text"
                         name="last_name"
                         value={input.last_name}
                         required
-                        onChange={(ev) => handleChange(ev)}
-                        autoComplete="off"
-                        autoFocus="off"
                       />
                     </label>
 
                     <label className="w-32 text-right">
                       Phone Number:
-                      <Input
+                      <RegularInput
                         size="md"
                         type="text"
                         name="phone_number"
                         value={input.phone_number}
                         required
-                        onChange={(ev) => handleChange(ev)}
-                        autoComplete="off"
                       />
                     </label>
 
                     <label className="w-32 text-right">
                       Email:
-                      <Input
+                      <RegularInput
                         size="md"
                         type="email"
                         name="email"
                         value={input.email}
                         required
-                        onChange={(ev) => handleChange(ev)}
-                        autoComplete="off"
                         placeholder="info@company.com"
                       />
                     </label>

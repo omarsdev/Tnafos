@@ -4,6 +4,8 @@ import { Input as ChakraInput } from "@chakra-ui/react";
 
 export const RegularInput = ({
   register,
+  input,
+  setInput,
   value,
   setValue,
   placeHolder,
@@ -13,7 +15,11 @@ export const RegularInput = ({
   error,
   ...rest
 }) => {
-  const handleChange = (event) => setValue(event.target.value);
+  // const handleChange = (event) => setValue(event.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
 
   return !value && !setValue ? (
     <ChakraInput
@@ -28,6 +34,8 @@ export const RegularInput = ({
       width={!width ? "381px" : width}
       type={inputType}
       {...register(`${name}`)}
+      autoComplete="off"
+      autoFocus="off"
       {...rest}
     />
   ) : (
@@ -44,6 +52,8 @@ export const RegularInput = ({
       value={value}
       onChange={handleChange}
       type={inputType}
+      autoComplete="off"
+      autoFocus="off"
       {...rest}
     />
   );
