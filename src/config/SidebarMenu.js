@@ -1,3 +1,5 @@
+import React from "react";
+
 import { FiHome } from "react-icons/fi";
 
 export const SidebarMenu = [
@@ -7,7 +9,6 @@ export const SidebarMenu = [
     icon: <FiHome />,
     to: "/",
     heading: null,
-    
   },
   {
     id: 1,
@@ -18,13 +19,14 @@ export const SidebarMenu = [
         id: 0,
         title: "Company",
         icon: <FiHome />,
+        to: "/company",
         // submenu: [
         //   {
-        //     title: "branch 1",
+        //     title: "Incoming",
         //     to: "/",
         //   },
         //   {
-        //     title: "branch 2",
+        //     title: "Outgoing",
         //     to: "/",
         //   },
         // ],
@@ -33,13 +35,30 @@ export const SidebarMenu = [
         id: 1,
         title: "Users",
         icon: <FiHome />,
+        to: "/user",
         // submenu: [
         //   {
-        //     title: "branch 1",
+        //     title: "Incoming",
         //     to: "/",
         //   },
         //   {
-        //     title: "branch 2",
+        //     title: "Outgoing",
+        //     to: "/",
+        //   },
+        // ],
+      },
+      {
+        id: 2,
+        title: "Services",
+        icon: <FiHome />,
+        to: "/service",
+        // submenu: [
+        //   {
+        //     title: "Incoming",
+        //     to: "/",
+        //   },
+        //   {
+        //     title: "Outgoing",
         //     to: "/",
         //   },
         // ],
@@ -48,34 +67,102 @@ export const SidebarMenu = [
   },
   {
     id: 2,
-    heading: "Estimates",
+    heading: "Documents",
     navitem: [
       {
-        id: 0,
-        title: "Company",
+        id: 3,
+        title: "Purchase Requests",
         icon: <FiHome />,
+        submenu: [
+          {
+            title: "Incoming",
+            to: "/",
+          },
+          {
+            title: "Outgoing",
+            to: "/",
+          },
+        ],
+      },
+      {
+        id: 4,
+        title: "Estimates",
+        icon: <FiHome />,
+        submenu: [
+          {
+            title: "Incoming",
+            to: "/estimates/incoming",
+          },
+          {
+            title: "Outgoing",
+            to: "/estimates/outgoing",
+          },
+        ],
+      },
+      {
+        id: 5,
+        title: "Invoices",
+        icon: <FiHome />,
+        submenu: [
+          {
+            title: "Incoming",
+            to: "/",
+          },
+          {
+            title: "Outgoing",
+            to: "/",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 6,
+    heading: "App Settings",
+    navitem: [
+      {
+        id: 6,
+        title: "Settings",
+        icon: <FiHome />,
+        to: "/settings",
         // submenu: [
         //   {
-        //     title: "branch 1",
+        //     title: "Incoming",
         //     to: "/",
         //   },
         //   {
-        //     title: "branch 2",
+        //     title: "Outgoing",
         //     to: "/",
         //   },
         // ],
       },
       {
-        id: 1,
-        title: "Users",
+        id: 7,
+        title: "Payments",
         icon: <FiHome />,
+        submenu: [
+          {
+            title: "Incoming",
+            to: "/",
+          },
+          {
+            title: "Outgoing",
+            to: "/",
+          },
+        ],
+      },
+      {
+        id: 8,
+        title: "Clients",
+        icon: <FiHome />,
+        to: "/",
         // submenu: [
         //   {
-        //     title: "branch 1",
+        //     title: "Incoming",
         //     to: "/",
         //   },
         //   {
-        //     title: "branch 2",
+        //     title: "Outgoing",
         //     to: "/",
         //   },
         // ],
