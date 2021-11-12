@@ -1,22 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Box, Grid, Text } from "@chakra-ui/react";
+import { useRouteMatch } from "react-router-dom";
+import { Box, Grid, Spinner, Text } from "@chakra-ui/react";
+
+import AxiosInstance from "api/axios-instance";
 
 import { CardItem } from "../components";
 
 export const Service = () => {
+  const match = useRouteMatch();
+  const [searchResult, setSearchResult] = useState(null);
+
+  useEffect(() => {
+    const handleSearchApi = async () => {
+      await AxiosInstance.get(
+        `api/services/search?search=${match.params.search}`
+      ).then((res) => {
+        setSearchResult(res.data.data);
+      });
+    };
+
+    handleSearchApi();
+  }, [match.params.search]);
+
   return (
     <>
       <Text fontSize="35px">Services</Text>
       <Box mt="40px">
-        <Grid templateColumns="repeat(3, 1fr)" gap={20}>
-          <CardItem
-            title="React Native Mobile App (iOS & Android)"
-            srcImg="https://bit.ly/sage-adebayo"
-            body="React Native combines the best parts of native development with React,
-          a best-in-class JavaScript library for building user interfaces."
-          />
-        </Grid>
+        {!searchResult ? (
+          <Spinner size="xl" color="#F8B916" />
+        ) : (
+          <Grid templateColumns="repeat(3, 1fr)" gap={20}>
+            {searchResult.map((e, i) => (
+              <CardItem key={i} data={e} />
+            ))}
+          </Grid>
+        )}
       </Box>
     </>
   );

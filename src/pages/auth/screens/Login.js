@@ -83,6 +83,7 @@ export const Login = () => {
                 name="Login"
                 onClick={handleLogin}
                 loadingButton={loadingButton}
+                buttonType="submit"
               />
               <Spacer />
 

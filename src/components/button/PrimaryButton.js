@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 
 export const PrimaryButton = ({
   name,
@@ -32,7 +32,7 @@ export const PrimaryButton = ({
       className="info-box"
       ref={ref}
       isLoading={
-        loadingButton !== null || loadingButton !== "undefined"
+        buttonType && (loadingButton || !loadingButton)
           ? loadingButton
           : loading
       }
@@ -54,7 +54,7 @@ export const PrimaryButton = ({
           <Logo />
         </Box>
       )}
-      {name}
+      <Text pt="5px">{name}</Text>
     </Button>
   );
 };

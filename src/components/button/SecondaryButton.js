@@ -7,6 +7,8 @@ export const SecondaryButton = ({
   btnWidth,
   btnHeight,
   btnBg,
+  buttonType,
+  loadingButton,
   ...buttonProps
 }) => {
   const [loading, setLoading] = useState(false);
@@ -30,7 +32,11 @@ export const SecondaryButton = ({
     <Button
       className="info-box"
       ref={ref}
-      isLoading={loading}
+      isLoading={
+        buttonType && (loadingButton || !loadingButton)
+          ? loadingButton
+          : loading
+      }
       loadingText="Loading"
       width={!btnWidth ? "120px" : btnWidth}
       height={!btnHeight ? "40px" : btnHeight}
@@ -43,6 +49,7 @@ export const SecondaryButton = ({
       _focus={{
         outline: "none",
       }}
+      paddingTop={"5px"}
       {...buttonProps}
     >
       {name}

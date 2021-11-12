@@ -177,9 +177,9 @@ export const Register = () => {
                 <Flex>
                   <PrimaryButton
                     name="Register"
-                    // buttonType="submit"
                     onClick={handleSubmit(onSubmit)}
                     loadingButton={loadingButton}
+                    buttonType="submit"
                   />
 
                   <Spacer />

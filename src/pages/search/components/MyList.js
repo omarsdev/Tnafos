@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Box, Flex, Text } from "@chakra-ui/react";
-
 import { ChevronDown } from "react-feather";
 
-import { MyListItem } from "./MyListItem";
-
 import { SecondaryButton } from "../../../components/index";
+import { SearchDataContext } from "context";
+
+const MyListItem = ({ data }) => {
+  return (
+    <Flex className="flex-col mt-3">
+      <Text fontSize="16px" ml="0px">
+        {data.name}
+      </Text>
+      <Box className="w-full bg-CBlack mt-2" h="1px" />
+    </Flex>
+  );
+};
 
 export const MyList = () => {
+  const { myListDataProviderValue } = useContext(SearchDataContext);
+  const { myListData } = myListDataProviderValue;
+
   return (
     <Box w="300px">
       <Box h="76px" px="20px" className="bg-CBlack rounded-t-3xl">
@@ -18,10 +30,9 @@ export const MyList = () => {
         </Flex>
       </Box>
       <Box bgColor="#F4F3EE" px="20px" pt="32px" className="rounded-b-3xl">
-        <MyListItem />
-        <MyListItem />
-        <MyListItem />
-        <MyListItem />
+        {myListData.map((e, i) => (
+          <MyListItem key={i} data={e} />
+        ))}
         <Box mt="23px">
           <SecondaryButton
             name="PROCCED"

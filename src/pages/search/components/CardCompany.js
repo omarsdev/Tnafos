@@ -1,13 +1,15 @@
 import React from "react";
-import { Box, Center, HStack, Image, Text, VStack } from "@chakra-ui/react";
 
+import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import { PhoneCall } from "react-feather";
+import { Link, useRouteMatch } from "react-router-dom";
 
-import Login from "assets/images/login.jpg";
 import { PrimaryButton } from "components";
-import { Call } from "assets/icons";
+import Login from "assets/images/login.jpg";
 
-export const CardCompany = () => {
+export const CardCompany = ({ data }) => {
+  const match = useRouteMatch();
+
   return (
     <Box className="rounded-3xl border-CPrimary border-2 h-56 w-full shadow-xl">
       <HStack className="h-full" spacing="0" alignItems="unset">
@@ -25,17 +27,13 @@ export const CardCompany = () => {
         <HStack className="w-4/5 h-full" spacing="0">
           <VStack width="65%" spacing="12px" alignItems="flex-start" pl="40px">
             <Text fontSize="21px" className="">
-              Company Name
+              {data.name || "Company Name"}
             </Text>
-            <Text maxHeight="67px" className="overflow-hidden">
-              Probably the best random sentence generator. More than 90 random
+            <Text height="67px" className="overflow-hidden">
+              {data.bio ||
+                `Probably the best random sentence generator. More than 90 random
               sentences all of which are human written and easily understood.
-              Probably the best random sentence generator. More than 90 random
-              sentences all of which are human written and easily understood.
-              Probably the best random sentence generator. More than 90 random
-              sentences all of which are human written and easily understood.
-              Probably the best random sentence generator. More than 90 random
-              sentences all of which are human written and easily
+              Probably the best random sentence generator.`}
             </Text>
             <Box w="100%">
               <HStack w="100%">
@@ -89,7 +87,9 @@ export const CardCompany = () => {
             justifyContent="center"
             spacing="20px"
           >
-            <PrimaryButton name="View Profile" height="50px" />
+            <Link to={`${match.url}/${data.uuid}`}>
+              <PrimaryButton name="View Profile" height="50px" />
+            </Link>
             <Box
               w="50px"
               h="50px"
