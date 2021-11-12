@@ -1,16 +1,8 @@
-import {
-  Heading,
-  Box,
-  Checkbox,
-  Button,
-  Input,
-  HStack,
-  Text,
-} from "@chakra-ui/react";
 import React, { useState } from "react";
+import { Heading, Box, Checkbox, Button, HStack, Text } from "@chakra-ui/react";
 import { Link, useHistory } from "react-router-dom";
 import { createNewUser } from "../../../../utils";
-import { RegularInput } from "../";
+import { FormInput } from "../../../../components";
 
 export const CreateUser = () => {
   const [input, setInput] = useState({
@@ -22,12 +14,8 @@ export const CreateUser = () => {
     phone_number: "",
   });
 
-  const [errors, setErrors] = useState(null);
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
+  const [check, setCheck] = useState(false);
+  // const [errors, setErros] = useState(null);
 
   const history = useHistory();
 
@@ -38,7 +26,7 @@ export const CreateUser = () => {
     if (RESP.success) {
       history.push("/dashboard/user");
     } else {
-      setErrors(RESP.errors);
+      // setErrors(RESP.errors);
       console.log("errors", errors);
     }
   };
@@ -68,80 +56,59 @@ export const CreateUser = () => {
           Add new User
         </Heading>
       </Box>
-      <form on onSubmit={(ev) => addUser(ev)}>
+      <form onSubmit={(ev) => addUser(ev)}>
         <label className="w-32 text-right">
           First Name :
-          <Input
-            size="sm"
-            borderRadius="lg"
-            type="text"
+          <FormInput
             name="first_name"
-            required
+            value={input.first_name}
+            inputType="text"
           />
         </label>
 
         <label className="w-32 text-right">
           Last Name:
-          <Input
-            size="sm"
-            borderRadius="lg"
-            type="text"
+          <FormInput
             name="last_name"
             value={input.last_name}
-            required
+            inputType="text"
           />
         </label>
 
         <label className="w-32 text-right">
           Phone Number:
-          <Input
-            size="sm"
-            borderRadius="lg"
-            type="text"
+          <FormInput
             name="phone_number"
             value={input.phone_number}
-            required
+            inputType="number"
           />
         </label>
 
         <label className="w-32 text-right">
           Email:
-          <Input
-            size="sm"
-            borderRadius="lg"
+          <FormInput
             type="email"
             name="email"
             value={input.email}
-            required
-            placeholder="info@company.com"
-            onFocus="off"
-            _autofill="off"
+            inputType="text"
           />
         </label>
 
         <label className="w-32 text-right">
           Password:
-          <Input
-            size="sm"
-            borderRadius="lg"
-            type="password"
+          <FormInput
             name="password"
             value={input.password}
-            required
+            inputType="password"
           />
         </label>
 
         <label className="w-32 text-right">
           Confirm Password:
-          <Input
-            size="sm"
-            borderRadius="lg"
-            type="password"
+          <FormInput
             name="password_confirmation"
             value={input.password_confirmation}
-            required
-            onFocus="off"
-            _autofill="off"
+            inputType="password"
           />
         </label>
 
