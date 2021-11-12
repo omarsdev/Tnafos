@@ -11,12 +11,26 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
+import AxiosInstance from "../../../../utils/axios-instance";
 
 export const UserHome = () => {
   const [usersList, setUsersList] = useState([]);
 
   const match = useRouteMatch();
   const { uuid } = useParams();
+
+  export const showUsersList = async () => {
+    await AxiosInstance.get("/api/dashboard/user")
+      .then((res) => {
+        return {
+          success: true,
+          data: res.data.data,
+        };
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const USERS = async () => {
     const array = await showUsersList();

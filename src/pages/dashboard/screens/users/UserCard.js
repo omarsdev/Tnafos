@@ -28,7 +28,8 @@ import {
   useRouteMatch,
   Link,
 } from "react-router-dom";
-import { getUser, updateUserInfo } from "../../../../utils";
+import { updateUserInfo } from "../../../../utils";
+import AxiosInstance from "../../../../utils/axios-instance";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);
@@ -40,32 +41,39 @@ export const UserCard = () => {
   const firstField = React.useRef();
   // const [errors, setErrors] = useState(null);
 
-  const Details = async () => {
-    const resp = await getUser(uuid);
-
-    if (resp.success) {
-      setCard(resp.data);
-    } else if (!resp.success && resp.error) {
-      history.push("/dashboard/user");
-    } else if (!resp.success && !resp.error) {
-      history.push("/");
-    }
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
+  const getUser = async (uuid) => {
+    await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
+      .then((res) => {
+        console.log(res.data.data);
+        return {
+          success: true,
+          data: res.data.data,
+        };
+      })
+      .catch((err) => {
+        return {
+          success: false,
+          error: err,
+        };
+      });
+    history.push("/dashboard/user");
+    setCard(data);
+  };
+
   const fetchData = async () => {
-    const Data = await getUser(uuid);
-    if (Data.success) {
-      setInput(Data.data);
+    Resp = await getUser(uuid);
+    if (Resp.success) {
+      setInput(Resp.data);
     }
   };
 
   useEffect(() => {
-    Details();
+    getUser();
     fetchData();
   }, []);
 

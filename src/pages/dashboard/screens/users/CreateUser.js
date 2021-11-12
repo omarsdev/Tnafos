@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { createNewUser } from "../../../../utils";
+import { AxiosInstance } from "../../../../utils/axios-instance";
 
 export const CreateUser = () => {
   const [input, setInput] = useState({
@@ -21,26 +21,34 @@ export const CreateUser = () => {
     phone_number: "",
   });
 
-  const [check, setCheck] = useState(false);
-  const [errors, setErrors] = useState(null);
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
-
   const history = useHistory();
 
-  const addUser = async (e) => {
+  const [check, setCheck] = useState(false);
+  // const [errors, setErrors] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
+
+  //* onSubmit function:
+  const addUser = async (e, userData) => {
     e.preventDefault();
-    const RESP = await createNewUser(input);
-    console.log(RESP);
-    if (RESP.success) {
-      history.push("/dashboard/user");
-    } else {
-      setErrors(RESP.errors);
-      console.log("errors", errors);
-    }
+    await AxiosInstance.post("/api/dashboard/user/create", userData)
+      .then((res) => {
+        return {
+          success: true,
+          data: res.data.data,
+        };
+      })
+      .catch((err) => {
+        return {
+          success: false,
+          errors: err.response.data.errors,
+          message: err.response.data.message,
+        };
+      });
+    history.push("/dashboard/user");
   };
 
   const handleCancel = () => {
@@ -79,6 +87,7 @@ export const CreateUser = () => {
             name="first_name"
             required
             value={input.first_name}
+            onChange={(ev) => handleChange(ev)}
           />
         </label>
 
@@ -91,6 +100,7 @@ export const CreateUser = () => {
             name="last_name"
             value={input.last_name}
             required
+            onChange={(ev) => handleChange(ev)}
           />
         </label>
 
@@ -103,6 +113,7 @@ export const CreateUser = () => {
             name="phone_number"
             value={input.phone_number}
             required
+            onChange={(ev) => handleChange(ev)}
           />
         </label>
 
@@ -116,6 +127,7 @@ export const CreateUser = () => {
             value={input.email}
             required
             _autofill="off"
+            onChange={(ev) => handleChange(ev)}
           />
         </label>
 
@@ -128,6 +140,7 @@ export const CreateUser = () => {
             name="password"
             value={input.password}
             required
+            onChange={(ev) => handleChange(ev)}
           />
         </label>
 
@@ -141,6 +154,7 @@ export const CreateUser = () => {
             value={input.password_confirmation}
             required
             _autofill="off"
+            onChange={(ev) => handleChange(ev)}
           />
         </label>
 
