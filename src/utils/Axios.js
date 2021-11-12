@@ -82,84 +82,73 @@ export const handleSearch = async (searchData) => {
   }
 };
 
+// export const createNewUser = async (userData) => {
+//   const token = getToken(); //* without token there will be an error (401: unauthorized) which means the user has to ensure his identity.
+//   try {
+//     const RESP = await axios.post(`${apiURL}/dashboard/user/create`, userData, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         Accept: "application/json",
+//       },
+//     });
+//     // console.log(RESP);
+//     return {
+//       success: true,
+//       data: RESP.data.data,
+//     };
+//   } catch (error) {
+//     // console.log("errors", error.response);
+//     return {
+//       success: false,
+//       errors: error.response.data.errors,
+//       message: error.response.data.message,
+//     };
+//   }
+// };
 
-// const instanse = axios.create ({
-//   baseURL: `${apiURL}/dashboard`,
-//   headers: {
-//       Authorization: `Bearer ${token}`,
-//       Accept: "application/json",
-//     },
-// });
+// export const showUsersList = async () => {
+//   const token = getToken();
+//   try {
+//     // const USERS = instanse.get('/user', instanse.defaults.headers(token));
+//     const USERS = await axios.get(`${apiURL}/dashboard/user`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         Accept: "application/json",
+//       },
+//     });
+//     return USERS.data.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-
-
-export const createNewUser = async (userData) => {
-  const token = getToken(); //* without token there will be an error (401: unauthorized) which means the user has to ensure his identity.
-  try {
-    const RESP = await axios.post(`${apiURL}/dashboard/user/create`, userData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-    });
-    // console.log(RESP);
-    return {
-      success: true,
-      data: RESP.data.data,
-    };
-  } catch (error) {
-    // console.log("errors", error.response);
-    return {
-      success: false,
-      errors: error.response.data.errors,
-      message: error.response.data.message,
-    };
-  }
-};
-
-export const showUsersList = async () => {
-  const token = getToken();
-  try {
-    // const USERS = instanse.get('/user', instanse.defaults.headers(token));
-    const USERS = await axios.get(`${apiURL}/dashboard/user`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-    });
-    return USERS.data.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const getUser = async (uuid) => {
-  const token = getToken(); //* grab the token to be autherized. (note: this differs to the uuid)
-  if (token) {
-    try {
-      const uInfo = await axios.get(`${apiURL}/dashboard/user/${uuid}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-        },
-      });
-      console.log(uInfo.data.data);
-      return {
-        success: true,
-        data: uInfo.data.data,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: error,
-      };
-    }
-  } else {
-    return {
-      success: false,
-    };
-  }
-};
+// export const getUser = async (uuid) => {
+//   const token = getToken(); //* grab the token to be autherized. (note: this differs to the uuid)
+//   if (token) {
+//     try {
+//       const uInfo = await axios.get(`${apiURL}/dashboard/user/${uuid}`, {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           Accept: "application/json",
+//         },
+//       });
+//       console.log(uInfo.data.data);
+//       return {
+//         success: true,
+//         data: uInfo.data.data,
+//       };
+//     } catch (error) {
+//       return {
+//         success: false,
+//         error: error,
+//       };
+//     }
+//   } else {
+//     return {
+//       success: false,
+//     };
+//   }
+// };
 
 export const updateUserInfo = async (uuid, dataToBeUpdated) => {
   const token = getToken();
@@ -282,7 +271,7 @@ export const getMyServices = async (uuid) => {
           Accept: "application/json",
         },
       });
-       console.log(resp);
+      console.log(resp);
       return {
         success: true,
         data: resp.data,
