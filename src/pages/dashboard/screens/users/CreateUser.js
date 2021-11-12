@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { createNewUser } from "../../../../utils";
+import { RegularInput } from "../";
 
 export const CreateUser = () => {
   const [input, setInput] = useState({
@@ -21,13 +22,12 @@ export const CreateUser = () => {
     phone_number: "",
   });
 
-  const [check, setCheck] = useState(false);
   const [errors, setErrors] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({ ...input, [name]: value });
+  // };
 
   const history = useHistory();
 
@@ -77,9 +77,6 @@ export const CreateUser = () => {
             type="text"
             name="first_name"
             required
-            onChange={(ev) => handleChange(ev)}
-            autoComplete="off"
-            autoFocus="off"
           />
         </label>
 
@@ -92,9 +89,6 @@ export const CreateUser = () => {
             name="last_name"
             value={input.last_name}
             required
-            onChange={(ev) => handleChange(ev)}
-            autoComplete="off"
-            autoFocus="off"
           />
         </label>
 
@@ -107,8 +101,6 @@ export const CreateUser = () => {
             name="phone_number"
             value={input.phone_number}
             required
-            onChange={(ev) => handleChange(ev)}
-            autoComplete="off"
           />
         </label>
 
@@ -121,8 +113,6 @@ export const CreateUser = () => {
             name="email"
             value={input.email}
             required
-            onChange={(ev) => handleChange(ev)}
-            autoComplete="off"
             placeholder="info@company.com"
             onFocus="off"
             _autofill="off"
@@ -138,8 +128,6 @@ export const CreateUser = () => {
             name="password"
             value={input.password}
             required
-            onChange={(ev) => handleChange(ev)}
-            autoComplete="off"
           />
         </label>
 
@@ -152,8 +140,6 @@ export const CreateUser = () => {
             name="password_confirmation"
             value={input.password_confirmation}
             required
-            onChange={(ev) => handleChange(ev)}
-            autoComplete="off"
             onFocus="off"
             _autofill="off"
           />
