@@ -89,8 +89,9 @@ export const CompanyHome = () => {
           Company
         </Heading>
 
-        <HStack w="full" spacing={44}>
+        <HStack spacing={44}>
           <CompanyCard Data={companyInfo} />
+
           <Box>
             <Box my="10" width="44">
               <Button
@@ -170,7 +171,7 @@ export const CompanyHome = () => {
         <ModalContent>
           <ModalHeader>Update your company info</ModalHeader>
           <ModalCloseButton />
-          <ModalBody overflow="scroll">
+          <ModalBody>
             {input && (
               <form onSubmit={(ev) => handleUpdate(ev)}>
                 <label className="block">

@@ -54,7 +54,7 @@ export const DashboardLayout = () => {
       {/* {userData ?*/}
       <HStack spacing={0}>
         <Sidebar />
-        <VStack className="chakra-stack w-full h-screen" spacing={0}>
+        <VStack className="chakra-stack w-full h-screen">
           <Navbar />
 
           {/* {body} */}

@@ -11,7 +11,7 @@ export const CompanyCard = ({ Data }) => {
       boxShadow="2xl"
       borderWidth="2px"
       w="fit-content"
-      size="sm"
+      size=""
       ml="10"
     >
       <Thead bg="orange.50">
