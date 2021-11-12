@@ -1,8 +1,15 @@
+import {
+  Heading,
+  Box,
+  Button,
+  HStack,
+  Checkbox,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Heading, Box, Checkbox, Button, HStack, Text } from "@chakra-ui/react";
 import { Link, useHistory } from "react-router-dom";
 import { createNewUser } from "../../../../utils";
-import { FormInput } from "../../../../components";
 
 export const CreateUser = () => {
   const [input, setInput] = useState({
@@ -15,7 +22,12 @@ export const CreateUser = () => {
   });
 
   const [check, setCheck] = useState(false);
-  // const [errors, setErros] = useState(null);
+  const [errors, setErrors] = useState(null);
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({ ...input, [name]: value });
+  // };
 
   const history = useHistory();
 
@@ -26,7 +38,7 @@ export const CreateUser = () => {
     if (RESP.success) {
       history.push("/dashboard/user");
     } else {
-      // setErrors(RESP.errors);
+      setErrors(RESP.errors);
       console.log("errors", errors);
     }
   };
@@ -56,59 +68,79 @@ export const CreateUser = () => {
           Add new User
         </Heading>
       </Box>
-      <form onSubmit={(ev) => addUser(ev)}>
+      <form on onSubmit={(ev) => addUser(ev)}>
         <label className="w-32 text-right">
           First Name :
-          <FormInput
+          <Input
+            size="sm"
+            type="text"
+            borderRadius="lg"
+            type="text"
             name="first_name"
+            required
             value={input.first_name}
-            inputType="text"
           />
         </label>
 
         <label className="w-32 text-right">
           Last Name:
-          <FormInput
+          <Input
+            size="sm"
+            type="text"
+            borderRadius="lg"
             name="last_name"
             value={input.last_name}
-            inputType="text"
+            required
           />
         </label>
 
         <label className="w-32 text-right">
           Phone Number:
-          <FormInput
+          <Input
+            size="sm"
+            type="text"
+            borderRadius="lg"
             name="phone_number"
             value={input.phone_number}
-            inputType="number"
+            required
           />
         </label>
 
         <label className="w-32 text-right">
           Email:
-          <FormInput
+          <Input
+            size="sm"
+            borderRadius="lg"
             type="email"
             name="email"
             value={input.email}
-            inputType="text"
+            required
+            _autofill="off"
           />
         </label>
 
         <label className="w-32 text-right">
           Password:
-          <FormInput
+          <Input
+            size="sm"
+            borderRadius="lg"
+            type="password"
             name="password"
             value={input.password}
-            inputType="password"
+            required
           />
         </label>
 
         <label className="w-32 text-right">
           Confirm Password:
-          <FormInput
+          <Input
+            size="sm"
+            borderRadius="lg"
+            type="password"
             name="password_confirmation"
             value={input.password_confirmation}
-            inputType="password"
+            required
+            _autofill="off"
           />
         </label>
 
@@ -116,13 +148,7 @@ export const CreateUser = () => {
           <Heading fontSize="md" color="gray.500" fontWeight="normal">
             Terms and Conditions agreement
           </Heading>
-          <Checkbox
-            size="sm"
-            colorScheme="blue"
-            onChange={(e) => {
-              setCheck(e.target.checked);
-            }}
-          >
+          <Checkbox size="sm" colorScheme="blue">
             I agree to Tnafos
           </Checkbox>
           <HStack>
@@ -139,11 +165,7 @@ export const CreateUser = () => {
               Decleration of Valid Information
             </Heading>
           </Box>
-          <Checkbox
-            onChange={(e) => {
-              setCheck(e.target.checked);
-            }}
-          >
+          <Checkbox>
             I confirm that the information given in this form is true, complete
             and accurate.
           </Checkbox>

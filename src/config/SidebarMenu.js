@@ -1,3 +1,5 @@
+import React from "react";
+
 import { FiHome } from "react-icons/fi";
 
 export const SidebarMenu = [
