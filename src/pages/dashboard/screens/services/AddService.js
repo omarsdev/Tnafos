@@ -1,7 +1,7 @@
 import { HStack, VStack, Button, Input, Box, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createService } from "../../../../utils";
+import { AxiosInstance } from "../../../../utils";
 
 export const AddService = () => {
   const [input, setInput] = useState({
@@ -19,14 +19,15 @@ export const AddService = () => {
     setInput({ ...input, [name]: value });
   };
 
-  const handleAddService = async (e) => {
-    e.preventDefault();
-    const response = await createService(input);
-    if (response.success) {
-      history.push("/dashboard/service");
-    } else {
-      // setErrors(response.errors);
-    }
+  //* service adding function:
+  const createService = async (input) => {
+    await AxiosInstance.post("/api/dashboard/service/create", input)
+      .then((res) => {
+        history.push("/dashboard/service");
+      })
+      .catch((err) => {
+        setErrors(err);
+      });
   };
 
   const handleCancel = () => {
@@ -55,7 +56,7 @@ export const AddService = () => {
           New Service
         </Heading>
       </Box>
-      <form onSubmit={(ev) => handleAddService(ev)}>
+      <form onSubmit={(ev) => createService(ev)}>
         <label className="ml-3 font-normal text-gray-600 text-lg">
           name:
           <Input

@@ -27,7 +27,7 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-import { getMyServices, updateService } from "../../../../utils";
+import { AxiosInstance, getMyServices, updateService } from "../../../../utils";
 
 export const MyService = () => {
   const [service, setService] = useState(null);
@@ -46,8 +46,22 @@ export const MyService = () => {
     setInput({ ...input, [name]: value });
   };
 
+  //* represent service card info:
+  const getMyService = async (uuid) => {
+    await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
+      .then((res) => {
+        console.log(res);
+        setService(res.data);
+      })
+      .catch((err) => {
+        history.push("/dashboard/service");
+      });
+  };
+
+  //* fetching service card's initial data:
   const fetchData = async () => {
-    const Data = await getMyServices(uuid);
+    const Data = await getMyService(uuid);
+    // console.log(Data);
     if (Data.success) {
       let service = Data.data;
       delete service.category;
@@ -58,36 +72,25 @@ export const MyService = () => {
     }
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const resp = await updateService(uuid, input);
-    if (resp.success) {
-      history.push(`/dashboard/service`);
-    } else {
-      console.log(resp);
-      setErrors(resp);
-    }
+  //* service update function:
+  const updateService = async (uuid, input) => {
+    await AxiosInstance.put(`/api/dashboard/service/${uuid}/update`, input)
+      .then((res) => {
+        console.log(res);
+        history.push(`/dashboard/service`);
+      })
+      .catch((err) => {
+        console.log(err);
+        setErrors(err);
+      });
   };
 
   const handleCancel = () => {
     history.push("/dashboard/service");
   };
 
-  const serviceCard = async () => {
-    const response = await getMyServices(uuid);
-    console.log(response);
-
-    if (response.success) {
-      setService(response.data.data);
-    } else if (!response.success && response.error) {
-      history.push("/dashboard/service");
-    } else if (!response.success && !response.error) {
-      history.push("/");
-    }
-  };
-
   useEffect(() => {
-    serviceCard();
+    getMyService();
     fetchData();
   }, []);
 
@@ -181,7 +184,7 @@ export const MyService = () => {
                 </DrawerHeader>
 
                 <DrawerBody mt="10">
-                  <form onSubmit={(ev) => handleUpdate(ev)}>
+                  <form onSubmit={(ev) => updateService(ev)}>
                     <label className="w-32 text-right">
                       Price:
                       <Input

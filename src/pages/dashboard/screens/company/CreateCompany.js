@@ -1,7 +1,7 @@
 import { Box, Input, Button, Grid, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createCompany } from "../../../../utils";
+import { AxiosInstance } from "../../../../utils";
 
 export const CreateCompany = () => {
   const [input, setInput] = useState({
@@ -33,11 +33,19 @@ export const CreateCompany = () => {
     setInput({ ...input, [name]: value });
   };
 
-  const handleCreate = async (e) => {
+  const createCompany = async (e, input) => {
     e.preventDefault();
-    const response = await createCompany(input);
-    console.log(response);
-    history.push("/dashboard/company");
+    await AxiosInstance.post("/api/dashboard/company/create", input)
+      .then((res) => {
+        console.log(res);
+        history.push("/dashboard/company");
+      })
+      .catch((err) => {
+        return {
+          success: false,
+          error: err,
+        };
+      });
   };
 
   return (
@@ -51,7 +59,7 @@ export const CreateCompany = () => {
       >
         Fill in Company Info
       </Heading>
-      <form>
+      <form onSubmit={(ev) => createCompany(ev)}>
         <label className="block">
           Company Name
           <Input
@@ -261,12 +269,7 @@ export const CreateCompany = () => {
           />
         </label>
 
-        <Button
-          colorScheme="blue"
-          onClick={(ev) => handleCreate(ev)}
-          m="5"
-          ml="96"
-        >
+        <Button colorScheme="blue" m="5" ml="96">
           SAVE
         </Button>
       </form>

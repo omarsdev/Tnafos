@@ -36,10 +36,8 @@ export const CreateUser = () => {
     e.preventDefault();
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
-        return {
-          success: true,
-          data: res.data.data,
-        };
+        console.log(res);
+        history.push("/dashboard/user");
       })
       .catch((err) => {
         return {
@@ -48,7 +46,6 @@ export const CreateUser = () => {
           message: err.response.data.message,
         };
       });
-    history.push("/dashboard/user");
   };
 
   const handleCancel = () => {

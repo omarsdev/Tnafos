@@ -21,22 +21,15 @@ export const UserHome = () => {
   const showUsersList = async () => {
     await AxiosInstance.get("/api/dashboard/user")
       .then((res) => {
-        return {
-          success: true,
-          data: res.data.data,
-        };
+        setUsersList(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const USERS = async () => {
-    const array = await showUsersList();
-    setUsersList(array);
-  };
   useEffect(() => {
-    USERS();
+    showUsersList();
   }, []);
   return (
     <>

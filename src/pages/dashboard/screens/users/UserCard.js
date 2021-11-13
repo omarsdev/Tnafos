@@ -28,7 +28,6 @@ import {
   useRouteMatch,
   Link,
 } from "react-router-dom";
-import { updateUserInfo } from "../../../../utils";
 import { AxiosInstance } from "../../../../utils";
 
 export const UserCard = () => {
@@ -39,7 +38,7 @@ export const UserCard = () => {
   const [input, setInput] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = React.useRef();
-  // const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,29 +50,12 @@ export const UserCard = () => {
     await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
       .then((res) => {
         console.log(res.data.data);
-        return {
-          success: true,
-          data: res.data.data,
-        };
+        setCard(res.data.data);
       })
       .catch((err) => {
-        return {
-          success: false,
-          error: err,
-        };
+        console.log(err);
+        history.push("/dashboard/user");
       });
-  };
-
-  const Details = async () => {
-    const resp = await getUser(uuid);
-
-    if (resp.success) {
-      setCard(resp.data);
-    } else if (!resp.success && resp.error) {
-      history.push("/dashboard/user");
-    } else if (!resp.success && !resp.error) {
-      history.push("/");
-    }
   };
 
   //* user updating form (fetch initial data):
@@ -91,32 +73,16 @@ export const UserCard = () => {
       dataToBeUpdated
     )
       .then((res) => {
-        return {
-          success: true,
-          data: res.data.data,
-        };
+        console.log(res);
+        history.push(`/dashboard/user`);
       })
       .catch((err) => {
-        return {
-          success: false,
-          errors: err,
-          message: err.response.data.message,
-        };
+        setErrors(err.response.data.message);
       });
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const resp = await updateUserInfo(uuid, input);
-    if (resp.success) {
-      history.push(`/dashboard/user`);
-    } else {
-      // setErrors(resp);
-    }
-  };
-
   useEffect(() => {
-    Details();
+    getUser();
     fetchData();
   }, []);
 
@@ -219,7 +185,7 @@ export const UserCard = () => {
                 </DrawerHeader>
 
                 <DrawerBody>
-                  <form onSubmit={(ev) => handleUpdate(ev)}>
+                  <form onSubmit={(ev) => updateUserInfo(ev)}>
                     <label className="w-32 text-right">
                       First Name :
                       <Input

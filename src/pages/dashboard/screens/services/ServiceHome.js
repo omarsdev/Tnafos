@@ -14,32 +14,22 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 export const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);
+  const match = useRouteMatch();
+  const { uuid } = useParams();
 
   //* represent all services:
   const showServicesList = async () => {
     await AxiosInstance.get("/api/dashboard/service")
       .then((res) => {
         console.log(res);
-        return {
-          success: true,
-          data: res.data.data,
-        };
+        setServicesList(res.data.data);
       })
       .catch((err) => console.log(err));
   };
 
-  const showList = async () => {
-    const List = await showServicesList();
-    console.log(List);
-    setServicesList(List.data);
-  };
-
   useEffect(() => {
-    showList();
+    showServicesList();
   }, []);
-
-  const match = useRouteMatch();
-  const { uuid } = useParams();
 
   return (
     <Box w="full" h="fit-content">
