@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { Box, Grid, Spinner, Text } from "@chakra-ui/react";
 
-import AxiosInstance from "api/axios-instance";
+import { AxiosInstance } from "api";
 
 import { CardItem } from "../components";
 

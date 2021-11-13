@@ -13,7 +13,7 @@ import {
 import { AuthLayout } from "../AuthLayout";
 import LoginImage from "assets/images/login.jpg";
 
-import { apiAuth } from "api";
+import { apiAuth } from "../../../api";
 
 export const Login = () => {
   const { tokenProviderValue } = useContext(UserDataContext);

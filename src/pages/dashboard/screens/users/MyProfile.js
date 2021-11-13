@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AxiosInstance } from "../../utils";
+import { AxiosInstance } from "utils";
 
 export const MyProfile = () => {
   const [profile, setProfile] = useState(null);

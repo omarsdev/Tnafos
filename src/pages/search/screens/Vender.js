@@ -4,7 +4,7 @@ import { Box, Grid, Text, VStack, Spinner } from "@chakra-ui/react";
 import { useRouteMatch } from "react-router-dom";
 
 import { CardItem, CardCompany } from "../components";
-import AxiosInstance from "api/axios-instance";
+import { AxiosInstance } from "api";
 import { SearchDataContext } from "context";
 
 export const Vender = () => {

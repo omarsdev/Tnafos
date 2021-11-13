@@ -18,7 +18,7 @@ import { SearchIcon } from "@chakra-ui/icons";
 
 import { Navbar } from "./components";
 
-import AxiosInstance from "api/axios-instance";
+import { AxiosInstance } from "../../api";
 import { UserDataContext } from "context";
 
 export const Homepage = () => {
