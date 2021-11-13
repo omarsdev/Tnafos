@@ -4,8 +4,8 @@ export const TnafosLogo = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="139.042"
-      height="153.633"
+      width="109.042"
+      height="123.633"
       viewBox="0 0 139.042 153.633"
     >
       <g

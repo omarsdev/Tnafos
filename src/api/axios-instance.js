@@ -18,9 +18,9 @@ AxiosInstance.interceptors.response.use(
   },
   function (error) {
     if (
-      // error.response?.data?.message?.toLowerCase() === "unauthorized" ||
-      // error.response?.data?.message?.toLowerCase() === "unauthenticated."
-      error.response.status === 401
+      error.response?.data?.message?.toLowerCase() === "unauthorized" ||
+      error.response?.data?.message?.toLowerCase() === "unauthenticated."
+      // error.response.status === 401
     ) {
       localStorage.removeItem("token");
       window.location.replace("/login");

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const NotFound = () => {
+export const E404 = () => {
   return (
     <div>
       <h1>This page is Not Found</h1>

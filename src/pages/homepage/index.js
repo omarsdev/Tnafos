@@ -1,2 +1,2 @@
-export * from './HomepageLayout';
+export * from './Homepage';
 export * from './Search';

@@ -1,9 +1,9 @@
 import React from "react";
 
-export const SearchLayout = () => {
+export const E401 = () => {
   return (
     <div>
-      <h1>Search Layout</h1>
+      <h1>Unautherized</h1>
     </div>
   );
 };

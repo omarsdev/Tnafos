@@ -10,6 +10,7 @@ import {
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../utils";
+import { RegularInput } from "components";
 
 export const CreateUser = () => {
   const [input, setInput] = useState({
@@ -76,7 +77,7 @@ export const CreateUser = () => {
       <form on onSubmit={(ev) => addUser(ev)}>
         <label className="w-32 text-right">
           First Name :
-          <Input
+          <RegularInput
             size="sm"
             type="text"
             borderRadius="lg"
@@ -90,7 +91,7 @@ export const CreateUser = () => {
 
         <label className="w-32 text-right">
           Last Name:
-          <Input
+          <RegularInput
             size="sm"
             type="text"
             borderRadius="lg"
@@ -103,7 +104,7 @@ export const CreateUser = () => {
 
         <label className="w-32 text-right">
           Phone Number:
-          <Input
+          <RegularInput
             size="sm"
             type="text"
             borderRadius="lg"
@@ -116,7 +117,7 @@ export const CreateUser = () => {
 
         <label className="w-32 text-right">
           Email:
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
             type="email"
@@ -130,7 +131,7 @@ export const CreateUser = () => {
 
         <label className="w-32 text-right">
           Password:
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
             type="password"
@@ -143,7 +144,7 @@ export const CreateUser = () => {
 
         <label className="w-32 text-right">
           Confirm Password:
-          <Input
+          <RegularInput
             size="sm"
             borderRadius="lg"
             type="password"
