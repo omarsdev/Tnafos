@@ -82,29 +82,29 @@ export const handleSearch = async (searchData) => {
   }
 };
 
-// export const createNewUser = async (userData) => {
-//   const token = getToken(); //* without token there will be an error (401: unauthorized) which means the user has to ensure his identity.
-//   try {
-//     const RESP = await axios.post(`${apiURL}/dashboard/user/create`, userData, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//         Accept: "application/json",
-//       },
-//     });
-//     // console.log(RESP);
-//     return {
-//       success: true,
-//       data: RESP.data.data,
-//     };
-//   } catch (error) {
-//     // console.log("errors", error.response);
-//     return {
-//       success: false,
-//       errors: error.response.data.errors,
-//       message: error.response.data.message,
-//     };
-//   }
-// };
+export const createNewUser = async (userData) => {
+  const token = getToken(); //* without token there will be an error (401: unauthorized) which means the user has to ensure his identity.
+  try {
+    const RESP = await axios.post(`${apiURL}/dashboard/user/create`, userData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    });
+    // console.log(RESP);
+    return {
+      success: true,
+      data: RESP.data.data,
+    };
+  } catch (error) {
+    // console.log("errors", error.response);
+    return {
+      success: false,
+      errors: error.response.data.errors,
+      message: error.response.data.message,
+    };
+  }
+};
 
 // export const showUsersList = async () => {
 //   const token = getToken();

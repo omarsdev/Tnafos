@@ -28,7 +28,7 @@ import {
   useRouteMatch,
   Link,
 } from "react-router-dom";
-import { AxiosInstance } from "../../../../utils";
+import { AxiosInstance } from "../../utils";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);
