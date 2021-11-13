@@ -44,7 +44,7 @@ export const CompanyHome = () => {
       .catch((err) => {
         return {
           success: false,
-          error: error,
+          error: err,
         };
       });
   };

@@ -51,7 +51,7 @@ export const MyService = () => {
     await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
       .then((res) => {
         console.log(res);
-        setService(res.data);
+        setService(res.data.data);
       })
       .catch((err) => {
         history.push("/dashboard/service");
