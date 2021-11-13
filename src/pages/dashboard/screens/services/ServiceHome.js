@@ -8,12 +8,25 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { Link, useParams, useRouteMatch } from "react-router-dom";
-import { showServicesList } from "../../../../utils";
+import { AxiosInstance } from "../../../../utils";
 import { ServiceCard } from "./";
 import { AiOutlinePlus } from "react-icons/ai";
 
 export const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);
+
+  //* represent all services:
+  const showServicesList = async () => {
+    await AxiosInstance.get("/api/dashboard/service")
+      .then((res) => {
+        console.log(res);
+        return {
+          success: true,
+          data: res.data.data,
+        };
+      })
+      .catch((err) => console.log(err));
+  };
 
   const showList = async () => {
     const List = await showServicesList();
