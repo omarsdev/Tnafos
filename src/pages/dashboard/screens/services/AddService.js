@@ -12,7 +12,7 @@ export const AddService = () => {
     price: "",
   });
   const history = useHistory();
-  // const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
