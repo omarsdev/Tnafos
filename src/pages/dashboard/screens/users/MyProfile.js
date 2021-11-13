@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { showProfile } from "../../../../utils";
 
 export const MyProfile = () => {
   const [profile, setProfile] = useState(null);
+
+  const showProfile = async () => {
+    await AxiosInstance.get("/api/dashboard/user/my-profile/")
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => console.log(err));
+  };
 
   const getMyProfile = async () => {
     const myData = await showProfile();

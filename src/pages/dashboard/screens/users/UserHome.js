@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useRouteMatch, useParams, Link } from "react-router-dom";
-import { showUsersList } from "../../../../utils";
 import { CardComponent } from "./";
 import {
   Box,
@@ -11,7 +10,7 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
-import AxiosInstance from "../../../../utils/AxiosInstance";
+import { AxiosInstance } from "../../../../utils";
 
 export const UserHome = () => {
   const [usersList, setUsersList] = useState([]);
@@ -19,7 +18,7 @@ export const UserHome = () => {
   const match = useRouteMatch();
   const { uuid } = useParams();
 
-  export const showUsersList = async () => {
+  const showUsersList = async () => {
     await AxiosInstance.get("/api/dashboard/user")
       .then((res) => {
         return {

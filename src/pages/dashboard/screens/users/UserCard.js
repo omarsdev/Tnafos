@@ -18,7 +18,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import { FiEdit } from "react-icons/fi";
+import { EditIcon } from "@chakra-ui/icons";
 import React, { useEffect, useState } from "react";
 import {
   Route,
@@ -29,7 +29,7 @@ import {
   Link,
 } from "react-router-dom";
 import { updateUserInfo } from "../../../../utils";
-import AxiosInstance from "../../../../utils";
+import { AxiosInstance } from "../../../../utils";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);
@@ -46,6 +46,7 @@ export const UserCard = () => {
     setInput({ ...input, [name]: value });
   };
 
+  //* presenting user card info.
   const getUser = async (uuid) => {
     await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
       .then((res) => {
@@ -61,21 +62,48 @@ export const UserCard = () => {
           error: err,
         };
       });
-    history.push("/dashboard/user");
-    setCard(data);
   };
 
+  const Details = async () => {
+    const resp = await getUser(uuid);
+
+    if (resp.success) {
+      setCard(resp.data);
+    } else if (!resp.success && resp.error) {
+      history.push("/dashboard/user");
+    } else if (!resp.success && !resp.error) {
+      history.push("/");
+    }
+  };
+
+  //* user updating form (fetch initial data):
   const fetchData = async () => {
-    Resp = await getUser(uuid);
+    const Resp = await getUser(uuid);
     if (Resp.success) {
       setInput(Resp.data);
     }
   };
 
-  useEffect(() => {
-    getUser();
-    fetchData();
-  }, []);
+  //* update function:
+  const updateUserInfo = async (uuid, dataToBeUpdated) => {
+    await AxiosInstance.put(
+      `/api/dashboard/user/${uuid}/update`,
+      dataToBeUpdated
+    )
+      .then((res) => {
+        return {
+          success: true,
+          data: res.data.data,
+        };
+      })
+      .catch((err) => {
+        return {
+          success: false,
+          errors: err,
+          message: err.response.data.message,
+        };
+      });
+  };
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -86,6 +114,11 @@ export const UserCard = () => {
       // setErrors(resp);
     }
   };
+
+  useEffect(() => {
+    Details();
+    fetchData();
+  }, []);
 
   const handleCancel = () => {
     history.push("/dashboard/user");
@@ -162,7 +195,7 @@ export const UserCard = () => {
                   _focus={{
                     bg: "blue.500",
                   }}
-                  icon={<FiEdit />}
+                  icon={<EditIcon />}
                   onClick={onOpen}
                 />
               </Link>

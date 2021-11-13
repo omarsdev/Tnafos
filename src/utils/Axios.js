@@ -150,59 +150,59 @@ export const handleSearch = async (searchData) => {
 //   }
 // };
 
-export const updateUserInfo = async (uuid, dataToBeUpdated) => {
-  const token = getToken();
-  if (token) {
-    try {
-      const resp = await axios.put(
-        `${apiURL}/dashboard/user/${uuid}/update`,
-        dataToBeUpdated,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-          },
-        }
-      );
-      return {
-        success: true,
-        data: resp.data.data,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        errors: error.response.data.errors,
-        message: error.response.data.message,
-      };
-    }
-  } else {
-    return {
-      success: false,
-    };
-  }
-};
+// export const updateUserInfo = async (uuid, dataToBeUpdated) => {
+//   const token = getToken();
+//   if (token) {
+//     try {
+//       const resp = await axios.put(
+//         `${apiURL}/dashboard/user/${uuid}/update`,
+//         dataToBeUpdated,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             Accept: "application/json",
+//           },
+//         }
+//       );
+//       return {
+//         success: true,
+//         data: resp.data.data,
+//       };
+//     } catch (error) {
+//       return {
+//         success: false,
+//         errors: error.response.data.errors,
+//         message: error.response.data.message,
+//       };
+//     }
+//   } else {
+//     return {
+//       success: false,
+//     };
+//   }
+// };
 
-export const showProfile = async () => {
-  const token = getToken();
-  if (token) {
-    try {
-      const resp = await axios.get(`${apiURL}dashboard/user/my-profile/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-        },
-      });
-      console.log(resp.data);
-      return resp.data;
-    } catch (error) {
-      console.log(error);
-    }
-  } else {
-    return {
-      success: false,
-    };
-  }
-};
+// export const showProfile = async () => {
+//   const token = getToken();
+//   if (token) {
+//     try {
+//       const resp = await axios.get(`${apiURL}dashboard/user/my-profile/`, {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           Accept: "application/json",
+//         },
+//       });
+//       console.log(resp.data);
+//       return resp.data;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   } else {
+//     return {
+//       success: false,
+//     };
+//   }
+// };
 
 export const createService = async (data) => {
   const token = getToken();
