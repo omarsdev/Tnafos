@@ -29,7 +29,7 @@ import {
   Link,
 } from "react-router-dom";
 import { updateUserInfo } from "../../../../utils";
-import AxiosInstance from "../../../../utils/axios-instance";
+import AxiosInstance from "../../../../utils";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);

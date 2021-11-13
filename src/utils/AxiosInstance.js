@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AxiosInstance = axios.create({
+export const AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_BASE,
   withCredentials: true,
 });
@@ -25,5 +25,3 @@ AxiosInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default AxiosInstance;

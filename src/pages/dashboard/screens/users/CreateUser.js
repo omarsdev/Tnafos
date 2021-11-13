@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { AxiosInstance } from "../../../../utils/axios-instance";
+import { AxiosInstance } from "../../../../utils";
 
 export const CreateUser = () => {
   const [input, setInput] = useState({
