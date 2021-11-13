@@ -323,62 +323,62 @@ export const handleSearch = async (searchData) => {
 //   }
 // };
 
-export const showCompany = async () => {
-  const token = getToken();
-  if (token) {
-    try {
-      const resp = await axios.get(`${apiURL}/dashboard/company`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-        },
-      });
-      return {
-        success: true,
-        data: resp.data.data,
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: error,
-      };
-    }
-  } else {
-    return {
-      success: false,
-    };
-  }
-};
+// export const showCompany = async () => {
+//   const token = getToken();
+//   if (token) {
+//     try {
+//       const resp = await axios.get(`${apiURL}/dashboard/company`, {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//           Accept: "application/json",
+//         },
+//       });
+//       return {
+//         success: true,
+//         data: resp.data.data,
+//       };
+//     } catch (error) {
+//       return {
+//         success: false,
+//         error: error,
+//       };
+//     }
+//   } else {
+//     return {
+//       success: false,
+//     };
+//   }
+// };
 
-export const updateCompany = async (dataToBeUpdated) => {
-  console.log(dataToBeUpdated);
-  const token = getToken();
-  if (token) {
-    try {
-      const resp = await axios.put(
-        `${apiURL}/dashboard/company/update`,
-        dataToBeUpdated,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-          },
-        }
-      );
-      return {
-        success: true,
-        data: resp.data.data,
-      };
-    } catch (error) {
-      console.log(error.response);
-      return {
-        success: false,
-        error: error,
-      };
-    }
-  } else {
-    return {
-      success: false,
-    };
-  }
-};
+// export const updateCompany = async (dataToBeUpdated) => {
+//   console.log(dataToBeUpdated);
+//   const token = getToken();
+//   if (token) {
+//     try {
+//       const resp = await axios.put(
+//         `${apiURL}/dashboard/company/update`,
+//         dataToBeUpdated,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             Accept: "application/json",
+//           },
+//         }
+//       );
+//       return {
+//         success: true,
+//         data: resp.data.data,
+//       };
+//     } catch (error) {
+//       console.log(error.response);
+//       return {
+//         success: false,
+//         error: error,
+//       };
+//     }
+//   } else {
+//     return {
+//       success: false,
+//     };
+//   }
+// };

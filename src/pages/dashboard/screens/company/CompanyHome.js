@@ -24,6 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
+import { AxiosInstance } from "../../../../utils";
 
 export const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState({});
@@ -31,12 +32,21 @@ export const CompanyHome = () => {
 
   const [input, setInput] = useState(null);
   const history = useHistory();
-  //   const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState(null);
 
-  const companyData = async () => {
-    const result = await showCompany();
-    console.log(result);
-    setcompanyInfo(result.data);
+  //* represent company data:
+  const showCompany = async () => {
+    await AxiosInstance.get("/api/dashboard/company")
+      .then((res) => {
+        console.log(res);
+        setcompanyInfo(res.data.data);
+      })
+      .catch((err) => {
+        return {
+          success: false,
+          error: error,
+        };
+      });
   };
 
   const handleChange = (e) => {
@@ -56,19 +66,20 @@ export const CompanyHome = () => {
     }
   };
 
-  const handleUpdate = async (e) => {
+  //* update company info:
+  const updateCompany = async (e, input) => {
     e.preventDefault();
-    const resp = await updateCompany(input);
-    if (resp.success) {
-      history.push(`/dashboard/company`);
-    } else {
-      console.log(resp);
-      //   setErrors(resp);
-    }
+    // console.log(input);
+    await AxiosInstance.put("/api/dashboard/company/update", input)
+      .then((res) => {
+        console.log(res);
+        history.push(`/dashboard/company`);
+      })
+      .catch((err) => setErrors(err));
   };
 
   useEffect(() => {
-    companyData();
+    showCompany();
     fetchData();
   }, []);
 
@@ -173,7 +184,7 @@ export const CompanyHome = () => {
           <ModalCloseButton />
           <ModalBody>
             {input && (
-              <form onSubmit={(ev) => handleUpdate(ev)}>
+              <form onSubmit={(ev) => updateCompany(ev)}>
                 <label className="block">
                   Company Name
                   <Input
