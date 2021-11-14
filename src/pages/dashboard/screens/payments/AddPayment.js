@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, Input, Button, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../../../../api";
+import { useHistory } from "react-router-dom";
 
 export const AddPayment = () => {
-  const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const [input, setInput] = useState({
     amount: "",
@@ -24,6 +30,10 @@ export const AddPayment = () => {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleCancel = () => {
+    history.push("/dashboard/payment");
   };
 
   return (
@@ -49,78 +59,84 @@ export const AddPayment = () => {
       </Box>
 
       <form onSubmit={handleSubmit((ev) => createPayment(ev))}>
-        <label className="w-32 text-right">
+        <label className="ml-3 font-normal text-gray-600 text-lg">
           amount :
-          <input
+          <Input
             size="sm"
             type="text"
             borderRadius="lg"
-            name="amount"
-            ref={register({ required: "This field is required!" })}
+            {...register("amount", { required: "This field is required!" })}
           />
-          {errors.amount && <p>{errors.amount.message}</p>}
+          {errors.amount && <p>{errors.amount?.message}</p>}
         </label>
 
-        <label className="w-32 text-right">
+        <label className="ml-3 font-normal text-gray-600 text-lg">
           method :
-          <input
+          <Input
             size="sm"
             type="text"
             borderRadius="lg"
-            name="method"
-            ref={register({ required: "This field is required!" })}
+            {...register("method", { required: "This field is required!" })}
           />
+          {errors.method && <p>{errors.method?.message}</p>}
         </label>
 
-        <label className="w-32 text-right">
+        <label className="ml-3 font-normal text-gray-600 text-lg">
           transaction_number :
-          <input
+          <Input
             size="sm"
             type="number"
             borderRadius="lg"
-            name="transaction_number"
-            ref={register({ required: "This field is required!" })}
+            {...register("transaction_number", {
+              required: "This field is required!",
+            })}
           />
           {errors.transaction_number && (
-            <p>{errors.transaction_number.message}</p>
+            <p>{errors.transaction_number?.message}</p>
           )}
         </label>
 
-        <label className="w-32 text-right">
+        <label className="ml-3 font-normal text-gray-600 text-lg">
           date :
-          <input
+          <Input
             size="sm"
             type="text"
             borderRadius="lg"
-            name="date"
-            ref={register({ required: "This field is required!" })}
+            {...register("date", { required: "This field is required!" })}
           />
           {errors.date && <p>{errors.date.message}</p>}
         </label>
 
-        <label className="w-32 text-right">
+        <label className="ml-3 font-normal text-gray-600 text-lg">
           notes :
-          <input
+          <Input
             size="sm"
             type="text"
             borderRadius="lg"
-            name="notes"
-            ref={register({ required: "This field is required!" })}
+            {...register("notes", { required: "This field is required!" })}
           />
-          {errors.notes && <p>{errors.notes.message}</p>}
+          {errors.notes && <p>{errors.notes?.message}</p>}
         </label>
 
-        <label className="w-32 text-right">
+        <label className="ml-3 font-normal text-gray-600 text-lg">
           invoice_id :
-          <input
+          <Input
             size="sm"
             type="number"
             borderRadius="lg"
-            name="invoice_id"
-            ref={register({ required: "This field is required!" })}
+            {...register("invoice_id", { required: "This field is required!" })}
           />
-          {errors.invoice_id && <p>{errors.invoice_id.message}</p>}
+          {errors.invoice_id && <p>{errors.invoice_id?.message}</p>}
         </label>
+        <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
+          <Button type="submit" colorScheme="blue" size="sm">
+            SAVE
+          </Button>
+
+          <Button onClick={handleCancel} colorScheme="blackAlpha" size="sm">
+            CANCEL
+          </Button>
+        </HStack>
       </form>
     </Box>
   );

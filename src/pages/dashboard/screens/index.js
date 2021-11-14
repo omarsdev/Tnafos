@@ -2,7 +2,7 @@ export * from "./clients/Client";
 export * from "./company/index";
 export * from "./estimates/Estimate";
 export * from "./invoices/index";
-export * from "./payments/Payment";
+export * from "./payments/index";
 export * from "./proposals/Proposal";
 export * from "./purchase-requests/PurchaseRequest";
 export * from "./services/index";

@@ -2,7 +2,6 @@ import { HStack, VStack, Button, Input, Box, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../utils";
-import { RegularInput } from "../../../../components";
 
 export const AddService = () => {
   const [input, setInput] = useState({
@@ -60,7 +59,7 @@ export const AddService = () => {
       <form onSubmit={(ev) => createService(ev)}>
         <label className="ml-3 font-normal text-gray-600 text-lg">
           name:
-          <RegularInput
+          <Input
             size="sm"
             borderRadius="lg"
             name="name"
@@ -71,7 +70,7 @@ export const AddService = () => {
 
         <label className="ml-3 font-normal text-gray-600 text-lg">
           description :
-          <RegularInput
+          <Input
             size="sm"
             borderRadius="lg"
             name="description"
@@ -82,7 +81,7 @@ export const AddService = () => {
 
         <label className="ml-3 font-normal text-gray-600 text-lg">
           category_id :
-          <RegularInput
+          <Input
             size="sm"
             borderRadius="lg"
             name="category_id"
@@ -93,7 +92,7 @@ export const AddService = () => {
 
         <label className="ml-3 font-normal text-gray-600 text-lg">
           price :
-          <RegularInput
+          <Input
             size="sm"
             borderRadius="lg"
             name="price"
@@ -104,7 +103,7 @@ export const AddService = () => {
 
         <label className="ml-3 font-normal text-gray-600 text-lg">
           type :
-          <RegularInput
+          <Input
             size="sm"
             borderRadius="lg"
             name="type"
