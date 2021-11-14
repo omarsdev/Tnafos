@@ -106,11 +106,11 @@ export const SidebarMenu = [
         submenu: [
           {
             title: "Incoming",
-            to: "/",
+            to: "/invoice/incoming",
           },
           {
             title: "Outgoing",
-            to: "/",
+            to: "/invoice/outgoing",
           },
         ],
       },
@@ -140,16 +140,17 @@ export const SidebarMenu = [
         id: 7,
         title: "Payments",
         icon: <FiHome />,
-        submenu: [
-          {
-            title: "Incoming",
-            to: "/",
-          },
-          {
-            title: "Outgoing",
-            to: "/",
-          },
-        ],
+        to: "/payment",
+        // submenu: [
+        //   {
+        //     title: "Incoming",
+        //     to: "/payment/incoming",
+        //   },
+        //   {
+        //     title: "Outgoing",
+        //     to: "/payment/outgoing",
+        //   },
+        // ],
       },
       {
         id: 8,

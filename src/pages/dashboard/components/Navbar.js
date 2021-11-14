@@ -28,13 +28,13 @@ export const Navbar = () => {
     <Box
       bg="white"
       className="flex flex-row-reverse opacity-100 shadow-xl w-full"
-      h="20"
+      h="24"
     >
-      <Box className="css-0 flex flex-row items-center justify-center">
-        <HStack
-          className="font-medium h-10 justify-center my-auto text-gray-700 text-md w-24"
-          spacing={0}
-        >
+      <Box
+        className="css-0 flex flex-row items-center justify-center"
+        mr="15px"
+      >
+        <HStack className="font-medium h-10 justify-center text-gray-700 text-md w-24">
           {/* <span className="my-auto mr-7">
                       {userData.first_name} {userData.last_name}
                     </span> */}
@@ -45,6 +45,7 @@ export const Navbar = () => {
           alt="User Profile Photo"
           borderRadius="full"
           boxSize="70px"
+          p="1"
         />
         <Menu>
           <MenuButton
