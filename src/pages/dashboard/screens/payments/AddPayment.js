@@ -12,18 +12,18 @@ export const AddPayment = () => {
     formState: { errors },
   } = useForm();
 
-  const [input, setInput] = useState({
-    amount: "",
-    method: "",
-    transaction_number: "",
-    date: "",
-    notes: "",
-    invoice_id: "",
-  });
+  //   const [input, setInput] = useState({
+  //     amount: "",
+  //     method: "",
+  //     transaction_number: "",
+  //     date: "",
+  //     notes: "",
+  //     invoice_id: "",
+  //   });
 
-  const createPayment = async (e, input) => {
+  const createPayment = async (e, data) => {
     e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/payment/create", input)
+    await AxiosInstance.post("/api/dashboard/payment/create", data)
       .then((res) => {
         console.log(res);
       })
@@ -58,7 +58,7 @@ export const AddPayment = () => {
         </Heading>
       </Box>
 
-      <form onSubmit={handleSubmit((ev) => createPayment(ev))}>
+      <form onSubmit={handleSubmit(createPayment)}>
         <label className="ml-3 font-normal text-gray-600 text-lg">
           amount :
           <Input

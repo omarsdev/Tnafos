@@ -8,43 +8,47 @@ import {
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../utils";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as Yup from "yup";
 
 export const CreateUser = () => {
-  const [input, setInput] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
-    phone_number: "",
-  });
+  //* form validation rules
+  // const validationSchema = Yup.object().shape({
+  //   password: Yup.string()
+  //     .required("Password is required")
+  //     .min(8, "Password must be at least 8 characters !"),
+  //   confirmPassword: Yup.string()
+  //     .required("Confirm Password is required")
+  //     .oneOf([Yup.ref("password")], "Passwords must match !"),
+  // });
+  // const formOptions = { resolver: yupResolver(validationSchema) };
+
+  //* get functions to build form with useForm() hook
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm();
 
   const history = useHistory();
 
-  const [check, setCheck] = useState(false);
-  // const [errors, setErrors] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
+  // const [check, setCheck] = useState(false);
+  const [err, setErr] = useState(null);
 
   //* onSubmit function:
-  const addUser = async (e, userData) => {
-    e.preventDefault();
+  const addUser = async (userData) => {
+    // console.log(userData);
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
         console.log(res);
         history.push("/dashboard/user");
       })
       .catch((err) => {
-        return {
-          success: false,
-          errors: err.response.data.errors,
-          message: err.response.data.message,
-        };
+        setErr(err.response.data);
+        console.log(err.response.data);
       });
   };
 
@@ -60,7 +64,7 @@ export const CreateUser = () => {
       w="2xl"
       px="15"
       pt="5"
-      h="2xl"
+      h="6xl"
     >
       <Box>
         <Heading
@@ -73,86 +77,97 @@ export const CreateUser = () => {
           Add new User
         </Heading>
       </Box>
-      <form on onSubmit={(ev) => addUser(ev)}>
-        <label className="w-32 text-right">
+      <form onSubmit={handleSubmit(addUser)}>
+        <label className="ml-3 font-normal text-gray-600 text-sm">
           First Name :
-          <input
+          <Input
             size="sm"
             type="text"
             borderRadius="lg"
-            type="text"
-            name="first_name"
-            required
-            value={input.first_name}
-            onChange={(ev) => handleChange(ev)}
+            errorBorderColor="red"
+            {...register("first_name", { required: "This field is required!" })}
           />
+          {err?.errors?.first_name && (
+            <p className="text-red-700">{err?.errors?.first_name}</p>
+          )}
         </label>
 
-        <label className="w-32 text-right">
-          Last Name:
-          <input
+        <label className="ml-3 font-normal text-gray-600 text-sm">
+          Last Name :
+          <Input
             size="sm"
             type="text"
             borderRadius="lg"
-            name="last_name"
-            value={input.last_name}
-            required
-            onChange={(ev) => handleChange(ev)}
+            errorBorderColor="red"
+            {...register("last_name", { required: "This field is required!" })}
           />
+          {err?.errors?.last_name && (
+            <p className="text-red-700">{err?.errors?.last_name}</p>
+          )}
         </label>
 
-        <label className="w-32 text-right">
+        <label className="ml-3 font-normal text-gray-600 ttext-sm">
+          Email :
+          <Input
+            size="sm"
+            type="text"
+            borderRadius="lg"
+            errorBorderColor="red"
+            {...register("email", { required: "This field is required!" })}
+          />
+          {err?.errors?.email &&
+            err?.errors?.email.map((e) => <p className="text-red-700">{e}</p>)}
+        </label>
+
+        <label className="ml-3 font-normal text-gray-600 text-sm">
+          Password :
+          <Input
+            size="sm"
+            type="password"
+            borderRadius="lg"
+            {...register("password", { required: "This field is required!" })}
+            // className={`form-control ${
+            //   err?.errors?.password ? "is-invalid" : ""
+            // }`}
+          />
+          {err?.errors?.password && (
+            <p className="text-red-700">{err?.errors?.password}</p>
+          )}
+        </label>
+
+        <label className="ml-3 font-normal text-gray-600 text-sm">
+          Password Confirmation :
+          <Input
+            size="sm"
+            type="password"
+            borderRadius="lg"
+            {...register("password_confirmation", {
+              required: "This field is required!",
+            })}
+            // className={`form-control ${
+            //   err?.errors?.confirmPassword ? "is-invalid" : ""
+            // }`}
+          />
+          {err?.errors?.password_confirmation && (
+            <p className="text-red-700">{err?.errors?.password_confirmation}</p>
+          )}
+        </label>
+
+        <label className="ml-3 font-normal text-gray-600 text-sm">
           Phone Number:
-          <input
+          <Input
             size="sm"
-            type="text"
+            type="number"
             borderRadius="lg"
-            name="phone_number"
-            value={input.phone_number}
-            required
-            onChange={(ev) => handleChange(ev)}
+            {...register("phone_number", {
+              required: "This field is required!",
+              length: { value: 10, message: "Invalid phone number !" },
+            })}
           />
-        </label>
-
-        <label className="w-32 text-right">
-          Email:
-          <input
-            size="sm"
-            borderRadius="lg"
-            type="email"
-            name="email"
-            value={input.email}
-            required
-            _autofill="off"
-            onChange={(ev) => handleChange(ev)}
-          />
-        </label>
-
-        <label className="w-32 text-right">
-          Password:
-          <input
-            size="sm"
-            borderRadius="lg"
-            type="password"
-            name="password"
-            value={input.password}
-            required
-            onChange={(ev) => handleChange(ev)}
-          />
-        </label>
-
-        <label className="w-32 text-right">
-          Confirm Password:
-          <input
-            size="sm"
-            borderRadius="lg"
-            type="password"
-            name="password_confirmation"
-            value={input.password_confirmation}
-            required
-            _autofill="off"
-            onChange={(ev) => handleChange(ev)}
-          />
+          {err?.errors?.phone_number &&
+            err?.errors?.phone_number.map((e) => (
+              <p className="text-red-700">{e}</p>
+            ))}
         </label>
 
         <Box className="flex flex-col items-center gap-2">
@@ -181,7 +196,7 @@ export const CreateUser = () => {
             and accurate.
           </Checkbox>
           <HStack spacing="10px">
-            <Button colorScheme="blue" size="sm">
+            <Button colorScheme="blue" size="sm" type="submit">
               SAVE
             </Button>
             <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>

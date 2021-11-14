@@ -40,11 +40,6 @@ export const UserCard = () => {
   const firstField = React.useRef();
   const [errors, setErrors] = useState(null);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
-
   //* presenting user card info.
   const getUser = async (uuid) => {
     await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
