@@ -11,13 +11,13 @@ import {
   Client,
   Company,
   Estimate,
-  Payment,
   Invoice,
   PurchaseRequest,
   Settings,
   User,
   Service,
 } from "./screens";
+import { PaymentHome } from "./screens/payments";
 
 export const DashboardLayout = () => {
   let match = useRouteMatch();
@@ -67,7 +67,7 @@ export const DashboardLayout = () => {
               path={`${match.path}/purchase-requests`}
               component={PurchaseRequest}
             />
-            <Route path={`${match.path}/payment`} component={Payment} />
+            <Route path={`${match.path}/payment`} component={PaymentHome} />
             <Route path={`${match.path}/invoice`} component={Invoice} />
             <Route path={`${match.path}/estimate`} component={Estimate} />
             <Route path={`${match.path}/client`} component={Client} />
