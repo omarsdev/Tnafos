@@ -49,15 +49,10 @@ export const CompanyHome = () => {
       });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
-  };
-
   const fetchData = async () => {
     const Data = await showCompany();
     if (Data.success) {
-      let company = Data.data;
+      let company = Data.data.data;
       delete company.country;
       delete company.admin;
       delete company.category;
