@@ -9,13 +9,13 @@ import { getToken, removeUserSession } from "../../utils/handleUser";
 import { handleTokenRequest } from "../../utils";
 import {
   Client,
-  Company,
   Estimate,
   Invoice,
   PurchaseRequest,
   Settings,
   UserHome,
   ServiceHome,
+  CompanyHome,
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 
@@ -60,7 +60,7 @@ export const DashboardLayout = () => {
           {/* {body} */}
           <Switch>
             <Route exact path={match.path} component={DashboardContent} />
-            <Route path={`${match.path}/company`} component={Company} />
+            <Route path={`${match.path}/company`} component={CompanyHome} />
             <Route path={`${match.path}/user`} component={UserHome} />
             <Route path={`${match.path}/service`} component={ServiceHome} />
             <Route
