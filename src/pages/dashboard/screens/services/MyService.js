@@ -41,39 +41,31 @@ export const MyService = () => {
   const [input, setInput] = useState(null);
   const [errors, setErrors] = useState(null);
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
+  };
 
   //* represent service card info:
-  const getMyService = async (uuid) => {
+  const getMyService = async () => {
     await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
       .then((res) => {
-        console.log(res);
+        // console.log(res.data.data);
         setService(res.data.data);
+        let service = res.data.data;
+        console.log(service);
+        delete service.category;
+        delete service.name;
+        delete service.description;
+        setInput(service);
       })
       .catch((err) => {
         history.push("/dashboard/service");
       });
   };
 
-  //* fetching service card's initial data:
-  // const fetchData = async () => {
-  //   const Data = await getMyService(uuid);
-  //   console.log(Data);
-  //   if (Data.success) {
-  //     let service = Data.data;
-  //     delete service.category;
-  //     delete service.name;
-  //     delete service.description;
-  //     setInput(service);
-  //     console.log(service);
-  //   }
-  // };
-
   //* service update function:
-  const updateService = async (uuid, dataToBeUpdataed = { input }) => {
+  const updateService = async (dataToBeUpdataed) => {
     await AxiosInstance.put(
       `/api/dashboard/service/${uuid}/update`,
       dataToBeUpdataed
@@ -83,8 +75,8 @@ export const MyService = () => {
         history.push(`/dashboard/service`);
       })
       .catch((err) => {
-        console.log(err);
-        setErrors(err);
+        console.log(err.response.data.message);
+        setErrors(err.response.data.message);
       });
   };
 
@@ -94,7 +86,6 @@ export const MyService = () => {
 
   useEffect(() => {
     getMyService();
-    // fetchData();
   }, []);
 
   return (
@@ -193,7 +184,8 @@ export const MyService = () => {
                       size="md"
                       type="text"
                       name="price"
-                      value={input.name}
+                      value={input.price}
+                      onChange={(ev) => handleChange(ev)}
                       required
                       m={"15px"}
                       w="52"
@@ -206,7 +198,8 @@ export const MyService = () => {
                       size="md"
                       type="text"
                       name="type"
-                      value={input.name}
+                      value={input.type}
+                      onChange={(ev) => handleChange(ev)}
                       required
                       m={"15px"}
                       w="52"
