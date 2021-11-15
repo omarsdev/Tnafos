@@ -26,6 +26,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Flex,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
@@ -87,7 +88,6 @@ export const CompanyHome = () => {
         <Route exact path={`${match.path}`}>
           <Box w="full" h="fit-content">
             <Heading
-              color="black"
               fontWeight="medium"
               fontSize="xx-large"
               fontFamily="inhirit"
@@ -99,11 +99,11 @@ export const CompanyHome = () => {
               Company
             </Heading>
 
-            <HStack spacing={44}>
+            <Flex h="large" spacing="200">
               <CompanyCard Data={companyInfo} />
 
-              <Box>
-                <Box my="10" width="44">
+              <VStack w="full" spacing="5" mt="5">
+                <Box width="44">
                   <Button
                     onClick={onOpen}
                     leftIcon={<FiEdit />}
@@ -128,6 +128,7 @@ export const CompanyHome = () => {
                   rounded="lg"
                   textAlign={"center"}
                   h="32"
+                  mt="10px"
                 >
                   <Text
                     fontSize="LG"
@@ -171,20 +172,27 @@ export const CompanyHome = () => {
                     </Button>
                   </VStack>
                 </Box>
-              </Box>
-            </HStack>
+              </VStack>
+            </Flex>
           </Box>
 
           {/* company update */}
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Update your company info</ModalHeader>
+              <ModalHeader
+                fontWeight="medium"
+                fontSize="large"
+                fontFamily="inhirit"
+                textColor="yellow.500"
+              >
+                Update your company info
+              </ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 {input && (
                   <form onSubmit={(ev) => updateCompany(ev)}>
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Company Name
                       <Input
                         size="md"
@@ -194,7 +202,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Type
                       <Input
                         size="md"
@@ -204,7 +212,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       CR Number
                       <Input
                         size="md"
@@ -214,7 +222,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       VAT Number
                       <Input
                         size="md"
@@ -224,7 +232,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Establishment Year
                       <Input
                         size="md"
@@ -234,7 +242,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Total Employees
                       <Input
                         size="md"
@@ -244,7 +252,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Bio
                       <Input
                         size="md"
@@ -254,7 +262,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Telephone
                       <Input
                         size="md"
@@ -264,7 +272,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Fax
                       <Input
                         size="md"
@@ -274,7 +282,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       e-mail
                       <Input
                         size="md"
@@ -284,7 +292,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Website
                       <Input
                         size="md"
@@ -294,7 +302,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Country-Id
                       <Input
                         size="md"
@@ -304,7 +312,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       City
                       <Input
                         size="md"
@@ -314,7 +322,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       po_box
                       <Input
                         size="md"
@@ -324,7 +332,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       ZIP_code
                       <Input
                         size="md"
@@ -334,7 +342,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Address
                       <Input
                         size="md"
@@ -344,7 +352,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Location:
                       <Input
                         size="md"
@@ -354,7 +362,7 @@ export const CompanyHome = () => {
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block text-gray-500 font-normal pl-1">
                       Category-Id
                       <Input
                         size="md"

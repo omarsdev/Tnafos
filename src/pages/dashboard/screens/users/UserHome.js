@@ -41,7 +41,7 @@ export const UserHome = () => {
     <>
       <Switch>
         <Route exact path={`${match.path}`}>
-          <Box w="full" h="fit-content">
+          <Box w="full" h="fit-content" overflow="scroll">
             <Grid h="16" templateColumns="repeat(5, 1fr)" gap="5" p="5">
               <GridItem colSpan={4}>
                 <Heading
