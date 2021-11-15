@@ -55,8 +55,8 @@ export const MyService = () => {
         let service = res.data.data;
         console.log(service);
         delete service.category;
-        delete service.name;
-        delete service.description;
+        // delete service.name;
+        // delete service.description;
         setInput(service);
       })
       .catch((err) => {
@@ -97,13 +97,18 @@ export const MyService = () => {
             mt="30px"
             maxW={"3xl"}
             w={"full"}
-            bg={useColorModeValue("white", "gray.900")}
+            bg={useColorModeValue("white", "orange.600")}
             boxShadow={"2xl"}
             rounded={"lg"}
             p={6}
             textAlign={"center"}
           >
-            <Heading fontSize={"2xl"} fontFamily={"sans-serif"} mb={4}>
+            <Heading
+              fontSize={"xl"}
+              fontFamily={"sans-serif"}
+              mb={4}
+              color={"gray.500"}
+            >
               Name of service:{service?.name}
             </Heading>
             <Text
