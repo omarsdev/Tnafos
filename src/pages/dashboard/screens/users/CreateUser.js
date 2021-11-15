@@ -11,27 +11,28 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../utils";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export const CreateUser = () => {
   //* form validation rules
-  // const validationSchema = Yup.object().shape({
-  //   password: Yup.string()
-  //     .required("Password is required")
-  //     .min(8, "Password must be at least 8 characters !"),
-  //   confirmPassword: Yup.string()
-  //     .required("Confirm Password is required")
-  //     .oneOf([Yup.ref("password")], "Passwords must match !"),
-  // });
-  // const formOptions = { resolver: yupResolver(validationSchema) };
+  const validationSchema = yup.object({
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters !"),
+    password_confirmation: yup
+      .string()
+      .required("Confirm Password is required")
+      .oneOf([yup.ref("password")], "Passwords must match !"),
+  });
 
   //* get functions to build form with useForm() hook
   const {
     register,
     handleSubmit,
-    // formState: { errors },
-  } = useForm();
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(validationSchema) });
 
   const history = useHistory();
 
@@ -46,9 +47,9 @@ export const CreateUser = () => {
         console.log(res);
         history.push("/dashboard/user");
       })
-      .catch((err) => {
-        setErr(err.response.data);
-        console.log(err.response.data);
+      .catch((error) => {
+        setErr(error);
+        console.log(error);
       });
   };
 
@@ -84,11 +85,12 @@ export const CreateUser = () => {
             size="sm"
             type="text"
             borderRadius="lg"
-            errorBorderColor="red"
             {...register("first_name", { required: "This field is required!" })}
           />
-          {err?.errors?.first_name && (
-            <p className="text-red-700">{err?.errors?.first_name}</p>
+          {errors.first_name && (
+            <p className="text-red-600 font-bold">
+              {errors.first_name?.message}
+            </p>
           )}
         </label>
 
@@ -98,11 +100,12 @@ export const CreateUser = () => {
             size="sm"
             type="text"
             borderRadius="lg"
-            errorBorderColor="red"
             {...register("last_name", { required: "This field is required!" })}
           />
-          {err?.errors?.last_name && (
-            <p className="text-red-700">{err?.errors?.last_name}</p>
+          {errors.last_name && (
+            <p className="text-red-600 font-bold">
+              {errors?.last_name?.message}
+            </p>
           )}
         </label>
 
@@ -112,11 +115,11 @@ export const CreateUser = () => {
             size="sm"
             type="text"
             borderRadius="lg"
-            errorBorderColor="red"
             {...register("email", { required: "This field is required!" })}
           />
-          {err?.errors?.email &&
-            err?.errors?.email.map((e) => <p className="text-red-700">{e}</p>)}
+          {errors.email && (
+            <p className="text-red-600 font-bold">{errors.email?.message}</p>
+          )}
         </label>
 
         <label className="ml-3 font-normal text-gray-600 text-sm">
@@ -125,13 +128,10 @@ export const CreateUser = () => {
             size="sm"
             type="password"
             borderRadius="lg"
-            {...register("password", { required: "This field is required!" })}
-            // className={`form-control ${
-            //   err?.errors?.password ? "is-invalid" : ""
-            // }`}
+            {...register("password")}
           />
-          {err?.errors?.password && (
-            <p className="text-red-700">{err?.errors?.password}</p>
+          {errors.password && (
+            <p className="text-red-600 font-bold">{errors.password?.message}</p>
           )}
         </label>
 
@@ -141,15 +141,12 @@ export const CreateUser = () => {
             size="sm"
             type="password"
             borderRadius="lg"
-            {...register("password_confirmation", {
-              required: "This field is required!",
-            })}
-            // className={`form-control ${
-            //   err?.errors?.confirmPassword ? "is-invalid" : ""
-            // }`}
+            {...register("password_confirmation")}
           />
-          {err?.errors?.password_confirmation && (
-            <p className="text-red-700">{err?.errors?.password_confirmation}</p>
+          {errors.password_confirmation && (
+            <p className="text-red-600 font-bold">
+              {errors.password_confirmation?.message}
+            </p>
           )}
         </label>
 
@@ -164,10 +161,11 @@ export const CreateUser = () => {
               length: { value: 10, message: "Invalid phone number !" },
             })}
           />
-          {err?.errors?.phone_number &&
-            err?.errors?.phone_number.map((e) => (
-              <p className="text-red-700">{e}</p>
-            ))}
+          {errors.phone_number && (
+            <p className="text-red-600 font-bold">
+              {errors.phone_number?.message}
+            </p>
+          )}
         </label>
 
         <Box className="flex flex-col items-center gap-2">

@@ -11,6 +11,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
+  Input,
   Center,
   Avatar,
   Heading,
@@ -28,7 +29,6 @@ import {
   Link,
 } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
-import { RegularInput } from "components";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);
@@ -41,11 +41,12 @@ export const UserCard = () => {
   const [errors, setErrors] = useState(null);
 
   //* presenting user card info.
-  const getUser = async (uuid) => {
+  const getUser = async () => {
     await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setCard(res.data.data);
+        setInput(res.data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -53,20 +54,14 @@ export const UserCard = () => {
       });
   };
 
-  //* user updating form (fetch initial data):
-  const fetchData = async () => {
-    const Resp = await getUser(uuid);
-    if (Resp.success) {
-      setInput(Resp.data);
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput({ ...input, [name]: value });
   };
 
   //* update function:
-  const updateUserInfo = async (uuid, dataToBeUpdated) => {
-    await AxiosInstance.put(
-      `/api/dashboard/user/${uuid}/update`,
-      dataToBeUpdated
-    )
+  const updateUserInfo = async (dataToBeUpdated) => {
+    await AxiosInstance.put(`/api/dashboard/user/${uuid}`, dataToBeUpdated)
       .then((res) => {
         console.log(res);
         history.push(`/dashboard/user`);
@@ -78,7 +73,6 @@ export const UserCard = () => {
 
   useEffect(() => {
     getUser();
-    fetchData();
   }, []);
 
   const handleCancel = () => {
@@ -183,46 +177,50 @@ export const UserCard = () => {
                   <form onSubmit={(ev) => updateUserInfo(ev)}>
                     <label className="w-32 text-right">
                       First Name :
-                      <RegularInput
+                      <Input
                         size="md"
                         type="text"
                         name="first_name"
                         value={input.first_name}
+                        onChange={(ev) => handleChange(ev)}
                         required
                       />
                     </label>
 
                     <label className="w-32 text-right">
                       Last Name:
-                      <RegularInput
+                      <Input
                         size="md"
                         type="text"
                         name="last_name"
                         value={input.last_name}
+                        onChange={(ev) => handleChange(ev)}
                         required
                       />
                     </label>
 
                     <label className="w-32 text-right">
                       Phone Number:
-                      <RegularInput
+                      <Input
                         size="md"
-                        type="text"
+                        type="number"
                         name="phone_number"
                         value={input.phone_number}
+                        onChange={(ev) => handleChange(ev)}
                         required
                       />
                     </label>
 
                     <label className="w-32 text-right">
                       Email:
-                      <RegularInput
+                      <Input
                         size="md"
                         type="email"
                         name="email"
                         value={input.email}
                         required
                         placeholder="info@company.com"
+                        onChange={(ev) => handleChange(ev)}
                       />
                     </label>
                     <HStack>

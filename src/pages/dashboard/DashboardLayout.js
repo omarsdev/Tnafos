@@ -14,8 +14,8 @@ import {
   Invoice,
   PurchaseRequest,
   Settings,
-  User,
-  Service,
+  UserHome,
+  ServiceHome,
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 
@@ -61,8 +61,8 @@ export const DashboardLayout = () => {
           <Switch>
             <Route exact path={match.path} component={DashboardContent} />
             <Route path={`${match.path}/company`} component={Company} />
-            <Route path={`${match.path}/user`} component={User} />
-            <Route path={`${match.path}/service`} component={Service} />
+            <Route path={`${match.path}/user`} component={UserHome} />
+            <Route path={`${match.path}/service`} component={ServiceHome} />
             <Route
               path={`${match.path}/purchase-requests`}
               component={PurchaseRequest}
