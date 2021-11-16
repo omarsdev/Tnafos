@@ -10,12 +10,12 @@ import { handleTokenRequest } from "../../utils";
 import {
   Client,
   Estimate,
-  Invoice,
   PurchaseRequest,
   Settings,
   UserHome,
   ServiceHome,
   CompanyHome,
+  InvoiceHome,
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 
@@ -68,7 +68,7 @@ export const DashboardLayout = () => {
               component={PurchaseRequest}
             />
             <Route path={`${match.path}/payment`} component={PaymentHome} />
-            <Route path={`${match.path}/invoice`} component={Invoice} />
+            <Route path={`${match.path}/invoice`} component={InvoiceHome} />
             <Route path={`${match.path}/estimate`} component={Estimate} />
             <Route path={`${match.path}/client`} component={Client} />
             <Route path={`${match.path}/settings`} component={Settings} />

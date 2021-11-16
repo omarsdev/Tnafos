@@ -40,15 +40,16 @@ export const ServiceHome = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        <Box w="full" h="fit-content" overflow="scroll">
+        <Box w="full" overflowY="scroll">
           <Grid h="16" templateColumns="repeat(5, 1fr)" gap="5" p="5">
             <GridItem colSpan={4}>
               <Heading
-                color="black"
+                textColor="gray.600"
                 fontWeight="medium"
                 fontSize="xx-large"
                 fontFamily="inhirit"
                 alignItems="baseline"
+                ml="5"
               >
                 Services
               </Heading>
@@ -67,7 +68,13 @@ export const ServiceHome = () => {
             </GridItem>
           </Grid>
 
-          <Grid templateColumns="repeat(5, 1fr)" gap={4} p="30px">
+          <Grid
+            templateColumns="repeat(5, 1fr)"
+            gap={4}
+            p="30px"
+            mt="10"
+            paddingX="10"
+          >
             {servicesList.length === 0
               ? null
               : servicesList.map((service, idx) => (
