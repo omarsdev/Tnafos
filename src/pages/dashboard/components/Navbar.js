@@ -19,9 +19,9 @@ export const Navbar = () => {
   const match = useRouteMatch();
   const history = useHistory();
 
-  const handlerLogOut = () => {
+  const handleLogOut = () => {
     removeUserSession();
-    history.go(0);
+    history.push("/login");
   };
 
   return (
@@ -58,7 +58,7 @@ export const Navbar = () => {
             <Link to={`${match.url}/user/profile`}>
               <MenuItem className="hover:bg-gray-200">My Profile</MenuItem>
             </Link>
-            <MenuItem onClick={handlerLogOut} className="hover:bg-gray-200">
+            <MenuItem onClick={handleLogOut} className="hover:bg-gray-200">
               Log out
             </MenuItem>
           </MenuList>

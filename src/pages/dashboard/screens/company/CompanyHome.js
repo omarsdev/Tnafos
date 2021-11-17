@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  useRouteMatch,
-  Link,
-  useHistory,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useRouteMatch, useHistory, Switch, Route } from "react-router-dom";
 import { CompanyCard, CreateCompany } from "./";
 import {
   HStack,
@@ -30,7 +24,7 @@ import {
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
-import { AxiosInstance } from "../../../../utils";
+import { AxiosInstance } from "api/AxiosInstance";
 
 export const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState({});

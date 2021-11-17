@@ -1,2 +1,1 @@
-export * from './LogoData';
-export * from './SidebarMenu';
+export * from "./SidebarMenu";

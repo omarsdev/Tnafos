@@ -105,32 +105,17 @@ export const UserCard = () => {
                 pos={"relative"}
               />
 
-              <Heading fontSize={"2xl"} fontFamily={"sans-serif"} mb={4}>
+              <Heading fontSize={"2xl"} py="4">
                 {card?.first_name}
                 {card?.last_name}
               </Heading>
-              <Text
-                fontWeight={600}
-                color={"gray.500"}
-                mb={2}
-                fontFamily={"sans-serif"}
-              >
+              <Text className="py-2 text-gray-600 font-semibold">
                 Telephone: {card?.phone_number}
               </Text>
-              <Text
-                fontWeight={600}
-                color={"gray.500"}
-                mb={2}
-                fontFamily={"sans-serif"}
-              >
+              <Text className="py-2 text-gray-600 font-semibold">
                 E-mail: {card?.email}
               </Text>
-              <Text
-                fontWeight={600}
-                color={"gray.500"}
-                mb={2}
-                fontFamily={"sans-serif"}
-              >
+              <Text className="py-2 text-gray-600 font-semibold">
                 Id :{card?.uuid}
               </Text>
 

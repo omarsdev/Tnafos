@@ -16,7 +16,7 @@ import {
   Grid,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { AxiosInstance } from "../../../../utils";
+import { AxiosInstance } from "api/AxiosInstance";
 
 export const UserHome = () => {
   const [usersList, setUsersList] = useState([]);

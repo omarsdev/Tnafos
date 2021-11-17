@@ -28,7 +28,7 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-import { AxiosInstance } from "../../../../utils";
+import { AxiosInstance } from "api/AxiosInstance";
 
 export const MyService = () => {
   const [service, setService] = useState(null);
