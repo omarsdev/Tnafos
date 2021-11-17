@@ -1,38 +1,17 @@
-import { Box, Input, Button, Grid, Heading } from "@chakra-ui/react";
+import { Input, Button, Grid, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../utils";
-import { RegularInput } from "../../../../components";
 
 export const CreateCompany = () => {
-  const [input, setInput] = useState({
-    name: "",
-    type: "",
-    cr: "",
-    vat: "",
-    establishment_year: "",
-    total_employees: "",
-    bio: "",
-    telephone: "",
-    fax: "",
-    email: "",
-    website: "",
-    country_id: "",
-    city: "",
-    po_box: "",
-    zip_code: "",
-    address: "",
-    location: "",
-    logo: "",
-    category_id: "",
-  });
-
   const history = useHistory();
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const createCompany = async (e, input) => {
     e.preventDefault();
@@ -42,10 +21,7 @@ export const CreateCompany = () => {
         history.push("/dashboard/company");
       })
       .catch((err) => {
-        return {
-          success: false,
-          error: err,
-        };
+        console.log(err.response.data);
       });
   };
 
@@ -60,198 +36,247 @@ export const CreateCompany = () => {
       >
         Fill in Company Info
       </Heading>
-      <form onSubmit={(ev) => createCompany(ev)}>
+      <form onSubmit={handleSubmit(createCompany)}>
         <label className="block">
           Company Name
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="name"
-            value={input.name}
+            {...register("name", { required: "This field is required!" })}
           />
+          {errors.name && (
+            <p className="text-red-700">{errors.name?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Type
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="type"
-            value={input.type}
+            {...register("type", { required: "This field is required!" })}
           />
+          {errors.type && (
+            <p className="text-red-700">{errors.type?.message}</p>
+          )}
         </label>
 
         <label className="block">
           CR Number
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="cr"
-            value={input.cr}
+            {...register("cr", { required: "This field is required!" })}
           />
+          {errors.cr && <p className="text-red-700">{errors.cr?.message}</p>}
         </label>
 
         <label className="block">
           VAT Number
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="vat"
-            value={input.vat}
+            {...register("vat", { required: "This field is required!" })}
           />
+          {errors.vat && <p className="text-red-700">{errors.vat?.message}</p>}
         </label>
 
         <label className="block">
           Establishment Year
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="establishment_year"
-            value={input.establishment_year}
+            {...register("establishment_year", {
+              required: "This field is required!",
+            })}
           />
         </label>
 
         <label className="block">
           Total Employees
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="total_employees"
-            value={input.total_employees}
+            {...register("total_employees", {
+              required: "This field is required!",
+            })}
           />
+          {errors.total_employees && (
+            <p className="text-red-700">{errors.total_employees?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Bio
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="bio"
-            value={input.bio}
+            {...register("bio", { required: "This field is required!" })}
           />
+          {errors.bio && <p className="text-red-700">{errors.bio?.message}</p>}
         </label>
 
         <label className="block">
           Telephone
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="telephone"
-            value={input.telephone}
+            {...register("telephone", { required: "This field is required!" })}
           />
+          {errors.telephone && (
+            <p className="text-red-700">{errors.telephone?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Fax
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="fax"
-            value={input.fax}
+            {...register("fax", { required: "This field is required!" })}
           />
+          {errors.fax && <p className="text-red-700">{errors.fax?.message}</p>}
         </label>
 
         <label className="block">
           e-mail
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="email"
-            value={input.email}
+            {...register("email", { required: "This field is required!" })}
           />
+          {errors.email && (
+            <p className="text-red-700">{errors.email?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Website
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="website"
-            value={input.website}
+            {...register("website", { required: "This field is required!" })}
           />
+          {errors.website && (
+            <p className="text-red-700">{errors.website?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Country-Id
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="country_id"
-            value={input.country_id}
+            {...register("country_id", { required: "This field is required!" })}
           />
+          {errors.country_id && (
+            <p className="text-red-700">{errors.country_id?.message}</p>
+          )}
         </label>
 
         <label className="block">
           City
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="city"
-            value={input.city}
+            {...register("city", { required: "This field is required!" })}
           />
+          {errors.city && (
+            <p className="text-red-700">{errors.city?.message}</p>
+          )}
         </label>
 
         <label className="block">
           po_box
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="po_box"
-            value={input.po_box}
+            {...register("po_box", { required: "This field is required!" })}
           />
+          {errors.po_box && (
+            <p className="text-red-700">{errors.po_box?.message}</p>
+          )}
         </label>
 
         <label className="block">
           ZIP_code
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="zip_code"
-            value={input.zip_code}
+            {...register("zip_code", { required: "This field is required!" })}
           />
+          {errors.zip_code && (
+            <p className="text-red-700">{errors.zip_code?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Address
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="address"
-            value={input.address}
+            {...register("address", { required: "This field is required!" })}
           />
+          {errors.address && (
+            <p className="text-red-700">{errors.address?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Location:
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="location"
-            value={input.location}
+            {...register("location", { required: "This field is required!" })}
           />
+          {errors.location && (
+            <p className="text-red-700">{errors.location?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Logo:
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="logo"
-            value={input.logo}
+            {...register("logo", { required: "This field is required!" })}
           />
+          {errors.logo && (
+            <p className="text-red-700">{errors.logo?.message}</p>
+          )}
         </label>
 
         <label className="block">
           Category-Id
-          <RegularInput
+          <Input
             size="sm"
+            type="text"
             borderRadius="lg"
-            name="category_id"
-            value={input.category_id}
+            {...register("category_id", {
+              required: "This field is required!",
+            })}
           />
         </label>
 
-        <Button colorScheme="blue" m="5" ml="96">
+        <Button colorScheme="yellow" m="5" ml="96">
           SAVE
         </Button>
       </form>

@@ -18,6 +18,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Stack,
 } from "@chakra-ui/react";
 import {
   Link,
@@ -54,7 +55,7 @@ export const MyService = () => {
         setService(res.data.data);
         let service = res.data.data;
         console.log(service);
-        delete service.category;
+        // delete service.category;
         // delete service.name;
         // delete service.description;
         setInput(service);
@@ -103,44 +104,19 @@ export const MyService = () => {
             p={6}
             textAlign={"center"}
           >
-            <Heading
-              fontSize={"xl"}
-              fontFamily={"sans-serif"}
-              mb={4}
-              color={"gray.500"}
-            >
+            <Text fontWeight={600} mb={4} color="gray.500">
               Name of service:{service?.name}
-            </Heading>
-            <Text
-              fontWeight={600}
-              color={"gray.500"}
-              mb={2}
-              fontFamily={"sans-serif"}
-            >
+            </Text>
+            <Text fontWeight={600} color={"gray.500"} mb={2}>
               Description:{service?.description}{" "}
             </Text>
-            <Text
-              fontWeight={600}
-              color={"gray.500"}
-              mb={2}
-              fontFamily={"sans-serif"}
-            >
+            <Text fontWeight={600} color={"gray.500"} mb={2}>
               Price: {service?.price}{" "}
             </Text>
-            <Text
-              fontWeight={600}
-              color={"gray.500"}
-              mb={2}
-              fontFamily={"sans-serif"}
-            >
-              Category-id: {service?.categoryid}{" "}
+            <Text fontWeight={600} color={"gray.500"} mb={2}>
+              Category-id: {service?.category.uuid}{" "}
             </Text>
-            <Text
-              fontWeight={600}
-              color={"gray.500"}
-              mb={2}
-              fontFamily={"sans-serif"}
-            >
+            <Text fontWeight={600} color={"gray.500"} mb={2}>
               Type :{service?.type}
             </Text>
             <Box>
@@ -148,16 +124,16 @@ export const MyService = () => {
                 flex={1}
                 fontSize={"sm"}
                 rounded={"full"}
-                bg={"blue.400"}
+                bg={"#F8B916"}
                 color={"white"}
                 boxShadow={
                   "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                 }
                 _hover={{
-                  bg: "blue.500",
+                  bg: "orange.400",
                 }}
                 _focus={{
-                  bg: "blue.500",
+                  bg: "orange.400",
                 }}
                 icon={<FiEdit />}
                 onClick={onOpen}
@@ -177,13 +153,13 @@ export const MyService = () => {
             <DrawerOverlay />
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader borderBottomWidth="1px">
+              <DrawerHeader borderBottomWidth="1px" color="#F8B916">
                 Edit your Info by filling up this form
               </DrawerHeader>
 
               <DrawerBody mt="10">
                 <form onSubmit={(ev) => updateService(ev)}>
-                  <label className="w-32 text-right">
+                  <label className="w-32 text-right text-gray-500 ">
                     Price:
                     <Input
                       size="md"
@@ -197,7 +173,7 @@ export const MyService = () => {
                     />
                   </label>
 
-                  <label className="w-32 text-right">
+                  <label className="w-32 text-right text-gray-500">
                     Type:
                     <Input
                       size="md"
@@ -212,10 +188,15 @@ export const MyService = () => {
                   </label>
 
                   <HStack mt="10">
-                    <Button colorScheme="blue" size="md">
+                    <Button colorScheme="yellow" size="md" textColor="white">
                       UPDATE SERVICE
                     </Button>
-                    <Button onClick={handleCancel} colorScheme="gray" size="md">
+                    <Button
+                      onClick={handleCancel}
+                      color="gray"
+                      _hover={{ bg: "#D1D5DB" }}
+                      size="md"
+                    >
                       CANCEL
                     </Button>
                   </HStack>

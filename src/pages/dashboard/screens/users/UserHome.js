@@ -45,14 +45,11 @@ export const UserHome = () => {
             <Grid h="16" templateColumns="repeat(5, 1fr)" gap="5" p="5">
               <GridItem colSpan={4}>
                 <Heading
-                  color="black"
-                  fontWeight="medium"
-                  fontSize="xx-large"
-                  fontFamily="inhirit"
-                  alignItems="baseline"
-                  py="4"
-                  px="5"
                   textColor="gray.600"
+                  fontSize="xx-large"
+                  fontWeight="lg"
+                  alignItems="baseline"
+                  ml="5"
                 >
                   Users
                 </Heading>

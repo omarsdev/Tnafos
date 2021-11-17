@@ -1,4 +1,5 @@
 import React from "react";
+import { Box, Heading } from "@chakra-ui/react";
 
 export const Outgoing = () => {
   return (

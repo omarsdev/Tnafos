@@ -17,8 +17,7 @@ import {
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
-
-import { EditIcon } from "@chakra-ui/icons";
+import { FiEdit } from "react-icons/fi";
 import React, { useEffect, useState } from "react";
 import {
   Route,
@@ -29,6 +28,7 @@ import {
   Link,
 } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
+import { borderColor } from "tailwindcss/defaultTheme";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);
@@ -139,18 +139,18 @@ export const UserCard = () => {
                   flex={1}
                   fontSize={"sm"}
                   rounded={"full"}
-                  bg={"blue.400"}
+                  bg={"#F8B916"}
                   color={"white"}
                   boxShadow={
                     "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                   }
                   _hover={{
-                    bg: "blue.500",
+                    bg: "orange.400",
                   }}
                   _focus={{
-                    bg: "blue.500",
+                    bg: "orange.400",
                   }}
-                  icon={<EditIcon />}
+                  icon={<FiEdit />}
                   onClick={onOpen}
                 />
               </Link>
@@ -169,13 +169,13 @@ export const UserCard = () => {
               <DrawerOverlay />
               <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerHeader borderBottomWidth="1px">
+                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
                   Edit your Info by filling up this form
                 </DrawerHeader>
 
                 <DrawerBody>
                   <form onSubmit={(ev) => updateUserInfo(ev)}>
-                    <label className="w-32 text-right">
+                    <label className="w-32 text-right text-gray-500 ">
                       First Name :
                       <Input
                         size="md"
@@ -183,11 +183,12 @@ export const UserCard = () => {
                         name="first_name"
                         value={input.first_name}
                         onChange={(ev) => handleChange(ev)}
+                        focusBorderColor="#F8B916"
                         required
                       />
                     </label>
 
-                    <label className="w-32 text-right">
+                    <label className="w-32 text-right text-gray-500 ">
                       Last Name:
                       <Input
                         size="md"
@@ -195,11 +196,12 @@ export const UserCard = () => {
                         name="last_name"
                         value={input.last_name}
                         onChange={(ev) => handleChange(ev)}
+                        focusBorderColor="#F8B916"
                         required
                       />
                     </label>
 
-                    <label className="w-32 text-right">
+                    <label className="w-32 text-right text-gray-500 ">
                       Phone Number:
                       <Input
                         size="md"
@@ -207,11 +209,12 @@ export const UserCard = () => {
                         name="phone_number"
                         value={input.phone_number}
                         onChange={(ev) => handleChange(ev)}
+                        focusBorderColor="#F8B916"
                         required
                       />
                     </label>
 
-                    <label className="w-32 text-right">
+                    <label className="w-32 text-right text-gray-500">
                       Email:
                       <Input
                         size="md"
@@ -221,11 +224,18 @@ export const UserCard = () => {
                         required
                         placeholder="info@company.com"
                         onChange={(ev) => handleChange(ev)}
+                        focusBorderColor="#F8B916"
                       />
                     </label>
-                    <HStack>
-                      <Button colorScheme="blue">UPDATE</Button>
-                      <Button onClick={handleCancel}>CANCEL</Button>
+                    <HStack mt="5">
+                      <Button colorScheme="yellow">UPDATE</Button>
+                      <Button
+                        onClick={handleCancel}
+                        color="gray"
+                        _hover={{ bg: "#D1D5DB" }}
+                      >
+                        CANCEL
+                      </Button>
                     </HStack>
                   </form>
                 </DrawerBody>

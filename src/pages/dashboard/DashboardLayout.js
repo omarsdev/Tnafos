@@ -45,13 +45,12 @@ export const DashboardLayout = () => {
 
   // useEffect(() => {
   //   getUser();
-  //   // checkCopmany();
   // }, []);
 
   //*  note: we picked user information below from the (userData) variable that we've stored in context provider
   return (
     <>
-      {/* {userData ?*/}
+      {/* {userData ? ( */}
       <HStack spacing={0}>
         <Sidebar />
         <VStack className="chakra-stack w-full h-screen">

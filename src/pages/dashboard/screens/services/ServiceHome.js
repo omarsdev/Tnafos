@@ -45,9 +45,8 @@ export const ServiceHome = () => {
             <GridItem colSpan={4}>
               <Heading
                 textColor="gray.600"
-                fontWeight="medium"
                 fontSize="xx-large"
-                fontFamily="inhirit"
+                fontWeight="lg"
                 alignItems="baseline"
                 ml="5"
               >

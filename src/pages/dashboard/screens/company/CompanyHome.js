@@ -88,13 +88,12 @@ export const CompanyHome = () => {
         <Route exact path={`${match.path}`}>
           <Box w="full" h="fit-content">
             <Heading
-              fontWeight="medium"
-              fontSize="xx-large"
-              fontFamily="inhirit"
-              py="4"
-              px="5"
-              w="full"
               textColor="gray.600"
+              fontSize="xx-large"
+              fontWeight="lg"
+              alignItems="baseline"
+              ml="5"
+              py="5"
             >
               Company
             </Heading>
@@ -184,7 +183,7 @@ export const CompanyHome = () => {
                 fontWeight="medium"
                 fontSize="large"
                 fontFamily="inhirit"
-                textColor="yellow.500"
+                textColor="#F8B916"
               >
                 Update your company info
               </ModalHeader>
