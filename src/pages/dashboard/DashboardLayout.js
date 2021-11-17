@@ -5,7 +5,6 @@ import { HStack, VStack, Center, Spinner } from "@chakra-ui/react";
 import { useRouteMatch, Route, Switch } from "react-router-dom";
 import { AxiosInstance } from "api";
 import {
-  Client,
   Estimate,
   PurchaseRequest,
   Settings,
@@ -13,6 +12,7 @@ import {
   ServiceHome,
   CompanyHome,
   InvoiceHome,
+  ClientsHome,
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 import { UserDataContext } from "context";
@@ -77,7 +77,7 @@ export const DashboardLayout = () => {
               <Route path={`${match.path}/payment`} component={PaymentHome} />
               <Route path={`${match.path}/invoice`} component={InvoiceHome} />
               <Route path={`${match.path}/estimate`} component={Estimate} />
-              <Route path={`${match.path}/client`} component={Client} />
+              <Route path={`${match.path}/client`} component={ClientsHome} />
               <Route path={`${match.path}/settings`} component={Settings} />
             </Switch>
           </VStack>

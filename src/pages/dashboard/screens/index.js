@@ -1,4 +1,4 @@
-export * from "./clients/Client";
+export * from "./clients";
 export * from "./company/index";
 export * from "./estimates/Estimate";
 export * from "./invoices/index";

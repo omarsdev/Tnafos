@@ -3,8 +3,6 @@ import {
   List,
   ListItem,
   ListIcon,
-  VStack,
-  StackDivider,
   HStack,
   Box,
   Text,
