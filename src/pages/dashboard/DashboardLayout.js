@@ -22,9 +22,9 @@ import { PaymentHome } from "./screens/payments";
 export const DashboardLayout = () => {
   let match = useRouteMatch();
 
-  // const { userDataProvider, userTokenProvider } = useContext(UserDataContext);
+  // const { userData, userToken} = useContext(UserDataContext);
   // const [userData, setUserData] = userDataProvider;
-  // const [clientToken, setClientToken] = userTokenProvider;
+  // const [clientToken, setClientToken] = tokenProviderValue;
 
   // const getUser = async () => {
   //   if (!userData) {
