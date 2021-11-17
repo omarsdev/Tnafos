@@ -24,7 +24,7 @@ import { AuthLayout } from "../AuthLayout";
 import RegisterImage from "assets/images/register.jpg";
 import { useForm } from "react-hook-form";
 
-import { apiAuth } from "../../../api";
+import { apiAuth } from "api";
 import { UserDataContext } from "context";
 
 export const Register = () => {

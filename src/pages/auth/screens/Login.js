@@ -38,7 +38,6 @@ export const Login = () => {
       } else {
         setUserToken(res.token);
       }
-      // console.log(res.token)
       history.push("/dashboard");
     } else {
       setError(res.error);
