@@ -1,4 +1,3 @@
-export * from "./auth/index";
 export * from "./input/RegularInput";
 export * from "./input/PasswordInput";
 
