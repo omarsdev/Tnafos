@@ -1,2 +1,1 @@
-export * from './Homepage';
-export * from './Search';
+export * from "./Homepage";
