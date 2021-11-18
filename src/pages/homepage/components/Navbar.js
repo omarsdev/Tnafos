@@ -1,14 +1,35 @@
 import React, { useContext, useState } from "react";
 
-import { Flex, Spacer, HStack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import {
+  Flex,
+  Spacer,
+  HStack,
+  Image,
+  Menu,
+  MenuButton,
+  Button,
+  MenuList,
+  MenuItem,
+  Text,
+} from "@chakra-ui/react";
+import { Link, useHistory } from "react-router-dom";
 
 import { SecondaryButton, PrimaryButton } from "components";
 import { UserDataContext } from "context";
+import { FaChevronDown } from "react-icons/fa";
+import { removeUserSession } from "utils";
 
 export const Navbar = () => {
+  const history = useHistory();
+
   const { dataProviderValue } = useContext(UserDataContext);
-  const { userData } = dataProviderValue;
+  const { userData, setUserData } = dataProviderValue;
+
+  const handleLogOut = () => {
+    removeUserSession();
+    setUserData(null);
+    history.go(0);
+  };
 
   return (
     <Flex mx={10} py={5} h={"8vh"}>
@@ -29,8 +50,34 @@ export const Navbar = () => {
             <PrimaryButton name="Login" />
           </Link>
         ) : (
-          // TODO
-          <h1>Drop Down</h1>
+          <HStack>
+            <Image
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+              alt="User Profile Photo"
+              borderRadius="full"
+              boxSize="60px"
+            />
+            <Text>
+              {userData.first_name} {userData.last_name}
+            </Text>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rightIcon={<FaChevronDown />}
+                bg="transparent"
+                _hover="transparent"
+                className="hover:bg-CWhite focus:bg-CWhite"
+              />
+              <MenuList w="28">
+                <Link to={`/dashboard/user/profile`}>
+                  <MenuItem className="hover:bg-gray-200">My Profile</MenuItem>
+                </Link>
+                <MenuItem onClick={handleLogOut} className="hover:bg-gray-200">
+                  Log out
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </HStack>
         )}
       </HStack>
     </Flex>
