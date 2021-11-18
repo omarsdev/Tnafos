@@ -156,7 +156,7 @@ export const SidebarMenu = [
         id: 8,
         title: "Clients",
         icon: <FiHome />,
-        to: "/",
+        to: "/clientshome",
         // submenu: [
         //   {
         //     title: "Incoming",

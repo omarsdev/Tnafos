@@ -2,7 +2,7 @@ import { HStack, VStack, Button, Input, Box, Heading } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { AxiosInstance } from "../../../../utils";
+import { AxiosInstance } from "api/AxiosInstance";
 
 export const AddService = () => {
   const {

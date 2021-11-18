@@ -1,4 +1,4 @@
-import { AxiosInstance } from "../axios-instance";
+import { AxiosInstance } from "../AxiosInstance";
 
 export const apiAuth = async (data, type) => {
   try {

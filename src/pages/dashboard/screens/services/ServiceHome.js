@@ -14,7 +14,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { AxiosInstance } from "../../../../utils";
+import { AxiosInstance } from "api/AxiosInstance";
 import { ServiceCard, AddService, MyService } from "./";
 import { AiOutlinePlus } from "react-icons/ai";
 

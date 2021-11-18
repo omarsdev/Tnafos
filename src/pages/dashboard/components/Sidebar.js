@@ -3,8 +3,6 @@ import {
   List,
   ListItem,
   ListIcon,
-  VStack,
-  StackDivider,
   HStack,
   Box,
   Text,
@@ -16,17 +14,17 @@ import {
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
-import { FaAngleDown, FaAngleRight, FaHome } from "react-icons/fa";
+import { FaAngleRight, FaHome } from "react-icons/fa";
 import { Link, useRouteMatch } from "react-router-dom";
-import { SidebarMenu } from "../../../config";
+import { SidebarMenu } from "../../../constants";
 
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
-const Heading = (heading) => {
+const Heading = () => {
   return <span>{SidebarMenu.heading}</span>;
 };
 
-const NavItem = ({ to, icon, title, submenu, heading }) => {
+const NavItem = ({ to, title, submenu, heading }) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleToggle = () => {
@@ -54,7 +52,7 @@ const NavItem = ({ to, icon, title, submenu, heading }) => {
       </Button>
       {isActive && Array.isArray(submenu) && (
         <UnorderedList>
-          <Heading heading={heading} className="" />
+          <Heading heading={heading} />
           {submenu.map((item) => (
             <NavItem className="" {...item} />
           ))}

@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
-import { AxiosInstance } from "../../../../utils";
+import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
