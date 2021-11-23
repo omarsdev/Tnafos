@@ -14,22 +14,31 @@ export const CompanyCard = ({ Data }) => {
       ml="10"
     >
       <Thead bg="orange.50">
-        <Th
-          fontWeight="medium"
-          fontSize="large"
-          fontFamily="inhirit"
-          textColor="yellow.500"
-          paddingY="2"
-          pl="2"
-        >
-          Company Profile
-        </Th>
-        <Th></Th>
+        <Tr>
+          <Th
+            bg="gray.50"
+            roundedTop="lg"
+            textColor="gray.700"
+            textAlign="start"
+            paddingY="2"
+            pl="2"
+          >
+            Company Profile
+          </Th>
+          <Th
+            bg="gray.50"
+            roundedTop="lg"
+            textColor="gray.700"
+            textAlign="start"
+            paddingY="2"
+            pl="2"
+          />
+        </Tr>
       </Thead>
 
       <Tbody>
         <Tr blockSize="max-content">
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Company Name
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -38,7 +47,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Type
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -47,7 +56,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             CR Number
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -56,7 +65,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             VAT Number
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -65,7 +74,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Establishment Year
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -74,7 +83,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Total Employees
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -83,7 +92,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Bio
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -92,7 +101,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Telephone
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -101,7 +110,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Fax
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -110,7 +119,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             e-mail
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -119,7 +128,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Website
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -128,7 +137,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             City
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -137,7 +146,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             po-box
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -146,7 +155,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             ZIP code
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -155,7 +164,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Address
           </Td>
           <Td fontSize="small" textColor="gray.600">
@@ -164,7 +173,7 @@ export const CompanyCard = ({ Data }) => {
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="yellow.600" pl="2">
+          <Td fontSize="small" textColor="blue.400" pl="2">
             Location
           </Td>
           <Td fontSize="small" textColor="gray.600">

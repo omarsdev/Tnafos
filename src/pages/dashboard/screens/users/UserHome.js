@@ -7,16 +7,9 @@ import {
   Route,
 } from "react-router-dom";
 import { CreateUser, MyProfile, UserCard, CardComponent } from "./";
-import {
-  Box,
-  IconButton,
-  Button,
-  GridItem,
-  Heading,
-  Grid,
-} from "@chakra-ui/react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { Box, Spacer, Heading, Flex, Grid } from "@chakra-ui/react";
 import { AxiosInstance } from "api/AxiosInstance";
+import { AddButton } from "components/button/AddButton";
 
 export const UserHome = () => {
   const [usersList, setUsersList] = useState([]);
@@ -42,38 +35,29 @@ export const UserHome = () => {
       <Switch>
         <Route exact path={`${match.path}`}>
           <Box w="full" overflowY="scroll">
-            <Grid h="16" templateColumns="repeat(5, 1fr)" gap="5" mt="5">
-              <GridItem colSpan={4}>
-                <Heading
-                  textColor="gray.600"
-                  fontSize="xx-large"
-                  fontWeight="lg"
-                  alignItems="baseline"
-                  ml="10"
-                >
-                  Users
-                </Heading>
-              </GridItem>
+            <Flex py="5" paddingX="10">
+              <Heading
+                textColor="gray.600"
+                fontSize="xx-large"
+                fontWeight="lg"
+                alignItems="baseline"
+              >
+                Users
+              </Heading>
 
-              <GridItem colSpan={1} pl="50px">
-                <Link to={`${match.url}/createuser`}>
-                  <IconButton
-                    as={Button}
-                    colorScheme="yellow"
-                    size="lg"
-                    icon={<AiOutlinePlus />}
-                    rounded="full"
-                  ></IconButton>
-                </Link>
-              </GridItem>
-            </Grid>
+              <Spacer />
+
+              <Link to={`${match.url}/createuser`}>
+                <AddButton />
+              </Link>
+            </Flex>
 
             <Grid templateColumns="repeat(5, 1fr)" gap={4} p="30px">
               {usersList.length === 0
                 ? null
                 : usersList.map((el, idx) => (
-                    <Box flexDirection="row" spacing="10px">
-                      <Link key={idx} to={`${match.url}/${el.uuid}`}>
+                    <Box key={idx} flexDirection="row" spacing="10px">
+                      <Link to={`${match.url}/${el.uuid}`}>
                         <CardComponent userData={el} />
                       </Link>
                     </Box>

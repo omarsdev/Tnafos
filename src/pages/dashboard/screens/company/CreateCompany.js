@@ -276,7 +276,7 @@ export const CreateCompany = () => {
           />
         </label>
 
-        <Button colorScheme="yellow" m="5" ml="96">
+        <Button colorScheme="yellow" m="5" ml="96" type="submit">
           SAVE
         </Button>
       </form>

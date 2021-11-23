@@ -14,7 +14,6 @@ import {
   Input,
   Center,
   Avatar,
-  Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
@@ -28,7 +27,6 @@ import {
   Link,
 } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
-import { borderColor } from "tailwindcss/defaultTheme";
 
 export const UserCard = () => {
   const [card, setCard] = useState(null);
@@ -105,40 +103,39 @@ export const UserCard = () => {
                 pos={"relative"}
               />
 
-              <Heading fontSize={"2xl"} py="4">
+              <Text fontSize={"2xl"} py="4">
                 {card?.first_name}
                 {card?.last_name}
-              </Heading>
-              <Text className="py-2 text-gray-600 font-semibold">
+              </Text>
+              <Text className="py-2 text-gray-600">
                 Telephone: {card?.phone_number}
               </Text>
-              <Text className="py-2 text-gray-600 font-semibold">
-                E-mail: {card?.email}
-              </Text>
-              <Text className="py-2 text-gray-600 font-semibold">
-                Id :{card?.uuid}
-              </Text>
+              <Text className="py-2 text-gray-600">E-mail: {card?.email}</Text>
+              <Text className="py-2 text-gray-600">Id :{card?.uuid}</Text>
 
-              <Link>
-                <IconButton
-                  flex={1}
-                  fontSize={"sm"}
-                  rounded={"full"}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  _focus={{
-                    bg: "orange.400",
-                  }}
-                  icon={<FiEdit />}
-                  onClick={onOpen}
-                />
-              </Link>
+              <Button
+                p="1px"
+                fontSize={"sm"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color="white"
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "#D59B06",
+                }}
+                _focus={{
+                  bg: "#D59B06",
+                }}
+                width="12"
+                height="12"
+                onClick={onOpen}
+              >
+                <Text>
+                  <FiEdit />
+                </Text>
+              </Button>
             </Box>
           </Center>
 

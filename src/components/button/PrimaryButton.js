@@ -20,6 +20,11 @@ export const PrimaryButton = ({
     }
   };
 
+  // let EventType= useRef(null);
+  // const handleClick = (e) =>{
+  //   EventType.current.contains(e.target)? {buttonProps.onClick(); setLoading(!loading);}: null
+  // }
+
   useEffect(() => {
     document.addEventListener("click", handleClick, true);
     return () => {

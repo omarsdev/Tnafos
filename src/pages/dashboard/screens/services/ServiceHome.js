@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  IconButton,
-  Box,
-  Heading,
-  Button,
-  GridItem,
-  Grid,
-} from "@chakra-ui/react";
+import { Flex, Box, Heading, Spacer, Grid } from "@chakra-ui/react";
 import {
   Link,
   useParams,
@@ -16,7 +9,8 @@ import {
 } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
 import { ServiceCard, AddService, MyService } from "./";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AddButton } from "components/button/AddButton";
+import { flex } from "tailwindcss/defaultTheme";
 
 export const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -41,36 +35,26 @@ export const ServiceHome = () => {
     <Switch>
       <Route exact path={`${match.path}`}>
         <Box w="full" overflowY="scroll">
-          <Grid h="16" templateColumns="repeat(5, 1fr)" gap="5" p="5">
-            <GridItem colSpan={4}>
-              <Heading
-                textColor="gray.600"
-                fontSize="xx-large"
-                fontWeight="lg"
-                alignItems="baseline"
-                ml="5"
-              >
-                Services
-              </Heading>
-            </GridItem>
+          <Flex py="5" paddingX="10">
+            <Heading
+              textColor="gray.600"
+              fontSize="xx-large"
+              fontWeight="lg"
+              alignItems="baseline"
+            >
+              Services
+            </Heading>
+            <Spacer />
 
-            <GridItem colSpan={1} pl="50px">
-              <Link to={`${match.url}/addservice`}>
-                <IconButton
-                  as={Button}
-                  colorScheme="yellow"
-                  size="lg"
-                  icon={<AiOutlinePlus />}
-                  rounded="full"
-                ></IconButton>
-              </Link>
-            </GridItem>
-          </Grid>
+            <Link to={`${match.url}/addservice`}>
+              <AddButton />
+            </Link>
+          </Flex>
 
           <Grid
             templateColumns="repeat(5, 1fr)"
-            gap={4}
-            p="30px"
+            gap={5}
+            py="5"
             mt="10"
             paddingX="10"
           >

@@ -54,7 +54,7 @@ export const Register = () => {
       } else {
         setUserToken(res.token);
       }
-      history.push("/dashboard");
+      history.push("/dashboard/createcompany");
     } else {
       console.log(res.error);
       setError(res.error);

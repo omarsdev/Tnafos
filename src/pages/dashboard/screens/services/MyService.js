@@ -5,7 +5,6 @@ import {
   IconButton,
   Center,
   useColorModeValue,
-  Heading,
   Text,
   useDisclosure,
   Input,
@@ -18,7 +17,7 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Stack,
+  Divider,
 } from "@chakra-ui/react";
 import {
   Link,
@@ -95,50 +94,74 @@ export const MyService = () => {
         {/* representing user credencials */}
         <Center>
           <Box
-            mt="30px"
-            maxW={"3xl"}
-            w={"full"}
-            bg={useColorModeValue("white", "orange.600")}
-            boxShadow={"2xl"}
-            rounded={"lg"}
-            p={6}
+            w="96"
+            bg={useColorModeValue("white", "gray.900")}
+            border="silver"
+            borderRadius="2xl"
+            boxShadow="2xl"
+            borderWidth="2px"
+            rounded="lg"
             textAlign={"center"}
+            h="72"
+            mt="10px"
           >
-            <Text fontWeight={600} mb={4} color="gray.500">
-              Name of service:{service?.name}
+            <Text
+              fontSize="LG"
+              bg="gray.50"
+              roundedTop="lg"
+              textColor="gray.700"
+              fontWeight="medium"
+              paddingY="1"
+              textAlign="start"
+              ml="5"
+            >
+              Service
             </Text>
-            <Text fontWeight={600} color={"gray.500"} mb={2}>
-              Description:{service?.description}{" "}
-            </Text>
-            <Text fontWeight={600} color={"gray.500"} mb={2}>
-              Price: {service?.price}{" "}
-            </Text>
-            <Text fontWeight={600} color={"gray.500"} mb={2}>
-              Category-id: {service?.category.uuid}{" "}
-            </Text>
-            <Text fontWeight={600} color={"gray.500"} mb={2}>
-              Type :{service?.type}
-            </Text>
-            <Box>
-              <IconButton
-                flex={1}
+            <Divider />
+            <VStack spacing={"1px"}>
+              <Text fontSize="4xl" mb={2} color="gray.700" mt="2">
+                {service?.name}
+              </Text>
+              <stack className="text-blue-400 text-xs">
+                Price:
+                <Text color={"gray.400"} mb={2} fontSize="large">
+                  {service?.price} SAR
+                </Text>
+              </stack>
+              <Text color={"gray.700"} mb={2}>
+                Description:{service?.description}{" "}
+              </Text>
+              <Text color={"gray.700"} mb={2}>
+                Category-id: {service?.category.uuid}{" "}
+              </Text>
+              <Text color={"gray.700"} mb={2}>
+                Type :{service?.type}
+              </Text>
+
+              <Button
+                p="1px"
                 fontSize={"sm"}
                 rounded={"full"}
                 bg={"#F8B916"}
-                color={"white"}
+                color="white"
                 boxShadow={
                   "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                 }
                 _hover={{
-                  bg: "orange.400",
+                  bg: "#D59B06",
                 }}
                 _focus={{
-                  bg: "orange.400",
+                  bg: "#D59B06",
                 }}
-                icon={<FiEdit />}
+                width="12"
+                height="12"
                 onClick={onOpen}
-              />
-            </Box>
+              >
+                <Text>
+                  <FiEdit />
+                </Text>
+              </Button>
+            </VStack>
           </Box>
         </Center>
 

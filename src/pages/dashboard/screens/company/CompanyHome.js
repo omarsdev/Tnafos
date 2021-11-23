@@ -104,9 +104,17 @@ export const CompanyHome = () => {
                     size={"md"}
                     fontWeight={"normal"}
                     px={4}
-                    colorScheme={"red"}
-                    bg={"orange.300"}
-                    _hover={{ bg: "orange.400" }}
+                    bg={"#F8B916"}
+                    color="white"
+                    boxShadow={
+                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                    }
+                    _hover={{
+                      bg: "#D59B06",
+                    }}
+                    _focus={{
+                      bg: "#D59B06",
+                    }}
                   >
                     Update Company
                   </Button>
@@ -138,7 +146,7 @@ export const CompanyHome = () => {
                   <VStack spacing={0}>
                     <HStack>
                       <Text
-                        textColor="orange.300"
+                        textColor="#F8B916"
                         fontSize="lg"
                         alignItems="baseline"
                         fontWeight="medium"
@@ -146,7 +154,7 @@ export const CompanyHome = () => {
                       >
                         rating
                       </Text>
-                      <Icon textColor="orange.300">
+                      <Icon textColor="#F8B916">
                         <FaStar size="medium" />
                       </Icon>
                     </HStack>
@@ -158,7 +166,7 @@ export const CompanyHome = () => {
                       colorScheme={"white"}
                       size="sm"
                       textColor="gray.600"
-                      borderColor="orange.300"
+                      borderColor="#F8B916"
                       borderWidth="2px"
                     >
                       VIEW ALL
