@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import {
@@ -15,6 +15,7 @@ import { UserDataContextProvider } from "./context";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { withFocusVisible } from "@v1v2/chakra";
+import { AlertContext } from "context/AlertContext";
 
 const theme = extendTheme(
   {
@@ -35,6 +36,8 @@ const theme = extendTheme(
 );
 
 const App = () => {
+  const [alert, setAlert] = useContext(AlertContext);
+
   return (
     <ChakraProvider theme={theme}>
       <UserDataContextProvider>
