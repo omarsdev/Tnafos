@@ -7,14 +7,18 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { AlertContext } from "context";
+import Alert from "components/Alert";
 
 export const CreateUser = () => {
+  const [alert, setAlert] = useContext(AlertContext);
+
   //* form validation rules
   const validationSchema = yup.object({
     password: yup
@@ -46,6 +50,7 @@ export const CreateUser = () => {
       .then((res) => {
         console.log(res);
         history.push("/dashboard/user");
+        <Alert />;
       })
       .catch((error) => {
         setErr(error);
