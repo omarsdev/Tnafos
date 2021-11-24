@@ -50,7 +50,6 @@ export const CreateUser = () => {
       .then((res) => {
         console.log(res);
         history.push("/dashboard/user");
-        <Alert />;
       })
       .catch((error) => {
         setErr(error);

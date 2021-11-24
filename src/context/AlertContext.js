@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import { Box, Text } from "@chakra-ui/react";
 
 export const AlertContext = createContext();

@@ -36,8 +36,6 @@ const theme = extendTheme(
 );
 
 const App = () => {
-  const [alert, setAlert] = useContext(AlertContext);
-
   return (
     <ChakraProvider theme={theme}>
       <UserDataContextProvider>
