@@ -15,7 +15,7 @@ import { UserDataContextProvider } from "./context";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { withFocusVisible } from "@v1v2/chakra";
-import { AlertContext } from "context/AlertContext";
+import { AlertContextProvider, AlertContext } from "context";
 
 const theme = extendTheme(
   {

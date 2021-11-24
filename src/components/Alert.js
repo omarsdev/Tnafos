@@ -6,7 +6,7 @@ import { GrClose } from "react-icons/gr";
 const Alert = () => {
   const [alert, setAlert] = useContext(AlertContext);
   return (
-    <Box style={{ color: `${alert.color}` }}>
+    <Box bg={alert.bgColor}>
       <VStack>
         <IconButton
           aria-label="close alert"
