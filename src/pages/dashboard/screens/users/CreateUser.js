@@ -15,9 +15,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AlertContext } from "context";
 import Alert from "components/Alert";
+import { AlertContextProvider } from "context";
 
 export const CreateUser = () => {
-  const [alert, setAlert] = useContext(AlertContext);
+  const { alertProvider } = useContext(AlertContextProvider);
+  const [alert, setAlert] = alertProvider;
 
   //* form validation rules
   const validationSchema = yup.object({
@@ -50,7 +52,6 @@ export const CreateUser = () => {
       .then((res) => {
         console.log(res);
         history.push("/dashboard/user");
-        setAlert();
       })
       .catch((error) => {
         setErr(error);
@@ -208,6 +209,7 @@ export const CreateUser = () => {
           </HStack>
         </Box>
       </form>
+      <ToastComponent />
     </Box>
   );
 };
