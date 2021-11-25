@@ -10,6 +10,7 @@ import { CreateUser, MyProfile, UserCard, CardComponent } from "./";
 import { Box, Spacer, Heading, Flex, Grid } from "@chakra-ui/react";
 import { AxiosInstance } from "api/AxiosInstance";
 import { AddButton } from "components/button/AddButton";
+import Alert from "components/Alert";
 
 export const UserHome = () => {
   const [usersList, setUsersList] = useState([]);
@@ -64,6 +65,7 @@ export const UserHome = () => {
                   ))}
             </Grid>
           </Box>
+          <Alert />
         </Route>
         <Route path={`${match.path}/createuser`} component={CreateUser} />
         <Route path={`${match.path}/profile`} component={MyProfile} />
