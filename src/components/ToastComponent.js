@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useToast, Wrap, WrapItem, Button } from "@chakra-ui/react";
 import { AlertContext } from "context";
 
 export const ToastComponent = ({ data }) => {
   const { alert, setAlert } = alertProviderValue;
   const { alertProviderValue } = useContext(AlertContext);
+
   const toast = useToast();
   const statuses = ["success", "error", "info"];
 
