@@ -14,10 +14,11 @@ import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AlertContext } from "context";
+import { ToastComponent } from "components";
 
 export const CreateUser = () => {
   const { alertProviderValue } = useContext(AlertContext);
-  const { setAlert } = alertProviderValue;
+  const { alert, setAlert } = alertProviderValue;
 
   //* form validation rules
   const validationSchema = yup.object({
@@ -50,7 +51,9 @@ export const CreateUser = () => {
       .then((res) => {
         console.log(res);
         history.push("/dashboard/user");
-        setAlert();
+        if (alert) {
+          // showAlert();
+        }
       })
       .catch((error) => {
         setErr(error);
@@ -199,9 +202,15 @@ export const CreateUser = () => {
             and accurate.
           </Checkbox>
           <HStack spacing="10px">
-            <Button colorScheme="blue" size="sm" type="submit">
+            <Button
+              colorScheme="blue"
+              size="sm"
+              type="submit"
+              status={"success"}
+            >
               SAVE
             </Button>
+
             <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>
               CANCEL
             </Button>
