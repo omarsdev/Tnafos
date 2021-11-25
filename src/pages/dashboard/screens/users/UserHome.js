@@ -14,12 +14,15 @@ import {
   GridItem,
   Heading,
   Grid,
+  HStack,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AxiosInstance } from "api/AxiosInstance";
 
 export const UserHome = () => {
-  const [usersList, setUsersList] = useState([]);
+  const [usersList, setUsersList] = useState(null);
 
   const match = useRouteMatch();
   const { uuid } = useParams();
@@ -41,44 +44,38 @@ export const UserHome = () => {
     <>
       <Switch>
         <Route exact path={`${match.path}`}>
-          <Box w="full" overflowY="scroll">
-            <Grid h="16" templateColumns="repeat(5, 1fr)" gap="5" mt="5">
-              <GridItem colSpan={4}>
-                <Heading
-                  textColor="gray.600"
-                  fontSize="xx-large"
-                  fontWeight="lg"
-                  alignItems="baseline"
-                  ml="10"
-                >
-                  Users
-                </Heading>
-              </GridItem>
-
-              <GridItem colSpan={1} pl="50px">
-                <Link to={`${match.url}/createuser`}>
-                  <IconButton
-                    as={Button}
-                    colorScheme="yellow"
-                    size="lg"
-                    icon={<AiOutlinePlus />}
-                    rounded="full"
-                  ></IconButton>
-                </Link>
-              </GridItem>
-            </Grid>
-
-            <Grid templateColumns="repeat(5, 1fr)" gap={4} p="30px">
-              {usersList.length === 0
-                ? null
-                : usersList.map((el, idx) => (
-                    <Box flexDirection="row" spacing="10px">
-                      <Link key={idx} to={`${match.url}/${el.uuid}`}>
-                        <CardComponent userData={el} />
-                      </Link>
-                    </Box>
-                  ))}
-            </Grid>
+          <Box overflowY="scroll" className="w-full" px="20">
+            <HStack justifyContent="space-between">
+              <Heading
+                textColor="gray.600"
+                fontSize="xx-large"
+                fontWeight="lg"
+                alignItems="baseline"
+              >
+                Users
+              </Heading>
+              <Link to={`${match.url}/createuser`}>
+                <IconButton
+                  as={Button}
+                  colorScheme="yellow"
+                  size="lg"
+                  icon={<AiOutlinePlus />}
+                  rounded="full"
+                />
+              </Link>
+            </HStack>
+            {/* templateColumns="repeat(3, 1fr)" gap={20} */}
+            {!usersList ? (
+              <Center h="70vh" w="100%">
+                <Spinner size="xl" color="#F8B916" />
+              </Center>
+            ) : (
+              <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
+                {usersList.map((el, idx) => (
+                  <CardComponent userData={el} key={idx} />
+                ))}
+              </Grid>
+            )}
           </Box>
         </Route>
         <Route path={`${match.path}/createuser`} component={CreateUser} />
