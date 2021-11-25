@@ -17,7 +17,7 @@ import { AlertContextProvider } from "context";
 
 export const CreateUser = () => {
   const { alertProvider } = useContext(AlertContextProvider);
-  const [alert, setAlert] = alertProvider;
+  const { alert, setAlert } = alertProvider;
 
   //* form validation rules
   const validationSchema = yup.object({
@@ -49,8 +49,9 @@ export const CreateUser = () => {
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
         console.log(res);
-        history.push("/dashboard/user");
-        setAlert();
+        if (alert) {
+          history.push("/dashboard/user");
+        }
       })
       .catch((error) => {
         setErr(error);
