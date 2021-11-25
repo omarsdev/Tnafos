@@ -6,7 +6,7 @@ export const AlertContextProvider = (props) => {
   const [alert, setAlert] = useState(null);
 
   return (
-    <AlertContext.Provider value={{ alertProvider: [alert, setAlert] }}>
+    <AlertContext.Provider value={{ alertProviderValue: [alert, setAlert] }}>
       {props.childern}
     </AlertContext.Provider>
   );
