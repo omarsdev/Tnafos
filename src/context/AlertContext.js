@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext } from "react";
-import { useToast } from "@chakra-ui/react";
+import { useToast, Wrap, WrapItem, Button } from "@chakra-ui/react";
 
 export const AlertContext = createContext();
 
@@ -34,13 +34,13 @@ export const AlertContextProvider = (props) => {
   const showAlert = () => {
     switch (statuses) {
       case "success":
-        setAlert(...ToastComponent, { description: "Successfully created!" });
+        setAlert(<ToastComponent />, { description: "Successfully created!" });
         break;
       case "error":
-        setAlert(...ToastComponent, { description: "Successfully deleted!" });
+        setAlert(<ToastComponent />, { description: "Successfully deleted!" });
         break;
       case "info":
-        setAlert(...ToastComponent, { description: "Updated successfully!" });
+        setAlert(<ToastComponent />, { description: "Updated successfully!" });
         break;
       default:
         return null;
@@ -52,7 +52,7 @@ export const AlertContextProvider = (props) => {
   }, [alert]);
 
   return (
-    <AlertContext.Provider value={{ alertValue: [alert, setAlert] }}>
+    <AlertContext.Provider value={{ alertProvider: [alert, setAlert] }}>
       {props.childern}
     </AlertContext.Provider>
   );
