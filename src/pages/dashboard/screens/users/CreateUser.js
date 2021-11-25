@@ -13,11 +13,11 @@ import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { AlertContextProvider } from "context";
+import { AlertContext } from "context";
 
 export const CreateUser = () => {
-  const { alertProvider } = useContext(AlertContextProvider);
-  const { alert, setAlert } = alertProvider;
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
 
   //* form validation rules
   const validationSchema = yup.object({
@@ -49,9 +49,8 @@ export const CreateUser = () => {
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
         console.log(res);
-        if (alert) {
-          history.push("/dashboard/user");
-        }
+        history.push("/dashboard/user");
+        setAlert();
       })
       .catch((error) => {
         setErr(error);
