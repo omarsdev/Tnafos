@@ -49,7 +49,6 @@ export const SecondaryButton = ({
       _focus={{
         outline: "none",
       }}
-      paddingTop={"5px"}
       {...buttonProps}
     >
       {name}

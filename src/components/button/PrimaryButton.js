@@ -54,7 +54,7 @@ export const PrimaryButton = ({
           <Logo />
         </Box>
       )}
-      <Text pt="5px">{name}</Text>
+      <Text>{name}</Text>
     </Button>
   );
 };
