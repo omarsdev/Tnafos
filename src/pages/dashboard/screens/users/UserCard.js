@@ -210,11 +210,14 @@ export const UserCard = () => {
                       />
                     </label>
                     <HStack mt="5">
-                      <Button colorScheme="yellow">UPDATE</Button>
+                      <Button colorScheme="yellow" textColor="white">
+                        UPDATE
+                      </Button>
                       <Button
                         onClick={handleCancel}
                         color="gray"
                         _hover={{ bg: "#D1D5DB" }}
+                        size="md"
                       >
                         CANCEL
                       </Button>

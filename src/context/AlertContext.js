@@ -1,30 +1,46 @@
 import React, { useEffect, useState, createContext } from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 
 export const AlertContext = createContext();
 
 export const AlertContextProvider = (props) => {
   const [alert, setAlert] = useState({});
+  const statuses = ["success", "error", "info"];
 
-  const showAlert = (type) => {
-    switch (type) {
-      case "add":
-        setAlert({
-          message: "Successfully created! ",
-          bgColor: "#6EE7B7",
-        });
+  const ToastComponent = ({ data }) => {
+    const toast = useToast();
+    return (
+      <Wrap>
+        {statuses.map((status, i) => (
+          <WrapItem key={i}>
+            <Button
+              onClick={() =>
+                toast({
+                  title: `${status} toast`,
+                  status: status,
+                  isClosable: true,
+                  duration: 4000,
+                  position: "bottom",
+                  description: data,
+                })
+              }
+            />
+          </WrapItem>
+        ))}
+      </Wrap>
+    );
+  };
+
+  const showAlert = () => {
+    switch (statuses) {
+      case "success":
+        setAlert(...ToastComponent, { description: "Successfully created!" });
         break;
-      case "update":
-        setAlert({
-          message: "Updated successfully!",
-          bgColor: "#93C5FD",
-        });
+      case "error":
+        setAlert(...ToastComponent, { description: "Successfully deleted!" });
         break;
-      case "remove":
-        setAlert({
-          message: "Successfully deleted!",
-          bgColor: "#F87171",
-        });
+      case "info":
+        setAlert(...ToastComponent, { description: "Updated successfully!" });
         break;
       default:
         return null;
@@ -36,7 +52,7 @@ export const AlertContextProvider = (props) => {
   }, [alert]);
 
   return (
-    <AlertContext.Provider value={{ alert, setAlert }}>
+    <AlertContext.Provider value={{ alertValue: [alert, setAlert] }}>
       {props.childern}
     </AlertContext.Provider>
   );
