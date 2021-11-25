@@ -10,12 +10,11 @@ import {
   Register,
   E404,
 } from "./pages";
-import { UserDataContextProvider } from "./context";
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { withFocusVisible } from "@v1v2/chakra";
-import { AlertContextProvider } from "context";
+import { UserDataContextProvider, AlertContextProvider } from "context";
 
 const theme = extendTheme(
   {

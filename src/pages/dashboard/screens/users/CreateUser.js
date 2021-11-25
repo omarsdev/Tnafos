@@ -13,8 +13,6 @@ import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { AlertContext } from "context";
-import Alert from "components/Alert";
 import { AlertContextProvider } from "context";
 
 export const CreateUser = () => {
@@ -52,6 +50,7 @@ export const CreateUser = () => {
       .then((res) => {
         console.log(res);
         history.push("/dashboard/user");
+        setAlert();
       })
       .catch((error) => {
         setErr(error);
@@ -209,7 +208,6 @@ export const CreateUser = () => {
           </HStack>
         </Box>
       </form>
-      <ToastComponent />
     </Box>
   );
 };
