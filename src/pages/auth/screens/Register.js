@@ -44,7 +44,6 @@ export const Register = () => {
   const [loadingButton, setLoadingButton] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log(data);
     setError(null);
     setLoadingButton(true);
     const res = await apiAuth(data, "register");
