@@ -52,7 +52,7 @@ export const CreateUser = () => {
         console.log(res);
         history.push("/dashboard/user");
         if (alert) {
-          // showAlert();
+          setAlert();
         }
       })
       .catch((error) => {
@@ -206,7 +206,7 @@ export const CreateUser = () => {
               colorScheme="blue"
               size="sm"
               type="submit"
-              status={"success"}
+              onClick={() => ToastComponent()}
             >
               SAVE
             </Button>
