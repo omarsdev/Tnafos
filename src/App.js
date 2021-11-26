@@ -38,18 +38,18 @@ const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <UserDataContextProvider>
-        <AlertContextProvider>
-          <Router>
-            <Switch>
-              <Route exact path="/" component={Homepage} />
-              <Route path="/register" component={Register} />
-              <Route path="/login" component={Login} />
-              <Route path="/dashboard" component={DashboardLayout} />
-              <Route path="/:search" component={SearchLayout} />
-              <Route path="*" component={E404} />
-            </Switch>
-          </Router>
-        </AlertContextProvider>
+        {/* <AlertContextProvider> */}
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Homepage} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={Login} />
+            <Route path="/dashboard" component={DashboardLayout} />
+            <Route path="/:search" component={SearchLayout} />
+            <Route path="*" component={E404} />
+          </Switch>
+        </Router>
+        {/* </AlertContextProvider> */}
       </UserDataContextProvider>
     </ChakraProvider>
   );
