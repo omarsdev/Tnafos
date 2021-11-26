@@ -210,7 +210,11 @@ export const UserCard = () => {
                       />
                     </label>
                     <HStack mt="5">
-                      <Button colorScheme="yellow" textColor="white">
+                      <Button
+                        colorScheme="yellow"
+                        textColor="white"
+                        type="submit"
+                      >
                         UPDATE
                       </Button>
                       <Button

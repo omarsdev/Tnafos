@@ -13,12 +13,12 @@ import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { AlertContext } from "context";
-import { ToastComponent } from "components";
+// import { AlertContext } from "context";
+// import { ToastComponent } from "components";
 
 export const CreateUser = () => {
-  const { alertProviderValue } = useContext(AlertContext);
-  const { alert, setAlert } = alertProviderValue;
+  // const { alertProviderValue } = useContext(AlertContext);
+  // const { alert, setAlert } = alertProviderValue;
 
   //* form validation rules
   const validationSchema = yup.object({
@@ -51,9 +51,9 @@ export const CreateUser = () => {
       .then((res) => {
         console.log(res);
         history.push("/dashboard/user");
-        if (alert) {
-          setAlert();
-        }
+        // if (alert) {
+        // setAlert();
+        // }
       })
       .catch((error) => {
         setErr(error);
@@ -206,7 +206,7 @@ export const CreateUser = () => {
               colorScheme="blue"
               size="sm"
               type="submit"
-              onClick={() => ToastComponent()}
+              // onClick={() => ToastComponent()}
             >
               SAVE
             </Button>

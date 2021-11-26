@@ -211,7 +211,12 @@ export const MyService = () => {
                   </label>
 
                   <HStack mt="10">
-                    <Button colorScheme="yellow" size="md" textColor="white">
+                    <Button
+                      colorScheme="yellow"
+                      size="md"
+                      textColor="white"
+                      type="submit"
+                    >
                       UPDATE SERVICE
                     </Button>
                     <Button
