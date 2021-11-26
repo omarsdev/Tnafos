@@ -15,9 +15,10 @@ import {
   Center,
   Avatar,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Route,
   Switch,
@@ -27,8 +28,14 @@ import {
   Link,
 } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
+import { AlertContext } from "context/AlertContext";
 
 export const UserCard = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const showAlert = alertProviderValue;
+
+  const toast = useToast();
+
   const [card, setCard] = useState(null);
   const { uuid } = useParams();
   const history = useHistory();
@@ -62,6 +69,7 @@ export const UserCard = () => {
     await AxiosInstance.put(`/api/dashboard/user/${uuid}`, dataToBeUpdated)
       .then((res) => {
         console.log(res);
+        showAlert({ status: "info" });
         history.push(`/dashboard/user`);
       })
       .catch((err) => {

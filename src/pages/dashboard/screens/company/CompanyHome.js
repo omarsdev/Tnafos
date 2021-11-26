@@ -376,7 +376,7 @@ export const CompanyHome = () => {
                 )}
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme="blue" mr={3}>
+                <Button colorScheme="blue" mr={3} type="submit">
                   update
                 </Button>
                 <Button variant="ghost" onClick={onClose}>
