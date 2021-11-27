@@ -32,12 +32,21 @@ export const Login = () => {
     setError(null);
     setLoadingButton(true);
     const res = await apiAuth({ password: password, email: email }, "login");
+
     if (res.success) {
+      let maxAge = 7200;
       if (rememberMe) {
-        localStorage.setItem("token", res.token);
-      } else {
-        setUserToken(res.token);
+        maxAge = 1209600;
       }
+      alert("hit");
+      const auth_token = `tnafos_auth=${res.token}`;
+      document.cookie =
+        auth_token +
+        // change it once in production
+        // ";samesite=lax;Secure;domain=tnafos.com;" +
+        "max-age=" +
+        maxAge;
+      setUserToken(res.token);
       history.push("/dashboard");
     } else {
       setError(res.error);
