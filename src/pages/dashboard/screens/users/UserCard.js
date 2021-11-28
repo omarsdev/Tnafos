@@ -73,8 +73,8 @@ export const UserCard = () => {
       .then((res) => {
         setIsUpdating(false);
         setAlert({
-          message: "User Has Been Updated",
-          // type: "INFO",
+          message: "User Has Been Updated!",
+          type: "INFO",
         });
         history.push(`/dashboard/user`);
       })
@@ -83,7 +83,7 @@ export const UserCard = () => {
         setErrors(err.response.data);
         setAlert({
           message: `${err.response.data}`,
-          // type: "ERROR",
+          type: "ERROR",
         });
       });
   };

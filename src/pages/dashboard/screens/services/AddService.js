@@ -22,7 +22,7 @@ export const AddService = () => {
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
         setAlert({
-          message: "User Has Been Updated",
+          message: "You've just added a new service!",
           // type: "success",
         });
         history.push("/dashboard/service");

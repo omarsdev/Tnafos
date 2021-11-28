@@ -47,8 +47,8 @@ export const CreateUser = () => {
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
         setAlert({
-          message: "User Has Been Updated",
-          // type: "info",
+          message: "New user has been added!",
+          type: "SUCCESS",
         });
         history.push("/dashboard/user");
       })
@@ -56,7 +56,7 @@ export const CreateUser = () => {
         setErr(error);
         setAlert({
           message: `${err.response.data}`,
-          // type: "error",
+          type: "ERROR",
         });
       });
   };

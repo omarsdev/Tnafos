@@ -18,17 +18,13 @@ const options = {
   offset: "25px",
   // you can also just use 'scale'
   transition: transitions.FADE,
-  types: types.INFO,
-};
 
-// const AlertTemplate = ({ style, options, message }) => (
-//   <div style={style}>
-//     {options.type === "info" && "!"}
-//     {options.type === "success" && ":)"}
-//     {options.type === "error" && ":("}
-//     {message}
-//   </div>
-// );
+  types: {
+    INFO: "info",
+    SUCCESS: "success",
+    ERROR: "error",
+  },
+};
 
 ReactDOM.render(
   <AlertProvider template={AlertTemplate} {...options}>
