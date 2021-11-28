@@ -1,11 +1,16 @@
 import { Input, Button, Grid, Heading } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../api/AxiosInstance";
+import { AlertContext } from "context";
 
 export const CreateCompany = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const setAlert = alertProviderValue;
+
   const history = useHistory();
+  const [err, setErr] = useState(null);
 
   const {
     register,
@@ -17,11 +22,18 @@ export const CreateCompany = () => {
     e.preventDefault();
     await AxiosInstance.post("/api/dashboard/company/create", input)
       .then((res) => {
-        console.log(res);
+        setAlert({
+          message: "Company profile has been created!",
+          type: "success",
+        });
         history.push("/dashboard/company");
       })
       .catch((err) => {
-        console.log(err.response.data);
+        setErr(err.response.data);
+        setAlert({
+          message: ` ${err.response.data}`,
+          type: "error",
+        });
       });
   };
 

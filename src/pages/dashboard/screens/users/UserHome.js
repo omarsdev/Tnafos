@@ -7,12 +7,21 @@ import {
   Route,
 } from "react-router-dom";
 import { CreateUser, MyProfile, UserCard, CardComponent } from "./";
-import { Box, Spacer, Heading, Flex, Grid } from "@chakra-ui/react";
+import {
+  Box,
+  IconButton,
+  Button,
+  Heading,
+  Grid,
+  HStack,
+  Center,
+  Spinner,
+} from "@chakra-ui/react";
+import { AiOutlinePlus } from "react-icons/ai";
 import { AxiosInstance } from "api/AxiosInstance";
-import { AddButton } from "components/button/AddButton";
 
 export const UserHome = () => {
-  const [usersList, setUsersList] = useState([]);
+  const [usersList, setUsersList] = useState(null);
 
   const match = useRouteMatch();
   const { uuid } = useParams();
@@ -34,8 +43,8 @@ export const UserHome = () => {
     <>
       <Switch>
         <Route exact path={`${match.path}`}>
-          <Box w="full" overflowY="scroll">
-            <Flex py="5" paddingX="10">
+          <Box w="full" padding="10">
+            <HStack justifyContent="space-between" paddingBottom="5">
               <Heading
                 textColor="gray.600"
                 fontSize="xx-large"
@@ -44,25 +53,28 @@ export const UserHome = () => {
               >
                 Users
               </Heading>
-
-              <Spacer />
-
               <Link to={`${match.url}/createuser`}>
-                <AddButton />
+                <IconButton
+                  as={Button}
+                  colorScheme="yellow"
+                  size="lg"
+                  icon={<AiOutlinePlus />}
+                  rounded="full"
+                />
               </Link>
-            </Flex>
+            </HStack>
 
-            <Grid templateColumns="repeat(5, 1fr)" gap={4} p="30px">
-              {usersList.length === 0
-                ? null
-                : usersList.map((el, idx) => (
-                    <Box key={idx} flexDirection="row" spacing="10px">
-                      <Link to={`${match.url}/${el.uuid}`}>
-                        <CardComponent userData={el} />
-                      </Link>
-                    </Box>
-                  ))}
-            </Grid>
+            {!usersList ? (
+              <Center h="70vh" w="100%">
+                <Spinner size="xl" color="#F8B916" />
+              </Center>
+            ) : (
+              <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
+                {usersList.map((el, idx) => (
+                  <CardComponent userData={el} key={idx} />
+                ))}
+              </Grid>
+            )}
           </Box>
         </Route>
         <Route path={`${match.path}/createuser`} component={CreateUser} />
@@ -72,3 +84,5 @@ export const UserHome = () => {
     </>
   );
 };
+
+// <Link to={`${match.url}/${el.uuid}`}>

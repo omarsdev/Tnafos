@@ -1,10 +1,14 @@
-import { HStack, VStack, Button, Input, Box, Heading } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { HStack, Button, Input, Box, Heading } from "@chakra-ui/react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
+import { AlertContext } from "context";
 
 export const AddService = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const setAlert = alertProviderValue;
+
   const {
     register,
     handleSubmit,
@@ -17,11 +21,17 @@ export const AddService = () => {
   const createService = async (data) => {
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
-        console.log(res);
+        setAlert({
+          message: "User Has Been Updated",
+          // type: "success",
+        });
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        console.log(err.responce.data);
+        setAlert({
+          message: `${err.response.data}`,
+          // type: "error",
+        });
         // setErr(err);
       });
   };

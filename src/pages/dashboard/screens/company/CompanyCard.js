@@ -10,24 +10,24 @@ export const CompanyCard = ({ Data }) => {
       borderRadius="2xl"
       boxShadow="2xl"
       borderWidth="2px"
-      size="simple"
+      w="600px"
+      h="700px"
       ml="10"
     >
-      <Thead bg="orange.50">
+      <Thead>
         <Tr>
           <Th
-            bg="gray.50"
-            roundedTop="lg"
+            bg="gray.100"
+            roundedTopLeft="lg"
             textColor="gray.700"
-            textAlign="start"
             paddingY="2"
             pl="2"
           >
             Company Profile
           </Th>
           <Th
-            bg="gray.50"
-            roundedTop="lg"
+            bg="gray.100"
+            roundedTopRight="lg"
             textColor="gray.700"
             textAlign="start"
             paddingY="2"
@@ -38,145 +38,145 @@ export const CompanyCard = ({ Data }) => {
 
       <Tbody>
         <Tr blockSize="max-content">
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Company Name
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data?.name}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Type
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.type}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             CR Number
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.cr}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             VAT Number
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.vat}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Establishment Year
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.establishment_year}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Total Employees
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.total_employees}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Bio
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.bio}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Telephone
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.telephone}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Fax
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.fax}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             e-mail
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.email}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Website
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.website}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             City
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.city}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             po-box
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.po_box}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             ZIP code
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.zip_code}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Address
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.address}
           </Td>
         </Tr>
 
         <Tr>
-          <Td fontSize="small" textColor="blue.400" pl="2">
+          <Td fontSize="meduim" textColor="blue.400" pl="2">
             Location
           </Td>
-          <Td fontSize="small" textColor="gray.600">
+          <Td fontSize="meduim" textColor="gray.600">
             {Data.location}
           </Td>
         </Tr>

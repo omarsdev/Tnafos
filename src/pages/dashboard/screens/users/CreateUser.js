@@ -7,18 +7,17 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import { AlertContext } from "context";
-// import { ToastComponent } from "components";
+import { AlertContext } from "context";
 
 export const CreateUser = () => {
-  // const { alertProviderValue } = useContext(AlertContext);
-  // const { alert, setAlert } = alertProviderValue;
+  const { alertProviderValue } = useContext(AlertContext);
+  const setAlert = alertProviderValue;
 
   //* form validation rules
   const validationSchema = yup.object({
@@ -41,23 +40,24 @@ export const CreateUser = () => {
 
   const history = useHistory();
 
-  // const [check, setCheck] = useState(false);
   const [err, setErr] = useState(null);
 
   //* onSubmit function:
   const addUser = async (userData) => {
-    // console.log(userData);
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
-        console.log(res);
+        setAlert({
+          message: "User Has Been Updated",
+          // type: "info",
+        });
         history.push("/dashboard/user");
-        // if (alert) {
-        // setAlert();
-        // }
       })
       .catch((error) => {
         setErr(error);
-        console.log(error);
+        setAlert({
+          message: `${err.response.data}`,
+          // type: "error",
+        });
       });
   };
 
@@ -202,15 +202,9 @@ export const CreateUser = () => {
             and accurate.
           </Checkbox>
           <HStack spacing="10px">
-            <Button
-              colorScheme="blue"
-              size="sm"
-              type="submit"
-              // onClick={() => ToastComponent()}
-            >
+            <Button colorScheme="blue" size="sm" type="submit">
               SAVE
             </Button>
-
             <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>
               CANCEL
             </Button>

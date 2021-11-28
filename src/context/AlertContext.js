@@ -1,37 +1,20 @@
 import React, { useState, createContext, useEffect } from "react";
-import { ToastComponent } from "components";
+import { useAlert } from "react-alert";
 
 export const AlertContext = createContext();
 
 export const AlertContextProvider = (props) => {
+  const alertFire = useAlert();
   const [alert, setAlert] = useState(null);
-
-  const statuses = ["success", "error", "info"];
-
-  const showAlert = () => {
-    switch (statuses) {
-      case "success":
-        setAlert(<ToastComponent />, { description: "Successfully created!" });
-        break;
-      case "error":
-        setAlert(<ToastComponent />, { description: "Successfully deleted!" });
-        break;
-      case "info":
-        setAlert(<ToastComponent />, { description: "Updated successfully!" });
-        break;
-      default:
-        return null;
-    }
-  };
 
   useEffect(() => {
     if (!alert) return;
-    showAlert();
+    alertFire.show(alert?.message, { type: alert?.type });
   }, [alert]);
 
   return (
-    <AlertContext.Provider value={{ alertProviderValue: showAlert() }}>
-      {props.childern}
+    <AlertContext.Provider value={{ alertProviderValue: setAlert }}>
+      {props.children}
     </AlertContext.Provider>
   );
 };

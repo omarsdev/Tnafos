@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useRouteMatch, useHistory, Switch, Route } from "react-router-dom";
 import { CompanyCard, CreateCompany } from "./";
 import {
-  HStack,
+  Center,
+  Spinner,
+  GridItem,
+  Grid,
   Box,
-  useColorModeValue,
   Text,
   Heading,
-  Button,
   VStack,
   Divider,
   Icon,
@@ -20,55 +21,103 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Flex,
+  Spacer,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
 import { AxiosInstance } from "api/AxiosInstance";
+import { PrimaryButton, SecondaryButton } from "components";
+import { RegularInput } from "components";
+
+import { useForm } from "react-hook-form";
+
+import { AlertContext } from "context/AlertContext";
 
 export const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState({});
+
+  const { alertProviderValue } = useContext(AlertContext);
+  const setAlert = alertProviderValue;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [input, setInput] = useState(null);
   const history = useHistory();
   const match = useRouteMatch();
+
+  const { register, handleSubmit, reset } = useForm();
+
   const [errors, setErrors] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const resetHooksForm = (data) => {
+    reset({
+      name: data.name,
+      type: data.type,
+      cr: data.cr,
+      vat: data.vat,
+      establishment_year: data.establishment_year,
+      total_employees: data.total_employees,
+      bio: data.bio,
+      telephone: data.telephone,
+      fax: data.fax,
+      email: data.email,
+      website: data.web,
+      country_id: data.country_id,
+      city: data.city,
+      po_box: data.po_box,
+      zip_code: data.zip_code,
+      address: data.address,
+      location: data.location,
+      category_id: data.category_id,
+    });
+  };
 
   //* represent company data:
   const showCompany = async () => {
     await AxiosInstance.get("/api/dashboard/company")
       .then((res) => {
-        console.log(res);
         setcompanyInfo(res.data.data);
         let company = res.data.data;
         console.log(company);
         delete company.country;
         delete company.admin;
         delete company.category;
-        setInput(company);
+        resetHooksForm(res.data.data);
       })
       .catch((err) => {
-        return {
-          success: false,
-          error: err,
-        };
+        history.push("/dashboard/company");
       });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
+  const onCancelHandler = () => {
+    if (isUpdating) return;
+    resetHooksForm(companyInfo);
+    setErrors(null);
+    onClose();
   };
 
   //* update company info:
-  const updateCompany = async (dataToBeUpdated) => {
+  const onUpdateCompany = async (dataToBeUpdated) => {
+    setErrors(null);
+    setIsUpdating(true);
     await AxiosInstance.put("/api/dashboard/company/update", dataToBeUpdated)
       .then((res) => {
-        console.log(res);
+        setIsUpdating(false);
+        setAlert({
+          message: "Company info has been updated successfully!",
+          type: "success",
+        });
         history.push(`/dashboard/company`);
       })
-      .catch((err) => setErrors(err));
+      .catch((err) => {
+        setIsUpdating(false);
+        setErrors(err.response.data);
+        setAlert({
+          message: ` ${err.response.data}`,
+          type: "error",
+        });
+      });
   };
 
   useEffect(() => {
@@ -80,110 +129,96 @@ export const CompanyHome = () => {
       <Switch>
         {/* Company Home Content */}
         <Route exact path={`${match.path}`}>
-          <Box w="full" h="fit-content">
+          <Box w="full" overflowY="scroll" padding="10">
             <Heading
               textColor="gray.600"
               fontSize="xx-large"
               fontWeight="lg"
               alignItems="baseline"
-              ml="5"
-              py="5"
             >
               Company
             </Heading>
 
-            <Flex h="large" spacing="200">
-              <CompanyCard Data={companyInfo} />
+            {!companyInfo ? (
+              <Center h="70vh" w="100%">
+                <Spinner size="xl" color="#F8B916" />
+              </Center>
+            ) : (
+              <Grid templateColumns="repeat(3, 1fr)" gap={5} pt="5">
+                <GridItem colSpan={2}>
+                  <CompanyCard Data={companyInfo} />
+                </GridItem>
 
-              <VStack w="full" spacing="5" mt="5">
-                <Box width="44">
-                  <Button
-                    onClick={onOpen}
-                    leftIcon={<FiEdit />}
-                    rounded={"lg"}
-                    size={"md"}
-                    fontWeight={"normal"}
-                    px={4}
-                    bg={"#F8B916"}
-                    color="white"
-                    boxShadow={
-                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                    }
-                    _hover={{
-                      bg: "#D59B06",
-                    }}
-                    _focus={{
-                      bg: "#D59B06",
-                    }}
-                  >
-                    Update Company
-                  </Button>
-                </Box>
-                <Box
-                  width="44"
-                  bg={useColorModeValue("white", "gray.900")}
-                  border="silver"
-                  borderRadius="2xl"
-                  boxShadow="2xl"
-                  borderWidth="2px"
-                  rounded="lg"
-                  textAlign={"center"}
-                  h="32"
-                  mt="10px"
-                >
-                  <Text
-                    fontSize="LG"
-                    bg="gray.100"
-                    roundedTop="lg"
-                    textColor="gray.700"
-                    fontFamily="inherit"
-                    fontWeight="medium"
-                    paddingY="1"
-                  >
-                    Review
-                  </Text>
-                  <Divider />
-                  <VStack spacing={0}>
-                    <HStack>
-                      <Text
-                        textColor="#F8B916"
-                        fontSize="lg"
-                        alignItems="baseline"
-                        fontWeight="medium"
-                        py="3"
-                      >
-                        rating
-                      </Text>
-                      <Icon textColor="#F8B916">
-                        <FaStar size="medium" />
-                      </Icon>
-                    </HStack>
-                    <Button
-                      leftIcon={<FaSync />}
-                      rounded="full"
-                      fontWeight={"normal"}
-                      px={4}
-                      colorScheme={"white"}
-                      size="sm"
-                      textColor="gray.600"
-                      borderColor="#F8B916"
+                <GridItem>
+                  <VStack w="full" spacing="5" mt="5">
+                    <PrimaryButton
+                      buttonType="button"
+                      leftIcon={<FiEdit />}
+                      onClick={onOpen}
+                      name=" Update Company"
+                      w="170px"
+                      h="45px"
+                      rounded="lg"
+                    />
+
+                    <Box
+                      className="rounded-3xl shadow-2xl relative bg-white"
+                      w="250px"
+                      h="350px"
+                      border="silver"
+                      borderRadius="2xl"
+                      boxShadow="2xl"
                       borderWidth="2px"
+                      rounded="lg"
+                      textAlign={"center"}
+                      h="32"
+                      mt="10px"
                     >
-                      VIEW ALL
-                    </Button>
+                      <Text
+                        fontSize="LG"
+                        bg="gray.100"
+                        roundedTop="lg"
+                        textColor="gray.700"
+                        fontFamily="inherit"
+                        fontWeight="medium"
+                        paddingY="1"
+                      >
+                        Review
+                      </Text>
+                      <Divider />
+                      <Box>
+                        <Text
+                          textColor="#F8B916"
+                          fontSize="lg"
+                          alignItems="baseline"
+                          fontWeight="medium"
+                          py="3"
+                        >
+                          rating
+                          <Icon textColor="#F8B916">
+                            <FaStar size="medium" />
+                          </Icon>
+                        </Text>
+
+                        <SecondaryButton
+                          leftIcon={<FaSync />}
+                          name="VIEW ALL"
+                        />
+                      </Box>
+                    </Box>
                   </VStack>
-                </Box>
-              </VStack>
-            </Flex>
+                </GridItem>
+              </Grid>
+            )}
           </Box>
 
           {/* company update */}
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal isOpen={isOpen} onClose={onClose} size="xl">
             <ModalOverlay />
             <ModalContent>
               <ModalHeader
                 fontWeight="medium"
-                fontSize="large"
+                fontSize="x-large"
                 fontFamily="inhirit"
                 textColor="#F8B916"
               >
@@ -191,197 +226,335 @@ export const CompanyHome = () => {
               </ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                {input && (
-                  <form onSubmit={(ev) => updateCompany(ev)}>
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Company Name
-                      <Input
-                        size="md"
+                <form>
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Company Name :
+                      <RegularInput
+                        placeHolder="Enter your company name here"
+                        inputType="text"
                         name="name"
-                        value={input.name}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.name ? true : false}
                       />
+                      {errors?.errors?.name &&
+                        errors?.errors?.name.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Type
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Type :
+                      <RegularInput
+                        placeHolder="enter type"
+                        inputType="text"
                         name="type"
-                        value={input.type}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.type ? true : false}
                       />
+                      {errors?.errors?.type &&
+                        errors?.errors?.type.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      CR Number
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      CR Number :
+                      <RegularInput
+                        inputType="text"
                         name="cr"
-                        value={input.cr}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.cr ? true : false}
                       />
+                      {errors?.errors?.cr &&
+                        errors?.errors?.cr.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
-
-                    <label className="block text-gray-500 font-normal pl-1">
-                      VAT Number
-                      <Input
-                        size="md"
+                  </Box>
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      VAT Number :
+                      <RegularInput
+                        inputType="text"
                         name="vat"
-                        value={input.vat}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.vat ? true : false}
                       />
+                      {errors?.errors?.vat &&
+                        errors?.errors?.vat.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Establishment Year
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Establishment Year :
+                      <RegularInput
+                        inputType="text"
                         name="establishment_year"
-                        value={input.establishment_year}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={
+                          errors?.errors?.establishment_year ? true : false
+                        }
                       />
+                      {errors?.errors?.establishment_year &&
+                        errors?.errors?.establishment_year.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Total Employees
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Total Employees :
+                      <RegularInput
+                        inputType="text"
                         name="total_employees"
-                        value={input.total_employees}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.total_employees ? true : false}
                       />
+                      {errors?.errors?.total_employees &&
+                        errors?.errors?.total_employees.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Bio
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Bio :
+                      <RegularInput
+                        inputType="text"
                         name="bio"
-                        value={input.bio}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.bio ? true : false}
                       />
+                      {errors?.errors?.bio &&
+                        errors?.errors?.bio.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Telephone
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Telephone :
+                      <RegularInput
+                        inputType="text"
                         name="telephone"
-                        value={input.telephone}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.telephone ? true : false}
                       />
+                      {errors?.errors?.telephone &&
+                        errors?.errors?.telephone.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Fax
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Fax :
+                      <RegularInput
+                        inputType="text"
                         name="fax"
-                        value={input.fax}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.fax ? true : false}
                       />
+                      {errors?.errors?.fax &&
+                        errors?.errors?.fax.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      e-mail
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      E-mail :
+                      <RegularInput
+                        inputType="text"
                         name="email"
-                        value={input.email}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.email ? true : false}
                       />
+                      {errors?.errors?.email &&
+                        errors?.errors?.email.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Website
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Website :
+                      <RegularInput
+                        inputType="text"
                         name="website"
-                        value={input.website}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.website ? true : false}
                       />
+                      {errors?.errors?.website &&
+                        errors?.errors?.website.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Country-Id
-                      <Input
-                        size="md"
-                        name="country_id"
-                        value={input.country_id}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
-
-                    <label className="block text-gray-500 font-normal pl-1">
-                      City
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      City :
+                      <RegularInput
+                        inputType="text"
                         name="city"
-                        value={input.city}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.city ? true : false}
                       />
+                      {errors?.errors?.city &&
+                        errors?.errors?.city.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      po_box
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      po_box :
+                      <RegularInput
+                        inputType="text"
                         name="po_box"
-                        value={input.po_box}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.po_box ? true : false}
                       />
+                      {errors?.errors?.po_box &&
+                        errors?.errors?.po_box.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      ZIP_code
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      ZIP-code :
+                      <RegularInput
+                        inputType="text"
                         name="zip_code"
-                        value={input.zip_code}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.zip_code ? true : false}
                       />
+                      {errors?.errors?.zip_code &&
+                        errors?.errors?.zip_code.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Address
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Address :
+                      <RegularInput
+                        inputType="text"
                         name="address"
-                        value={input.address}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.address ? true : false}
                       />
+                      {errors?.errors?.address &&
+                        errors?.errors?.address.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
+                  </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Location:
-                      <Input
-                        size="md"
+                  <Box className="mt-4">
+                    <label className="w-32 text-left text-gray-500 ">
+                      Location :
+                      <RegularInput
+                        inputType="text"
                         name="location"
-                        value={input.location}
-                        onChange={(ev) => handleChange(ev)}
+                        register={register}
+                        width="100%"
+                        error={errors?.errors?.location ? true : false}
                       />
+                      {errors?.errors?.location &&
+                        errors?.errors?.location.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
-
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Category-Id
-                      <Input
-                        size="md"
-                        name="category_id"
-                        value={input.category_id}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
-                  </form>
-                )}
+                  </Box>
+                </form>
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme="blue" mr={3} type="submit">
-                  update
-                </Button>
-                <Button variant="ghost" onClick={onClose}>
-                  CANCEL
-                </Button>
+                <PrimaryButton
+                  name="Update"
+                  onClick={handleSubmit(onUpdateCompany)}
+                  loadingButton={isUpdating}
+                  buttonType="submit"
+                />
+
+                <SecondaryButton
+                  name="Cancel"
+                  onClick={onCancelHandler}
+                  buttonType="button"
+                />
+                <Box>
+                  {errors?.message && (
+                    <Text className="text-center mt-4" color="red">
+                      {errors?.message}
+                    </Text>
+                  )}
+                </Box>
               </ModalFooter>
             </ModalContent>
           </Modal>

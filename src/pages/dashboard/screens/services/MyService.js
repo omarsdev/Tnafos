@@ -1,49 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FiEdit } from "react-icons/fi";
 import {
   Box,
   IconButton,
   Center,
-  useColorModeValue,
+  Spinner,
   Text,
   useDisclosure,
-  Input,
+  Flex,
   VStack,
-  HStack,
-  Button,
   Drawer,
   DrawerBody,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Divider,
+  Spacer,
 } from "@chakra-ui/react";
-import {
-  Link,
-  Route,
-  Switch,
-  useHistory,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
+import { RegularInput } from "components";
+
+import { useForm } from "react-hook-form";
+import { PrimaryButton } from "components";
+import { SecondaryButton } from "components";
+import { AlertContext } from "context/AlertContext";
 
 export const MyService = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const setAlert = alertProviderValue;
   const [service, setService] = useState(null);
-  const { uuid } = useParams();
-  const match = useRouteMatch();
 
   const history = useHistory();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = React.useRef();
-  const [input, setInput] = useState(null);
-  const [errors, setErrors] = useState(null);
+  const { uuid } = useParams();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { register, handleSubmit, reset } = useForm();
+
+  const [errors, setErrors] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const resetHooksForm = (data) => {
+    reset({
+      price: data.price,
+      type: data.type,
+    });
   };
 
   //* represent service card info:
@@ -51,13 +53,13 @@ export const MyService = () => {
     await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
       .then((res) => {
         // console.log(res.data.data);
+        resetHooksForm(res.data.data);
         setService(res.data.data);
         let service = res.data.data;
         console.log(service);
         // delete service.category;
         // delete service.name;
         // delete service.description;
-        setInput(service);
       })
       .catch((err) => {
         history.push("/dashboard/service");
@@ -65,175 +67,190 @@ export const MyService = () => {
   };
 
   //* service update function:
-  const updateService = async (dataToBeUpdataed) => {
+  const onUpdateService = async (dataToBeUpdataed) => {
+    setErrors(null);
+    setIsUpdating(true);
     await AxiosInstance.put(
       `/api/dashboard/service/${uuid}/update`,
       dataToBeUpdataed
     )
       .then((res) => {
-        console.log(res);
+        setIsUpdating(false);
+        setAlert({
+          message: "Service Has Been Updated!",
+          // type: "info",
+        });
         history.push(`/dashboard/service`);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
-        setErrors(err.response.data.message);
+        setIsUpdating(false);
+        setErrors(err.response.data);
+        setAlert({
+          message: `${err.response.data}`,
+          // type: "error",
+        });
       });
   };
 
-  const handleCancel = () => {
-    history.push("/dashboard/service");
+  const onCancelHandler = () => {
+    if (isUpdating) return;
+    resetHooksForm(service);
+    setErrors(null);
+    onClose();
   };
 
   useEffect(() => {
     getMyService();
   }, []);
 
-  return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        {/* representing user credencials */}
-        <Center>
-          <Box
-            w="96"
-            bg={useColorModeValue("white", "gray.900")}
-            border="silver"
-            borderRadius="2xl"
-            boxShadow="2xl"
-            borderWidth="2px"
-            rounded="lg"
-            textAlign={"center"}
-            h="72"
-            mt="10px"
-          >
+  return !service ? (
+    <Center h="70vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
+  ) : (
+    <>
+      <Center py="5">
+        <Box
+          className="rounded-3xl shadow-2xl relative bg-white"
+          w="350px"
+          h="350px"
+        >
+          <VStack spacing="20px">
             <Text
-              fontSize="LG"
+              w="full"
               bg="gray.50"
               roundedTop="lg"
               textColor="gray.700"
-              fontWeight="medium"
-              paddingY="1"
               textAlign="start"
-              ml="5"
+              fontSize="x-large"
+              pl="5%"
             >
               Service
             </Text>
-            <Divider />
-            <VStack spacing={"1px"}>
-              <Text fontSize="4xl" mb={2} color="gray.700" mt="2">
+            <Box mr="0" px="5%">
+              <Text py="1" fontSize="large" textColor="gray.600">
                 {service?.name}
               </Text>
-              <stack className="text-blue-400 text-xs">
-                Price:
-                <Text color={"gray.400"} mb={2} fontSize="large">
-                  {service?.price} SAR
-                </Text>
-              </stack>
-              <Text color={"gray.700"} mb={2}>
-                Description:{service?.description}{" "}
+              <Text className="text-blue-400 text-medium">Price:</Text>
+              <Text py="1" fontSize="large" textColor="gray.600">
+                {service?.price} SAR
               </Text>
-              <Text color={"gray.700"} mb={2}>
-                Category-id: {service?.category.uuid}{" "}
+              <Text py="1" fontSize="large" textColor="gray.600">
+                Description:{service?.description}
               </Text>
-              <Text color={"gray.700"} mb={2}>
+              <Text py="1" fontSize="large" textColor="gray.600">
+                Category-id: {service?.category.uuid}
+              </Text>
+              <Text py="1" fontSize="large" textColor="gray.600">
                 Type :{service?.type}
               </Text>
+            </Box>
 
-              <Button
-                p="1px"
+            <Box position="absolute" bottom="5">
+              <IconButton
+                flex={1}
                 fontSize={"sm"}
                 rounded={"full"}
                 bg={"#F8B916"}
-                color="white"
+                color={"white"}
                 boxShadow={
                   "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                 }
                 _hover={{
-                  bg: "#D59B06",
+                  bg: "orange.400",
                 }}
                 _focus={{
-                  bg: "#D59B06",
+                  bg: "orange.400",
                 }}
-                width="12"
-                height="12"
+                icon={<FiEdit />}
                 onClick={onOpen}
-              >
-                <Text>
-                  <FiEdit />
+              />
+            </Box>
+          </VStack>
+        </Box>
+      </Center>
+
+      {/* updating service. */}
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
+
+          <DrawerBody>
+            <form>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Price :
+                  <RegularInput
+                    placeHolder="price"
+                    inputType="text"
+                    name="price"
+                    register={register}
+                    width="100%"
+                    error={errors?.errors?.price ? true : false}
+                  />
+                  {errors?.errors?.price &&
+                    errors?.errors?.price.map((e) => (
+                      <Text className="text-left" color="red">
+                        {e}
+                      </Text>
+                    ))}
+                </label>
+              </Box>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Type :
+                  <RegularInput
+                    placeHolder="type"
+                    inputType="text"
+                    width="180px"
+                    name="type"
+                    register={register}
+                    width="100%"
+                    error={errors?.errors?.type ? true : false}
+                  />
+                  {errors?.errors?.type &&
+                    errors?.errors?.type.map((e) => (
+                      <Text className="text-left" color="red">
+                        {e}
+                      </Text>
+                    ))}
+                </label>
+              </Box>
+
+              <Flex mt="5">
+                <PrimaryButton
+                  name="Update"
+                  onClick={handleSubmit(onUpdateService)}
+                  loadingButton={isUpdating}
+                  buttonType="submit"
+                />
+
+                <Spacer />
+
+                <SecondaryButton
+                  name="Cancel"
+                  onClick={onCancelHandler}
+                  buttonType="button"
+                />
+              </Flex>
+              {errors?.message && (
+                <Text className="text-center mt-4" color="red">
+                  {errors?.message}
                 </Text>
-              </Button>
-            </VStack>
-          </Box>
-        </Center>
-
-        {/* Updating service */}
-        {input ? (
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            initialFocusRef={firstField}
-            onClose={onClose}
-          >
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerCloseButton />
-              <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-                Edit your Info by filling up this form
-              </DrawerHeader>
-
-              <DrawerBody mt="10">
-                <form onSubmit={(ev) => updateService(ev)}>
-                  <label className="w-32 text-right text-gray-500 ">
-                    Price:
-                    <Input
-                      size="md"
-                      type="text"
-                      name="price"
-                      value={input.price}
-                      onChange={(ev) => handleChange(ev)}
-                      required
-                      m={"15px"}
-                      w="52"
-                    />
-                  </label>
-
-                  <label className="w-32 text-right text-gray-500">
-                    Type:
-                    <Input
-                      size="md"
-                      type="text"
-                      name="type"
-                      value={input.type}
-                      onChange={(ev) => handleChange(ev)}
-                      required
-                      m={"15px"}
-                      w="52"
-                    />
-                  </label>
-
-                  <HStack mt="10">
-                    <Button
-                      colorScheme="yellow"
-                      size="md"
-                      textColor="white"
-                      type="submit"
-                    >
-                      UPDATE SERVICE
-                    </Button>
-                    <Button
-                      onClick={handleCancel}
-                      color="gray"
-                      _hover={{ bg: "#D1D5DB" }}
-                      size="md"
-                    >
-                      CANCEL
-                    </Button>
-                  </HStack>
-                </form>
-              </DrawerBody>
-            </DrawerContent>
-          </Drawer>
-        ) : null}
-      </Route>
-    </Switch>
+              )}
+            </form>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };

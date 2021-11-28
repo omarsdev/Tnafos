@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Flex, Box, Heading, Spacer, Grid } from "@chakra-ui/react";
+import {
+  HStack,
+  Button,
+  IconButton,
+  Box,
+  Heading,
+  Center,
+  Spinner,
+  Grid,
+} from "@chakra-ui/react";
 import {
   Link,
   useParams,
@@ -8,9 +17,8 @@ import {
   Route,
 } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
+import { AiOutlinePlus } from "react-icons/ai";
 import { ServiceCard, AddService, MyService } from "./";
-import { AddButton } from "components/button/AddButton";
-import { flex } from "tailwindcss/defaultTheme";
 
 export const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -34,8 +42,8 @@ export const ServiceHome = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        <Box w="full" overflowY="scroll">
-          <Flex py="5" paddingX="10">
+        <Box w="full" overflowY="scroll" padding="10">
+          <HStack justifyContent="space-between" paddingBottom="5">
             <Heading
               textColor="gray.600"
               fontSize="xx-large"
@@ -44,28 +52,28 @@ export const ServiceHome = () => {
             >
               Services
             </Heading>
-            <Spacer />
-
             <Link to={`${match.url}/addservice`}>
-              <AddButton />
+              <IconButton
+                as={Button}
+                colorScheme="yellow"
+                size="lg"
+                icon={<AiOutlinePlus />}
+                rounded="full"
+              />
             </Link>
-          </Flex>
+          </HStack>
 
-          <Grid
-            templateColumns="repeat(5, 1fr)"
-            gap={5}
-            py="5"
-            mt="10"
-            paddingX="10"
-          >
-            {servicesList.length === 0
-              ? null
-              : servicesList.map((service, idx) => (
-                  <Link key={idx} to={`${match.url}/${service.uuid}`}>
-                    <ServiceCard info={service} />
-                  </Link>
-                ))}
-          </Grid>
+          {!servicesList ? (
+            <Center h="70vh" w="100%">
+              <Spinner size="xl" color="#F8B916" />
+            </Center>
+          ) : (
+            <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
+              {servicesList.map((service, idx) => (
+                <ServiceCard info={service} key={idx} />
+              ))}
+            </Grid>
+          )}
         </Box>
       </Route>
       <Route path={`${match.path}/addservice`} component={AddService} />
