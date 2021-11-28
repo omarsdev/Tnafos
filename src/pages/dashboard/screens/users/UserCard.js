@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
 import { RegularInput } from "components";
@@ -74,7 +74,7 @@ export const UserCard = () => {
         setIsUpdating(false);
         setAlert({
           message: "User Has Been Updated!",
-          type: "INFO",
+          type: "info",
         });
         history.push(`/dashboard/user`);
       })
@@ -83,7 +83,7 @@ export const UserCard = () => {
         setErrors(err.response.data);
         setAlert({
           message: `${err.response.data}`,
-          type: "ERROR",
+          type: "error",
         });
       });
   };

@@ -16,10 +16,6 @@ export const RegularInput = ({
   ...rest
 }) => {
   const handleChange = (event) => setValue(event.target.value);
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
 
   return !value && !setValue ? (
     <ChakraInput

@@ -18,12 +18,6 @@ const options = {
   offset: "25px",
   // you can also just use 'scale'
   transition: transitions.FADE,
-
-  types: {
-    INFO: "info",
-    SUCCESS: "success",
-    ERROR: "error",
-  },
 };
 
 ReactDOM.render(

@@ -43,7 +43,7 @@ export const UserHome = () => {
     <>
       <Switch>
         <Route exact path={`${match.path}`}>
-          <Box w="full" padding="10">
+          <Box w="full" overflowY="scroll" padding="10">
             <HStack justifyContent="space-between" paddingBottom="5">
               <Heading
                 textColor="gray.600"

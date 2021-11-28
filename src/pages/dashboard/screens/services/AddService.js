@@ -1,9 +1,11 @@
-import { HStack, Button, Input, Box, Heading } from "@chakra-ui/react";
+import { HStack, Text, Box, Heading } from "@chakra-ui/react";
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
 import { AlertContext } from "context";
+
+import { PrimaryButton, SecondaryButton, RegularInput } from "components";
 
 export const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -14,8 +16,9 @@ export const AddService = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const history = useHistory();
-  // const [err, setErr] = useState(null);
+  const [err, setErr] = useState(null);
 
   //* service adding function:
   const createService = async (data) => {
@@ -23,16 +26,16 @@ export const AddService = () => {
       .then((res) => {
         setAlert({
           message: "You've just added a new service!",
-          // type: "success",
+          type: "success",
         });
         history.push("/dashboard/service");
       })
       .catch((err) => {
         setAlert({
           message: `${err.response.data}`,
-          // type: "error",
+          type: "error",
         });
-        // setErr(err);
+        setErr(err.response.data);
       });
   };
 
@@ -45,104 +48,128 @@ export const AddService = () => {
       borderRadius="lg"
       overflow="hidden"
       borderWidth="1px"
-      w="xl"
+      w="2xl"
       px="20"
       pt="5"
       h="lg"
     >
       <Box>
         <Heading
-          color="yellow.500"
-          fontWeight="medium"
+          color="#F8B916"
           fontSize="x-large"
-          fontFamily="inhirit"
+          fontWeight="lg"
           alignItems="baseline"
-          m={4}
         >
           New Service
         </Heading>
       </Box>
-      <form onSubmit={handleSubmit(createService)}>
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          name:
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("name", { required: "This field is required!" })}
-          />
-          {errors.name && (
-            <p className="text-red-700">{errors.name?.message}</p>
-          )}
-        </label>
+      <form>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Name of service :
+            <RegularInput
+              inputType="text"
+              name="name"
+              register={register}
+              width="100%"
+              error={errors?.errors?.name ? true : false}
+            />
+            {errors?.errors?.name &&
+              errors?.errors?.name.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          description :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("description", {
-              required: "This field is required!",
-            })}
-          />
-          {errors.description && (
-            <p className="text-red-700">{errors.description?.message}</p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Description :
+            <RegularInput
+              inputType="text"
+              name="description"
+              register={register}
+              width="100%"
+              error={errors?.errors?.description ? true : false}
+            />
+            {errors?.errors?.description &&
+              errors?.errors?.description.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          category_id :
-          <Input
-            size="sm"
-            type="number"
-            borderRadius="lg"
-            m={2}
-            {...register("category_id", {
-              required: "This field is required!",
-            })}
-          />
-          {errors.category_id && (
-            <p className="text-red-700">{errors.category_id?.message}</p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Category-Id :
+            <RegularInput
+              inputType="text"
+              name="category_id"
+              register={register}
+              width="100%"
+              error={errors?.errors?.category_id ? true : false}
+            />
+            {errors?.errors?.category_id &&
+              errors?.errors?.category_id.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          price :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("price", { required: "This field is required!" })}
-          />
-          {errors.price && (
-            <p className="text-red-700">{errors.price?.message}</p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Price :
+            <RegularInput
+              inputType="text"
+              name="price"
+              register={register}
+              width="100%"
+              error={errors?.errors?.price ? true : false}
+            />
+            {errors?.errors?.price &&
+              errors?.errors?.price.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          type :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("type", { required: "This field is required!" })}
-          />
-          {errors.type && (
-            <p className="text-red-700">{errors.type?.message}</p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Type:
+            <RegularInput
+              inputType="text"
+              name="type"
+              register={register}
+              width="100%"
+              error={errors?.errors?.type ? true : false}
+            />
+            {errors?.errors?.type &&
+              errors?.errors?.type.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+          </label>
+        </Box>
         <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
-          <Button colorScheme="blue" size="sm" type="submit">
-            ADD SERVICE
-          </Button>
-          <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>
-            CANCEL
-          </Button>
+          <PrimaryButton
+            name="Update"
+            onClick={handleSubmit(createService)}
+            buttonType="submit"
+          />
+
+          <SecondaryButton
+            name="Cancel"
+            onClick={handleCancel}
+            buttonType="button"
+          />
         </HStack>
       </form>
     </Box>

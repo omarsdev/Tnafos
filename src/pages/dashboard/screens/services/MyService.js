@@ -78,7 +78,7 @@ export const MyService = () => {
         setIsUpdating(false);
         setAlert({
           message: "Service Has Been Updated!",
-          // type: "info",
+          type: "info",
         });
         history.push(`/dashboard/service`);
       })
@@ -87,7 +87,7 @@ export const MyService = () => {
         setErrors(err.response.data);
         setAlert({
           message: `${err.response.data}`,
-          // type: "error",
+          type: "error",
         });
       });
   };

@@ -48,7 +48,7 @@ export const CreateUser = () => {
       .then((res) => {
         setAlert({
           message: "New user has been added!",
-          type: "SUCCESS",
+          type: "success",
         });
         history.push("/dashboard/user");
       })
@@ -56,7 +56,7 @@ export const CreateUser = () => {
         setErr(error);
         setAlert({
           message: `${err.response.data}`,
-          type: "ERROR",
+          type: "error",
         });
       });
   };
