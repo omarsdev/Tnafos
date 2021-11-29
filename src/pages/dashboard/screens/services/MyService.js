@@ -83,12 +83,13 @@ export const MyService = () => {
         history.push(`/dashboard/service`);
       })
       .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err?.response?.data);
-        setAlert({
-          message: `${err?.response?.data}`,
-          type: "error",
-        });
+        console.log(err.response.data);
+        // setIsUpdating(false);
+        // setErrors(err?.response?.data);
+        // setAlert({
+        //   message: `${err?.response?.data}`,
+        //   type: "error",
+        // });
       });
   };
 

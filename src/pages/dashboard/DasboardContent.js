@@ -3,7 +3,7 @@ import React from "react";
 
 export const DashboardContent = () => {
   return (
-    <Box className="w-full" h="6xl" p="2">
+    <Box className="w-full" p="2" overflowY="scroll">
       content here is related to dashboard's sub pages...
     </Box>
   );

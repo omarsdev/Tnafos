@@ -21,16 +21,16 @@ export const AddService = () => {
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
         setAlert({
-          message: "You've just added a new service!",
+          message: "new service has been added!",
           type: "success",
         });
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        // setAlert({
-        //   message: "SOMETHING WRONG.",
-        //   type: "error",
-        // });
+        setAlert({
+          message: "SOMETHING WRONG.",
+          type: "error",
+        });
         setErrors(err?.response?.data);
       });
   };
