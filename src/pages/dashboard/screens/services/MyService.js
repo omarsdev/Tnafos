@@ -197,12 +197,11 @@ export const MyService = () => {
                     width="100%"
                     error={errors?.errors?.price ? true : false}
                   />
-                  {errors?.errors?.price &&
-                    errors?.errors?.price.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
+                  {errors && errors?.errors && errors?.errors?.price && (
+                    <Text className="text-left" color="red">
+                      {errors?.errors?.price}
+                    </Text>
+                  )}
                 </label>
               </Box>
               <Box className="mt-4">
@@ -217,12 +216,11 @@ export const MyService = () => {
                     width="100%"
                     error={errors?.errors?.type ? true : false}
                   />
-                  {errors?.errors?.type &&
-                    errors?.errors?.type.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
+                  {errors && errors?.errors && errors?.errors?.type && (
+                    <Text className="text-left" color="red">
+                      {errors?.errors?.type}
+                    </Text>
+                  )}
                 </label>
               </Box>
 

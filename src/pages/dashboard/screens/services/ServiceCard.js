@@ -30,7 +30,7 @@ export const ServiceCard = ({ info }) => {
             Price
           </Text>
           <Text fontSize="x-large">{info?.price} SAR</Text>
-          <Text fontSize="x-large">{info?.type} SAR</Text>
+          <Text fontSize="x-large">{info?.type}</Text>
         </Box>
         <Box position="absolute" bottom="5">
           <Link to={`${match.url}/${info.uuid}`}>

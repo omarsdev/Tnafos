@@ -27,11 +27,10 @@ export const AddService = () => {
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        console.log(err);
-        setAlert({
-          message: "SOMETHING WRONG.",
-          type: "error",
-        });
+        // setAlert({
+        //   message: "SOMETHING WRONG.",
+        //   type: "error",
+        // });
         setErrors(err.response.data);
       });
   };
@@ -41,14 +40,7 @@ export const AddService = () => {
   };
 
   return (
-    <Box
-      borderRadius="lg"
-      overflow="hidden"
-      borderWidth="1px"
-      w="2xl"
-      px="20"
-      pt="5"
-    >
+    <Box borderRadius="lg" borderWidth="1px" boxSize="2xl" px="20" pt="5">
       <Box>
         <Heading
           color="#F8B916"
@@ -124,7 +116,7 @@ export const AddService = () => {
               width="100%"
               error={errors?.errors?.price ? true : false}
             />
-            {errors && errors?.errors && errors?.errors?.pricE && (
+            {errors && errors?.errors && errors?.errors?.price && (
               <Text className="text-left" color="red">
                 {errors?.errors?.price}
               </Text>
@@ -162,6 +154,13 @@ export const AddService = () => {
             buttonType="button"
           />
         </HStack>
+        <Box>
+          {errors?.message && (
+            <Text className="text-center mt-4" color="red">
+              {errors?.message}
+            </Text>
+          )}
+        </Box>
       </form>
     </Box>
   );

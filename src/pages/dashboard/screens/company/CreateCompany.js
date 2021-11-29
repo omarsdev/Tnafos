@@ -1,4 +1,4 @@
-import { Input, Button, Grid, Heading } from "@chakra-ui/react";
+import { Input, Button, Box, Text, Heading } from "@chakra-ui/react";
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
@@ -12,11 +12,7 @@ export const CreateCompany = () => {
   const history = useHistory();
   const [err, setErr] = useState(null);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const createCompany = async (e, input) => {
     e.preventDefault();
@@ -48,7 +44,7 @@ export const CreateCompany = () => {
       >
         Fill in Company Info
       </Heading>
-      <form onSubmit={handleSubmit(createCompany)}>
+      <form>
         <label className="block">
           Company Name
           <Input
@@ -57,9 +53,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("name", { required: "This field is required!" })}
           />
-          {errors.name && (
-            <p className="text-red-700">{errors.name?.message}</p>
-          )}
+          {err.name && <p className="text-red-700">{err.name?.message}</p>}
         </label>
 
         <label className="block">
@@ -70,9 +64,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("type", { required: "This field is required!" })}
           />
-          {errors.type && (
-            <p className="text-red-700">{errors.type?.message}</p>
-          )}
+          {err.type && <p className="text-red-700">{err.type?.message}</p>}
         </label>
 
         <label className="block">
@@ -83,7 +75,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("cr", { required: "This field is required!" })}
           />
-          {errors.cr && <p className="text-red-700">{errors.cr?.message}</p>}
+          {err.cr && <p className="text-red-700">{err.cr?.message}</p>}
         </label>
 
         <label className="block">
@@ -94,7 +86,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("vat", { required: "This field is required!" })}
           />
-          {errors.vat && <p className="text-red-700">{errors.vat?.message}</p>}
+          {err.vat && <p className="text-red-700">{err.vat?.message}</p>}
         </label>
 
         <label className="block">
@@ -119,8 +111,8 @@ export const CreateCompany = () => {
               required: "This field is required!",
             })}
           />
-          {errors.total_employees && (
-            <p className="text-red-700">{errors.total_employees?.message}</p>
+          {err.total_employees && (
+            <p className="text-red-700">{err.total_employees?.message}</p>
           )}
         </label>
 
@@ -132,7 +124,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("bio", { required: "This field is required!" })}
           />
-          {errors.bio && <p className="text-red-700">{errors.bio?.message}</p>}
+          {err.bio && <p className="text-red-700">{err.bio?.message}</p>}
         </label>
 
         <label className="block">
@@ -143,8 +135,8 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("telephone", { required: "This field is required!" })}
           />
-          {errors.telephone && (
-            <p className="text-red-700">{errors.telephone?.message}</p>
+          {err.telephone && (
+            <p className="text-red-700">{err.telephone?.message}</p>
           )}
         </label>
 
@@ -156,7 +148,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("fax", { required: "This field is required!" })}
           />
-          {errors.fax && <p className="text-red-700">{errors.fax?.message}</p>}
+          {err.fax && <p className="text-red-700">{err.fax?.message}</p>}
         </label>
 
         <label className="block">
@@ -167,9 +159,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("email", { required: "This field is required!" })}
           />
-          {errors.email && (
-            <p className="text-red-700">{errors.email?.message}</p>
-          )}
+          {err.email && <p className="text-red-700">{err.email?.message}</p>}
         </label>
 
         <label className="block">
@@ -180,8 +170,8 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("website", { required: "This field is required!" })}
           />
-          {errors.website && (
-            <p className="text-red-700">{errors.website?.message}</p>
+          {err.website && (
+            <p className="text-red-700">{err.website?.message}</p>
           )}
         </label>
 
@@ -193,8 +183,8 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("country_id", { required: "This field is required!" })}
           />
-          {errors.country_id && (
-            <p className="text-red-700">{errors.country_id?.message}</p>
+          {err.country_id && (
+            <p className="text-red-700">{err.country_id?.message}</p>
           )}
         </label>
 
@@ -206,9 +196,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("city", { required: "This field is required!" })}
           />
-          {errors.city && (
-            <p className="text-red-700">{errors.city?.message}</p>
-          )}
+          {err.city && <p className="text-red-700">{err.city?.message}</p>}
         </label>
 
         <label className="block">
@@ -219,9 +207,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("po_box", { required: "This field is required!" })}
           />
-          {errors.po_box && (
-            <p className="text-red-700">{errors.po_box?.message}</p>
-          )}
+          {err.po_box && <p className="text-red-700">{err.po_box?.message}</p>}
         </label>
 
         <label className="block">
@@ -232,8 +218,8 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("zip_code", { required: "This field is required!" })}
           />
-          {errors.zip_code && (
-            <p className="text-red-700">{errors.zip_code?.message}</p>
+          {err.zip_code && (
+            <p className="text-red-700">{err.zip_code?.message}</p>
           )}
         </label>
 
@@ -245,8 +231,8 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("address", { required: "This field is required!" })}
           />
-          {errors.address && (
-            <p className="text-red-700">{errors.address?.message}</p>
+          {err.address && (
+            <p className="text-red-700">{err.address?.message}</p>
           )}
         </label>
 
@@ -258,8 +244,8 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("location", { required: "This field is required!" })}
           />
-          {errors.location && (
-            <p className="text-red-700">{errors.location?.message}</p>
+          {err.location && (
+            <p className="text-red-700">{err.location?.message}</p>
           )}
         </label>
 
@@ -271,9 +257,7 @@ export const CreateCompany = () => {
             borderRadius="lg"
             {...register("logo", { required: "This field is required!" })}
           />
-          {errors.logo && (
-            <p className="text-red-700">{errors.logo?.message}</p>
-          )}
+          {err.logo && <p className="text-red-700">{err.logo?.message}</p>}
         </label>
 
         <label className="block">
@@ -291,6 +275,13 @@ export const CreateCompany = () => {
         <Button colorScheme="yellow" m="5" ml="96" type="submit">
           SAVE
         </Button>
+        <Box>
+          {err?.message && (
+            <Text className="text-center mt-4" color="red">
+              {err?.message}
+            </Text>
+          )}
+        </Box>
       </form>
     </>
   );

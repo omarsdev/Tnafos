@@ -171,7 +171,7 @@ export const CompanyHome = () => {
                       borderWidth="2px"
                       rounded="lg"
                       textAlign={"center"}
-                      h="32"
+                      h="36"
                       mt="10px"
                     >
                       <Text
