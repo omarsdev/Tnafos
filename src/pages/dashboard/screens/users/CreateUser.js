@@ -180,7 +180,7 @@ export const CreateUser = () => {
           <Heading fontSize="md" color="gray.500" fontWeight="normal">
             Terms and Conditions agreement
           </Heading>
-          <Checkbox size="sm" colorScheme="blue">
+          <Checkbox size="sm" colorScheme="blue" required>
             I agree to Tnafos
           </Checkbox>
           <HStack>

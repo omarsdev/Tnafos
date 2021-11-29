@@ -14,13 +14,11 @@ import {
   types,
   Provider as AlertProvider,
 } from "react-alert";
-import { AlignJustify } from "react-feather";
-import { padding } from "tailwindcss/defaultTheme";
 
 const AlertTemplate = ({ style, options, message }) => (
-  <div className="bg-blue-500 rounded-lg h-16 w-56 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
-    {options.type === "info" && <FaInfoCircle className="text-white " />}
+  <div className="bg-blue-500 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
     {options.type === "success" && <FaCheckCircle className="text-white " />}
+    {options.type === "info" && <FaInfoCircle className="text-white " />}
     {options.type === "error" && (
       <FaExclamationCircle className="text-white " />
     )}

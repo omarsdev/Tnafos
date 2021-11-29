@@ -31,7 +31,7 @@ export const AddService = () => {
         //   message: "SOMETHING WRONG.",
         //   type: "error",
         // });
-        setErrors(err.response.data);
+        setErrors(err?.response?.data);
       });
   };
 

@@ -9,6 +9,7 @@ export const AlertContextProvider = (props) => {
 
   useEffect(() => {
     if (!alert) return;
+    console.log(alert);
     alertFire.show(alert?.message, alert?.type);
   }, [alert]);
 

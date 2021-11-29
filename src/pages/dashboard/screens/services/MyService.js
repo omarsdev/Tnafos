@@ -84,9 +84,9 @@ export const MyService = () => {
       })
       .catch((err) => {
         setIsUpdating(false);
-        setErrors(err.response.data);
+        setErrors(err?.response?.data);
         setAlert({
-          message: `${err.response.data}`,
+          message: `${err?.response?.data}`,
           type: "error",
         });
       });

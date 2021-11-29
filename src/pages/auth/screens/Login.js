@@ -14,6 +14,7 @@ import { AuthLayout } from "../AuthLayout";
 import LoginImage from "assets/images/login.jpg";
 
 import { apiAuth } from "../../../api";
+import { AxiosInstance } from "api/AxiosInstance";
 
 export const Login = () => {
   const { tokenProviderValue } = useContext(UserDataContext);
@@ -28,6 +29,22 @@ export const Login = () => {
 
   const [loadingButton, setLoadingButton] = useState(false);
 
+  // const showCompany = async () => {
+  //   await AxiosInstance.get("/api/dashboard/company")
+  //     .then((res) => {
+  //       setcompanyInfo(res.data.data);
+  //       let company = res.data.data;
+  //       console.log(company);
+  //       delete company.country;
+  //       delete company.admin;
+  //       delete company.category;
+  //       resetHooksForm(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       history.push("/dashboard/company");
+  //     });
+  // };
+
   const handleLogin = async () => {
     setError(null);
     setLoadingButton(true);
@@ -38,7 +55,11 @@ export const Login = () => {
       } else {
         setUserToken(res.token);
       }
-      history.push("/dashboard");
+      // if (showCompany) {
+      //   history.push("/dashboard/company");
+      // } else {
+      //   history.push("/dashboard/company/create");
+      // }
     } else {
       setError(res.error);
       setLoadingButton(false);

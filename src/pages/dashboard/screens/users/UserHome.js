@@ -24,7 +24,6 @@ export const UserHome = () => {
   const [usersList, setUsersList] = useState(null);
 
   const match = useRouteMatch();
-  const { uuid } = useParams();
 
   const showUsersList = async () => {
     await AxiosInstance.get("/api/dashboard/user")
