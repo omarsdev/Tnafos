@@ -2,6 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import {
+  FaInfoCircle,
+  FaCheckCircle,
+  FaExclamationCircle,
+} from "react-icons/fa";
 
 import {
   transitions,
@@ -9,15 +14,25 @@ import {
   types,
   Provider as AlertProvider,
 } from "react-alert";
-import AlertTemplate from "react-alert-template-basic";
+import { AlignJustify } from "react-feather";
+import { padding } from "tailwindcss/defaultTheme";
+
+const AlertTemplate = ({ style, options, message }) => (
+  <div className="bg-blue-500 rounded-lg h-16 w-56 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
+    {options.type === "info" && <FaInfoCircle className="text-white " />}
+    {options.type === "success" && <FaCheckCircle className="text-white " />}
+    {options.type === "error" && (
+      <FaExclamationCircle className="text-white " />
+    )}
+    <p className="justify-center flex flex-row text-lg text-white">{message}</p>
+  </div>
+);
 
 const options = {
-  // you can also just use 'bottom center'
   position: positions.BOTTOM_CENTER,
-  timeout: 5000,
+  timeout: 6000,
   offset: "25px",
-  // you can also just use 'scale'
-  transition: transitions.FADE,
+  transition: transitions.SCALE,
 };
 
 ReactDOM.render(

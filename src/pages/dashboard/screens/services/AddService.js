@@ -11,14 +11,10 @@ export const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const setAlert = alertProviderValue;
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
+  const [errors, setErrors] = useState(null);
 
   const history = useHistory();
-  const [err, setErr] = useState(null);
 
   //* service adding function:
   const createService = async (data) => {
@@ -31,11 +27,12 @@ export const AddService = () => {
         history.push("/dashboard/service");
       })
       .catch((err) => {
+        console.log(err);
         setAlert({
-          message: `${err.response.data}`,
+          message: "SOMETHING WRONG.",
           type: "error",
         });
-        setErr(err.response.data);
+        setErrors(err.response.data);
       });
   };
 
@@ -51,7 +48,6 @@ export const AddService = () => {
       w="2xl"
       px="20"
       pt="5"
-      h="lg"
     >
       <Box>
         <Heading
@@ -74,12 +70,11 @@ export const AddService = () => {
               width="100%"
               error={errors?.errors?.name ? true : false}
             />
-            {errors?.errors?.name &&
-              errors?.errors?.name.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
+            {errors && errors?.errors && errors?.errors?.name && (
+              <Text className="text-left" color="red">
+                {errors?.errors?.name}
+              </Text>
+            )}
           </label>
         </Box>
 
@@ -93,12 +88,11 @@ export const AddService = () => {
               width="100%"
               error={errors?.errors?.description ? true : false}
             />
-            {errors?.errors?.description &&
-              errors?.errors?.description.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
+            {errors && errors?.errors && errors?.errors?.description && (
+              <Text className="text-left" color="red">
+                {errors?.errors?.description}
+              </Text>
+            )}
           </label>
         </Box>
 
@@ -112,12 +106,11 @@ export const AddService = () => {
               width="100%"
               error={errors?.errors?.category_id ? true : false}
             />
-            {errors?.errors?.category_id &&
-              errors?.errors?.category_id.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
+            {errors && errors?.errors && errors?.errors?.category_id && (
+              <Text className="text-left" color="red">
+                {errors?.errors?.category_id}
+              </Text>
+            )}
           </label>
         </Box>
 
@@ -131,12 +124,11 @@ export const AddService = () => {
               width="100%"
               error={errors?.errors?.price ? true : false}
             />
-            {errors?.errors?.price &&
-              errors?.errors?.price.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
+            {errors && errors?.errors && errors?.errors?.pricE && (
+              <Text className="text-left" color="red">
+                {errors?.errors?.price}
+              </Text>
+            )}
           </label>
         </Box>
 
@@ -150,17 +142,16 @@ export const AddService = () => {
               width="100%"
               error={errors?.errors?.type ? true : false}
             />
-            {errors?.errors?.type &&
-              errors?.errors?.type.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
+            {errors && errors?.errors && errors?.errors?.type && (
+              <Text className="text-left" color="red">
+                {errors?.errors?.type}
+              </Text>
+            )}
           </label>
         </Box>
         <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
           <PrimaryButton
-            name="Update"
+            name="ADD SERVICE"
             onClick={handleSubmit(createService)}
             buttonType="submit"
           />
