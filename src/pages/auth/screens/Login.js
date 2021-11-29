@@ -27,23 +27,24 @@ export const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState(null);
 
+  const [companyInfo, setCompanyInfo] = useState(null);
+
   const [loadingButton, setLoadingButton] = useState(false);
 
-  // const showCompany = async () => {
-  //   await AxiosInstance.get("/api/dashboard/company")
-  //     .then((res) => {
-  //       setcompanyInfo(res.data.data);
-  //       let company = res.data.data;
-  //       console.log(company);
-  //       delete company.country;
-  //       delete company.admin;
-  //       delete company.category;
-  //       resetHooksForm(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       history.push("/dashboard/company");
-  //     });
-  // };
+  const showCompany = async () => {
+    await AxiosInstance.get("/api/dashboard/company")
+      .then((res) => {
+        setCompanyInfo(res.data.data);
+        let company = res.data.data;
+        console.log(company);
+        delete company.country;
+        delete company.admin;
+        delete company.category;
+      })
+      .catch((err) => {
+        history.push("/dashboard/company");
+      });
+  };
 
   const handleLogin = async () => {
     setError(null);
@@ -52,14 +53,14 @@ export const Login = () => {
     if (res.success) {
       if (rememberMe) {
         localStorage.setItem("token", res.token);
+        if (showCompany) {
+          history.push("/dashboard/company");
+        } else {
+          history.push("/dashboard/company/create");
+        }
       } else {
         setUserToken(res.token);
       }
-      // if (showCompany) {
-      //   history.push("/dashboard/company");
-      // } else {
-      //   history.push("/dashboard/company/create");
-      // }
     } else {
       setError(res.error);
       setLoadingButton(false);
