@@ -1,12 +1,4 @@
-import {
-  Heading,
-  Box,
-  Button,
-  HStack,
-  Checkbox,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Heading, Box, HStack, Checkbox, Text } from "@chakra-ui/react";
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
@@ -14,6 +6,9 @@ import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AlertContext } from "context";
+
+import { RegularInput, PrimaryButton } from "components";
+import { SecondaryButton } from "components";
 
 export const CreateUser = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -32,11 +27,9 @@ export const CreateUser = () => {
   });
 
   //* get functions to build form with useForm() hook
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(validationSchema) });
+  const { register, handleSubmit } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
   const history = useHistory();
 
@@ -53,11 +46,12 @@ export const CreateUser = () => {
         history.push("/dashboard/user");
       })
       .catch((error) => {
-        setErr(error);
-        setAlert({
-          message: `${err.response.data}`,
-          type: "error",
-        });
+        console.log(error);
+        // setErr(error);
+        // setAlert({
+        //   message: `${error?.response?.data}`,
+        //   type: "error",
+        // });
       });
   };
 
@@ -66,115 +60,132 @@ export const CreateUser = () => {
   };
 
   return (
-    <Box
-      borderRadius="lg"
-      overflow="hidden"
-      borderWidth="1px"
-      w="2xl"
-      px="15"
-      pt="5"
-      h="6xl"
-    >
+    <Box borderRadius="lg" borderWidth="1px" boxSize="2xl" px="20" pt="5">
       <Box>
         <Heading
-          color="yellow.500"
-          fontWeight="medium"
+          color="#F8B916"
           fontSize="x-large"
-          fontFamily="inhirit"
+          fontWeight="lg"
           alignItems="baseline"
         >
-          Add new User
+          Add user
         </Heading>
       </Box>
-      <form onSubmit={handleSubmit(addUser)}>
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          First Name :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("first_name", { required: "This field is required!" })}
-          />
-          {errors.first_name && (
-            <p className="text-red-600 font-bold">
-              {errors.first_name?.message}
-            </p>
-          )}
-        </label>
+      <form>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            First Name :
+            <RegularInput
+              placeHolder="first name"
+              inputType="text"
+              width="180px"
+              name="first_name"
+              register={register}
+              width="100%"
+              error={err?.first_name ? true : false}
+            />
+            {err && err?.first_name && (
+              <Text className="text-left" color="red">
+                {err?.first_name}
+              </Text>
+            )}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          Last Name :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("last_name", { required: "This field is required!" })}
-          />
-          {errors.last_name && (
-            <p className="text-red-600 font-bold">
-              {errors?.last_name?.message}
-            </p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Last Name :
+            <RegularInput
+              inputType="text"
+              width="180px"
+              name="last_name"
+              register={register}
+              width="100%"
+              error={err?.last_name ? true : false}
+            />
+            {err && err?.last_name && (
+              <Text className="text-left" color="red">
+                {err?.last_name}
+              </Text>
+            )}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 ttext-sm">
-          Email :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("email", { required: "This field is required!" })}
-          />
-          {errors.email && (
-            <p className="text-red-600 font-bold">{errors.email?.message}</p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Email :
+            <RegularInput
+              inputType="text"
+              width="180px"
+              name="email"
+              register={register}
+              width="100%"
+              error={err?.email ? true : false}
+            />
+            {err && err?.email && (
+              <Text className="text-left" color="red">
+                {err?.email}
+              </Text>
+            )}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          Password :
-          <Input
-            size="sm"
-            type="password"
-            borderRadius="lg"
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className="text-red-600 font-bold">{errors.password?.message}</p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Password :
+            <RegularInput
+              inputType="password"
+              width="180px"
+              name="password"
+              register={register}
+              width="100%"
+              error={err?.password ? true : false}
+            />
+            {err && err?.password && (
+              <Text className="text-left" color="red">
+                {err?.password}
+              </Text>
+            )}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          Password Confirmation :
-          <Input
-            size="sm"
-            type="password"
-            borderRadius="lg"
-            {...register("password_confirmation")}
-          />
-          {errors.password_confirmation && (
-            <p className="text-red-600 font-bold">
-              {errors.password_confirmation?.message}
-            </p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Password :
+            <RegularInput
+              inputType="password"
+              width="180px"
+              name="password_confirmation"
+              register={register}
+              width="100%"
+              error={err?.password_confirmation ? true : false}
+            />
+            {err && err?.password_confirmation && (
+              <Text className="text-left" color="red">
+                {err?.password_confirmation}
+              </Text>
+            )}
+          </label>
+        </Box>
 
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          Phone Number:
-          <Input
-            size="sm"
-            type="number"
-            borderRadius="lg"
-            {...register("phone_number", {
-              required: "This field is required!",
-              length: { value: 10, message: "Invalid phone number !" },
-            })}
-          />
-          {errors.phone_number && (
-            <p className="text-red-600 font-bold">
-              {errors.phone_number?.message}
-            </p>
-          )}
-        </label>
+        <Box className="mt-4">
+          <label className="w-32 text-left text-gray-500 ">
+            Phone Number :
+            <RegularInput
+              inputType="number"
+              width="180px"
+              name="phone_number"
+              register={register}
+              width="100%"
+              error={err?.phone_number ? true : false}
+            />
+            {err && err?.phone_number && (
+              <Text className="text-left" color="red">
+                {err?.phone_number}
+              </Text>
+            )}
+          </label>
+        </Box>
 
         <Box className="flex flex-col items-center gap-2">
           <Heading fontSize="md" color="gray.500" fontWeight="normal">
@@ -197,17 +208,18 @@ export const CreateUser = () => {
               Decleration of Valid Information
             </Heading>
           </Box>
-          <Checkbox>
+          <Checkbox required>
             I confirm that the information given in this form is true, complete
             and accurate.
           </Checkbox>
           <HStack spacing="10px">
-            <Button colorScheme="blue" size="sm" type="submit">
-              SAVE
-            </Button>
-            <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>
-              CANCEL
-            </Button>
+            <PrimaryButton
+              buttonType="submit"
+              name="SAVE"
+              onClick={handleSubmit(addUser)}
+            />
+
+            <SecondaryButton onClick={handleCancel} name="CANCEL" />
           </HStack>
         </Box>
       </form>
