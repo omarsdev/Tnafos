@@ -1,5 +1,5 @@
-import { Heading, Box, HStack, Checkbox, Text } from "@chakra-ui/react";
-import React, { useState, useContext } from "react";
+import { Heading, Box, HStack, Checkbox, Text, Spacer } from "@chakra-ui/react";
+import React, { useState, useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
@@ -13,6 +13,12 @@ import { SecondaryButton } from "components";
 export const CreateUser = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const setAlert = alertProviderValue;
+
+  const history = useHistory();
+  const [err, setErr] = useState(null);
+
+  const [photo, setPhoto] = useState(null);
+  let inputRef = useRef();
 
   //* form validation rules
   const validationSchema = yup.object({
@@ -31,9 +37,28 @@ export const CreateUser = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const history = useHistory();
+  const fileSelectHandler = (ev) => {
+    console.log(ev.target.files[0]);
+    setPhoto(ev.target.files[0]);
+  };
 
-  const [err, setErr] = useState(null);
+  //* photoUpload function:
+  const photoUploadHandler = async () => {
+    inputRef.current.onChange((e) => fileSelectHandler(e));
+    if (fileSelectHandler) {
+      await AxiosInstance.post("api/dashboard/media/store", photo).then(
+        (res) => {
+          console.log(res.data);
+          setAlert({
+            message: "photo has been uploaded",
+            type: "info",
+          }).catch((error) => {
+            console.log(error.response.data);
+          });
+        }
+      );
+    }
+  };
 
   //* onSubmit function:
   const addUser = async (userData) => {
@@ -47,11 +72,11 @@ export const CreateUser = () => {
       })
       .catch((error) => {
         console.log(error);
-        // setErr(error);
-        // setAlert({
-        //   message: `${error?.response?.data}`,
-        //   type: "error",
-        // });
+        setErr(error);
+        setAlert({
+          message: `${error?.response?.data}`,
+          type: "error",
+        });
       });
   };
 
@@ -61,7 +86,7 @@ export const CreateUser = () => {
 
   return (
     <Box borderRadius="lg" borderWidth="1px" boxSize="2xl" px="20" pt="5">
-      <Box>
+      <HStack>
         <Heading
           color="#F8B916"
           fontSize="x-large"
@@ -70,7 +95,23 @@ export const CreateUser = () => {
         >
           Add user
         </Heading>
-      </Box>
+
+        <Spacer />
+        <input
+          type="file"
+          onChange={(ev) => fileSelectHandler(ev)}
+          style={{ display: "none" }}
+          ref={inputRef}
+        />
+        <SecondaryButton
+          onClick={handleSubmit(photoUploadHandler)}
+          name="Upload photo"
+          type="file"
+          rounded="lg"
+          width="120px"
+          height="30px"
+        />
+      </HStack>
       <form>
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
@@ -212,6 +253,7 @@ export const CreateUser = () => {
             I confirm that the information given in this form is true, complete
             and accurate.
           </Checkbox>
+
           <HStack spacing="10px">
             <PrimaryButton
               buttonType="submit"
