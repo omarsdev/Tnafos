@@ -289,7 +289,7 @@ export const CreateUser = () => {
               complete and accurate.
             </Checkbox>
 
-            <HStack spacing="10px" pt="5">
+            <HStack spacing="10px" py="5">
               <PrimaryButton
                 buttonType="submit"
                 name="SAVE"
