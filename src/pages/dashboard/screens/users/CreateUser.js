@@ -1,4 +1,12 @@
-import { Heading, Box, HStack, Checkbox, Text, Spacer } from "@chakra-ui/react";
+import {
+  Heading,
+  Box,
+  HStack,
+  Checkbox,
+  Text,
+  Spacer,
+  Center,
+} from "@chakra-ui/react";
 import React, { useState, useContext, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 
@@ -110,11 +118,11 @@ export const CreateUser = () => {
   };
 
   return (
-    <Box borderRadius="lg" borderWidth="1px" boxSize="2xl" px="20" pt="5">
-      <HStack>
+    <Box overflowY="scroll" w="full" px="20" pt="5">
+      <HStack className="px-52 ">
         <Heading
           color="#F8B916"
-          fontSize="x-large"
+          fontSize="3xl"
           fontWeight="lg"
           alignItems="baseline"
         >
@@ -137,161 +145,163 @@ export const CreateUser = () => {
           height="30px"
         />
       </HStack>
-      <form>
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            First Name :
-            <RegularInput
-              placeHolder="first name"
-              inputType="text"
-              width="180px"
-              name="first_name"
-              register={register}
-              width="100%"
-              error={err?.first_name ? true : false}
-            />
-            {err && err?.first_name && (
-              <Text className="text-left" color="red">
-                {err?.first_name}
-              </Text>
-            )}
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Last Name :
-            <RegularInput
-              placeHolder="last name"
-              inputType="text"
-              width="180px"
-              name="last_name"
-              register={register}
-              width="100%"
-              error={err?.last_name ? true : false}
-            />
-            {err && err?.last_name && (
-              <Text className="text-left" color="red">
-                {err?.last_name}
-              </Text>
-            )}
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Email :
-            <RegularInput
-              placeHolder="Enter email"
-              inputType="text"
-              width="180px"
-              name="email"
-              register={register}
-              width="100%"
-              error={err?.email ? true : false}
-            />
-            {err && err?.email && (
-              <Text className="text-left" color="red">
-                {err?.email}
-              </Text>
-            )}
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Password :
-            <PasswordInput
-              placeHolder="password"
-              inputType="password"
-              name="password"
-              register={register}
-              error={err?.password ? true : false}
-            />
-            {err && err?.password && (
-              <Text className="text-left" color="red">
-                {err?.password}
-              </Text>
-            )}
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Confirm Password :
-            <PasswordInput
-              placeHolder="confirm your password"
-              inputType="password"
-              name="password_confirmation"
-              register={register}
-              error={err?.password_confirmation ? true : false}
-            />
-            {err && err?.password_confirmation && (
-              <Text className="text-left" color="red">
-                {err?.password_confirmation}
-              </Text>
-            )}
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Phone Number :
-            <RegularInput
-              placeHolder="phone number"
-              inputType="number"
-              width="180px"
-              name="phone_number"
-              register={register}
-              width="100%"
-              error={err?.phone_number ? true : false}
-            />
-            {err && err?.phone_number && (
-              <Text className="text-left" color="red">
-                {err?.phone_number}
-              </Text>
-            )}
-          </label>
-        </Box>
-
-        <Box className="flex flex-col items-center gap-2">
-          <Heading fontSize="md" color="gray.500" fontWeight="normal">
-            Terms and Conditions agreement
-          </Heading>
-          <Checkbox size="sm" colorScheme="blue" required>
-            I agree to Tnafos
-          </Checkbox>
-          <HStack>
-            <Link to="#" className="text-blue-700 hover:underline">
-              <Text>terms of service</Text>
-            </Link>{" "}
-            <Text>and</Text>
-            <Link className="text-blue-700 hover:underline">
-              Privacy policy
-            </Link>
-          </HStack>
-          <Box>
-            <Heading fontSize="md" color="gray.500" fontWeight="normal">
-              Decleration of Valid Information
-            </Heading>
+      <Center pt="10">
+        <form>
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 ">
+              First Name :
+              <RegularInput
+                placeHolder="first name"
+                inputType="text"
+                width="180px"
+                name="first_name"
+                register={register}
+                width="100%"
+                error={err?.first_name ? true : false}
+              />
+              {err && err?.first_name && (
+                <Text className="text-left" color="red">
+                  {err?.first_name}
+                </Text>
+              )}
+            </label>
           </Box>
-          <Checkbox required>
-            I confirm that the information given in this form is true, complete
-            and accurate.
-          </Checkbox>
 
-          <HStack spacing="10px">
-            <PrimaryButton
-              buttonType="submit"
-              name="SAVE"
-              onClick={handleSubmit(addUser)}
-              loadingButton={isUpdating}
-            />
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 ">
+              Last Name :
+              <RegularInput
+                placeHolder="last name"
+                inputType="text"
+                width="180px"
+                name="last_name"
+                register={register}
+                width="100%"
+                error={err?.last_name ? true : false}
+              />
+              {err && err?.last_name && (
+                <Text className="text-left" color="red">
+                  {err?.last_name}
+                </Text>
+              )}
+            </label>
+          </Box>
 
-            <SecondaryButton onClick={handleCancel} name="CANCEL" />
-          </HStack>
-        </Box>
-      </form>
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 ">
+              Email :
+              <RegularInput
+                placeHolder="Enter email"
+                inputType="text"
+                width="180px"
+                name="email"
+                register={register}
+                width="100%"
+                error={err?.email ? true : false}
+              />
+              {err && err?.email && (
+                <Text className="text-left" color="red">
+                  {err?.email}
+                </Text>
+              )}
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 ">
+              Password :
+              <PasswordInput
+                placeHolder="password"
+                inputType="password"
+                name="password"
+                register={register}
+                error={err?.password ? true : false}
+              />
+              {err && err?.password && (
+                <Text className="text-left" color="red">
+                  {err?.password}
+                </Text>
+              )}
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 ">
+              Confirm Password :
+              <PasswordInput
+                placeHolder="confirm your password"
+                inputType="password"
+                name="password_confirmation"
+                register={register}
+                error={err?.password_confirmation ? true : false}
+              />
+              {err && err?.password_confirmation && (
+                <Text className="text-left" color="red">
+                  {err?.password_confirmation}
+                </Text>
+              )}
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 ">
+              Phone Number :
+              <RegularInput
+                placeHolder="phone number"
+                inputType="number"
+                width="180px"
+                name="phone_number"
+                register={register}
+                width="100%"
+                error={err?.phone_number ? true : false}
+              />
+              {err && err?.phone_number && (
+                <Text className="text-left" color="red">
+                  {err?.phone_number}
+                </Text>
+              )}
+            </label>
+          </Box>
+
+          <Box className="flex flex-col items-center gap-2 mt-5">
+            <Heading fontSize="2xl" color="gray.500" fontWeight="normal">
+              Terms and Conditions agreement
+            </Heading>
+            <Checkbox colorScheme="blue" required>
+              I agree to Tnafos
+            </Checkbox>
+            <HStack>
+              <Link to="#" className="text-blue-700 hover:underline">
+                <Text>terms of service</Text>
+              </Link>{" "}
+              <Text>and</Text>
+              <Link className="text-blue-700 hover:underline">
+                Privacy policy
+              </Link>
+            </HStack>
+            <Box>
+              <Heading fontSize="2xl" color="gray.500" fontWeight="normal">
+                Decleration of Valid Information
+              </Heading>
+            </Box>
+            <Checkbox required>
+              I confirm that the information given in this form is true,
+              complete and accurate.
+            </Checkbox>
+
+            <HStack spacing="10px" pt="5">
+              <PrimaryButton
+                buttonType="submit"
+                name="SAVE"
+                onClick={handleSubmit(addUser)}
+                loadingButton={isUpdating}
+              />
+
+              <SecondaryButton onClick={handleCancel} name="CANCEL" />
+            </HStack>
+          </Box>
+        </form>
+      </Center>
     </Box>
   );
 };
