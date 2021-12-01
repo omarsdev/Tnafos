@@ -1,14 +1,21 @@
 import { Heading, Box, HStack, Checkbox, Text, Spacer } from "@chakra-ui/react";
 import React, { useState, useContext, useRef } from "react";
-import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
+
 import { AxiosInstance } from "api/AxiosInstance";
+
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
 import { AlertContext } from "context";
 
-import { RegularInput, PrimaryButton } from "components";
-import { SecondaryButton } from "components";
+import {
+  RegularInput,
+  PrimaryButton,
+  PasswordInput,
+  SecondaryButton,
+} from "components";
 
 export const CreateUser = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -16,6 +23,7 @@ export const CreateUser = () => {
 
   const history = useHistory();
   const [err, setErr] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const [photo, setPhoto] = useState(null);
   let inputRef = useRef();
@@ -25,11 +33,24 @@ export const CreateUser = () => {
     password: yup
       .string()
       .required("Password is required")
-      .min(8, "Password must be at least 8 characters !"),
+      .min(8, "Password must be at least 8 characters !")
+      .matches(RegExp("(.*[a-z].*)"), "Lowercase")
+      .matches(RegExp("(.*[A-Z].*)"), "at least one Uppercase character")
+      .matches(RegExp('[!@#$%^&*(),.?":{}|<>]'), "Special")
+      .matches(RegExp("(.*\\d.*)"), "Number"),
+
     password_confirmation: yup
       .string()
-      .required("Confirm Password is required")
+      .required("Confirm Password is required !")
       .oneOf([yup.ref("password")], "Passwords must match !"),
+
+    first_name: yup.string().required("first name is required!"),
+    last_name: yup.string().required("last name is required!"),
+    email: yup.string().email().required("Email is required!"),
+    phone_number: yup
+      .number()
+      .min(10, "Invalid phone number, minium 10 numbers! ")
+      .required("Phone number is required!"),
   });
 
   //* get functions to build form with useForm() hook
@@ -37,6 +58,7 @@ export const CreateUser = () => {
     resolver: yupResolver(validationSchema),
   });
 
+  //* select photo for upload function:
   const fileSelectHandler = (ev) => {
     console.log(ev.target.files[0]);
     setPhoto(ev.target.files[0]);
@@ -46,7 +68,7 @@ export const CreateUser = () => {
   const photoUploadHandler = async () => {
     inputRef.current.onChange((e) => fileSelectHandler(e));
     if (fileSelectHandler) {
-      await AxiosInstance.post("api/dashboard/media/store", photo).then(
+      await AxiosInstance.post("/api/dashboard/media/store", photo).then(
         (res) => {
           console.log(res.data);
           setAlert({
@@ -62,8 +84,10 @@ export const CreateUser = () => {
 
   //* onSubmit function:
   const addUser = async (userData) => {
+    setIsUpdating(true);
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
+        setIsUpdating(false);
         setAlert({
           message: "New user has been added!",
           type: "success",
@@ -71,6 +95,7 @@ export const CreateUser = () => {
         history.push("/dashboard/user");
       })
       .catch((error) => {
+        setIsUpdating(false);
         console.log(error);
         setErr(error);
         setAlert({
@@ -106,7 +131,7 @@ export const CreateUser = () => {
         <SecondaryButton
           onClick={handleSubmit(photoUploadHandler)}
           name="Upload photo"
-          type="file"
+          buttonType="file"
           rounded="lg"
           width="120px"
           height="30px"
@@ -137,6 +162,7 @@ export const CreateUser = () => {
           <label className="w-32 text-left text-gray-500 ">
             Last Name :
             <RegularInput
+              placeHolder="last name"
               inputType="text"
               width="180px"
               name="last_name"
@@ -156,6 +182,7 @@ export const CreateUser = () => {
           <label className="w-32 text-left text-gray-500 ">
             Email :
             <RegularInput
+              placeHolder="Enter email"
               inputType="text"
               width="180px"
               name="email"
@@ -174,12 +201,11 @@ export const CreateUser = () => {
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Password :
-            <RegularInput
+            <PasswordInput
+              placeHolder="password"
               inputType="password"
-              width="180px"
               name="password"
               register={register}
-              width="100%"
               error={err?.password ? true : false}
             />
             {err && err?.password && (
@@ -192,13 +218,12 @@ export const CreateUser = () => {
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
-            Password :
-            <RegularInput
+            Confirm Password :
+            <PasswordInput
+              placeHolder="confirm your password"
               inputType="password"
-              width="180px"
               name="password_confirmation"
               register={register}
-              width="100%"
               error={err?.password_confirmation ? true : false}
             />
             {err && err?.password_confirmation && (
@@ -213,6 +238,7 @@ export const CreateUser = () => {
           <label className="w-32 text-left text-gray-500 ">
             Phone Number :
             <RegularInput
+              placeHolder="phone number"
               inputType="number"
               width="180px"
               name="phone_number"
@@ -259,6 +285,7 @@ export const CreateUser = () => {
               buttonType="submit"
               name="SAVE"
               onClick={handleSubmit(addUser)}
+              loadingButton={isUpdating}
             />
 
             <SecondaryButton onClick={handleCancel} name="CANCEL" />
