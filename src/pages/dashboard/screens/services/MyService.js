@@ -108,7 +108,7 @@ export const MyService = () => {
   }, []);
 
   //* media file upload:
-  const uploadFile = () => {
+  const uploadFile = (photo) => {
     if (!photo) return;
     media(uuid, "service", photo);
   };
