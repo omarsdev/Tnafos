@@ -25,6 +25,29 @@ import {
   SecondaryButton,
 } from "components";
 
+const validationSchema = yup.object({
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters !")
+    .matches(RegExp("(.*[a-z].*)"), "Lowercase")
+    .matches(RegExp("(.*[A-Z].*)"), "at least one Uppercase character")
+    .matches(RegExp('[!@#$%^&*(),.?":{}|<>]'), "Special")
+    .matches(RegExp("(.*\\d.*)"), "Number"),
+
+  password_confirmation: yup
+    .string()
+    .required("Confirm Password is required !")
+    .oneOf([yup.ref("password")], "Passwords must match !"),
+
+  first_name: yup.string().required("first name is required!"),
+  last_name: yup.string().required("last name is required!"),
+  email: yup.string().email().required("Email is required!"),
+  phone_number: yup
+    .number()
+    .min(10, "Invalid phone number, minium 10 numbers! ")
+    .required("Phone number is required!"),
+});
 export const CreateUser = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const setAlert = alertProviderValue;
@@ -33,33 +56,11 @@ export const CreateUser = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
+  const [selectedFile, setSelectedFile] = useState(null);
   const [photo, setPhoto] = useState(null);
-  let inputRef = useRef();
+  let inputRef = useRef(null);
 
   //* form validation rules
-  const validationSchema = yup.object({
-    password: yup
-      .string()
-      .required("Password is required")
-      .min(8, "Password must be at least 8 characters !")
-      .matches(RegExp("(.*[a-z].*)"), "Lowercase")
-      .matches(RegExp("(.*[A-Z].*)"), "at least one Uppercase character")
-      .matches(RegExp('[!@#$%^&*(),.?":{}|<>]'), "Special")
-      .matches(RegExp("(.*\\d.*)"), "Number"),
-
-    password_confirmation: yup
-      .string()
-      .required("Confirm Password is required !")
-      .oneOf([yup.ref("password")], "Passwords must match !"),
-
-    first_name: yup.string().required("first name is required!"),
-    last_name: yup.string().required("last name is required!"),
-    email: yup.string().email().required("Email is required!"),
-    phone_number: yup
-      .number()
-      .min(10, "Invalid phone number, minium 10 numbers! ")
-      .required("Phone number is required!"),
-  });
 
   //* get functions to build form with useForm() hook
   const { register, handleSubmit } = useForm({
@@ -67,27 +68,36 @@ export const CreateUser = () => {
   });
 
   //* select photo for upload function:
-  const fileSelectHandler = (ev) => {
-    console.log(ev.target.files[0]);
-    setPhoto(ev.target.files[0]);
+  // const fileSelectHandler = (ev) => {
+  //   console.log(ev.target.files[0]);
+  //   setPhoto(ev.target.files[0]);
+  // };
+  const handleFileInput = (e) => {
+    setPhoto(e.target.files[0]);
   };
+
+  const chooseFile = () => {};
 
   //* photoUpload function:
   const photoUploadHandler = async () => {
-    inputRef.current.onChange((e) => fileSelectHandler(e));
-    if (fileSelectHandler) {
-      await AxiosInstance.post("/api/dashboard/media/store", photo).then(
-        (res) => {
-          console.log(res.data);
-          setAlert({
-            message: "photo has been uploaded",
-            type: "info",
-          }).catch((error) => {
-            console.log(error.response.data);
-          });
-        }
-      );
-    }
+    //   const formData = new FormData();
+    // formData.append("name", name);
+    // formData.append("file", selectedFile);
+    // console.log("Works");
+    // inputRef.current.onChange((e) => fileSelectHandler(e));
+    // if (fileSelectHandler) {
+    //   await AxiosInstance.post("/api/dashboard/media/store", photo)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       setAlert({
+    //         message: "photo has been uploaded",
+    //         type: "info",
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.response.data);
+    //     });
+    // }
   };
 
   //* onSubmit function:
@@ -132,13 +142,21 @@ export const CreateUser = () => {
         <Spacer />
         <input
           type="file"
-          onChange={(ev) => fileSelectHandler(ev)}
-          style={{ display: "none" }}
+          onChange={(ev) => handleFileInput(ev)}
+          // style={{ display: "none" }}
           ref={inputRef}
         />
         <SecondaryButton
-          onClick={handleSubmit(photoUploadHandler)}
+          onClick={photoUploadHandler}
           name="Upload photo"
+          buttonType="file"
+          rounded="lg"
+          width="120px"
+          height="30px"
+        />
+        <SecondaryButton
+          onClick={(e) => inputRef.current && inputRef.current.click()}
+          name="Choose photo"
           buttonType="file"
           rounded="lg"
           width="120px"
