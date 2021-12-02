@@ -60,13 +60,12 @@ export const UserCard = () => {
   const getUser = async () => {
     await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
       .then((res) => {
-        if (res.data.data) {
-          resetHooksForm(res.data.data);
-          setCard(res.data.data);
-        }
+        console.log(res.data.data);
+        resetHooksForm(res.data.data);
+        setCard(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
         history.push("/dashboard/user");
       });
   };
@@ -200,7 +199,7 @@ export const UserCard = () => {
                     placeHolder="First name"
                     inputType="text"
                     name="first_name"
-                    register={register}
+                    register={register("first_name")}
                     width="100%"
                     error={errors?.errors?.first_name ? true : false}
                   />
@@ -221,7 +220,7 @@ export const UserCard = () => {
                     inputType="text"
                     width="180px"
                     name="last_name"
-                    register={register}
+                    register={register("last_name")}
                     width="100%"
                     error={errors?.errors?.last_name ? true : false}
                   />
@@ -242,7 +241,7 @@ export const UserCard = () => {
                     inputType="text"
                     width="180px"
                     name="phone_number"
-                    register={register}
+                    register={register("phone_number")}
                     width="100%"
                     error={errors?.errors?.phone_number ? true : false}
                   />
@@ -263,7 +262,7 @@ export const UserCard = () => {
                     inputType="text"
                     width="180px"
                     name="email"
-                    register={register}
+                    register={register("email")}
                     width="100%"
                     error={errors?.errors?.email ? true : false}
                   />

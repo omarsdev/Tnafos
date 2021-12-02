@@ -213,7 +213,7 @@ export const MyService = () => {
                     placeHolder="price"
                     inputType="text"
                     name="price"
-                    register={register}
+                    register={register("price")}
                     width="100%"
                     error={errors?.errors?.price ? true : false}
                   />
@@ -232,7 +232,7 @@ export const MyService = () => {
                     inputType="text"
                     width="180px"
                     name="type"
-                    register={register}
+                    register={register("type")}
                     width="100%"
                     error={errors?.errors?.type ? true : false}
                   />

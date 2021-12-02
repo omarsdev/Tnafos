@@ -6,6 +6,7 @@ import {
   Text,
   Spacer,
   Center,
+  Stack,
 } from "@chakra-ui/react";
 import React, { useState, useContext, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -63,22 +64,14 @@ export const CreateUser = () => {
   //* form validation rules
 
   //* get functions to build form with useForm() hook
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(validationSchema) });
+  const { register, handleSubmit } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
   //* select photo for upload function:
-  // const fileSelectHandler = (ev) => {
-  //   console.log(ev.target.files[0]);
-  //   setPhoto(ev.target.files[0]);
-  // };
   const handleFileInput = (e) => {
     setPhoto(e.target.files[0]);
   };
-
-  const chooseFile = () => {};
 
   //* photoUpload function:
   const photoUploadHandler = async () => {
@@ -104,8 +97,8 @@ export const CreateUser = () => {
 
   //* onSubmit function:
   const addUser = async (userData) => {
-    console.log(userData);
-    console.log(errors);
+    // console.log(userData);
+    // console.log(err);
 
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
@@ -116,8 +109,7 @@ export const CreateUser = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
-        setErr(error);
+        setErr(error.response.data);
         setAlert({
           message: `${error?.response?.data}`,
           type: "error",
@@ -127,50 +119,30 @@ export const CreateUser = () => {
 
   const handleCancel = () => {
     history.push("/dashboard/user");
-    console.log(errors);
-    // setAlert({
-    //   message: `error message`,
-    //   type: "success",
-    // });
   };
 
   return (
     <Box overflowY="scroll" w="full" px="20" pt="5">
-      {/* <HStack className="px-52 ">
-        <Heading
-          color="#F8B916"
-          fontSize="3xl"
-          fontWeight="lg"
-          alignItems="baseline"
-        >
-          Add user
-        </Heading>
+      <Heading
+        color="#F8B916"
+        fontSize="3xl"
+        fontWeight="lg"
+        alignItems="baseline"
+        pl="56"
+      >
+        Add user
+      </Heading>
 
-        <Spacer />
+      <HStack className="pt-10 w-full flex pl-56 " spacing="20px">
         <input
           type="file"
           onChange={(ev) => handleFileInput(ev)}
-          // style={{ display: "none" }}
           ref={inputRef}
         />
-        <SecondaryButton
-          onClick={photoUploadHandler}
-          name="Upload photo"
-          buttonType="file"
-          rounded="lg"
-          width="120px"
-          height="30px"
-        />
-        <SecondaryButton
-          onClick={(e) => inputRef.current && inputRef.current.click()}
-          name="Choose photo"
-          buttonType="file"
-          rounded="lg"
-          width="120px"
-          height="30px"
-        />
-      </HStack> */}
-      <Center pt="10">
+
+        <SecondaryButton onClick={photoUploadHandler} name="Upload photo" />
+      </HStack>
+      <Center>
         <form>
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
@@ -181,11 +153,11 @@ export const CreateUser = () => {
                 width="180px"
                 register={register("first_name")}
                 width="100%"
-                error={errors?.first_name?.message ? true : false}
+                error={err?.first_name?.message ? true : false}
               />
-              {errors && errors?.first_name && (
+              {err && err?.first_name && (
                 <Text className="text-left" color="red">
-                  {errors?.first_name?.message}
+                  {err?.first_name?.message}
                 </Text>
               )}
             </label>
@@ -198,12 +170,12 @@ export const CreateUser = () => {
                 placeHolder="last name"
                 inputtype="text"
                 width="100%"
-                error={errors?.last_name ? true : false}
+                error={err?.last_name ? true : false}
                 register={register("last_name")}
               />
-              {errors && errors?.last_name && (
+              {err && err?.last_name && (
                 <Text className="text-left" color="red">
-                  {errors?.last_name?.message}
+                  {err?.last_name?.message}
                 </Text>
               )}
             </label>
@@ -216,12 +188,12 @@ export const CreateUser = () => {
                 placeHolder="Enter email"
                 inputtype="text"
                 width="100%"
-                error={errors?.email ? true : false}
+                error={err?.email ? true : false}
                 register={register("email")}
               />
-              {errors && errors?.email && (
+              {err && err?.email && (
                 <Text className="text-left" color="red">
-                  {errors?.email.message}
+                  {err?.email.message}
                 </Text>
               )}
             </label>
@@ -232,15 +204,13 @@ export const CreateUser = () => {
               Password :
               <PasswordInput
                 placeHolder="password"
-                inputtype="password"
-                // name="password"
-                // register={register}
-                error={errors?.password ? true : false}
+                className="w-64"
+                error={err?.password ? true : false}
                 register={register("password")}
               />
-              {errors && errors?.password && (
+              {err && err?.password && (
                 <Text className="text-left" color="red">
-                  {errors?.password?.message}
+                  {err?.password?.message}
                 </Text>
               )}
             </label>
@@ -252,14 +222,13 @@ export const CreateUser = () => {
               <PasswordInput
                 placeHolder="confirm your password"
                 inputtype="password"
-                // name="password_confirmation"
-                // register={register}
-                error={errors?.password_confirmation ? true : false}
+                width="100%"
+                error={err?.password_confirmation ? true : false}
                 register={register("password_confirmation")}
               />
-              {errors && errors?.password_confirmation?.message && (
+              {err && err?.password_confirmation?.message && (
                 <Text className="text-left" color="red">
-                  {errors?.password_confirmation?.message}
+                  {err?.password_confirmation?.message}
                 </Text>
               )}
             </label>
@@ -271,16 +240,14 @@ export const CreateUser = () => {
               <RegularInput
                 placeHolder="phone number"
                 inputtype="number"
-                width="180px"
-                // name="phone_number"
-                // register={register}
+                width="381px"
                 width="100%"
-                error={errors?.phone_number ? true : false}
+                error={err?.phone_number ? true : false}
                 register={register("phone_number")}
               />
-              {errors && errors?.phone_number && (
+              {err && err?.phone_number && (
                 <Text className="text-left" color="red">
-                  {errors?.phone_number?.message}
+                  {err?.phone_number?.message}
                 </Text>
               )}
             </label>
