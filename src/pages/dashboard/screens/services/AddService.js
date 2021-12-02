@@ -21,19 +21,19 @@ export const AddService = () => {
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
         console.log(res.data.data);
-        // setAlert({
-        //   message: "new service has been added!",
-        //   type: "success",
-        // });
+        setAlert({
+          message: "new service has been added!",
+          type: "success",
+        });
         history.push("/dashboard/service");
       })
       .catch((err) => {
         console.log(err.response.data.errors);
-        // setAlert({
-        //   message: "SOMETHING WRONG.",
-        //   type: "error",
-        // });
-        // setErrors(err?.response?.data);
+        setAlert({
+          message: "SOMETHING WRONG.",
+          type: "error",
+        });
+        setErrors(err?.response?.data);
       });
   };
 
