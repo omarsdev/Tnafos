@@ -21,9 +21,6 @@ export const RegularInput = ({
   //   const { name, value } = e.target;
   //   setInput({ ...input, [name]: value });
   // };
-
-  console.log(error);
-
   return !value && !setValue ? (
     <ChakraInput
       className="rounded-3xl select-none"

@@ -129,7 +129,11 @@ export const CreateUser = () => {
 
   const handleCancel = () => {
     // history.push("/dashboard/user");
-    console.log(errors);
+    // console.log(errors);
+    setAlert({
+      message: `error message`,
+      type: "success",
+    });
   };
 
   return (
@@ -322,6 +326,7 @@ export const CreateUser = () => {
             </HStack>
           </Box>
         </form>
+        <button onClick={handleCancel}>Alert</button>
       </Center>
     </Box>
   );
