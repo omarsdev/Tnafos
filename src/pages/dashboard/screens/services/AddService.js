@@ -20,18 +20,20 @@ export const AddService = () => {
   const createService = async (data) => {
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
-        setAlert({
-          message: "new service has been added!",
-          type: "success",
-        });
+        console.log(res.data.data);
+        // setAlert({
+        //   message: "new service has been added!",
+        //   type: "success",
+        // });
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        setAlert({
-          message: "SOMETHING WRONG.",
-          type: "error",
-        });
-        setErrors(err?.response?.data);
+        console.log(err.response.data.errors);
+        // setAlert({
+        //   message: "SOMETHING WRONG.",
+        //   type: "error",
+        // });
+        // setErrors(err?.response?.data);
       });
   };
 

@@ -39,7 +39,7 @@ export const UserCard = () => {
   const { uuid } = useParams();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, watch, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const [card, setCard] = useState(null);
   const [errors, setErrors] = useState(null);
@@ -76,6 +76,7 @@ export const UserCard = () => {
     setIsUpdating(true);
     await AxiosInstance.put(`/api/dashboard/user/${uuid}/update`, data)
       .then((res) => {
+        console.log(res);
         setIsUpdating(false);
         setAlert({
           message: "User Has Been Updated!",
@@ -84,7 +85,8 @@ export const UserCard = () => {
         history.push(`/dashboard/user`);
       })
       .catch((err) => {
-        setIsUpdating(false);
+        console.log(err);
+        // setIsUpdating(false);
         setErrors(err.response.data);
         setAlert({
           message: `${err.response.data}`,

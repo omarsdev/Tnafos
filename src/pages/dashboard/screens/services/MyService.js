@@ -87,12 +87,12 @@ export const MyService = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        // setIsUpdating(false);
-        // setErrors(err?.response?.data);
-        // setAlert({
-        //   message: `${err?.response?.data}`,
-        //   type: "error",
-        // });
+        setIsUpdating(false);
+        setErrors(err?.response?.data);
+        setAlert({
+          message: `${err?.response?.data}`,
+          type: "error",
+        });
       });
   };
 

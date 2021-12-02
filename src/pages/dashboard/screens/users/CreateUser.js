@@ -106,34 +106,32 @@ export const CreateUser = () => {
   const addUser = async (userData) => {
     console.log(userData);
     console.log(errors);
-    // setIsUpdating(true);
-    // await AxiosInstance.post("/api/dashboard/user/create", userData)
-    //   .then((res) => {
-    //     setIsUpdating(false);
-    //     setAlert({
-    //       message: "New user has been added!",
-    //       type: "success",
-    //     });
-    //     history.push("/dashboard/user");
-    //   })
-    //   .catch((error) => {
-    //     setIsUpdating(false);
-    //     console.log(error);
-    //     setErr(error);
-    //     setAlert({
-    //       message: `${error?.response?.data}`,
-    //       type: "error",
-    //     });
-    //   });
+
+    await AxiosInstance.post("/api/dashboard/user/create", userData)
+      .then((res) => {
+        history.push("/dashboard/user");
+        setAlert({
+          message: `New user has been added!`,
+          type: "success",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setErr(error);
+        setAlert({
+          message: `${error?.response?.data}`,
+          type: "error",
+        });
+      });
   };
 
   const handleCancel = () => {
-    // history.push("/dashboard/user");
-    // console.log(errors);
-    setAlert({
-      message: `error message`,
-      type: "success",
-    });
+    history.push("/dashboard/user");
+    console.log(errors);
+    // setAlert({
+    //   message: `error message`,
+    //   type: "success",
+    // });
   };
 
   return (
@@ -179,7 +177,7 @@ export const CreateUser = () => {
               First Name :
               <RegularInput
                 placeHolder="first name"
-                inputType="text"
+                inputtype="text"
                 width="180px"
                 register={register("first_name")}
                 width="100%"
@@ -198,7 +196,7 @@ export const CreateUser = () => {
               Last Name :
               <RegularInput
                 placeHolder="last name"
-                inputType="text"
+                inputtype="text"
                 width="100%"
                 error={errors?.last_name ? true : false}
                 register={register("last_name")}
@@ -216,7 +214,7 @@ export const CreateUser = () => {
               Email :
               <RegularInput
                 placeHolder="Enter email"
-                inputType="text"
+                inputtype="text"
                 width="100%"
                 error={errors?.email ? true : false}
                 register={register("email")}
@@ -234,7 +232,7 @@ export const CreateUser = () => {
               Password :
               <PasswordInput
                 placeHolder="password"
-                inputType="password"
+                inputtype="password"
                 // name="password"
                 // register={register}
                 error={errors?.password ? true : false}
@@ -253,7 +251,7 @@ export const CreateUser = () => {
               Confirm Password :
               <PasswordInput
                 placeHolder="confirm your password"
-                inputType="password"
+                inputtype="password"
                 // name="password_confirmation"
                 // register={register}
                 error={errors?.password_confirmation ? true : false}
@@ -272,7 +270,7 @@ export const CreateUser = () => {
               Phone Number :
               <RegularInput
                 placeHolder="phone number"
-                inputType="number"
+                inputtype="number"
                 width="180px"
                 // name="phone_number"
                 // register={register}
@@ -296,11 +294,11 @@ export const CreateUser = () => {
               I agree to Tnafos
             </Checkbox>
             <HStack>
-              <Link to="#" className="text-blue-700 hover:underline">
+              <Link to="/" className="text-blue-700 hover:underline">
                 <Text>terms of service</Text>
               </Link>{" "}
               <Text>and</Text>
-              <Link className="text-blue-700 hover:underline">
+              <Link to="/" className="text-blue-700 hover:underline">
                 Privacy policy
               </Link>
             </HStack>
@@ -326,7 +324,7 @@ export const CreateUser = () => {
             </HStack>
           </Box>
         </form>
-        <button onClick={handleCancel}>Alert</button>
+        {/* <button onClick={handleCancel}>Alert</button> */}
       </Center>
     </Box>
   );
