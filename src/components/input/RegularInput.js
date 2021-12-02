@@ -13,25 +13,40 @@ export const RegularInput = ({
   width,
   name,
   error,
+  requiredMessage,
   ...rest
 }) => {
   const handleChange = (event) => setValue(event.target.value);
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setInput({ ...input, [name]: value });
+  // };
+
+  console.log(error);
 
   return !value && !setValue ? (
     <ChakraInput
       className="rounded-3xl select-none"
       borderRadius="25"
       focusBorderColor="#F8B916"
-      borderColor={!error ? "#AEAEAE" : "red"}
+      borderColor={!error ? "#AEAEAE" : "#ff0000"}
       backgroundColor="#fff"
       paddingLeft={inputType === "tel" && "80px"}
       placeholder={placeHolder}
       id={name}
       width={!width ? "381px" : width}
       type={inputType}
-      {...register(`${name}`)}
-      autoComplete="off"
-      autoFocus="off"
+      // {...(requiredMessage
+      //   ? {
+      //       ...register(
+      //         `${name}`,
+      //         requiredMessage ? { required: `${requiredMessage}` } : null
+      //       ),
+      //     }
+      //   : { ...register(`${name}`) })}
+      // autoComplete="off"
+      // autoFocus="off"
+      {...register}
       {...rest}
     />
   ) : (

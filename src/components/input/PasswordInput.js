@@ -34,7 +34,8 @@ export const PasswordInput = ({
           borderRadius="25"
           placeholder={placeHolder}
           type={show ? "text" : "password"}
-          {...register(`${name}`)}
+          // {...register(`${name}`)}
+          {...register}
           {...rest}
         />
       ) : (
