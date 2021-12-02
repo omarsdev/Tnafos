@@ -3,7 +3,7 @@ import {
   Box,
   Text,
   Image,
-  VStack,
+  HStack,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -15,9 +15,10 @@ import {
   Spinner,
   Flex,
   Spacer,
+  VStack,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
@@ -27,6 +28,7 @@ import { useForm } from "react-hook-form";
 import { PrimaryButton } from "components";
 import { SecondaryButton } from "components";
 import { AlertContext } from "context/AlertContext";
+import { media } from "api/media";
 
 export const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -42,6 +44,9 @@ export const UserCard = () => {
   const [card, setCard] = useState(null);
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+
+  const [photo, setPhoto] = useState(null);
+  let inputRef = useRef(null);
 
   const resetHooksForm = (data) => {
     reset({
@@ -98,6 +103,12 @@ export const UserCard = () => {
   useEffect(() => {
     getUser();
   }, []);
+
+  //* media file upload:
+  const uploadFile = (photo) => {
+    if (!photo) return;
+    media(uuid, "user", photo);
+  };
 
   return !card ? (
     <Center h="70vh" w="100%">
@@ -170,6 +181,15 @@ export const UserCard = () => {
           </DrawerHeader>
 
           <DrawerBody>
+            <HStack align="flex-end" w="full" alignItems="baseline" mb="14">
+              <input
+                type="file"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton name="Upload File" onClick={uploadFile} />
+            </HStack>
             <form>
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">

@@ -7,7 +7,7 @@ import {
   Spinner,
   Text,
   useDisclosure,
-  Flex,
+  HStack,
   VStack,
   Drawer,
   DrawerBody,
@@ -16,6 +16,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Spacer,
+  Stack,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
@@ -25,6 +26,7 @@ import { useForm } from "react-hook-form";
 import { PrimaryButton } from "components";
 import { SecondaryButton } from "components";
 import { AlertContext } from "context/AlertContext";
+import { media } from "api/media";
 
 export const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -40,6 +42,7 @@ export const MyService = () => {
 
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [photo, setPhoto] = useState(null);
 
   const resetHooksForm = (data) => {
     reset({
@@ -104,6 +107,12 @@ export const MyService = () => {
     getMyService();
   }, []);
 
+  //* media file upload:
+  const uploadFile = () => {
+    if (!photo) return;
+    media(uuid, "service", photo);
+  };
+
   return !service ? (
     <Center h="70vh" w="100%">
       <Spinner size="xl" color="#F8B916" />
@@ -113,8 +122,8 @@ export const MyService = () => {
       <Center py="5">
         <Box
           className="rounded-3xl shadow-2xl relative bg-white"
-          w="350px"
-          h="350px"
+          w="400px"
+          h="400px"
         >
           <VStack spacing="20px">
             <Text
@@ -128,6 +137,7 @@ export const MyService = () => {
             >
               Service
             </Text>
+
             <Box mr="0" px="5%">
               <Text py="1" fontSize="large" textColor="gray.600">
                 {service?.name}
@@ -186,7 +196,16 @@ export const MyService = () => {
           </DrawerHeader>
 
           <DrawerBody>
-            <form>
+            <HStack align="flex-end" w="full" alignItems="baseline" mb="14">
+              <input
+                type="file"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton name="Upload File" onClick={uploadFile} />
+            </HStack>
+            <form pt="5">
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Price :
@@ -225,7 +244,7 @@ export const MyService = () => {
                 </label>
               </Box>
 
-              <Flex mt="5">
+              <HStack mt="5" w="250px">
                 <PrimaryButton
                   name="Update"
                   onClick={handleSubmit(onUpdateService)}
@@ -240,7 +259,7 @@ export const MyService = () => {
                   onClick={onCancelHandler}
                   buttonType="button"
                 />
-              </Flex>
+              </HStack>
               {errors?.message && (
                 <Text className="text-center mt-4" color="red">
                   {errors?.message}
