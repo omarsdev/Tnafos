@@ -11,8 +11,12 @@ export const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const setAlert = alertProviderValue;
 
-  const { register, handleSubmit } = useForm();
-  const [errors, setErrors] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [err, setErr] = useState(null);
 
   const history = useHistory();
 
@@ -28,12 +32,12 @@ export const AddService = () => {
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        console.log(err.response.data.errors);
+        console.log(err.response.data);
+        setErr(err?.response?.data.errors);
         setAlert({
           message: "SOMETHING WRONG.",
           type: "error",
         });
-        setErrors(err?.response?.data);
       });
   };
 
@@ -60,13 +64,13 @@ export const AddService = () => {
             <RegularInput
               inputType="text"
               name="name"
-              register={register}
+              register={register("name")}
               width="100%"
-              error={errors?.errors?.name ? true : false}
+              error={errors?.name ? true : false}
             />
-            {errors && errors?.errors && errors?.errors?.name && (
+            {errors && errors?.name && (
               <Text className="text-left" color="red">
-                {errors?.errors?.name}
+                {errors?.name}
               </Text>
             )}
           </label>
@@ -78,13 +82,13 @@ export const AddService = () => {
             <RegularInput
               inputType="text"
               name="description"
-              register={register}
+              register={register("description")}
               width="100%"
-              error={errors?.errors?.description ? true : false}
+              error={errors?.description ? true : false}
             />
-            {errors && errors?.errors && errors?.errors?.description && (
+            {errors && errors?.description && (
               <Text className="text-left" color="red">
-                {errors?.errors?.description}
+                {errors?.description}
               </Text>
             )}
           </label>
@@ -96,13 +100,13 @@ export const AddService = () => {
             <RegularInput
               inputType="text"
               name="category_id"
-              register={register}
+              register={register("category_is")}
               width="100%"
-              error={errors?.errors?.category_id ? true : false}
+              error={errors?.category_id ? true : false}
             />
-            {errors && errors?.errors && errors?.errors?.category_id && (
+            {errors && errors?.category_id && (
               <Text className="text-left" color="red">
-                {errors?.errors?.category_id}
+                {errors?.category_id}
               </Text>
             )}
           </label>
@@ -114,13 +118,13 @@ export const AddService = () => {
             <RegularInput
               inputType="text"
               name="price"
-              register={register}
+              register={register("price")}
               width="100%"
-              error={errors?.errors?.price ? true : false}
+              error={errors?.price ? true : false}
             />
-            {errors && errors?.errors && errors?.errors?.price && (
+            {errors && errors?.price && (
               <Text className="text-left" color="red">
-                {errors?.errors?.price}
+                {errors?.price}
               </Text>
             )}
           </label>
@@ -132,13 +136,13 @@ export const AddService = () => {
             <RegularInput
               inputType="text"
               name="type"
-              register={register}
+              register={register("type")}
               width="100%"
-              error={errors?.errors?.type ? true : false}
+              error={errors?.type ? true : false}
             />
-            {errors && errors?.errors && errors?.errors?.type && (
+            {errors && errors?.type && (
               <Text className="text-left" color="red">
-                {errors?.errors?.type}
+                {errors?.type}
               </Text>
             )}
           </label>

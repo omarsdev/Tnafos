@@ -111,11 +111,10 @@ export const CreateUser = () => {
         history.push("/dashboard/user");
       })
       .catch((error) => {
-        console.log(error.response.data.errors);
+        // console.log(error.response.data.errors);
         setErr(error.response.data.errors);
-        // console.log(err);
         setAlert({
-          message: `${error?.response?.data}`,
+          message: `${error?.response?.data?.errors}`,
           type: "error",
         });
       });
