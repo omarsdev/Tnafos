@@ -64,7 +64,11 @@ export const CreateUser = () => {
   //* form validation rules
 
   //* get functions to build form with useForm() hook
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
@@ -97,19 +101,19 @@ export const CreateUser = () => {
 
   //* onSubmit function:
   const addUser = async (userData) => {
-    // console.log(userData);
-    // console.log(err);
-
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
-        history.push("/dashboard/user");
+        console.log(res.data.data);
         setAlert({
           message: `New user has been added!`,
           type: "success",
         });
+        history.push("/dashboard/user");
       })
       .catch((error) => {
-        setErr(error.response.data);
+        console.log(error.response.data.errors);
+        setErr(error.response.data.errors);
+        // console.log(err);
         setAlert({
           message: `${error?.response?.data}`,
           type: "error",
@@ -153,13 +157,14 @@ export const CreateUser = () => {
                 width="180px"
                 register={register("first_name")}
                 width="100%"
-                error={err?.first_name?.message ? true : false}
+                error={errors?.first_name?.message ? true : false}
               />
-              {err && err?.first_name && (
+              {errors && errors?.first_name && (
                 <Text className="text-left" color="red">
-                  {err?.first_name?.message}
+                  {errors?.first_name?.message}
                 </Text>
               )}
+              <Text>{err?.first_name}</Text>
             </label>
           </Box>
 
@@ -170,14 +175,15 @@ export const CreateUser = () => {
                 placeHolder="last name"
                 inputtype="text"
                 width="100%"
-                error={err?.last_name ? true : false}
+                error={errors?.last_name ? true : false}
                 register={register("last_name")}
               />
-              {err && err?.last_name && (
+              {errors && errors?.last_name && (
                 <Text className="text-left" color="red">
-                  {err?.last_name?.message}
+                  {errors?.last_name?.message}
                 </Text>
               )}
+              <Text>{err?.last_name}</Text>
             </label>
           </Box>
 
@@ -188,14 +194,15 @@ export const CreateUser = () => {
                 placeHolder="Enter email"
                 inputtype="text"
                 width="100%"
-                error={err?.email ? true : false}
+                error={errors?.email ? true : false}
                 register={register("email")}
               />
-              {err && err?.email && (
+              {errors && errors?.email && (
                 <Text className="text-left" color="red">
-                  {err?.email.message}
+                  {errors?.email.message}
                 </Text>
               )}
+              <Text>{err?.email}</Text>
             </label>
           </Box>
 
@@ -205,14 +212,15 @@ export const CreateUser = () => {
               <PasswordInput
                 placeHolder="password"
                 className="w-64"
-                error={err?.password ? true : false}
+                error={errors?.password ? true : false}
                 register={register("password")}
               />
-              {err && err?.password && (
+              {errors && errors?.password && (
                 <Text className="text-left" color="red">
-                  {err?.password?.message}
+                  {errors?.password?.message}
                 </Text>
               )}
+              <Text>{err?.password}</Text>
             </label>
           </Box>
 
@@ -223,14 +231,15 @@ export const CreateUser = () => {
                 placeHolder="confirm your password"
                 inputtype="password"
                 width="100%"
-                error={err?.password_confirmation ? true : false}
+                error={errors?.password_confirmation ? true : false}
                 register={register("password_confirmation")}
               />
-              {err && err?.password_confirmation?.message && (
+              {errors && errors?.password_confirmation?.message && (
                 <Text className="text-left" color="red">
-                  {err?.password_confirmation?.message}
+                  {errors?.password_confirmation?.message}
                 </Text>
               )}
+              <Text>{err?.password_confirmation}</Text>
             </label>
           </Box>
 
@@ -242,14 +251,15 @@ export const CreateUser = () => {
                 inputtype="number"
                 width="381px"
                 width="100%"
-                error={err?.phone_number ? true : false}
+                error={errors?.phone_number ? true : false}
                 register={register("phone_number")}
               />
-              {err && err?.phone_number && (
+              {errors && errors?.phone_number && (
                 <Text className="text-left" color="red">
-                  {err?.phone_number?.message}
+                  {errors?.phone_number?.message}
                 </Text>
               )}
+              <Text>{err?.phone_number}</Text>
             </label>
           </Box>
 
