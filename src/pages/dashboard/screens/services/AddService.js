@@ -32,8 +32,8 @@ export const AddService = () => {
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        console.log(err.response.data);
-        setErr(err?.response?.data.errors);
+        console.log(err.response.data.errors);
+        setErr(err?.response?.data?.errors);
         setAlert({
           message: "SOMETHING WRONG.",
           type: "error",
@@ -66,11 +66,11 @@ export const AddService = () => {
               name="name"
               register={register("name")}
               width="100%"
-              error={errors?.name ? true : false}
+              error={errors?.errors?.name ? true : false}
             />
-            {errors && errors?.name && (
+            {errors && errors?.errors && errors?.errors?.name && (
               <Text className="text-left" color="red">
-                {errors?.name}
+                {errors?.errors?.name}
               </Text>
             )}
           </label>
