@@ -140,17 +140,6 @@ export const CreateUser = () => {
         Add user
       </Heading>
 
-      <button
-        onClick={() => {
-          setAlert({
-            message: `New user has been added!`,
-            type: "error",
-          });
-        }}
-      >
-        Alert ME
-      </button>
-
       <HStack className="pt-10 w-full flex pl-56 " spacing="20px">
         <input
           type="file"
