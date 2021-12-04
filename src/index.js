@@ -12,20 +12,24 @@ import { transitions, positions, Provider as AlertProvider } from "react-alert";
 
 const AlertTemplate = ({ options, message }) => {
   return (
-    <div className="bg-blue-500 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
-      <div className="bg-green-500 ">
-        {options.type === "success" && (
+    <div className="">
+      {options.type === "success" && (
+        <div className="bg-green-500 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
           <FaCheckCircle className="text-white " />
-        )}
-      </div>
-      <div className="bg-blue-500">
-        {options.type === "info" && <FaInfoCircle className="text-white " />}
-      </div>
-      <div className="bg-yellow-400 ">
-        {options.type === "error" && (
+        </div>
+      )}
+
+      {options.type === "info" && (
+        <div className="bg-blue-500 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
+          <FaInfoCircle className="text-white " />{" "}
+        </div>
+      )}
+
+      {options.type === "error" && (
+        <div className="bg-yellow-400 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
           <FaExclamationCircle className="text-black bg-red-500" />
-        )}
-      </div>
+        </div>
+      )}
       <p className="justify-center flex flex-row text-lg text-white">
         {message}
       </p>
