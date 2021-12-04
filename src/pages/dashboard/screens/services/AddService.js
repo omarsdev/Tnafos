@@ -33,7 +33,7 @@ export const AddService = () => {
       })
       .catch((err) => {
         console.log(err.response.data.errors);
-        setErr(err?.response?.data?.errors);
+        setErr(err?.response?.data.errors);
         setAlert({
           message: `${err.response.data.message}`,
           type: "error",
@@ -74,6 +74,12 @@ export const AddService = () => {
                   {e}
                 </Text>
               ))}
+            {err?.name &&
+              err?.name.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -89,6 +95,12 @@ export const AddService = () => {
             />
             {errors?.errors?.description &&
               errors?.errors?.description.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+            {err?.name &&
+              err?.description.map((e) => (
                 <Text className="text-left" color="red">
                   {e}
                 </Text>
@@ -111,6 +123,12 @@ export const AddService = () => {
                   {e}
                 </Text>
               ))}
+            {err?.name &&
+              err?.category_id.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -129,6 +147,12 @@ export const AddService = () => {
                   {e}
                 </Text>
               ))}
+            {err?.name &&
+              err?.price.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -143,6 +167,12 @@ export const AddService = () => {
             />
             {errors?.errors?.type &&
               errors?.errors?.type.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+            {err?.name &&
+              err?.type.map((e) => (
                 <Text className="text-left" color="red">
                   {e}
                 </Text>
