@@ -12,7 +12,6 @@ import { transitions, positions, Provider as AlertProvider } from "react-alert";
 
 const AlertTemplate = ({ options, message }) => {
   return (
-    <div className="">
       {options.type === "success" && (
         <div className="bg-green-500 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
           <FaCheckCircle className="text-white " />
@@ -33,7 +32,6 @@ const AlertTemplate = ({ options, message }) => {
       <p className="justify-center flex flex-row text-lg text-white">
         {message}
       </p>
-    </div>
   );
 };
 
