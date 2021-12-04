@@ -14,25 +14,31 @@ const AlertTemplate = ({ options, message }) => {
   return (
     <>
       {options.type === "success" && (
-        <div className="bg-green-500 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
+        <div className="bg-green-600 rounded-lg h-16 w-72 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
           <FaCheckCircle className="text-white " />
+          <p className="justify-center flex flex-row text-lg text-white">
+            {message}
+          </p>
         </div>
       )}
 
       {options.type === "info" && (
-        <div className="bg-blue-500 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
+        <div className="bg-blue-500 rounded-lg h-16 w-72 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
           <FaInfoCircle className="text-white " />{" "}
+          <p className="justify-center flex flex-row text-lg text-white">
+            {message}
+          </p>
         </div>
       )}
 
       {options.type === "error" && (
-        <div className="bg-yellow-400 rounded-lg h-16 w-60 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
-          <FaExclamationCircle className="text-black bg-red-500" />
+        <div className="bg-yellow-500 rounded-lg h-16 w-72 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
+          <FaExclamationCircle className="text-white " />
+          <p className="justify-center flex flex-row text-lg text-white">
+            {message}
+          </p>
         </div>
       )}
-      <p className="justify-center flex flex-row text-lg text-white">
-        {message}
-      </p>
     </>
   );
 };

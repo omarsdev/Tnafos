@@ -208,9 +208,11 @@ export const CreateUser = () => {
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Password :
-              <PasswordInput
+              <RegularInput
                 placeHolder="password"
                 className="w-64"
+                inputType="password"
+                width="100%"
                 error={err?.password ? true : false}
                 register={register("password")}
               />
@@ -225,8 +227,9 @@ export const CreateUser = () => {
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Confirm Password :
-              <PasswordInput
+              <RegularInput
                 placeHolder="confirm your password"
+                width="100%"
                 inputType="password"
                 width="100%"
                 error={err?.password_confirmation ? true : false}
@@ -258,7 +261,7 @@ export const CreateUser = () => {
               <Text>{err?.phone_number}</Text>
             </label>
           </Box>
-          s
+
           <Box className="flex flex-col items-center gap-2 mt-5">
             <Heading fontSize="2xl" color="gray.500" fontWeight="normal">
               Terms and Conditions agreement

@@ -68,8 +68,8 @@ export const AddService = () => {
               error={errors?.errors?.name ? true : false}
               register={register("name")}
             />
-            {errors?.name &&
-              errors?.name.map((e) => (
+            {errors?.errors?.name &&
+              errors?.errors?.name.map((e) => (
                 <Text className="text-left" color="red">
                   {e}
                 </Text>
@@ -98,7 +98,7 @@ export const AddService = () => {
                   {e}
                 </Text>
               ))}
-            {err?.name &&
+            {err?.description &&
               err?.description.map((e) => (
                 <Text className="text-left" color="red">
                   {e}
@@ -122,7 +122,7 @@ export const AddService = () => {
                   {e}
                 </Text>
               ))}
-            {err?.name &&
+            {err?.category_id &&
               err?.category_id.map((e) => (
                 <Text className="text-left" color="red">
                   {e}
@@ -146,7 +146,7 @@ export const AddService = () => {
                   {e}
                 </Text>
               ))}
-            {err?.name &&
+            {err?.price &&
               err?.price.map((e) => (
                 <Text className="text-left" color="red">
                   {e}
@@ -170,7 +170,7 @@ export const AddService = () => {
                   {e}
                 </Text>
               ))}
-            {err?.name &&
+            {err?.type &&
               err?.type.map((e) => (
                 <Text className="text-left" color="red">
                   {e}

@@ -12,7 +12,7 @@ import {
   VStack,
   Divider,
   Icon,
-  Input,
+  Stack,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -21,7 +21,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Spacer,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
@@ -519,7 +518,7 @@ export const CompanyHome = () => {
                   </Box>
                 </form>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter my="5">
                 <PrimaryButton
                   name="Update"
                   onClick={handleSubmit(onUpdateCompany)}
@@ -532,13 +531,14 @@ export const CompanyHome = () => {
                   onClick={onCancelHandler}
                   buttonType="button"
                 />
-                <Box>
+
+                <Stack>
                   {errors?.message && (
                     <Text className="text-center mt-4" color="red">
                       {errors?.message}
                     </Text>
                   )}
-                </Box>
+                </Stack>
               </ModalFooter>
             </ModalContent>
           </Modal>
