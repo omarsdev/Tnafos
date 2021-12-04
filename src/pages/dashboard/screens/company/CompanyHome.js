@@ -37,7 +37,7 @@ export const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState({});
 
   const { alertProviderValue } = useContext(AlertContext);
-  const setAlert = alertProviderValue;
+  const { setAlert } = alertProviderValue;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -235,7 +235,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.name ? true : false}
-                        {...register("name")}
+                        register={register("name")}
                       />
                       {errors?.errors?.name &&
                         errors?.errors?.name.map((e) => (
@@ -254,7 +254,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.type ? true : false}
-                        {...register("type")}
+                        register={register("type")}
                       />
                       {errors?.errors?.type &&
                         errors?.errors?.type.map((e) => (
@@ -272,7 +272,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.cr ? true : false}
-                        {...register("cr")}
+                        register={register("cr")}
                       />
                       {errors?.errors?.cr &&
                         errors?.errors?.cr.map((e) => (
@@ -289,7 +289,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.vat ? true : false}
-                        {...register("vat")}
+                        register={register("vat")}
                       />
                       {errors?.errors?.vat &&
                         errors?.errors?.vat.map((e) => (
@@ -309,7 +309,7 @@ export const CompanyHome = () => {
                         error={
                           errors?.errors?.establishment_year ? true : false
                         }
-                        {...register("establishment_year")}
+                        register={register("establishment_year")}
                       />
                       {errors?.errors?.establishment_year &&
                         errors?.errors?.establishment_year.map((e) => (
@@ -327,7 +327,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.total_employees ? true : false}
-                        {...register("total_employees")}
+                        register={register("total_employees")}
                       />
                       {errors?.errors?.total_employees &&
                         errors?.errors?.total_employees.map((e) => (
@@ -345,7 +345,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.bio ? true : false}
-                        {...register("bio")}
+                        register={register("bio")}
                       />
                       {errors?.errors?.bio &&
                         errors?.errors?.bio.map((e) => (
@@ -363,7 +363,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.telephone ? true : false}
-                        {...register("telephone")}
+                        register={register("telephone")}
                       />
                       {errors?.errors?.telephone &&
                         errors?.errors?.telephone.map((e) => (
@@ -381,7 +381,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.fax ? true : false}
-                        {...register("fax")}
+                        register={register("fax")}
                       />
                       {errors?.errors?.fax &&
                         errors?.errors?.fax.map((e) => (
@@ -399,7 +399,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.email ? true : false}
-                        {...register("email")}
+                        register={register("email")}
                       />
                       {errors?.errors?.email &&
                         errors?.errors?.email.map((e) => (
@@ -417,7 +417,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.website ? true : false}
-                        {...register("website")}
+                        register={register("website")}
                       />
                       {errors?.errors?.website &&
                         errors?.errors?.website.map((e) => (
@@ -435,7 +435,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.city ? true : false}
-                        {...register("city")}
+                        register={register("city")}
                       />
                       {errors?.errors?.city &&
                         errors?.errors?.city.map((e) => (
@@ -453,7 +453,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.po_box ? true : false}
-                        {...register("po_box")}
+                        register={register("po_box")}
                       />
                       {errors?.errors?.po_box &&
                         errors?.errors?.po_box.map((e) => (
@@ -471,7 +471,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.zip_code ? true : false}
-                        {...register("zip_code")}
+                        register={register("zip_code")}
                       />
                       {errors?.errors?.zip_code &&
                         errors?.errors?.zip_code.map((e) => (
@@ -489,7 +489,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.address ? true : false}
-                        {...register("address")}
+                        register={register("address")}
                       />
                       {errors?.errors?.address &&
                         errors?.errors?.address.map((e) => (
@@ -507,7 +507,7 @@ export const CompanyHome = () => {
                         inputType="text"
                         width="100%"
                         error={errors?.errors?.location ? true : false}
-                        {...register("location")}
+                        register={register("location")}
                       />
                       {errors?.errors?.location &&
                         errors?.errors?.location.map((e) => (

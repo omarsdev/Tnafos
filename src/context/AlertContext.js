@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, useEffect, useMemo } from "react";
 import { useAlert } from "react-alert";
 
 export const AlertContext = createContext();
@@ -18,8 +18,16 @@ export const AlertContextProvider = (props) => {
     }
   }, [alert]);
 
+  const alertProviderValue = useMemo(
+    () => ({
+      alert,
+      setAlert,
+    }),
+    [alert, setAlert]
+  );
+
   return (
-    <AlertContext.Provider value={{ alertProviderValue: setAlert }}>
+    <AlertContext.Provider value={{ alertProviderValue }}>
       {props.children}
     </AlertContext.Provider>
   );

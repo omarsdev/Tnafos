@@ -36,7 +36,6 @@ export const Register = () => {
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm();
 
@@ -44,7 +43,7 @@ export const Register = () => {
   const [loadingButton, setLoadingButton] = useState(false);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     setError(null);
     setLoadingButton(true);
     const res = await apiAuth(data, "register");
@@ -78,7 +77,7 @@ export const Register = () => {
                       inputType="text"
                       width="180px"
                       error={error?.errors?.first_name ? true : false}
-                      {...register("first_name")}
+                      register={register("first_name")}
                     />
                     {error?.errors?.first_name &&
                       error?.errors?.first_name.map((e) => (
@@ -94,7 +93,7 @@ export const Register = () => {
                       inputType="text"
                       width="180px"
                       error={error?.errors?.last_name ? true : false}
-                      {...register("last_name")}
+                      register={register("last_name")}
                     />
                     {error?.errors?.last_name &&
                       error?.errors?.last_name.map((e) => (
@@ -109,7 +108,7 @@ export const Register = () => {
                     placeHolder="Email"
                     inputType="email"
                     error={error?.errors?.email ? true : false}
-                    {...register("email")}
+                    register={register("email")}
                   />
                   {error?.errors?.email &&
                     error?.errors?.email.map((e) => (
@@ -119,13 +118,13 @@ export const Register = () => {
                 <PasswordInput
                   placeHolder="Password"
                   error={error?.errors?.password ? true : false}
-                  {...register("password")}
+                  register={register("password")}
                 />
                 <Box>
                   <PasswordInput
                     placeHolder="Confirm password"
                     error={error?.errors?.password ? true : false}
-                    {...register("password_confirmation")}
+                    register={register("password_confirmation")}
                   />
                   {error?.errors?.password &&
                     error?.errors?.password.map((e) => (
@@ -150,7 +149,7 @@ export const Register = () => {
                       placeHolder="Mobile"
                       inputType="tel"
                       error={error?.errors?.phone_number ? true : false}
-                      {...register("phone_number")}
+                      register={register("phone_number")}
                     />
                   </InputGroup>
                   {error?.errors?.phone_number &&

@@ -1,3 +1,4 @@
+import React, { useState, useContext, useRef, useCallback } from "react";
 import {
   Heading,
   Box,
@@ -8,7 +9,6 @@ import {
   Center,
   Stack,
 } from "@chakra-ui/react";
-import React, { useState, useContext, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { AxiosInstance } from "api/AxiosInstance";
@@ -51,7 +51,7 @@ const validationSchema = yup.object({
 });
 export const CreateUser = () => {
   const { alertProviderValue } = useContext(AlertContext);
-  const setAlert = alertProviderValue;
+  const { setAlert } = alertProviderValue;
 
   const history = useHistory();
   const [err, setErr] = useState(null);
@@ -100,10 +100,12 @@ export const CreateUser = () => {
   };
 
   //* onSubmit function:
-  const addUser = async (userData) => {
+  const addUser = useCallback(async (userData) => {
+    setIsUpdating(true);
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
         console.log(res.data.data);
+        setIsUpdating(false);
         setAlert({
           message: `New user has been added!`,
           type: "success",
@@ -111,14 +113,16 @@ export const CreateUser = () => {
         history.push("/dashboard/user");
       })
       .catch((error) => {
+        setIsUpdating(false);
         // console.log(error.response.data.errors);
-        setErr(error.response.data.errors);
+        // setErr(error.response.data.errors);
+        // console.log("error");
         setAlert({
           message: `${error?.response?.data?.errors}`,
           type: "error",
         });
       });
-  };
+  }, []);
 
   const handleCancel = () => {
     history.push("/dashboard/user");
@@ -135,6 +139,17 @@ export const CreateUser = () => {
       >
         Add user
       </Heading>
+
+      <button
+        onClick={() => {
+          setAlert({
+            message: `New user has been added!`,
+            type: "error",
+          });
+        }}
+      >
+        Alert ME
+      </button>
 
       <HStack className="pt-10 w-full flex pl-56 " spacing="20px">
         <input
@@ -155,7 +170,7 @@ export const CreateUser = () => {
                 inputType="text"
                 width="100%"
                 error={err?.first_name?.message ? true : false}
-                {...register("first_name")}
+                register={register("first_name")}
               />
               {errors && errors?.first_name && (
                 <Text className="text-left" color="red">
@@ -173,7 +188,7 @@ export const CreateUser = () => {
                 inputType="text"
                 width="100%"
                 error={err?.last_name ? true : false}
-                {...register("last_name")}
+                register={register("last_name")}
               />
               {errors && errors?.last_name && (
                 <Text className="text-left" color="red">
@@ -191,7 +206,7 @@ export const CreateUser = () => {
                 inputType="text"
                 width="100%"
                 error={err?.email ? true : false}
-                {...register("email")}
+                register={register("email")}
               />
               {errors && errors?.email && (
                 <Text className="text-left" color="red">
@@ -208,7 +223,7 @@ export const CreateUser = () => {
                 placeHolder="password"
                 className="w-64"
                 error={err?.password ? true : false}
-                {...register("password")}
+                register={register("password")}
               />
               {errors && errors?.password && (
                 <Text className="text-left" color="red">
@@ -226,7 +241,7 @@ export const CreateUser = () => {
                 inputType="password"
                 width="100%"
                 error={err?.password_confirmation ? true : false}
-                {...register("password_confirmation")}
+                register={register("password_confirmation")}
               />
               {errors && errors?.password_confirmation?.message && (
                 <Text className="text-left" color="red">
@@ -244,7 +259,7 @@ export const CreateUser = () => {
                 inputType="number"
                 width="100%"
                 error={err?.phone_number ? true : false}
-                {...register("phone_number")}
+                register={register("phone_number")}
               />
               {errors && errors?.phone_number && (
                 <Text className="text-left" color="red">
@@ -288,6 +303,7 @@ export const CreateUser = () => {
                 onClick={handleSubmit(addUser)}
                 loadingButton={isUpdating}
               />
+              {/* <button onClick={handleSubmit(addUser)}>submit</button> */}
 
               <SecondaryButton onClick={handleCancel} name="CANCEL" />
             </HStack>

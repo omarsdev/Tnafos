@@ -30,7 +30,7 @@ import { media } from "api/media";
 
 export const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
-  const setAlert = alertProviderValue;
+  const { setAlert } = alertProviderValue;
   const [service, setService] = useState(null);
 
   const history = useHistory();
@@ -214,7 +214,7 @@ export const MyService = () => {
                     inputType="text"
                     width="100%"
                     error={errors?.errors?.price ? true : false}
-                    {...register("price")}
+                    register={register("price")}
                   />
                   {errors && errors?.errors && errors?.errors?.price && (
                     <Text className="text-left" color="red">
@@ -231,7 +231,7 @@ export const MyService = () => {
                     inputType="text"
                     width="100%"
                     error={errors?.errors?.type ? true : false}
-                    {...register("type")}
+                    register={register("type")}
                   />
                   {errors && errors?.errors && errors?.errors?.type && (
                     <Text className="text-left" color="red">

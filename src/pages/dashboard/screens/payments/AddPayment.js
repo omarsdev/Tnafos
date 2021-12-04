@@ -65,7 +65,9 @@ export const AddPayment = () => {
             size="sm"
             type="text"
             borderRadius="lg"
-            {...register("amount", { required: "This field is required!" })}
+            register={register("amount", {
+              required: "This field is required!",
+            })}
           />
           {errors.amount && <p>{errors.amount?.message}</p>}
         </label>
@@ -76,7 +78,9 @@ export const AddPayment = () => {
             size="sm"
             type="text"
             borderRadius="lg"
-            {...register("method", { required: "This field is required!" })}
+            register={register("method", {
+              required: "This field is required!",
+            })}
           />
           {errors.method && <p>{errors.method?.message}</p>}
         </label>
@@ -87,7 +91,7 @@ export const AddPayment = () => {
             size="sm"
             type="number"
             borderRadius="lg"
-            {...register("transaction_number", {
+            register={register("transaction_number", {
               required: "This field is required!",
             })}
           />
@@ -102,7 +106,7 @@ export const AddPayment = () => {
             size="sm"
             type="text"
             borderRadius="lg"
-            {...register("date", { required: "This field is required!" })}
+            register={register("date", { required: "This field is required!" })}
           />
           {errors.date && <p>{errors.date.message}</p>}
         </label>
@@ -113,7 +117,9 @@ export const AddPayment = () => {
             size="sm"
             type="text"
             borderRadius="lg"
-            {...register("notes", { required: "This field is required!" })}
+            register={register("notes", {
+              required: "This field is required!",
+            })}
           />
           {errors.notes && <p>{errors.notes?.message}</p>}
         </label>
@@ -124,7 +130,9 @@ export const AddPayment = () => {
             size="sm"
             type="number"
             borderRadius="lg"
-            {...register("invoice_id", { required: "This field is required!" })}
+            register={register("invoice_id", {
+              required: "This field is required!",
+            })}
           />
           {errors.invoice_id && <p>{errors.invoice_id?.message}</p>}
         </label>

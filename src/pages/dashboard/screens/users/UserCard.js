@@ -32,7 +32,7 @@ import { media } from "api/media";
 
 export const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
-  const setAlert = alertProviderValue;
+  const { setAlert } = alertProviderValue;
 
   const history = useHistory();
 
@@ -201,7 +201,7 @@ export const UserCard = () => {
                     inputType="text"
                     width="100%"
                     error={errors?.errors?.first_name ? true : false}
-                    {...register("first_name")}
+                    register={register("first_name")}
                   />
                   {errors?.errors?.first_name &&
                     errors?.errors?.first_name.map((e) => (
@@ -220,7 +220,7 @@ export const UserCard = () => {
                     inputType="text"
                     width="100%"
                     error={errors?.errors?.last_name ? true : false}
-                    {...register("last_name")}
+                    register={register("last_name")}
                   />
                   {errors?.errors?.last_name &&
                     errors?.errors?.last_name.map((e) => (
@@ -239,7 +239,7 @@ export const UserCard = () => {
                     inputType="text"
                     width="100%"
                     error={errors?.errors?.phone_number ? true : false}
-                    {...register("phone_number")}
+                    register={register("phone_number")}
                   />
                   {errors?.errors?.phone_number &&
                     errors?.errors?.phone_number.map((e) => (
@@ -258,7 +258,7 @@ export const UserCard = () => {
                     inputType="text"
                     width="100%"
                     error={errors?.errors?.email ? true : false}
-                    {...register("email")}
+                    register={register("email")}
                   />
                   {errors?.errors?.email &&
                     errors?.errors?.email.map((e) => (

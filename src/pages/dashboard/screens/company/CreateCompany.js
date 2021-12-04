@@ -8,7 +8,7 @@ import { PrimaryButton, RegularInput } from "components";
 
 export const CreateCompany = () => {
   const { alertProviderValue } = useContext(AlertContext);
-  const setAlert = alertProviderValue;
+  const { setAlert } = alertProviderValue;
 
   const history = useHistory();
   const [err, setErr] = useState(null);
@@ -59,7 +59,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.name ? true : false}
-              {...register("name")}
+              register={register("name")}
             />
             {err && err?.name && (
               <Text className="text-left" color="red">
@@ -76,7 +76,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.type ? true : false}
-              {...register("type")}
+              register={register("type")}
             />
             {err && err?.type && (
               <Text className="text-left" color="red">
@@ -93,7 +93,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.cr ? true : false}
-              {...register("cr")}
+              register={register("cr")}
             />
             {err && err?.cr && (
               <Text className="text-left" color="red">
@@ -110,7 +110,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.vat ? true : false}
-              {...register("vat")}
+              register={register("vat")}
             />
             {err && err?.vat && (
               <Text className="text-left" color="red">
@@ -127,7 +127,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.establishment_year ? true : false}
-              {...register("establishment_year")}
+              register={register("establishment_year")}
             />
             {err && err?.establishment_year && (
               <Text className="text-left" color="red">
@@ -144,7 +144,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.total_employees ? true : false}
-              {...register("total_employees")}
+              register={register("total_employees")}
             />
             {err && err?.total_employees && (
               <Text className="text-left" color="red">
@@ -161,7 +161,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.bio ? true : false}
-              {...register("bio")}
+              register={register("bio")}
             />
             {err && err?.bio && (
               <Text className="text-left" color="red">
@@ -178,7 +178,7 @@ export const CreateCompany = () => {
               inputType="number"
               width="100%"
               error={err?.err?.telephone ? true : false}
-              {...register("telephone")}
+              register={register("telephone")}
             />
             {err && err?.telephone && (
               <Text className="text-left" color="red">
@@ -195,7 +195,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.fax ? true : false}
-              {...register("fax")}
+              register={register("fax")}
             />
             {err && err?.fax && (
               <Text className="text-left" color="red">
@@ -212,7 +212,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.email ? true : false}
-              {...register("email")}
+              register={register("email")}
             />
             {err && err?.email && (
               <Text className="text-left" color="red">
@@ -229,7 +229,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.website ? true : false}
-              {...register("website")}
+              register={register("website")}
             />
             {err && err?.website && (
               <Text className="text-left" color="red">
@@ -246,7 +246,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.country_id ? true : false}
-              {...register("country_id")}
+              register={register("country_id")}
             />
             {err && err?.country_id && (
               <Text className="text-left" color="red">
@@ -263,7 +263,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.city ? true : false}
-              {...register("city")}
+              register={register("city")}
             />
             {err && err?.city && (
               <Text className="text-left" color="red">
@@ -280,7 +280,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.po_box ? true : false}
-              {...register("po_box")}
+              register={register("po_box")}
             />
             {err && err?.po_box && (
               <Text className="text-left" color="red">
@@ -297,7 +297,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.zip_code ? true : false}
-              {...register("zip_code")}
+              register={register("zip_code")}
             />
             {err && err?.zip_code && (
               <Text className="text-left" color="red">
@@ -314,7 +314,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.address ? true : false}
-              {...register("address")}
+              register={register("address")}
             />
             {err && err?.address && (
               <Text className="text-left" color="red">
@@ -331,7 +331,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.location ? true : false}
-              {...register("location")}
+              register={register("location")}
             />
             {err && err?.location && (
               <Text className="text-left" color="red">
@@ -348,7 +348,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.logo ? true : false}
-              {...register("logo")}
+              register={register("logo")}
             />
             {err && err?.logo && (
               <Text className="text-left" color="red">
@@ -365,7 +365,7 @@ export const CreateCompany = () => {
               inputType="text"
               width="100%"
               error={err?.err?.category_id ? true : false}
-              {...register("category_id")}
+              register={register("category_id")}
             />
             {err && err?.category_id && (
               <Text className="text-left" color="red">

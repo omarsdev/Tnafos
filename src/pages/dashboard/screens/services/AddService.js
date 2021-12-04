@@ -9,7 +9,7 @@ import { PrimaryButton, SecondaryButton, RegularInput } from "components";
 
 export const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
-  const setAlert = alertProviderValue;
+  const { setAlert } = alertProviderValue;
 
   const {
     register,
@@ -66,7 +66,7 @@ export const AddService = () => {
               inputType="text"
               width="100%"
               error={errors?.errors?.name ? true : false}
-              {...register("name")}
+              register={register("name")}
             />
             {errors?.name &&
               errors?.name.map((e) => (
@@ -90,7 +90,7 @@ export const AddService = () => {
               inputType="text"
               width="100%"
               error={errors?.errors?.description ? true : false}
-              {...register("description")}
+              register={register("description")}
             />
             {errors?.errors?.description &&
               errors?.errors?.description.map((e) => (
@@ -114,7 +114,7 @@ export const AddService = () => {
               inputType="text"
               width="100%"
               error={errors?.errors?.category_id ? true : false}
-              {...register("category_id")}
+              register={register("category_id")}
             />
             {errors?.errors?.category_id &&
               errors?.errors?.category_id.map((e) => (
@@ -138,7 +138,7 @@ export const AddService = () => {
               inputType="text"
               width="100%"
               error={errors?.errors?.price ? true : false}
-              {...register("price")}
+              register={register("price")}
             />
             {errors?.errors?.price &&
               errors?.errors?.price.map((e) => (
@@ -162,7 +162,7 @@ export const AddService = () => {
               inputType="text"
               width="100%"
               error={errors?.errors?.type ? true : false}
-              {...register("type")}
+              register={register("type")}
             />
             {errors?.errors?.type &&
               errors?.errors?.type.map((e) => (
