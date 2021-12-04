@@ -22,6 +22,7 @@ export const AddService = () => {
 
   //* service adding function:
   const createService = async (data) => {
+    console.log(data);
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
         console.log(res.data.data);
@@ -66,10 +67,10 @@ export const AddService = () => {
               name="name"
               register={register("name")}
               width="100%"
-              error={errors?.errors?.name ? true : false}
+              error={errors?.name ? true : false}
             />
-            {errors?.errors?.name &&
-              errors?.errors?.name.map((e) => (
+            {errors?.name &&
+              errors?.name.map((e) => (
                 <Text className="text-left" color="red">
                   {e}
                 </Text>
@@ -87,7 +88,7 @@ export const AddService = () => {
           <label className="w-32 text-left text-gray-500 ">
             Description :
             <RegularInput
-              inputType="text"
+              inputtype="text"
               name="description"
               register={register("description")}
               width="100%"
@@ -112,7 +113,7 @@ export const AddService = () => {
           <label className="w-32 text-left text-gray-500 ">
             Category-Id :
             <RegularInput
-              inputType="text"
+              inputtype="text"
               register={register("category_id")}
               width="100%"
               error={errors?.errors?.category_id ? true : false}
@@ -136,7 +137,7 @@ export const AddService = () => {
           <label className="w-32 text-left text-gray-500 ">
             Price :
             <RegularInput
-              inputType="text"
+              inputtype="text"
               register={register("price")}
               width="100%"
               error={errors?.errors?.price ? true : false}
@@ -160,7 +161,7 @@ export const AddService = () => {
           <label className="w-32 text-left text-gray-500 ">
             Type:
             <RegularInput
-              inputType="text"
+              inputtype="text"
               register={register("type")}
               width="100%"
               error={errors?.errors?.type ? true : false}
