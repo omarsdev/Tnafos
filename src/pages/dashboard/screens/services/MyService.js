@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { FiEdit } from "react-icons/fi";
 import {
   Box,
@@ -70,7 +70,7 @@ export const MyService = () => {
   };
 
   //* service update function:
-  const onUpdateService = async (dataToBeUpdataed) => {
+  const onUpdateService = useCallback(async (dataToBeUpdataed) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(
@@ -94,7 +94,7 @@ export const MyService = () => {
           type: "error",
         });
       });
-  };
+  }, []);
 
   const onCancelHandler = () => {
     if (isUpdating) return;

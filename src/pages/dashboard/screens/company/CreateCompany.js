@@ -1,5 +1,5 @@
+import React, { useState, useContext, useCallback } from "react";
 import { Box, Text, Heading } from "@chakra-ui/react";
-import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../api/AxiosInstance";
@@ -19,25 +19,25 @@ export const CreateCompany = () => {
     formState: { errors },
   } = useForm();
 
-  const createCompany = async (input) => {
+  const createCompany = useCallback(async (input) => {
     await AxiosInstance.post("/api/dashboard/company/create", input)
       .then((res) => {
         console.log(res.data.data);
-        // setAlert({
-        //   message: "Company profile has been created!",
-        //   type: "success",
-        // });
-        // history.push("/dashboard/company");
+        setAlert({
+          message: "Company profile has been created!",
+          type: "success",
+        });
+        history.push("/dashboard/company");
       })
       .catch((err) => {
         console.log(err.response.data);
-        // setErr(err.response.data);
-        // setAlert({
-        //   message: ` ${err?.response?.data}`,
-        //   type: "error",
-        // });
+        setErr(err.response.data);
+        setAlert({
+          message: ` ${err?.response?.data}`,
+          type: "error",
+        });
       });
-  };
+  }, []);
 
   return (
     <Box borderRadius="lg" borderWidth="1px" boxSize="2xl" px="20" pt="5">

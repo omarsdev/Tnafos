@@ -26,6 +26,7 @@ import {
   SecondaryButton,
 } from "components";
 
+//* form validation rules
 const validationSchema = yup.object({
   password: yup
     .string()
@@ -61,9 +62,8 @@ export const CreateUser = () => {
   const [photo, setPhoto] = useState(null);
   let inputRef = useRef(null);
 
-  //* form validation rules
-
   //* get functions to build form with useForm() hook
+
   const {
     register,
     handleSubmit,
@@ -114,9 +114,7 @@ export const CreateUser = () => {
       })
       .catch((error) => {
         setIsUpdating(false);
-        // console.log(error.response.data.errors);
-        // setErr(error.response.data.errors);
-        // console.log("error");
+        setErr(error.response.data.errors);
         setAlert({
           message: `${error?.response?.data?.errors}`,
           type: "error",

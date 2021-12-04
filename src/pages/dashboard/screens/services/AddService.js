@@ -1,5 +1,5 @@
+import React, { useState, useContext, useCallback } from "react";
 import { HStack, Text, Box, Heading } from "@chakra-ui/react";
-import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
@@ -21,7 +21,7 @@ export const AddService = () => {
   const history = useHistory();
 
   //* service adding function:
-  const createService = async (data) => {
+  const createService = useCallback(async (data) => {
     console.log(data);
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
@@ -40,7 +40,7 @@ export const AddService = () => {
           type: "error",
         });
       });
-  };
+  }, []);
 
   const handleCancel = () => {
     history.push("/dashboard/service");

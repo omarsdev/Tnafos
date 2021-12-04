@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { useRouteMatch, useHistory, Switch, Route } from "react-router-dom";
 import { CompanyCard, CreateCompany } from "./";
 import {
@@ -44,9 +44,14 @@ export const CompanyHome = () => {
   const history = useHistory();
   const match = useRouteMatch();
 
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const [errors, setErrors] = useState(null);
+  const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
   const resetHooksForm = (data) => {
@@ -92,13 +97,13 @@ export const CompanyHome = () => {
   const onCancelHandler = () => {
     if (isUpdating) return;
     resetHooksForm(companyInfo);
-    setErrors(null);
+    setErr(null);
     onClose();
   };
 
   //* update company info:
-  const onUpdateCompany = async (dataToBeUpdated) => {
-    setErrors(null);
+  const onUpdateCompany = useCallback(async (dataToBeUpdated) => {
+    setErr(null);
     setIsUpdating(true);
     await AxiosInstance.put("/api/dashboard/company/update", dataToBeUpdated)
       .then((res) => {
@@ -111,13 +116,14 @@ export const CompanyHome = () => {
       })
       .catch((err) => {
         setIsUpdating(false);
-        setErrors(err.response.data);
+
+        setErr(err.response.data.errors);
         setAlert({
-          message: ` ${err.response.data}`,
+          message: ` ${err.response.data.message}`,
           type: "error",
         });
       });
-  };
+  }, []);
 
   useEffect(() => {
     showCompany();
@@ -242,6 +248,12 @@ export const CompanyHome = () => {
                             {e}
                           </Text>
                         ))}
+                      {err?.name &&
+                        err?.name.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
                   </Box>
 
@@ -257,6 +269,12 @@ export const CompanyHome = () => {
                       />
                       {errors?.errors?.type &&
                         errors?.errors?.type.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
+                      {err?.type &&
+                        err?.type.map((e) => (
                           <Text className="text-left" color="red">
                             {e}
                           </Text>
@@ -279,6 +297,12 @@ export const CompanyHome = () => {
                             {e}
                           </Text>
                         ))}
+                      {err?.cr &&
+                        err?.cr.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
                   </Box>
                   <Box className="mt-4">
@@ -292,6 +316,12 @@ export const CompanyHome = () => {
                       />
                       {errors?.errors?.vat &&
                         errors?.errors?.vat.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
+                      {err?.vat &&
+                        err?.vat.map((e) => (
                           <Text className="text-left" color="red">
                             {e}
                           </Text>
@@ -316,6 +346,12 @@ export const CompanyHome = () => {
                             {e}
                           </Text>
                         ))}
+                      {err?.establishment_year &&
+                        err?.establishment_year.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
                   </Box>
 
@@ -330,6 +366,12 @@ export const CompanyHome = () => {
                       />
                       {errors?.errors?.total_employees &&
                         errors?.errors?.total_employees.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
+                      {err?.total_employees &&
+                        err?.total_employees.map((e) => (
                           <Text className="text-left" color="red">
                             {e}
                           </Text>
@@ -352,6 +394,12 @@ export const CompanyHome = () => {
                             {e}
                           </Text>
                         ))}
+                      {err?.bio &&
+                        err?.bio.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
                   </Box>
 
@@ -366,6 +414,12 @@ export const CompanyHome = () => {
                       />
                       {errors?.errors?.telephone &&
                         errors?.errors?.telephone.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
+                      {err?.telephone &&
+                        err?.telephone.map((e) => (
                           <Text className="text-left" color="red">
                             {e}
                           </Text>
@@ -388,6 +442,12 @@ export const CompanyHome = () => {
                             {e}
                           </Text>
                         ))}
+                      {err?.fax &&
+                        err?.fax.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
                   </Box>
 
@@ -402,6 +462,12 @@ export const CompanyHome = () => {
                       />
                       {errors?.errors?.email &&
                         errors?.errors?.email.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
+                      {err?.email &&
+                        err?.email.map((e) => (
                           <Text className="text-left" color="red">
                             {e}
                           </Text>
@@ -424,6 +490,12 @@ export const CompanyHome = () => {
                             {e}
                           </Text>
                         ))}
+                      {err?.website &&
+                        err?.website.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
                   </Box>
 
@@ -438,6 +510,12 @@ export const CompanyHome = () => {
                       />
                       {errors?.errors?.city &&
                         errors?.errors?.city.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
+                      {err?.city &&
+                        err?.city.map((e) => (
                           <Text className="text-left" color="red">
                             {e}
                           </Text>
@@ -460,6 +538,12 @@ export const CompanyHome = () => {
                             {e}
                           </Text>
                         ))}
+                      {err?.po_box &&
+                        err?.po_box.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
                   </Box>
 
@@ -474,6 +558,12 @@ export const CompanyHome = () => {
                       />
                       {errors?.errors?.zip_code &&
                         errors?.errors?.zip_code.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
+                      {err?.zip_code &&
+                        err?.zip_code.map((e) => (
                           <Text className="text-left" color="red">
                             {e}
                           </Text>
@@ -496,6 +586,12 @@ export const CompanyHome = () => {
                             {e}
                           </Text>
                         ))}
+                      {err?.address &&
+                        err?.address.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
                     </label>
                   </Box>
 
@@ -510,6 +606,12 @@ export const CompanyHome = () => {
                       />
                       {errors?.errors?.location &&
                         errors?.errors?.location.map((e) => (
+                          <Text className="text-left" color="red">
+                            {e}
+                          </Text>
+                        ))}
+                      {err?.location &&
+                        err?.location.map((e) => (
                           <Text className="text-left" color="red">
                             {e}
                           </Text>
