@@ -1,3 +1,10 @@
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import {
   IconButton,
   Box,
@@ -18,7 +25,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
-import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
@@ -46,7 +52,7 @@ export const UserCard = () => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const [photo, setPhoto] = useState(null);
-  let inputRef = useRef(null);
+  // let inputRef = useRef(null);
 
   const resetHooksForm = (data) => {
     reset({
@@ -70,7 +76,7 @@ export const UserCard = () => {
       });
   };
 
-  const onUpdateUserInfo = async (data) => {
+  const onUpdateUserInfo = useCallback(async (data) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(`/api/dashboard/user/${uuid}/update`, data)
@@ -93,7 +99,7 @@ export const UserCard = () => {
           type: "error",
         });
       });
-  };
+  }, []);
 
   const onCancelHandler = () => {
     if (isUpdating) return;
