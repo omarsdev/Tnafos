@@ -212,10 +212,9 @@ export const MyService = () => {
                   <RegularInput
                     placeHolder="price"
                     inputType="text"
-                    name="price"
-                    register={register("price")}
                     width="100%"
                     error={errors?.errors?.price ? true : false}
+                    {...register("price")}
                   />
                   {errors && errors?.errors && errors?.errors?.price && (
                     <Text className="text-left" color="red">
@@ -230,11 +229,9 @@ export const MyService = () => {
                   <RegularInput
                     placeHolder="type"
                     inputType="text"
-                    width="180px"
-                    name="type"
-                    register={register("type")}
                     width="100%"
                     error={errors?.errors?.type ? true : false}
+                    {...register("type")}
                   />
                   {errors && errors?.errors && errors?.errors?.type && (
                     <Text className="text-left" color="red">

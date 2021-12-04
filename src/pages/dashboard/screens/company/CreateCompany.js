@@ -52,11 +52,9 @@ export const CreateCompany = () => {
             Company Name :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="name"
-              register={register}
               width="100%"
               error={err?.err?.name ? true : false}
+              {...register("name")}
             />
             {err && err?.name && (
               <Text className="text-left" color="red">
@@ -71,11 +69,9 @@ export const CreateCompany = () => {
             Type :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="type"
-              register={register}
               width="100%"
               error={err?.err?.type ? true : false}
+              {...register("type")}
             />
             {err && err?.type && (
               <Text className="text-left" color="red">
@@ -90,11 +86,9 @@ export const CreateCompany = () => {
             Cr Number :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="cr"
-              register={register}
               width="100%"
               error={err?.err?.cr ? true : false}
+              {...register("cr")}
             />
             {err && err?.cr && (
               <Text className="text-left" color="red">
@@ -109,11 +103,9 @@ export const CreateCompany = () => {
             VAT Number :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="vat"
-              register={register}
               width="100%"
               error={err?.err?.vat ? true : false}
+              {...register("vat")}
             />
             {err && err?.vat && (
               <Text className="text-left" color="red">
@@ -128,11 +120,9 @@ export const CreateCompany = () => {
             Establishment Year :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="establishment_year"
-              register={register}
               width="100%"
               error={err?.err?.establishment_year ? true : false}
+              {...register("establishment_year")}
             />
             {err && err?.establishment_year && (
               <Text className="text-left" color="red">
@@ -147,11 +137,9 @@ export const CreateCompany = () => {
             Total Employees :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="total_employees"
-              register={register}
               width="100%"
               error={err?.err?.total_employees ? true : false}
+              {...register("total_employees")}
             />
             {err && err?.total_employees && (
               <Text className="text-left" color="red">
@@ -166,11 +154,9 @@ export const CreateCompany = () => {
             Bio :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="bio"
-              register={register}
               width="100%"
               error={err?.err?.bio ? true : false}
+              {...register("bio")}
             />
             {err && err?.bio && (
               <Text className="text-left" color="red">
@@ -185,11 +171,9 @@ export const CreateCompany = () => {
             Telephone :
             <RegularInput
               inputType="number"
-              width="180px"
-              name="telephone"
-              register={register}
               width="100%"
               error={err?.err?.telephone ? true : false}
+              {...register("telephone")}
             />
             {err && err?.telephone && (
               <Text className="text-left" color="red">
@@ -204,11 +188,9 @@ export const CreateCompany = () => {
             Fax :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="fax"
-              register={register}
               width="100%"
               error={err?.err?.fax ? true : false}
+              {...register("fax")}
             />
             {err && err?.fax && (
               <Text className="text-left" color="red">
@@ -223,11 +205,9 @@ export const CreateCompany = () => {
             E-mail :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="email"
-              register={register}
               width="100%"
               error={err?.err?.email ? true : false}
+              {...register("email")}
             />
             {err && err?.email && (
               <Text className="text-left" color="red">
@@ -242,11 +222,9 @@ export const CreateCompany = () => {
             Website :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="website"
-              register={register}
               width="100%"
               error={err?.err?.website ? true : false}
+              {...register("website")}
             />
             {err && err?.website && (
               <Text className="text-left" color="red">
@@ -261,11 +239,9 @@ export const CreateCompany = () => {
             Country-Id :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="country_id"
-              register={register}
               width="100%"
               error={err?.err?.country_id ? true : false}
+              {...register("country_id")}
             />
             {err && err?.country_id && (
               <Text className="text-left" color="red">
@@ -280,11 +256,9 @@ export const CreateCompany = () => {
             City :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="city"
-              register={register}
               width="100%"
               error={err?.err?.city ? true : false}
+              {...register("city")}
             />
             {err && err?.city && (
               <Text className="text-left" color="red">
@@ -299,11 +273,9 @@ export const CreateCompany = () => {
             po-Box :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="po_box"
-              register={register}
               width="100%"
               error={err?.err?.po_box ? true : false}
+              {...register("po_box")}
             />
             {err && err?.po_box && (
               <Text className="text-left" color="red">
@@ -318,11 +290,9 @@ export const CreateCompany = () => {
             ZIP-Code :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="zip_code"
-              register={register}
               width="100%"
               error={err?.err?.zip_code ? true : false}
+              {...register("zip_code")}
             />
             {err && err?.zip_code && (
               <Text className="text-left" color="red">
@@ -337,11 +307,9 @@ export const CreateCompany = () => {
             Address :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="address"
-              register={register}
               width="100%"
               error={err?.err?.address ? true : false}
+              {...register("address")}
             />
             {err && err?.address && (
               <Text className="text-left" color="red">
@@ -356,11 +324,9 @@ export const CreateCompany = () => {
             Location :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="location"
-              register={register}
               width="100%"
               error={err?.err?.location ? true : false}
+              {...register("location")}
             />
             {err && err?.location && (
               <Text className="text-left" color="red">
@@ -375,11 +341,9 @@ export const CreateCompany = () => {
             Logo :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="logo"
-              register={register}
               width="100%"
               error={err?.err?.logo ? true : false}
+              {...register("logo")}
             />
             {err && err?.logo && (
               <Text className="text-left" color="red">
@@ -394,11 +358,9 @@ export const CreateCompany = () => {
             Category-Id :
             <RegularInput
               inputType="text"
-              width="180px"
-              name="category_id"
-              register={register}
               width="100%"
               error={err?.err?.category_id ? true : false}
+              {...register("category_id")}
             />
             {err && err?.category_id && (
               <Text className="text-left" color="red">

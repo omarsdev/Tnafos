@@ -233,10 +233,9 @@ export const CompanyHome = () => {
                       <RegularInput
                         placeHolder="Enter your company name here"
                         inputType="text"
-                        name="name"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.name ? true : false}
+                        {...register("name")}
                       />
                       {errors?.errors?.name &&
                         errors?.errors?.name.map((e) => (
@@ -253,10 +252,9 @@ export const CompanyHome = () => {
                       <RegularInput
                         placeHolder="enter type"
                         inputType="text"
-                        name="type"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.type ? true : false}
+                        {...register("type")}
                       />
                       {errors?.errors?.type &&
                         errors?.errors?.type.map((e) => (
@@ -272,10 +270,9 @@ export const CompanyHome = () => {
                       CR Number :
                       <RegularInput
                         inputType="text"
-                        name="cr"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.cr ? true : false}
+                        {...register("cr")}
                       />
                       {errors?.errors?.cr &&
                         errors?.errors?.cr.map((e) => (
@@ -290,10 +287,9 @@ export const CompanyHome = () => {
                       VAT Number :
                       <RegularInput
                         inputType="text"
-                        name="vat"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.vat ? true : false}
+                        {...register("vat")}
                       />
                       {errors?.errors?.vat &&
                         errors?.errors?.vat.map((e) => (
@@ -309,12 +305,11 @@ export const CompanyHome = () => {
                       Establishment Year :
                       <RegularInput
                         inputType="text"
-                        name="establishment_year"
-                        register={register}
                         width="100%"
                         error={
                           errors?.errors?.establishment_year ? true : false
                         }
+                        {...register("establishment_year")}
                       />
                       {errors?.errors?.establishment_year &&
                         errors?.errors?.establishment_year.map((e) => (
@@ -330,10 +325,9 @@ export const CompanyHome = () => {
                       Total Employees :
                       <RegularInput
                         inputType="text"
-                        name="total_employees"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.total_employees ? true : false}
+                        {...register("total_employees")}
                       />
                       {errors?.errors?.total_employees &&
                         errors?.errors?.total_employees.map((e) => (
@@ -349,10 +343,9 @@ export const CompanyHome = () => {
                       Bio :
                       <RegularInput
                         inputType="text"
-                        name="bio"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.bio ? true : false}
+                        {...register("bio")}
                       />
                       {errors?.errors?.bio &&
                         errors?.errors?.bio.map((e) => (
@@ -368,10 +361,9 @@ export const CompanyHome = () => {
                       Telephone :
                       <RegularInput
                         inputType="text"
-                        name="telephone"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.telephone ? true : false}
+                        {...register("telephone")}
                       />
                       {errors?.errors?.telephone &&
                         errors?.errors?.telephone.map((e) => (
@@ -387,10 +379,9 @@ export const CompanyHome = () => {
                       Fax :
                       <RegularInput
                         inputType="text"
-                        name="fax"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.fax ? true : false}
+                        {...register("fax")}
                       />
                       {errors?.errors?.fax &&
                         errors?.errors?.fax.map((e) => (
@@ -406,10 +397,9 @@ export const CompanyHome = () => {
                       E-mail :
                       <RegularInput
                         inputType="text"
-                        name="email"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.email ? true : false}
+                        {...register("email")}
                       />
                       {errors?.errors?.email &&
                         errors?.errors?.email.map((e) => (
@@ -425,10 +415,9 @@ export const CompanyHome = () => {
                       Website :
                       <RegularInput
                         inputType="text"
-                        name="website"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.website ? true : false}
+                        {...register("website")}
                       />
                       {errors?.errors?.website &&
                         errors?.errors?.website.map((e) => (
@@ -444,10 +433,9 @@ export const CompanyHome = () => {
                       City :
                       <RegularInput
                         inputType="text"
-                        name="city"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.city ? true : false}
+                        {...register("city")}
                       />
                       {errors?.errors?.city &&
                         errors?.errors?.city.map((e) => (
@@ -463,10 +451,9 @@ export const CompanyHome = () => {
                       po_box :
                       <RegularInput
                         inputType="text"
-                        name="po_box"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.po_box ? true : false}
+                        {...register("po_box")}
                       />
                       {errors?.errors?.po_box &&
                         errors?.errors?.po_box.map((e) => (
@@ -482,10 +469,9 @@ export const CompanyHome = () => {
                       ZIP-code :
                       <RegularInput
                         inputType="text"
-                        name="zip_code"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.zip_code ? true : false}
+                        {...register("zip_code")}
                       />
                       {errors?.errors?.zip_code &&
                         errors?.errors?.zip_code.map((e) => (
@@ -501,10 +487,9 @@ export const CompanyHome = () => {
                       Address :
                       <RegularInput
                         inputType="text"
-                        name="address"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.address ? true : false}
+                        {...register("address")}
                       />
                       {errors?.errors?.address &&
                         errors?.errors?.address.map((e) => (
@@ -520,10 +505,9 @@ export const CompanyHome = () => {
                       Location :
                       <RegularInput
                         inputType="text"
-                        name="location"
-                        register={register}
                         width="100%"
                         error={errors?.errors?.location ? true : false}
+                        {...register("location")}
                       />
                       {errors?.errors?.location &&
                         errors?.errors?.location.map((e) => (

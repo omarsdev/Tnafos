@@ -149,11 +149,10 @@ export const CreateUser = () => {
               First Name :
               <RegularInput
                 placeHolder="first name"
-                inputtype="text"
-                width="180px"
-                register={register("first_name")}
+                inputType="text"
                 width="100%"
                 error={err?.first_name?.message ? true : false}
+                {...register("first_name")}
               />
               {err && err?.first_name && (
                 <Text className="text-left" color="red">
@@ -162,16 +161,15 @@ export const CreateUser = () => {
               )}
             </label>
           </Box>
-
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Last Name :
               <RegularInput
                 placeHolder="last name"
-                inputtype="text"
+                inputType="text"
                 width="100%"
                 error={err?.last_name ? true : false}
-                register={register("last_name")}
+                {...register("last_name")}
               />
               {err && err?.last_name && (
                 <Text className="text-left" color="red">
@@ -180,16 +178,15 @@ export const CreateUser = () => {
               )}
             </label>
           </Box>
-
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Email :
               <RegularInput
                 placeHolder="Enter email"
-                inputtype="text"
+                inputType="text"
                 width="100%"
                 error={err?.email ? true : false}
-                register={register("email")}
+                {...register("email")}
               />
               {err && err?.email && (
                 <Text className="text-left" color="red">
@@ -198,7 +195,6 @@ export const CreateUser = () => {
               )}
             </label>
           </Box>
-
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Password :
@@ -206,7 +202,7 @@ export const CreateUser = () => {
                 placeHolder="password"
                 className="w-64"
                 error={err?.password ? true : false}
-                register={register("password")}
+                {...register("password")}
               />
               {err && err?.password && (
                 <Text className="text-left" color="red">
@@ -215,16 +211,15 @@ export const CreateUser = () => {
               )}
             </label>
           </Box>
-
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Confirm Password :
               <PasswordInput
                 placeHolder="confirm your password"
-                inputtype="password"
+                inputType="password"
                 width="100%"
                 error={err?.password_confirmation ? true : false}
-                register={register("password_confirmation")}
+                {...register("password_confirmation")}
               />
               {err && err?.password_confirmation?.message && (
                 <Text className="text-left" color="red">
@@ -233,17 +228,15 @@ export const CreateUser = () => {
               )}
             </label>
           </Box>
-
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Phone Number :
               <RegularInput
                 placeHolder="phone number"
-                inputtype="number"
-                width="381px"
+                inputType="number"
                 width="100%"
                 error={err?.phone_number ? true : false}
-                register={register("phone_number")}
+                {...register("phone_number")}
               />
               {err && err?.phone_number && (
                 <Text className="text-left" color="red">
@@ -252,7 +245,7 @@ export const CreateUser = () => {
               )}
             </label>
           </Box>
-
+          s
           <Box className="flex flex-col items-center gap-2 mt-5">
             <Heading fontSize="2xl" color="gray.500" fontWeight="normal">
               Terms and Conditions agreement

@@ -59,10 +59,9 @@ export const AddService = () => {
             Name of service :
             <RegularInput
               inputType="text"
-              name="name"
-              register={register}
               width="100%"
               error={errors?.errors?.name ? true : false}
+              {...register("name")}
             />
             {errors && errors?.errors && errors?.errors?.name && (
               <Text className="text-left" color="red">
@@ -77,10 +76,9 @@ export const AddService = () => {
             Description :
             <RegularInput
               inputType="text"
-              name="description"
-              register={register}
               width="100%"
               error={errors?.errors?.description ? true : false}
+              {...register("description")}
             />
             {errors && errors?.errors && errors?.errors?.description && (
               <Text className="text-left" color="red">
@@ -95,10 +93,9 @@ export const AddService = () => {
             Category-Id :
             <RegularInput
               inputType="text"
-              name="category_id"
-              register={register}
               width="100%"
               error={errors?.errors?.category_id ? true : false}
+              {...register("category_id")}
             />
             {errors && errors?.errors && errors?.errors?.category_id && (
               <Text className="text-left" color="red">
@@ -113,10 +110,9 @@ export const AddService = () => {
             Price :
             <RegularInput
               inputType="text"
-              name="price"
-              register={register}
               width="100%"
               error={errors?.errors?.price ? true : false}
+              {...register("price")}
             />
             {errors && errors?.errors && errors?.errors?.price && (
               <Text className="text-left" color="red">
@@ -131,10 +127,9 @@ export const AddService = () => {
             Type:
             <RegularInput
               inputType="text"
-              name="type"
-              register={register}
               width="100%"
               error={errors?.errors?.type ? true : false}
+              {...register("type")}
             />
             {errors && errors?.errors && errors?.errors?.type && (
               <Text className="text-left" color="red">

@@ -77,9 +77,8 @@ export const Register = () => {
                       placeHolder="First name"
                       inputType="text"
                       width="180px"
-                      name="first_name"
-                      register={register}
                       error={error?.errors?.first_name ? true : false}
+                      {...register("first_name")}
                     />
                     {error?.errors?.first_name &&
                       error?.errors?.first_name.map((e) => (
@@ -94,9 +93,8 @@ export const Register = () => {
                       placeHolder="Last name"
                       inputType="text"
                       width="180px"
-                      name="last_name"
-                      register={register}
                       error={error?.errors?.last_name ? true : false}
+                      {...register("last_name")}
                     />
                     {error?.errors?.last_name &&
                       error?.errors?.last_name.map((e) => (
@@ -110,9 +108,8 @@ export const Register = () => {
                   <RegularInput
                     placeHolder="Email"
                     inputType="email"
-                    name="email"
-                    register={register}
                     error={error?.errors?.email ? true : false}
+                    {...register("email")}
                   />
                   {error?.errors?.email &&
                     error?.errors?.email.map((e) => (
@@ -121,16 +118,14 @@ export const Register = () => {
                 </Box>
                 <PasswordInput
                   placeHolder="Password"
-                  name="password"
-                  register={register}
                   error={error?.errors?.password ? true : false}
+                  {...register("password")}
                 />
                 <Box>
                   <PasswordInput
                     placeHolder="Confirm password"
-                    name="password_confirmation"
-                    register={register}
                     error={error?.errors?.password ? true : false}
+                    {...register("password_confirmation")}
                   />
                   {error?.errors?.password &&
                     error?.errors?.password.map((e) => (
@@ -154,9 +149,8 @@ export const Register = () => {
                     <RegularInput
                       placeHolder="Mobile"
                       inputType="tel"
-                      name="phone_number"
-                      register={register}
                       error={error?.errors?.phone_number ? true : false}
+                      {...register("phone_number")}
                     />
                   </InputGroup>
                   {error?.errors?.phone_number &&
