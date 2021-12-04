@@ -85,8 +85,9 @@ export const UserCard = () => {
       })
       .catch((err) => {
         console.log(err);
-        // setIsUpdating(false);
+        setIsUpdating(false);
         setErrors(err.response.data);
+        console.log(err.response.data);
         setAlert({
           message: `${err.response.data}`,
           type: "error",

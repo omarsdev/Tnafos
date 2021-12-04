@@ -64,7 +64,11 @@ export const CreateUser = () => {
   //* form validation rules
 
   //* get functions to build form with useForm() hook
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
@@ -97,21 +101,20 @@ export const CreateUser = () => {
 
   //* onSubmit function:
   const addUser = async (userData) => {
-    // console.log(userData);
-    // console.log(err);
-
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
-        history.push("/dashboard/user");
+        console.log(res.data.data);
         setAlert({
           message: `New user has been added!`,
           type: "success",
         });
+        history.push("/dashboard/user");
       })
       .catch((error) => {
-        setErr(error.response.data);
+        // console.log(error.response.data.errors);
+        setErr(error.response.data.errors);
         setAlert({
-          message: `${error?.response?.data}`,
+          message: `${error?.response?.data?.errors}`,
           type: "error",
         });
       });
@@ -154,11 +157,12 @@ export const CreateUser = () => {
                 error={err?.first_name?.message ? true : false}
                 {...register("first_name")}
               />
-              {err && err?.first_name && (
+              {errors && errors?.first_name && (
                 <Text className="text-left" color="red">
-                  {err?.first_name?.message}
+                  {errors?.first_name?.message}
                 </Text>
               )}
+              <Text>{err?.first_name}</Text>
             </label>
           </Box>
           <Box className="mt-4">
@@ -171,11 +175,12 @@ export const CreateUser = () => {
                 error={err?.last_name ? true : false}
                 {...register("last_name")}
               />
-              {err && err?.last_name && (
+              {errors && errors?.last_name && (
                 <Text className="text-left" color="red">
-                  {err?.last_name?.message}
+                  {errors?.last_name?.message}
                 </Text>
               )}
+              <Text>{err?.last_name}</Text>
             </label>
           </Box>
           <Box className="mt-4">
@@ -188,11 +193,12 @@ export const CreateUser = () => {
                 error={err?.email ? true : false}
                 {...register("email")}
               />
-              {err && err?.email && (
+              {errors && errors?.email && (
                 <Text className="text-left" color="red">
-                  {err?.email.message}
+                  {errors?.email.message}
                 </Text>
               )}
+              <Text>{err?.email}</Text>
             </label>
           </Box>
           <Box className="mt-4">
@@ -204,11 +210,12 @@ export const CreateUser = () => {
                 error={err?.password ? true : false}
                 {...register("password")}
               />
-              {err && err?.password && (
+              {errors && errors?.password && (
                 <Text className="text-left" color="red">
-                  {err?.password?.message}
+                  {errors?.password?.message}
                 </Text>
               )}
+              <Text>{err?.password}</Text>
             </label>
           </Box>
           <Box className="mt-4">
@@ -221,11 +228,12 @@ export const CreateUser = () => {
                 error={err?.password_confirmation ? true : false}
                 {...register("password_confirmation")}
               />
-              {err && err?.password_confirmation?.message && (
+              {errors && errors?.password_confirmation?.message && (
                 <Text className="text-left" color="red">
-                  {err?.password_confirmation?.message}
+                  {errors?.password_confirmation?.message}
                 </Text>
               )}
+              <Text>{err?.password_confirmation}</Text>
             </label>
           </Box>
           <Box className="mt-4">
@@ -238,11 +246,12 @@ export const CreateUser = () => {
                 error={err?.phone_number ? true : false}
                 {...register("phone_number")}
               />
-              {err && err?.phone_number && (
+              {errors && errors?.phone_number && (
                 <Text className="text-left" color="red">
-                  {err?.phone_number?.message}
+                  {errors?.phone_number?.message}
                 </Text>
               )}
+              <Text>{err?.phone_number}</Text>
             </label>
           </Box>
           s

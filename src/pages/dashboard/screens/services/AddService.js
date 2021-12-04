@@ -11,13 +11,18 @@ export const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const setAlert = alertProviderValue;
 
-  const { register, handleSubmit } = useForm();
-  const [errors, setErrors] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [err, setErr] = useState(null);
 
   const history = useHistory();
 
   //* service adding function:
   const createService = async (data) => {
+    console.log(data);
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
         console.log(res.data.data);
@@ -29,11 +34,11 @@ export const AddService = () => {
       })
       .catch((err) => {
         console.log(err.response.data.errors);
+        setErr(err?.response?.data.errors);
         setAlert({
-          message: "SOMETHING WRONG.",
+          message: `${err.response.data.message}`,
           type: "error",
         });
-        setErrors(err?.response?.data);
       });
   };
 
@@ -63,11 +68,18 @@ export const AddService = () => {
               error={errors?.errors?.name ? true : false}
               {...register("name")}
             />
-            {errors && errors?.errors && errors?.errors?.name && (
-              <Text className="text-left" color="red">
-                {errors?.errors?.name}
-              </Text>
-            )}
+            {errors?.name &&
+              errors?.name.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+            {err?.name &&
+              err?.name.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -80,11 +92,18 @@ export const AddService = () => {
               error={errors?.errors?.description ? true : false}
               {...register("description")}
             />
-            {errors && errors?.errors && errors?.errors?.description && (
-              <Text className="text-left" color="red">
-                {errors?.errors?.description}
-              </Text>
-            )}
+            {errors?.errors?.description &&
+              errors?.errors?.description.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+            {err?.name &&
+              err?.description.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -97,11 +116,18 @@ export const AddService = () => {
               error={errors?.errors?.category_id ? true : false}
               {...register("category_id")}
             />
-            {errors && errors?.errors && errors?.errors?.category_id && (
-              <Text className="text-left" color="red">
-                {errors?.errors?.category_id}
-              </Text>
-            )}
+            {errors?.errors?.category_id &&
+              errors?.errors?.category_id.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+            {err?.name &&
+              err?.category_id.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -114,11 +140,18 @@ export const AddService = () => {
               error={errors?.errors?.price ? true : false}
               {...register("price")}
             />
-            {errors && errors?.errors && errors?.errors?.price && (
-              <Text className="text-left" color="red">
-                {errors?.errors?.price}
-              </Text>
-            )}
+            {errors?.errors?.price &&
+              errors?.errors?.price.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+            {err?.name &&
+              err?.price.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -131,11 +164,18 @@ export const AddService = () => {
               error={errors?.errors?.type ? true : false}
               {...register("type")}
             />
-            {errors && errors?.errors && errors?.errors?.type && (
-              <Text className="text-left" color="red">
-                {errors?.errors?.type}
-              </Text>
-            )}
+            {errors?.errors?.type &&
+              errors?.errors?.type.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
+            {err?.name &&
+              err?.type.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
         <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
