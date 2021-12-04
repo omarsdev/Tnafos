@@ -18,11 +18,12 @@ export const CreateCompany = () => {
   const createCompany = async (input) => {
     await AxiosInstance.post("/api/dashboard/company/create", input)
       .then((res) => {
-        setAlert({
-          message: "Company profile has been created!",
-          type: "success",
-        });
-        history.push("/dashboard/company");
+        console.log(res.data.data);
+        // setAlert({
+        //   message: "Company profile has been created!",
+        //   type: "success",
+        // });
+        // history.push("/dashboard/company");
       })
       .catch((err) => {
         console.log(err.response.data);

@@ -36,7 +36,7 @@ export const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm();
 
@@ -78,7 +78,7 @@ export const Register = () => {
                       inputType="text"
                       width="180px"
                       name="first_name"
-                      register={register}
+                      register={register("first_name")}
                       error={error?.errors?.first_name ? true : false}
                     />
                     {error?.errors?.first_name &&
@@ -95,7 +95,7 @@ export const Register = () => {
                       inputType="text"
                       width="180px"
                       name="last_name"
-                      register={register}
+                      register={register("last_name")}
                       error={error?.errors?.last_name ? true : false}
                     />
                     {error?.errors?.last_name &&
@@ -111,7 +111,7 @@ export const Register = () => {
                     placeHolder="Email"
                     inputType="email"
                     name="email"
-                    register={register}
+                    register={register("email")}
                     error={error?.errors?.email ? true : false}
                   />
                   {error?.errors?.email &&
@@ -122,14 +122,14 @@ export const Register = () => {
                 <PasswordInput
                   placeHolder="Password"
                   name="password"
-                  register={register}
+                  register={register("password")}
                   error={error?.errors?.password ? true : false}
                 />
                 <Box>
                   <PasswordInput
                     placeHolder="Confirm password"
                     name="password_confirmation"
-                    register={register}
+                    register={register("password_confirmation")}
                     error={error?.errors?.password ? true : false}
                   />
                   {error?.errors?.password &&
@@ -155,7 +155,7 @@ export const Register = () => {
                       placeHolder="Mobile"
                       inputType="tel"
                       name="phone_number"
-                      register={register}
+                      register={register("phone_number")}
                       error={error?.errors?.phone_number ? true : false}
                     />
                   </InputGroup>

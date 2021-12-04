@@ -35,7 +35,7 @@ export const AddService = () => {
         console.log(err.response.data.errors);
         setErr(err?.response?.data?.errors);
         setAlert({
-          message: "SOMETHING WRONG.",
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });
@@ -62,17 +62,18 @@ export const AddService = () => {
           <label className="w-32 text-left text-gray-500 ">
             Name of service :
             <RegularInput
-              inputType="text"
+              inputtype="text"
               name="name"
               register={register("name")}
               width="100%"
               error={errors?.errors?.name ? true : false}
             />
-            {errors && errors?.errors && errors?.errors?.name && (
-              <Text className="text-left" color="red">
-                {errors?.errors?.name}
-              </Text>
-            )}
+            {errors?.errors?.name &&
+              errors?.errors?.name.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -84,13 +85,14 @@ export const AddService = () => {
               name="description"
               register={register("description")}
               width="100%"
-              error={errors?.description ? true : false}
+              error={errors?.errors?.description ? true : false}
             />
-            {errors && errors?.description && (
-              <Text className="text-left" color="red">
-                {errors?.description}
-              </Text>
-            )}
+            {errors?.errors?.description &&
+              errors?.errors?.description.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -99,16 +101,16 @@ export const AddService = () => {
             Category-Id :
             <RegularInput
               inputType="text"
-              name="category_id"
-              register={register("category_is")}
+              register={register("category_id")}
               width="100%"
-              error={errors?.category_id ? true : false}
+              error={errors?.errors?.category_id ? true : false}
             />
-            {errors && errors?.category_id && (
-              <Text className="text-left" color="red">
-                {errors?.category_id}
-              </Text>
-            )}
+            {errors?.errors?.category_id &&
+              errors?.errors?.category_id.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -117,16 +119,16 @@ export const AddService = () => {
             Price :
             <RegularInput
               inputType="text"
-              name="price"
               register={register("price")}
               width="100%"
-              error={errors?.price ? true : false}
+              error={errors?.errors?.price ? true : false}
             />
-            {errors && errors?.price && (
-              <Text className="text-left" color="red">
-                {errors?.price}
-              </Text>
-            )}
+            {errors?.errors?.price &&
+              errors?.errors?.price.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
 
@@ -135,16 +137,16 @@ export const AddService = () => {
             Type:
             <RegularInput
               inputType="text"
-              name="type"
               register={register("type")}
               width="100%"
-              error={errors?.type ? true : false}
+              error={errors?.errors?.type ? true : false}
             />
-            {errors && errors?.type && (
-              <Text className="text-left" color="red">
-                {errors?.type}
-              </Text>
-            )}
+            {errors?.errors?.type &&
+              errors?.errors?.type.map((e) => (
+                <Text className="text-left" color="red">
+                  {e}
+                </Text>
+              ))}
           </label>
         </Box>
         <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
