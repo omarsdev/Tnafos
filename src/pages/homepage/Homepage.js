@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import {
   Box,
-  HStack,
+  Stack,
   Center,
   InputGroup,
   Input,
@@ -71,15 +71,23 @@ export const Homepage = () => {
       ) : (
         <>
           <Navbar />
-          <Center h="92vh" w="100%">
+          <Center h="92vh">
             <VStack spacing={10}>
               <TnafosHomeLogo />
-
-              <InputGroup size="lg">
+              <InputGroup
+                alignItems={"center"}
+                justifyContent={"center"}
+                size="lg"
+              >
                 <Input
-                  w={"40vw"}
-                  borderBottomLeftRadius={20}
-                  borderTopLeftRadius={20}
+                  width={{
+                    base: "18em",
+                    sm: "22em",
+                    md: "28em",
+                    lg: "32em",
+                  }}
+                  borderBottomLeftRadius={"99em"}
+                  borderTopLeftRadius={"99em"}
                   focusBorderColor="#F8B916"
                   borderColor="#AEAEAE"
                   value={searchInput}
@@ -89,21 +97,27 @@ export const Homepage = () => {
                 <InputRightAddon
                   children={<SearchIcon color="white" />}
                   cursor={"pointer"}
-                  borderBottomRightRadius={20}
-                  borderTopRightRadius={20}
+                  borderBottomRightRadius={"99em"}
+                  borderTopRightRadius={"99em"}
                   bgColor={"#F8B916"}
                   borderColor={"#F8B916"}
                   onClick={searchHandler}
                 />
               </InputGroup>
-              <HStack spacing={10}>
+              <Stack
+                direction={["column", "row"]}
+                justify={"center"}
+                spacing={"2em"}
+                shouldWrapChildren={true}
+                wrap={"flexWrap"}
+              >
                 <h1>Products</h1>
                 <h1>Services</h1>
                 <h1>Categories</h1>
                 <h1>Blog</h1>
-                <h1>GitHup</h1>
-                <h1>Forge</h1>
-              </HStack>
+                <h1>GitHub</h1>
+                {/* <h1>Forge</h1> */}
+              </Stack>
             </VStack>
           </Center>
         </>

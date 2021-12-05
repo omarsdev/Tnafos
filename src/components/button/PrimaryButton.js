@@ -3,11 +3,13 @@ import React, { useRef, useEffect, useState } from "react";
 import { Box, Button, Text } from "@chakra-ui/react";
 
 export const PrimaryButton = ({
+  width = { base: "7em", sm: "7em", md: "8em", lg: "9em", xl: "9em" },
+  height = { base: "2.5em", sm: "2.5em", md: "3em", lg: "3em", xl: "3em" },
+  type = "button",
   name,
-  buttonType,
   Logo,
   loadingButton,
-  ...buttonProps
+  ...props
 }) => {
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +17,7 @@ export const PrimaryButton = ({
 
   const handleClick = (event) => {
     if (ref.current && ref.current.contains(event.target)) {
-      buttonProps.onClick && buttonProps.onClick();
+      props.onClick && props.onClick();
       setLoading(!loading);
     }
   };
@@ -32,22 +34,20 @@ export const PrimaryButton = ({
       className="info-box"
       ref={ref}
       isLoading={
-        buttonType && (loadingButton || !loadingButton)
-          ? loadingButton
-          : loading
+        type && (loadingButton || !loadingButton) ? loadingButton : loading
       }
       loadingText="Loading"
-      width="120px"
-      height="40px"
-      backgroundColor="#F8B916"
-      _hover={{ bg: "#D59B06" }}
-      borderRadius="30px"
-      color="white"
+      width={width}
+      height={height}
+      backgroundColor="brand.primary"
+      _hover={{ bg: "primary.600" }}
+      borderRadius="99em"
+      color="brand.white"
       _focus={{
         outline: "none",
       }}
-      type={buttonType ? buttonType : "button"}
-      {...buttonProps}
+      type={type}
+      {...props}
     >
       {Logo && (
         <Box mx={15}>

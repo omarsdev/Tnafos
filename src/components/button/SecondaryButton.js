@@ -1,12 +1,13 @@
 import React, { useRef, useEffect, useState } from "react";
 
-import { Button } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 
 export const SecondaryButton = ({
   name,
-  btnWidth,
-  btnHeight,
-  btnBg,
+  width = { base: "7em", sm: "7em", md: "8em", lg: "9em", xl: "9em" },
+  height = { base: "2.5em", sm: "2.5em", md: "3em", lg: "3em", xl: "3em" },
+  backgroundColor = "#ffffff",
+  borderRadius = "99em",
   buttonType,
   loadingButton,
   ...buttonProps
@@ -38,14 +39,14 @@ export const SecondaryButton = ({
           : loading
       }
       loadingText="Loading"
-      width={!btnWidth ? "120px" : btnWidth}
-      height={!btnHeight ? "40px" : btnHeight}
+      width={width}
+      height={height}
       borderColor="#F8B916"
       borderWidth="2px"
-      backgroundColor={!btnBg ? "white" : btnBg}
-      borderRadius="30px"
-      color="black"
-      _hover={{ bg: "#F8B916", color: "white" }}
+      backgroundColor={backgroundColor}
+      borderRadius={borderRadius}
+      color="primary"
+      _hover={{ bg: "#F8B916", color: "#ffffff" }}
       _focus={{
         outline: "none",
       }}
