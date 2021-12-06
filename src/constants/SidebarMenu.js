@@ -1,12 +1,21 @@
 import React from "react";
 
-import { FiHome } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
+import { HiOutlineUserGroup } from "react-icons/hi";
+
+import { BiCog, BiUser, BiLineChart } from "react-icons/bi";
+import { BsListCheck, BsCurrencyExchange } from "react-icons/bs";
+
+import { VscTools } from "react-icons/vsc";
+import { GiMoneyStack } from "react-icons/gi";
+
+import { ImLibrary } from "react-icons/im";
 
 export const SidebarMenu = [
   {
     id: 0,
     title: "Dashboard",
-    icon: <FiHome />,
+    icon: <FiMenu />,
     to: "/",
     heading: null,
   },
@@ -18,7 +27,7 @@ export const SidebarMenu = [
       {
         id: 0,
         title: "Company",
-        icon: <FiHome />,
+        icon: <ImLibrary />,
         to: "/company",
         // submenu: [
         //   {
@@ -34,7 +43,7 @@ export const SidebarMenu = [
       {
         id: 1,
         title: "Users",
-        icon: <FiHome />,
+        icon: <BiUser />,
         to: "/user",
         // submenu: [
         //   {
@@ -50,7 +59,7 @@ export const SidebarMenu = [
       {
         id: 2,
         title: "Services",
-        icon: <FiHome />,
+        icon: <VscTools />,
         to: "/service",
         // submenu: [
         //   {
@@ -72,7 +81,7 @@ export const SidebarMenu = [
       {
         id: 3,
         title: "Purchase Requests",
-        icon: <FiHome />,
+        icon: <BsListCheck />,
         submenu: [
           {
             title: "Incoming",
@@ -87,7 +96,7 @@ export const SidebarMenu = [
       {
         id: 4,
         title: "Estimates",
-        icon: <FiHome />,
+        icon: <BiLineChart />,
         submenu: [
           {
             title: "Incoming",
@@ -102,7 +111,7 @@ export const SidebarMenu = [
       {
         id: 5,
         title: "Invoices",
-        icon: <FiHome />,
+        icon: <BsCurrencyExchange />,
         submenu: [
           {
             title: "Incoming",
@@ -123,7 +132,7 @@ export const SidebarMenu = [
       {
         id: 6,
         title: "Settings",
-        icon: <FiHome />,
+        icon: <BiCog />,
         to: "/settings",
         // submenu: [
         //   {
@@ -139,7 +148,7 @@ export const SidebarMenu = [
       {
         id: 7,
         title: "Payments",
-        icon: <FiHome />,
+        icon: <GiMoneyStack />,
         to: "/payment",
         // submenu: [
         //   {
@@ -155,7 +164,7 @@ export const SidebarMenu = [
       {
         id: 8,
         title: "Clients",
-        icon: <FiHome />,
+        icon: <HiOutlineUserGroup />,
         to: "/clientshome",
         // submenu: [
         //   {
