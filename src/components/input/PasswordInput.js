@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Eye, EyeOff } from "react-feather";
+import { Controller } from "react-hook-form";
 
 export const PasswordInput = ({
   register,
@@ -61,5 +62,31 @@ export const PasswordInput = ({
         {show ? <Eye /> : <EyeOff />}
       </InputRightElement>
     </InputGroup>
+  );
+};
+
+export const PasswordInputControl = ({
+  control,
+  name,
+  placeHolder,
+  register,
+  errors,
+}) => {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({
+        field: { onChange, onBlur, value, name, ref },
+        fieldState: { invalid, isTouched, isDirty, error },
+        formState,
+      }) => (
+        <PasswordInput
+          placeholder={placeHolder}
+          register={register(`${name}`, { required: true })}
+          error={error || errors}
+        />
+      )}
+    />
   );
 };

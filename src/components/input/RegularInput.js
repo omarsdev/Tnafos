@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Input as ChakraInput } from "@chakra-ui/react";
+import { control, Controller } from "react-hook-form";
 
 export const RegularInput = ({
   register,
@@ -17,10 +18,7 @@ export const RegularInput = ({
   ...rest
 }) => {
   const handleChange = (event) => setValue(event.target.value);
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setInput({ ...input, [name]: value });
-  // };
+
   return !value && !setValue ? (
     <ChakraInput
       className="rounded-3xl select-none"
@@ -33,16 +31,6 @@ export const RegularInput = ({
       id={name}
       width={!width ? "381px" : width}
       type={inputType}
-      // {...(requiredMessage
-      //   ? {
-      //       ...register(
-      //         `${name}`,
-      //         requiredMessage ? { required: `${requiredMessage}` } : null
-      //       ),
-      //     }
-      //   : { ...register(`${name}`) })}
-      // autoComplete="off"
-      // autoFocus="off"
       {...register}
       {...rest}
     />
@@ -63,6 +51,36 @@ export const RegularInput = ({
       autoComplete="off"
       autoFocus="off"
       {...rest}
+    />
+  );
+};
+
+export const RegularInputControl = ({
+  control,
+  name,
+  placeHolder,
+  register,
+  width,
+  inputType,
+  errors,
+}) => {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({
+        field: { onChange, onBlur, value, name, ref },
+        fieldState: { invalid, isTouched, isDirty, error },
+        formState,
+      }) => (
+        <RegularInput
+          placeholder={placeHolder}
+          register={register(`${name}`, { required: true })}
+          error={errors}
+          width={width}
+          inputType={inputType}
+        />
+      )}
     />
   );
 };
