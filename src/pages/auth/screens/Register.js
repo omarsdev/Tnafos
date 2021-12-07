@@ -26,6 +26,8 @@ import { useForm } from "react-hook-form";
 
 import { apiAuth } from "api";
 import { UserDataContext } from "context";
+import { RegularInputControl } from "components";
+import { PasswordInputControl } from "components";
 
 export const Register = () => {
   const { tokenProviderValue } = useContext(UserDataContext);
@@ -37,13 +39,13 @@ export const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm();
 
   const [error, setError] = useState(null);
   const [loadingButton, setLoadingButton] = useState(false);
 
   const onSubmit = async (data) => {
-    // console.log(data);
     setError(null);
     setLoadingButton(true);
     const res = await apiAuth(data, "register");
@@ -72,12 +74,13 @@ export const Register = () => {
               <Stack spacing={4}>
                 <Flex>
                   <Flex direction="column">
-                    <RegularInput
-                      placeHolder="First name"
-                      inputType="text"
+                    <RegularInputControl
+                      placeHolder="First Name"
+                      name="first_name"
+                      control={control}
+                      register={register}
                       width="180px"
                       error={error?.errors?.first_name ? true : false}
-                      register={register("first_name")}
                     />
                     {error?.errors?.first_name &&
                       error?.errors?.first_name.map((e) => (
@@ -88,12 +91,13 @@ export const Register = () => {
                   </Flex>
                   <Spacer />
                   <Flex direction="column">
-                    <RegularInput
-                      placeHolder="Last name"
-                      inputType="text"
+                    <RegularInputControl
+                      placeHolder="Last Name"
+                      name="last_name"
+                      control={control}
+                      register={register}
                       width="180px"
                       error={error?.errors?.last_name ? true : false}
-                      register={register("last_name")}
                     />
                     {error?.errors?.last_name &&
                       error?.errors?.last_name.map((e) => (
@@ -104,27 +108,32 @@ export const Register = () => {
                   </Flex>
                 </Flex>
                 <Box>
-                  <RegularInput
+                  <RegularInputControl
                     placeHolder="Email"
-                    inputType="email"
+                    name="email"
+                    control={control}
+                    register={register}
                     error={error?.errors?.email ? true : false}
-                    register={register("email")}
                   />
                   {error?.errors?.email &&
                     error?.errors?.email.map((e) => (
                       <Text color="red">{e}</Text>
                     ))}
                 </Box>
-                <PasswordInput
+                <PasswordInputControl
                   placeHolder="Password"
+                  name="password"
+                  control={control}
+                  register={register}
                   error={error?.errors?.password ? true : false}
-                  register={register("password")}
                 />
                 <Box>
-                  <PasswordInput
+                  <PasswordInputControl
+                    control={control}
+                    register={register}
                     placeHolder="Confirm password"
-                    error={error?.errors?.password ? true : false}
-                    register={register("password_confirmation")}
+                    name="password_confirmation"
+                    error={error?.errors?.password_confirmation ? true : false}
                   />
                   {error?.errors?.password &&
                     error?.errors?.password.map((e) => (
@@ -145,11 +154,13 @@ export const Register = () => {
                       borderRightWidth="1px"
                       borderRightColor="#AEAEAE"
                     />
-                    <RegularInput
+                    <RegularInputControl
                       placeHolder="Mobile"
+                      name="phone_number"
+                      control={control}
+                      register={register}
                       inputType="tel"
                       error={error?.errors?.phone_number ? true : false}
-                      register={register("phone_number")}
                     />
                   </InputGroup>
                   {error?.errors?.phone_number &&
