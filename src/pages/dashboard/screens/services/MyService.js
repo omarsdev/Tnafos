@@ -8,7 +8,7 @@ import {
   Text,
   useDisclosure,
   HStack,
-  VStack,
+  Stack,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -16,7 +16,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Spacer,
-  Stack,
+  Flex,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
@@ -125,42 +125,41 @@ export const MyService = () => {
           w="400px"
           h="400px"
         >
-          <VStack spacing="20px">
-            <Text
-              w="full"
-              bg="gray.50"
-              roundedTop="lg"
-              textColor="gray.700"
-              textAlign="start"
-              fontSize="x-large"
-              pl="5%"
-            >
-              Service
+          <Text
+            w="full"
+            // bg="gray.200"
+            roundedTop="lg"
+            textColor="gray.700"
+            textAlign="start"
+            fontSize="x-large"
+            pl="5%"
+            pt="5"
+          >
+            Service
+          </Text>
+
+          <Stack mr="0" px="5%" bg="gray.200" mt="5" h="270px">
+            <Text py="1" fontSize="large" textColor="gray.600">
+              {service?.name}
             </Text>
-
-            <Box mr="0" px="5%">
-              <Text py="1" fontSize="large" textColor="gray.600">
-                {service?.name}
-              </Text>
-              <Text className="text-blue-400 text-medium">Price:</Text>
-              <Text py="1" fontSize="large" textColor="gray.600">
-                {service?.price} SAR
-              </Text>
-              <Text py="1" fontSize="large" textColor="gray.600">
-                Description:{service?.description}
-              </Text>
-              <Text py="1" fontSize="large" textColor="gray.600">
-                Category-id: {service?.category.uuid}
-              </Text>
-              <Text py="1" fontSize="large" textColor="gray.600">
-                Type :{service?.type}
-              </Text>
-            </Box>
-
-            <Box position="absolute" bottom="5">
+            <Text className="text-blue-400 text-medium">Price:</Text>
+            <Text py="1" fontSize="large" textColor="gray.600">
+              {service?.price} SAR
+            </Text>
+            <Text py="1" fontSize="large" textColor="gray.600">
+              Description:{service?.description}
+            </Text>
+            <Text py="1" fontSize="large" textColor="gray.600">
+              Category-id: {service?.category.uuid}
+            </Text>
+            <Text py="1" fontSize="large" textColor="gray.600">
+              Type :{service?.type}
+            </Text>
+            <Flex justify={"center"} mt={-12}>
               <IconButton
-                flex={1}
-                fontSize={"sm"}
+                justify={"center"}
+                mt={-6}
+                fontSize={"large"}
                 rounded={"full"}
                 bg={"#F8B916"}
                 color={"white"}
@@ -176,8 +175,8 @@ export const MyService = () => {
                 icon={<FiEdit />}
                 onClick={onOpen}
               />
-            </Box>
-          </VStack>
+            </Flex>
+          </Stack>
         </Box>
       </Center>
 
@@ -196,7 +195,13 @@ export const MyService = () => {
           </DrawerHeader>
 
           <DrawerBody>
-            <HStack align="flex-end" w="full" alignItems="baseline" mb="14">
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
               <input
                 type="file"
                 onChange={(e) => setPhoto(e.target.files[0])}
@@ -241,22 +246,21 @@ export const MyService = () => {
                 </label>
               </Box>
 
-              <HStack mt="5" w="250px">
+              <Flex mt="5" w="full" direction="row-reverse">
                 <PrimaryButton
                   name="Update"
                   onClick={handleSubmit(onUpdateService)}
                   loadingButton={isUpdating}
                   buttonType="submit"
+                  mx="2"
                 />
-
-                <Spacer />
 
                 <SecondaryButton
                   name="Cancel"
                   onClick={onCancelHandler}
                   buttonType="button"
                 />
-              </HStack>
+              </Flex>
               {errors?.message && (
                 <Text className="text-center mt-4" color="red">
                   {errors?.message}

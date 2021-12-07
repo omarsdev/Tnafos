@@ -15,7 +15,7 @@ export const ServiceCard = ({ info }) => {
       <VStack spacing="20px">
         <Text
           w="full"
-          bg="gray.50"
+          bg="gray.200"
           roundedTop="lg"
           textColor="gray.700"
           textAlign="start"

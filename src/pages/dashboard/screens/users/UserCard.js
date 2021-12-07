@@ -150,10 +150,10 @@ export const UserCard = () => {
               <Text py="1">Id :{card?.uuid}</Text>
             </Box>
 
-            <Box position="absolute" bottom="5">
+            <Flex justify={"center"} mt={-12}>
               <IconButton
-                flex={1}
-                fontSize={"sm"}
+                justify={"center"}
+                fontSize={"large"}
                 rounded={"full"}
                 bg={"#F8B916"}
                 color={"white"}
@@ -169,7 +169,7 @@ export const UserCard = () => {
                 icon={<FiEdit />}
                 onClick={onOpen}
               />
-            </Box>
+            </Flex>
           </VStack>
         </Box>
       </Center>
@@ -189,7 +189,13 @@ export const UserCard = () => {
           </DrawerHeader>
 
           <DrawerBody>
-            <HStack align="flex-end" w="full" alignItems="baseline" mb="14">
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
               <input
                 type="file"
                 onChange={(e) => setPhoto(e.target.files[0])}
@@ -275,15 +281,14 @@ export const UserCard = () => {
                 </label>
               </Box>
 
-              <Flex mt="5">
+              <Flex mt="5" w="full" direction="row-reverse">
                 <PrimaryButton
                   name="Update"
                   onClick={handleSubmit(onUpdateUserInfo)}
                   loadingButton={isUpdating}
                   buttonType="submit"
+                  mx="2"
                 />
-
-                <Spacer />
 
                 <SecondaryButton
                   name="Cancel"
