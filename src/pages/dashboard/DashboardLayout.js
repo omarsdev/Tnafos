@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DashboardContent } from "./DasboardContent";
 import { Navbar, Sidebar } from "./components/index";
-import { HStack, VStack, Center, Spinner } from "@chakra-ui/react";
+import { HStack, VStack, Center, Spinner, Box, Grid } from "@chakra-ui/react";
 import { useRouteMatch, Route, Switch } from "react-router-dom";
 import { AxiosInstance } from "api";
+
 import {
   Estimate,
   PurchaseRequest,
