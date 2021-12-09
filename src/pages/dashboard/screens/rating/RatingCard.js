@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FiInbox } from "react-icons/fi";
 
-export const RatingCard = () => {
+export const RatingCard = ({ ratDetails }) => {
   return (
     <Box
       mt="5"

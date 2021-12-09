@@ -14,6 +14,7 @@ import {
   CompanyHome,
   InvoiceHome,
   ClientsHome,
+  Ratings,
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 import { UserDataContext } from "context";
@@ -80,6 +81,7 @@ export const DashboardLayout = () => {
               <Route path={`${match.path}/estimate`} component={Estimate} />
               <Route path={`${match.path}/client`} component={ClientsHome} />
               <Route path={`${match.path}/settings`} component={Settings} />
+              <Route path={`${match.path}/rating`} component={Ratings} />
             </Switch>
           </VStack>
         </HStack>
