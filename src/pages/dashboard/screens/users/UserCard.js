@@ -28,7 +28,7 @@ import { FiEdit } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
-import { RegularInput } from "components";
+import { RegularInputControl  } from "components";
 
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "components";
@@ -45,7 +45,7 @@ export const UserCard = () => {
   const { uuid } = useParams();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, control } = useForm();
 
   const [card, setCard] = useState(null);
   const [errors, setErrors] = useState(null);
@@ -202,13 +202,14 @@ export const UserCard = () => {
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   First Name :
-                  <RegularInput
-                    placeHolder="First name"
-                    inputType="text"
-                    width="100%"
-                    error={errors?.errors?.first_name ? true : false}
-                    register={register("first_name")}
-                  />
+                  <RegularInputControl
+                      placeHolder="First Name"
+                      name="first_name"
+                      control={control}
+                      register={register}
+                      width="100%"
+                      error={errors?.errors?.first_name ? true : false}
+                    />
                   {errors?.errors?.first_name &&
                     errors?.errors?.first_name.map((e) => (
                       <Text className="text-left" color="red">
@@ -221,13 +222,14 @@ export const UserCard = () => {
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Last Name :
-                  <RegularInput
-                    placeHolder="Last name"
-                    inputType="text"
-                    width="100%"
-                    error={errors?.errors?.last_name ? true : false}
-                    register={register("last_name")}
-                  />
+                  <RegularInputControl
+                      placeHolder="Last Name"
+                      name="last_name"
+                      control={control}
+                      register={register}
+                      width="100%"
+                      error={errors?.errors?.last_name ? true : false}
+                    />
                   {errors?.errors?.last_name &&
                     errors?.errors?.last_name.map((e) => (
                       <Text className="text-left" color="red">
@@ -240,13 +242,14 @@ export const UserCard = () => {
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Phone Number:
-                  <RegularInput
-                    placeHolder="Phone Number"
-                    inputType="text"
-                    width="100%"
-                    error={errors?.errors?.phone_number ? true : false}
-                    register={register("phone_number")}
-                  />
+                   <RegularInputControl
+                      placeHolder="Phone Number"
+                      name="phone_number"
+                      control={control}
+                      register={register}
+                      width="100%"
+                      error={errors?.errors?.phone_number ? true : false}
+                    />
                   {errors?.errors?.phone_number &&
                     errors?.errors?.phone_number.map((e) => (
                       <Text className="text-left" color="red">
@@ -259,13 +262,14 @@ export const UserCard = () => {
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500">
                   Email:
-                  <RegularInput
-                    placeHolder="Email"
-                    inputType="text"
-                    width="100%"
-                    error={errors?.errors?.email ? true : false}
-                    register={register("email")}
-                  />
+                  <RegularInputControl
+                      placeHolder="Email"
+                      name="email"
+                      control={control}
+                      register={register}
+                      width="100%"
+                      error={errors?.errors?.email ? true : false}
+                    />
                   {errors?.errors?.email &&
                     errors?.errors?.email.map((e) => (
                       <Text className="text-left" color="red">

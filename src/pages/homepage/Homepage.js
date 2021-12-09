@@ -20,6 +20,7 @@ import { Navbar } from "./components";
 
 import { AxiosInstance } from "../../api";
 import { UserDataContext } from "context";
+import { getToken } from "utils";
 
 export const Homepage = () => {
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
@@ -42,11 +43,7 @@ export const Homepage = () => {
 
   const fetchTokenMe = async () => {
     try {
-      const res = await AxiosInstance.get("/api/dashboard/user/my-profile", {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      });
+      const res = await AxiosInstance.get("/api/dashboard/user/my-profile");
       setUserData(res.data.data);
       setLoading(false);
     } catch (error) {
@@ -55,7 +52,7 @@ export const Homepage = () => {
   };
 
   useEffect(() => {
-    if (userToken || localStorage.getItem("token")) {
+    if (userToken || getToken()) {
       fetchTokenMe();
     } else {
       setLoading(false);

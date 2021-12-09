@@ -16,6 +16,7 @@ import {
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 import { UserDataContext } from "context";
+import { getToken } from "utils";
 
 export const DashboardLayout = () => {
   let match = useRouteMatch();
@@ -26,13 +27,9 @@ export const DashboardLayout = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const fetchTokenMe = async () => {
+  const fetchTokenMe = async (token) => {
     try {
-      const res = await AxiosInstance.get("/api/dashboard/user/my-profile", {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      });
+      const res = await AxiosInstance.get("/api/dashboard/user/my-profile");
       //* save user. info in the context provider which will be invoked later in Home page
       setUserData(res.data.data);
       setLoading(false);
@@ -44,7 +41,7 @@ export const DashboardLayout = () => {
   const getUser = async () => {
     if (!userData) {
       //* grab token wether from local storage or context
-      let token = localStorage.getItem("token") || userToken;
+      let token = getToken() || userToken;
       if (token) {
         fetchTokenMe();
       }
@@ -52,7 +49,7 @@ export const DashboardLayout = () => {
   };
 
   useEffect(() => {
-    getUser();
+    fetchTokenMe();
   }, []);
 
   //*  note: we picked user information below from the (userData) variable that we've stored in context provider

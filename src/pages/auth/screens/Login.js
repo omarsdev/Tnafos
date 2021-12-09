@@ -61,7 +61,7 @@ export const Login = () => {
       document.cookie =
         auth_token +
         // change it once in production
-        // ";samesite=lax;Secure;domain=tnafos.com;" +
+        ";samesite=lax;Secure;domain=127.0.0.1;" +
         "max-age=" +
         maxAge;
       setUserToken(res.token);
