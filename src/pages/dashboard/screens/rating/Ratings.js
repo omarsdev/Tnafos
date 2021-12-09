@@ -10,6 +10,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
+import { MyRating } from "./";
 
 export const Ratings = () => {
   const [ratings, setRatings] = useState(null);
@@ -34,18 +35,19 @@ export const Ratings = () => {
 
   return (
     <Switch>
-      <Route path={`${match.path}`}>
+      <Route path={match.path}>
         <Box>
           <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
-            {/* {ratings?.map((el, id) => (
-          <Link to={`${match.url}/${uuid}`} key={id}>
-            <RatingCard ratDetails={el} />
-          </Link>
-        ))} */}
-            <RatingCard />
+            {ratings?.map((el, id) => (
+              <Link to={`${match.url}/:uuid`} key={id}>
+                <RatingCard ratDetails={el} />
+              </Link>
+            ))}
+            {/* <RatingCard /> */}
           </Grid>
         </Box>
       </Route>
+      <Route path={`${match.path}/:uuid`} component={MyRating} />
     </Switch>
   );
 };
