@@ -76,7 +76,7 @@ export const RegularInputControl = ({
         <RegularInput
           placeholder={placeHolder}
           register={register(`${name}`, { required: true })}
-          error={errors}
+          error={errors || error}
           width={width}
           inputType={inputType}
         />
