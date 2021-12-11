@@ -35,12 +35,7 @@ export const Register = () => {
 
   const history = useHistory();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   const [error, setError] = useState(null);
   const [loadingButton, setLoadingButton] = useState(false);
@@ -57,8 +52,7 @@ export const Register = () => {
       }
       history.push("/dashboard/company/create");
     } else {
-      console.log(res.error);
-      setError(res.error);
+      setError(res.error.errors);
       setLoadingButton(false);
     }
   };
@@ -80,14 +74,8 @@ export const Register = () => {
                       control={control}
                       register={register}
                       width="180px"
-                      error={error?.errors?.first_name ? true : false}
+                      errors={error}
                     />
-                    {error?.errors?.first_name &&
-                      error?.errors?.first_name.map((e) => (
-                        <Text color="red" maxWidth="180px" textAlign="center">
-                          {e}
-                        </Text>
-                      ))}
                   </Flex>
                   <Spacer />
                   <Flex direction="column">
@@ -97,14 +85,8 @@ export const Register = () => {
                       control={control}
                       register={register}
                       width="180px"
-                      error={error?.errors?.last_name ? true : false}
+                      errors={error}
                     />
-                    {error?.errors?.last_name &&
-                      error?.errors?.last_name.map((e) => (
-                        <Text color="red" maxWidth="180px" textAlign="center">
-                          {e}
-                        </Text>
-                      ))}
                   </Flex>
                 </Flex>
                 <Box>
@@ -113,32 +95,26 @@ export const Register = () => {
                     name="email"
                     control={control}
                     register={register}
-                    error={error?.errors?.email ? true : false}
+                    errors={error}
                   />
-                  {error?.errors?.email &&
-                    error?.errors?.email.map((e) => (
-                      <Text color="red">{e}</Text>
-                    ))}
                 </Box>
-                <PasswordInputControl
-                  placeHolder="Password"
-                  name="password"
-                  control={control}
-                  register={register}
-                  error={error?.errors?.password ? true : false}
-                />
+                <Box>
+                  <PasswordInputControl
+                    placeHolder="Password"
+                    name="password"
+                    control={control}
+                    register={register}
+                    errors={error}
+                  />
+                </Box>
                 <Box>
                   <PasswordInputControl
                     control={control}
                     register={register}
                     placeHolder="Confirm password"
                     name="password_confirmation"
-                    error={error?.errors?.password_confirmation ? true : false}
+                    errors={error}
                   />
-                  {error?.errors?.password &&
-                    error?.errors?.password.map((e) => (
-                      <Text color="red">{e}</Text>
-                    ))}
                 </Box>
                 <Box>
                   <InputGroup>
@@ -148,9 +124,7 @@ export const Register = () => {
                       position={"absolute"}
                       zIndex={"10"}
                       borderRadius="25px"
-                      borderColor={
-                        error?.errors?.phone_number ? "red" : "#AEAEAE"
-                      }
+                      borderColor={error?.phone_number ? "red" : "#AEAEAE"}
                       borderRightWidth="1px"
                       borderRightColor="#AEAEAE"
                     />
@@ -160,13 +134,9 @@ export const Register = () => {
                       control={control}
                       register={register}
                       inputType="tel"
-                      error={error?.errors?.phone_number ? true : false}
+                      errors={error}
                     />
                   </InputGroup>
-                  {error?.errors?.phone_number &&
-                    error?.errors?.phone_number.map((e) => (
-                      <Text color="red">{e}</Text>
-                    ))}
                 </Box>
                 <Flex>
                   <Flex>

@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
-import { RegularInput } from "components";
+import { RegularInputControl } from "components";
 
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "components";
@@ -38,7 +38,7 @@ export const MyService = () => {
   const { uuid } = useParams();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, control } = useForm();
 
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -86,9 +86,9 @@ export const MyService = () => {
         history.push(`/dashboard/service`);
       })
       .catch((err) => {
-        console.log(err.response.data);
+        // console.log(err.response.data);
         setIsUpdating(false);
-        setErrors(err?.response?.data);
+        setErrors(err?.response?.data.errors);
         setAlert({
           message: `${err?.response?.data}`,
           type: "error",
@@ -209,35 +209,29 @@ export const MyService = () => {
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Price :
-                  <RegularInput
-                    placeHolder="price"
+                  <RegularInputControl
+                    placeHolder="Price"
+                    name="price"
                     inputType="text"
+                    control={control}
+                    register={register}
                     width="100%"
-                    error={errors?.errors?.price ? true : false}
-                    register={register("price")}
+                    errors={errors}
                   />
-                  {errors && errors?.errors && errors?.errors?.price && (
-                    <Text className="text-left" color="red">
-                      {errors?.errors?.price}
-                    </Text>
-                  )}
                 </label>
               </Box>
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Type :
-                  <RegularInput
-                    placeHolder="type"
+                  <RegularInputControl
+                    placeHolder="Type"
+                    name="type"
                     inputType="text"
                     width="100%"
-                    error={errors?.errors?.type ? true : false}
-                    register={register("type")}
+                    control={control}
+                    register={register}
+                    errors={errors}
                   />
-                  {errors && errors?.errors && errors?.errors?.type && (
-                    <Text className="text-left" color="red">
-                      {errors?.errors?.type}
-                    </Text>
-                  )}
                 </label>
               </Box>
 
@@ -248,20 +242,13 @@ export const MyService = () => {
                   loadingButton={isUpdating}
                   buttonType="submit"
                 />
-
                 <Spacer />
-
                 <SecondaryButton
                   name="Cancel"
                   onClick={onCancelHandler}
                   buttonType="button"
                 />
               </HStack>
-              {errors?.message && (
-                <Text className="text-center mt-4" color="red">
-                  {errors?.message}
-                </Text>
-              )}
             </form>
           </DrawerBody>
         </DrawerContent>

@@ -5,7 +5,11 @@ import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
 import { AlertContext } from "context";
 
-import { PrimaryButton, SecondaryButton, RegularInput } from "components";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  RegularInputControl,
+} from "components";
 
 export const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -15,6 +19,7 @@ export const AddService = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm();
   const [err, setErr] = useState(null);
 
@@ -33,7 +38,6 @@ export const AddService = () => {
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        console.log(err.response.data.errors);
         setErr(err?.response?.data.errors);
         setAlert({
           message: `${err.response.data.message}`,
@@ -62,120 +66,75 @@ export const AddService = () => {
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Name of service :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Name of service"
               inputType="text"
               width="100%"
-              error={errors?.errors?.name ? true : false}
-              register={register("name")}
+              name="name"
+              control={control}
+              register={register}
+              errors={err}
             />
-            {errors?.errors?.name &&
-              errors?.errors?.name.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
-            {err?.name &&
-              err?.name.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Description :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Description"
+              name="description"
               inputType="text"
               width="100%"
-              error={errors?.errors?.description ? true : false}
-              register={register("description")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {errors?.errors?.description &&
-              errors?.errors?.description.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
-            {err?.description &&
-              err?.description.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Category-Id :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Category id"
+              name="category_id"
               inputType="text"
               width="100%"
-              error={errors?.errors?.category_id ? true : false}
-              register={register("category_id")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {errors?.errors?.category_id &&
-              errors?.errors?.category_id.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
-            {err?.category_id &&
-              err?.category_id.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Price :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Price"
+              name="price"
               inputType="text"
               width="100%"
-              error={errors?.errors?.price ? true : false}
-              register={register("price")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {errors?.errors?.price &&
-              errors?.errors?.price.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
-            {err?.price &&
-              err?.price.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Type:
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Type"
+              name="type"
               inputType="text"
               width="100%"
-              error={errors?.errors?.type ? true : false}
-              register={register("type")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {errors?.errors?.type &&
-              errors?.errors?.type.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
-            {err?.type &&
-              err?.type.map((e) => (
-                <Text className="text-left" color="red">
-                  {e}
-                </Text>
-              ))}
           </label>
         </Box>
         <HStack m={3} className="flex flex-row gap-2" ml={"24"}>

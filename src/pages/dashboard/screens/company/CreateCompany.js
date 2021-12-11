@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../api/AxiosInstance";
 import { AlertContext } from "context";
-import { PrimaryButton, RegularInput } from "components";
+import { PrimaryButton, RegularInputControl } from "components";
 
 export const CreateCompany = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -17,6 +17,7 @@ export const CreateCompany = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm();
 
   const createCompany = useCallback(async (input) => {
@@ -31,7 +32,7 @@ export const CreateCompany = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        setErr(err.response.data);
+        setErr(err.response.data.errors);
         setAlert({
           message: ` ${err?.response?.data}`,
           type: "error",
@@ -55,323 +56,285 @@ export const CreateCompany = () => {
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Company Name :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Company Name"
+              name="name"
               inputType="text"
               width="100%"
-              error={err?.err?.name ? true : false}
-              register={register("name")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.name && (
-              <Text className="text-left" color="red">
-                {err?.name}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Type :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Type"
+              name="type"
               inputType="text"
               width="100%"
-              error={err?.err?.type ? true : false}
-              register={register("type")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.type && (
-              <Text className="text-left" color="red">
-                {err?.type}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Cr Number :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Cr Number"
+              name="cr"
               inputType="text"
               width="100%"
-              error={err?.err?.cr ? true : false}
-              register={register("cr")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.cr && (
-              <Text className="text-left" color="red">
-                {err?.cr}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             VAT Number :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="VAT Number"
+              name="vat"
               inputType="text"
               width="100%"
-              error={err?.err?.vat ? true : false}
-              register={register("vat")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.vat && (
-              <Text className="text-left" color="red">
-                {err?.vat}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Establishment Year :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Establishment Year"
+              name="establishment_year"
               inputType="text"
               width="100%"
-              error={err?.err?.establishment_year ? true : false}
-              register={register("establishment_year")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.establishment_year && (
-              <Text className="text-left" color="red">
-                {err?.establishment_year}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Total Employees :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Total Employees"
+              name="total_employees"
               inputType="text"
               width="100%"
-              error={err?.err?.total_employees ? true : false}
-              register={register("total_employees")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.total_employees && (
-              <Text className="text-left" color="red">
-                {err?.total_employees}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Bio :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Bio"
+              name="bio"
               inputType="text"
               width="100%"
-              error={err?.err?.bio ? true : false}
-              register={register("bio")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.bio && (
-              <Text className="text-left" color="red">
-                {err?.bio}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Telephone :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Telephone"
+              name="telephone"
               inputType="number"
               width="100%"
-              error={err?.err?.telephone ? true : false}
-              register={register("telephone")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.telephone && (
-              <Text className="text-left" color="red">
-                {err?.telephone}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Fax :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Fax"
+              name="fax"
               inputType="text"
               width="100%"
-              error={err?.err?.fax ? true : false}
-              register={register("fax")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.fax && (
-              <Text className="text-left" color="red">
-                {err?.fax}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             E-mail :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Email"
+              name="email"
               inputType="text"
               width="100%"
-              error={err?.err?.email ? true : false}
-              register={register("email")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.email && (
-              <Text className="text-left" color="red">
-                {err?.email}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Website :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Website"
+              name="website"
               inputType="text"
               width="100%"
-              error={err?.err?.website ? true : false}
-              register={register("website")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.website && (
-              <Text className="text-left" color="red">
-                {err?.website}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Country-Id :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Country ID"
+              name="country_id"
               inputType="text"
               width="100%"
-              error={err?.err?.country_id ? true : false}
-              register={register("country_id")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.country_id && (
-              <Text className="text-left" color="red">
-                {err?.country_id}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             City :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="City"
+              name="city"
               inputType="text"
               width="100%"
-              error={err?.err?.city ? true : false}
-              register={register("city")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.city && (
-              <Text className="text-left" color="red">
-                {err?.city}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             po-Box :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Po_box"
+              name="po_box"
               inputType="text"
               width="100%"
-              error={err?.err?.po_box ? true : false}
-              register={register("po_box")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.po_box && (
-              <Text className="text-left" color="red">
-                {err?.po_box}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             ZIP-Code :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Zip code"
+              name="zip_code"
               inputType="text"
               width="100%"
-              error={err?.err?.zip_code ? true : false}
-              register={register("zip_code")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.zip_code && (
-              <Text className="text-left" color="red">
-                {err?.zip_code}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Address :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Address"
+              name="address"
               inputType="text"
               width="100%"
-              error={err?.err?.address ? true : false}
-              register={register("address")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.address && (
-              <Text className="text-left" color="red">
-                {err?.address}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Location :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Location"
+              name="location"
               inputType="text"
               width="100%"
-              error={err?.err?.location ? true : false}
-              register={register("location")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.location && (
-              <Text className="text-left" color="red">
-                {err?.location}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Logo :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Logo"
+              name="logo"
               inputType="text"
               width="100%"
-              error={err?.err?.logo ? true : false}
-              register={register("logo")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.logo && (
-              <Text className="text-left" color="red">
-                {err?.logo}
-              </Text>
-            )}
           </label>
         </Box>
 
         <Box className="mt-4">
           <label className="w-32 text-left text-gray-500 ">
             Category-Id :
-            <RegularInput
+            <RegularInputControl
+              placeHolder="Category Id"
+              name="category_id"
               inputType="text"
               width="100%"
-              error={err?.err?.category_id ? true : false}
-              register={register("category_id")}
+              control={control}
+              register={register}
+              errors={err}
             />
-            {err && err?.category_id && (
-              <Text className="text-left" color="red">
-                {err?.category_id}
-              </Text>
-            )}
           </label>
         </Box>
 

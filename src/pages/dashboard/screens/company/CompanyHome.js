@@ -26,7 +26,7 @@ import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
 import { AxiosInstance } from "api/AxiosInstance";
 import { PrimaryButton, SecondaryButton } from "components";
-import { RegularInput } from "components";
+import { RegularInputControl } from "components";
 
 import { useForm } from "react-hook-form";
 
@@ -49,6 +49,7 @@ export const CompanyHome = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    control,
   } = useForm();
 
   const [err, setErr] = useState(null);
@@ -235,387 +236,239 @@ export const CompanyHome = () => {
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Company Name :
-                      <RegularInput
+                      <RegularInputControl
                         placeHolder="Enter your company name here"
+                        name="name"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.name ? true : false}
-                        register={register("name")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.name &&
-                        errors?.errors?.name.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.name &&
-                        err?.name.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Type :
-                      <RegularInput
-                        placeHolder="enter type"
+                      <RegularInputControl
+                        placeHolder="Enter type"
+                        name="type"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.type ? true : false}
-                        register={register("type")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.type &&
-                        errors?.errors?.type.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.type &&
-                        err?.type.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       CR Number :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter CR"
+                        name="cr"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.cr ? true : false}
-                        register={register("cr")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.cr &&
-                        errors?.errors?.cr.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.cr &&
-                        err?.cr.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       VAT Number :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter VAT"
+                        name="vat"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.vat ? true : false}
-                        register={register("vat")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.vat &&
-                        errors?.errors?.vat.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.vat &&
-                        err?.vat.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Establishment Year :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter establishment year"
+                        name="establishment_year"
                         inputType="text"
                         width="100%"
-                        error={
-                          errors?.errors?.establishment_year ? true : false
-                        }
-                        register={register("establishment_year")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.establishment_year &&
-                        errors?.errors?.establishment_year.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.establishment_year &&
-                        err?.establishment_year.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Total Employees :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter total employees"
+                        name="total_employees"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.total_employees ? true : false}
-                        register={register("total_employees")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.total_employees &&
-                        errors?.errors?.total_employees.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.total_employees &&
-                        err?.total_employees.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Bio :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter Bio"
+                        name="bio"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.bio ? true : false}
-                        register={register("bio")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.bio &&
-                        errors?.errors?.bio.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.bio &&
-                        err?.bio.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Telephone :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter telephone"
+                        name="telephone"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.telephone ? true : false}
-                        register={register("telephone")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.telephone &&
-                        errors?.errors?.telephone.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.telephone &&
-                        err?.telephone.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Fax :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter fax"
+                        name="fax"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.fax ? true : false}
-                        register={register("fax")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.fax &&
-                        errors?.errors?.fax.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.fax &&
-                        err?.fax.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       E-mail :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter email"
+                        name="email"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.email ? true : false}
-                        register={register("email")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.email &&
-                        errors?.errors?.email.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.email &&
-                        err?.email.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Website :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter website"
+                        name="website"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.website ? true : false}
-                        register={register("website")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.website &&
-                        errors?.errors?.website.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.website &&
-                        err?.website.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       City :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter city"
+                        name="city"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.city ? true : false}
-                        register={register("city")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.city &&
-                        errors?.errors?.city.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.city &&
-                        err?.city.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       po_box :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter po box"
+                        name="po_box"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.po_box ? true : false}
-                        register={register("po_box")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.po_box &&
-                        errors?.errors?.po_box.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.po_box &&
-                        err?.po_box.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       ZIP-code :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter zip code"
+                        name="zip_code"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.zip_code ? true : false}
-                        register={register("zip_code")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.zip_code &&
-                        errors?.errors?.zip_code.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.zip_code &&
-                        err?.zip_code.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Address :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter address"
+                        name="address"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.address ? true : false}
-                        register={register("address")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.address &&
-                        errors?.errors?.address.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.address &&
-                        err?.address.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
 
                   <Box className="mt-4">
                     <label className="w-32 text-left text-gray-500 ">
                       Location :
-                      <RegularInput
+                      <RegularInputControl
+                        placeHolder="Enter Location"
+                        name="location"
                         inputType="text"
                         width="100%"
-                        error={errors?.errors?.location ? true : false}
-                        register={register("location")}
+                        control={control}
+                        register={register}
+                        errors={err}
                       />
-                      {errors?.errors?.location &&
-                        errors?.errors?.location.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
-                      {err?.location &&
-                        err?.location.map((e) => (
-                          <Text className="text-left" color="red">
-                            {e}
-                          </Text>
-                        ))}
                     </label>
                   </Box>
                 </form>

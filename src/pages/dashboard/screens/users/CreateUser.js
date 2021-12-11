@@ -24,6 +24,8 @@ import {
   PrimaryButton,
   PasswordInput,
   SecondaryButton,
+  RegularInputControl,
+  PasswordInputControl,
 } from "components";
 
 //* form validation rules
@@ -64,11 +66,7 @@ export const CreateUser = () => {
 
   //* get functions to build form with useForm() hook
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit, control } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
@@ -115,6 +113,7 @@ export const CreateUser = () => {
       .catch((error) => {
         setIsUpdating(false);
         setErr(error.response.data.errors);
+        console.log(error.response.data.errors);
         setAlert({
           message: `${error?.response?.data?.errors}`,
           type: "error",
@@ -152,111 +151,78 @@ export const CreateUser = () => {
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               First Name :
-              <RegularInput
-                placeHolder="first name"
-                inputType="text"
+              <RegularInputControl
+                placeHolder="First Name"
+                name="first_name"
+                control={control}
+                register={register}
                 width="100%"
-                error={err?.first_name?.message ? true : false}
-                register={register("first_name")}
+                errors={err}
               />
-              {errors && errors?.first_name && (
-                <Text className="text-left" color="red">
-                  {errors?.first_name?.message}
-                </Text>
-              )}
-              <Text>{err?.first_name}</Text>
             </label>
           </Box>
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Last Name :
-              <RegularInput
-                placeHolder="last name"
-                inputType="text"
+              <RegularInputControl
+                placeHolder="Last name"
+                name="last_name"
+                control={control}
+                register={register}
                 width="100%"
-                error={err?.last_name ? true : false}
-                register={register("last_name")}
+                errors={err}
               />
-              {errors && errors?.last_name && (
-                <Text className="text-left" color="red">
-                  {errors?.last_name?.message}
-                </Text>
-              )}
-              <Text>{err?.last_name}</Text>
             </label>
           </Box>
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Email :
-              <RegularInput
+              <RegularInputControl
                 placeHolder="Enter email"
-                inputType="text"
+                name="email"
+                control={control}
+                register={register}
                 width="100%"
-                error={err?.email ? true : false}
-                register={register("email")}
+                errors={err}
               />
-              {errors && errors?.email && (
-                <Text className="text-left" color="red">
-                  {errors?.email.message}
-                </Text>
-              )}
-              <Text>{err?.email}</Text>
             </label>
           </Box>
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Password :
-              <RegularInput
-                placeHolder="password"
-                className="w-64"
-                inputType="password"
-                width="100%"
-                error={err?.password ? true : false}
-                register={register("password")}
+              <PasswordInputControl
+                placeHolder="Password"
+                name="password"
+                control={control}
+                register={register}
+                errors={err}
               />
-              {errors && errors?.password && (
-                <Text className="text-left" color="red">
-                  {errors?.password?.message}
-                </Text>
-              )}
-              <Text>{err?.password}</Text>
             </label>
           </Box>
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Confirm Password :
-              <RegularInput
+              <PasswordInputControl
                 placeHolder="confirm your password"
-                width="100%"
-                inputType="password"
-                width="100%"
-                error={err?.password_confirmation ? true : false}
-                register={register("password_confirmation")}
+                name="password_confirmation"
+                control={control}
+                register={register}
+                error={err}
               />
-              {errors && errors?.password_confirmation?.message && (
-                <Text className="text-left" color="red">
-                  {errors?.password_confirmation?.message}
-                </Text>
-              )}
-              <Text>{err?.password_confirmation}</Text>
             </label>
           </Box>
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 ">
               Phone Number :
-              <RegularInput
-                placeHolder="phone number"
+              <RegularInputControl
+                placeHolder="Phone number"
+                name="phone_number"
                 inputType="number"
+                control={control}
+                register={register}
                 width="100%"
-                error={err?.phone_number ? true : false}
-                register={register("phone_number")}
+                errors={err}
               />
-              {errors && errors?.phone_number && (
-                <Text className="text-left" color="red">
-                  {errors?.phone_number?.message}
-                </Text>
-              )}
-              <Text>{err?.phone_number}</Text>
             </label>
           </Box>
 
@@ -288,18 +254,15 @@ export const CreateUser = () => {
 
             <HStack spacing="10px" py="5">
               <PrimaryButton
-                buttonType="submit"
                 name="SAVE"
                 onClick={handleSubmit(addUser)}
                 loadingButton={isUpdating}
               />
-              {/* <button onClick={handleSubmit(addUser)}>submit</button> */}
 
               <SecondaryButton onClick={handleCancel} name="CANCEL" />
             </HStack>
           </Box>
         </form>
-        {/* <button onClick={handleCancel}>Alert</button> */}
       </Center>
     </Box>
   );

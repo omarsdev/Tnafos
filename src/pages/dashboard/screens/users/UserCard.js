@@ -28,7 +28,7 @@ import { FiEdit } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
-import { RegularInputControl  } from "components";
+import { RegularInputControl } from "components";
 
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "components";
@@ -203,19 +203,13 @@ export const UserCard = () => {
                 <label className="w-32 text-left text-gray-500 ">
                   First Name :
                   <RegularInputControl
-                      placeHolder="First Name"
-                      name="first_name"
-                      control={control}
-                      register={register}
-                      width="100%"
-                      error={errors?.errors?.first_name ? true : false}
-                    />
-                  {errors?.errors?.first_name &&
-                    errors?.errors?.first_name.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
+                    placeHolder="First Name"
+                    name="first_name"
+                    control={control}
+                    register={register}
+                    width="100%"
+                    error={errors}
+                  />
                 </label>
               </Box>
 
@@ -223,39 +217,27 @@ export const UserCard = () => {
                 <label className="w-32 text-left text-gray-500 ">
                   Last Name :
                   <RegularInputControl
-                      placeHolder="Last Name"
-                      name="last_name"
-                      control={control}
-                      register={register}
-                      width="100%"
-                      error={errors?.errors?.last_name ? true : false}
-                    />
-                  {errors?.errors?.last_name &&
-                    errors?.errors?.last_name.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
+                    placeHolder="Last Name"
+                    name="last_name"
+                    control={control}
+                    register={register}
+                    width="100%"
+                    error={errors}
+                  />
                 </label>
               </Box>
 
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Phone Number:
-                   <RegularInputControl
-                      placeHolder="Phone Number"
-                      name="phone_number"
-                      control={control}
-                      register={register}
-                      width="100%"
-                      error={errors?.errors?.phone_number ? true : false}
-                    />
-                  {errors?.errors?.phone_number &&
-                    errors?.errors?.phone_number.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
+                  <RegularInputControl
+                    placeHolder="Phone Number"
+                    name="phone_number"
+                    control={control}
+                    register={register}
+                    width="100%"
+                    error={errors}
+                  />
                 </label>
               </Box>
 
@@ -263,19 +245,13 @@ export const UserCard = () => {
                 <label className="w-32 text-left text-gray-500">
                   Email:
                   <RegularInputControl
-                      placeHolder="Email"
-                      name="email"
-                      control={control}
-                      register={register}
-                      width="100%"
-                      error={errors?.errors?.email ? true : false}
-                    />
-                  {errors?.errors?.email &&
-                    errors?.errors?.email.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
+                    placeHolder="Email"
+                    name="email"
+                    control={control}
+                    register={register}
+                    width="100%"
+                    error={errors}
+                  />
                 </label>
               </Box>
 

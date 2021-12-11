@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import { Input as ChakraInput } from "@chakra-ui/react";
+import { HStack, Input as ChakraInput, Text, VStack } from "@chakra-ui/react";
 import { control, Controller } from "react-hook-form";
+import { Box } from "react-feather";
 
 export const RegularInput = ({
   register,
@@ -73,13 +74,23 @@ export const RegularInputControl = ({
         fieldState: { invalid, isTouched, isDirty, error },
         formState,
       }) => (
-        <RegularInput
-          placeholder={placeHolder}
-          register={register(`${name}`, { required: true })}
-          error={error || errors}
-          width={width}
-          inputType={inputType}
-        />
+        <VStack>
+          <RegularInput
+            placeholder={placeHolder}
+            register={register(`${name}`, { required: true })}
+            error={error || (errors && errors[name])}
+            width={width}
+            inputType={inputType}
+          />
+          {error?.message && <Text color="#ff0000">{error?.message}</Text>}
+          {errors &&
+            errors[name] &&
+            errors[name].map((e, i) => (
+              <Text color="#ff0000" key={i}>
+                {e}
+              </Text>
+            ))}
+        </VStack>
       )}
     />
   );

@@ -56,7 +56,6 @@ export const Login = () => {
       if (rememberMe) {
         maxAge = 1209600;
       }
-      alert("hit");
       const auth_token = `tnafos_auth=${res.token}`;
       document.cookie =
         auth_token +
