@@ -67,7 +67,7 @@ export const Navbar = () => {
         mr="15px"
       >
         <HStack className="font-medium h-10 justify-center text-gray-700 text-md w-24">
-          <span className="my-auto mr-7">
+          <span className="my-auto ">
             {userData.first_name} {userData.last_name}
           </span>
           {/* <Text>User name</Text> */}
@@ -78,14 +78,12 @@ export const Navbar = () => {
           borderRadius="full"
           boxSize="70px"
           p="1"
+          objectFit="cover"
         />
-        <Menu>
-          <MenuButton
-            as={Button}
-            rightIcon={<FaChevronDown />}
-            bg="transparent"
-            _hover="transparent"
-          />
+        <Menu isLazy>
+          <MenuButton px="3">
+            <FaChevronDown />
+          </MenuButton>
           <MenuList w="28">
             <Link to={`${match.url}/user/profile`}>
               <MenuItem className="hover:bg-gray-200">My Profile</MenuItem>

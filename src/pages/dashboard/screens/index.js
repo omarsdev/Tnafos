@@ -8,3 +8,4 @@ export * from "./purchase-requests/PurchaseRequest";
 export * from "./services/index";
 export * from "./users/index";
 export * from "./settings/Settings";
+export * from "./rating/index";

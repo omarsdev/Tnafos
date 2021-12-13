@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DashboardContent } from "./DasboardContent";
 import { Navbar, Sidebar } from "./components/index";
-import { HStack, VStack, Center, Spinner } from "@chakra-ui/react";
+import { HStack, VStack, Center, Spinner, Box, Grid } from "@chakra-ui/react";
 import { useRouteMatch, Route, Switch } from "react-router-dom";
 import { AxiosInstance } from "api";
+
 import {
   Estimate,
   PurchaseRequest,
@@ -13,6 +14,7 @@ import {
   CompanyHome,
   InvoiceHome,
   ClientsHome,
+  Ratings,
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 import { UserDataContext } from "context";
@@ -76,6 +78,7 @@ export const DashboardLayout = () => {
               <Route path={`${match.path}/estimate`} component={Estimate} />
               <Route path={`${match.path}/client`} component={ClientsHome} />
               <Route path={`${match.path}/settings`} component={Settings} />
+              <Route path={`${match.path}/rating`} component={Ratings} />
             </Switch>
           </VStack>
         </HStack>

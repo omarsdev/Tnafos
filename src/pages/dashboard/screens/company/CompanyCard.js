@@ -14,10 +14,10 @@ export const CompanyCard = ({ Data }) => {
       h="700px"
       ml="10"
     >
-      <Thead>
+      <Thead height="14">
         <Tr>
           <Th
-            bg="gray.100"
+            bg="gray.200"
             roundedTopLeft="lg"
             textColor="gray.700"
             paddingY="2"
@@ -26,7 +26,7 @@ export const CompanyCard = ({ Data }) => {
             Company Profile
           </Th>
           <Th
-            bg="gray.100"
+            bg="gray.200"
             roundedTopRight="lg"
             textColor="gray.700"
             textAlign="start"

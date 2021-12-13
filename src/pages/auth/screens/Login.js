@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 
 import { Stack, Flex, Spacer, Box, Center, Text } from "@chakra-ui/react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 
 import { UserDataContext } from "context";
 import {
@@ -64,7 +64,12 @@ export const Login = () => {
         "max-age=" +
         maxAge;
       setUserToken(res.token);
-      history.push("/dashboard");
+      // history.push("/dashboard");
+      if (showCompany) {
+        history.push("/dashboard/rating/");
+      } else {
+        Redirect("/dashboard/company/create/");
+      }
     } else {
       setError(res.error);
       setLoadingButton(false);

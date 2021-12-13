@@ -13,6 +13,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Stack,
 } from "@chakra-ui/react";
 import { FaAngleRight, FaHome } from "react-icons/fa";
 import { Link, useRouteMatch } from "react-router-dom";
@@ -66,10 +67,12 @@ export const Sidebar = () => {
   let match = useRouteMatch();
 
   return (
-    <Box className="bg-gray-800 w-52 h-screen">
-      <Box className="h-28 w-full">
-        <TnafosSearchLogo />
-      </Box>
+    <Box className="bg-CBlack w-52 h-screen">
+      <Stack w-full h-32 ml="3" my="2">
+        <Link to="/">
+          <TnafosSearchLogo />
+        </Link>
+      </Stack>
 
       <Box className="css-0 w-auto">
         <List className="gap-y-2">
@@ -77,7 +80,7 @@ export const Sidebar = () => {
             <Box key={idxxx}>
               <Divider />
               <ListItem>
-                <Box>
+                <Box px="2" my="2">
                   <Text
                     className="text-CWhite p-1 font-extralight"
                     fontSize="xs"
@@ -86,7 +89,7 @@ export const Sidebar = () => {
                   </Text>
                   {item.id === 0 ? (
                     <Link to={`${match.url}`} key={idxxx}>
-                      <HStack paddingX="1" className="py-2">
+                      <HStack px="2" mb="2">
                         {item.icon && (
                           <Text className="text-CWhite">{item.icon}</Text>
                         )}
@@ -116,7 +119,7 @@ export const Sidebar = () => {
                                     _hover="transparent"
                                     // fontSize="md"
                                   >
-                                    <HStack>
+                                    <HStack px="2">
                                       <Text className="text-CWhite font-medium">
                                         {ele.icon}
                                       </Text>
@@ -151,7 +154,7 @@ export const Sidebar = () => {
                                       fontWeight="light"
                                       _hover="transparent"
                                     >
-                                      <HStack>
+                                      <HStack px="2">
                                         <Text>{ele.icon}</Text>
                                         <Text>{ele.title}</Text>
                                       </HStack>

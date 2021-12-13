@@ -1,10 +1,6 @@
-import { Box } from "@chakra-ui/layout";
 import React from "react";
+import { Box } from "@chakra-ui/react";
 
 export const DashboardContent = () => {
-  return (
-    <Box className="w-full" p="2" overflowY="scroll">
-      content here is related to dashboard's sub pages...
-    </Box>
-  );
+  return <Box>dashboard home</Box>;
 };

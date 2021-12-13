@@ -162,7 +162,7 @@ export const CompanyHome = () => {
                       leftIcon={<FiEdit />}
                       onClick={onOpen}
                       name=" Update Company"
-                      w="170px"
+                      width="200px"
                       h="45px"
                       rounded="lg"
                     />
@@ -182,7 +182,7 @@ export const CompanyHome = () => {
                     >
                       <Text
                         fontSize="LG"
-                        bg="gray.100"
+                        bg="gray.200"
                         roundedTop="lg"
                         textColor="gray.700"
                         fontFamily="inherit"
