@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Stat,
   StatLabel,
@@ -13,7 +13,27 @@ import {
 } from "@chakra-ui/react";
 import { FiInbox } from "react-icons/fi";
 
-export const RatingCard = ({ ratDetails }) => {
+export const RatingCard = () => {
+  const setBorder = () => {
+    let titles = ["1", "2", "3", "4"];
+    switch (titles) {
+      case "title-one":
+        <Box borderLeftColor="brand.primary" />;
+      case "title-tow":
+        <Box borderLeftColor="brand.info" />;
+      case "title-three":
+        <Box borderLeftColor="brand.error" />;
+      case "title-four":
+        <Box borderLeftColor="brand.grey" />;
+    }
+  };
+  // const borderColor = [
+  //   "brand.primary",
+  //   "brand.info",
+  //   "brand.error",
+  //   "brand.grey",
+  // ];
+
   return (
     <Box
       mt="5"
@@ -23,7 +43,7 @@ export const RatingCard = ({ ratDetails }) => {
       shadow="2xl"
       relative
       bg={"white"}
-      borderLeftColor="brand.primary"
+      borderLeftColor={setBorder}
       borderLeftWidth="4px"
     >
       <HStack w="full">
