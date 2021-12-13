@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Grid } from "@chakra-ui/react";
 
-import { RatingCard } from "./components";
 import { AxiosInstance } from "api/AxiosInstance";
 import {
   useParams,
@@ -10,7 +9,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { MyRating } from "./";
+import { MyRating, RatingCard } from "./";
 
 export const Ratings = () => {
   const [ratings, setRatings] = useState(null);
@@ -38,12 +37,12 @@ export const Ratings = () => {
       <Route path={match.path}>
         <Box>
           <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
-            {ratings?.map((el, id) => (
+            {/* {ratings?.map((el, id) => (
               <Link to={`${match.url}/:uuid`} key={id}>
                 <RatingCard ratDetails={el} />
               </Link>
-            ))}
-            {/* <RatingCard /> */}
+            ))} */}
+            <RatingCard />
           </Grid>
         </Box>
       </Route>
