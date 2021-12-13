@@ -17,13 +17,13 @@ export const RatingCard = () => {
   const setBorder = () => {
     let titles = ["1", "2", "3", "4"];
     switch (titles) {
-      case "title-one":
+      case "1":
         <Box borderLeftColor="brand.primary" />;
-      case "title-tow":
+      case "2":
         <Box borderLeftColor="brand.info" />;
-      case "title-three":
+      case "3":
         <Box borderLeftColor="brand.error" />;
-      case "title-four":
+      case "4":
         <Box borderLeftColor="brand.grey" />;
     }
   };
