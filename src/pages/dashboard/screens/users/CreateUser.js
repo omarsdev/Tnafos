@@ -3,7 +3,7 @@ import {
   Heading,
   Box,
   HStack,
-  Checkbox,
+  Flex,
   Text,
   Spacer,
   Center,
@@ -12,6 +12,7 @@ import {
 import { Link, useHistory } from "react-router-dom";
 
 import { AxiosInstance } from "api/AxiosInstance";
+import { CheckBox } from "components";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -59,6 +60,10 @@ export const CreateUser = () => {
   const history = useHistory();
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+
+  //* for checkboxes:
+  const [checked, setChecked] = useState(false);
+  const [ch, setCh] = useState(false);
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [photo, setPhoto] = useState(null);
@@ -126,144 +131,159 @@ export const CreateUser = () => {
   };
 
   return (
-    <Box overflowY="scroll" w="full" px="20" pt="5">
-      <Heading
-        color="#F8B916"
-        fontSize="3xl"
-        fontWeight="lg"
-        alignItems="baseline"
-        pl="56"
+    <Box overflowY="scroll" w="full">
+      <Box
+        px="20"
+        mt="6"
+        boxShadow="2xl"
+        rounded="3xl"
+        w="750px"
+        ml="40"
+        bg="white"
       >
-        Add user
-      </Heading>
+        <Heading
+          color="#F8B916"
+          fontSize="3xl"
+          fontWeight="lg"
+          alignItems="baseline"
+          pt="4"
+        >
+          Add user
+        </Heading>
 
-      <HStack className="pt-10 w-full flex pl-56 " spacing="20px">
-        <input
-          type="file"
-          onChange={(ev) => handleFileInput(ev)}
-          ref={inputRef}
-        />
-
-        <SecondaryButton onClick={photoUploadHandler} name="Upload photo" />
-      </HStack>
-      <Center>
-        <form>
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 ">
-              First Name :
-              <RegularInputControl
-                placeHolder="First Name"
-                name="first_name"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 ">
-              Last Name :
-              <RegularInputControl
-                placeHolder="Last name"
-                name="last_name"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 ">
-              Email :
-              <RegularInputControl
-                placeHolder="Enter email"
-                name="email"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 ">
-              Password :
-              <PasswordInputControl
-                placeHolder="Password"
-                name="password"
-                control={control}
-                register={register}
-                errors={err}
-              />
-            </label>
-          </Box>
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 ">
-              Confirm Password :
-              <PasswordInputControl
-                placeHolder="confirm your password"
-                name="password_confirmation"
-                control={control}
-                register={register}
-                error={err}
-              />
-            </label>
-          </Box>
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 ">
-              Phone Number :
-              <RegularInputControl
-                placeHolder="Phone number"
-                name="phone_number"
-                inputType="number"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="flex flex-col items-center gap-2 mt-5">
-            <Heading fontSize="2xl" color="gray.500" fontWeight="normal">
-              Terms and Conditions agreement
-            </Heading>
-            <Checkbox colorScheme="blue" required>
-              I agree to Tnafos
-            </Checkbox>
-            <HStack>
-              <Link to="/" className="text-blue-700 hover:underline">
-                <Text>terms of service</Text>
-              </Link>{" "}
-              <Text>and</Text>
-              <Link to="/" className="text-blue-700 hover:underline">
-                Privacy policy
-              </Link>
-            </HStack>
-            <Box>
-              <Heading fontSize="2xl" color="gray.500" fontWeight="normal">
-                Decleration of Valid Information
-              </Heading>
+        <Flex w="full" pl="5" mt="16">
+          <input
+            type="file"
+            onChange={(ev) => handleFileInput(ev)}
+            ref={inputRef}
+          />
+          <Spacer />
+          <SecondaryButton onClick={photoUploadHandler} name="Upload photo" />
+        </Flex>
+        <Center>
+          <form>
+            <Box className="mt-4">
+              <label className="w-32 text-left text-gray-500 pl-3">
+                First Name :
+                <RegularInputControl
+                  placeHolder="First Name"
+                  name="first_name"
+                  control={control}
+                  register={register}
+                  width="100%"
+                  errors={err}
+                />
+              </label>
             </Box>
-            <Checkbox required>
-              I confirm that the information given in this form is true,
-              complete and accurate.
-            </Checkbox>
+            <Box className="mt-4">
+              <label className="w-32 text-left text-gray-500 pl-3 ">
+                Last Name :
+                <RegularInputControl
+                  placeHolder="Last name"
+                  name="last_name"
+                  control={control}
+                  register={register}
+                  width="100%"
+                  errors={err}
+                />
+              </label>
+            </Box>
+            <Box className="mt-4">
+              <label className="w-32 text-left text-gray-500 pl-3">
+                Email :
+                <RegularInputControl
+                  placeHolder="Enter email"
+                  name="email"
+                  control={control}
+                  register={register}
+                  width="100%"
+                  errors={err}
+                />
+              </label>
+            </Box>
+            <Box className="mt-4">
+              <label className="w-32 text-left text-gray-500 pl-3">
+                Password :
+                <PasswordInputControl
+                  placeHolder="Password"
+                  name="password"
+                  control={control}
+                  register={register}
+                  errors={err}
+                />
+              </label>
+            </Box>
+            <Box className="mt-4">
+              <label className="w-32 text-left text-gray-500 pl-3">
+                Confirm Password :
+                <PasswordInputControl
+                  placeHolder="confirm your password"
+                  name="password_confirmation"
+                  control={control}
+                  register={register}
+                  error={err}
+                />
+              </label>
+            </Box>
+            <Box className="mt-4">
+              <label className="w-32 text-left text-gray-500 pl-3">
+                Phone Number :
+                <RegularInputControl
+                  placeHolder="Phone number"
+                  name="phone_number"
+                  inputType="number"
+                  control={control}
+                  register={register}
+                  width="100%"
+                  errors={err}
+                />
+              </label>
+            </Box>
 
-            <HStack spacing="10px" py="5">
-              <PrimaryButton
-                name="SAVE"
-                onClick={handleSubmit(addUser)}
-                loadingButton={isUpdating}
+            <Box className="flex flex-col items-center gap-2 mt-10">
+              <Heading fontSize="xl" color="grey" fontWeight="normal">
+                Terms and Conditions agreement
+              </Heading>
+              <CheckBox
+                name="I agree to Tnafos"
+                value={checked}
+                setValue={setChecked}
               />
 
-              <SecondaryButton onClick={handleCancel} name="CANCEL" />
-            </HStack>
-          </Box>
-        </form>
-      </Center>
+              <HStack>
+                <Link to="/" className="hover:underline text-CInfo">
+                  <Text>terms of service</Text>
+                </Link>{" "}
+                <Text>and</Text>
+                <Link to="/" className="hover:underline text-CInfo">
+                  <Text>Privacy policy</Text>
+                </Link>
+              </HStack>
+              <Box>
+                <Heading fontSize="xl" color="grey" fontWeight="normal">
+                  Decleration of Valid Information
+                </Heading>
+              </Box>
+              <CheckBox
+                name="I confirm that the information given in this form is true,
+            complete and accurate."
+                value={ch}
+                setValue={setCh}
+              />
+
+              <HStack spacing="10px" py="5">
+                <PrimaryButton
+                  name="SAVE"
+                  onClick={handleSubmit(addUser)}
+                  loadingButton={isUpdating}
+                />
+
+                <SecondaryButton onClick={handleCancel} name="CANCEL" />
+              </HStack>
+            </Box>
+          </form>
+        </Center>
+      </Box>
     </Box>
   );
 };

@@ -51,8 +51,8 @@ export const AddService = () => {
   };
 
   return (
-    <Box borderRadius="lg" borderWidth="1px" boxSize="2xl" px="20" pt="5">
-      <Box>
+    <Box boxShadow="2xl" rounded="3xl" boxSize="2xl">
+      <Box px="20" mt="10">
         <Heading
           color="#F8B916"
           fontSize="x-large"
@@ -61,103 +61,104 @@ export const AddService = () => {
         >
           New Service
         </Heading>
+
+        <form mt="5">
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Name of service :
+              <RegularInputControl
+                placeHolder="Name of service"
+                inputType="text"
+                width="100%"
+                name="name"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Description :
+              <RegularInputControl
+                placeHolder="Description"
+                name="description"
+                inputType="text"
+                width="100%"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Category-Id :
+              <RegularInputControl
+                placeHolder="Category id"
+                name="category_id"
+                inputType="text"
+                width="100%"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3 ">
+              Price :
+              <RegularInputControl
+                placeHolder="Price"
+                name="price"
+                inputType="text"
+                width="100%"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Type:
+              <RegularInputControl
+                placeHolder="Type"
+                name="type"
+                inputType="text"
+                width="100%"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+          <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
+            <PrimaryButton
+              name="ADD SERVICE"
+              onClick={handleSubmit(createService)}
+              buttonType="submit"
+            />
+
+            <SecondaryButton
+              name="Cancel"
+              onClick={handleCancel}
+              buttonType="button"
+            />
+          </HStack>
+          <Box>
+            {errors?.message && (
+              <Text className="text-center mt-4" color="red">
+                {errors?.message}
+              </Text>
+            )}
+          </Box>
+        </form>
       </Box>
-      <form>
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Name of service :
-            <RegularInputControl
-              placeHolder="Name of service"
-              inputType="text"
-              width="100%"
-              name="name"
-              control={control}
-              register={register}
-              errors={err}
-            />
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Description :
-            <RegularInputControl
-              placeHolder="Description"
-              name="description"
-              inputType="text"
-              width="100%"
-              control={control}
-              register={register}
-              errors={err}
-            />
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Category-Id :
-            <RegularInputControl
-              placeHolder="Category id"
-              name="category_id"
-              inputType="text"
-              width="100%"
-              control={control}
-              register={register}
-              errors={err}
-            />
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Price :
-            <RegularInputControl
-              placeHolder="Price"
-              name="price"
-              inputType="text"
-              width="100%"
-              control={control}
-              register={register}
-              errors={err}
-            />
-          </label>
-        </Box>
-
-        <Box className="mt-4">
-          <label className="w-32 text-left text-gray-500 ">
-            Type:
-            <RegularInputControl
-              placeHolder="Type"
-              name="type"
-              inputType="text"
-              width="100%"
-              control={control}
-              register={register}
-              errors={err}
-            />
-          </label>
-        </Box>
-        <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
-          <PrimaryButton
-            name="ADD SERVICE"
-            onClick={handleSubmit(createService)}
-            buttonType="submit"
-          />
-
-          <SecondaryButton
-            name="Cancel"
-            onClick={handleCancel}
-            buttonType="button"
-          />
-        </HStack>
-        <Box>
-          {errors?.message && (
-            <Text className="text-center mt-4" color="red">
-              {errors?.message}
-            </Text>
-          )}
-        </Box>
-      </form>
     </Box>
   );
 };

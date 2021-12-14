@@ -261,7 +261,7 @@ export const UserCard = () => {
                 </label>
               </Box>
 
-              <Flex mt="5" w="full" direction="row-reverse">
+              <Flex mt="5" w="full" ml="320px">
                 <PrimaryButton
                   name="Update"
                   onClick={handleSubmit(onUpdateUserInfo)}

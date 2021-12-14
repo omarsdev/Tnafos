@@ -67,7 +67,7 @@ export const Sidebar = () => {
   let match = useRouteMatch();
 
   return (
-    <Box className="bg-CBlack w-52 h-screen">
+    <Box className="w-52 h-screen bg-black">
       <Stack w-full h-32 ml="3" my="2">
         <Link to="/">
           <TnafosSearchLogo />

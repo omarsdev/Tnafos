@@ -127,22 +127,19 @@ export const MyService = () => {
         >
           <Text
             w="full"
-            // bg="gray.200"
+            bg="gray.200"
             roundedTop="lg"
             textColor="gray.700"
             textAlign="start"
             fontSize="x-large"
             pl="5%"
-            pt="5"
+            py="3"
           >
-            Service
+            {service?.name}
           </Text>
 
-          <Stack mr="0" px="5%" bg="gray.200" mt="5" h="270px">
-            <Text py="1" fontSize="large" textColor="gray.600">
-              {service?.name}
-            </Text>
-            <Text className="text-blue-400 text-medium">Price:</Text>
+          <Stack mr="0" px="5%" mt="5" h="270px">
+            <Text color="#007BFF">Price:</Text>
             <Text py="1" fontSize="large" textColor="gray.600">
               {service?.price} SAR
             </Text>
@@ -155,10 +152,10 @@ export const MyService = () => {
             <Text py="1" fontSize="large" textColor="gray.600">
               Type :{service?.type}
             </Text>
-            <Flex justify={"center"} mt={-12}>
+            <Flex justify={"center"}>
               <IconButton
                 justify={"center"}
-                mt={-6}
+                mb={3}
                 fontSize={"large"}
                 rounded={"full"}
                 bg={"#F8B916"}
@@ -240,7 +237,7 @@ export const MyService = () => {
                 </label>
               </Box>
 
-              <Flex mt="5" w="full" direction="row-reverse">
+              <Flex mt="5" w="full" ml="320px">
                 <PrimaryButton
                   name="Update"
                   onClick={handleSubmit(onUpdateService)}
@@ -248,7 +245,6 @@ export const MyService = () => {
                   buttonType="submit"
                   mx="2"
                 />
-                <Spacer />
 
                 <SecondaryButton
                   name="Cancel"
