@@ -21,11 +21,11 @@ export const ServiceCard = ({ info }) => {
             rounded="3xl"
             w="100%"
             h="160px"
-            marginTop={"8px"}
+            marginTop={"10px"}
           />
           <Box className="flex flex-col justify-center">
             <Text>{info?.name}</Text>
-            <Text color="#007BFF">Price {info?.price} SAR</Text>
+            <Text color="#007BFF">Price : {info?.price} SAR</Text>
 
             <Text>{info?.type}</Text>
           </Box>

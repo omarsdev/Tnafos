@@ -123,7 +123,7 @@ export const MyService = () => {
         <Box
           className="rounded-3xl shadow-2xl relative bg-white"
           w="400px"
-          h="400px"
+          h="370px"
         >
           <Text
             w="full"
@@ -139,10 +139,7 @@ export const MyService = () => {
           </Text>
 
           <Stack mr="0" px="5%" mt="5" h="270px">
-            <Text color="#007BFF">Price:</Text>
-            <Text py="1" fontSize="large" textColor="gray.600">
-              {service?.price} SAR
-            </Text>
+            <Text color="#007BFF">Price: {service?.price} SAR</Text>
             <Text py="1" fontSize="large" textColor="gray.600">
               Description:{service?.description}
             </Text>
