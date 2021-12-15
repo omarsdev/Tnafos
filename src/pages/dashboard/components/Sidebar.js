@@ -16,7 +16,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { FaAngleRight, FaHome } from "react-icons/fa";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, NavLink, useRouteMatch } from "react-router-dom";
 import { SidebarMenu } from "../../../constants";
 
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
@@ -83,6 +83,7 @@ export const Sidebar = () => {
                 <Box px="2" my="2">
                   <Text
                     className="text-CWhite p-1 font-extralight"
+                    opacity="0.50"
                     fontSize="xs"
                   >
                     {item.heading}
@@ -107,7 +108,7 @@ export const Sidebar = () => {
                               {ele.to && !ele.submenu ? (
                                 <Link
                                   to={`${match.url}${ele.to}`}
-                                  // className="font-medium"
+                                  className=" font-medium  hover: 'opacity-0'"
                                   key={idx}
                                 >
                                   <Box
@@ -116,14 +117,28 @@ export const Sidebar = () => {
                                     bg="transparent"
                                     width="60%"
                                     height="10"
-                                    _hover="transparent"
-                                    // fontSize="md"
+                                    _hover={{
+                                      bg: "tranparent",
+                                      color: "#FFFFFF",
+                                      opacity: "0",
+                                    }}
+                                    _focus={{
+                                      bg: "tranparent",
+                                      color: "#FFFFFF",
+                                      opacity: "0",
+                                    }}
                                   >
                                     <HStack px="2">
-                                      <Text className="text-CWhite font-medium">
+                                      <Text
+                                        className="text-CWhite font-medium"
+                                        opacity="0.60"
+                                      >
                                         {ele.icon}
                                       </Text>
-                                      <Text className="text-CWhite">
+                                      <Text
+                                        className="text-CWhite font-medium"
+                                        opacity="0.60"
+                                      >
                                         {ele.title}
                                       </Text>
                                     </HStack>
@@ -147,6 +162,7 @@ export const Sidebar = () => {
                                       _focus={{ border: "hidden" }}
                                       rightIcon={<FaAngleRight />}
                                       className="text-CWhite"
+                                      opacity="0.60"
                                       bg="transparent"
                                       width="100%"
                                       height="10"
@@ -155,8 +171,15 @@ export const Sidebar = () => {
                                       _hover="transparent"
                                     >
                                       <HStack px="2">
-                                        <Text>{ele.icon}</Text>
-                                        <Text>{ele.title}</Text>
+                                        <Text
+                                          className="text-CWhite"
+                                          _hover={{ opacity: 0 }}
+                                        >
+                                          {ele.icon}
+                                        </Text>
+                                        <Text className="text-CWhite">
+                                          {ele.title}
+                                        </Text>
                                       </HStack>
                                     </MenuButton>
                                     <MenuList overflow="hidden" width="40">

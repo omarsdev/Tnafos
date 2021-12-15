@@ -5,6 +5,8 @@ import { HStack, VStack, Center, Spinner, Box, Grid } from "@chakra-ui/react";
 import { useRouteMatch, Route, Switch } from "react-router-dom";
 import { AxiosInstance } from "api";
 
+import { ProtectedRoute } from "components";
+
 import {
   Estimate,
   PurchaseRequest,
@@ -18,7 +20,6 @@ import {
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 import { UserDataContext } from "context";
-import { getToken } from "utils";
 
 export const DashboardLayout = () => {
   let match = useRouteMatch();
