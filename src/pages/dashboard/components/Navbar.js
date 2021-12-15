@@ -16,6 +16,7 @@ import { removeUserSession } from "../../../utils";
 import { useHistory } from "react-router-dom";
 import { UserDataContext } from "context";
 import { AxiosInstance } from "api";
+import { height } from "tailwindcss/defaultTheme";
 
 export const Navbar = () => {
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
@@ -70,7 +71,6 @@ export const Navbar = () => {
           <span className="my-auto ">
             {userData.first_name} {userData.last_name}
           </span>
-          {/* <Text>User name</Text> */}
         </HStack>
         <Image
           src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
@@ -81,10 +81,16 @@ export const Navbar = () => {
           objectFit="cover"
         />
         <Menu isLazy>
-          <MenuButton px="3">
+          <MenuButton
+            px="3"
+            _hover={{ color: "#AEAEAE" }}
+            _focus={{
+              color: "#AEAEAE",
+            }}
+          >
             <FaChevronDown />
           </MenuButton>
-          <MenuList w="28">
+          <MenuList w="28" mt="4">
             <Link to={`${match.url}/user/profile`}>
               <MenuItem className="hover:bg-gray-200">My Profile</MenuItem>
             </Link>

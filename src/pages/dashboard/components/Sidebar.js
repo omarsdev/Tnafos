@@ -129,12 +129,7 @@ export const Sidebar = () => {
                                       }}
                                     >
                                       <Text fontSize="medium">{ele.icon}</Text>
-                                      <Text
-                                        // opacity="0.60"
-                                        fontSize="medium"
-                                      >
-                                        {ele.title}
-                                      </Text>
+                                      <Text fontSize="medium">{ele.title}</Text>
                                     </HStack>
                                   </Box>
                                 </Link>
@@ -155,25 +150,22 @@ export const Sidebar = () => {
                                       }}
                                       _focus={{ border: "hidden" }}
                                       rightIcon={<FaAngleRight />}
-                                      className="text-CWhite"
-                                      opacity="0.60"
+                                      className="text-CWhite text-opacity-60"
                                       bg="transparent"
                                       width="100%"
                                       height="10"
                                       fontSize="md"
                                       fontWeight="light"
-                                      _hover="transparent"
+                                      _hover={{
+                                        textColor: "#FFFFFF",
+                                      }}
+                                      _focus={{
+                                        textColor: "#FFFFFF",
+                                      }}
                                     >
                                       <HStack px="2">
-                                        <Text
-                                          className="text-CWhite"
-                                          _hover={{ opacity: 0 }}
-                                        >
-                                          {ele.icon}
-                                        </Text>
-                                        <Text className="text-CWhite">
-                                          {ele.title}
-                                        </Text>
+                                        <Text>{ele.icon}</Text>
+                                        <Text>{ele.title}</Text>
                                       </HStack>
                                     </MenuButton>
                                     <MenuList overflow="hidden" width="40">
