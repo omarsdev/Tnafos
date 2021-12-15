@@ -18,7 +18,7 @@ export const RatingCard = () => {
   //   let titles = ["1", "2", "3", "4"];
   //   switch (titles) {
   //     case "1":
-  //       <Box borderLeftColor="brand.primary" />;
+  //       "brand.primary" ;
   //     case "2":
   //       <Box borderLeftColor="brand.info" />;
   //     case "3":
@@ -27,13 +27,10 @@ export const RatingCard = () => {
   //       <Box borderLeftColor="brand.grey" />;
   //   }
   // };
-  // const borderColor = [
-  //   "brand.primary",
-  //   "brand.info",
-  //   "brand.error",
-  //   "brand.grey",
-  // ];
 
+  const colors = ["red", "blue", "yellow"];
+  const randomElement = colors[Math.floor(Math.random() * colors.length)];
+  console.log(randomElement);
   return (
     <Box
       mt="5"
@@ -43,7 +40,7 @@ export const RatingCard = () => {
       shadow="2xl"
       relative
       bg={"white"}
-      // borderLeftColor={setBorder}
+      borderLeftColor={randomElement}
       borderLeftWidth="4px"
     >
       <HStack w="full">

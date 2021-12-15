@@ -128,7 +128,7 @@ export const UserCard = () => {
         <Box
           className="rounded-3xl shadow-2xl relative bg-white"
           w="350px"
-          h="400px"
+          h="430px"
         >
           <VStack spacing="20px" mx="5%">
             <Image
@@ -137,7 +137,7 @@ export const UserCard = () => {
               objectFit="cover"
               rounded="3xl"
               w="100%"
-              h="160px"
+              h="180px"
               marginTop={"20px"}
             />
             <Box mr="0">

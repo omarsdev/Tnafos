@@ -7,7 +7,7 @@ export const CompanyCard = ({ Data }) => {
       variant="simple"
       colorScheme="gray"
       border="silver"
-      borderRadius="2xl"
+      borderRadius="3xl"
       boxShadow="2xl"
       borderWidth="2px"
       w="600px"

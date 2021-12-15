@@ -12,7 +12,7 @@ import {
 import { MyRating, RatingCard } from "./";
 
 export const Ratings = () => {
-  const [ratings, setRatings] = useState(null);
+  const [ratings, setRatings] = useState([1, 2, 3, 4]);
 
   const { uuid } = useParams();
   let match = useRouteMatch();
@@ -29,7 +29,7 @@ export const Ratings = () => {
   };
 
   useEffect(() => {
-    getAllRatings();
+    // getAllRatings();
   }, []);
 
   return (
@@ -37,12 +37,12 @@ export const Ratings = () => {
       <Route path={match.path}>
         <Box>
           <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
-            {/* {ratings?.map((el, id) => (
+            {ratings.map((el, id) => (
               <Link to={`${match.url}/:uuid`} key={id}>
                 <RatingCard ratDetails={el} />
               </Link>
-            ))} */}
-            <RatingCard />
+            ))}
+            {/* <RatingCard /> */}
           </Grid>
         </Box>
       </Route>

@@ -33,7 +33,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "context/AlertContext";
 
 export const CompanyHome = () => {
-  const [companyInfo, setcompanyInfo] = useState({});
+  const [companyInfo, setcompanyInfo] = useState(null);
 
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
@@ -150,23 +150,13 @@ export const CompanyHome = () => {
                 <Spinner size="xl" color="#F8B916" />
               </Center>
             ) : (
-              <Grid templateColumns="repeat(3, 1fr)" gap={5} pt="5">
+              <Grid templateColumns="repeat(3, 1fr)" gap={5} mt="10">
                 <GridItem colSpan={2}>
                   <CompanyCard Data={companyInfo} />
                 </GridItem>
 
                 <GridItem>
-                  <VStack w="full" spacing="5" mt="5">
-                    <PrimaryButton
-                      buttonType="button"
-                      leftIcon={<FiEdit />}
-                      onClick={onOpen}
-                      name=" Update Company"
-                      width="200px"
-                      h="45px"
-                      rounded="lg"
-                    />
-
+                  <VStack w="full" spacing="10">
                     <Box
                       className="rounded-3xl shadow-2xl relative bg-white"
                       w="250px"
@@ -177,8 +167,8 @@ export const CompanyHome = () => {
                       borderWidth="2px"
                       rounded="lg"
                       textAlign={"center"}
-                      h="36"
-                      mt="10px"
+                      h="44"
+                      // mt="10px"
                     >
                       <Text
                         fontSize="LG"
@@ -187,7 +177,7 @@ export const CompanyHome = () => {
                         textColor="gray.700"
                         fontFamily="inherit"
                         fontWeight="medium"
-                        paddingY="1"
+                        paddingY="3"
                       >
                         Review
                       </Text>
@@ -198,7 +188,7 @@ export const CompanyHome = () => {
                           fontSize="lg"
                           alignItems="baseline"
                           fontWeight="medium"
-                          py="3"
+                          py="5"
                         >
                           rating
                           <Icon textColor="#F8B916">
@@ -212,6 +202,15 @@ export const CompanyHome = () => {
                         />
                       </Box>
                     </Box>
+                    <PrimaryButton
+                      buttonType="button"
+                      leftIcon={<FiEdit />}
+                      onClick={onOpen}
+                      name=" Update Company"
+                      width="200px"
+                      h="45px"
+                      rounded="lg"
+                    />
                   </VStack>
                 </GridItem>
               </Grid>

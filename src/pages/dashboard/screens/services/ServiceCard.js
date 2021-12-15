@@ -11,19 +11,8 @@ export const ServiceCard = ({ info }) => {
       <Box
         className="rounded-3xl shadow-2xl relative bg-white"
         w="300px"
-        h="380px"
+        h="340px"
       >
-        <Text
-          w="full"
-          bg="gray.200"
-          roundedTop="lg"
-          textColor="gray.700"
-          textAlign="start"
-          fontSize="x-large"
-          pl="5%"
-        >
-          {info?.name}
-        </Text>
         <VStack spacing="20px" mx="5%">
           <Image
             src={"https://bit.ly/sage-adebayo"}
@@ -34,11 +23,10 @@ export const ServiceCard = ({ info }) => {
             h="160px"
             marginTop={"8px"}
           />
-          <Box>
-            <Text color="#007BFF" textAlign="start" pl="2">
-              Price
-            </Text>
-            <Text>{info?.price} SAR</Text>
+          <Box className="flex flex-col justify-center">
+            <Text>{info?.name}</Text>
+            <Text color="#007BFF">Price {info?.price} SAR</Text>
+
             <Text>{info?.type}</Text>
           </Box>
           <Box position="absolute" bottom="5">
