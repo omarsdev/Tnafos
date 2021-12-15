@@ -80,7 +80,7 @@ export const Navbar = () => {
           p="1"
           objectFit="cover"
         />
-        <Menu isLazy>
+        <Menu isLazy closeOnSelect="true">
           <MenuButton
             px="3"
             _hover={{ color: "#AEAEAE" }}

@@ -17,6 +17,7 @@ import {
   DrawerCloseButton,
   Spacer,
   Flex,
+  Image,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
@@ -123,22 +124,21 @@ export const MyService = () => {
         <Box
           className="rounded-3xl shadow-2xl relative bg-white"
           w="400px"
-          h="370px"
+          h="500px"
         >
-          <Text
-            w="full"
-            bg="gray.200"
-            roundedTop="lg"
-            textColor="gray.700"
-            textAlign="start"
-            fontSize="x-large"
-            pl="5%"
-            py="3"
-          >
-            {service?.name}
-          </Text>
-
-          <Stack mr="0" px="5%" mt="5" h="270px">
+          <Stack mr="0" mt="5" h="270px" mx="5%">
+            <Image
+              src={"https://bit.ly/sage-adebayo"}
+              alt="Segun Adebayo"
+              objectFit="cover"
+              rounded="3xl"
+              w="100%"
+              h="180px"
+              marginTop={"10px"}
+            />
+            <Text py="1" fontSize="large" textColor="gray.600">
+              {service?.name}
+            </Text>
             <Text color="#007BFF">Price: {service?.price} SAR</Text>
             <Text py="1" fontSize="large" textColor="gray.600">
               Description:{service?.description}

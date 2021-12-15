@@ -20,6 +20,7 @@ import { Link, NavLink, useRouteMatch } from "react-router-dom";
 import { SidebarMenu } from "../../../constants";
 
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
+import { width } from "tailwindcss/defaultTheme";
 
 const Heading = () => {
   return <span>{SidebarMenu.heading}</span>;
@@ -137,8 +138,9 @@ export const Sidebar = () => {
                                 <Menu
                                   isLazy
                                   placement="bottom"
-                                  size="20"
+                                  // flip="true"
                                   preventOverflow="true"
+                                  closeOnSelect="true"
                                 >
                                   <>
                                     <MenuButton
@@ -146,9 +148,8 @@ export const Sidebar = () => {
                                       paddingX="1"
                                       as={Button}
                                       _expanded={{
-                                        bg: "gray.600",
+                                        bg: "transparent",
                                       }}
-                                      _focus={{ border: "hidden" }}
                                       rightIcon={<FaAngleRight />}
                                       className="text-CWhite text-opacity-60"
                                       bg="transparent"
@@ -161,6 +162,7 @@ export const Sidebar = () => {
                                       }}
                                       _focus={{
                                         textColor: "#FFFFFF",
+                                        border: "hidden",
                                       }}
                                     >
                                       <HStack px="2">
@@ -168,7 +170,7 @@ export const Sidebar = () => {
                                         <Text>{ele.title}</Text>
                                       </HStack>
                                     </MenuButton>
-                                    <MenuList overflow="hidden" width="40">
+                                    <MenuList overflow="hidden" width="30">
                                       {ele.submenu.map((element, index) => (
                                         <MenuItem key={index} width="100%">
                                           <Link
