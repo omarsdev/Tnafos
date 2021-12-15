@@ -40,16 +40,6 @@ export const DashboardLayout = () => {
     }
   };
 
-  const getUser = async () => {
-    if (!userData) {
-      //* grab token wether from local storage or context
-      let token = getToken() || userToken;
-      if (token) {
-        fetchTokenMe();
-      }
-    }
-  };
-
   useEffect(() => {
     fetchTokenMe();
   }, []);
