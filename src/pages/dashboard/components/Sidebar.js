@@ -117,27 +117,29 @@ export const Sidebar = () => {
                                     bg="transparent"
                                     width="60%"
                                     height="10"
-                                    _hover={{
-                                      bg: "tranparent",
-                                      color: "#FFFFFF",
-                                      opacity: "0",
-                                    }}
-                                    _focus={{
-                                      bg: "tranparent",
-                                      color: "#FFFFFF",
-                                      opacity: "0",
-                                    }}
                                   >
                                     <HStack px="2">
                                       <Text
-                                        className="text-CWhite font-medium"
-                                        opacity="0.60"
+                                        fontSize="medium"
+                                        // opacity="0.60"
+                                        _hover={{
+                                          textColor: "#FFFFFF",
+                                        }}
+                                        _focus={{
+                                          textColor: "#FFFFFF",
+                                        }}
                                       >
                                         {ele.icon}
                                       </Text>
                                       <Text
-                                        className="text-CWhite font-medium"
-                                        opacity="0.60"
+                                        // opacity="0.60"
+                                        fontSize="medium"
+                                        _hover={{
+                                          textColor: "#FFFFFF",
+                                        }}
+                                        _focus={{
+                                          textColor: "#FFFFFF",
+                                        }}
                                       >
                                         {ele.title}
                                       </Text>
