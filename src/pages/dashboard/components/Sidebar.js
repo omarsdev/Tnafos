@@ -118,28 +118,20 @@ export const Sidebar = () => {
                                     width="60%"
                                     height="10"
                                   >
-                                    <HStack px="2">
-                                      <Text
-                                        fontSize="medium"
-                                        // opacity="0.60"
-                                        _hover={{
-                                          textColor: "#FFFFFF",
-                                        }}
-                                        _focus={{
-                                          textColor: "#FFFFFF",
-                                        }}
-                                      >
-                                        {ele.icon}
-                                      </Text>
+                                    <HStack
+                                      px="2"
+                                      className="text-CWhite text-opacity-60"
+                                      _hover={{
+                                        textColor: "#FFFFFF",
+                                      }}
+                                      _focus={{
+                                        textColor: "#FFFFFF",
+                                      }}
+                                    >
+                                      <Text fontSize="medium">{ele.icon}</Text>
                                       <Text
                                         // opacity="0.60"
                                         fontSize="medium"
-                                        _hover={{
-                                          textColor: "#FFFFFF",
-                                        }}
-                                        _focus={{
-                                          textColor: "#FFFFFF",
-                                        }}
                                       >
                                         {ele.title}
                                       </Text>
