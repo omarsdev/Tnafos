@@ -1,36 +1,22 @@
-import React, { useState } from "react";
-import { Route, Redirect, useHistory } from "react-router-dom";
-import { AxiosInstance } from "api";
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 
-export const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [companyInfo, setCompanyInfo] = useState(null);
-  let history = useHistory();
-
-  const showCompany = async () => {
-    await AxiosInstance.get("/api/dashboard/company")
-      .then((res) => {
-        setCompanyInfo(res.data.data);
-        let company = res.data.data;
-        console.log(company);
-        delete company.country;
-        delete company.admin;
-        delete company.category;
-      })
-      .catch((err) => {
-        history.push("/dashboard/company");
-      });
-  };
+export const ProtectedRoute = ({
+  hasCompany,
+  component: Component,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (showCompany) {
-          return <Component />;
+        if (hasCompany) {
+          return <Component {...props} />;
         } else {
           return (
             <Redirect
               to={{
-                pathname: "/dashboard/company/create",
+                path: "/dashboard/company/create",
                 state: { from: props.location },
               }}
             />
