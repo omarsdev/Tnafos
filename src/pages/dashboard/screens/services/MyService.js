@@ -126,27 +126,27 @@ export const MyService = () => {
           w="400px"
           h="500px"
         >
-          <Stack mr="0" mt="5" h="270px" mx="5%">
-            <Image
-              src={"https://bit.ly/sage-adebayo"}
-              alt="Segun Adebayo"
-              objectFit="cover"
-              rounded="3xl"
-              w="100%"
-              h="180px"
-              marginTop={"10px"}
-            />
-            <Text py="1" fontSize="large" textColor="gray.600">
+          <Image
+            src={"https://bit.ly/sage-adebayo"}
+            alt="Segun Adebayo"
+            objectFit="cover"
+            roundedTop="3xl"
+            w="100%"
+            h="220px"
+            layout={"fill"}
+          />
+          <Stack mr="0" h="270px" mx="5%">
+            <Text mt="1" fontSize="x-large" textColor="gray.600">
               {service?.name}
             </Text>
             <Text color="#007BFF">Price: {service?.price} SAR</Text>
-            <Text py="1" fontSize="large" textColor="gray.600">
+            <Text fontSize="large" textColor="gray.600">
               Description:{service?.description}
             </Text>
-            <Text py="1" fontSize="large" textColor="gray.600">
+            <Text fontSize="large" textColor="gray.600">
               Category-id: {service?.category.uuid}
             </Text>
-            <Text py="1" fontSize="large" textColor="gray.600">
+            <Text fontSize="large" textColor="gray.600">
               Type :{service?.type}
             </Text>
             <Flex justify={"center"}>

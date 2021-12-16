@@ -126,28 +126,28 @@ export const UserCard = () => {
     <>
       <Center py="5">
         <Box
-          className="rounded-3xl shadow-2xl relative bg-white"
+          className="rounded-3xl relative bg-white shadow-2xl"
           w="350px"
           h="430px"
         >
-          <VStack spacing="20px" mx="5%">
-            <Image
-              src={"https://bit.ly/sage-adebayo"}
-              alt="Segun Adebayo"
-              objectFit="cover"
-              rounded="3xl"
-              w="100%"
-              h="180px"
-              marginTop={"20px"}
-            />
+          <Image
+            src={"https://bit.ly/sage-adebayo"}
+            alt="Segun Adebayo"
+            objectFit="cover"
+            roundedTop="3xl"
+            w="100%"
+            h="220px"
+            layout={"fill"}
+          />
+          <VStack spacing="20px" mx="5%" mt="5">
             <Box mr="0">
-              <Text py="1">
+              <Text py="1" textColor="gray.600">
                 Name: {card?.first_name}
                 {card?.last_name}
               </Text>
-              <Text py="1">E-mail: {card?.email}</Text>
-              <Text py="1">Telephone: {card?.phone_number}</Text>
-              <Text py="1">Id :{card?.uuid}</Text>
+              <Text textColor="gray.600">E-mail: {card?.email}</Text>
+              <Text textColor="gray.600">Telephone: {card?.phone_number}</Text>
+              <Text textColor="gray.600">Id :{card?.uuid}</Text>
             </Box>
 
             <Flex justify={"center"} mt={-12}>

@@ -66,12 +66,12 @@ export const DashboardLayout = () => {
                 component={Ratings}
                 hasCompany={companyInfo}
               />
-              <ProtectedRoute
+              <Route
                 path={`${match.path}/user`}
                 component={UserHome}
                 hasCompany={companyInfo}
               />
-              <ProtectedRoute
+              <Route
                 path={`${match.path}/service`}
                 component={ServiceHome}
                 hasCompany={companyInfo}
