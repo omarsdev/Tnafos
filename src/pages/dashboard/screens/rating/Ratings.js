@@ -36,7 +36,7 @@ export const Ratings = () => {
     <Switch>
       <Route path={match.path}>
         <Box>
-          <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
+          <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
             {ratings.map((el, id) => (
               <Link to={`${match.url}/:uuid`} key={id}>
                 <RatingCard ratDetails={el} />
@@ -50,7 +50,3 @@ export const Ratings = () => {
     </Switch>
   );
 };
-
-// grey: "#AEAEAE",
-// error: "#B00020",
-// info: "#007BFF",

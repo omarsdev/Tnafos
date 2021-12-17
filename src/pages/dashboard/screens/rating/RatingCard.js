@@ -34,10 +34,10 @@ export const RatingCard = () => {
   return (
     <Box
       mt="5"
-      w="250px"
+      w="240px"
       h="70px"
       rounded="xl"
-      shadow="2xl"
+      boxShadow="2xl"
       relative
       bg={"white"}
       borderLeftColor={randomElement}
@@ -46,7 +46,7 @@ export const RatingCard = () => {
       <HStack w="full">
         <Stat px="5%">
           <StatLabel>title</StatLabel>
-          <StatNumber>number</StatNumber>
+          <StatNumber fontSize="md">number</StatNumber>
         </Stat>
         <Box pr="7%" fontSize="5xl" fontWeight="light" pt="2%">
           <FiInbox color="#AEAEAE" />
