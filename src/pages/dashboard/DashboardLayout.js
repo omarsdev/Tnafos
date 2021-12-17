@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Sidebar } from "./components/index";
 import { HStack, VStack, Center, Spinner, Box, Grid } from "@chakra-ui/react";
-import { useRouteMatch, Route, Switch } from "react-router-dom";
+import { useRouteMatch, Route, Switch, Router } from "react-router-dom";
 import { AxiosInstance } from "api";
 
 import { ProtectedRoute } from "components";
@@ -30,8 +30,6 @@ export const DashboardLayout = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const [companyInfo, showCompany] = useCompany(null);
-
   const fetchTokenMe = async (token) => {
     try {
       const res = await AxiosInstance.get("/api/dashboard/user/my-profile");
@@ -57,54 +55,22 @@ export const DashboardLayout = () => {
             <Navbar />
 
             {/* {body} */}
+
             <Switch>
               <Route exact path={match.path} />
               <Route path={`${match.path}/company`} component={CompanyHome} />
+              <Route path={`${match.path}/rating`} component={Ratings} />
+              <Route path={`${match.path}/user`} component={UserHome} />
+              <Route path={`${match.path}/service`} component={ServiceHome} />
               <Route
-                path={`${match.path}/rating`}
-                component={Ratings}
-                hasCompany={companyInfo}
-              />
-              <Route
-                path={`${match.path}/user`}
-                component={UserHome}
-                hasCompany={companyInfo}
-              />
-              <Route
-                path={`${match.path}/service`}
-                component={ServiceHome}
-                hasCompany={companyInfo}
-              />
-              <ProtectedRoute
                 path={`${match.path}/purchase-requests`}
                 component={PurchaseRequest}
-                hasCompany={companyInfo}
               />
-              <ProtectedRoute
-                path={`${match.path}/payment`}
-                component={PaymentHome}
-                hasCompany={companyInfo}
-              />
-              <ProtectedRoute
-                path={`${match.path}/invoice`}
-                component={InvoiceHome}
-                hasCompany={companyInfo}
-              />
-              <ProtectedRoute
-                path={`${match.path}/estimate`}
-                component={Estimate}
-                hasCompany={companyInfo}
-              />
-              <ProtectedRoute
-                path={`${match.path}/client`}
-                component={ClientsHome}
-                hasCompany={companyInfo}
-              />
-              <ProtectedRoute
-                path={`${match.path}/settings`}
-                component={Settings}
-                hasCompany={companyInfo}
-              />
+              <Route path={`${match.path}/payment`} component={PaymentHome} />
+              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
+              <Route path={`${match.path}/estimate`} component={Estimate} />
+              <Route path={`${match.path}/client`} component={ClientsHome} />
+              <Route path={`${match.path}/settings`} component={Settings} />
             </Switch>
           </VStack>
         </HStack>
