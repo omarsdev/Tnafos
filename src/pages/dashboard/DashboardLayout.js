@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { DashboardContent } from "./DasboardContent";
 import { Navbar, Sidebar } from "./components/index";
 import { HStack, VStack, Center, Spinner, Box, Grid } from "@chakra-ui/react";
 import { useRouteMatch, Route, Switch } from "react-router-dom";
@@ -61,7 +60,7 @@ export const DashboardLayout = () => {
             <Switch>
               <Route exact path={match.path} />
               <Route path={`${match.path}/company`} component={CompanyHome} />
-              <ProtectedRoute
+              <Route
                 path={`${match.path}/rating`}
                 component={Ratings}
                 hasCompany={companyInfo}
