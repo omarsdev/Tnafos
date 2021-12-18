@@ -4,8 +4,6 @@ import { HStack, VStack, Center, Spinner, Box, Grid } from "@chakra-ui/react";
 import { useRouteMatch, Route, Switch, Router } from "react-router-dom";
 import { AxiosInstance } from "api";
 
-import { ProtectedRoute } from "components";
-
 import {
   Estimate,
   PurchaseRequest,

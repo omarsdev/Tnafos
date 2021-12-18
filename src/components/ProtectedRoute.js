@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Redirect, useHistory } from "react-router-dom";
 import { AxiosInstance } from "api";
+import { UserDataContext } from "context";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const [companyInfo, setCompanyInfo] = useState(null);
+  const { companyProviderValue } = useContext(UserDataContext);
+  const { companyInfo, setCompanyInfo } = companyProviderValue;
+
   let history = useHistory();
 
   const showCompany = async () => {
@@ -20,6 +23,11 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
         history.push("/dashboard/company");
       });
   };
+
+  useEffect(() => {
+    showCompany();
+  }, [companyInfo]);
+
   return (
     <Route
       {...rest}

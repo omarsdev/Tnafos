@@ -28,7 +28,7 @@ export const CreateCompany = () => {
           message: "Company profile has been created!",
           type: "success",
         });
-        history.push("/dashboard/company");
+        history.push("/dashboard/rating");
       })
       .catch((err) => {
         console.log(err.response.data);

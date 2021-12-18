@@ -46,7 +46,7 @@ export const Login = () => {
         "max-age=" +
         maxAge;
       setUserToken(res.token);
-      history.push("/dashboard");
+      history.push("/dashboard/rating");
       // if (showCompany) {
       //   history.push("/dashboard/rating/");
       // } else {
