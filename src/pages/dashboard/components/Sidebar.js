@@ -15,54 +15,11 @@ import {
   MenuItem,
   Stack,
 } from "@chakra-ui/react";
-import { FaAngleRight, FaHome } from "react-icons/fa";
-import { Link, NavLink, useRouteMatch } from "react-router-dom";
+import { FaAngleRight } from "react-icons/fa";
+import { Link, useRouteMatch } from "react-router-dom";
 import { SidebarMenu } from "../../../constants";
 
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
-import { width } from "tailwindcss/defaultTheme";
-
-const Heading = () => {
-  return <span>{SidebarMenu.heading}</span>;
-};
-
-const NavItem = ({ to, title, submenu, heading }) => {
-  const [isActive, setIsActive] = useState(false);
-
-  const handleToggle = () => {
-    setIsActive(!isActive);
-  };
-
-  //*if nav-item is a link, then:
-  if (to) {
-    return (
-      <List>
-        <Link to="#" className="">
-          <ListItem>
-            <ListIcon as={FaHome} />
-            {title}
-          </ListItem>
-        </Link>
-      </List>
-    );
-  }
-  return (
-    <List>
-      <Button onClick={handleToggle}>
-        <FaAngleRight />
-        {title}
-      </Button>
-      {isActive && Array.isArray(submenu) && (
-        <UnorderedList>
-          <Heading heading={heading} />
-          {submenu.map((item) => (
-            <NavItem className="" {...item} />
-          ))}
-        </UnorderedList>
-      )}
-    </List>
-  );
-};
 
 export const Sidebar = () => {
   let match = useRouteMatch();
@@ -138,7 +95,6 @@ export const Sidebar = () => {
                                 <Menu
                                   isLazy
                                   placement="bottom"
-                                  // flip="true"
                                   preventOverflow="true"
                                   closeOnSelect="true"
                                 >
@@ -172,13 +128,14 @@ export const Sidebar = () => {
                                     </MenuButton>
                                     <MenuList overflow="hidden" width="30">
                                       {ele.submenu.map((element, index) => (
-                                        <MenuItem key={index} width="100%">
-                                          <Link
-                                            to={`${match.url}${element.to}`}
-                                          >
+                                        <Link
+                                          to={`${match.url}${element.to}`}
+                                          key={index}
+                                        >
+                                          <MenuItem width="100%">
                                             {element.title}
-                                          </Link>
-                                        </MenuItem>
+                                          </MenuItem>
+                                        </Link>
                                       ))}
                                     </MenuList>
                                   </>

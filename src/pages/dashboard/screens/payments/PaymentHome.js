@@ -10,32 +10,25 @@ export const PaymentHome = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        <Box w="full" h="fit-content">
-          <HStack w="full" spacing={"900px"}>
+        <Box w="full" overflowY="scroll" padding="10">
+          <HStack justifyContent="space-between" paddingBottom="5">
             <Heading
-              color="black"
-              fontWeight="medium"
-              fontSize="xx-large"
-              fontFamily="inhirit"
-              alignItems="baseline"
-              py="4"
-              px="5"
               textColor="gray.600"
-              justifyItems="start"
+              fontSize="xx-large"
+              fontWeight="lg"
+              alignItems="baseline"
             >
               Payments
             </Heading>
-            <Box>
-              <Link to={`${match.url}/addpayment`}>
-                <IconButton
-                  as={Button}
-                  colorScheme="yellow"
-                  size="lg"
-                  icon={<AiOutlinePlus />}
-                  rounded="full"
-                ></IconButton>
-              </Link>
-            </Box>
+            <Link to={`${match.url}/addpayment`}>
+              <IconButton
+                as={Button}
+                colorScheme="yellow"
+                size="lg"
+                icon={<AiOutlinePlus />}
+                rounded="full"
+              />
+            </Link>
           </HStack>
           <Table />
         </Box>

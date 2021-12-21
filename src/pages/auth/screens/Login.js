@@ -47,11 +47,6 @@ export const Login = () => {
         maxAge;
       setUserToken(res.token);
       history.push("/dashboard/rating");
-      // if (showCompany) {
-      //   history.push("/dashboard/rating/");
-      // } else {
-      //   Redirect("/dashboard/company/create/");
-      // }
     } else {
       setError(res.error);
       setLoadingButton(false);

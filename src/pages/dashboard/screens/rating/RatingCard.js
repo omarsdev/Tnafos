@@ -1,36 +1,13 @@
 import React from "react";
-import {
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-  StatGroup,
-  Box,
-  HStack,
-  Stack,
-  Spacer,
-} from "@chakra-ui/react";
+import { Stat, StatLabel, StatNumber, Box, HStack } from "@chakra-ui/react";
 import { FiInbox } from "react-icons/fi";
 
-export const RatingCard = () => {
-  // const setBorder = () => {
-  //   let titles = ["1", "2", "3", "4"];
-  //   switch (titles) {
-  //     case "1":
-  //       "brand.primary" ;
-  //     case "2":
-  //       <Box borderLeftColor="brand.info" />;
-  //     case "3":
-  //       <Box borderLeftColor="brand.error" />;
-  //     case "4":
-  //       <Box borderLeftColor="brand.grey" />;
-  //   }
-  // };
+export const RatingCard = ({ ratDetails }) => {
+  const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
 
-  const colors = ["red", "blue", "yellow"];
+  //* set border color:
   const randomElement = colors[Math.floor(Math.random() * colors.length)];
-  console.log(randomElement);
+  // console.log(randomElement);
   return (
     <Box
       mt="5"
@@ -44,11 +21,11 @@ export const RatingCard = () => {
       borderLeftWidth="4px"
     >
       <HStack w="full">
-        <Stat px="5%">
-          <StatLabel>title</StatLabel>
-          <StatNumber fontSize="md">number</StatNumber>
+        <Stat px="5%" w="full">
+          <StatLabel py="1">{ratDetails.comment}</StatLabel>
+          <StatNumber fontSize="xl">{ratDetails.stars}</StatNumber>
         </Stat>
-        <Box pr="7%" fontSize="5xl" fontWeight="light" pt="2%">
+        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
           <FiInbox color="#AEAEAE" />
         </Box>
       </HStack>

@@ -12,7 +12,7 @@ export const Outgoing = () => {
         alignItems="baseline"
         ml="5"
       >
-        Invoices - Incoming
+        Invoices - Outgoing
       </Heading>
     </Box>
   );

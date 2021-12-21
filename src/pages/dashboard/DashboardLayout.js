@@ -1,7 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Sidebar } from "./components/index";
-import { HStack, VStack, Center, Spinner, Box, Grid } from "@chakra-ui/react";
-import { useRouteMatch, Route, Switch, Router } from "react-router-dom";
+import {
+  HStack,
+  VStack,
+  Center,
+  Spinner,
+  Box,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Grid,
+} from "@chakra-ui/react";
+import { useRouteMatch, Route, Switch } from "react-router-dom";
+import { FiInbox } from "react-icons/fi";
 import { AxiosInstance } from "api";
 
 import {
@@ -11,15 +22,21 @@ import {
   UserHome,
   ServiceHome,
   CompanyHome,
-  InvoiceHome,
+  Incoming,
+  Outgoing,
   ClientsHome,
   Ratings,
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 import { UserDataContext } from "context";
-import { useCompany } from "hooks";
+import { ProtectedRoute } from "components";
 
 export const DashboardLayout = () => {
+  const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
+
+  //* set border color:
+  const randomElement = colors[Math.floor(Math.random() * colors.length)];
+
   let match = useRouteMatch();
 
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
@@ -55,20 +72,143 @@ export const DashboardLayout = () => {
             {/* {body} */}
 
             <Switch>
-              <Route exact path={match.path} />
-              <Route path={`${match.path}/company`} component={CompanyHome} />
-              <Route path={`${match.path}/rating`} component={Ratings} />
-              <Route path={`${match.path}/user`} component={UserHome} />
-              <Route path={`${match.path}/service`} component={ServiceHome} />
-              <Route
+              <Route exact path={match.path}>
+                <Box>
+                  <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
+                    <Box
+                      mt="5"
+                      w="240px"
+                      h="70px"
+                      rounded="xl"
+                      boxShadow="2xl"
+                      relative
+                      bg={"white"}
+                      borderLeftColor={randomElement}
+                      borderLeftWidth="4px"
+                    >
+                      <HStack w="full">
+                        <Stat px="5%" w="full">
+                          <StatLabel py="1">Title</StatLabel>
+                          <StatNumber fontSize="xl">number</StatNumber>
+                        </Stat>
+                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
+                          <FiInbox color="#AEAEAE" />
+                        </Box>
+                      </HStack>
+                    </Box>
+
+                    <Box
+                      mt="5"
+                      w="240px"
+                      h="70px"
+                      rounded="xl"
+                      boxShadow="2xl"
+                      relative
+                      bg={"white"}
+                      borderLeftColor={randomElement}
+                      borderLeftWidth="4px"
+                    >
+                      <HStack w="full">
+                        <Stat px="5%" w="full">
+                          <StatLabel py="1">Title</StatLabel>
+                          <StatNumber fontSize="xl">number</StatNumber>
+                        </Stat>
+                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
+                          <FiInbox color="#AEAEAE" />
+                        </Box>
+                      </HStack>
+                    </Box>
+
+                    <Box
+                      mt="5"
+                      w="240px"
+                      h="70px"
+                      rounded="xl"
+                      boxShadow="2xl"
+                      relative
+                      bg={"white"}
+                      borderLeftColor={randomElement}
+                      borderLeftWidth="4px"
+                    >
+                      <HStack w="full">
+                        <Stat px="5%" w="full">
+                          <StatLabel py="1">Title</StatLabel>
+                          <StatNumber fontSize="xl">number</StatNumber>
+                        </Stat>
+                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
+                          <FiInbox color="#AEAEAE" />
+                        </Box>
+                      </HStack>
+                    </Box>
+
+                    <Box
+                      mt="5"
+                      w="240px"
+                      h="70px"
+                      rounded="xl"
+                      boxShadow="2xl"
+                      relative
+                      bg={"white"}
+                      borderLeftColor={randomElement}
+                      borderLeftWidth="4px"
+                    >
+                      <HStack w="full">
+                        <Stat px="5%" w="full">
+                          <StatLabel py="1">Title</StatLabel>
+                          <StatNumber fontSize="xl">number</StatNumber>
+                        </Stat>
+                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
+                          <FiInbox color="#AEAEAE" />
+                        </Box>
+                      </HStack>
+                    </Box>
+                  </Grid>
+                </Box>
+              </Route>
+              <ProtectedRoute
+                path={`${match.path}/company`}
+                component={CompanyHome}
+              />
+              <ProtectedRoute
+                path={`${match.path}/rating`}
+                component={Ratings}
+              />
+              <ProtectedRoute
+                path={`${match.path}/user`}
+                component={UserHome}
+              />
+              <ProtectedRoute
+                path={`${match.path}/service`}
+                component={ServiceHome}
+              />
+              <ProtectedRoute
                 path={`${match.path}/purchase-requests`}
                 component={PurchaseRequest}
               />
-              <Route path={`${match.path}/payment`} component={PaymentHome} />
-              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
-              <Route path={`${match.path}/estimate`} component={Estimate} />
-              <Route path={`${match.path}/client`} component={ClientsHome} />
-              <Route path={`${match.path}/settings`} component={Settings} />
+              <ProtectedRoute
+                path={`${match.path}/payment`}
+                component={PaymentHome}
+              />
+              <ProtectedRoute
+                path={`${match.path}/invoice/incoming`}
+                component={Incoming}
+              />
+              <ProtectedRoute
+                path={`${match.path}/invoice/outgoing`}
+                component={Outgoing}
+              />
+              <ProtectedRoute
+                path={`${match.path}/estimate`}
+                component={Estimate}
+              />
+              <ProtectedRoute
+                path={`${match.path}/client`}
+                component={ClientsHome}
+              />
+              <ProtectedRoute
+                path={`${match.path}/settings`}
+                component={Settings}
+              />
             </Switch>
           </VStack>
         </HStack>

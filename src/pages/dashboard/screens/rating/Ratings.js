@@ -10,10 +10,9 @@ import {
   Switch,
 } from "react-router-dom";
 import { MyRating, RatingCard } from "./";
-import { ProtectedRoute } from "components";
 
 export const Ratings = () => {
-  const [ratings, setRatings] = useState([1, 2, 3, 4]);
+  const [ratings, setRatings] = useState([]);
 
   const { uuid } = useParams();
   let match = useRouteMatch();
@@ -30,24 +29,25 @@ export const Ratings = () => {
   };
 
   useEffect(() => {
-    // getAllRatings();
+    getAllRatings();
   }, []);
 
   return (
     <Switch>
-      <ProtectedRoute path={match.path}>
+      <Route path={`${match.path}`}>
         <Box>
           <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
-            {ratings.map((el, id) => (
-              <Link to={`${match.url}/:uuid`} key={id}>
-                <RatingCard ratDetails={el} />
-              </Link>
-            ))}
-            {/* <RatingCard /> */}
+            {ratings.length === 0
+              ? null
+              : ratings.map((el, id) => (
+                  <Link to={`${match.url}/${el.uuid}`} key={id}>
+                    <RatingCard ratDetails={el} />
+                  </Link>
+                ))}
           </Grid>
         </Box>
-      </ProtectedRoute>
-      {/* <ProtectedRoute path={`${match.path}/:uuid`} component={MyRating} /> */}
+      </Route>
+      <Route path={`${match.path}/:uuid`} component={MyRating} />
     </Switch>
   );
 };
