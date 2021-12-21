@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { AxiosInstance } from "api";
 import { Box, Text } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import { useParams, Switch, Route, useRouteMatch } from "react-router-dom";
 
 export const MyRating = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const { uuid } = useParams();
+  const match = useRouteMatch();
 
   const showRating = async () => {
     await AxiosInstance.get(`/api/dashboard/rating/${uuid}`)
@@ -22,8 +23,12 @@ export const MyRating = () => {
     showRating();
   }, []);
   return (
-    <Box>
-      <Text>{data}</Text>
-    </Box>
+    <Switch>
+      <Route path={`${match.path}`}>
+        <Box>
+          <Text>{data}</Text>
+        </Box>
+      </Route>
+    </Switch>
   );
 };
