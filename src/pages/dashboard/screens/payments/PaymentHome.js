@@ -1,12 +1,36 @@
-import React from "react";
-import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Heading,
+  Button,
+  IconButton,
+  HStack,
+  Center,
+  Spinner,
+} from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
-import { Table } from "./";
-import { AddPayment } from "./";
+import { TableComponent, AddPayment } from "./";
+import { AxiosInstance } from "api";
 
 export const PaymentHome = () => {
+  const [list, setList] = useState([]);
+
   const match = useRouteMatch();
+
+  const paymentsList = async () => {
+    await AxiosInstance.get("/api/dashboard/payment/")
+      .then((res) => {
+        setList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    paymentsList();
+  }, []);
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
@@ -30,7 +54,16 @@ export const PaymentHome = () => {
               />
             </Link>
           </HStack>
-          <Table />
+
+          {!list ? (
+            <Center h="70vh" w="100%">
+              <Spinner size="xl" color="#F8B916" />
+            </Center>
+          ) : (
+            <Box>
+              <TableComponent payments={list} />
+            </Box>
+          )}
         </Box>
       </Route>
       <Route path={`${match.path}/addpayment`} component={AddPayment} />
