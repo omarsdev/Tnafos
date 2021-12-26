@@ -14,6 +14,7 @@ import { AuthLayout } from "../AuthLayout";
 import LoginImage from "assets/images/login.jpg";
 
 import { apiAuth } from "../../../api";
+import { setUserSession } from "utils";
 
 export const Login = () => {
   const { tokenProviderValue } = useContext(UserDataContext);
@@ -34,17 +35,11 @@ export const Login = () => {
     const res = await apiAuth({ password: password, email: email }, "login");
 
     if (res.success) {
-      let maxAge = 7200;
+      let maxAge = 2;
       if (rememberMe) {
-        maxAge = 1209600;
+        maxAge = 365;
       }
-      const auth_token = `tnafos_auth=${res.token}`;
-      document.cookie =
-        auth_token +
-        // change it once in production
-        ";samesite=lax;Secure;domain=127.0.0.1;" +
-        "max-age=" +
-        maxAge;
+      setUserSession(res.token, maxAge);
       setUserToken(res.token);
       history.push("/dashboard/rating");
     } else {
