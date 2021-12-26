@@ -29,7 +29,6 @@ export const ServiceHome = () => {
   const showServicesList = async () => {
     await AxiosInstance.get("/api/dashboard/service")
       .then((res) => {
-        console.log(res);
         setServicesList(res.data.data);
       })
       .catch((err) => console.log(err));

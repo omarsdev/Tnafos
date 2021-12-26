@@ -20,7 +20,7 @@ export const CreateCompany = () => {
     control,
   } = useForm();
 
-  const createCompany = useCallback(async (input) => {
+  const createCompany = async (input) => {
     await AxiosInstance.post("/api/dashboard/company/create", input)
       .then((res) => {
         console.log(res.data.data);
@@ -38,7 +38,7 @@ export const CreateCompany = () => {
           type: "error",
         });
       });
-  }, []);
+  };
 
   return (
     <Box overflowY="scroll" w="full">

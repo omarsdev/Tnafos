@@ -54,6 +54,7 @@ export const Navbar = () => {
 
   const handleLogOut = () => {
     removeUserSession();
+    setUserData(null);
     history.push("/login");
   };
 

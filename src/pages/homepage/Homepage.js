@@ -52,7 +52,7 @@ export const Homepage = () => {
   };
 
   useEffect(() => {
-    if (userToken || getToken()) {
+    if (getToken()) {
       fetchTokenMe();
     } else {
       setLoading(false);

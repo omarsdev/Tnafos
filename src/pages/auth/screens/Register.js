@@ -28,6 +28,7 @@ import { apiAuth } from "api";
 import { UserDataContext } from "context";
 import { RegularInputControl } from "components";
 import { PasswordInputControl } from "components";
+import { setUserSession } from "utils";
 
 export const Register = () => {
   const { tokenProviderValue } = useContext(UserDataContext);
@@ -45,11 +46,12 @@ export const Register = () => {
     setLoadingButton(true);
     const res = await apiAuth(data, "register");
     if (res.success) {
+      let maxAge = 2;
       if (data.rememberMe) {
-        localStorage.setItem("token", res.token);
-      } else {
-        setUserToken(res.token);
+        maxAge = 365;
       }
+      setUserSession(res.token, maxAge);
+      setUserToken(res.token);
       history.push("/dashboard/company/create");
     } else {
       setError(res.error.errors);

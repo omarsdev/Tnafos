@@ -28,6 +28,7 @@ export const UserHome = () => {
   const showUsersList = async () => {
     await AxiosInstance.get("/api/dashboard/user")
       .then((res) => {
+        console.log(res.data.data);
         setUsersList(res.data.data);
       })
       .catch((err) => {
