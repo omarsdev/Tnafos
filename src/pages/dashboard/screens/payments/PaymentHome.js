@@ -80,7 +80,7 @@ export const PaymentHome = () => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {list.map((el, idx) => {
+                  {list.map((el, idx) => (
                     <Tr key={idx}>
                       <Td>{el?.amount}</Td>
                       <Td>{el?.uuid}</Td>
@@ -88,8 +88,8 @@ export const PaymentHome = () => {
                       <Td>{el?.date}</Td>
                       <Td>{el?.transaction_number}</Td>
                       <Td>{el?.notes}</Td>
-                    </Tr>;
-                  })}
+                    </Tr>
+                  ))}
                 </Tbody>
               </Table>
             </Box>
