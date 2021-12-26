@@ -7,10 +7,16 @@ import {
   HStack,
   Center,
   Spinner,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
-import { TableComponent, AddPayment } from "./";
+import { AddPayment } from "./";
 import { AxiosInstance } from "api";
 
 export const PaymentHome = () => {
@@ -21,6 +27,7 @@ export const PaymentHome = () => {
   const paymentsList = async () => {
     await AxiosInstance.get("/api/dashboard/payment/")
       .then((res) => {
+        console.log(res.data.data);
         setList(res.data.data);
       })
       .catch((err) => {
@@ -61,7 +68,30 @@ export const PaymentHome = () => {
             </Center>
           ) : (
             <Box>
-              <TableComponent payments={list} />
+              <Table size="md">
+                <Thead>
+                  <Tr>
+                    <Th>Amount</Th>
+                    <Th>Payment-number</Th>
+                    <Th>Payment-method</Th>
+                    <Th>Date</Th>
+                    <Th>Transaction-ID</Th>
+                    <Th>Notes</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {list.map((el, idx) => {
+                    <Tr key={idx}>
+                      <Td>{el?.amount}</Td>
+                      <Td>{el?.uuid}</Td>
+                      <Td>{el?.method}</Td>
+                      <Td>{el?.date}</Td>
+                      <Td>{el?.transaction_number}</Td>
+                      <Td>{el?.notes}</Td>
+                    </Tr>;
+                  })}
+                </Tbody>
+              </Table>
             </Box>
           )}
         </Box>
