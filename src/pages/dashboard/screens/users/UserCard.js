@@ -1,8 +1,15 @@
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import {
   IconButton,
   Box,
   Text,
-  Button,
+  Image,
   HStack,
   Drawer,
   DrawerBody,
@@ -11,49 +18,41 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Input,
   Center,
-  Avatar,
-  Heading,
-  useColorModeValue,
   Spinner,
-  DrawerFooter,
   Flex,
   Spacer,
+  VStack,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Route,
-  Switch,
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Link,
-} from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
-import { borderColor } from "tailwindcss/defaultTheme";
-import { RegularInput } from "components";
+
+import { RegularInputControl } from "components";
 
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "components";
 import { SecondaryButton } from "components";
 import { AlertContext } from "context/AlertContext";
+import { media } from "api/media";
 
 export const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
-  const setAlert = alertProviderValue;
+  const { setAlert } = alertProviderValue;
 
   const history = useHistory();
-  const match = useRouteMatch();
+
   const { uuid } = useParams();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { register, handleSubmit, watch, reset } = useForm();
+  const { register, handleSubmit, reset, control } = useForm();
 
   const [card, setCard] = useState(null);
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+
+  const [photo, setPhoto] = useState(null);
+  // let inputRef = useRef(null);
 
   const resetHooksForm = (data) => {
     reset({
@@ -67,33 +66,40 @@ export const UserCard = () => {
   const getUser = async () => {
     await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
       .then((res) => {
-        if (res.data.data) {
-          resetHooksForm(res.data.data);
-          setCard(res.data.data);
-        }
+        console.log(res.data.data);
+        resetHooksForm(res.data.data);
+        setCard(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
         history.push("/dashboard/user");
       });
   };
 
-  const onUpdateUserInfo = async (data) => {
+  const onUpdateUserInfo = useCallback(async (data) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(`/api/dashboard/user/${uuid}/update`, data)
       .then((res) => {
+        console.log(res);
         setIsUpdating(false);
         setAlert({
-          message: "User Has Been Updated",
+          message: "User Has Been Updated!",
+          type: "info",
         });
         history.push(`/dashboard/user`);
       })
       .catch((err) => {
+        console.log(err);
         setIsUpdating(false);
         setErrors(err.response.data);
+        console.log(err.response.data);
+        setAlert({
+          message: `${err.response.data}`,
+          type: "error",
+        });
       });
-  };
+  }, []);
 
   const onCancelHandler = () => {
     if (isUpdating) return;
@@ -106,66 +112,65 @@ export const UserCard = () => {
     getUser();
   }, []);
 
+  //* media file upload:
+  const uploadFile = (photo) => {
+    if (!photo) return;
+    media(uuid, "user", photo);
+  };
+
   return !card ? (
     <Center h="70vh" w="100%">
       <Spinner size="xl" color="#F8B916" />
     </Center>
   ) : (
     <>
-      <Center>
+      <Center py="5">
         <Box
-          mt="30px"
-          maxW={"320px"}
-          w={"full"}
-          // bg={useColorModeValue("white", "gray.900")}
-          boxShadow={"2xl"}
-          rounded={"lg"}
-          p={6}
-          textAlign={"center"}
+          className="rounded-3xl relative bg-white shadow-2xl"
+          w="350px"
+          h="430px"
         >
-          <Avatar
-            size={"2xl"}
-            src={
-              "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
-            }
-            alt="user-img"
-            mb={4}
-            pos={"relative"}
+          <Image
+            src={"https://bit.ly/sage-adebayo"}
+            alt="Segun Adebayo"
+            objectFit="cover"
+            roundedTop="3xl"
+            w="100%"
+            h="220px"
+            layout={"fill"}
           />
+          <VStack spacing="20px" mx="5%" mt="5">
+            <Box mr="0">
+              <Text py="1" textColor="gray.600">
+                Name: {card?.first_name}
+                {card?.last_name}
+              </Text>
+              <Text textColor="gray.600">E-mail: {card?.email}</Text>
+              <Text textColor="gray.600">Telephone: {card?.phone_number}</Text>
+              <Text textColor="gray.600">Id :{card?.uuid}</Text>
+            </Box>
 
-          <Heading fontSize={"2xl"} py="4">
-            {card?.first_name}
-            {card?.last_name}
-          </Heading>
-          <Text className="py-2 text-gray-600 font-semibold">
-            Telephone: {card?.phone_number}
-          </Text>
-          <Text className="py-2 text-gray-600 font-semibold">
-            E-mail: {card?.email}
-          </Text>
-          <Text className="py-2 text-gray-600 font-semibold">
-            Id :{card?.uuid}
-          </Text>
-          <IconButton
-            flex={1}
-            fontSize={"sm"}
-            rounded={"full"}
-            bg={"#F8B916"}
-            color={"white"}
-            boxShadow={
-              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-            }
-            _hover={{
-              bg: "orange.400",
-            }}
-            _focus={{
-              bg: "orange.400",
-            }}
-            icon={<FiEdit />}
-            onClick={onOpen}
-          />
-
-          {/* <Button onClick={onOpen}>Click me</Button> */}
+            <Flex justify={"center"} mt={-12}>
+              <IconButton
+                justify={"center"}
+                fontSize={"large"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                _focus={{
+                  bg: "orange.400",
+                }}
+                icon={<FiEdit />}
+                onClick={onOpen}
+              />
+            </Flex>
+          </VStack>
         </Box>
       </Center>
 
@@ -184,99 +189,86 @@ export const UserCard = () => {
           </DrawerHeader>
 
           <DrawerBody>
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
+              <input
+                type="file"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton name="Upload File" onClick={uploadFile} />
+            </HStack>
             <form>
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   First Name :
-                  <RegularInput
-                    placeHolder="First name"
-                    inputType="text"
+                  <RegularInputControl
+                    placeHolder="First Name"
                     name="first_name"
+                    control={control}
                     register={register}
                     width="100%"
-                    error={errors?.errors?.first_name ? true : false}
+                    error={errors}
                   />
-                  {errors?.errors?.first_name &&
-                    errors?.errors?.first_name.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
                 </label>
               </Box>
 
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Last Name :
-                  <RegularInput
-                    placeHolder="Last name"
-                    inputType="text"
-                    width="180px"
+                  <RegularInputControl
+                    placeHolder="Last Name"
                     name="last_name"
+                    control={control}
                     register={register}
                     width="100%"
-                    error={errors?.errors?.last_name ? true : false}
+                    error={errors}
                   />
-                  {errors?.errors?.last_name &&
-                    errors?.errors?.last_name.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
                 </label>
               </Box>
 
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Phone Number:
-                  <RegularInput
+                  <RegularInputControl
                     placeHolder="Phone Number"
-                    inputType="text"
-                    width="180px"
                     name="phone_number"
+                    control={control}
                     register={register}
                     width="100%"
-                    error={errors?.errors?.phone_number ? true : false}
+                    error={errors}
                   />
-                  {errors?.errors?.phone_number &&
-                    errors?.errors?.phone_number.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
                 </label>
               </Box>
 
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500">
                   Email:
-                  <RegularInput
+                  <RegularInputControl
                     placeHolder="Email"
-                    inputType="text"
-                    width="180px"
                     name="email"
+                    control={control}
                     register={register}
                     width="100%"
-                    error={errors?.errors?.email ? true : false}
+                    error={errors}
                   />
-                  {errors?.errors?.email &&
-                    errors?.errors?.email.map((e) => (
-                      <Text className="text-left" color="red">
-                        {e}
-                      </Text>
-                    ))}
                 </label>
               </Box>
 
-              <Flex mt="5">
+              <Flex mt="5" w="full" ml="320px">
                 <PrimaryButton
                   name="Update"
                   onClick={handleSubmit(onUpdateUserInfo)}
                   loadingButton={isUpdating}
                   buttonType="submit"
+                  mx="2"
                 />
-
-                <Spacer />
 
                 <SecondaryButton
                   name="Cancel"

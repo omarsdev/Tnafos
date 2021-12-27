@@ -1,140 +1,164 @@
-import { HStack, VStack, Button, Input, Box, Heading } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useContext, useCallback } from "react";
+import { HStack, Text, Box, Heading } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
+import { AlertContext } from "context";
+
+import {
+  PrimaryButton,
+  SecondaryButton,
+  RegularInputControl,
+} from "components";
 
 export const AddService = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm();
+  const [err, setErr] = useState(null);
+
   const history = useHistory();
-  // const [err, setErr] = useState(null);
 
   //* service adding function:
-  const createService = async (data) => {
+  const createService = useCallback(async (data) => {
+    console.log(data);
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
-        console.log(res);
+        console.log(res.data.data);
+        setAlert({
+          message: "new service has been added!",
+          type: "success",
+        });
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        console.log(err.responce.data);
-        // setErr(err);
+        setErr(err?.response?.data.errors);
+        setAlert({
+          message: `${err.response.data.message}`,
+          type: "error",
+        });
       });
-  };
+  }, []);
 
   const handleCancel = () => {
     history.push("/dashboard/service");
   };
 
   return (
-    <Box
-      borderRadius="lg"
-      overflow="hidden"
-      borderWidth="1px"
-      w="xl"
-      px="20"
-      pt="5"
-      h="lg"
-    >
-      <Box>
+    <Box boxShadow="2xl" rounded="3xl" boxSize="2xl">
+      <Box px="20" mt="10">
         <Heading
-          color="yellow.500"
-          fontWeight="medium"
+          color="#F8B916"
           fontSize="x-large"
-          fontFamily="inhirit"
+          fontWeight="lg"
           alignItems="baseline"
-          m={4}
         >
           New Service
         </Heading>
+
+        <form mt="5">
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Name of service :
+              <RegularInputControl
+                placeHolder="Name of service"
+                inputType="text"
+                width="100%"
+                name="name"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Description :
+              <RegularInputControl
+                placeHolder="Description"
+                name="description"
+                inputType="text"
+                width="100%"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Category-Id :
+              <RegularInputControl
+                placeHolder="Category id"
+                name="category_id"
+                inputType="text"
+                width="100%"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3 ">
+              Price :
+              <RegularInputControl
+                placeHolder="Price"
+                name="price"
+                inputType="text"
+                width="100%"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Type:
+              <RegularInputControl
+                placeHolder="Type"
+                name="type"
+                inputType="text"
+                width="100%"
+                control={control}
+                register={register}
+                errors={err}
+              />
+            </label>
+          </Box>
+          <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
+            <PrimaryButton
+              name="ADD SERVICE"
+              onClick={handleSubmit(createService)}
+              buttonType="submit"
+            />
+
+            <SecondaryButton
+              name="Cancel"
+              onClick={handleCancel}
+              buttonType="button"
+            />
+          </HStack>
+          <Box>
+            {errors?.message && (
+              <Text className="text-center mt-4" color="red">
+                {errors?.message}
+              </Text>
+            )}
+          </Box>
+        </form>
       </Box>
-      <form onSubmit={handleSubmit(createService)}>
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          name:
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("name", { required: "This field is required!" })}
-          />
-          {errors.name && (
-            <p className="text-red-700">{errors.name?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          description :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("description", {
-              required: "This field is required!",
-            })}
-          />
-          {errors.description && (
-            <p className="text-red-700">{errors.description?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          category_id :
-          <Input
-            size="sm"
-            type="number"
-            borderRadius="lg"
-            m={2}
-            {...register("category_id", {
-              required: "This field is required!",
-            })}
-          />
-          {errors.category_id && (
-            <p className="text-red-700">{errors.category_id?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          price :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("price", { required: "This field is required!" })}
-          />
-          {errors.price && (
-            <p className="text-red-700">{errors.price?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          type :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("type", { required: "This field is required!" })}
-          />
-          {errors.type && (
-            <p className="text-red-700">{errors.type?.message}</p>
-          )}
-        </label>
-        <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
-          <Button colorScheme="blue" size="sm" type="submit">
-            ADD SERVICE
-          </Button>
-          <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>
-            CANCEL
-          </Button>
-        </HStack>
-      </form>
     </Box>
   );
 };

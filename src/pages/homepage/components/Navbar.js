@@ -30,6 +30,9 @@ export const Navbar = () => {
     setUserData(null);
     history.go(0);
   };
+  const handlePress = () => {
+    alert("hit");
+  };
 
   return (
     <Flex mx={10} py={5} h={"8vh"}>

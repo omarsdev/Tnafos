@@ -1,50 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { FiEdit } from "react-icons/fi";
 import {
   Box,
   IconButton,
   Center,
-  useColorModeValue,
-  Heading,
+  Spinner,
   Text,
   useDisclosure,
-  Input,
-  VStack,
   HStack,
-  Button,
+  Stack,
   Drawer,
   DrawerBody,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  Stack,
+  Spacer,
+  Flex,
+  Image,
 } from "@chakra-ui/react";
-import {
-  Link,
-  Route,
-  Switch,
-  useHistory,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
+import { RegularInputControl } from "components";
+
+import { useForm } from "react-hook-form";
+import { PrimaryButton } from "components";
+import { SecondaryButton } from "components";
+import { AlertContext } from "context/AlertContext";
+import { media } from "api/media";
 
 export const MyService = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
   const [service, setService] = useState(null);
-  const { uuid } = useParams();
-  const match = useRouteMatch();
 
   const history = useHistory();
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = React.useRef();
-  const [input, setInput] = useState(null);
-  const [errors, setErrors] = useState(null);
+  const { uuid } = useParams();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { register, handleSubmit, reset, control } = useForm();
+
+  const [errors, setErrors] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [photo, setPhoto] = useState(null);
+
+  const resetHooksForm = (data) => {
+    reset({
+      price: data.price,
+      type: data.type,
+    });
   };
 
   //* represent service card info:
@@ -52,13 +57,13 @@ export const MyService = () => {
     await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
       .then((res) => {
         // console.log(res.data.data);
+        resetHooksForm(res.data.data);
         setService(res.data.data);
         let service = res.data.data;
         console.log(service);
         // delete service.category;
         // delete service.name;
         // delete service.description;
-        setInput(service);
       })
       .catch((err) => {
         history.push("/dashboard/service");
@@ -66,63 +71,89 @@ export const MyService = () => {
   };
 
   //* service update function:
-  const updateService = async (dataToBeUpdataed) => {
+  const onUpdateService = useCallback(async (dataToBeUpdataed) => {
+    setErrors(null);
+    setIsUpdating(true);
     await AxiosInstance.put(
       `/api/dashboard/service/${uuid}/update`,
       dataToBeUpdataed
     )
       .then((res) => {
-        console.log(res);
+        setIsUpdating(false);
+        setAlert({
+          message: "Service Has Been Updated!",
+          type: "info",
+        });
         history.push(`/dashboard/service`);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
-        setErrors(err.response.data.message);
+        // console.log(err.response.data);
+        setIsUpdating(false);
+        setErrors(err?.response?.data.errors);
+        setAlert({
+          message: `${err?.response?.data}`,
+          type: "error",
+        });
       });
-  };
+  }, []);
 
-  const handleCancel = () => {
-    history.push("/dashboard/service");
+  const onCancelHandler = () => {
+    if (isUpdating) return;
+    resetHooksForm(service);
+    setErrors(null);
+    onClose();
   };
 
   useEffect(() => {
     getMyService();
   }, []);
 
-  return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        {/* representing user credencials */}
-        <Center>
-          <Box
-            mt="30px"
-            maxW={"3xl"}
-            w={"full"}
-            bg={useColorModeValue("white", "orange.600")}
-            boxShadow={"2xl"}
-            rounded={"lg"}
-            p={6}
-            textAlign={"center"}
-          >
-            <Text fontWeight={600} mb={4} color="gray.500">
-              Name of service:{service?.name}
+  //* media file upload:
+  const uploadFile = (photo) => {
+    if (!photo) return;
+    media(uuid, "service", photo);
+  };
+
+  return !service ? (
+    <Center h="70vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
+  ) : (
+    <>
+      <Center py="5">
+        <Box
+          className="rounded-3xl shadow-2xl relative bg-white"
+          w="400px"
+          h="500px"
+        >
+          <Image
+            src={"https://bit.ly/sage-adebayo"}
+            alt="Segun Adebayo"
+            objectFit="cover"
+            roundedTop="3xl"
+            w="100%"
+            h="220px"
+            layout={"fill"}
+          />
+          <Stack mr="0" h="270px" mx="5%">
+            <Text mt="1" fontSize="x-large" textColor="gray.600">
+              {service?.name}
             </Text>
-            <Text fontWeight={600} color={"gray.500"} mb={2}>
-              Description:{service?.description}{" "}
+            <Text color="#007BFF">Price: {service?.price} SAR</Text>
+            <Text fontSize="large" textColor="gray.600">
+              Description:{service?.description}
             </Text>
-            <Text fontWeight={600} color={"gray.500"} mb={2}>
-              Price: {service?.price}{" "}
+            <Text fontSize="large" textColor="gray.600">
+              Category-id: {service?.category.uuid}
             </Text>
-            <Text fontWeight={600} color={"gray.500"} mb={2}>
-              Category-id: {service?.category.uuid}{" "}
-            </Text>
-            <Text fontWeight={600} color={"gray.500"} mb={2}>
+            <Text fontSize="large" textColor="gray.600">
               Type :{service?.type}
             </Text>
-            <Box>
+            <Flex justify={"center"}>
               <IconButton
-                flex={1}
-                fontSize={"sm"}
+                justify={"center"}
+                mb={3}
+                fontSize={"large"}
                 rounded={"full"}
                 bg={"#F8B916"}
                 color={"white"}
@@ -138,74 +169,96 @@ export const MyService = () => {
                 icon={<FiEdit />}
                 onClick={onOpen}
               />
-            </Box>
-          </Box>
-        </Center>
+            </Flex>
+          </Stack>
+        </Box>
+      </Center>
 
-        {/* Updating service */}
-        {input ? (
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            initialFocusRef={firstField}
-            onClose={onClose}
-          >
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerCloseButton />
-              <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-                Edit your Info by filling up this form
-              </DrawerHeader>
+      {/* updating service. */}
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
 
-              <DrawerBody mt="10">
-                <form onSubmit={(ev) => updateService(ev)}>
-                  <label className="w-32 text-right text-gray-500 ">
-                    Price:
-                    <Input
-                      size="md"
-                      type="text"
-                      name="price"
-                      value={input.price}
-                      onChange={(ev) => handleChange(ev)}
-                      required
-                      m={"15px"}
-                      w="52"
-                    />
-                  </label>
+          <DrawerBody>
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
+              <input
+                type="file"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton name="Upload File" onClick={uploadFile} />
+            </HStack>
+            <form pt="5">
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Price :
+                  <RegularInputControl
+                    placeHolder="Price"
+                    name="price"
+                    inputType="text"
+                    control={control}
+                    register={register}
+                    width="100%"
+                    errors={errors}
+                  />
+                </label>
+              </Box>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Type :
+                  <RegularInputControl
+                    placeHolder="Type"
+                    name="type"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={errors}
+                  />
+                </label>
+              </Box>
 
-                  <label className="w-32 text-right text-gray-500">
-                    Type:
-                    <Input
-                      size="md"
-                      type="text"
-                      name="type"
-                      value={input.type}
-                      onChange={(ev) => handleChange(ev)}
-                      required
-                      m={"15px"}
-                      w="52"
-                    />
-                  </label>
+              <Flex mt="5" w="full" ml="320px">
+                <PrimaryButton
+                  name="Update"
+                  onClick={handleSubmit(onUpdateService)}
+                  loadingButton={isUpdating}
+                  buttonType="submit"
+                  mx="2"
+                />
 
-                  <HStack mt="10">
-                    <Button colorScheme="yellow" size="md" textColor="white">
-                      UPDATE SERVICE
-                    </Button>
-                    <Button
-                      onClick={handleCancel}
-                      color="gray"
-                      _hover={{ bg: "#D1D5DB" }}
-                      size="md"
-                    >
-                      CANCEL
-                    </Button>
-                  </HStack>
-                </form>
-              </DrawerBody>
-            </DrawerContent>
-          </Drawer>
-        ) : null}
-      </Route>
-    </Switch>
+                <SecondaryButton
+                  name="Cancel"
+                  onClick={onCancelHandler}
+                  buttonType="button"
+                />
+                {/* </HStack> */}
+              </Flex>
+              {errors?.message && (
+                <Text className="text-center mt-4" color="red">
+                  {errors?.message}
+                </Text>
+              )}
+            </form>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };

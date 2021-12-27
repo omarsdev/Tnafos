@@ -11,7 +11,6 @@ import {
   Box,
   IconButton,
   Button,
-  GridItem,
   Heading,
   Grid,
   HStack,
@@ -25,11 +24,11 @@ export const UserHome = () => {
   const [usersList, setUsersList] = useState(null);
 
   const match = useRouteMatch();
-  const { uuid } = useParams();
 
   const showUsersList = async () => {
     await AxiosInstance.get("/api/dashboard/user")
       .then((res) => {
+        console.log(res.data.data);
         setUsersList(res.data.data);
       })
       .catch((err) => {
@@ -44,8 +43,8 @@ export const UserHome = () => {
     <>
       <Switch>
         <Route exact path={`${match.path}`}>
-          <Box overflowY="scroll" className="w-full" px="20">
-            <HStack justifyContent="space-between">
+          <Box w="full" overflowY="scroll" padding="10">
+            <HStack justifyContent="space-between" paddingBottom="5">
               <Heading
                 textColor="gray.600"
                 fontSize="xx-large"
@@ -64,7 +63,7 @@ export const UserHome = () => {
                 />
               </Link>
             </HStack>
-            {/* templateColumns="repeat(3, 1fr)" gap={20} */}
+
             {!usersList ? (
               <Center h="70vh" w="100%">
                 <Spinner size="xl" color="#F8B916" />
@@ -85,3 +84,5 @@ export const UserHome = () => {
     </>
   );
 };
+
+// <Link to={`${match.url}/${el.uuid}`}>

@@ -1,11 +1,19 @@
+import Cookies from "js-cookie";
+
 export const getToken = () => {
-  return localStorage.getItem("token") || null;
+  return Cookies.get("tnafos_auth");
 };
 
-export const setUserSession = (token) => {
-  localStorage.setItem("token", token);
+export const setUserSession = (token, maxAge) => {
+  Cookies.set("tnafos_auth", token, {
+    expires: maxAge,
+    domain: "127.0.0.1",
+    secure: true,
+    sameSite: "lax",
+  });
+  // https://curity.io/resources/learn/token-handler-spa-tutorial/
 };
 
 export const removeUserSession = () => {
-  localStorage.removeItem("token");
+  Cookies.remove("tnafos_auth");
 };

@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useRouteMatch, useHistory, Switch, Route } from "react-router-dom";
+import React, { useEffect, useState, useContext, useCallback } from "react";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { CompanyCard, CreateCompany } from "./";
 import {
-  HStack,
+  Center,
+  Spinner,
+  GridItem,
+  Grid,
   Box,
-  useColorModeValue,
   Text,
   Heading,
-  Button,
   VStack,
   Divider,
   Icon,
-  Input,
+  Stack,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -20,56 +21,109 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Flex,
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
 import { AxiosInstance } from "api/AxiosInstance";
+import { PrimaryButton, SecondaryButton } from "components";
+import { RegularInputControl } from "components";
+
+import { useForm } from "react-hook-form";
+
+import { AlertContext } from "context/AlertContext";
 
 export const CompanyHome = () => {
-  const [companyInfo, setcompanyInfo] = useState({});
+  const [companyInfo, setcompanyInfo] = useState(null);
+
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [input, setInput] = useState(null);
   const history = useHistory();
   const match = useRouteMatch();
-  const [errors, setErrors] = useState(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+    control,
+  } = useForm();
+
+  const [err, setErr] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const resetHooksForm = (data) => {
+    reset({
+      name: data.name,
+      type: data.type,
+      cr: data.cr,
+      vat: data.vat,
+      establishment_year: data.establishment_year,
+      total_employees: data.total_employees,
+      bio: data.bio,
+      telephone: data.telephone,
+      fax: data.fax,
+      email: data.email,
+      website: data.web,
+      country_id: data.country_id,
+      city: data.city,
+      po_box: data.po_box,
+      zip_code: data.zip_code,
+      address: data.address,
+      location: data.location,
+      category_id: data.category_id,
+    });
+  };
 
   //* represent company data:
   const showCompany = async () => {
     await AxiosInstance.get("/api/dashboard/company")
       .then((res) => {
-        console.log(res);
         setcompanyInfo(res.data.data);
         let company = res.data.data;
-        console.log(company);
         delete company.country;
         delete company.admin;
         delete company.category;
-        setInput(company);
+        resetHooksForm(res.data.data);
       })
       .catch((err) => {
-        return {
-          success: false,
-          error: err,
-        };
+        history.push("/dashboard/company");
       });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
+  const onCancelHandler = () => {
+    if (isUpdating) return;
+    resetHooksForm(companyInfo);
+    setErr(null);
+    onClose();
   };
 
   //* update company info:
-  const updateCompany = async (dataToBeUpdated) => {
+  const onUpdateCompany = useCallback(async (dataToBeUpdated) => {
+    setErr(null);
+    setIsUpdating(true);
     await AxiosInstance.put("/api/dashboard/company/update", dataToBeUpdated)
       .then((res) => {
-        console.log(res);
+        setIsUpdating(false);
+        setAlert({
+          message: "Company info has been updated successfully!",
+          type: "success",
+        });
         history.push(`/dashboard/company`);
       })
-      .catch((err) => setErrors(err));
-  };
+      .catch((err) => {
+        setIsUpdating(false);
+
+        setErr(err.response.data.errors);
+        setAlert({
+          message: ` ${err.response.data.message}`,
+          type: "error",
+        });
+      });
+  }, []);
 
   useEffect(() => {
     showCompany();
@@ -77,309 +131,364 @@ export const CompanyHome = () => {
 
   return (
     <>
-      <Switch>
-        {/* Company Home Content */}
-        <Route exact path={`${match.path}`}>
-          <Box w="full" h="fit-content">
-            <Heading
-              textColor="gray.600"
-              fontSize="xx-large"
-              fontWeight="lg"
-              alignItems="baseline"
-              ml="5"
-              py="5"
-            >
-              Company
-            </Heading>
+      <Box w="full" overflowY="scroll" padding="10">
+        <Heading
+          textColor="gray.600"
+          fontSize="xx-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          Company
+        </Heading>
 
-            <Flex h="large" spacing="200">
+        {!companyInfo ? (
+          <Center h="70vh" w="100%">
+            <Spinner size="xl" color="#F8B916" />
+          </Center>
+        ) : (
+          <Grid templateColumns="repeat(3, 1fr)" gap={5} mt="10">
+            <GridItem colSpan={2}>
               <CompanyCard Data={companyInfo} />
+            </GridItem>
 
-              <VStack w="full" spacing="5" mt="5">
-                <Box width="44">
-                  <Button
-                    onClick={onOpen}
-                    leftIcon={<FiEdit />}
-                    rounded={"lg"}
-                    size={"md"}
-                    fontWeight={"normal"}
-                    px={4}
-                    colorScheme={"red"}
-                    bg={"orange.300"}
-                    _hover={{ bg: "orange.400" }}
-                  >
-                    Update Company
-                  </Button>
-                </Box>
+            <GridItem>
+              <VStack w="full" spacing="10">
                 <Box
-                  width="44"
-                  bg={useColorModeValue("white", "gray.900")}
+                  className="rounded-3xl shadow-2xl relative bg-white"
+                  w="250px"
+                  h="350px"
                   border="silver"
                   borderRadius="2xl"
                   boxShadow="2xl"
                   borderWidth="2px"
                   rounded="lg"
                   textAlign={"center"}
-                  h="32"
-                  mt="10px"
+                  h="44"
+                  // mt="10px"
                 >
                   <Text
                     fontSize="LG"
-                    bg="gray.100"
+                    bg="gray.200"
                     roundedTop="lg"
                     textColor="gray.700"
                     fontFamily="inherit"
                     fontWeight="medium"
-                    paddingY="1"
+                    paddingY="3"
                   >
                     Review
                   </Text>
                   <Divider />
-                  <VStack spacing={0}>
-                    <HStack>
-                      <Text
-                        textColor="orange.300"
-                        fontSize="lg"
-                        alignItems="baseline"
-                        fontWeight="medium"
-                        py="3"
-                      >
-                        rating
-                      </Text>
-                      <Icon textColor="orange.300">
+                  <Box>
+                    <Text
+                      textColor="#F8B916"
+                      fontSize="lg"
+                      alignItems="baseline"
+                      fontWeight="medium"
+                      py="5"
+                    >
+                      rating
+                      <Icon textColor="#F8B916">
                         <FaStar size="medium" />
                       </Icon>
-                    </HStack>
-                    <Button
-                      leftIcon={<FaSync />}
-                      rounded="full"
-                      fontWeight={"normal"}
-                      px={4}
-                      colorScheme={"white"}
-                      size="sm"
-                      textColor="gray.600"
-                      borderColor="orange.300"
-                      borderWidth="2px"
-                    >
-                      VIEW ALL
-                    </Button>
-                  </VStack>
+                    </Text>
+
+                    <SecondaryButton leftIcon={<FaSync />} name="VIEW ALL" />
+                  </Box>
                 </Box>
+                <PrimaryButton
+                  buttonType="button"
+                  leftIcon={<FiEdit />}
+                  onClick={onOpen}
+                  name=" Update Company"
+                  width="200px"
+                  h="45px"
+                  rounded="lg"
+                />
               </VStack>
-            </Flex>
-          </Box>
+            </GridItem>
+          </Grid>
+        )}
+      </Box>
 
-          {/* company update */}
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader
-                fontWeight="medium"
-                fontSize="large"
-                fontFamily="inhirit"
-                textColor="#F8B916"
-              >
-                Update your company info
-              </ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                {input && (
-                  <form onSubmit={(ev) => updateCompany(ev)}>
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Company Name
-                      <Input
-                        size="md"
-                        name="name"
-                        value={input.name}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+      {/* company update */}
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader
+            fontWeight="medium"
+            fontSize="x-large"
+            fontFamily="inhirit"
+            textColor="#F8B916"
+          >
+            Update your company info
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Company Name :
+                  <RegularInputControl
+                    placeHolder="Enter your company name here"
+                    name="name"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Type
-                      <Input
-                        size="md"
-                        name="type"
-                        value={input.type}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Type :
+                  <RegularInputControl
+                    placeHolder="Enter type"
+                    name="type"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      CR Number
-                      <Input
-                        size="md"
-                        name="cr"
-                        value={input.cr}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  CR Number :
+                  <RegularInputControl
+                    placeHolder="Enter CR"
+                    name="cr"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  VAT Number :
+                  <RegularInputControl
+                    placeHolder="Enter VAT"
+                    name="vat"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      VAT Number
-                      <Input
-                        size="md"
-                        name="vat"
-                        value={input.vat}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Establishment Year :
+                  <RegularInputControl
+                    placeHolder="Enter establishment year"
+                    name="establishment_year"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Establishment Year
-                      <Input
-                        size="md"
-                        name="establishment_year"
-                        value={input.establishment_year}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Total Employees :
+                  <RegularInputControl
+                    placeHolder="Enter total employees"
+                    name="total_employees"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Total Employees
-                      <Input
-                        size="md"
-                        name="total_employees"
-                        value={input.total_employees}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Bio :
+                  <RegularInputControl
+                    placeHolder="Enter Bio"
+                    name="bio"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Bio
-                      <Input
-                        size="md"
-                        name="bio"
-                        value={input.bio}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Telephone :
+                  <RegularInputControl
+                    placeHolder="Enter telephone"
+                    name="telephone"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Telephone
-                      <Input
-                        size="md"
-                        name="telephone"
-                        value={input.telephone}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Fax :
+                  <RegularInputControl
+                    placeHolder="Enter fax"
+                    name="fax"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Fax
-                      <Input
-                        size="md"
-                        name="fax"
-                        value={input.fax}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  E-mail :
+                  <RegularInputControl
+                    placeHolder="Enter email"
+                    name="email"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      e-mail
-                      <Input
-                        size="md"
-                        name="email"
-                        value={input.email}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Website :
+                  <RegularInputControl
+                    placeHolder="Enter website"
+                    name="website"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Website
-                      <Input
-                        size="md"
-                        name="website"
-                        value={input.website}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  City :
+                  <RegularInputControl
+                    placeHolder="Enter city"
+                    name="city"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Country-Id
-                      <Input
-                        size="md"
-                        name="country_id"
-                        value={input.country_id}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  po_box :
+                  <RegularInputControl
+                    placeHolder="Enter po box"
+                    name="po_box"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      City
-                      <Input
-                        size="md"
-                        name="city"
-                        value={input.city}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  ZIP-code :
+                  <RegularInputControl
+                    placeHolder="Enter zip code"
+                    name="zip_code"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      po_box
-                      <Input
-                        size="md"
-                        name="po_box"
-                        value={input.po_box}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Address :
+                  <RegularInputControl
+                    placeHolder="Enter address"
+                    name="address"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      ZIP_code
-                      <Input
-                        size="md"
-                        name="zip_code"
-                        value={input.zip_code}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500 ">
+                  Location :
+                  <RegularInputControl
+                    placeHolder="Enter Location"
+                    name="location"
+                    inputType="text"
+                    width="100%"
+                    control={control}
+                    register={register}
+                    errors={err}
+                  />
+                </label>
+              </Box>
+            </form>
+          </ModalBody>
+          <ModalFooter my="5">
+            <PrimaryButton
+              name="Update"
+              onClick={handleSubmit(onUpdateCompany)}
+              loadingButton={isUpdating}
+              buttonType="submit"
+            />
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Address
-                      <Input
-                        size="md"
-                        name="address"
-                        value={input.address}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
+            <SecondaryButton
+              name="Cancel"
+              onClick={onCancelHandler}
+              buttonType="button"
+            />
 
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Location:
-                      <Input
-                        size="md"
-                        name="location"
-                        value={input.location}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
-
-                    <label className="block text-gray-500 font-normal pl-1">
-                      Category-Id
-                      <Input
-                        size="md"
-                        name="category_id"
-                        value={input.category_id}
-                        onChange={(ev) => handleChange(ev)}
-                      />
-                    </label>
-                  </form>
-                )}
-              </ModalBody>
-              <ModalFooter>
-                <Button colorScheme="blue" mr={3}>
-                  update
-                </Button>
-                <Button variant="ghost" onClick={onClose}>
-                  CANCEL
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
-        </Route>
-        <Route path={`${match.path}/create`} component={CreateCompany} />
-      </Switch>
+            <Stack>
+              {errors?.message && (
+                <Text className="text-center mt-4" color="red">
+                  {errors?.message}
+                </Text>
+              )}
+            </Stack>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
