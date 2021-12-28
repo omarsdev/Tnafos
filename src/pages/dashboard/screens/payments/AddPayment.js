@@ -30,8 +30,8 @@ export const AddPayment = () => {
   //     invoice_id: "",
   //   });
 
-  const createPayment = async (e, data) => {
-    e.preventDefault();
+  const createPayment = async (data) => {
+    // e.preventDefault();
     await AxiosInstance.post("/api/dashboard/payment/create", data)
       .then((res) => {
         console.log(res);

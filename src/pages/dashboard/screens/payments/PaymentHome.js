@@ -13,8 +13,14 @@ import {
   Tr,
   Th,
   Td,
+  Select,
+  Divider,
+  Text,
+  Spacer,
+  Stack,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { BiUpload } from "react-icons/bi";
 import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
 import { AddPayment } from "./";
 import { AxiosInstance } from "api";
@@ -70,6 +76,34 @@ export const PaymentHome = () => {
             <Box>
               <Table size="md">
                 <Thead>
+                  <HStack w="full">
+                    <Button
+                      rounded="full"
+                      w="40"
+                      height="30px"
+                      variant="outline"
+                      colorScheme="gray"
+                    >
+                      <Text fontSize="xs">EXPORT</Text>
+                      <Divider
+                        orientation="vertical"
+                        width="2px"
+                        color="gray.600"
+                      />
+                      <span>
+                        <BiUpload />
+                      </span>
+                    </Button>
+
+                    <Spacer />
+
+                    <Select placeholder="10" size="sm" rounded="full">
+                      <Divider orientation="vertical" width="1px" />
+                      <option value="option1">25</option>
+                      <option value="option2">50</option>
+                      <option value="option3">100</option>
+                    </Select>
+                  </HStack>
                   <Tr>
                     <Th>Amount</Th>
                     <Th>Payment-number</Th>
