@@ -30,7 +30,6 @@ import {
 import { PaymentHome } from "./screens/payments";
 import { UserDataContext } from "context";
 import { PrivateRoute } from "./components/PrivateRoute";
-import {} from "./screens/company/CompanyLayout";
 
 export const DashboardLayout = () => {
   const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
