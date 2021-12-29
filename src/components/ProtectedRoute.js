@@ -9,7 +9,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
 
   let history = useHistory();
 
-  const showCompany = async () => {
+  const showCompany = () => {
     await AxiosInstance.get("/api/dashboard/company")
       .then((res) => {
         setCompanyInfo(res.data.data);
@@ -21,6 +21,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
       })
       .catch((err) => {
         history.push("/dashboard/company");
+        set;
       });
   };
 
