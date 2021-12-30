@@ -51,7 +51,7 @@ export const PaymentHome = () => {
             >
               Payments
             </Heading>
-            <Link to={`${match.url}/addpayment`}>
+            {/* <Link to={`${match.url}/addpayment`}>
               <IconButton
                 as={Button}
                 colorScheme="yellow"
@@ -59,7 +59,7 @@ export const PaymentHome = () => {
                 icon={<AiOutlinePlus />}
                 rounded="full"
               />
-            </Link>
+            </Link> */}
           </HStack>
 
           {!list ? (
