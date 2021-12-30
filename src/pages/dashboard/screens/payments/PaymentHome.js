@@ -50,6 +50,7 @@ export const PaymentHome = () => {
   useEffect(() => {
     paymentsList();
   }, []);
+
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
@@ -93,31 +94,30 @@ export const PaymentHome = () => {
                 List of payments
               </Text>
 
-              <Flex w="full" height="45px" my="5" spacing="30px">
+              <Flex w="full" height="45px" my="8" spacing="30px">
                 <HStack pl="5">
                   <SecondaryButton
                     rounded="full"
                     width="100px"
-                    height="30px"
+                    height="40px"
                     variant="outline"
                     colorScheme="gray"
                     name="EXPORT"
                     fontSize="xs"
                     leftIcon={<BiUpload size="20px" />}
-                  >
-                    {/* <Divider
+                  />
+                  {/* <Divider
                           orientation="vertical"
                           width="2px"
                           color="gray.700"
                         /> */}
-                  </SecondaryButton>
 
                   <Select
                     placeholder="10"
                     size="sm"
                     rounded="full"
-                    height="30px"
-                    width="100px"
+                    height="40px"
+                    width="120px"
                   >
                     {/* <Divider orientation="vertical" width="1px" /> */}
                     <option value="option1">25</option>
@@ -137,11 +137,12 @@ export const PaymentHome = () => {
                       type="text"
                       placeholder="search"
                       focusBorderColor="#F8B916"
+                      rounded="full"
                     />
                   </InputGroup>
                 </Box>
               </Flex>
-              <Table size="md">
+              <Table size="md" w="full">
                 <Thead>
                   <Tr bg="gray.200" borderRadius="full">
                     <Th>Payment-number</Th>
@@ -175,12 +176,14 @@ export const PaymentHome = () => {
                 <Tbody>
                   {list.map((el, idx) => (
                     <Tr key={idx}>
-                      <Td>{el?.uuid}</Td>
-                      <Td>{el?.amount}</Td>
-                      <Td>{el?.method}</Td>
-                      <Td>{el?.date}</Td>
-                      <Td>{el?.transaction_number}</Td>
-                      <Td>{el?.notes}</Td>
+                      <Link to={`${match.url}/${el.uuid}`}>
+                        <Td>{el?.uuid}</Td>
+                        <Td>{el?.amount}</Td>
+                        <Td>{el?.method}</Td>
+                        <Td>{el?.date}</Td>
+                        <Td>{el?.transaction_number}</Td>
+                        <Td>{el?.notes}</Td>
+                      </Link>
                     </Tr>
                   ))}
                 </Tbody>

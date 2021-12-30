@@ -9,25 +9,25 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
 
   let history = useHistory();
 
-  const showCompany = () => {
-    await AxiosInstance.get("/api/dashboard/company")
-      .then((res) => {
-        setCompanyInfo(res.data.data);
-        let company = res.data.data;
-        console.log(company);
-        delete company.country;
-        delete company.admin;
-        delete company.category;
-      })
-      .catch((err) => {
-        history.push("/dashboard/company");
-        set;
-      });
-  };
+  // const showCompany = async () => {
+  //   await AxiosInstance.get("/api/dashboard/company")
+  //     .then((res) => {
+  //       setCompanyInfo(res.data.data);
+  //       let company = res.data.data;
+  //       console.log(company);
+  //       delete company.country;
+  //       delete company.admin;
+  //       delete company.category;
+  //     })
+  //     .catch((err) => {
+  //       history.push("/dashboard/company");
+  //       set;
+  //     });
+  // };
 
-  useEffect(() => {
-    showCompany();
-  }, [companyInfo]);
+  // useEffect(() => {
+  //   showCompany();
+  // }, [companyInfo]);
 
   return (
     <Route

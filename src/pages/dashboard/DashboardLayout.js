@@ -29,7 +29,8 @@ import {
 } from "./screens";
 import { PaymentHome } from "./screens/payments";
 import { UserDataContext } from "context";
-import { PrivateRoute } from "./components/PrivateRoute";
+// import { PrivateRoute } from "./components/PrivateRoute";
+import {} from "./screens/company/CompanyLayout";
 
 export const DashboardLayout = () => {
   const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
@@ -74,7 +75,7 @@ export const DashboardLayout = () => {
             {/* {body} */}
 
             <Switch>
-              <PrivateRoute exact path={match.path}>
+              <Route exact path={match.path}>
                 <Box>
                   <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
                     <Box
@@ -166,42 +167,27 @@ export const DashboardLayout = () => {
                     </Box>
                   </Grid>
                 </Box>
-              </PrivateRoute>
+              </Route>
               <Route path={`${match.path}/company`} component={CompanyLayout} />
-              <PrivateRoute path={`${match.path}/rating`} component={Ratings} />
-              <PrivateRoute path={`${match.path}/user`} component={UserHome} />
-              <PrivateRoute
-                path={`${match.path}/service`}
-                component={ServiceHome}
-              />
-              <PrivateRoute
+              <Route path={`${match.path}/rating`} component={Ratings} />
+              <Route path={`${match.path}/user`} component={UserHome} />
+              <Route path={`${match.path}/service`} component={ServiceHome} />
+              <Route
                 path={`${match.path}/purchase-requests`}
                 component={PurchaseRequest}
               />
-              <PrivateRoute
-                path={`${match.path}/payment`}
-                component={PaymentHome}
-              />
-              <PrivateRoute
+              <Route path={`${match.path}/payment`} component={PaymentHome} />
+              <Route
                 path={`${match.path}/invoice/incoming`}
                 component={Incoming}
               />
-              <PrivateRoute
+              <Route
                 path={`${match.path}/invoice/outgoing`}
                 component={Outgoing}
               />
-              <PrivateRoute
-                path={`${match.path}/estimate`}
-                component={Estimate}
-              />
-              <PrivateRoute
-                path={`${match.path}/client`}
-                component={ClientsHome}
-              />
-              <PrivateRoute
-                path={`${match.path}/settings`}
-                component={Settings}
-              />
+              <Route path={`${match.path}/estimate`} component={Estimate} />
+              <Route path={`${match.path}/client`} component={ClientsHome} />
+              <Route path={`${match.path}/settings`} component={Settings} />
             </Switch>
           </VStack>
         </HStack>
