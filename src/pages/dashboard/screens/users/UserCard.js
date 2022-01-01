@@ -163,9 +163,6 @@ export const UserCard = () => {
                 _hover={{
                   bg: "orange.400",
                 }}
-                _focus={{
-                  bg: "orange.400",
-                }}
                 icon={<FiEdit />}
                 onClick={onOpen}
               />

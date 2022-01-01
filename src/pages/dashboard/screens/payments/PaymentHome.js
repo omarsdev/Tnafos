@@ -26,7 +26,13 @@ import {
 import { Search2Icon } from "@chakra-ui/icons";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiUpload, BiChevronsUp } from "react-icons/bi";
-import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
+import {
+  Link,
+  useRouteMatch,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
 import { AddPayment } from "./";
 import { AxiosInstance } from "api";
 import { SecondaryButton } from "components";
@@ -35,6 +41,7 @@ export const PaymentHome = () => {
   const [list, setList] = useState([]);
 
   const match = useRouteMatch();
+  const history = useHistory();
 
   const paymentsList = async () => {
     await AxiosInstance.get("/api/dashboard/payment/")
@@ -84,12 +91,13 @@ export const PaymentHome = () => {
               <Text
                 py="3"
                 px="3"
-                borderBottom="groove"
+                // borderBottom="groove"
                 borderWidth="2px"
-                bg="gray.200"
+                bg="#333333"
                 width="100%"
                 roundedTop="2xl"
                 fontSize="lg"
+                color="white"
               >
                 List of payments
               </Text>
@@ -144,47 +152,58 @@ export const PaymentHome = () => {
               </Flex>
               <Table size="md" w="full">
                 <Thead>
-                  <Tr bg="gray.200" borderRadius="full">
-                    <Th>Payment-number</Th>
+                  <Tr bg="#333333" borderRadius="full">
+                    <Th color="white">Payment-number</Th>
                     <Th>
                       <Flex>
-                        <BiChevronsUp size="25px" /> <Text>Amount</Text>{" "}
+                        <BiChevronsUp size="25px" color="white" />{" "}
+                        <Text color="white">Amount</Text>{" "}
                       </Flex>
                     </Th>
                     <Th>
                       <Flex>
-                        <BiChevronsUp /> Payment-method{" "}
+                        <BiChevronsUp size="25px" color="white" />{" "}
+                        <Text color="white">Payment-method </Text>
                       </Flex>
                     </Th>
                     <Th>
                       <Flex>
-                        <BiChevronsUp /> Date{" "}
+                        <BiChevronsUp size="25px" color="white" />
+                        <Text color="white"> Date </Text>
                       </Flex>
                     </Th>
                     <Th>
                       <Flex>
-                        <BiChevronsUp /> Transaction-ID{" "}
+                        <BiChevronsUp size="25px" color="white" />{" "}
+                        <Text color="white">Transaction-ID </Text>
                       </Flex>
                     </Th>
                     <Th>
                       <Flex>
-                        <BiChevronsUp /> Notes{" "}
+                        <BiChevronsUp size="25px" color="white" />
+                        <Text color="white"> Notes </Text>
                       </Flex>
                     </Th>
                   </Tr>
                 </Thead>
                 <Tbody>
                   {list.map((el, idx) => (
-                    <Tr key={idx}>
-                      <Link to={`${match.url}/${el.uuid}`}>
-                        <Td>{el?.uuid}</Td>
-                        <Td>{el?.amount}</Td>
-                        <Td>{el?.method}</Td>
-                        <Td>{el?.date}</Td>
-                        <Td>{el?.transaction_number}</Td>
-                        <Td>{el?.notes}</Td>
-                      </Link>
+                    <Tr
+                      onClick={() => {
+                        history.push(`${match.url}/${el.uuid}`);
+                      }}
+                      key={idx}
+                      _hover={{ bg: "gray.100" }}
+                    >
+                      <Td>{el?.uuid}</Td>
+                      <Td>{el?.amount}</Td>
+                      <Td>{el?.method}</Td>
+                      <Td>{el?.date}</Td>
+                      <Td>{el?.transaction_number}</Td>
+                      <Td>{el?.notes}</Td>
                     </Tr>
+                    //   </Button>
+                    // </Box>
                   ))}
                 </Tbody>
               </Table>
