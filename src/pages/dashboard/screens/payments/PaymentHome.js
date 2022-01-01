@@ -33,7 +33,7 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import { AddPayment } from "./";
+import { AddPayment, PaymentDetails } from "./";
 import { AxiosInstance } from "api";
 import { SecondaryButton } from "components";
 
@@ -212,6 +212,7 @@ export const PaymentHome = () => {
         </Box>
       </Route>
       <Route path={`${match.path}/addpayment`} component={AddPayment} />
+      <Route path={`${match.path}/:uuid`} component={PaymentDetails} />
     </Switch>
   );
 };

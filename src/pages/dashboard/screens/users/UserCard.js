@@ -26,13 +26,15 @@ import {
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
-import { AxiosInstance } from "../../../../api";
+import { AxiosInstance } from "api";
 
-import { RegularInputControl } from "components";
+import {
+  RegularInputControl,
+  SecondaryButton,
+  PrimaryButton,
+} from "components";
 
 import { useForm } from "react-hook-form";
-import { PrimaryButton } from "components";
-import { SecondaryButton } from "components";
 import { AlertContext } from "context/AlertContext";
 import { media } from "api/media";
 

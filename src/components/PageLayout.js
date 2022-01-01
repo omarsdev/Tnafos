@@ -24,8 +24,12 @@ import {
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
 import { BiUpload, BiChevronsUp } from "react-icons/bi";
+import { SecondaryButton } from "components";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
-export const PageLayout = ({ heading, th, idx, data }) => {
+export const PageLayout = ({ heading, th, idx, data, uuid }) => {
+  const match = useRouteMatch();
+  const history = useHistory();
   return (
     <Box className="rounded-3xl shadow-2xl relative bg-white">
       <Text
@@ -97,7 +101,7 @@ export const PageLayout = ({ heading, th, idx, data }) => {
         <Tbody>
           <Tr
             onClick={() => {
-              history.push(`${match.url}/${el.uuid}`);
+              history.push(`${match.url}/${uuid}`);
             }}
             key={idx}
             _hover={{ bg: "gray.100" }}
