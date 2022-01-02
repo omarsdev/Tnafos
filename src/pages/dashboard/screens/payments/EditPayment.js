@@ -37,7 +37,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "context/AlertContext";
 import { media } from "api/media";
 
-export const UserCard = () => {
+export const EditPayment = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -130,8 +130,8 @@ export const UserCard = () => {
       <Center py="5">
         <Box
           className="rounded-3xl relative bg-white shadow-2xl"
-          w="350px"
-          h="430px"
+          w="400px"
+          h="500px"
         >
           <Image
             src={"https://bit.ly/sage-adebayo"}
