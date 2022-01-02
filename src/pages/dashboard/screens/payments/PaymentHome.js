@@ -33,15 +33,19 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import { AddPayment, PaymentDetails } from "./";
+import { AddPayment, EditPayment } from "./";
 import { AxiosInstance } from "api";
 import { SecondaryButton } from "components";
+import { FiEdit } from "react-icons/fi";
+import { BsTrash } from "react-icons/bs";
 
 export const PaymentHome = () => {
   const [list, setList] = useState([]);
+  const [editPaymentId, setEditPaymentId] = useState(null);
 
   const match = useRouteMatch();
   const history = useHistory();
+  // const uuid = useParams();
 
   const paymentsList = async () => {
     await AxiosInstance.get("/api/dashboard/payment/")
@@ -53,6 +57,10 @@ export const PaymentHome = () => {
         console.log(err);
       });
   };
+
+  // const handleEditClick = () => {
+  //   history.push(`${match.url}/${uuid}`);
+  // };
 
   useEffect(() => {
     paymentsList();
@@ -138,7 +146,6 @@ export const PaymentHome = () => {
                 <Box mr="5" w="200px">
                   <InputGroup>
                     <InputLeftElement
-                      // pointerEvents="none"
                       children={<Search2Icon color="gray.300" />}
                     />
                     <Input
@@ -150,69 +157,103 @@ export const PaymentHome = () => {
                   </InputGroup>
                 </Box>
               </Flex>
-              <Table size="md" w="full">
-                <Thead>
-                  <Tr bg="#333333" borderRadius="full">
-                    <Th color="white">Payment-number</Th>
-                    <Th>
-                      <Flex>
-                        <BiChevronsUp size="25px" color="white" />{" "}
-                        <Text color="white">Amount</Text>{" "}
-                      </Flex>
-                    </Th>
-                    <Th>
-                      <Flex>
-                        <BiChevronsUp size="25px" color="white" />{" "}
-                        <Text color="white">Payment-method </Text>
-                      </Flex>
-                    </Th>
-                    <Th>
-                      <Flex>
-                        <BiChevronsUp size="25px" color="white" />
-                        <Text color="white"> Date </Text>
-                      </Flex>
-                    </Th>
-                    <Th>
-                      <Flex>
-                        <BiChevronsUp size="25px" color="white" />{" "}
-                        <Text color="white">Transaction-ID </Text>
-                      </Flex>
-                    </Th>
-                    <Th>
-                      <Flex>
-                        <BiChevronsUp size="25px" color="white" />
-                        <Text color="white"> Notes </Text>
-                      </Flex>
-                    </Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {list.map((el, idx) => (
-                    <Tr
-                      onClick={() => {
-                        history.push(`${match.url}/${el.uuid}`);
-                      }}
-                      key={idx}
-                      _hover={{ bg: "gray.100" }}
-                    >
-                      <Td>{el?.uuid}</Td>
-                      <Td>{el?.amount}</Td>
-                      <Td>{el?.method}</Td>
-                      <Td>{el?.date}</Td>
-                      <Td>{el?.transaction_number}</Td>
-                      <Td>{el?.notes}</Td>
+              <form>
+                <Table size="md" w="full">
+                  <Thead>
+                    <Tr bg="#333333" borderRadius="full">
+                      <Th color="white">Payment-number</Th>
+                      <Th>
+                        <Flex>
+                          <BiChevronsUp size="25px" color="white" />{" "}
+                          <Text color="white">Amount</Text>{" "}
+                        </Flex>
+                      </Th>
+                      <Th>
+                        <Flex>
+                          <BiChevronsUp size="25px" color="white" />{" "}
+                          <Text color="white">Payment-method </Text>
+                        </Flex>
+                      </Th>
+                      <Th>
+                        <Flex>
+                          <BiChevronsUp size="25px" color="white" />
+                          <Text color="white"> Date </Text>
+                        </Flex>
+                      </Th>
+                      <Th>
+                        <Flex>
+                          <BiChevronsUp size="25px" color="white" />{" "}
+                          <Text color="white">Transaction-ID </Text>
+                        </Flex>
+                      </Th>
+                      <Th>
+                        <Flex>
+                          <BiChevronsUp size="25px" color="white" />
+                          <Text color="white"> Notes </Text>
+                        </Flex>
+                      </Th>
+                      <Th>
+                        <Flex>
+                          <BiChevronsUp size="25px" color="white" />
+                          <Text color="white"> Action </Text>
+                        </Flex>
+                      </Th>
                     </Tr>
-                    //   </Button>
-                    // </Box>
-                  ))}
-                </Tbody>
-              </Table>
+                  </Thead>
+                  <Tbody>
+                    {list.map((el, idx) => (
+                      <Tr key={idx} _hover={{ bg: "gray.100" }}>
+                        <Td>{el?.uuid}</Td>
+                        <Td>{el?.amount}</Td>
+                        <Td>{el?.method}</Td>
+                        <Td>{el?.date}</Td>
+                        <Td>{el?.transaction_number}</Td>
+                        <Td>{el?.notes}</Td>
+                        <Td>
+                          <Flex justify={"center"} gap="10px">
+                            <IconButton
+                              justify={"center"}
+                              fontSize={"md"}
+                              rounded={"full"}
+                              bg={"#F8B916"}
+                              color={"white"}
+                              boxShadow={
+                                "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                              }
+                              _hover={{
+                                bg: "orange.400",
+                              }}
+                              icon={<FiEdit />}
+                              onClick={history.push(`${match.url}/${el.uuid}`)}
+                            />
+                            <IconButton
+                              justify={"center"}
+                              fontSize={"md"}
+                              rounded={"full"}
+                              bg={"#F8B916"}
+                              color={"white"}
+                              boxShadow={
+                                "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                              }
+                              _hover={{
+                                bg: "orange.400",
+                              }}
+                              icon={<BsTrash />}
+                              // onClick={onOpen}
+                            />
+                          </Flex>
+                        </Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              </form>
             </Box>
           )}
         </Box>
       </Route>
       <Route path={`${match.path}/addpayment`} component={AddPayment} />
-      <Route path={`${match.path}/:uuid`} component={PaymentDetails} />
+      <Route path={`${match.path}/:uuid`} component={EditPayment} />
     </Switch>
   );
 };

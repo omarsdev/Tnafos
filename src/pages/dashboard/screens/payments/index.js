@@ -1,4 +1,4 @@
 export * from "./PaymentHome";
 export * from "./AddPayment";
-export * from "./PaymentDetails";
+export * from "./EditPayment";
 export * from "./UpdatePayment";

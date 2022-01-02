@@ -1,8 +1,15 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import {
   IconButton,
   Box,
   Text,
+  Image,
   HStack,
   Drawer,
   DrawerBody,
@@ -17,6 +24,7 @@ import {
   Spacer,
   VStack,
 } from "@chakra-ui/react";
+import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api";
 
 import {
@@ -26,38 +34,43 @@ import {
 } from "components";
 
 import { useForm } from "react-hook-form";
-
 import { AlertContext } from "context/AlertContext";
 import { media } from "api/media";
 
-export const PaymentDetails = () => {
-  const [card, setCard] = useState(null);
-  const [errors, setErrors] = useState(null);
-  const [isUpdating, setIsUpdating] = useState(false);
+export const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
+
+  const history = useHistory();
+
+  const { uuid } = useParams();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { register, handleSubmit, reset, control } = useForm();
 
-  const history = useHistory();
-  const { uuid } = useParams();
+  const [card, setCard] = useState(null);
+  const [errors, setErrors] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const [photo, setPhoto] = useState(null);
+  // let inputRef = useRef(null);
 
   const resetHooksForm = (data) => {
     reset({
-      amount: data.amount,
-      date: data.date,
+      // amount: data.amount,
       method: data.method,
       transaction_number: data.transaction_number,
+      date: data.date,
       notes: data.notes,
       uuid: data.uuid,
     });
   };
 
   const getPayment = async () => {
-    await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
+    await AxiosInstance.get(`/api/dashboard/payment/${uuid}`)
       .then((res) => {
         console.log(res.data.data);
+        resetHooksForm(res.data.data);
         setCard(res.data.data);
       })
       .catch((err) => {
@@ -66,19 +79,18 @@ export const PaymentDetails = () => {
       });
   };
 
-  const onUpdatePayment = useCallback(async (data) => {
+  const updatePayment = useCallback(async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(`/api/dashboard/user/${uuid}/update`, data)
+    await AxiosInstance.put(`/api/dashboard/payment/${uuid}/update`, data)
       .then((res) => {
         console.log(res);
-        resetHooksForm(res.data.data);
         setIsUpdating(false);
         setAlert({
-          message: "User Has Been Updated!",
+          message: "Payment's info has been updated!",
           type: "info",
         });
-        history.push(`/dashboard/user`);
+        history.push(`/dashboard/payment`);
       })
       .catch((err) => {
         console.log(err);
@@ -99,15 +111,15 @@ export const PaymentDetails = () => {
     onClose();
   };
 
-  //* media file upload:
-  const uploadFile = (photo) => {
-    if (!photo) return;
-    media(uuid, "user", photo);
-  };
-
   useEffect(() => {
     getPayment();
   }, []);
+
+  //* media file upload:
+  const uploadFile = (photo) => {
+    if (!photo) return;
+    media(uuid, "payment", photo);
+  };
 
   return !card ? (
     <Center h="70vh" w="100%">
@@ -121,8 +133,7 @@ export const PaymentDetails = () => {
           w="350px"
           h="430px"
         >
-          <Box>media</Box>
-          {/* <Image
+          <Image
             src={"https://bit.ly/sage-adebayo"}
             alt="Segun Adebayo"
             objectFit="cover"
@@ -130,20 +141,23 @@ export const PaymentDetails = () => {
             w="100%"
             h="220px"
             layout={"fill"}
-          /> */}
+          />
           <VStack spacing="20px" mx="5%" mt="5">
             <Box mr="0">
               <Text py="1" textColor="gray.600">
-                Name: {card?.first_name}
-                {card?.last_name}
+                Amount: {card?.amount}
               </Text>
-              <Text textColor="gray.600">E-mail: {card?.email}</Text>
-              <Text textColor="gray.600">Telephone: {card?.phone_number}</Text>
-              <Text textColor="gray.600">Id :{card?.uuid}</Text>
+              <Text textColor="gray.600">Method: {card?.method}</Text>
+              <Text textColor="gray.600">
+                Transaction_Number: {card?.transaction_number}
+              </Text>
+              <Text textColor="gray.600">Date:{card?.date}</Text>
+              <Text textColor="gray.600">Notes:{card?.notes}</Text>
+              <Text textColor="gray.600">UUID:{card?.uuid}</Text>
             </Box>
 
             <Flex justify={"center"} mt={-12}>
-              <IconButton
+              <SecondaryButton
                 justify={"center"}
                 fontSize={"large"}
                 rounded={"full"}
@@ -155,9 +169,11 @@ export const PaymentDetails = () => {
                 _hover={{
                   bg: "orange.400",
                 }}
-                icon={<FiEdit />}
+                // icon={<FiEdit />}
                 onClick={onOpen}
-              />
+              >
+                Edit here
+              </SecondaryButton>
             </Flex>
           </VStack>
         </Box>
@@ -194,40 +210,26 @@ export const PaymentDetails = () => {
               <SecondaryButton name="Upload File" onClick={uploadFile} />
             </HStack>
             <form>
-              <Box className="mt-4">
+              {/* <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Amount :
                   <RegularInputControl
-                    placeHolder="First Name"
-                    name="first_name"
+                    placeHolder="amount"
+                    name="amount"
                     control={control}
                     register={register}
                     width="100%"
                     error={errors}
                   />
                 </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Date :
-                  <RegularInputControl
-                    placeHolder="Last Name"
-                    name="last_name"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
+              </Box> */}
 
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">
                   Method:
                   <RegularInputControl
-                    placeHolder="Phone Number"
-                    name="phone_number"
+                    placeHolder="method"
+                    name="method"
                     control={control}
                     register={register}
                     width="100%"
@@ -238,10 +240,24 @@ export const PaymentDetails = () => {
 
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500">
-                  Transaction - number:
+                  Transaction - Number:
                   <RegularInputControl
-                    placeHolder="Email"
-                    name="email"
+                    placeHolder="Transaction - number"
+                    name="transaction_number"
+                    control={control}
+                    register={register}
+                    width="100%"
+                    error={errors}
+                  />
+                </label>
+              </Box>
+
+              <Box className="mt-4">
+                <label className="w-32 text-left text-gray-500">
+                  Date:
+                  <RegularInputControl
+                    placeHolder="date"
+                    name="date"
                     control={control}
                     register={register}
                     width="100%"
@@ -254,8 +270,8 @@ export const PaymentDetails = () => {
                 <label className="w-32 text-left text-gray-500">
                   Notes:
                   <RegularInputControl
-                    placeHolder="Email"
-                    name="email"
+                    placeHolder="notes"
+                    name="notes"
                     control={control}
                     register={register}
                     width="100%"
@@ -268,8 +284,8 @@ export const PaymentDetails = () => {
                 <label className="w-32 text-left text-gray-500">
                   UUID:
                   <RegularInputControl
-                    placeHolder="Email"
-                    name="email"
+                    placeHolder="uuid"
+                    name="uuid"
                     control={control}
                     register={register}
                     width="100%"
@@ -281,7 +297,7 @@ export const PaymentDetails = () => {
               <Flex mt="5" w="full" ml="320px">
                 <PrimaryButton
                   name="Update"
-                  onClick={handleSubmit(onUpdatePayment)}
+                  onClick={handleSubmit(updatePayment)}
                   loadingButton={isUpdating}
                   buttonType="submit"
                   mx="2"
