@@ -159,21 +159,20 @@ export const EditPayment = () => {
             <Flex justify={"center"} mt={-12}>
               <SecondaryButton
                 justify={"center"}
-                fontSize={"large"}
+                fontSize={"md"}
                 rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
+                // bg={"#F8B916"}
+                // color={"white"}
+                // boxShadow={
+                //   "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                // }
+                // _hover={{
+                //   bg: "orange.400",
+                // }}
                 // icon={<FiEdit />}
                 onClick={onOpen}
-              >
-                Edit here
-              </SecondaryButton>
+                name="Click here to edit"
+              />
             </Flex>
           </VStack>
         </Box>

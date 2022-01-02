@@ -41,10 +41,13 @@ import { BsTrash } from "react-icons/bs";
 
 export const PaymentHome = () => {
   const [list, setList] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+
+  //* representing certain number of rows based on select option:
+  const [rowsNumber, setRowsNumber] = useState("10");
 
   const match = useRouteMatch();
   const history = useHistory();
-  // const uuid = useParams();
 
   const paymentsList = async () => {
     await AxiosInstance.get("/api/dashboard/payment/")
@@ -57,9 +60,23 @@ export const PaymentHome = () => {
       });
   };
 
-  // const handleEditClick = () => {
-  //   history.push(`${match.url}/${uuid}`);
-  // };
+  const handleKeypress = (e) => {
+    if (e.key === "Enter") {
+      searchHandler();
+    }
+  };
+  const searchHandler = () => {
+    history.push(`/${searchInput}`);
+  };
+
+  const handleDeleteClick = (paymentId) => {
+    const newList = [...list];
+
+    const index = list.findIndex((el) => el.uuid === paymentId);
+
+    newList.splice(index, 1);
+    setList(newList);
+  };
 
   useEffect(() => {
     paymentsList();
@@ -121,23 +138,21 @@ export const PaymentHome = () => {
                     fontSize="xs"
                     leftIcon={<BiUpload size="20px" />}
                   />
-                  {/* <Divider
-                          orientation="vertical"
-                          width="2px"
-                          color="gray.700"
-                        /> */}
 
                   <Select
-                    placeholder="10"
                     size="sm"
                     rounded="full"
                     height="40px"
                     width="120px"
+                    onChange={(e) => {
+                      const selectedOption = e.target.value;
+                      setRowsNumber(selectedOption);
+                    }}
                   >
                     {/* <Divider orientation="vertical" width="1px" /> */}
-                    <option value="option1">25</option>
-                    <option value="option2">50</option>
-                    <option value="option3">100</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
                   </Select>
                 </HStack>
                 <Spacer />
@@ -152,6 +167,9 @@ export const PaymentHome = () => {
                       placeholder="search"
                       focusBorderColor="#F8B916"
                       rounded="full"
+                      value={searchInput}
+                      onChange={(e) => setSearchInput(e.target.value)}
+                      onKeyPress={handleKeypress}
                     />
                   </InputGroup>
                 </Box>
@@ -240,7 +258,7 @@ export const PaymentHome = () => {
                                 bg: "orange.400",
                               }}
                               icon={<BsTrash />}
-                              // onClick={onOpen}
+                              onClick={handleDeleteClick}
                             />
                           </Flex>
                         </Td>
