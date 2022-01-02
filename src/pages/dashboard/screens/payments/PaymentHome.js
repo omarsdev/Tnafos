@@ -41,7 +41,6 @@ import { BsTrash } from "react-icons/bs";
 
 export const PaymentHome = () => {
   const [list, setList] = useState([]);
-  const [editPaymentId, setEditPaymentId] = useState(null);
 
   const match = useRouteMatch();
   const history = useHistory();
