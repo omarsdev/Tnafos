@@ -223,7 +223,9 @@ export const PaymentHome = () => {
                                 bg: "orange.400",
                               }}
                               icon={<FiEdit />}
-                              onClick={history.push(`${match.url}/${el.uuid}`)}
+                              onClick={() => {
+                                history.push(`${match.url}/${el.uuid}`);
+                              }}
                             />
                             <IconButton
                               justify={"center"}
