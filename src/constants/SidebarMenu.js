@@ -1,3 +1,5 @@
+// TODO update purchaes
+
 import React from "react";
 
 import { FiMenu } from "react-icons/fi";
@@ -85,11 +87,11 @@ export const SidebarMenu = [
         submenu: [
           {
             title: "Incoming",
-            to: "/",
+            to: "/purchase-requests/incoming",
           },
           {
             title: "Outgoing",
-            to: "/",
+            to: "/purchase-requests/outgoing",
           },
         ],
       },
