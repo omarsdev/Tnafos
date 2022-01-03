@@ -180,37 +180,37 @@ export const PaymentHome = () => {
                     <Tr bg="#333333" borderRadius="full">
                       <Th color="white">Payment-number</Th>
                       <Th>
-                        <Flex>
+                        <Flex justifyContent="center" alignItems="center">
                           <BiChevronsUp size="25px" color="white" />{" "}
                           <Text color="white">Amount</Text>{" "}
                         </Flex>
                       </Th>
                       <Th>
-                        <Flex>
+                        <Flex justifyContent="center" alignItems="center">
                           <BiChevronsUp size="25px" color="white" />{" "}
                           <Text color="white">Payment-method </Text>
                         </Flex>
                       </Th>
                       <Th>
-                        <Flex>
+                        <Flex justifyContent="center" alignItems="center">
                           <BiChevronsUp size="25px" color="white" />
                           <Text color="white"> Date </Text>
                         </Flex>
                       </Th>
                       <Th>
-                        <Flex>
+                        <Flex justifyContent="center" alignItems="center">
                           <BiChevronsUp size="25px" color="white" />{" "}
                           <Text color="white">Transaction-ID </Text>
                         </Flex>
                       </Th>
                       <Th>
-                        <Flex>
+                        <Flex justifyContent="center" alignItems="center">
                           <BiChevronsUp size="25px" color="white" />
                           <Text color="white"> Notes </Text>
                         </Flex>
                       </Th>
                       <Th>
-                        <Flex>
+                        <Flex justifyContent="center" alignItems="center">
                           <BiChevronsUp size="25px" color="white" />
                           <Text color="white"> Action </Text>
                         </Flex>
