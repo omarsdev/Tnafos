@@ -1,5 +1,5 @@
-import React, { useState, useContext, useCallback } from "react";
-import { HStack, Text, Box, Heading } from "@chakra-ui/react";
+import React, { useState, useContext, useCallback, useEffect } from "react";
+import { HStack, Text, Box, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
@@ -11,6 +11,8 @@ import {
   RegularInputControl,
 } from "components";
 
+import { DropDownCategory } from "../../components";
+
 export const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
@@ -21,13 +23,14 @@ export const AddService = () => {
     formState: { errors },
     control,
   } = useForm();
+
   const [err, setErr] = useState(null);
+  const [listCategory, setListCategory] = useState(null);
 
   const history = useHistory();
 
   //* service adding function:
-  const createService = useCallback(async (data) => {
-    console.log(data);
+  const createService = async (data) => {
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
         console.log(res.data.data);
@@ -44,13 +47,27 @@ export const AddService = () => {
           type: "error",
         });
       });
-  }, []);
+  };
+
+  const getAllCategory = async () => {
+    await AxiosInstance.get("/api/category/")
+      .then((res) => {
+        setListCategory(res.data.data);
+      })
+      .catch((err) => {
+        setErr(err.response.data);
+      });
+  };
 
   const handleCancel = () => {
     history.push("/dashboard/service");
   };
 
-  return (
+  useEffect(() => {
+    getAllCategory();
+  }, []);
+
+  return listCategory ? (
     <Box boxShadow="2xl" rounded="3xl" boxSize="2xl">
       <Box px="20" mt="10">
         <Heading
@@ -96,14 +113,14 @@ export const AddService = () => {
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
               Category-Id :
-              <RegularInputControl
-                placeHolder="Category id"
-                name="category_id"
-                inputType="text"
+              <DropDownCategory
+                list={listCategory}
                 width="100%"
+                name="category_id"
                 control={control}
                 register={register}
                 errors={err}
+                typeButtonHookForm={true}
               />
             </label>
           </Box>
@@ -142,6 +159,8 @@ export const AddService = () => {
               name="ADD SERVICE"
               onClick={handleSubmit(createService)}
               buttonType="submit"
+              typeButton="react-hook-form"
+              typeButtonHookForm={false}
             />
 
             <SecondaryButton
@@ -160,5 +179,9 @@ export const AddService = () => {
         </form>
       </Box>
     </Box>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };
