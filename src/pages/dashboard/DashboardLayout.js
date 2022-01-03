@@ -207,7 +207,10 @@ export const DashboardLayout = () => {
                 path={`${match.path}/estimate/incoming`}
                 component={IncomingEstimates}
               />
-              <Route path={`${match.path}/client`} component={ClientsHome} />
+              <Route
+                path={`${match.path}/clientshome`}
+                component={ClientsHome}
+              />
               <Route path={`${match.path}/settings`} component={Settings} />
             </Switch>
           </VStack>

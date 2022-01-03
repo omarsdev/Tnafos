@@ -1,3 +1,5 @@
 export * from "./ClientsHome";
 export * from "./AddClient";
-export * from "./EditClient";
+export * from "./ClientCard";
+export * from "./ClientContacts";
+export * from "./ClientMedia";

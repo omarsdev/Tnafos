@@ -8,4 +8,5 @@ export * from "./CheckBox";
 
 export * from "./Navbar";
 
-export * from "./PageLayout";
+export * from "./AddForm";
+export * from "./CustomTable";

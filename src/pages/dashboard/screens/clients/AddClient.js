@@ -23,7 +23,7 @@ export const AddClient = () => {
 
   const createClient = async (data) => {
     // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/contact/create", data)
+    await AxiosInstance.post("/api/dashboard/customer/create", data)
       .then((res) => {
         console.log(res);
       })
@@ -61,10 +61,10 @@ export const AddClient = () => {
         <form>
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
-              Customer-Id :
+              Company Name :
               <RegularInputControl
-                placeHolder="customer-id"
-                name="customer_id"
+                placeHolder="company name"
+                name="company_name"
                 control={control}
                 register={register}
                 width="100%"
@@ -75,10 +75,10 @@ export const AddClient = () => {
 
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
-              First Name :
+              VAT Number :
               <RegularInputControl
-                placeHolder="first name"
-                name="first_name"
+                placeHolder="vat number"
+                name="vat_number"
                 control={control}
                 register={register}
                 width="100%"
@@ -89,10 +89,10 @@ export const AddClient = () => {
 
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
-              Last Name :
+              Phone :
               <RegularInputControl
-                placeHolder="last name"
-                name="last_name"
+                placeHolder="phone"
+                name="phone"
                 control={control}
                 register={register}
                 width="100%"
@@ -103,10 +103,10 @@ export const AddClient = () => {
 
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
-              Position :
+              Fax :
               <RegularInputControl
-                placeHolder="position"
-                name="position"
+                placeHolder="fax"
+                name="fax"
                 control={control}
                 register={register}
                 width="100%"
@@ -117,10 +117,10 @@ export const AddClient = () => {
 
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
-              Email :
+              Website :
               <RegularInputControl
-                placeHolder="email"
-                name="email"
+                placeHolder="website"
+                name="website"
                 control={control}
                 register={register}
                 width="100%"
@@ -131,10 +131,10 @@ export const AddClient = () => {
 
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
-              Phone Number :
+              Currency :
               <RegularInputControl
-                placeHolder="phone number"
-                name="phone_number"
+                placeHolder="currency"
+                name="currency"
                 control={control}
                 register={register}
                 width="100%"
@@ -145,10 +145,10 @@ export const AddClient = () => {
 
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
-              Is Primary:
+              Language:
               <RegularInputControl
-                placeHolder="is_primary"
-                name="is_primary"
+                placeHolder="language"
+                name="language"
                 control={control}
                 register={register}
                 width="100%"
@@ -159,9 +159,93 @@ export const AddClient = () => {
 
           <Box className="mt-4">
             <label className="w-32 text-left text-gray-500 pl-3">
-              Country Code :
+              Country Id :
               <RegularInputControl
-                placeHolder="country code"
+                placeHolder="country_id"
+                name="country_id"
+                control={control}
+                register={register}
+                width="100%"
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Address :
+              <RegularInputControl
+                placeHolder="address"
+                name="address"
+                control={control}
+                register={register}
+                width="100%"
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              City :
+              <RegularInputControl
+                placeHolder="city"
+                name="city"
+                control={control}
+                register={register}
+                width="100%"
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              State :
+              <RegularInputControl
+                placeHolder="state"
+                name="state"
+                control={control}
+                register={register}
+                width="100%"
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              ZIP Code :
+              <RegularInputControl
+                placeHolder="zipcode"
+                name="zipcode"
+                control={control}
+                register={register}
+                width="100%"
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Is Registered :
+              <RegularInputControl
+                placeHolder="is_registered"
+                name="is_registered"
+                control={control}
+                register={register}
+                width="100%"
+                errors={err}
+              />
+            </label>
+          </Box>
+
+          <Box className="mt-4">
+            <label className="w-32 text-left text-gray-500 pl-3">
+              Country code :
+              <RegularInputControl
+                placeHolder="country_code"
                 name="country_code"
                 control={control}
                 register={register}

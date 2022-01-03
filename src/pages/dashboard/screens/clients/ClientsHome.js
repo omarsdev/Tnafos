@@ -33,13 +33,14 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import { AddPayment, EditPayment } from "./";
+
+import { AddClient, ClientCard } from "./";
 import { AxiosInstance } from "api";
 import { SecondaryButton } from "components";
-import { FiEdit } from "react-icons/fi";
+import { GrContactInfo } from "react-icons/gr";
 import { BsTrash } from "react-icons/bs";
 
-export const PaymentHome = () => {
+export const ClientsHome = () => {
   const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -50,7 +51,7 @@ export const PaymentHome = () => {
   const history = useHistory();
 
   const clientsList = async () => {
-    await AxiosInstance.get("/api/dashboard/contact/")
+    await AxiosInstance.get("/api/dashboard/customer/")
       .then((res) => {
         console.log(res.data.data);
         setList(res.data.data);
@@ -230,15 +231,13 @@ export const PaymentHome = () => {
                   <Tbody>
                     {list.map((el, idx) => (
                       <Tr key={idx} _hover={{ bg: "gray.100" }}>
-                        <Td>{el.uuid}</Td>
-                        <Td>{el.amount}</Td>
-                        <Td>{el?.country_code}</Td>
-                        <Td>
-                          {el.first_name} {el.last_name}
-                        </Td>
-                        <Td>{el.position}</Td>
-                        <Td>{el.email}</Td>
-                        <Td>{el.phone_number}</Td>
+                        <Td>{el?.cmpany_name}</Td>
+                        <Td>{el?.primary_contact?.first_name}</Td>
+                        <Td>{el?.phone}</Td>
+
+                        <Td>{el?.website}</Td>
+                        <Td>{el?.vat_number}</Td>
+                        <Td>{el?.currency}</Td>
                         <Td>
                           <Flex justify={"center"} gap="10px">
                             <IconButton
@@ -253,11 +252,12 @@ export const PaymentHome = () => {
                               _hover={{
                                 bg: "orange.400",
                               }}
-                              icon={<FiEdit />}
+                              icon={<GrContactInfo />}
                               onClick={() => {
                                 history.push(`${match.url}/${el.uuid}`);
                               }}
                             />
+
                             <IconButton
                               justify={"center"}
                               fontSize={"md"}
@@ -284,8 +284,8 @@ export const PaymentHome = () => {
           )}
         </Box>
       </Route>
-      <Route path={`${match.path}/addpayment`} component={AddPayment} />
-      <Route path={`${match.path}/:uuid`} component={EditPayment} />
+      <Route path={`${match.path}/addclient`} component={AddClient} />
+      <Route path={`${match.path}/:uuid`} component={ClientCard} />
     </Switch>
   );
 };

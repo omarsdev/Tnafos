@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading } from "@chakra-ui/react";
-import { CustomTable } from "../../components";
+import { CustomTable } from "components";
 import { AxiosInstance } from "api";
 
 export const Incoming = () => {
