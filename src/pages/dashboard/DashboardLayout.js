@@ -1,3 +1,5 @@
+// TODO purchase for incoming and outgoing
+
 import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Sidebar } from "./components/index";
 import {
@@ -11,7 +13,13 @@ import {
   StatNumber,
   Grid,
 } from "@chakra-ui/react";
-import { useRouteMatch, Route, Switch } from "react-router-dom";
+import {
+  useRouteMatch,
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 import { FiInbox } from "react-icons/fi";
 import { AxiosInstance } from "api";
 
@@ -38,7 +46,9 @@ export const DashboardLayout = () => {
   //* set border color:
   const randomElement = colors[Math.floor(Math.random() * colors.length)];
 
-  let match = useRouteMatch();
+  const match = useRouteMatch();
+  const location = useLocation();
+  const history = useHistory();
 
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
@@ -60,9 +70,17 @@ export const DashboardLayout = () => {
     }
   };
 
+  const removeForwardSlashFromUrl = () => {
+    console.log(location);
+    if (location.pathname === "/dashboard/") {
+      history.push("/dashboard");
+    }
+  };
+
   useEffect(() => {
     if (userData) return;
     fetchTokenMe();
+    removeForwardSlashFromUrl();
   }, []);
 
   return (
