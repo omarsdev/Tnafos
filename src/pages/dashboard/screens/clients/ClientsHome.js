@@ -33,13 +33,13 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import { AddPayment, EditPayment } from "./";
+// import { EditPayment } from "./";
 import { AxiosInstance } from "api";
 import { SecondaryButton } from "components";
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
-export const PaymentHome = () => {
+export const ClientsHome = () => {
   const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -284,8 +284,8 @@ export const PaymentHome = () => {
           )}
         </Box>
       </Route>
-      <Route path={`${match.path}/addpayment`} component={AddPayment} />
-      <Route path={`${match.path}/:uuid`} component={EditPayment} />
+      {/* <Route path={`${match.path}/addpayment`} component={AddPayment} /> */}
+      {/* <Route path={`${match.path}/:uuid`} component={EditPayment} /> */}
     </Switch>
   );
 };

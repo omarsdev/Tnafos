@@ -9,3 +9,4 @@ export * from "./services/index";
 export * from "./users/index";
 export * from "./settings/Settings";
 export * from "./rating/index";
+export * from "./clients";
