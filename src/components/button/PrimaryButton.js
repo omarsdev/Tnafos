@@ -9,6 +9,7 @@ export const PrimaryButton = ({
   name,
   Logo,
   loadingButton,
+  typeButtonHookForm,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
@@ -17,7 +18,9 @@ export const PrimaryButton = ({
 
   const handleClick = (event) => {
     if (ref.current && ref.current.contains(event.target)) {
-      props.onClick && props.onClick();
+      if (typeButtonHookForm) {
+        props.onClick && props.onClick();
+      }
       setLoading(!loading);
     }
   };
