@@ -10,33 +10,12 @@ import {
   Box,
   Text,
   Image,
-  HStack,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
   Center,
   Spinner,
-  Flex,
-  Spacer,
   VStack,
 } from "@chakra-ui/react";
-import { FiEdit } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api";
-
-import {
-  RegularInputControl,
-  SecondaryButton,
-  PrimaryButton,
-} from "components";
-
-import { useForm } from "react-hook-form";
-import { AlertContext } from "context/AlertContext";
-import { media } from "api/media";
 
 export const ClientContacts = () => {
   const history = useHistory();
@@ -52,7 +31,6 @@ export const ClientContacts = () => {
     await AxiosInstance.get(`/api/dashboard/customer/${uuid}/contacts`)
       .then((res) => {
         console.log(res.data.data);
-        resetHooksForm(res.data.data);
         setCard(res.data.data);
       })
       .catch((err) => {

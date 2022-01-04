@@ -24,7 +24,13 @@ import {
   Spacer,
   VStack,
 } from "@chakra-ui/react";
-import { useHistory, useParams, Switch, Route } from "react-router-dom";
+import {
+  useHistory,
+  useParams,
+  useRouteMatch,
+  Switch,
+  Route,
+} from "react-router-dom";
 import { AxiosInstance } from "api";
 
 import { MdOutlinePermMedia } from "react-icons/md";
@@ -47,6 +53,7 @@ export const ClientCard = () => {
   const { setAlert } = alertProviderValue;
 
   const history = useHistory();
+  const match = useRouteMatch();
 
   const { uuid } = useParams();
 
