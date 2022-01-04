@@ -25,7 +25,7 @@ import { AxiosInstance } from "api";
 import { BsTrash } from "react-icons/bs";
 import { CustomTable, SecondaryButton } from "components";
 
-export const IncomingEstimates = () => {
+export const OutgoingEstimates = () => {
   const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -79,9 +79,8 @@ export const IncomingEstimates = () => {
               fontWeight="lg"
               alignItems="baseline"
             >
-              Incoming Estimates
+              Outgoin Estimates
             </Heading>
-
             <IconButton
               as={Button}
               colorScheme="yellow"

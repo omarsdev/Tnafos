@@ -25,6 +25,7 @@ import { AxiosInstance } from "api";
 
 import {
   IncomingEstimates,
+  OutgoingEstimates,
   PurchaseRequest,
   Settings,
   UserHome,
@@ -206,6 +207,10 @@ export const DashboardLayout = () => {
               <Route
                 path={`${match.path}/estimate/incoming`}
                 component={IncomingEstimates}
+              />
+              <Route
+                path={`${match.path}/estimate/outgoing`}
+                component={OutgoingEstimates}
               />
               <Route
                 path={`${match.path}/clientshome`}

@@ -70,10 +70,10 @@ export const ClientsHome = () => {
     history.push(`/${searchInput}`);
   };
 
-  const handleDeleteClick = (paymentId) => {
+  const handleDeleteClick = (clientId) => {
     const newList = [...list];
 
-    const index = list.findIndex((el) => el.uuid === paymentId);
+    const index = list.findIndex((el) => el.uuid === clientId);
 
     newList.splice(index, 1);
     setList(newList);
