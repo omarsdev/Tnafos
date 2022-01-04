@@ -1,5 +1,5 @@
-import React from "react";
+// import React from "react";
 
-export const Outgoing = () => {
-  return <div></div>;
-};
+// export const Outgoing = () => {
+//   return <div></div>;
+// };
