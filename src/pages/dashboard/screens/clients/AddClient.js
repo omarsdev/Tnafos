@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { AxiosInstance } from "api";
@@ -8,10 +8,14 @@ import {
   SecondaryButton,
   PrimaryButton,
 } from "components";
+import { AlertContext } from "context";
 
 export const AddClient = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
 
   const history = useHistory();
   const {
@@ -26,9 +30,22 @@ export const AddClient = () => {
     await AxiosInstance.post("/api/dashboard/customer/create", data)
       .then((res) => {
         console.log(res);
+        setIsUpdating(false);
+        setAlert({
+          message: `New client has been added!`,
+          type: "success",
+        });
+        history.push("/dashboard/user");
       })
       .catch((err) => {
         console.log(err);
+        setIsUpdating(false);
+        setErr(err.response.data.errors);
+        console.log(err.response.data.errors);
+        setAlert({
+          message: `${err?.response?.data?.errors}`,
+          type: "error",
+        });
       });
   };
 

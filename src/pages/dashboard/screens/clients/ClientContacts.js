@@ -7,6 +7,7 @@ import {
   Center,
   Spinner,
   VStack,
+  Stack,
 } from "@chakra-ui/react";
 import {
   useHistory,
@@ -16,6 +17,7 @@ import {
   Route,
 } from "react-router-dom";
 import { AxiosInstance } from "api";
+import { AiOutlineHome } from "react-icons/ai";
 
 export const ClientContacts = () => {
   const history = useHistory();
@@ -23,7 +25,7 @@ export const ClientContacts = () => {
 
   const { uuid } = useParams();
 
-  const [card, setCard] = useState(null);
+  const [card, setCard] = useState([]);
 
   const getClientContacts = async () => {
     await AxiosInstance.get(`/api/dashboard/customer/${uuid}/contacts`)
@@ -52,12 +54,12 @@ export const ClientContacts = () => {
           <Center py="5">
             <Box
               className="rounded-3xl relative bg-white shadow-2xl"
-              w="350px"
-              h="200px"
+              w="400px"
+              h="450px"
             >
               <VStack spacing="20px" mx="5%" mt="5">
-                {card.map((el, idx) => {
-                  <Box mr="0" key={idx}>
+                {card.map((el, idx) => (
+                  <Stack key={idx}>
                     <Text py="1" textColor="gray.600">
                       Name: {el?.first_name}
                       {el?.last_name}
@@ -68,8 +70,28 @@ export const ClientContacts = () => {
                     </Text>
                     <Text textColor="gray.600">E-mail :{el?.email}</Text>
                     <Text textColor="gray.600">Id :{el?.uuid}</Text>
-                  </Box>;
-                })}
+                  </Stack>
+                ))}
+
+                <Box>
+                  <IconButton
+                    justify={"center"}
+                    fontSize={"lg"}
+                    rounded={"full"}
+                    bg={"#F8B916"}
+                    color={"white"}
+                    boxShadow={
+                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                    }
+                    _hover={{
+                      bg: "orange.400",
+                    }}
+                    icon={<AiOutlineHome />}
+                    onClick={() => {
+                      history.push("/dashboard/clientshome");
+                    }}
+                  />
+                </Box>
               </VStack>
             </Box>
           </Center>

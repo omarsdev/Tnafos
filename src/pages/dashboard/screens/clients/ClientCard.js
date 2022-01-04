@@ -280,6 +280,48 @@ export const ClientCard = () => {
                   <form>
                     <Box className="mt-4">
                       <label className="w-32 text-left text-gray-500 ">
+                        Company Name :
+                        <RegularInputControl
+                          placeHolder="first name"
+                          name="first_name"
+                          control={control}
+                          register={register}
+                          width="100%"
+                          error={errors}
+                        />
+                      </label>
+                    </Box>
+
+                    <Box className="mt-4">
+                      <label className="w-32 text-left text-gray-500 ">
+                        First Nmae :
+                        <RegularInputControl
+                          placeHolder="first name"
+                          name="first_name"
+                          control={control}
+                          register={register}
+                          width="100%"
+                          error={errors}
+                        />
+                      </label>
+                    </Box>
+
+                    <Box className="mt-4">
+                      <label className="w-32 text-left text-gray-500 ">
+                        First Nmae :
+                        <RegularInputControl
+                          placeHolder="first name"
+                          name="first_name"
+                          control={control}
+                          register={register}
+                          width="100%"
+                          error={errors}
+                        />
+                      </label>
+                    </Box>
+
+                    <Box className="mt-4">
+                      <label className="w-32 text-left text-gray-500 ">
                         First Nmae :
                         <RegularInputControl
                           placeHolder="first name"
