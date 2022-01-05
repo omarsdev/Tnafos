@@ -1,16 +1,14 @@
 // import React from "react";
-// import { EstimateCard, AddEstimate, Outgoing, Incoming } from "./";
+// import { HStack, Heading, Box, IconButton, Button } from "@chakra-ui/react";
+// import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 // import {
-//   Link,
-//   useRouteMatch,
-//   Switch,
-//   Route,
-//   useHistory,
-// } from "react-router-dom";
-// import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
-// import { AiOutlinePlus } from "react-icons/ai";
+//   AddEstimate,
+//   EstimateCard,
+//   IncomingEstimates,
+//   OutgoingEstimates,
+// } from "./";
 
-// export const EstimateHome = () => {
+// export const InvoiceHome = () => {
 //   const match = useRouteMatch();
 //   return (
 //     <Switch>
@@ -41,9 +39,9 @@
 //         </HStack>
 //         {/* <CustomTable /> */}
 //       </Route>
-//       <Route path={`${match.path}/addestimate`} component={AddEstimate} />
-//       <Route path={`${match.path}/incoming`} component={Incoming} />
-//       <Route path={`${match.path}/outgoing`} component={Outgoing} />
+//       <Route path={`${match.path}/addinvoice`} component={AddEstimate} />
+//       <Route path={`${match.path}/incoming`} component={IncomingEstimates} />
+//       <Route path={`${match.path}/outgoing`} component={OutgoingEstimates} />
 //       <Route path={`${match.path}/estimatecard`} component={EstimateCard} />
 //     </Switch>
 //   );

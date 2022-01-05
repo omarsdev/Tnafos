@@ -1,3 +1,3 @@
 export * from "./Sidebar";
 export * from "./Navbar";
-// export * from "./CustomTableee";
+export * from "./CustomTable";

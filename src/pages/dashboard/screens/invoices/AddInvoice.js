@@ -1,5 +1,5 @@
-// import React from "react";
+import React from "react";
 
-// export const AddInvoice = () => {
-//   return <div>add ..</div>;
-// };
+export const AddInvoice = () => {
+  return <div>add ..</div>;
+};
