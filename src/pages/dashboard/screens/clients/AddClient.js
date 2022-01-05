@@ -25,9 +25,9 @@ export const AddClient = () => {
     control,
   } = useForm();
 
-  const createData = async (data) => {
+  const createClient = async (data) => {
     // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/${componmemt}/create", data)
+    await AxiosInstance.post("/api/dashboard/client/create", data)
       .then((res) => {
         console.log(res);
         setIsUpdating(false);
@@ -48,8 +48,6 @@ export const AddClient = () => {
         });
       });
   };
-
-  <CustomTable apiCall={""} />;
 
   const handleCancel = () => {
     history.push("/dashboard/clientsHome");
