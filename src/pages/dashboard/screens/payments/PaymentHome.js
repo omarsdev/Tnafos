@@ -33,7 +33,7 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import { AddPayment, EditPayment } from "./";
+import { AddPayment, PaymentCard } from "./";
 import { AxiosInstance } from "api";
 import { SecondaryButton } from "components";
 import { FiEdit } from "react-icons/fi";
@@ -245,21 +245,6 @@ export const PaymentHome = () => {
                                 history.push(`${match.url}/${el.uuid}`);
                               }}
                             />
-                            <IconButton
-                              justify={"center"}
-                              fontSize={"md"}
-                              rounded={"full"}
-                              bg={"#F8B916"}
-                              color={"white"}
-                              boxShadow={
-                                "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                              }
-                              _hover={{
-                                bg: "orange.400",
-                              }}
-                              icon={<BsTrash />}
-                              onClick={handleDeleteClick}
-                            />
                           </Flex>
                         </Td>
                       </Tr>
@@ -272,7 +257,7 @@ export const PaymentHome = () => {
         </Box>
       </Route>
       <Route path={`${match.path}/addpayment`} component={AddPayment} />
-      <Route path={`${match.path}/:uuid`} component={EditPayment} />
+      <Route path={`${match.path}/:uuid`} component={PaymentCard} />
     </Switch>
   );
 };

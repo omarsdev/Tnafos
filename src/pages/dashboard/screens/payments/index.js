@@ -1,3 +1,4 @@
 export * from "./PaymentHome";
 export * from "./AddPayment";
-export * from "./EditPayment";
+export * from "./PaymentCard";
+export * from "./PaymentMedia";
