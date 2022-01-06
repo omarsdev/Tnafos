@@ -205,11 +205,11 @@ export const DashboardLayout = () => {
                 component={Outgoing}
               />
               <Route
-                path={`${match.path}/estimate/incoming`}
+                path={`${match.path}/estimate/incomingestimates`}
                 component={IncomingEstimates}
               />
               <Route
-                path={`${match.path}/estimate/outgoing`}
+                path={`${match.path}/estimate/outgoingestimates`}
                 component={OutgoingEstimates}
               />
               <Route
