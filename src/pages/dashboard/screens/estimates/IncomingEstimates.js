@@ -3,7 +3,7 @@ import { Box, Heading } from "@chakra-ui/react";
 // import { CustomTable } from "../../components";
 import { AxiosInstance } from "api";
 
-export const Incoming = () => {
+export const IncomingEstimates = () => {
   const [list, setList] = useState(null);
 
   const paymentsList = async () => {

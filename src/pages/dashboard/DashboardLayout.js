@@ -26,17 +26,19 @@ import { AxiosInstance } from "api";
 import {
   IncomingEstimates,
   OutgoingEstimates,
-  PurchaseRequest,
   Settings,
   UserHome,
+  IncomingPurchases,
+  OutgoingPurchases,
   ServiceHome,
   CompanyLayout,
   Incoming,
   Outgoing,
   ClientsHome,
   Ratings,
+  PaymentHome,
 } from "./screens";
-import { PaymentHome } from "./screens/payments";
+
 import { UserDataContext } from "context";
 // import { PrivateRoute } from "./components/PrivateRoute";
 import {} from "./screens/company/CompanyLayout";
@@ -192,8 +194,12 @@ export const DashboardLayout = () => {
               <Route path={`${match.path}/user`} component={UserHome} />
               <Route path={`${match.path}/service`} component={ServiceHome} />
               <Route
-                path={`${match.path}/purchase-requests`}
-                component={PurchaseRequest}
+                path={`${match.path}/purchase-request/incomingpurchases`}
+                component={IncomingPurchases}
+              />
+              <Route
+                path={`${match.path}/purchase-request/outgoingpurchases`}
+                component={OutgoingPurchases}
               />
               <Route path={`${match.path}/payment`} component={PaymentHome} />
               <Route
