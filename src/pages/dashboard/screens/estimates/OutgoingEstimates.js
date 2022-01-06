@@ -35,7 +35,7 @@ export const OutgoingEstimates = () => {
   //* representing certain number of rows based on select option:
   const [rowsNumber, setRowsNumber] = useState("10");
 
-  const incomingList = async () => {
+  const estOutgoingList = async () => {
     await AxiosInstance.get("/api/dashboard/estimate/incoming")
       .then((res) => {
         console.log(res.data.data);
@@ -56,7 +56,7 @@ export const OutgoingEstimates = () => {
   };
 
   useEffect(() => {
-    paymentsList();
+    estOutgoingList();
   }, []);
 
   return (
