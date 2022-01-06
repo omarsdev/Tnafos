@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
+import { NoData } from "../../components";
 
 export const ClientMedia = () => {
   const [media, setMedia] = useState([]);
@@ -59,20 +60,24 @@ export const ClientMedia = () => {
               h="200px"
             >
               <VStack spacing="20px" mx="5%" mt="5">
-                {media.map((el, idx) => (
-                  <Stack key={idx}>
-                    <Text py="1" textColor="gray.600">
-                      Name: {el?.first_name}
-                      {el?.last_name}
-                    </Text>
-                    <Text textColor="gray.600">Position: {el?.position}</Text>
-                    <Text textColor="gray.600">
-                      Phone Number: {el?.phone_number}
-                    </Text>
-                    <Text textColor="gray.600">E-mail :{el?.email}</Text>
-                    <Text textColor="gray.600">Id :{el?.uuid}</Text>
-                  </Stack>
-                ))}
+                {media.length === 0 ? (
+                  <NoData />
+                ) : (
+                  media.map((el, idx) => (
+                    <Stack key={idx}>
+                      <Text py="1" textColor="gray.600">
+                        Name: {el?.first_name}
+                        {el?.last_name}
+                      </Text>
+                      <Text textColor="gray.600">Position: {el?.position}</Text>
+                      <Text textColor="gray.600">
+                        Phone Number: {el?.phone_number}
+                      </Text>
+                      <Text textColor="gray.600">E-mail :{el?.email}</Text>
+                      <Text textColor="gray.600">Id :{el?.uuid}</Text>
+                    </Stack>
+                  ))
+                )}
 
                 <Box>
                   <IconButton
@@ -98,6 +103,7 @@ export const ClientMedia = () => {
           </Center>
         )}
       </Route>
+      <Route path={`${match.path}/nodata`} component={NoData}></Route>
     </Switch>
   );
 };
