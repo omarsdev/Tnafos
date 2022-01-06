@@ -77,7 +77,7 @@ export const UserHome = () => {
             )}
           </Box>
         </Route>
-        <Route path={`${match.path}/createuser`} component={CreateUser} />
+        {/* <Route path={`${match.path}/createuser`} component={CreateUser} /> */}
         <Route path={`${match.path}/profile`} component={MyProfile} />
         <Route path={`${match.path}/:uuid`} component={UserCard} />
       </Switch>
