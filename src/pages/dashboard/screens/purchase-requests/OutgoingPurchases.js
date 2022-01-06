@@ -63,6 +63,10 @@ export const OutgoingPurchases = () => {
     }
   };
 
+  const searchHandler = () => {
+    history.push(`/${searchInput}`);
+  };
+
   useEffect(() => {
     purOutgoingList();
   }, []);

@@ -63,6 +63,10 @@ export const IncomingEstimates = () => {
     }
   };
 
+  const searchHandler = () => {
+    history.push(`/${searchInput}`);
+  };
+
   useEffect(() => {
     estIncomingList();
   }, []);

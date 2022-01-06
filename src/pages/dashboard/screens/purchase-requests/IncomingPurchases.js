@@ -62,6 +62,10 @@ export const IncomingPurchases = () => {
     }
   };
 
+  const searchHandler = () => {
+    history.push(`/${searchInput}`);
+  };
+
   useEffect(() => {
     purIncomingList();
   }, []);
