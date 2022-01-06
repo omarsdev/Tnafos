@@ -55,17 +55,8 @@ export const OutgoingEstimates = () => {
     history.push(`/${searchInput}`);
   };
 
-  const handleDeleteClick = (paymentId) => {
-    const newList = [...list];
-
-    const index = list.findIndex((el) => el.uuid === paymentId);
-
-    newList.splice(index, 1);
-    setList(newList);
-  };
-
   useEffect(() => {
-    incomingList();
+    paymentsList();
   }, []);
 
   return (

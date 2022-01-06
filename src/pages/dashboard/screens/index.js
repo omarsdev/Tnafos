@@ -4,7 +4,7 @@ export * from "./estimates/index";
 export * from "./invoices/index";
 export * from "./payments/index";
 export * from "./proposals/Proposal";
-export * from "./purchase-requests/PuchasesHome";
+export * from "./purchase-requests/index";
 export * from "./services/index";
 export * from "./users/index";
 export * from "./settings/Settings";

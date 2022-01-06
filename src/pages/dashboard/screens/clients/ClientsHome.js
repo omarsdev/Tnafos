@@ -66,6 +66,7 @@ export const ClientsHome = () => {
       searchHandler();
     }
   };
+
   const searchHandler = () => {
     history.push(`/${searchInput}`);
   };
