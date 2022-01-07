@@ -2,12 +2,13 @@ import React from "react";
 import { Box } from "@chakra-ui/react";
 
 import { RegularInputControl, PasswordInputControl } from "components";
+import { CustomSelect } from "components";
 
 export const CustomAddForm = ({ listForm, control, register }) => {
   return listForm.map((element) => (
     <Box className="mt-4">
       <label className="w-32 text-left text-gray-500 pl-3">
-        {element.head} :
+        {element.head}
         {element.isPassword ? (
           <PasswordInputControl
             placeHolder={element.placeHolder}
@@ -15,6 +16,15 @@ export const CustomAddForm = ({ listForm, control, register }) => {
             control={control}
             register={register}
             error={element.err}
+          />
+        ) : element.isSelect ? (
+          <CustomSelect
+            control={control}
+            register={register}
+            placeHolder={element.placeHolder}
+            name={element.name}
+            errors={element.err}
+            optionList={element.optionList}
           />
         ) : (
           <RegularInputControl
