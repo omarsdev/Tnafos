@@ -64,37 +64,37 @@ export const AddPayment = () => {
           <CustomAddForm
             listForm={[
               {
-                head: "Enter amount : ",
-                placeHolder: "Enter amount : ",
+                head: "Enter amount",
+                placeHolder: "Enter amount ",
                 name: "amount",
                 err: err,
               },
               {
-                head: "Enter method : ",
-                placeHolder: "Enter method : ",
+                head: "Enter method",
+                placeHolder: "Enter method ",
                 name: "method",
                 err: err,
               },
               {
-                head: "Enter Transaction-number : ",
-                placeHolder: "Enter Transaction-number : ",
+                head: "Enter Transaction-number ",
+                placeHolder: "Enter Transaction-number",
                 name: "transaction-number",
                 err: err,
               },
               {
-                head: "Enter Date : ",
-                placeHolder: "Enter date : ",
+                head: "Enter Date  ",
+                placeHolder: "Enter date ",
                 name: "date",
                 err: err,
               },
               {
-                head: "Enter invoice-id : ",
+                head: "Enter invoice-id ",
                 placeHolder: "invoice_id",
                 name: "invoice_id",
                 err: err,
               },
               {
-                head: "Enter notes: ",
+                head: "Enter notes ",
                 placeHolder: "notes",
                 name: "notes",
                 err: err,

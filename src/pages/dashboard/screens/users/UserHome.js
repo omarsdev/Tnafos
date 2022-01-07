@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   useRouteMatch,
-  useParams,
+  useHistory,
   Link,
   Switch,
   Route,
@@ -24,6 +24,7 @@ export const UserHome = () => {
   const [usersList, setUsersList] = useState(null);
 
   const match = useRouteMatch();
+  const history = useHistory();
 
   const showUsersList = async () => {
     await AxiosInstance.get("/api/dashboard/user")
@@ -53,15 +54,17 @@ export const UserHome = () => {
               >
                 Users
               </Heading>
-              <Link to={`${match.url}/createuser`}>
-                <IconButton
-                  as={Button}
-                  colorScheme="yellow"
-                  size="lg"
-                  icon={<AiOutlinePlus />}
-                  rounded="full"
-                />
-              </Link>
+
+              <IconButton
+                as={Button}
+                colorScheme="yellow"
+                size="lg"
+                icon={<AiOutlinePlus />}
+                rounded="full"
+                onClick={() => {
+                  history.push(`${match.url}/createuser`);
+                }}
+              />
             </HStack>
 
             {!usersList ? (
@@ -77,7 +80,7 @@ export const UserHome = () => {
             )}
           </Box>
         </Route>
-        {/* <Route path={`${match.path}/createuser`} component={CreateUser} /> */}
+        <Route path={`${match.path}/createuser`} component={CreateUser} />
         <Route path={`${match.path}/profile`} component={MyProfile} />
         <Route path={`${match.path}/:uuid`} component={UserCard} />
       </Switch>
