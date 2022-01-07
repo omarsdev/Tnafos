@@ -10,6 +10,9 @@ export const CustomSelect = ({
   errors,
   width,
   optionList,
+  value,
+  key,
+  displayValue,
   ...rest
 }) => {
   return (
@@ -30,8 +33,8 @@ export const CustomSelect = ({
             {...rest}
           >
             {optionList.map((e) => (
-              <option value={e.short_name} key={e.uuid}>
-                {e.short_name}
+              <option value={e[value]} key={e[key]}>
+                {e[displayValue]}
               </option>
             ))}
           </Select>

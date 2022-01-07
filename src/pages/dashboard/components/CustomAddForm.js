@@ -25,6 +25,9 @@ export const CustomAddForm = ({ listForm, control, register }) => {
             name={element.name}
             errors={element.err}
             optionList={element.optionList}
+            value={element.value}
+            key={element.uuid}
+            displayValue={element.displayValue}
           />
         ) : (
           <RegularInputControl
@@ -32,8 +35,8 @@ export const CustomAddForm = ({ listForm, control, register }) => {
             name={element.name}
             control={control}
             register={register}
-            width="100%"
             errors={element.err}
+            inputType={element.inputType}
           />
         )}
       </label>
