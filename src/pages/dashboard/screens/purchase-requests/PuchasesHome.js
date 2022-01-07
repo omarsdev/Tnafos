@@ -7,6 +7,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { Box, HStack, Heading } from "@chakra-ui/react";
+import { AddPurchase } from "./";
 
 export const PuchasesHome = () => {
   const match = useRouteMatch();
@@ -27,6 +28,7 @@ export const PuchasesHome = () => {
           </HStack>
         </Box>
       </Route>
+      <Route path={`${match.path}/addpurchase`} component={AddPurchase} />
     </Switch>
   );
 };
