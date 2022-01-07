@@ -39,7 +39,13 @@ import { SecondaryButton } from "components";
 import { FiEdit } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
 
-export const CustomTable = ({ PageHeadLine, thHeading, thData, list }) => {
+export const CustomTable = ({
+  PageHeadLine,
+  thHeading,
+  thData,
+  list,
+  listData,
+}) => {
   const match = useRouteMatch();
   const history = useHistory();
   return !list ? (
@@ -151,12 +157,9 @@ export const CustomTable = ({ PageHeadLine, thHeading, thData, list }) => {
               <Tbody>
                 {list.map((el, idx) => (
                   <Tr key={idx} _hover={{ bg: "gray.100" }}>
-                    <Td>{el?.uuid}</Td>
-                    <Td>{el?.amount}</Td>
-                    <Td>{el?.method}</Td>
-                    <Td>{el?.date}</Td>
-                    <Td>{el?.transaction_number}</Td>
-                    <Td>{el?.notes}</Td>
+                    {listData.map((e) => (
+                      <Td>{el[e]}</Td>
+                    ))}
                     <Td>
                       <Flex justify={"center"} gap="10px">
                         <IconButton
