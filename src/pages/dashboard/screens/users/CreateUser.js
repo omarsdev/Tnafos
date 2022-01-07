@@ -208,6 +208,9 @@ export const CreateUser = () => {
                   err: err,
                   isSelect: true,
                   optionList: countryList,
+                  value: "short_name",
+                  key: "uuid",
+                  displayValue: "short_name",
                 },
               ]}
               control={control}
