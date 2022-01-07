@@ -19,7 +19,7 @@ import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
 import { NoData } from "../../components";
 
-export const ClientMedia = () => {
+export const PaymentMedia = () => {
   const [media, setMedia] = useState([]);
 
   const match = useRouteMatch();
@@ -29,20 +29,20 @@ export const ClientMedia = () => {
 
   const { uuid } = useParams();
 
-  const getClientMedia = async () => {
-    await AxiosInstance.get(`/api/dashboard/customer/${uuid}/media`)
+  const getPaymentMedia = async () => {
+    await AxiosInstance.get(`/api/dashboard/payment/${uuid}/media`)
       .then((res) => {
         console.log(res.data.data);
         setMedia(res.data.data);
       })
       .catch((err) => {
         console.log(err.response.data);
-        history.push("/dashboard/clientshome");
+        history.push("/dashboard/paymenthome");
       });
   };
 
   useEffect(() => {
-    getClientMedia();
+    getPaymentMedia();
   }, []);
 
   return (
@@ -53,7 +53,7 @@ export const ClientMedia = () => {
             <Spinner size="xl" color="#F8B916" />
           </Center>
         ) : media.length === 0 ? (
-          <NoData component={"clientshome"} />
+          <NoData component={"payment"} />
         ) : (
           <Center py="5">
             <Box
@@ -85,7 +85,7 @@ export const ClientMedia = () => {
                     }}
                     icon={<AiOutlineHome />}
                     onClick={() => {
-                      history.push("/dashboard/clientshome");
+                      history.push("/dashboard/paymenthome");
                     }}
                   />
                 </Box>

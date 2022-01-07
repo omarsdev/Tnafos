@@ -12,7 +12,7 @@ import { AlertContext } from "context";
 
 import { CustomAddForm } from "../../components";
 
-export const AddClient = () => {
+export const AddPurchase = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -27,17 +27,17 @@ export const AddClient = () => {
     control,
   } = useForm();
 
-  const createClient = async (data) => {
+  const createRequest = async (data) => {
     // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/customer/create", data)
+    await AxiosInstance.post("/api/dashboard/purchase-request/create", data)
       .then((res) => {
         console.log(res);
         setIsUpdating(false);
         setAlert({
-          message: `New client has been added!`,
+          message: `New purchase-request has been added!`,
           type: "success",
         });
-        history.push("/dashboard/clientshome");
+        history.push("/dashboard/purchaseshome");
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +52,7 @@ export const AddClient = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/clientshome");
+    history.push("/dashboard/purchaseshome");
   };
 
   return (
@@ -74,7 +74,7 @@ export const AddClient = () => {
           pt="4"
           mb="12"
         >
-          Fill in this form to add new client.
+          Fill in this form to add new purchase-request.
         </Heading>
 
         <form>
@@ -173,7 +173,7 @@ export const AddClient = () => {
           <HStack spacing="10px" py="10" ml="40">
             <PrimaryButton
               name="SAVE"
-              onClick={handleSubmit(createClient)}
+              onClick={handleSubmit(createRequest)}
               loadingButton={isUpdating}
             />
 

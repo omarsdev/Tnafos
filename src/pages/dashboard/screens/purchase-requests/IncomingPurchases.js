@@ -2,41 +2,54 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Heading,
+  Button,
   IconButton,
   HStack,
-  Button,
-  Text,
-  Spinner,
   Center,
+  Spinner,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Select,
+  Divider,
+  Text,
+  Spacer,
   Flex,
   Input,
   InputGroup,
   InputLeftElement,
-  Spacer,
-  Select,
+  Stack,
 } from "@chakra-ui/react";
-import { AiOutlineHome } from "react-icons/ai";
 
-import { Search2Icon } from "@chakra-ui/icons";
-import { BiUpload } from "react-icons/bi";
-
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+import { BiUpload, BiChevronsUp } from "react-icons/bi";
+import {
+  Link,
+  useRouteMatch,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
+// import { CustomTable } from "../../components";
 import { AxiosInstance } from "api";
-import { BsTrash } from "react-icons/bs";
-import { CustomTable, SecondaryButton } from "components";
+import { AiOutlineHome } from "react-icons/ai";
+import { SecondaryButton } from "components";
+import { Search2Icon } from "@chakra-ui/icons";
+import { PurchasesHome } from "./";
+import { NoData } from "../../components";
 
-export const OutgoingEstimates = () => {
+export const IncomingPurchases = () => {
   const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [rowsNumber, setRowsNumber] = useState("10");
 
   const match = useRouteMatch();
   const history = useHistory();
 
-  //* representing certain number of rows based on select option:
-  const [rowsNumber, setRowsNumber] = useState("10");
-
-  const estOutgoingList = async () => {
-    await AxiosInstance.get("/api/dashboard/estimate/incoming")
+  const purIncomingList = async () => {
+    await AxiosInstance.get("/api/dashboard/payment/")
       .then((res) => {
         console.log(res.data.data);
         setList(res.data.data);
@@ -45,20 +58,19 @@ export const OutgoingEstimates = () => {
         console.log(err);
       });
   };
-
   const handleKeypress = (e) => {
     if (e.key === "Enter") {
       searchHandler();
     }
   };
+
   const searchHandler = () => {
     history.push(`/${searchInput}`);
   };
 
   useEffect(() => {
-    estOutgoingList();
+    purIncomingList();
   }, []);
-
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
@@ -70,7 +82,7 @@ export const OutgoingEstimates = () => {
               fontWeight="lg"
               alignItems="baseline"
             >
-              Outgoin Estimates
+              IncomingPurchases
             </Heading>
             <IconButton
               as={Button}
@@ -79,7 +91,7 @@ export const OutgoingEstimates = () => {
               icon={<AiOutlineHome />}
               rounded="full"
               onClick={() => {
-                history.push(`${match.url}/estimatehome`);
+                Redirect("/dashboard/purchase-request");
               }}
             />
           </HStack>
@@ -88,6 +100,8 @@ export const OutgoingEstimates = () => {
             <Center h="70vh" w="100%">
               <Spinner size="xl" color="#F8B916" />
             </Center>
+          ) : list.length === 0 ? (
+            <NoData component={"purchase-request"} />
           ) : (
             <Box className="rounded-3xl shadow-2xl relative bg-white" w="full">
               <Text
@@ -101,7 +115,7 @@ export const OutgoingEstimates = () => {
                 fontSize="lg"
                 color="white"
               >
-                List of incoming estimates
+                List of incoming purchase requests
               </Text>
 
               <Flex w="full" height="45px" my="8" spacing="30px">
@@ -158,6 +172,7 @@ export const OutgoingEstimates = () => {
           )}
         </Box>
       </Route>
+      <Route path={`${match.path}` - 1} component={PurchasesHome} />
     </Switch>
   );
 };

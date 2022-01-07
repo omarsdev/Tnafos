@@ -2,41 +2,52 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Heading,
+  Button,
   IconButton,
   HStack,
-  Button,
-  Text,
-  Spinner,
   Center,
+  Spinner,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Select,
+  Divider,
+  Text,
+  Spacer,
   Flex,
   Input,
   InputGroup,
   InputLeftElement,
-  Spacer,
-  Select,
+  Stack,
 } from "@chakra-ui/react";
-import { AiOutlineHome } from "react-icons/ai";
 
-import { Search2Icon } from "@chakra-ui/icons";
-import { BiUpload } from "react-icons/bi";
-
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+import { BiUpload, BiChevronsUp } from "react-icons/bi";
+import {
+  Link,
+  useRouteMatch,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
+// import { CustomTable } from "../../components";
 import { AxiosInstance } from "api";
-import { BsTrash } from "react-icons/bs";
-import { CustomTable, SecondaryButton } from "components";
+import { AiOutlineHome } from "react-icons/ai";
+import { SecondaryButton } from "components";
+import { Search2Icon } from "@chakra-ui/icons";
 
-export const OutgoingEstimates = () => {
+export const OutgoingPurchases = () => {
   const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [rowsNumber, setRowsNumber] = useState("10");
 
   const match = useRouteMatch();
   const history = useHistory();
 
-  //* representing certain number of rows based on select option:
-  const [rowsNumber, setRowsNumber] = useState("10");
-
-  const estOutgoingList = async () => {
-    await AxiosInstance.get("/api/dashboard/estimate/incoming")
+  const purOutgoingList = async () => {
+    await AxiosInstance.get("/api/dashboard/payment/")
       .then((res) => {
         console.log(res.data.data);
         setList(res.data.data);
@@ -51,12 +62,13 @@ export const OutgoingEstimates = () => {
       searchHandler();
     }
   };
+
   const searchHandler = () => {
     history.push(`/${searchInput}`);
   };
 
   useEffect(() => {
-    estOutgoingList();
+    purOutgoingList();
   }, []);
 
   return (
@@ -70,7 +82,7 @@ export const OutgoingEstimates = () => {
               fontWeight="lg"
               alignItems="baseline"
             >
-              Outgoin Estimates
+              OutgoingPurchases
             </Heading>
             <IconButton
               as={Button}
@@ -101,7 +113,7 @@ export const OutgoingEstimates = () => {
                 fontSize="lg"
                 color="white"
               >
-                List of incoming estimates
+                List of incoming purchase-requests
               </Text>
 
               <Flex w="full" height="45px" my="8" spacing="30px">

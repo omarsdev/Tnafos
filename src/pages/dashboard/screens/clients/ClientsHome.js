@@ -66,6 +66,7 @@ export const ClientsHome = () => {
       searchHandler();
     }
   };
+
   const searchHandler = () => {
     history.push(`/${searchInput}`);
   };
@@ -195,7 +196,7 @@ export const ClientsHome = () => {
                     <Th>
                       <Flex justifyContent="center" alignItems="center">
                         <BiChevronsUp size="25px" color="white" />{" "}
-                        <Text color="white">Country Code</Text>{" "}
+                        <Text color="white">Company Name</Text>{" "}
                       </Flex>
                     </Th>
 
@@ -234,7 +235,7 @@ export const ClientsHome = () => {
                         {el?.primary_contact?.last_name}
                       </Td>
                       <Td>{el?.primary_contact?.email}</Td>
-                      <Td>{el?.country?.country_code}</Td>
+                      <Td>{el?.company_name}</Td>
 
                       <Td>{el?.website}</Td>
                       <Td>{el?.phone}</Td>
@@ -257,22 +258,6 @@ export const ClientsHome = () => {
                             onClick={() => {
                               history.push(`${match.url}/${el.uuid}`);
                             }}
-                          />
-
-                          <IconButton
-                            justify={"center"}
-                            fontSize={"md"}
-                            rounded={"full"}
-                            bg={"#F8B916"}
-                            color={"white"}
-                            boxShadow={
-                              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                            }
-                            _hover={{
-                              bg: "orange.400",
-                            }}
-                            icon={<BsTrash />}
-                            onClick={handleDeleteClick}
                           />
                         </Flex>
                       </Td>

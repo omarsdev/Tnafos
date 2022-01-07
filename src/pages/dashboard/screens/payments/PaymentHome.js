@@ -1,6 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import { AddPayment, EditPayment } from "./";
+import {
+  Box,
+  Heading,
+  Button,
+  IconButton,
+  HStack,
+  Center,
+  Spinner,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Select,
+  Divider,
+  Text,
+  Spacer,
+  Flex,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Stack,
+} from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BiUpload, BiChevronsUp } from "react-icons/bi";
+import {
+  Link,
+  useRouteMatch,
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom";
+import { AddPayment, PaymentCard } from "./";
 import { AxiosInstance } from "api";
 import { CustomTable } from "pages";
 
@@ -59,7 +94,7 @@ export const PaymentHome = () => {
         />
       </Route>
       <Route path={`${match.path}/addpayment`} component={AddPayment} />
-      <Route path={`${match.path}/:uuid`} component={EditPayment} />
+      <Route path={`${match.path}/:uuid`} component={PaymentCard} />
     </Switch>
   );
 };

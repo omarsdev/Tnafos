@@ -1,4 +1,10 @@
-import React, { useState, useContext, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useContext,
+  useRef,
+  useCallback,
+  useEffect,
+} from "react";
 import {
   Heading,
   Box,
@@ -10,7 +16,13 @@ import {
   Stack,
   Spinner,
 } from "@chakra-ui/react";
-import { Link, useHistory } from "react-router-dom";
+import {
+  Link,
+  useHistory,
+  useRouteMatch,
+  Route,
+  Switch,
+} from "react-router-dom";
 
 import { AxiosInstance } from "api/AxiosInstance";
 import { CheckBox } from "components";
@@ -30,7 +42,6 @@ import {
   PasswordInputControl,
 } from "components";
 import { CustomAddForm } from "pages";
-import { useEffect } from "react";
 import { CustomSelect } from "components";
 
 //* form validation rules
@@ -64,6 +75,7 @@ export const CreateUser = () => {
   const history = useHistory();
 
   const [countryList, setCountryList] = useState(null);
+  const match = useRouteMatch();
 
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -85,7 +97,7 @@ export const CreateUser = () => {
 
   // * onSubmit function:
   const addUser = async (userData) => {
-    console.log(userData);
+    // console.log(userData);
     setIsUpdating(true);
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {

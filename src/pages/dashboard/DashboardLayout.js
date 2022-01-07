@@ -26,17 +26,20 @@ import { AxiosInstance } from "api";
 import {
   IncomingEstimates,
   OutgoingEstimates,
-  PurchaseRequest,
   Settings,
   UserHome,
+  IncomingPurchases,
+  OutgoingPurchases,
   ServiceHome,
   CompanyLayout,
+  InvoiceHome,
   Incoming,
   Outgoing,
   ClientsHome,
   Ratings,
+  PaymentHome,
 } from "./screens";
-import { PaymentHome } from "./screens/payments";
+
 import { UserDataContext } from "context";
 // import { PrivateRoute } from "./components/PrivateRoute";
 import {} from "./screens/company/CompanyLayout";
@@ -192,9 +195,14 @@ export const DashboardLayout = () => {
               <Route path={`${match.path}/user`} component={UserHome} />
               <Route path={`${match.path}/service`} component={ServiceHome} />
               <Route
-                path={`${match.path}/purchase-requests`}
-                component={PurchaseRequest}
+                path={`${match.path}/purchase-request/incomingpurchases`}
+                component={IncomingPurchases}
               />
+              <Route
+                path={`${match.path}/purchase-request/outgoingpurchases`}
+                component={OutgoingPurchases}
+              />
+
               <Route path={`${match.path}/payment`} component={PaymentHome} />
               <Route
                 path={`${match.path}/invoice/incoming`}
@@ -204,12 +212,14 @@ export const DashboardLayout = () => {
                 path={`${match.path}/invoice/outgoing`}
                 component={Outgoing}
               />
+              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
+
               <Route
-                path={`${match.path}/estimate/incoming`}
+                path={`${match.path}/estimate/incomingestimates`}
                 component={IncomingEstimates}
               />
               <Route
-                path={`${match.path}/estimate/outgoing`}
+                path={`${match.path}/estimate/outgoingestimates`}
                 component={OutgoingEstimates}
               />
               <Route
