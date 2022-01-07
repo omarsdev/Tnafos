@@ -8,6 +8,7 @@ import {
   Spacer,
   Center,
   Stack,
+  Spinner,
 } from "@chakra-ui/react";
 import { Link, useHistory } from "react-router-dom";
 
@@ -29,6 +30,8 @@ import {
   PasswordInputControl,
 } from "components";
 import { CustomAddForm } from "pages";
+import { useEffect } from "react";
+import { CustomSelect } from "components";
 
 //* form validation rules
 const validationSchema = yup.object({
@@ -59,6 +62,9 @@ export const CreateUser = () => {
   const { setAlert } = alertProviderValue;
 
   const history = useHistory();
+
+  const [countryList, setCountryList] = useState(null);
+
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -77,36 +83,50 @@ export const CreateUser = () => {
     setPhoto(e.target.files[0]);
   };
 
-  //* onSubmit function:
-  const addUser = useCallback(async (userData) => {
-    // console.log(userData);
+  // * onSubmit function:
+  const addUser = async (userData) => {
+    console.log(userData);
     setIsUpdating(true);
-    // await AxiosInstance.post("/api/dashboard/user/create", userData)
-    //   .then((res) => {
-    //     console.log(res.data.data);
-    //     setIsUpdating(false);
-    //     setAlert({
-    //       message: `New user has been added!`,
-    //       type: "success",
-    //     });
-    //     history.push("/dashboard/user");
-    //   })
-    //   .catch((error) => {
-    //     setIsUpdating(false);
-    //     setErr(error.response.data.errors);
-    //     console.log(error.response.data.errors);
-    //     setAlert({
-    //       message: `${error?.response?.data?.errors}`,
-    //       type: "error",
-    //     });
-    //   });
-  }, []);
+    await AxiosInstance.post("/api/dashboard/user/create", userData)
+      .then((res) => {
+        setAlert({
+          message: `New user has been added!`,
+          type: "success",
+        });
+        history.push("/dashboard/user");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setErr(error.response.data.errors);
+        setAlert({
+          message: `${error?.response?.data?.errors}`,
+          type: "error",
+        });
+      })
+      .finally(() => {
+        setIsUpdating(false);
+      });
+  };
 
   const handleCancel = () => {
     history.push("/dashboard/user");
   };
 
-  return (
+  const getAllCountry = async () => {
+    await AxiosInstance.get("/api/country")
+      .then((res) => {
+        setCountryList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  useEffect(() => {
+    getAllCountry();
+  }, []);
+
+  return countryList ? (
     <Box overflowY="scroll" w="full">
       <Box
         px="20"
@@ -144,25 +164,25 @@ export const CreateUser = () => {
             <CustomAddForm
               listForm={[
                 {
-                  head: "Enter first name : ",
+                  head: "First name : ",
                   placeHolder: "Enter first name : ",
                   name: "first_name",
                   err: err,
                 },
                 {
-                  head: "Enter last name : ",
+                  head: "Last name : ",
                   placeHolder: "Enter last name : ",
                   name: "last_name",
                   err: err,
                 },
                 {
-                  head: "Enter email : ",
+                  head: "Email : ",
                   placeHolder: "Enter email : ",
                   name: "email",
                   err: err,
                 },
                 {
-                  head: "Enter password : ",
+                  head: "Password : ",
                   placeHolder: "Enter password : ",
                   name: "password",
                   err: err,
@@ -176,15 +196,30 @@ export const CreateUser = () => {
                   isPassword: true,
                 },
                 {
-                  head: "Enter Phone Number : ",
-                  placeHolder: "Phone number",
+                  head: "Phone Number : ",
+                  placeHolder: "enter phone number",
                   name: "phone_number",
                   err: err,
+                },
+                {
+                  head: "Country Code : ",
+                  placeHolder: "Select Country Code : ex SA",
+                  name: "country_code",
+                  err: err,
+                  isSelect: true,
+                  optionList: countryList,
                 },
               ]}
               control={control}
               register={register}
             />
+            {/* <CustomSelect
+              control={control}
+              register={register}
+              placeHolder="Select a country"
+              errors={err}
+              optionList={countryList}
+            /> */}
             <Box className="flex flex-col items-center gap-2 mt-10">
               <Heading fontSize="xl" color="grey" fontWeight="normal">
                 Terms and Conditions agreement
@@ -230,5 +265,9 @@ export const CreateUser = () => {
         </Center>
       </Box>
     </Box>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };
