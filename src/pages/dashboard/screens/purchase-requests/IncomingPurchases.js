@@ -91,7 +91,7 @@ export const IncomingPurchases = () => {
               icon={<AiOutlineHome />}
               rounded="full"
               onClick={() => {
-                history.push("-1");
+                Redirect("/dashboard/purchase-request");
               }}
             />
           </HStack>
@@ -172,7 +172,7 @@ export const IncomingPurchases = () => {
           )}
         </Box>
       </Route>
-      {/* <Route path={`${match.path}/purchaseshome`} component={PurchasesHome} /> */}
+      <Route path={`${match.path}` - 1} component={PurchasesHome} />
     </Switch>
   );
 };

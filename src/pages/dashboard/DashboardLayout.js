@@ -32,6 +32,7 @@ import {
   OutgoingPurchases,
   ServiceHome,
   CompanyLayout,
+  InvoiceHome,
   Incoming,
   Outgoing,
   ClientsHome,
@@ -201,6 +202,7 @@ export const DashboardLayout = () => {
                 path={`${match.path}/purchase-request/outgoingpurchases`}
                 component={OutgoingPurchases}
               />
+
               <Route path={`${match.path}/payment`} component={PaymentHome} />
               <Route
                 path={`${match.path}/invoice/incoming`}
@@ -210,6 +212,8 @@ export const DashboardLayout = () => {
                 path={`${match.path}/invoice/outgoing`}
                 component={Outgoing}
               />
+              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
+
               <Route
                 path={`${match.path}/estimate/incomingestimates`}
                 component={IncomingEstimates}
