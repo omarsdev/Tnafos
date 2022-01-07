@@ -41,7 +41,7 @@ import { GrContactInfo } from "react-icons/gr";
 import { BsTrash } from "react-icons/bs";
 
 export const ClientsHome = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
   //* representing certain number of rows based on select option:

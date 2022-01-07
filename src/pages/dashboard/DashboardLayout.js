@@ -24,8 +24,7 @@ import { FiInbox } from "react-icons/fi";
 import { AxiosInstance } from "api";
 
 import {
-  IncomingEstimates,
-  OutgoingEstimates,
+  EstimateHome,
   Settings,
   UserHome,
   IncomingPurchases,
@@ -42,7 +41,6 @@ import {
 
 import { UserDataContext } from "context";
 // import { PrivateRoute } from "./components/PrivateRoute";
-import {} from "./screens/company/CompanyLayout";
 
 export const DashboardLayout = () => {
   const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
@@ -191,33 +189,19 @@ export const DashboardLayout = () => {
               <Route path={`${match.path}/user`} component={UserHome} />
               <Route path={`${match.path}/service`} component={ServiceHome} />
               <Route
-                path={`${match.path}/purchase-request/incomingpurchases`}
+                path={`${match.path}/purchase-request/incoming`}
                 component={IncomingPurchases}
               />
               <Route
-                path={`${match.path}/purchase-request/outgoingpurchases`}
+                path={`${match.path}/purchase-request/outgoing`}
                 component={OutgoingPurchases}
               />
 
               <Route path={`${match.path}/payment`} component={PaymentHome} />
-              <Route
-                path={`${match.path}/invoice/incoming`}
-                component={Incoming}
-              />
-              <Route
-                path={`${match.path}/invoice/outgoing`}
-                component={Outgoing}
-              />
+
               <Route path={`${match.path}/invoice`} component={InvoiceHome} />
 
-              <Route
-                path={`${match.path}/estimate/incomingestimates`}
-                component={IncomingEstimates}
-              />
-              <Route
-                path={`${match.path}/estimate/outgoingestimates`}
-                component={OutgoingEstimates}
-              />
+              <Route path={`${match.path}/estimate`} component={EstimateHome} />
               <Route
                 path={`${match.path}/clientshome`}
                 component={ClientsHome}

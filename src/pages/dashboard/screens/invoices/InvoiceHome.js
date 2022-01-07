@@ -8,7 +8,7 @@ export const InvoiceHome = () => {
   const match = useRouteMatch();
   return (
     <Switch>
-      <Route path={`${match.path}`}>
+      <Route exact path={`${match.path}`}>
         <HStack w="full" spacing={"900px"} py="5">
           <Heading
             textColor="gray.600"

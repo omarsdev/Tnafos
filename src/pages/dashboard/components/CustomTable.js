@@ -54,7 +54,7 @@ export const CustomTable = ({
     </Center>
   ) : (
     <Box w="full" overflowY="scroll" padding="10">
-      <HStack justifyContent="space-between" paddingBottom="5">
+      {/* <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
           fontSize="xx-large"
@@ -72,7 +72,7 @@ export const CustomTable = ({
             rounded="full"
           />
         </Link>
-      </HStack>
+      </HStack> */}
 
       {!list ? (
         <Center h="70vh" w="100%">

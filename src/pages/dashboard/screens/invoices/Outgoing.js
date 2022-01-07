@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
 import { AxiosInstance } from "api";
-import { CustomTable } from "pages";
+import { CustomTable, NoData } from "pages";
 
 export const Outgoing = () => {
   const [list, setList] = useState(null);
@@ -22,28 +22,36 @@ export const Outgoing = () => {
 
   return (
     <Box>
-      <CustomTable
-        PageHeadLine="Invoices - Outgoing"
-        thHeading="List of Invoices - Outgoing"
-        thData={[
-          "Invoices-ID",
-          "Subject",
-          "Date",
-          "Discount Amount",
-          "Vat Amount",
-          "Total",
-          "options",
-        ]}
-        list={list}
-        listData={[
-          "uuid",
-          "subject",
-          "date",
-          "discount_amount",
-          "vat_amount",
-          "total",
-        ]}
-      />
+      {!list ? (
+        <Center h="70vh" w="100%">
+          <Spinner size="xl" color="#F8B916" />
+        </Center>
+      ) : list.length === 0 ? (
+        <NoData />
+      ) : (
+        <CustomTable
+          PageHeadLine="Invoices - Outgoing"
+          thHeading="List of Invoices - Outgoing"
+          thData={[
+            "Invoices-ID",
+            "Subject",
+            "Date",
+            "Discount Amount",
+            "Vat Amount",
+            "Total",
+            "options",
+          ]}
+          list={list}
+          listData={[
+            "uuid",
+            "subject",
+            "date",
+            "discount_amount",
+            "vat_amount",
+            "total",
+          ]}
+        />
+      )}
     </Box>
   );
 };

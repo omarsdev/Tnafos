@@ -41,7 +41,7 @@ import { Search2Icon } from "@chakra-ui/icons";
 import { NoData } from "../../components";
 
 export const IncomingPurchases = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 
@@ -49,9 +49,8 @@ export const IncomingPurchases = () => {
   const history = useHistory();
 
   const purIncomingList = async () => {
-    await AxiosInstance.get("/api/dashboard/payment/")
+    await AxiosInstance.get("/api/dashboard/purchase-request/incoming")
       .then((res) => {
-        console.log(res.data.data);
         setList(res.data.data);
       })
       .catch((err) => {
