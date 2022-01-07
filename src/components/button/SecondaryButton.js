@@ -18,7 +18,7 @@ export const SecondaryButton = ({
 
   const handleClick = (event) => {
     if (ref.current && ref.current.contains(event.target)) {
-      buttonProps.onClick && buttonProps.onClick();
+      // buttonProps.onClick && buttonProps.onClick();
       setLoading(!loading);
     }
   };
