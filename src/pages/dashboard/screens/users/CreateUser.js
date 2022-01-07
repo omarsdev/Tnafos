@@ -111,7 +111,7 @@ export const CreateUser = () => {
         console.log(error.response.data);
         setErr(error.response.data.errors);
         setAlert({
-          message: `${error?.response?.data?.errors}`,
+          message: `${error.response.data.message}`,
           type: "error",
         });
       })

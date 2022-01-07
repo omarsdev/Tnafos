@@ -31,7 +31,6 @@ export const AddClient = () => {
     // e.preventDefault();
     await AxiosInstance.post("/api/dashboard/customer/create", data)
       .then((res) => {
-        console.log(res);
         setIsUpdating(false);
         setAlert({
           message: `New client has been added!`,
@@ -40,12 +39,10 @@ export const AddClient = () => {
         history.push("/dashboard/clientshome");
       })
       .catch((err) => {
-        console.log(err);
         setIsUpdating(false);
         setErr(err.response.data.errors);
-        console.log(err.response.data.errors);
         setAlert({
-          message: `${err?.response?.data?.errors}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });

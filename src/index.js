@@ -32,7 +32,7 @@ const AlertTemplate = ({ options, message }) => {
       )}
 
       {options.type === "error" && (
-        <div className="bg-yellow-500 rounded-lg h-16 w-72 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
+        <div className="bg-red-500 rounded-lg h-16 w-72 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
           <FaExclamationCircle className="text-white " />
           <p className="justify-center flex flex-row text-lg text-white">
             {message}

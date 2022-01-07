@@ -45,7 +45,7 @@ export const AddPurchase = () => {
         setErr(err.response.data.errors);
         console.log(err.response.data.errors);
         setAlert({
-          message: `${err?.response?.data?.errors}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });

@@ -63,11 +63,9 @@ export const DashboardLayout = () => {
   const fetchTokenMe = async (token) => {
     try {
       const res = await AxiosInstance.get("/api/dashboard/user/my-profile");
-      console.log(res.data.data);
       setUserData(res.data.data);
       setLoading(false);
     } catch (error) {
-      console.log(error.response);
       setUserData(error.response);
       setLoading(false);
       // console.log(status);
@@ -75,7 +73,6 @@ export const DashboardLayout = () => {
   };
 
   const removeForwardSlashFromUrl = () => {
-    console.log(location);
     if (location.pathname === "/dashboard/") {
       history.push("/dashboard");
     }

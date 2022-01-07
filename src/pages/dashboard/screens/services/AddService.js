@@ -39,7 +39,7 @@ export const AddService = () => {
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        setErr(err?.response?.data.errors);
+        setErr(err.response.data.errors);
         setAlert({
           message: `${err.response.data.message}`,
           type: "error",

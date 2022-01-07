@@ -90,7 +90,7 @@ export const PaymentCard = () => {
       });
   };
 
-  const updatePayment = useCallback(async (data) => {
+  const updatePayment = async (data) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(`/api/dashboard/payment/${uuid}/update`, data)
@@ -104,16 +104,14 @@ export const PaymentCard = () => {
         history.push(`/dashboard/payment`);
       })
       .catch((err) => {
-        console.log(err);
         setIsUpdating(false);
         setErrors(err.response.data);
-        console.log(err.response.data);
         setAlert({
-          message: `${err.response.data}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });
-  }, []);
+  };
 
   const onCancelHandler = () => {
     if (isUpdating) return;

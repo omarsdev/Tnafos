@@ -102,7 +102,7 @@ export const CompanyHome = () => {
   };
 
   //* update company info:
-  const onUpdateCompany = useCallback(async (dataToBeUpdated) => {
+  const onUpdateCompany = async (dataToBeUpdated) => {
     setErr(null);
     setIsUpdating(true);
     await AxiosInstance.put("/api/dashboard/company/update", dataToBeUpdated)
@@ -116,14 +116,13 @@ export const CompanyHome = () => {
       })
       .catch((err) => {
         setIsUpdating(false);
-
         setErr(err.response.data.errors);
         setAlert({
-          message: ` ${err.response.data.message}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });
-  }, []);
+  };
 
   useEffect(() => {
     showCompany();

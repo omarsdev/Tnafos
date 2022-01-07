@@ -54,26 +54,18 @@ export const MyService = () => {
     });
   };
 
-  //* represent service card info:
   const getMyService = async () => {
     await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
       .then((res) => {
-        console.log(res.data.data);
         resetHooksForm(res.data.data);
         setService(res.data.data);
-        let service = res.data.data;
-        console.log(service);
-        // delete service.category;
-        // delete service.name;
-        // delete service.description;
       })
       .catch((err) => {
         history.push("/dashboard/service");
       });
   };
 
-  //* service update function:
-  const onUpdateService = useCallback(async (dataToBeUpdataed) => {
+  const onUpdateService = async (dataToBeUpdataed) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(
@@ -91,13 +83,13 @@ export const MyService = () => {
       .catch((err) => {
         // console.log(err.response.data);
         setIsUpdating(false);
-        setErrors(err?.response?.data.errors);
+        setErrors(err.response.data.errors);
         setAlert({
-          message: `${err?.response?.data}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });
-  }, []);
+  };
 
   const onCancelHandler = () => {
     if (isUpdating) return;
@@ -106,15 +98,15 @@ export const MyService = () => {
     onClose();
   };
 
-  useEffect(() => {
-    getMyService();
-  }, []);
-
   //* media file upload:
   const uploadFile = (photo) => {
     if (!photo) return;
     media(uuid, "service", photo);
   };
+
+  useEffect(() => {
+    getMyService();
+  }, []);
 
   return !service ? (
     <Center h="70vh" w="100%">

@@ -92,7 +92,7 @@ export const ClientCard = () => {
       });
   };
 
-  const updateClient = useCallback(async (data) => {
+  const updateClient = async (data) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(`/api/dashboard/customer/${uuid}/update`, data)
@@ -106,16 +106,14 @@ export const ClientCard = () => {
         history.push(`/dashboard/clientsHome`);
       })
       .catch((err) => {
-        console.log(err);
         setIsUpdating(false);
         setErrors(err.response.data);
-        console.log(err.response.data);
         setAlert({
-          message: `${err.response.data}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });
-  }, []);
+  };
 
   const onCancelHandler = () => {
     if (isUpdating) return;

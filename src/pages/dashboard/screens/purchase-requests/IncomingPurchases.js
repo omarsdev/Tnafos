@@ -37,7 +37,7 @@ import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
 import { SecondaryButton } from "components";
 import { Search2Icon } from "@chakra-ui/icons";
-import { PurchasesHome } from "./";
+// import { PurchasesHome } from "./PuchasesHome";
 import { NoData } from "../../components";
 
 export const IncomingPurchases = () => {
@@ -91,7 +91,7 @@ export const IncomingPurchases = () => {
               icon={<AiOutlineHome />}
               rounded="full"
               onClick={() => {
-                Redirect("/dashboard/purchase-request");
+                // Redirect("/dashboard/purchase-request");
               }}
             />
           </HStack>
@@ -172,7 +172,7 @@ export const IncomingPurchases = () => {
           )}
         </Box>
       </Route>
-      <Route path={`${match.path}` - 1} component={PurchasesHome} />
+      {/* <Route path={`${match.path}` - 1} component={PurchasesHome} /> */}
     </Switch>
   );
 };

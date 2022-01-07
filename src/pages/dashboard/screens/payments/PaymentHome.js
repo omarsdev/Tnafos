@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import { AddPayment, EditPayment } from "./";
 import {
   Box,
   Heading,
@@ -28,13 +27,6 @@ import {
 import { Search2Icon } from "@chakra-ui/icons";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiUpload, BiChevronsUp } from "react-icons/bi";
-import {
-  Link,
-  useRouteMatch,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
 import { AddPayment, PaymentCard } from "./";
 import { AxiosInstance } from "api";
 import { CustomTable } from "pages";
