@@ -9,6 +9,8 @@ import {
   PrimaryButton,
 } from "components";
 
+import { CustomAddForm } from "../../components";
+
 export const AddPayment = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);

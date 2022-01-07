@@ -10,6 +10,8 @@ import {
 } from "components";
 import { AlertContext } from "context";
 
+import { CustomAddForm } from "../../components";
+
 export const AddClient = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
