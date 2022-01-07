@@ -48,10 +48,12 @@ export const ClientMedia = () => {
   return (
     <Switch>
       <Route path={`${match.path}`}>
-        {!card ? (
+        {!media ? (
           <Center h="70vh" w="100%">
             <Spinner size="xl" color="#F8B916" />
           </Center>
+        ) : media.length === 0 ? (
+          <NoData component={"clientshome"} />
         ) : (
           <Center py="5">
             <Box
@@ -60,24 +62,13 @@ export const ClientMedia = () => {
               h="200px"
             >
               <VStack spacing="20px" mx="5%" mt="5">
-                {media.length === 0 ? (
-                  <NoData />
-                ) : (
-                  media.map((el, idx) => (
-                    <Stack key={idx}>
-                      <Text py="1" textColor="gray.600">
-                        Name: {el?.first_name}
-                        {el?.last_name}
-                      </Text>
-                      <Text textColor="gray.600">Position: {el?.position}</Text>
-                      <Text textColor="gray.600">
-                        Phone Number: {el?.phone_number}
-                      </Text>
-                      <Text textColor="gray.600">E-mail :{el?.email}</Text>
-                      <Text textColor="gray.600">Id :{el?.uuid}</Text>
-                    </Stack>
-                  ))
-                )}
+                {media.map((el, idx) => (
+                  <Stack key={idx}>
+                    <Text py="1" textColor="gray.600">
+                      {el}
+                    </Text>
+                  </Stack>
+                ))}
 
                 <Box>
                   <IconButton

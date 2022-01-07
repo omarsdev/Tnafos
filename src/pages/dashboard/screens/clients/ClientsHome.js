@@ -196,7 +196,7 @@ export const ClientsHome = () => {
                     <Th>
                       <Flex justifyContent="center" alignItems="center">
                         <BiChevronsUp size="25px" color="white" />{" "}
-                        <Text color="white">Country Code</Text>{" "}
+                        <Text color="white">Company Name</Text>{" "}
                       </Flex>
                     </Th>
 
@@ -235,7 +235,7 @@ export const ClientsHome = () => {
                         {el?.primary_contact?.last_name}
                       </Td>
                       <Td>{el?.primary_contact?.email}</Td>
-                      <Td>{el?.country?.country_code}</Td>
+                      <Td>{el?.company_name}</Td>
 
                       <Td>{el?.website}</Td>
                       <Td>{el?.phone}</Td>

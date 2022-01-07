@@ -170,7 +170,7 @@ export const PaymentCard = () => {
                     <Text textColor="gray.600">UUID:{card?.uuid}</Text>
                   </Box>
 
-                  <Flex justify={"center"} mt={-12}>
+                  <Flex justify={"center"} w="full" gap="15px">
                     <IconButton
                       justify={"center"}
                       fontSize={"lg"}

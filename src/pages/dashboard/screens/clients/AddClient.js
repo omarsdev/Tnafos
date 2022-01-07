@@ -35,7 +35,7 @@ export const AddClient = () => {
           message: `New client has been added!`,
           type: "success",
         });
-        history.push("/dashboard/user");
+        history.push("/dashboard/clientshome");
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +50,7 @@ export const AddClient = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/clientsHome");
+    history.push("/dashboard/clientshome");
   };
 
   return (
@@ -76,201 +76,98 @@ export const AddClient = () => {
         </Heading>
 
         <form>
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Company Name :
-              <RegularInputControl
-                placeHolder="company name"
-                name="company_name"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Enter Company Name : ",
+                placeHolder: "Enter Company Name : ",
+                name: "company_name",
+                err: err,
+              },
+              {
+                head: "Enter VAT Number : ",
+                placeHolder: "Enter VAT Number : ",
+                name: "vat_number",
+                err: err,
+              },
+              {
+                head: "Enter Phone : ",
+                placeHolder: "Enter Phone : ",
+                name: "phone",
+                err: err,
+              },
+              {
+                head: "Enter Fax : ",
+                placeHolder: "Enter Fax : ",
+                name: "fax",
+                err: err,
+              },
+              {
+                head: "Enter Currency: ",
+                placeHolder: "Currency",
+                name: "currency",
+                err: err,
+                isPassword: true,
+              },
+              {
+                head: "Enter Website : ",
+                placeHolder: "Website",
+                name: "website",
+                err: err,
+              },
+              {
+                head: "Enter Language : ",
+                placeHolder: "Language",
+                name: "language",
+                err: err,
+              },
+              {
+                head: "Enter Country Id : ",
+                placeHolder: "Country Id",
+                name: "country_id",
+                err: err,
+              },
+              {
+                head: "Enter Address : ",
+                placeHolder: "Address",
+                name: "address",
+                err: err,
+              },
+              {
+                head: "Enter City : ",
+                placeHolder: "City",
+                name: "city",
+                err: err,
+              },
+              {
+                head: "Enter State : ",
+                placeHolder: "State",
+                name: "state",
+                err: err,
+              },
+              {
+                head: "Enter ZIP Code : ",
+                placeHolder: "ZIP Code",
+                name: "zipcode",
+                err: err,
+              },
+              {
+                head: "Enter Is Registered : ",
+                placeHolder: "Is Registered",
+                name: "is_regisered",
+                err: err,
+              },
+              {
+                head: "Enter Is Country code : ",
+                placeHolder: "Is Country code",
+                name: "country_code",
+                err: err,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
 
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              VAT Number :
-              <RegularInputControl
-                placeHolder="vat number"
-                name="vat_number"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Phone :
-              <RegularInputControl
-                placeHolder="phone"
-                name="phone"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Fax :
-              <RegularInputControl
-                placeHolder="fax"
-                name="fax"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Website :
-              <RegularInputControl
-                placeHolder="website"
-                name="website"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Currency :
-              <RegularInputControl
-                placeHolder="currency"
-                name="currency"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Language:
-              <RegularInputControl
-                placeHolder="language"
-                name="language"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Country Id :
-              <RegularInputControl
-                placeHolder="country_id"
-                name="country_id"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Address :
-              <RegularInputControl
-                placeHolder="address"
-                name="address"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              City :
-              <RegularInputControl
-                placeHolder="city"
-                name="city"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              State :
-              <RegularInputControl
-                placeHolder="state"
-                name="state"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              ZIP Code :
-              <RegularInputControl
-                placeHolder="zipcode"
-                name="zipcode"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Is Registered :
-              <RegularInputControl
-                placeHolder="is_registered"
-                name="is_registered"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Country code :
-              <RegularInputControl
-                placeHolder="country_code"
-                name="country_code"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
           <HStack spacing="10px" py="10" ml="40">
             <PrimaryButton
               name="SAVE"

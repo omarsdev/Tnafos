@@ -37,6 +37,8 @@ import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
 import { SecondaryButton } from "components";
 import { Search2Icon } from "@chakra-ui/icons";
+import { PurchasesHome } from "./";
+import { NoData } from "../../components";
 
 export const IncomingPurchases = () => {
   const [list, setList] = useState([]);
@@ -89,7 +91,7 @@ export const IncomingPurchases = () => {
               icon={<AiOutlineHome />}
               rounded="full"
               onClick={() => {
-                history.push(`${match.url}/estimatehome`);
+                history.push("-1");
               }}
             />
           </HStack>
@@ -98,6 +100,8 @@ export const IncomingPurchases = () => {
             <Center h="70vh" w="100%">
               <Spinner size="xl" color="#F8B916" />
             </Center>
+          ) : list.length === 0 ? (
+            <NoData component={"purchase-request"} />
           ) : (
             <Box className="rounded-3xl shadow-2xl relative bg-white" w="full">
               <Text
@@ -168,6 +172,7 @@ export const IncomingPurchases = () => {
           )}
         </Box>
       </Route>
+      {/* <Route path={`${match.path}/purchaseshome`} component={PurchasesHome} /> */}
     </Switch>
   );
 };
