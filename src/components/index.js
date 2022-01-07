@@ -8,4 +8,4 @@ export * from "./CheckBox";
 
 export * from "./Navbar";
 
-export * from "./ProtectedRoute";
+export * from "./CustomSelect";

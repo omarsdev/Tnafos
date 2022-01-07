@@ -31,10 +31,9 @@ export const CreateCompany = () => {
         history.push("/dashboard/rating");
       })
       .catch((err) => {
-        console.log(err.response.data);
         setErr(err.response.data.errors);
         setAlert({
-          message: ` ${err?.response?.data}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });

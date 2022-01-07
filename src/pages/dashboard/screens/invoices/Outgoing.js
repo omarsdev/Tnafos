@@ -1,19 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Heading } from "@chakra-ui/react";
+import { AxiosInstance } from "api";
+import { CustomTable } from "pages";
 
 export const Outgoing = () => {
+  const [list, setList] = useState(null);
+
+  const invoiceIncomingList = async () => {
+    await AxiosInstance.get("/api/dashboard/invoice/outgoing")
+      .then((res) => {
+        setList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    invoiceIncomingList();
+  }, []);
+
   return (
     <Box>
-      <Heading
-        textColor="gray.600"
-        fontWeight="medium"
-        fontSize="xx-large"
-        fontFamily="inhirit"
-        alignItems="baseline"
-        ml="5"
-      >
-        Invoices - Outgoing
-      </Heading>
+      <CustomTable
+        PageHeadLine="Invoices - Outgoing"
+        thHeading="List of Invoices - Outgoing"
+        thData={[
+          "Invoices-ID",
+          "Subject",
+          "Date",
+          "Discount Amount",
+          "Vat Amount",
+          "Total",
+          "options",
+        ]}
+        list={list}
+        listData={[
+          "uuid",
+          "subject",
+          "date",
+          "discount_amount",
+          "vat_amount",
+          "total",
+        ]}
+      />
     </Box>
   );
 };

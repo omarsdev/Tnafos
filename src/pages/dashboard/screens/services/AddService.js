@@ -1,5 +1,5 @@
-import React, { useState, useContext, useCallback } from "react";
-import { HStack, Text, Box, Heading } from "@chakra-ui/react";
+import React, { useState, useContext, useCallback, useEffect } from "react";
+import { HStack, Text, Box, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
@@ -10,6 +10,7 @@ import {
   SecondaryButton,
   RegularInputControl,
 } from "components";
+import { CustomAddForm } from "pages";
 
 export const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -25,12 +26,12 @@ export const AddService = () => {
 
   const history = useHistory();
 
+  const [categoriesList, setCategoriesList] = useState(null);
+
   //* service adding function:
-  const createService = useCallback(async (data) => {
-    console.log(data);
+  const createService = async (data) => {
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
-        console.log(res.data.data);
         setAlert({
           message: "new service has been added!",
           type: "success",
@@ -38,19 +39,33 @@ export const AddService = () => {
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        setErr(err?.response?.data.errors);
+        setErr(err.response.data.errors);
         setAlert({
           message: `${err.response.data.message}`,
           type: "error",
         });
       });
-  }, []);
+  };
 
   const handleCancel = () => {
     history.push("/dashboard/service");
   };
 
-  return (
+  const getAllCategories = async () => {
+    await AxiosInstance.get("/api/category")
+      .then((res) => {
+        setCategoriesList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
+  return categoriesList ? (
     <Box boxShadow="2xl" rounded="3xl" boxSize="2xl">
       <Box px="20" mt="10">
         <Heading
@@ -63,80 +78,52 @@ export const AddService = () => {
         </Heading>
 
         <form mt="5">
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Name of service :
-              <RegularInputControl
-                placeHolder="Name of service"
-                inputType="text"
-                width="100%"
-                name="name"
-                control={control}
-                register={register}
-                errors={err}
-              />
-            </label>
-          </Box>
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Name of service : ",
+                placeHolder: "Enter first name : ",
+                name: "name",
+                err: err,
+                inputType: "text",
+              },
+              {
+                head: "Description : ",
+                placeHolder: "Enter Description : ",
+                name: "description",
+                inputType: "text",
+                err: err,
+              },
+              {
+                head: "Category : ",
+                placeHolder: "Select category",
+                name: "category_id",
+                err: err,
+                isSelect: true,
+                optionList: categoriesList,
+                value: "uuid",
+                key: "uuid",
+                displayValue: "name",
+              },
+              {
+                head: "Price : ",
+                placeHolder: "Enter Price : ",
+                name: "price",
+                inputType: "number",
+                err: err,
+              },
+              {
+                head: "Type : ",
+                placeHolder: "Enter Type : ",
+                name: "type",
+                inputType: "text",
+                err: err,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
 
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Description :
-              <RegularInputControl
-                placeHolder="Description"
-                name="description"
-                inputType="text"
-                width="100%"
-                control={control}
-                register={register}
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Category-Id :
-              <RegularInputControl
-                placeHolder="Category id"
-                name="category_id"
-                inputType="text"
-                width="100%"
-                control={control}
-                register={register}
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3 ">
-              Price :
-              <RegularInputControl
-                placeHolder="Price"
-                name="price"
-                inputType="text"
-                width="100%"
-                control={control}
-                register={register}
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Type:
-              <RegularInputControl
-                placeHolder="Type"
-                name="type"
-                inputType="text"
-                width="100%"
-                control={control}
-                register={register}
-                errors={err}
-              />
-            </label>
-          </Box>
           <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
             <PrimaryButton
               name="ADD SERVICE"
@@ -160,5 +147,9 @@ export const AddService = () => {
         </form>
       </Box>
     </Box>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };

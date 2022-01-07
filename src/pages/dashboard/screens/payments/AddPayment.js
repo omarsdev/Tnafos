@@ -9,6 +9,8 @@ import {
   PrimaryButton,
 } from "components";
 
+import { CustomAddForm } from "../../components";
+
 export const AddPayment = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -21,17 +23,8 @@ export const AddPayment = () => {
     control,
   } = useForm();
 
-  //   const [input, setInput] = useState({
-  //     amount: "",
-  //     method: "",
-  //     transaction_number: "",
-  //     date: "",
-  //     notes: "",
-  //     invoice_id: "",
-  //   });
-
-  const createPayment = async (e, data) => {
-    e.preventDefault();
+  const createPayment = async (data) => {
+    // e.preventDefault();
     await AxiosInstance.post("/api/dashboard/payment/create", data)
       .then((res) => {
         console.log(res);
@@ -68,89 +61,49 @@ export const AddPayment = () => {
         </Heading>
 
         <form>
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              amount :
-              <RegularInputControl
-                placeHolder="amount"
-                name="amount"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Enter amount",
+                placeHolder: "Enter amount ",
+                name: "amount",
+                err: err,
+              },
+              {
+                head: "Enter method",
+                placeHolder: "Enter method ",
+                name: "method",
+                err: err,
+              },
+              {
+                head: "Enter Transaction-number ",
+                placeHolder: "Enter Transaction-number",
+                name: "transaction-number",
+                err: err,
+              },
+              {
+                head: "Enter Date  ",
+                placeHolder: "Enter date ",
+                name: "date",
+                err: err,
+              },
+              {
+                head: "Enter invoice-id ",
+                placeHolder: "invoice_id",
+                name: "invoice_id",
+                err: err,
+              },
+              {
+                head: "Enter notes ",
+                placeHolder: "notes",
+                name: "notes",
+                err: err,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
 
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              method :
-              <RegularInputControl
-                placeHolder="method"
-                name="method"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Transaction-number :
-              <RegularInputControl
-                placeHolder="transaction number"
-                name="transaction-number"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              Date :
-              <RegularInputControl
-                placeHolder="date"
-                name="date"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              notes :
-              <RegularInputControl
-                placeHolder="notes"
-                name="notes"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
-
-          <Box className="mt-4">
-            <label className="w-32 text-left text-gray-500 pl-3">
-              invoice_id :
-              <RegularInputControl
-                placeHolder="invoice_id"
-                name="invoice_id"
-                control={control}
-                register={register}
-                width="100%"
-                errors={err}
-              />
-            </label>
-          </Box>
           <HStack spacing="10px" py="10" ml="40">
             <PrimaryButton
               name="SAVE"

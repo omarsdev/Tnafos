@@ -17,7 +17,7 @@ export const PrimaryButton = ({
 
   const handleClick = (event) => {
     if (ref.current && ref.current.contains(event.target)) {
-      props.onClick && props.onClick();
+      // props.onClick && props.onClick();
       setLoading(!loading);
     }
   };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import {
   Box,
   Heading,
@@ -13,21 +14,36 @@ import {
   Tr,
   Th,
   Td,
+  Select,
+  Divider,
+  Text,
+  Spacer,
+  Flex,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Stack,
 } from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
 import { AiOutlinePlus } from "react-icons/ai";
-import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
-import { AddPayment } from "./";
+import { BiUpload, BiChevronsUp } from "react-icons/bi";
+import { AddPayment, PaymentCard } from "./";
 import { AxiosInstance } from "api";
+import { CustomTable } from "pages";
 
 export const PaymentHome = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
+
+  //* representing certain number of rows based on select option:
+  const [rowsNumber, setRowsNumber] = useState("10");
 
   const match = useRouteMatch();
+  const history = useHistory();
 
   const paymentsList = async () => {
     await AxiosInstance.get("/api/dashboard/payment/")
       .then((res) => {
-        console.log(res.data.data);
         setList(res.data.data);
       })
       .catch((err) => {
@@ -35,68 +51,42 @@ export const PaymentHome = () => {
       });
   };
 
+  const searchHandler = () => {
+    history.push(`/${searchInput}`);
+  };
+
   useEffect(() => {
     paymentsList();
   }, []);
+
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        <Box w="full" overflowY="scroll" padding="10">
-          <HStack justifyContent="space-between" paddingBottom="5">
-            <Heading
-              textColor="gray.600"
-              fontSize="xx-large"
-              fontWeight="lg"
-              alignItems="baseline"
-            >
-              Payments
-            </Heading>
-            {/* <Link to={`${match.url}/addpayment`}>
-              <IconButton
-                as={Button}
-                colorScheme="yellow"
-                size="lg"
-                icon={<AiOutlinePlus />}
-                rounded="full"
-              />
-            </Link> */}
-          </HStack>
-
-          {!list ? (
-            <Center h="70vh" w="100%">
-              <Spinner size="xl" color="#F8B916" />
-            </Center>
-          ) : (
-            <Box>
-              <Table size="md">
-                <Thead>
-                  <Tr>
-                    <Th>Amount</Th>
-                    <Th>Payment-number</Th>
-                    <Th>Payment-method</Th>
-                    <Th>Date</Th>
-                    <Th>Transaction-ID</Th>
-                    <Th>Notes</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {list.map((el, idx) => (
-                    <Tr key={idx}>
-                      <Td>{el?.amount}</Td>
-                      <Td>{el?.uuid}</Td>
-                      <Td>{el?.method}</Td>
-                      <Td>{el?.date}</Td>
-                      <Td>{el?.transaction_number}</Td>
-                      <Td>{el?.notes}</Td>
-                    </Tr>
-                  ))}
-                </Tbody>
-              </Table>
-            </Box>
-          )}
-        </Box>
+        <CustomTable
+          PageHeadLine="Payments"
+          thHeading="List of payments"
+          thData={[
+            "Transaction-ID",
+            "Amount",
+            "Date",
+            "Method",
+            "Transaction Number",
+            "Notes",
+            "options",
+          ]}
+          list={list}
+          listData={[
+            "uuid",
+            "amount",
+            "date",
+            "method",
+            "transaction_number",
+            "notes",
+          ]}
+        />
       </Route>
       <Route path={`${match.path}/addpayment`} component={AddPayment} />
+      <Route path={`${match.path}/:uuid`} component={PaymentCard} />
     </Switch>
   );
 };

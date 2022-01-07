@@ -28,6 +28,8 @@ import { PrimaryButton } from "components";
 import { SecondaryButton } from "components";
 import { AlertContext } from "context/AlertContext";
 import { media } from "api/media";
+import { CustomEditForm } from "pages";
+import { CustomAddForm } from "pages";
 
 export const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -52,26 +54,18 @@ export const MyService = () => {
     });
   };
 
-  //* represent service card info:
   const getMyService = async () => {
     await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
       .then((res) => {
-        // console.log(res.data.data);
         resetHooksForm(res.data.data);
         setService(res.data.data);
-        let service = res.data.data;
-        console.log(service);
-        // delete service.category;
-        // delete service.name;
-        // delete service.description;
       })
       .catch((err) => {
         history.push("/dashboard/service");
       });
   };
 
-  //* service update function:
-  const onUpdateService = useCallback(async (dataToBeUpdataed) => {
+  const onUpdateService = async (dataToBeUpdataed) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(
@@ -89,13 +83,13 @@ export const MyService = () => {
       .catch((err) => {
         // console.log(err.response.data);
         setIsUpdating(false);
-        setErrors(err?.response?.data.errors);
+        setErrors(err.response.data.errors);
         setAlert({
-          message: `${err?.response?.data}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });
-  }, []);
+  };
 
   const onCancelHandler = () => {
     if (isUpdating) return;
@@ -104,15 +98,15 @@ export const MyService = () => {
     onClose();
   };
 
-  useEffect(() => {
-    getMyService();
-  }, []);
-
   //* media file upload:
   const uploadFile = (photo) => {
     if (!photo) return;
     media(uuid, "service", photo);
   };
+
+  useEffect(() => {
+    getMyService();
+  }, []);
 
   return !service ? (
     <Center h="70vh" w="100%">
@@ -175,90 +169,34 @@ export const MyService = () => {
       </Center>
 
       {/* updating service. */}
-      <Drawer
+      <CustomEditForm
         isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
+        onCancelHandler={onCancelHandler}
+        onUpdate={handleSubmit(onUpdateService)}
+        isUpdating={isUpdating}
+        errors={errors}
       >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <HStack
-              align="flex-end"
-              w="full"
-              alignItems="baseline"
-              mb="14"
-              mt="5"
-            >
-              <input
-                type="file"
-                onChange={(e) => setPhoto(e.target.files[0])}
-                name="choose file"
-              />
-              <Spacer />
-              <SecondaryButton name="Upload File" onClick={uploadFile} />
-            </HStack>
-            <form pt="5">
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Price :
-                  <RegularInputControl
-                    placeHolder="Price"
-                    name="price"
-                    inputType="text"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    errors={errors}
-                  />
-                </label>
-              </Box>
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Type :
-                  <RegularInputControl
-                    placeHolder="Type"
-                    name="type"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={errors}
-                  />
-                </label>
-              </Box>
-
-              <Flex mt="5" w="full" ml="320px">
-                <PrimaryButton
-                  name="Update"
-                  onClick={handleSubmit(onUpdateService)}
-                  loadingButton={isUpdating}
-                  buttonType="submit"
-                  mx="2"
-                />
-
-                <SecondaryButton
-                  name="Cancel"
-                  onClick={onCancelHandler}
-                  buttonType="button"
-                />
-                {/* </HStack> */}
-              </Flex>
-              {errors?.message && (
-                <Text className="text-center mt-4" color="red">
-                  {errors?.message}
-                </Text>
-              )}
-            </form>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+        <CustomAddForm
+          listForm={[
+            {
+              head: "Price : ",
+              placeHolder: "Enter Price : ",
+              name: "price",
+              inputType: "number",
+              err: errors,
+            },
+            {
+              head: "Type : ",
+              placeHolder: "Enter Type : ",
+              name: "type",
+              inputType: "text",
+              err: errors,
+            },
+          ]}
+          control={control}
+          register={register}
+        />
+      </CustomEditForm>
     </>
   );
 };

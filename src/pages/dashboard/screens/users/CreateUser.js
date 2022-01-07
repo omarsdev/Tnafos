@@ -1,4 +1,10 @@
-import React, { useState, useContext, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useContext,
+  useRef,
+  useCallback,
+  useEffect,
+} from "react";
 import {
   Heading,
   Box,
@@ -8,8 +14,15 @@ import {
   Spacer,
   Center,
   Stack,
+  Spinner,
 } from "@chakra-ui/react";
-import { Link, useHistory } from "react-router-dom";
+import {
+  Link,
+  useHistory,
+  useRouteMatch,
+  Route,
+  Switch,
+} from "react-router-dom";
 
 import { AxiosInstance } from "api/AxiosInstance";
 import { CheckBox } from "components";
@@ -28,6 +41,8 @@ import {
   RegularInputControl,
   PasswordInputControl,
 } from "components";
+import { CustomAddForm } from "pages";
+import { CustomSelect } from "components";
 
 //* form validation rules
 const validationSchema = yup.object({
@@ -58,10 +73,13 @@ export const CreateUser = () => {
   const { setAlert } = alertProviderValue;
 
   const history = useHistory();
+
+  const [countryList, setCountryList] = useState(null);
+  const match = useRouteMatch();
+
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  //* for checkboxes:
   const [checked, setChecked] = useState(false);
   const [ch, setCh] = useState(false);
 
@@ -69,46 +87,20 @@ export const CreateUser = () => {
   const [photo, setPhoto] = useState(null);
   let inputRef = useRef(null);
 
-  //* get functions to build form with useForm() hook
-
   const { register, handleSubmit, control } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
-  //* select photo for upload function:
   const handleFileInput = (e) => {
     setPhoto(e.target.files[0]);
   };
 
-  //* photoUpload function:
-  const photoUploadHandler = async () => {
-    //   const formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("file", selectedFile);
-    // console.log("Works");
-    // inputRef.current.onChange((e) => fileSelectHandler(e));
-    // if (fileSelectHandler) {
-    //   await AxiosInstance.post("/api/dashboard/media/store", photo)
-    //     .then((res) => {
-    //       console.log(res.data);
-    //       setAlert({
-    //         message: "photo has been uploaded",
-    //         type: "info",
-    //       });
-    //     })
-    //     .catch((error) => {
-    //       console.log(error.response.data);
-    //     });
-    // }
-  };
-
-  //* onSubmit function:
-  const addUser = useCallback(async (userData) => {
+  // * onSubmit function:
+  const addUser = async (userData) => {
+    // console.log(userData);
     setIsUpdating(true);
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
-        console.log(res.data.data);
-        setIsUpdating(false);
         setAlert({
           message: `New user has been added!`,
           type: "success",
@@ -116,21 +108,37 @@ export const CreateUser = () => {
         history.push("/dashboard/user");
       })
       .catch((error) => {
-        setIsUpdating(false);
+        console.log(error.response.data);
         setErr(error.response.data.errors);
-        console.log(error.response.data.errors);
         setAlert({
-          message: `${error?.response?.data?.errors}`,
+          message: `${error.response.data.message}`,
           type: "error",
         });
+      })
+      .finally(() => {
+        setIsUpdating(false);
       });
-  }, []);
+  };
 
   const handleCancel = () => {
     history.push("/dashboard/user");
   };
 
-  return (
+  const getAllCountry = async () => {
+    await AxiosInstance.get("/api/country")
+      .then((res) => {
+        setCountryList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  useEffect(() => {
+    getAllCountry();
+  }, []);
+
+  return countryList ? (
     <Box overflowY="scroll" w="full">
       <Box
         px="20"
@@ -158,88 +166,75 @@ export const CreateUser = () => {
             ref={inputRef}
           />
           <Spacer />
-          <SecondaryButton onClick={photoUploadHandler} name="Upload photo" />
+          <SecondaryButton
+            // onClick={photoUploadHandler}
+            name="Upload photo"
+          />
         </Flex>
         <Center>
           <form>
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3">
-                First Name :
-                <RegularInputControl
-                  placeHolder="First Name"
-                  name="first_name"
-                  control={control}
-                  register={register}
-                  width="100%"
-                  errors={err}
-                />
-              </label>
-            </Box>
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Last Name :
-                <RegularInputControl
-                  placeHolder="Last name"
-                  name="last_name"
-                  control={control}
-                  register={register}
-                  width="100%"
-                  errors={err}
-                />
-              </label>
-            </Box>
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3">
-                Email :
-                <RegularInputControl
-                  placeHolder="Enter email"
-                  name="email"
-                  control={control}
-                  register={register}
-                  width="100%"
-                  errors={err}
-                />
-              </label>
-            </Box>
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3">
-                Password :
-                <PasswordInputControl
-                  placeHolder="Password"
-                  name="password"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3">
-                Confirm Password :
-                <PasswordInputControl
-                  placeHolder="confirm your password"
-                  name="password_confirmation"
-                  control={control}
-                  register={register}
-                  error={err}
-                />
-              </label>
-            </Box>
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3">
-                Phone Number :
-                <RegularInputControl
-                  placeHolder="Phone number"
-                  name="phone_number"
-                  inputType="number"
-                  control={control}
-                  register={register}
-                  width="100%"
-                  errors={err}
-                />
-              </label>
-            </Box>
-
+            <CustomAddForm
+              listForm={[
+                {
+                  head: "First name : ",
+                  placeHolder: "Enter first name : ",
+                  name: "first_name",
+                  err: err,
+                },
+                {
+                  head: "Last name : ",
+                  placeHolder: "Enter last name : ",
+                  name: "last_name",
+                  err: err,
+                },
+                {
+                  head: "Email : ",
+                  placeHolder: "Enter email : ",
+                  name: "email",
+                  err: err,
+                },
+                {
+                  head: "Password : ",
+                  placeHolder: "Enter password : ",
+                  name: "password",
+                  err: err,
+                  isPassword: true,
+                },
+                {
+                  head: "Confirm Password : ",
+                  placeHolder: "confirm your password",
+                  name: "password_confirmation",
+                  err: err,
+                  isPassword: true,
+                },
+                {
+                  head: "Phone Number : ",
+                  placeHolder: "enter phone number",
+                  name: "phone_number",
+                  err: err,
+                },
+                {
+                  head: "Country Code : ",
+                  placeHolder: "Select Country Code : ex SA",
+                  name: "country_code",
+                  err: err,
+                  isSelect: true,
+                  optionList: countryList,
+                  value: "short_name",
+                  key: "uuid",
+                  displayValue: "short_name",
+                },
+              ]}
+              control={control}
+              register={register}
+            />
+            {/* <CustomSelect
+              control={control}
+              register={register}
+              placeHolder="Select a country"
+              errors={err}
+              optionList={countryList}
+            /> */}
             <Box className="flex flex-col items-center gap-2 mt-10">
               <Heading fontSize="xl" color="grey" fontWeight="normal">
                 Terms and Conditions agreement
@@ -285,5 +280,9 @@ export const CreateUser = () => {
         </Center>
       </Box>
     </Box>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };

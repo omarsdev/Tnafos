@@ -26,13 +26,15 @@ import {
 } from "@chakra-ui/react";
 import { FiEdit } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
-import { AxiosInstance } from "../../../../api";
+import { AxiosInstance } from "api";
 
-import { RegularInputControl } from "components";
+import {
+  RegularInputControl,
+  SecondaryButton,
+  PrimaryButton,
+} from "components";
 
 import { useForm } from "react-hook-form";
-import { PrimaryButton } from "components";
-import { SecondaryButton } from "components";
 import { AlertContext } from "context/AlertContext";
 import { media } from "api/media";
 
@@ -76,7 +78,7 @@ export const UserCard = () => {
       });
   };
 
-  const onUpdateUserInfo = useCallback(async (data) => {
+  const onUpdateUserInfo = async (data) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(`/api/dashboard/user/${uuid}/update`, data)
@@ -90,16 +92,14 @@ export const UserCard = () => {
         history.push(`/dashboard/user`);
       })
       .catch((err) => {
-        console.log(err);
         setIsUpdating(false);
         setErrors(err.response.data);
-        console.log(err.response.data);
         setAlert({
-          message: `${err.response.data}`,
+          message: `${err.response.data.message}`,
           type: "error",
         });
       });
-  }, []);
+  };
 
   const onCancelHandler = () => {
     if (isUpdating) return;
@@ -161,9 +161,6 @@ export const UserCard = () => {
                   "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                 }
                 _hover={{
-                  bg: "orange.400",
-                }}
-                _focus={{
                   bg: "orange.400",
                 }}
                 icon={<FiEdit />}

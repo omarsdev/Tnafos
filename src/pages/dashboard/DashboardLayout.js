@@ -1,3 +1,5 @@
+// TODO purchase for incoming and outgoing
+
 import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Sidebar } from "./components/index";
 import {
@@ -11,25 +13,35 @@ import {
   StatNumber,
   Grid,
 } from "@chakra-ui/react";
-import { useRouteMatch, Route, Switch } from "react-router-dom";
+import {
+  useRouteMatch,
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 import { FiInbox } from "react-icons/fi";
 import { AxiosInstance } from "api";
 
 import {
-  Estimate,
-  PurchaseRequest,
+  IncomingEstimates,
+  OutgoingEstimates,
   Settings,
   UserHome,
+  IncomingPurchases,
+  OutgoingPurchases,
   ServiceHome,
   CompanyLayout,
+  InvoiceHome,
   Incoming,
   Outgoing,
   ClientsHome,
   Ratings,
+  PaymentHome,
 } from "./screens";
-import { PaymentHome } from "./screens/payments";
+
 import { UserDataContext } from "context";
-import { PrivateRoute } from "./components/PrivateRoute";
+// import { PrivateRoute } from "./components/PrivateRoute";
 import {} from "./screens/company/CompanyLayout";
 
 export const DashboardLayout = () => {
@@ -38,7 +50,9 @@ export const DashboardLayout = () => {
   //* set border color:
   const randomElement = colors[Math.floor(Math.random() * colors.length)];
 
-  let match = useRouteMatch();
+  const match = useRouteMatch();
+  const location = useLocation();
+  const history = useHistory();
 
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
@@ -49,20 +63,24 @@ export const DashboardLayout = () => {
   const fetchTokenMe = async (token) => {
     try {
       const res = await AxiosInstance.get("/api/dashboard/user/my-profile");
-      // console.log(res.data.data);
       setUserData(res.data.data);
       setLoading(false);
     } catch (error) {
-      // console.log(error.response);
       setUserData(error.response);
       setLoading(false);
-      // console.log(status);
+    }
+  };
+
+  const removeForwardSlashFromUrl = () => {
+    if (location.pathname === "/dashboard/") {
+      history.push("/dashboard");
     }
   };
 
   useEffect(() => {
     if (userData) return;
     fetchTokenMe();
+    removeForwardSlashFromUrl();
   }, []);
 
   return (
@@ -70,12 +88,12 @@ export const DashboardLayout = () => {
       {!loading && userData ? (
         <HStack spacing={0}>
           <Sidebar />
-          <VStack className="chakra-stack w-full h-screen">
+          <VStack className="chakra-stack w-full h-screen overflow-scroll">
             <Navbar />
             {/* {body} */}
 
             <Switch>
-              <PrivateRoute exact path={match.path}>
+              <Route exact path={match.path}>
                 <Box>
                   <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
                     <Box
@@ -167,42 +185,44 @@ export const DashboardLayout = () => {
                     </Box>
                   </Grid>
                 </Box>
-              </PrivateRoute>
+              </Route>
               <Route path={`${match.path}/company`} component={CompanyLayout} />
-              <PrivateRoute path={`${match.path}/rating`} component={Ratings} />
-              <PrivateRoute path={`${match.path}/user`} component={UserHome} />
-              <PrivateRoute
-                path={`${match.path}/service`}
-                component={ServiceHome}
+              <Route path={`${match.path}/rating`} component={Ratings} />
+              <Route path={`${match.path}/user`} component={UserHome} />
+              <Route path={`${match.path}/service`} component={ServiceHome} />
+              <Route
+                path={`${match.path}/purchase-request/incomingpurchases`}
+                component={IncomingPurchases}
               />
-              <PrivateRoute
-                path={`${match.path}/purchase-requests`}
-                component={PurchaseRequest}
+              <Route
+                path={`${match.path}/purchase-request/outgoingpurchases`}
+                component={OutgoingPurchases}
               />
-              <PrivateRoute
-                path={`${match.path}/payment`}
-                component={PaymentHome}
-              />
-              <PrivateRoute
+
+              <Route path={`${match.path}/payment`} component={PaymentHome} />
+              <Route
                 path={`${match.path}/invoice/incoming`}
                 component={Incoming}
               />
-              <PrivateRoute
+              <Route
                 path={`${match.path}/invoice/outgoing`}
                 component={Outgoing}
               />
-              <PrivateRoute
-                path={`${match.path}/estimate`}
-                component={Estimate}
+              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
+
+              <Route
+                path={`${match.path}/estimate/incomingestimates`}
+                component={IncomingEstimates}
               />
-              <PrivateRoute
-                path={`${match.path}/client`}
+              <Route
+                path={`${match.path}/estimate/outgoingestimates`}
+                component={OutgoingEstimates}
+              />
+              <Route
+                path={`${match.path}/clientshome`}
                 component={ClientsHome}
               />
-              <PrivateRoute
-                path={`${match.path}/settings`}
-                component={Settings}
-              />
+              <Route path={`${match.path}/settings`} component={Settings} />
             </Switch>
           </VStack>
         </HStack>

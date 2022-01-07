@@ -30,7 +30,7 @@ export const RegularInput = ({
       paddingLeft={inputType === "tel" && "80px"}
       placeholder={placeHolder}
       id={name}
-      width={!width ? "381px" : width}
+      width={!width ? "100%" : width}
       type={inputType}
       {...register}
       {...rest}
@@ -45,7 +45,7 @@ export const RegularInput = ({
       paddingLeft={inputType === "tel" && "80px"}
       placeholder={placeHolder}
       id={name}
-      width={!width ? "381px" : width}
+      width={!width ? "100%" : width}
       value={value}
       onChange={handleChange}
       type={inputType}
