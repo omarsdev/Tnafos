@@ -59,10 +59,9 @@ import { AxiosInstance } from "api";
 export const Incoming = () => {
   const [list, setList] = useState(null);
 
-  const paymentsList = async () => {
-    await AxiosInstance.get("/api/dashboard/payment/")
+  const invoiceIncomingList = async () => {
+    await AxiosInstance.get("/api/dashboard/invoice/incoming")
       .then((res) => {
-        console.log(res.data.data);
         setList(res.data.data);
       })
       .catch((err) => {
@@ -71,7 +70,7 @@ export const Incoming = () => {
   };
 
   useEffect(() => {
-    paymentsList();
+    invoiceIncomingList();
   }, []);
 
   return (
@@ -86,7 +85,7 @@ export const Incoming = () => {
       >
         Invoices - Incoming
       </Heading> */}
-      <CustomTable
+      {/* <CustomTable
         PageHeadLine={"Invoices - Incoming"}
         thHeading="List of Invoices - Incoming"
         list={list}
@@ -98,6 +97,28 @@ export const Incoming = () => {
           "Transaction-ID",
           "Notes",
           "Action",
+        ]}
+      /> */}
+      <CustomTable
+        PageHeadLine="Invoices - Incoming"
+        thHeading="List of Invoices - Incoming"
+        thData={[
+          "Invoices-ID",
+          "Amount",
+          "Date",
+          "Method",
+          "Transaction Number",
+          "Notes",
+          "options",
+        ]}
+        list={list}
+        listData={[
+          "uuid",
+          "amount",
+          "date",
+          "method",
+          "transaction_number",
+          "notes",
         ]}
       />
     </Box>
