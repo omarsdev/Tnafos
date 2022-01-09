@@ -21,15 +21,12 @@ import {
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api/AxiosInstance";
-import { RegularInputControl } from "components";
 
 import { useForm } from "react-hook-form";
-import { PrimaryButton } from "components";
-import { SecondaryButton } from "components";
+
 import { AlertContext } from "context/AlertContext";
 import { media } from "api/media";
-import { CustomEditForm } from "pages";
-import { CustomAddForm } from "pages";
+import { CustomEditForm } from "../../components";
 
 export const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -176,8 +173,8 @@ export const MyService = () => {
         isUpdating={isUpdating}
         errors={errors}
       >
-        <CustomAddForm
-          listForm={[
+        <CustomEditForm
+          children={[
             {
               head: "Price : ",
               placeHolder: "Enter Price : ",
