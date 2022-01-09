@@ -28,11 +28,7 @@ import { FiEdit } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api";
 
-import {
-  RegularInputControl,
-  SecondaryButton,
-  PrimaryButton,
-} from "components";
+import { CustomEditForm } from "../../components";
 
 import { useForm } from "react-hook-form";
 import { AlertContext } from "context/AlertContext";
@@ -172,6 +168,7 @@ export const UserCard = () => {
       </Center>
 
       {/* updating user info. */}
+      <CustomEditForm children={[]} />
       <Drawer
         isOpen={isOpen}
         placement="right"
