@@ -1,8 +1,11 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 
-import { RegularInputControl, PasswordInputControl } from "components";
-import { CustomSelect } from "components";
+import {
+  RegularInputControl,
+  PasswordInputControl,
+  CustomSelect,
+} from "components";
 
 export const CustomAddForm = ({ listForm, control, register }) => {
   return listForm.map((element) => (

@@ -28,7 +28,11 @@ import { FiEdit } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "api";
 
-import { CustomEditForm } from "../../components";
+import {
+  RegularInputControl,
+  SecondaryButton,
+  PrimaryButton,
+} from "components";
 
 import { useForm } from "react-hook-form";
 import { AlertContext } from "context/AlertContext";
@@ -168,7 +172,6 @@ export const UserCard = () => {
       </Center>
 
       {/* updating user info. */}
-      <CustomEditForm children={[]} />
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -282,3 +285,62 @@ export const UserCard = () => {
     </>
   );
 };
+
+// editListForm={[
+//   {
+//     head: "First Name : ",
+//     placeHolder: "Enter First Name",
+//     name: "first_name",
+//     errors: errors,
+//     inputType: "text",
+//   },
+//   {
+//     head: "Last Name : ",
+//     placeHolder: "Enter Last Name",
+//     name: "last_name",
+//     errors: errors,
+//     inputType: "text",
+//   },
+//   {
+//     head: "Phone Number : ",
+//     placeHolder: "Enter Phone Number",
+//     name: "phone_number",
+//     errors: errors,
+//     inputType: "number",
+//   },
+//   {
+//     head: "Email : ",
+//     placeHolder: "Enter Email",
+//     name: "email",
+//     errors: errors,
+//     inputType: "text",
+//   },
+//   {
+//     head: "Password : ",
+//     placeHolder: "Enter Password",
+//     name: "password",
+//     errors: errors,
+//     isPassword: true,
+//   },
+//   {
+//     head: "Confirm Password : ",
+//     placeHolder: "confirm your password",
+//     name: "password_confirmation",
+//     errors: errors,
+//     isPassword: true,
+//   },
+//   {
+//     head: "Country Code : ",
+//     placeHolder: "Select Country Code : ex SA",
+//     name: "country_code",
+//     errors: errors,
+//     isSelect: true,
+//     optionList: countryList,
+//     value: "short_name",
+//     key: "uuid",
+//     displayValue: "short_name",
+//   },
+// ]}
+// control={control}
+// register={register}
+// />
