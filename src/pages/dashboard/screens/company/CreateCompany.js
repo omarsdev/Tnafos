@@ -61,290 +61,145 @@ export const CreateCompany = () => {
         </Heading>
         <Center mt="10">
           <form>
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3">
-                Company Name :
-                <RegularInputControl
-                  placeHolder="Company Name"
-                  name="name"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Type :
-                <RegularInputControl
-                  placeHolder="Type"
-                  name="type"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Cr Number :
-                <RegularInputControl
-                  placeHolder="Cr Number"
-                  name="cr"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                VAT Number :
-                <RegularInputControl
-                  placeHolder="VAT Number"
-                  name="vat"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Establishment Year :
-                <RegularInputControl
-                  placeHolder="Establishment Year"
-                  name="establishment_year"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Total Employees :
-                <RegularInputControl
-                  placeHolder="Total Employees"
-                  name="total_employees"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Bio :
-                <RegularInputControl
-                  placeHolder="Bio"
-                  name="bio"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Telephone :
-                <RegularInputControl
-                  placeHolder="Telephone"
-                  name="telephone"
-                  inputType="number"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Fax :
-                <RegularInputControl
-                  placeHolder="Fax"
-                  name="fax"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                E-mail :
-                <RegularInputControl
-                  placeHolder="Email"
-                  name="email"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Website :
-                <RegularInputControl
-                  placeHolder="Website"
-                  name="website"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Country-Id :
-                <RegularInputControl
-                  placeHolder="Country ID"
-                  name="country_id"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                City :
-                <RegularInputControl
-                  placeHolder="City"
-                  name="city"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                po-Box :
-                <RegularInputControl
-                  placeHolder="Po_box"
-                  name="po_box"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                ZIP-Code :
-                <RegularInputControl
-                  placeHolder="Zip code"
-                  name="zip_code"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Address :
-                <RegularInputControl
-                  placeHolder="Address"
-                  name="address"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Location :
-                <RegularInputControl
-                  placeHolder="Location"
-                  name="location"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Logo :
-                <RegularInputControl
-                  placeHolder="Logo"
-                  name="logo"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
-
-            <Box className="mt-4">
-              <label className="w-32 text-left text-gray-500 pl-3 ">
-                Category-Id :
-                <RegularInputControl
-                  placeHolder="Category Id"
-                  name="category_id"
-                  inputType="text"
-                  width="100%"
-                  control={control}
-                  register={register}
-                  errors={err}
-                />
-              </label>
-            </Box>
+            <CustomAddForm
+              listForm={[
+                {
+                  head: "Company Name : ",
+                  placeHolder: "Enter Company Name : ",
+                  name: "name",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Type : ",
+                  placeHolder: "Enter Type : ",
+                  name: "type",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Total Employees : ",
+                  placeHolder: "Enter Total Employees : ",
+                  name: "total_employees",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "VAT Number ",
+                  placeHolder: "Enter VAT Number ",
+                  name: "vat",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Confirm Cr Number : ",
+                  placeHolder: "confirm your Cr Number",
+                  name: "cr",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Phone Establishment Year : ",
+                  placeHolder: "enter  Establishment Year",
+                  name: "establishment_year",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Phone Bio : ",
+                  placeHolder: "enter Bio",
+                  name: "bio",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Telephone : ",
+                  placeHolder: "Enter Telephone",
+                  name: "telephone",
+                  err: err,
+                  inputType: "number",
+                },
+                {
+                  head: "Fax : ",
+                  placeHolder: "Enter Fax",
+                  name: "fax",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "E-mail : ",
+                  placeHolder: "Enter E-mail",
+                  name: "email",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Website : ",
+                  placeHolder: "Enter Website",
+                  name: "website",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Country-Id  : ",
+                  placeHolder: "Enter Country-Id ",
+                  name: "country_id ",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "City  : ",
+                  placeHolder: "Enter City ",
+                  name: "city ",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "po-Box  : ",
+                  placeHolder: "Enter po-Box ",
+                  name: "po-box ",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "ZIP-Code  : ",
+                  placeHolder: "Enter ZIP-Code ",
+                  name: "zip_code ",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Address  : ",
+                  placeHolder: "Enter Address ",
+                  name: "address ",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Logo  : ",
+                  placeHolder: "Enter Logo ",
+                  name: "logo ",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Location : ",
+                  placeHolder: "Enter Location",
+                  name: "location",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Category_id : ",
+                  placeHolder: "Enter Category_id",
+                  name: "category_id",
+                  err: err,
+                  inputType: "text",
+                },
+              ]}
+              control={control}
+              register={register}
+            />
 
             <PrimaryButton
               colorScheme="yellow"

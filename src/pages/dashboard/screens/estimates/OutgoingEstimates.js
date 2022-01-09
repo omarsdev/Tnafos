@@ -5,15 +5,8 @@ import {
   IconButton,
   HStack,
   Button,
-  Text,
   Spinner,
   Center,
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Spacer,
-  Select,
 } from "@chakra-ui/react";
 import { AiOutlineHome } from "react-icons/ai";
 
