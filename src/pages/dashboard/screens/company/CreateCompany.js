@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { AxiosInstance } from "../../../../api/AxiosInstance";
 import { AlertContext } from "context";
-import { PrimaryButton, RegularInputControl } from "components";
+import { PrimaryButton } from "components";
+import { CustomAddForm } from "../../components";
 
 export const CreateCompany = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -65,21 +66,21 @@ export const CreateCompany = () => {
               listForm={[
                 {
                   head: "Company Name : ",
-                  placeHolder: "Enter Company Name : ",
+                  placeHolder: "Enter Company Name",
                   name: "name",
                   err: err,
                   inputType: "text",
                 },
                 {
                   head: "Type : ",
-                  placeHolder: "Enter Type : ",
+                  placeHolder: "Enter Type",
                   name: "type",
                   err: err,
                   inputType: "text",
                 },
                 {
                   head: "Total Employees : ",
-                  placeHolder: "Enter Total Employees : ",
+                  placeHolder: "Enter Total Employees",
                   name: "total_employees",
                   err: err,
                   inputType: "text",
