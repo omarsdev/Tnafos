@@ -10,7 +10,7 @@ export const NoData = ({ component }) => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        <Box w="full" overflowY="scroll" padding="10">
+        <Box w="full" padding="10">
           <HStack justifyContent="space-between" paddingBottom="5">
             <Text
               textColor="gray.600"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Box,
   Heading,
@@ -26,24 +26,18 @@ import {
 import { Search2Icon } from "@chakra-ui/icons";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiUpload, BiChevronsUp } from "react-icons/bi";
-import {
-  Link,
-  useRouteMatch,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
-import { AddPayment, EditPayment } from ".";
-import { AxiosInstance } from "api";
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import { NoData } from "./";
+
 import { SecondaryButton } from "components";
 import { FiEdit } from "react-icons/fi";
-import { BsTrash } from "react-icons/bs";
 
 export const CustomTable = ({
   PageHeadLine,
   thHeading,
   thData,
   list,
+  component,
   listData,
 }) => {
   const match = useRouteMatch();
@@ -54,7 +48,7 @@ export const CustomTable = ({
     </Center>
   ) : (
     <Box w="full" overflowY="scroll" padding="10">
-      {/* <HStack justifyContent="space-between" paddingBottom="5">
+      <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
           fontSize="xx-large"
@@ -72,12 +66,14 @@ export const CustomTable = ({
             rounded="full"
           />
         </Link>
-      </HStack> */}
+      </HStack>
 
       {!list ? (
         <Center h="70vh" w="100%">
           <Spinner size="xl" color="#F8B916" />
         </Center>
+      ) : list.length === 0 ? (
+        <NoData component={component} />
       ) : (
         <Box className="rounded-3xl shadow-2xl relative bg-white">
           <Text

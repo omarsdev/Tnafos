@@ -106,10 +106,16 @@ export const OutgoingPurchases = () => {
           ) : (
             <CustomTable
               PageHeadLine="Payments"
-              thHeading="List of purchase oncoming"
-              thData={["Transaction-ID", "Details", "Date", "options"]}
+              thHeading="List of purchase outgoing"
+              thData={[
+                "Transaction-ID",
+                "Details",
+                "Date",
+                "Service",
+                "options",
+              ]}
               list={list}
-              listData={["uuid", "details", "date"]}
+              listData={["uuid", "details", "date", "service"]}
             />
           )}
         </Box>
