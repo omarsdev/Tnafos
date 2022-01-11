@@ -1,15 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
+import React, { useState, useContext } from "react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import { AxiosInstance } from "api";
 import { useHistory } from "react-router-dom";
+import { SecondaryButton, PrimaryButton } from "components";
+import { AlertContext } from "context";
 
 import { CustomAddForm } from "../../components";
 
-import { SecondaryButton, PrimaryButton } from "../../../../components";
-import { AlertContext } from "../../../../context";
-import { AxiosInstance } from "../../../../api";
-
-const AddPurchase = () => {
+export const AddPurchase = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -24,17 +23,17 @@ const AddPurchase = () => {
     control,
   } = useForm();
 
-  const createRequest = async (data) => {
+  const createEstimate = async (data) => {
     // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/purchase-request/create", data)
+    await AxiosInstance.post("/api/dashboard/estimate/create", data)
       .then((res) => {
         console.log(res);
         setIsUpdating(false);
         setAlert({
-          message: `New purchase-request has been added!`,
+          message: `New estimate has been added!`,
           type: "success",
         });
-        history.push("/dashboard/purchaseshome");
+        history.push("/dashboard/estimatehome");
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +48,7 @@ const AddPurchase = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/purchaseshome");
+    history.push("/dashboard/estimatehome");
   };
 
   return (
@@ -71,7 +70,7 @@ const AddPurchase = () => {
           pt="4"
           mb="12"
         >
-          Fill in this form to add new purchase-request.
+          Fill in this form to add new estimate.
         </Heading>
 
         <form>
@@ -106,7 +105,7 @@ const AddPurchase = () => {
           <HStack spacing="10px" py="10" ml="40">
             <PrimaryButton
               name="SAVE"
-              onClick={handleSubmit(createRequest)}
+              onClick={handleSubmit(createEstimate)}
               loadingButton={isUpdating}
             />
 
@@ -117,5 +116,3 @@ const AddPurchase = () => {
     </Box>
   );
 };
-
-export default AddPurchase;

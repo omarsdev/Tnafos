@@ -4,31 +4,21 @@ import {
   Box,
   Text,
   Image,
-  HStack,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   Center,
   Spinner,
   Flex,
-  Spacer,
   VStack,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { FiEdit } from "react-icons/fi";
 
-import {
-  RegularInputControl,
-  SecondaryButton,
-  PrimaryButton,
-} from "../../../../components";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
+
+import { useForm } from "react-hook-form";
+
+import { CustomAddForm, CustomEditForm } from "../../components";
 
 const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -164,116 +154,73 @@ const UserCard = () => {
       </Center>
 
       {/* updating user info. */}
-      <Drawer
+      <CustomEditForm
         isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
+        onCancelHandler={onCancelHandler}
+        onUpdate={handleSubmit(onUpdateUserInfo)}
+        isUpdating={isUpdating}
+        errors={errors}
       >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <HStack
-              align="flex-end"
-              w="full"
-              alignItems="baseline"
-              mb="14"
-              mt="5"
-            >
-              <input
-                type="file"
-                onChange={(e) => setPhoto(e.target.files[0])}
-                name="choose file"
-              />
-              <Spacer />
-              <SecondaryButton name="Upload File" onClick={uploadFile} />
-            </HStack>
-            <form>
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  First Name :
-                  <RegularInputControl
-                    placeHolder="First Name"
-                    name="first_name"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Last Name :
-                  <RegularInputControl
-                    placeHolder="Last Name"
-                    name="last_name"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Phone Number:
-                  <RegularInputControl
-                    placeHolder="Phone Number"
-                    name="phone_number"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  Email:
-                  <RegularInputControl
-                    placeHolder="Email"
-                    name="email"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Flex mt="5" w="full" ml="320px">
-                <PrimaryButton
-                  name="Update"
-                  onClick={handleSubmit(onUpdateUserInfo)}
-                  loadingButton={isUpdating}
-                  buttonType="submit"
-                  mx="2"
-                />
-
-                <SecondaryButton
-                  name="Cancel"
-                  onClick={onCancelHandler}
-                  buttonType="button"
-                />
-              </Flex>
-              {errors?.message && (
-                <Text className="text-center mt-4" color="red">
-                  {errors?.message}
-                </Text>
-              )}
-            </form>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+        <CustomAddForm
+          listForm={[
+            {
+              head: "First Name : ",
+              placeHolder: "Enter First Name",
+              name: "first_name",
+              errors: errors,
+              inputType: "text",
+            },
+            {
+              head: "Last Name : ",
+              placeHolder: "Enter Last Name",
+              name: "last_name",
+              errors: errors,
+              inputType: "text",
+            },
+            {
+              head: "Phone Number : ",
+              placeHolder: "Enter Phone Number",
+              name: "phone_number",
+              errors: errors,
+              inputType: "number",
+            },
+            {
+              head: "Email : ",
+              placeHolder: "Enter Email",
+              name: "email",
+              errors: errors,
+              inputType: "text",
+            },
+            {
+              head: "Password : ",
+              placeHolder: "Enter Password",
+              name: "password",
+              errors: errors,
+              isPassword: true,
+            },
+            {
+              head: "Confirm Password : ",
+              placeHolder: "confirm your password",
+              name: "password_confirmation",
+              errors: errors,
+              isPassword: true,
+            },
+            // {
+            //   head: "Country Code : ",
+            //   placeHolder: "Select Country Code : ex SA",
+            //   name: "country_code",
+            //   errors: errors,
+            //   isSelect: true,
+            //   optionList: countryList,
+            //   value: "short_name",
+            //   key: "uuid",
+            //   displayValue: "short_name",
+            // },
+          ]}
+          control={control}
+          register={register}
+        />
+      </CustomEditForm>
     </>
   );
 };

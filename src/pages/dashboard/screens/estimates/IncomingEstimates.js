@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Heading,
-  Button,
-  IconButton,
-  HStack,
-  Center,
-  Spinner,
-} from "@chakra-ui/react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import { AiOutlineHome } from "react-icons/ai";
+import EstimateCard from "./EstimateCard";
 
-import { NoData } from "../../components";
 import { CustomTable } from "../../components";
 import { AxiosInstance } from "../../../../api";
 
@@ -23,7 +14,7 @@ const IncomingEstimates = () => {
   const match = useRouteMatch();
   const history = useHistory();
 
-  const getIncomingList = async () => {
+  const getIncomingEst = async () => {
     await AxiosInstance.get("/api/dashboard/estimate/incoming")
       .then((res) => {
         setList(res.data.data);
@@ -44,53 +35,47 @@ const IncomingEstimates = () => {
   };
 
   useEffect(() => {
-    getIncomingList();
+    getIncomingEst();
   }, []);
 
   return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        <Box w="full" overflowY="scroll" padding="10">
-          <HStack justifyContent="space-between" paddingBottom="5">
-            <Heading
-              textColor="gray.600"
-              fontSize="xx-large"
-              fontWeight="lg"
-              alignItems="baseline"
-            >
-              Incoming Estimates
-            </Heading>
-            <IconButton
-              as={Button}
-              colorScheme="yellow"
-              size="lg"
-              icon={<AiOutlineHome />}
-              rounded="full"
-              onClick={() => {
-                history.push(`${match.url}/estimatehome`);
-              }}
-            />
-          </HStack>
+    <Box w="full" overflowY="scroll" padding="10">
+      <HStack justifyContent="space-between" paddingBottom="5">
+        <Heading
+          textColor="gray.600"
+          fontSize="xx-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          Incoming Estimates
+        </Heading>
+      </HStack>
 
-          {!list ? (
-            <Center h="70vh" w="100%">
-              <Spinner size="xl" color="#F8B916" />
-            </Center>
-          ) : list.length === 0 ? (
-            // TODO
-            <NoData />
-          ) : (
-            <CustomTable
-              PageHeadLine="Payments"
-              thHeading="List of purchase oncoming"
-              thData={["Transaction-ID", "Details", "Date", "options"]}
-              list={list}
-              listData={["uuid", "details", "date"]}
-            />
-          )}
-        </Box>
-      </Route>
-    </Switch>
+      <CustomTable
+        list={list}
+        component="estimate"
+        theHeading="List of incoming estimates"
+        theData={[
+          "Transaction-ID",
+          "Subject",
+          "Name",
+          "Date",
+          "Company",
+          "Valid-till",
+          "Status",
+          "Action",
+        ]}
+        listData={[
+          "uuid",
+          "subject",
+          "assigned_to",
+          "date",
+          "company_name",
+          "valid_till",
+          "status",
+        ]}
+      />
+    </Box>
   );
 };
 

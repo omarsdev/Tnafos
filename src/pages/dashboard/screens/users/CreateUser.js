@@ -204,13 +204,7 @@ const CreateUser = () => {
               control={control}
               register={register}
             />
-            {/* <CustomSelect
-              control={control}
-              register={register}
-              placeHolder="Select a country"
-              errors={err}
-              optionList={countryList}
-            /> */}
+
             <Box className="flex flex-col items-center gap-2 mt-10">
               <Heading fontSize="xl" color="grey" fontWeight="normal">
                 Terms and Conditions agreement

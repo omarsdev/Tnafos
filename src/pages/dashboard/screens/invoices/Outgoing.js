@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 
 import { CustomTable, NoData } from "../../components";
 
@@ -7,6 +8,7 @@ import { AxiosInstance } from "../../../../api";
 
 const Outgoing = () => {
   const [list, setList] = useState(null);
+  const history = useHistory();
 
   const invoiceIncomingList = async () => {
     await AxiosInstance.get("/api/dashboard/invoice/outgoing")
@@ -14,7 +16,8 @@ const Outgoing = () => {
         setList(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        history.push("/dashboard/invoicehome");
       });
   };
 
