@@ -4,7 +4,7 @@ import { Link, useRouteMatch } from "react-router-dom";
 
 import { SecondaryButton } from "../../../../components";
 
-export const CardComponent = ({ userData }) => {
+const CardComponent = ({ userData }) => {
   const match = useRouteMatch();
 
   return (
@@ -39,3 +39,5 @@ export const CardComponent = ({ userData }) => {
     </Box>
   );
 };
+
+export default CardComponent;

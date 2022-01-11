@@ -20,7 +20,7 @@ import { UserDataContext } from "../../context";
 import { getToken } from "../../utils";
 import { TnafosHomeLogo } from "../../assets/icons";
 
-export const Homepage = () => {
+const Homepage = () => {
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
   const { setUserData } = dataProviderValue;
@@ -120,3 +120,5 @@ export const Homepage = () => {
     </Box>
   );
 };
+
+export default Homepage;

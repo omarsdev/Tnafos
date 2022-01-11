@@ -3,12 +3,15 @@ import React from "react";
 import { Box, Flex, VStack } from "@chakra-ui/react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { Company, Vender, Service } from "./screens";
+import Company from "./screens/Company";
+import Service from "./screens/Service";
+import Vender from "./screens/Vender";
+
 import { Navbar, CardItem, MyList, MainCompany } from "./components";
 
 import { SearchDataContextProvider } from "../../context";
 
-export const SearchLayout = () => {
+const SearchLayout = () => {
   let match = useRouteMatch();
 
   return (
@@ -55,3 +58,5 @@ export const SearchLayout = () => {
     </SearchDataContextProvider>
   );
 };
+
+export default SearchLayout;

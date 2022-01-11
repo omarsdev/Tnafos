@@ -25,7 +25,7 @@ import { useForm } from "react-hook-form";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
 
-import { CompanyCard, CreateCompany } from "./";
+import CompanyCard from "./CompanyCard";
 
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance } from "../../../../api";
@@ -35,7 +35,7 @@ import {
   RegularInputControl,
 } from "../../../../components";
 
-export const CompanyHome = () => {
+const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState(null);
 
   const { alertProviderValue } = useContext(AlertContext);
@@ -494,3 +494,5 @@ export const CompanyHome = () => {
     </>
   );
 };
+
+export default CompanyHome;

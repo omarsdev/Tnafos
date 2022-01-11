@@ -13,7 +13,7 @@ import {
 import { AlertContext } from "../../../../context";
 import { AxiosInstance } from "../../../../api";
 
-export const AddPurchase = () => {
+const AddPurchase = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -185,3 +185,5 @@ export const AddPurchase = () => {
     </Box>
   );
 };
+
+export default AddPurchase;

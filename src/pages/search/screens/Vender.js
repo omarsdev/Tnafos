@@ -43,3 +43,5 @@ export const Vender = () => {
     </>
   );
 };
+
+export default Vender;

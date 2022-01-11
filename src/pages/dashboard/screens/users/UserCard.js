@@ -30,7 +30,7 @@ import {
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 
-export const UserCard = () => {
+const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -277,3 +277,5 @@ export const UserCard = () => {
     </>
   );
 };
+
+export default UserCard;

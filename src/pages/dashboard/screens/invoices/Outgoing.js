@@ -5,7 +5,7 @@ import { CustomTable, NoData } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 
-export const Outgoing = () => {
+const Outgoing = () => {
   const [list, setList] = useState(null);
 
   const invoiceIncomingList = async () => {
@@ -57,3 +57,5 @@ export const Outgoing = () => {
     </Box>
   );
 };
+
+export default Outgoing;

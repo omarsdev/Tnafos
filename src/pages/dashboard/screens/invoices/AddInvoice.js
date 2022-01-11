@@ -1,5 +1,7 @@
 import React from "react";
 
-export const AddInvoice = () => {
+const AddInvoice = () => {
   return <div>add ..</div>;
 };
+
+export default AddInvoice;

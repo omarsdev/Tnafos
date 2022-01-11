@@ -3,7 +3,7 @@ import { Box, Text, Center, useColorModeValue } from "@chakra-ui/react";
 
 import { AxiosInstance } from "../../../../api";
 
-export const MyProfile = () => {
+const MyProfile = () => {
   const [profile, setProfile] = useState(null);
 
   //* grab user's profile:
@@ -47,3 +47,5 @@ export const MyProfile = () => {
     </Center>
   );
 };
+
+export default MyProfile;

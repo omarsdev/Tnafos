@@ -24,7 +24,7 @@ import {
 } from "../../../../components";
 import { AxiosInstance } from "../../../../api";
 
-export const CreateUser = () => {
+const CreateUser = () => {
   const validationSchema = yup.object({
     password: yup
       .string()
@@ -262,3 +262,5 @@ export const CreateUser = () => {
     </Center>
   );
 };
+
+export default CreateUser;

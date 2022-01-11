@@ -16,7 +16,7 @@ import LoginImage from "../../../assets/images/login.jpg";
 import { apiAuth } from "../../../api";
 import { setUserSession } from "../../../utils";
 
-export const Login = () => {
+const Login = () => {
   const { tokenProviderValue } = useContext(UserDataContext);
   const { setUserToken } = tokenProviderValue;
 
@@ -106,3 +106,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;

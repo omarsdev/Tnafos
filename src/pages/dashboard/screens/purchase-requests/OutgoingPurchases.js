@@ -17,7 +17,7 @@ import { CustomTable, NoData } from "../../components";
 import { AxiosInstance } from "../../../../api";
 import { SecondaryButton } from "../../../../components";
 
-export const OutgoingPurchases = () => {
+const OutgoingPurchases = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
@@ -94,3 +94,5 @@ export const OutgoingPurchases = () => {
     </Switch>
   );
 };
+
+export default OutgoingPurchases;

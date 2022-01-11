@@ -26,7 +26,7 @@ import { NoData } from "../../components";
 import { SecondaryButton } from "../../../../components";
 import { AxiosInstance } from "../../../../api";
 
-export const IncomingPurchases = () => {
+const IncomingPurchases = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
@@ -161,3 +161,5 @@ export const IncomingPurchases = () => {
     </Switch>
   );
 };
+
+export default IncomingPurchases;

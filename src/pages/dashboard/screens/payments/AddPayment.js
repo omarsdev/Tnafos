@@ -8,7 +8,7 @@ import { CustomAddForm } from "../../components";
 import { SecondaryButton, PrimaryButton } from "../../../../components";
 import { AxiosInstance } from "../../../../api";
 
-export const AddPayment = () => {
+const AddPayment = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -115,3 +115,5 @@ export const AddPayment = () => {
     </Box>
   );
 };
+
+export default AddPayment;

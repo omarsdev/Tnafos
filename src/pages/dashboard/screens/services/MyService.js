@@ -19,7 +19,7 @@ import { CustomEditForm, CustomAddForm } from "../../components";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 
-export const MyService = () => {
+const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
   const [service, setService] = useState(null);
@@ -188,3 +188,5 @@ export const MyService = () => {
     </>
   );
 };
+
+export default MyService;

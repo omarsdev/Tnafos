@@ -20,7 +20,7 @@ import { NoData } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 
-export const PaymentMedia = () => {
+const PaymentMedia = () => {
   const [media, setMedia] = useState([]);
 
   const match = useRouteMatch();
@@ -99,3 +99,5 @@ export const PaymentMedia = () => {
     </Switch>
   );
 };
+
+export default PaymentMedia;

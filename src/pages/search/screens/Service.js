@@ -55,3 +55,5 @@ export const Service = () => {
     </>
   );
 };
+
+export default Service;

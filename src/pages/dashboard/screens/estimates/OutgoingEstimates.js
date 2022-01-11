@@ -15,7 +15,7 @@ import { NoData, CustomTable } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 
-export const OutgoingEstimates = () => {
+const OutgoingEstimates = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
@@ -108,3 +108,5 @@ export const OutgoingEstimates = () => {
     </Switch>
   );
 };
+
+export default OutgoingEstimates;

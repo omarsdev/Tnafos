@@ -21,7 +21,7 @@ import { NoData } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 
-export const ClientMedia = () => {
+const ClientMedia = () => {
   const [media, setMedia] = useState([]);
 
   const match = useRouteMatch();
@@ -100,3 +100,5 @@ export const ClientMedia = () => {
     </Switch>
   );
 };
+
+export default ClientMedia;

@@ -23,26 +23,22 @@ import {
 import { FiInbox } from "react-icons/fi";
 import { AxiosInstance } from "../../api";
 
-import {
-  EstimateHome,
-  Settings,
-  UserHome,
-  IncomingPurchases,
-  OutgoingPurchases,
-  ServiceHome,
-  CompanyLayout,
-  InvoiceHome,
-  Incoming,
-  Outgoing,
-  ClientsHome,
-  Ratings,
-  PaymentHome,
-} from "./screens";
+import ClientLayout from "./screens/clients/ClientLayout";
+import CompanyLayout from "./screens/company/CompanyLayout";
+import EstimateLayout from "./screens/estimates/EstimateLayout";
+import InvoiceHome from "./screens/invoices/InvoiceHome";
+import PaymentLayout from "./screens/payments/PaymentLayout";
+// import Proposal from "./screens/proposals/Proposal"
+import PurchasesLayout from "./screens/purchase-requests/PurchasesLayout";
+import Ratings from "./screens/rating/Ratings";
+import ServiceLayout from "./screens/services/ServiceLayout";
+import SettingLayout from "./screens/settings/SettingLayout";
+import UserLayout from "./screens/users/UserLayout";
 
 import { UserDataContext } from "../../context";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
-export const DashboardLayout = () => {
+const DashboardLayout = () => {
   const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
 
   //* set border color:
@@ -186,27 +182,26 @@ export const DashboardLayout = () => {
               </Route>
               <Route path={`${match.path}/company`} component={CompanyLayout} />
               <Route path={`${match.path}/rating`} component={Ratings} />
-              <Route path={`${match.path}/user`} component={UserHome} />
-              <Route path={`${match.path}/service`} component={ServiceHome} />
+              <Route path={`${match.path}/user`} component={UserLayout} />
+              <Route path={`${match.path}/service`} component={ServiceLayout} />
               <Route
-                path={`${match.path}/purchase-request/incoming`}
-                component={IncomingPurchases}
-              />
-              <Route
-                path={`${match.path}/purchase-request/outgoing`}
-                component={OutgoingPurchases}
+                path={`${match.path}/purchase-request`}
+                component={PurchasesLayout}
               />
 
-              <Route path={`${match.path}/payment`} component={PaymentHome} />
+              <Route path={`${match.path}/payment`} component={PaymentLayout} />
 
               <Route path={`${match.path}/invoice`} component={InvoiceHome} />
 
-              <Route path={`${match.path}/estimate`} component={EstimateHome} />
               <Route
-                path={`${match.path}/clientshome`}
-                component={ClientsHome}
+                path={`${match.path}/estimate`}
+                component={EstimateLayout}
               />
-              <Route path={`${match.path}/settings`} component={Settings} />
+              <Route path={`${match.path}/client`} component={ClientLayout} />
+              <Route
+                path={`${match.path}/settings`}
+                component={SettingLayout}
+              />
             </Switch>
           </VStack>
         </HStack>
@@ -218,3 +213,5 @@ export const DashboardLayout = () => {
     </>
   );
 };
+
+export default DashboardLayout;

@@ -4,7 +4,7 @@ import { Link, useRouteMatch } from "react-router-dom";
 
 import { SecondaryButton } from "../../../../components";
 
-export const ServiceCard = ({ info }) => {
+const ServiceCard = ({ info }) => {
   const match = useRouteMatch();
   return (
     <Center py="5">
@@ -39,3 +39,5 @@ export const ServiceCard = ({ info }) => {
     </Center>
   );
 };
+
+export default ServiceCard;

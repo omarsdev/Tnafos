@@ -7,7 +7,7 @@ import { PrimaryButton, RegularInputControl } from "../../../../components";
 import { AlertContext } from "../../../../context";
 import { AxiosInstance } from "../../../../api";
 
-export const CreateCompany = () => {
+const CreateCompany = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -369,3 +369,5 @@ export const CreateCompany = () => {
     </Box>
   );
 };
+
+export default CreateCompany;

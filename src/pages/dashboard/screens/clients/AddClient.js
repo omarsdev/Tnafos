@@ -9,7 +9,7 @@ import { SecondaryButton, PrimaryButton } from "../../../../components";
 import { AlertContext } from "../../../../context";
 import { AxiosInstance } from "../../../../api";
 
-export const AddClient = () => {
+const AddClient = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -178,3 +178,5 @@ export const AddClient = () => {
     </Box>
   );
 };
+
+export default AddClient;

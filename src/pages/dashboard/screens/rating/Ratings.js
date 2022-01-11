@@ -10,7 +10,7 @@ import {
 import { MyRating, RatingCard } from "./";
 import { AxiosInstance } from "../../../../api";
 
-export const Ratings = () => {
+const Ratings = () => {
   const [ratings, setRatings] = useState([]);
 
   const { uuid } = useParams();
@@ -50,3 +50,5 @@ export const Ratings = () => {
     </Switch>
   );
 };
+
+export default Ratings;

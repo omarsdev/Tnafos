@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td, Box } from "@chakra-ui/react";
 
-export const CompanyCard = ({ Data }) => {
+const CompanyCard = ({ Data }) => {
   return (
     <Table
       variant="simple"
@@ -184,3 +184,5 @@ export const CompanyCard = ({ Data }) => {
     </Table>
   );
 };
+
+export default CompanyCard;

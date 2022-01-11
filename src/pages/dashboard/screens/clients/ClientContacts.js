@@ -101,3 +101,5 @@ export const ClientContacts = () => {
     </Switch>
   );
 };
+
+export default ClientContacts;

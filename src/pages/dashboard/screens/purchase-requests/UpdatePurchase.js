@@ -1,5 +1,7 @@
 import React from "react";
 
-export const UpdatePurchase = () => {
+const UpdatePurchase = () => {
   return <div></div>;
 };
+
+export default UpdatePurchase;

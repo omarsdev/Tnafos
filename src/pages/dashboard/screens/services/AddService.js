@@ -9,7 +9,7 @@ import { PrimaryButton, SecondaryButton } from "../../../../components";
 import { AxiosInstance } from "../../../../api";
 import { AlertContext } from "../../../../context";
 
-export const AddService = () => {
+const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -150,3 +150,5 @@ export const AddService = () => {
     </Center>
   );
 };
+
+export default AddService;
