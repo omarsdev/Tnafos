@@ -8,14 +8,14 @@ import {
   Spinner,
   Center,
 } from "@chakra-ui/react";
-import { AiOutlineHome } from "react-icons/ai";
+
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import { AxiosInstance } from "api";
 import { CustomTable } from "../../components";
 import { EstimateCard } from "./";
 
 export const OutgoingEstimates = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   const match = useRouteMatch();
@@ -64,10 +64,10 @@ export const OutgoingEstimates = () => {
           </HStack>
 
           <CustomTable
-            PageHeadLine="estimate"
             thHeading="List of outgoing estimates"
+            list={list}
             theData={[
-              "Transaction-ID",
+              "UUID",
               "Subject",
               "Name",
               "Date",
