@@ -33,7 +33,7 @@ import {
   ServiceHome,
   CompanyLayout,
   IncomingEstimates,
-  OutgoinEstimates,
+  OutgoingEstimates,
   ClientsHome,
   Ratings,
   PaymentHome,
@@ -204,7 +204,7 @@ export const DashboardLayout = () => {
               />
               <Route
                 path={`${match.path}/estimate/outgoing`}
-                component={OutgoinEstimates}
+                component={OutgoingEstimates}
               />
 
               <Route
