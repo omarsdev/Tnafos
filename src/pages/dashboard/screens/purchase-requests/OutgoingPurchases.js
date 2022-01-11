@@ -31,14 +31,12 @@ import {
   Switch,
   Route,
   useHistory,
+  useParams,
 } from "react-router-dom";
-// import { CustomTable } from "../../components";
+import { CustomTable, NoData } from "../../components";
 import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
-import { SecondaryButton } from "components";
-import { Search2Icon } from "@chakra-ui/icons";
-import { NoData } from "pages";
-import { CustomTable } from "pages";
+import { UpdatePurchase } from "./";
 
 export const OutgoingPurchases = () => {
   const [list, setList] = useState(null);
@@ -47,6 +45,7 @@ export const OutgoingPurchases = () => {
 
   const match = useRouteMatch();
   const history = useHistory();
+  const uuid = useParams();
 
   const purOutgoingList = async () => {
     await AxiosInstance.get("api/dashboard/purchase-request/outgoing")
@@ -97,29 +96,17 @@ export const OutgoingPurchases = () => {
             />
           </HStack>
 
-          {!list ? (
-            <Center h="70vh" w="100%">
-              <Spinner size="xl" color="#F8B916" />
-            </Center>
-          ) : list.length === 0 ? (
-            <NoData component={"purchase-request"} />
-          ) : (
-            <CustomTable
-              PageHeadLine="Payments"
-              thHeading="List of purchase outgoing"
-              thData={[
-                "Transaction-ID",
-                "Details",
-                "Date",
-                "Service",
-                "options",
-              ]}
-              list={list}
-              listData={["uuid", "details", "date", "service"]}
-            />
-          )}
+          <CustomTable
+            PageHeadLine="Purchase Requests"
+            thHeading="List of outgoing purchase-requests"
+            thData={["Transaction-ID", "Details", "Date", "Service", "options"]}
+            list={list}
+            listData={["uuid", "details", "date", "service"]}
+            component={"purchase-requset"}
+          />
         </Box>
       </Route>
+      <Route path={`${match.path}/outgoing/:uuid`} component={UpdatePurchase} />
     </Switch>
   );
 };

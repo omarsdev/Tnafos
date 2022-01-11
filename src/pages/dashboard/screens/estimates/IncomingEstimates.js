@@ -23,8 +23,6 @@ import {
   InputLeftElement,
   Stack,
 } from "@chakra-ui/react";
-
-import { BiUpload, BiChevronsUp } from "react-icons/bi";
 import {
   Link,
   useRouteMatch,
@@ -32,13 +30,11 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-// import { CustomTable } from "../../components";
+import { CustomTable } from "../../components";
 import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
-import { SecondaryButton } from "components";
-import { Search2Icon } from "@chakra-ui/icons";
 import { NoData } from "pages";
-import { CustomTable } from "pages";
+import { EstimateCard } from "./";
 
 export const IncomingEstimates = () => {
   const [list, setList] = useState(null);
@@ -115,6 +111,7 @@ export const IncomingEstimates = () => {
           )}
         </Box>
       </Route>
+      <Route path={`${match.path}/incoming/:uuid`} component={EstimateCard} />
     </Switch>
   );
 };

@@ -97,6 +97,7 @@ export const AddPurchase = () => {
                 placeHolder: "Enter Phone",
                 name: "phone",
                 err: err,
+                inputType: "number",
               },
               {
                 head: "Enter Fax",

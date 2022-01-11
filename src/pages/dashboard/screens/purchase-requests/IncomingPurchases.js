@@ -53,8 +53,7 @@ export const IncomingPurchases = () => {
           listData={["uuid", "details", "date", "service[name]"]}
         />
       </Route>
-      {/* <Route path={`${match.path}` - 1} component={PurchasesHome} /> */}
-      <Route path={`${match.path}/:uuid`} component={UpdatePurchase} />
+      <Route path={`${match.path}/incoming/:uuid`} component={UpdatePurchase} />
     </Switch>
   );
 };

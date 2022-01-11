@@ -37,13 +37,8 @@ import { MdOutlinePermMedia } from "react-icons/md";
 import { AiOutlineContacts } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 
-import {
-  RegularInputControl,
-  SecondaryButton,
-  PrimaryButton,
-} from "components";
-
 import { ClientContacts, ClientMedia } from "./";
+import { CustomEditForm } from "../../components";
 
 import { useForm } from "react-hook-form";
 import { AlertContext } from "context/AlertContext";
@@ -246,186 +241,69 @@ export const ClientCard = () => {
             </Center>
 
             {/* updating user info. */}
-            <Drawer
+            <CustomEditForm
               isOpen={isOpen}
-              placement="right"
-              onClose={onCancelHandler}
-              size="lg"
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(updateClient)}
+              isUpdating={isUpdating}
+              errors={errors}
             >
-              <DrawerOverlay />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-                  Editing Info by filling up this form
-                </DrawerHeader>
-
-                <DrawerBody>
-                  <HStack
-                    align="flex-end"
-                    w="full"
-                    alignItems="baseline"
-                    mb="14"
-                    mt="5"
-                  >
-                    <input
-                      type="file"
-                      onChange={(e) => setPhoto(e.target.files[0])}
-                      name="choose file"
-                    />
-                    <Spacer />
-                    <SecondaryButton name="Upload File" onClick={uploadFile} />
-                  </HStack>
-                  <form>
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500 ">
-                        Company Name :
-                        <RegularInputControl
-                          placeHolder="first name"
-                          name="first_name"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500 ">
-                        First Nmae :
-                        <RegularInputControl
-                          placeHolder="first name"
-                          name="first_name"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500 ">
-                        First Nmae :
-                        <RegularInputControl
-                          placeHolder="first name"
-                          name="first_name"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500 ">
-                        First Nmae :
-                        <RegularInputControl
-                          placeHolder="first name"
-                          name="first_name"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500 ">
-                        Last Name:
-                        <RegularInputControl
-                          placeHolder="last_name"
-                          name="last_name"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500">
-                        Position :
-                        <RegularInputControl
-                          placeHolder="position"
-                          name="position"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500">
-                        Email:
-                        <RegularInputControl
-                          placeHolder="email"
-                          name="email"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500">
-                        Phone Number:
-                        <RegularInputControl
-                          placeHolder="phone_number"
-                          name="phone_number"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Box className="mt-4">
-                      <label className="w-32 text-left text-gray-500">
-                        Country code:
-                        <RegularInputControl
-                          placeHolder="country code"
-                          name="country_code"
-                          control={control}
-                          register={register}
-                          width="100%"
-                          error={errors}
-                        />
-                      </label>
-                    </Box>
-
-                    <Flex mt="5" w="full" ml="320px">
-                      <PrimaryButton
-                        name="Update"
-                        onClick={handleSubmit(updateClient)}
-                        loadingButton={isUpdating}
-                        buttonType="submit"
-                        mx="2"
-                      />
-
-                      <SecondaryButton
-                        name="Cancel"
-                        onClick={onCancelHandler}
-                        buttonType="button"
-                      />
-                    </Flex>
-                    {errors?.message && (
-                      <Text className="text-center mt-4" color="red">
-                        {errors?.message}
-                      </Text>
-                    )}
-                  </form>
-                </DrawerBody>
-              </DrawerContent>
-            </Drawer>
+              <CustomEditForm
+                children={[
+                  {
+                    head: "Company Name : ",
+                    placeHolder: "Enter Company Name : ",
+                    name: "company_name",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "First Name : ",
+                    placeHolder: "Enter First Name : ",
+                    name: "first_name",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Last Name : ",
+                    placeHolder: "Enter Last Name : ",
+                    name: "last_name",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Position : ",
+                    placeHolder: "Enter Position : ",
+                    name: "position",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Email : ",
+                    placeHolder: "Enter Email : ",
+                    name: "email",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Phone Number : ",
+                    placeHolder: "Enter Phone Number : ",
+                    name: "phone_number",
+                    inputType: "number",
+                    errors: errors,
+                  },
+                  {
+                    head: "Country code : ",
+                    placeHolder: "Enter Country code : ",
+                    name: "country_code",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
           </>
         )}
       </Route>

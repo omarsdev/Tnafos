@@ -26,7 +26,7 @@ import { useForm } from "react-hook-form";
 
 import { AlertContext } from "context/AlertContext";
 import { media } from "api/media";
-import { CustomEditForm } from "../../components";
+import { CustomEditForm, CustomAddForm } from "../../components";
 
 export const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -173,8 +173,8 @@ export const MyService = () => {
         isUpdating={isUpdating}
         errors={errors}
       >
-        <CustomEditForm
-          children={[
+        <CustomAddForm
+          listForm={[
             {
               head: "Price : ",
               placeHolder: "Enter Price : ",

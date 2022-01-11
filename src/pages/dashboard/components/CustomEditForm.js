@@ -57,7 +57,7 @@ export const CustomEditForm = ({
           </HStack>
           <form pt="5">
             {children}
-            <Flex mt="5" w="full" ml="320px">
+            <Flex my="10" w="full" ml="320px">
               <PrimaryButton
                 name="Update"
                 onClick={onUpdate}
