@@ -10,6 +10,14 @@ import {
   Stack,
   Flex,
   Image,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  HStack,
+  Spacer,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -18,6 +26,7 @@ import { CustomEditForm, CustomAddForm } from "../../components";
 
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
+import { SecondaryButton } from "../../../../components/button/SecondaryButton";
 
 const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -157,34 +166,66 @@ const MyService = () => {
       </Center>
 
       {/* updating service. */}
-      <CustomEditForm
+      <Drawer
         isOpen={isOpen}
-        onCancelHandler={onCancelHandler}
-        onUpdate={handleSubmit(onUpdateService)}
-        isUpdating={isUpdating}
-        errors={errors}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
       >
-        <CustomAddForm
-          listForm={[
-            {
-              head: "Price : ",
-              placeHolder: "Enter Price : ",
-              name: "price",
-              inputType: "number",
-              err: errors,
-            },
-            {
-              head: "Type : ",
-              placeHolder: "Enter Type : ",
-              name: "type",
-              inputType: "text",
-              err: errors,
-            },
-          ]}
-          control={control}
-          register={register}
-        />
-      </CustomEditForm>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
+
+          <DrawerBody>
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
+              <input
+                type="file"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton name="Upload File" onClick={uploadFile} />
+            </HStack>
+            <CustomEditForm
+              isOpen={isOpen}
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(onUpdateService)}
+              isUpdating={isUpdating}
+              errors={errors}
+            >
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Price : ",
+                    placeHolder: "Enter Price : ",
+                    name: "price",
+                    inputType: "number",
+                    err: errors,
+                  },
+                  {
+                    head: "Type : ",
+                    placeHolder: "Enter Type : ",
+                    name: "type",
+                    inputType: "text",
+                    err: errors,
+                  },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };
