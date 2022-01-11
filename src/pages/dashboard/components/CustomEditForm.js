@@ -37,24 +37,6 @@ export const CustomEditForm = ({
         </DrawerHeader>
 
         <DrawerBody>
-          <HStack
-            align="flex-end"
-            w="full"
-            alignItems="baseline"
-            mb="14"
-            mt="5"
-          >
-            <input
-              type="file"
-              //   onChange={(e) => setPhoto(e.target.files[0])}
-              name="choose file"
-            />
-            <Spacer />
-            <SecondaryButton
-              name="Upload File"
-              // onClick={uploadFile}
-            />
-          </HStack>
           <form pt="5">
             {children}
             <Flex my="10" w="full" ml="320px">

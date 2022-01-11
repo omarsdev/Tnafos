@@ -20,6 +20,8 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  HStack,
+  Spacer,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { FiEdit } from "react-icons/fi";
@@ -170,9 +172,9 @@ const CompanyHome = () => {
                 >
                   <Text
                     fontSize="LG"
-                    bg="gray.200"
+                    bg="#333333"
                     roundedTop="lg"
-                    textColor="gray.700"
+                    textColor="white"
                     fontFamily="inherit"
                     fontWeight="medium"
                     paddingY="3"
@@ -215,6 +217,7 @@ const CompanyHome = () => {
       {/* company update */}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
+
         <ModalContent>
           <ModalHeader
             fontWeight="medium"
@@ -226,6 +229,24 @@ const CompanyHome = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
+              <input
+                type="file"
+                //   onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton
+                name="Upload File"
+                // onClick={uploadFile}
+              />
+            </HStack>
             <form>
               <Box className="mt-4">
                 <label className="w-32 text-left text-gray-500 ">

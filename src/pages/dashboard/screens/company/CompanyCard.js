@@ -17,18 +17,18 @@ const CompanyCard = ({ Data }) => {
       <Thead height="14">
         <Tr>
           <Th
-            bg="gray.200"
+            bg="#333333"
             roundedTopLeft="lg"
-            textColor="gray.700"
+            textColor="white"
             paddingY="2"
             pl="2"
           >
             Company Profile
           </Th>
           <Th
-            bg="gray.200"
+            bg="#333333"
             roundedTopRight="lg"
-            textColor="gray.700"
+            textColor="white"
             textAlign="start"
             paddingY="2"
             pl="2"
