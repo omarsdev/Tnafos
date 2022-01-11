@@ -90,13 +90,13 @@ export const AddPurchase = () => {
                 err: err,
                 inputType: "text",
               },
-              {
-                head: "Lines",
-                placeHolder: "Enter Lines",
-                name: "lines",
-                err: err,
-                inputType: "text",
-              },
+              //   {
+              //     head: "Lines",
+              //     placeHolder: "Enter Lines",
+              //     name: "lines",
+              //     err: err,
+              //     inputType: "text",
+              //   },
             ]}
             control={control}
             register={register}

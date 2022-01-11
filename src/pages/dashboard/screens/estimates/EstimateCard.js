@@ -126,7 +126,7 @@ const EstimateCard = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        {/* {!card ? (
+        {!card ? (
           <Center h="70vh" w="100%">
             <Spinner size="xl" color="#F8B916" />
           </Center>
@@ -135,8 +135,8 @@ const EstimateCard = () => {
             <Center py="5">
               <Box
                 className="rounded-3xl relative bg-white shadow-2xl"
-                w="400px"
-                h="500px"
+                w="500px"
+                h="900px"
               >
                 <VStack spacing="20px" mx="5%" mt="5">
                   <Box mr="0">
@@ -157,57 +157,63 @@ const EstimateCard = () => {
                     </Text>
                     <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
                     <Text textColor="gray.600">Total:{card?.total}</Text>
-                    <Text textColor="gray.600">
-                      Contact personal-info:
+                    <Box textColor="gray.600" my="3">
+                      <Text fontWeight="bold">Assigned - to :</Text>
                       <Stack>
-                        <Text>{card?.assigned_to?.first_name}</Text>
-                        <Text>{card?.assigned_to?.last_name}</Text>
+                        <Text>
+                          {card?.assigned_to?.first_name}{" "}
+                          {card?.assigned_to?.last_name}
+                        </Text>
                         <Text>{card?.assigned_to?.email}</Text>
                         <Text>{card?.assigned_to?.phone_number}</Text>
                         <Text>{card?.assigned_to?.uuid}</Text>
                         <Text>{card?.assigned_to?.is_admin}</Text>
                       </Stack>
-                    </Text>
-                    <Text textColor="gray.600">
-                      Company Info:{" "}
-                      {card.customer.map((element, idxx) => (
-                        <Stack key={idxx}>
-                          <Text>
-                            {element?.primary_contact.map((item, index) => (
-                              <Stack>
-                                <Text>{item?.first_name}</Text>
-                                <Text>{item?.last_name}</Text>
-                                <Text>{item?.position}</Text>
-                                <Text>{item?.email}</Text>
-                                <Text>{item?.phone_number}</Text>
-                                <Text>{item?.uuid}</Text>
-                              </Stack>
-                            ))}
-                          </Text>
-                          <Text>{element?.company_name}</Text>
-                          <Text>{element?.vat_number}</Text>
-                          <Text>{element?.phone}</Text>
-                          <Text>{element?.fax}</Text>
-                          <Text>{element?.website}</Text>
-                          <Text>{element?.currency}</Text>
-                          <Text>{element?.state}</Text>
-                          <Text>{element?.city}</Text>
-                          <Text>{element?.zipcode}</Text>
-                          <Text>{element?.address}</Text>
-                          <Text>
-                            {element.country.map((e, id) => (
-                              <Stack key={id}>
-                                <Text>{e?.name}</Text>
-                                <Text>{e?.short_name}</Text>
-                                <Text>{e?.country_code}</Text>
-                                <Text>{e?.currency}</Text>
-                                <Text>{e?.uuid}</Text>
-                              </Stack>
-                            ))}
-                          </Text>
-                        </Stack>
-                      ))}
-                    </Text>
+                    </Box>
+                    <Box textColor="gray.600" my="3">
+                      {" "}
+                      <Text fontWeight="bold">Company Info:</Text>
+                      <Stack>
+                        <Text> {card?.customer?.company_name}</Text>
+                        <Text>{card?.customer?.vat_number}</Text>
+                        <Text>{card?.customer?.phone}</Text>
+                        <Text>{card?.customer?.fax}</Text>
+                        <Text>{card?.customer?.website}</Text>
+                        <Text>{card?.customer?.currency}</Text>
+                        <Text>{card?.customer?.state}</Text>
+                        <Text>{card?.customer?.city}</Text>
+                        <Text>{card?.customer?.zipcode}</Text>
+                        <Text>{card?.customer?.address}</Text>
+                      </Stack>
+                    </Box>
+
+                    <Box textColor="gray.600" my="3">
+                      {" "}
+                      <Text fontWeight="bold">Country:</Text>
+                      <Stack>
+                        <Text> {card?.customer?.country?.name}</Text>
+                        <Text>{card?.customer?.country?.short_name}</Text>
+                        <Text>{card?.customer?.country?.country_code}</Text>
+                        <Text>{card?.customer?.country?.currency}</Text>
+                        <Text>{card?.customer?.country?.uuid}</Text>
+                      </Stack>
+                    </Box>
+
+                    <Box textColor="gray.600" my="3">
+                      {" "}
+                      <Text fontWeight="bold">Contact personal-info:</Text>
+                      <Stack>
+                        <Text>
+                          {" "}
+                          {card?.primary_contact?.first_name}{" "}
+                          {card?.primary_contact?.last_name}
+                        </Text>
+                        <Text>{card?.primary_contact?.position}</Text>
+                        <Text>{card?.primary_contact?.email}</Text>
+                        <Text>{card?.primary_contact?.phone_number}</Text>
+                        <Text>{card?.primary_contact?.uuid}</Text>
+                      </Stack>
+                    </Box>
                   </Box>
 
                   <Flex justify={"center"} w="full" gap="15px">
@@ -249,107 +255,139 @@ const EstimateCard = () => {
               </Box>
             </Center>
 
-            <CustomEditForm
+            {/* updating estimate */}
+            <Drawer
               isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updateEstimate)}
-              isUpdating={isUpdating}
-              errors={errors}
+              placement="right"
+              onClose={onCancelHandler}
+              size="lg"
             >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Subject : ",
-                    placeHolder: "Enter Subject",
-                    name: "subject",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Status : ",
-                    placeHolder: "Enter Status",
-                    name: "status",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Date : ",
-                    placeHolder: "Enter Date",
-                    name: "date",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Valid - till : ",
-                    placeHolder: "valid - till",
-                    name: "valid_till",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Currency : ",
-                    placeHolder: "Enter Currency",
-                    name: "currency",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Customer Id : ",
-                    placeHolder: "Enter customer_id",
-                    name: "customer_id",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Assigned - to : ",
-                    placeHolder: "Enter the uuid here",
-                    name: "assigned_to",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Discount- type : ",
-                    placeHolder: "Enter discount_type",
-                    name: "discount_type",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Discount - amount : ",
-                    placeHolder: "Enter discount_amount",
-                    name: "discount_amount",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Sub-total : ",
-                    placeHolder: "Enter sub-total",
-                    name: "subtotal",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Total : ",
-                    placeHolder: "Enter Total",
-                    name: "total",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  //   {
-                  //     head: "Lines : ",
-                  //     placeHolder: "Enter Lines",
-                  //     name: "lines",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+                  Edit your Info by filling up this form
+                </DrawerHeader>
+
+                <DrawerBody>
+                  <HStack
+                    align="flex-end"
+                    w="full"
+                    alignItems="baseline"
+                    mb="14"
+                    mt="5"
+                  >
+                    <input
+                      type="file"
+                      onChange={(e) => setPhoto(e.target.files[0])}
+                      name="choose file"
+                    />
+                    <Spacer />
+                    <SecondaryButton name="Upload File" onClick={uploadFile} />
+                  </HStack>
+                  <CustomEditForm
+                    isOpen={isOpen}
+                    onCancelHandler={onCancelHandler}
+                    onUpdate={handleSubmit(updateEstimate)}
+                    isUpdating={isUpdating}
+                    errors={errors}
+                  >
+                    <CustomAddForm
+                      listForm={[
+                        {
+                          head: "Subject : ",
+                          placeHolder: "Enter Subject",
+                          name: "subject",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Status : ",
+                          placeHolder: "Enter Status",
+                          name: "status",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Date : ",
+                          placeHolder: "Enter Date",
+                          name: "date",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Valid - till : ",
+                          placeHolder: "valid - till",
+                          name: "valid_till",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Currency : ",
+                          placeHolder: "Enter Currency",
+                          name: "currency",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Customer Id : ",
+                          placeHolder: "Enter customer_id",
+                          name: "customer_id",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Assigned - to : ",
+                          placeHolder: "Enter the uuid here",
+                          name: "assigned_to",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Discount- type : ",
+                          placeHolder: "Enter discount_type",
+                          name: "discount_type",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Discount - amount : ",
+                          placeHolder: "Enter discount_amount",
+                          name: "discount_amount",
+                          inputType: "number",
+                          errors: errors,
+                        },
+                        {
+                          head: "Sub-total : ",
+                          placeHolder: "Enter sub-total",
+                          name: "subtotal",
+                          inputType: "number",
+                          errors: errors,
+                        },
+                        {
+                          head: "Total : ",
+                          placeHolder: "Enter Total",
+                          name: "total",
+                          inputType: "number",
+                          errors: errors,
+                        },
+                        //   {
+                        //     head: "Lines : ",
+                        //     placeHolder: "Enter Lines",
+                        //     name: "lines",
+                        //     inputType: "text",
+                        //     errors: errors,
+                        //   },
+                      ]}
+                      control={control}
+                      register={register}
+                    />
+                  </CustomEditForm>
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
           </>
-        )} */}
-        <h1>HEllo WOrld</h1>
+        )}
       </Route>
       <Route path={`${match.path}/updatestatus`} component={UpdateStatus} />
       <Route
