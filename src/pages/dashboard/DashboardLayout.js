@@ -21,7 +21,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { FiInbox } from "react-icons/fi";
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../../api";
 
 import {
   EstimateHome,
@@ -39,7 +39,7 @@ import {
   PaymentHome,
 } from "./screens";
 
-import { UserDataContext } from "context";
+import { UserDataContext } from "../../context";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
 export const DashboardLayout = () => {

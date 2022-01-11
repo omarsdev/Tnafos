@@ -3,18 +3,18 @@ import React, { useState, useContext } from "react";
 import { Stack, Flex, Spacer, Box, Center, Text } from "@chakra-ui/react";
 import { Link, useHistory, Redirect } from "react-router-dom";
 
-import { UserDataContext } from "context";
+import { UserDataContext } from "../../../context";
 import {
   RegularInput,
   PasswordInput,
   PrimaryButton,
   CheckBox,
-} from "components";
+} from "../../../components";
 import { AuthLayout } from "../AuthLayout";
-import LoginImage from "assets/images/login.jpg";
+import LoginImage from "../../../assets/images/login.jpg";
 
 import { apiAuth } from "../../../api";
-import { setUserSession } from "utils";
+import { setUserSession } from "../../../utils";
 
 export const Login = () => {
   const { tokenProviderValue } = useContext(UserDataContext);

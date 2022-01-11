@@ -1,4 +1,4 @@
-import { AxiosInstance } from "api/AxiosInstance";
+import { AxiosInstance } from "../api";
 import { useHistory } from "react-router-dom";
 
 export const CompanyProfile = () => {

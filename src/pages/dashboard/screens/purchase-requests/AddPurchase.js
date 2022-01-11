@@ -1,16 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { AxiosInstance } from "api";
 import { useHistory } from "react-router-dom";
+
+import { CustomAddForm } from "../../components";
+
 import {
   RegularInputControl,
   SecondaryButton,
   PrimaryButton,
-} from "components";
-import { AlertContext } from "context";
-
-import { CustomAddForm } from "../../components";
+} from "../../../../components";
+import { AlertContext } from "../../../../context";
+import { AxiosInstance } from "../../../../api";
 
 export const AddPurchase = () => {
   const [err, setErr] = useState(null);

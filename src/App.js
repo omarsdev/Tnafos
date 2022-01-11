@@ -14,10 +14,10 @@ import {
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { withFocusVisible } from "@v1v2/chakra";
-import { AlertContextProvider } from "context/AlertContext";
-import { UserDataContextProvider } from "context";
+import { AlertContextProvider } from "./context/AlertContext";
+import { UserDataContextProvider } from "./context";
 import { ErrorBoundary } from "react-error-boundary";
-import { FallBack } from "components/FallBack";
+import { FallBack } from "./components/FallBack";
 
 const theme = extendTheme(
   {

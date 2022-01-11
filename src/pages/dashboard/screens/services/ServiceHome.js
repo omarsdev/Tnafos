@@ -16,9 +16,10 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { AxiosInstance } from "api/AxiosInstance";
 import { AiOutlinePlus } from "react-icons/ai";
 import { ServiceCard, AddService, MyService } from "./";
+
+import { AxiosInstance } from "../../../../api";
 
 export const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);

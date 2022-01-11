@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
-import { AxiosInstance } from "api";
-import { CustomTable, NoData } from "pages";
+import { Box, Center, Spinner } from "@chakra-ui/react";
+
+import { CustomTable, NoData } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
 
 export const Outgoing = () => {
   const [list, setList] = useState(null);

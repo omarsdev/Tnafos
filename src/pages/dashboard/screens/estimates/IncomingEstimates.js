@@ -32,13 +32,11 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-// import { CustomTable } from "../../components";
-import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
-import { SecondaryButton } from "components";
-import { Search2Icon } from "@chakra-ui/icons";
-import { NoData } from "pages";
-import { CustomTable } from "pages";
+
+import { NoData } from "../../components";
+import { CustomTable } from "../../components";
+import { AxiosInstance } from "../../../../api";
 
 export const IncomingEstimates = () => {
   const [list, setList] = useState(null);

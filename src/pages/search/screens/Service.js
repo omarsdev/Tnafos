@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { useRouteMatch } from "react-router-dom";
 import { Box, Grid, Spinner, Text } from "@chakra-ui/react";
-
-import { AxiosInstance } from "api";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import { CardItem } from "../components";
-import InfiniteScroll from "react-infinite-scroll-component";
+
+import { AxiosInstance } from "../../../api";
 
 export const Service = () => {
   const match = useRouteMatch();

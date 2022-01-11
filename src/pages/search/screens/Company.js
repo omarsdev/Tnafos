@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { Box, Grid, Text } from "@chakra-ui/react";
 
 import { CardItem } from "../components";
-import { SearchDataContext } from "context";
+import { SearchDataContext } from "../../../context";
 
 export const Company = () => {
   const { companyListProviderValue } = useContext(SearchDataContext);

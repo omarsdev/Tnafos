@@ -16,8 +16,9 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
+
+import { AxiosInstance } from "../../../../api";
 
 export const ClientContacts = () => {
   const history = useHistory();

@@ -1,10 +1,11 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import { Box, Text, Heading, Center } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { AxiosInstance } from "../../../../api/AxiosInstance";
-import { AlertContext } from "context";
-import { PrimaryButton, RegularInputControl } from "components";
+
+import { PrimaryButton, RegularInputControl } from "../../../../components";
+import { AlertContext } from "../../../../context";
+import { AxiosInstance } from "../../../../api";
 
 export const CreateCompany = () => {
   const { alertProviderValue } = useContext(AlertContext);

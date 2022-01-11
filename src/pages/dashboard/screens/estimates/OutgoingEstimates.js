@@ -5,27 +5,15 @@ import {
   IconButton,
   HStack,
   Button,
-  Text,
   Spinner,
   Center,
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Spacer,
-  Select,
 } from "@chakra-ui/react";
+import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 
-import { Search2Icon } from "@chakra-ui/icons";
-import { BiUpload } from "react-icons/bi";
+import { NoData, CustomTable } from "../../components";
 
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import { AxiosInstance } from "api";
-import { BsTrash } from "react-icons/bs";
-import { SecondaryButton } from "components";
-import { NoData } from "pages";
-import { CustomTable } from "pages";
+import { AxiosInstance } from "../../../../api";
 
 export const OutgoingEstimates = () => {
   const [list, setList] = useState(null);

@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  useRouteMatch,
-  useHistory,
-  Link,
-  Switch,
-  Route,
-} from "react-router-dom";
-import { CreateUser, MyProfile, UserCard, CardComponent } from "./";
+import { useRouteMatch, useHistory, Switch, Route } from "react-router-dom";
 import {
   Box,
   IconButton,
@@ -18,7 +11,10 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { AxiosInstance } from "api/AxiosInstance";
+
+import { CreateUser, MyProfile, UserCard, CardComponent } from "./";
+
+import { AxiosInstance } from "../../../../api";
 
 export const UserHome = () => {
   const [usersList, setUsersList] = useState(null);

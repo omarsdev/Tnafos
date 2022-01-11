@@ -7,38 +7,15 @@ import {
   HStack,
   Center,
   Spinner,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Select,
-  Divider,
-  Text,
-  Spacer,
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
 } from "@chakra-ui/react";
 
-import { BiUpload, BiChevronsUp } from "react-icons/bi";
-import {
-  Link,
-  useRouteMatch,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
-// import { CustomTable } from "../../components";
-import { AxiosInstance } from "api";
+import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+
 import { AiOutlineHome } from "react-icons/ai";
-import { SecondaryButton } from "components";
-import { Search2Icon } from "@chakra-ui/icons";
-import { NoData } from "pages";
-import { CustomTable } from "pages";
+import { CustomTable, NoData } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
+import { SecondaryButton } from "../../../../components";
 
 export const OutgoingPurchases = () => {
   const [list, setList] = useState(null);

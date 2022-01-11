@@ -3,8 +3,8 @@ import React, { useContext } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { ChevronDown } from "react-feather";
 
-import { SecondaryButton } from "../../../components/index";
-import { SearchDataContext } from "context";
+import { SecondaryButton } from "../../../components";
+import { SearchDataContext } from "../../../context";
 
 const MyListItem = ({ data }) => {
   return (

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Heading,
-  Button,
   IconButton,
   HStack,
   Center,
@@ -14,30 +12,19 @@ import {
   Th,
   Td,
   Select,
-  Divider,
   Text,
   Spacer,
   Flex,
   Input,
   InputGroup,
   InputLeftElement,
-  Stack,
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
-import { AiOutlinePlus } from "react-icons/ai";
 import { BiUpload, BiChevronsUp } from "react-icons/bi";
-import {
-  Link,
-  useRouteMatch,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
-import { AddPayment, EditPayment } from ".";
-import { AxiosInstance } from "api";
-import { SecondaryButton } from "components";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
-import { BsTrash } from "react-icons/bs";
+
+import { SecondaryButton } from "../../../components";
 
 export const CustomTable = ({
   PageHeadLine,

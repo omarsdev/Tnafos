@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { AxiosInstance } from "api";
 import { Box, Text } from "@chakra-ui/react";
 import { useParams, Switch, Route, useRouteMatch } from "react-router-dom";
+
+import { AxiosInstance } from "../../../../api";
 
 export const MyRating = () => {
   const [data, setData] = useState(null);

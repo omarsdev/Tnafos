@@ -1,8 +1,10 @@
 import React from "react";
-import { useRouteMatch, useHistory, Switch, Route } from "react-router-dom";
+import { useRouteMatch, Switch, Route } from "react-router-dom";
 import { CreateCompany } from "./CreateCompany";
 import { CompanyHome } from "./CompanyHome";
-import { PrivateRoute } from "pages/dashboard/components/PrivateRoute";
+
+import { PrivateRoute } from "../../components/PrivateRoute";
+
 export const CompanyLayout = () => {
   const match = useRouteMatch();
   return (

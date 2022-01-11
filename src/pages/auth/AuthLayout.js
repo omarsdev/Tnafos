@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { Image } from "@chakra-ui/react";
 
-import { TnafosLogoTitle } from "assets/icons";
+import { TnafosLogoTitle } from "../../assets/icons";
 
 export const AuthLayout = ({ BGImage, children }) => {
   const history = useHistory();

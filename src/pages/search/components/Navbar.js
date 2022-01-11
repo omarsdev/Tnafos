@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 
-import { TnafosSearchLogo } from "assets/icons";
+import { TnafosSearchLogo } from "../../../assets/icons";
 import { SearchIcon } from "@chakra-ui/icons";
 
 export const Navbar = () => {

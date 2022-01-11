@@ -1,35 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import {
-  Box,
-  Heading,
-  Button,
-  IconButton,
-  HStack,
-  Center,
-  Spinner,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Select,
-  Divider,
-  Text,
-  Spacer,
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-} from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BiUpload, BiChevronsUp } from "react-icons/bi";
+
 import { AddPayment, PaymentCard } from "./";
-import { AxiosInstance } from "api";
-import { CustomTable } from "pages";
+import { CustomTable } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
 
 export const PaymentHome = () => {
   const [list, setList] = useState(null);

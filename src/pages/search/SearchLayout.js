@@ -6,7 +6,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { Company, Vender, Service } from "./screens";
 import { Navbar, CardItem, MyList, MainCompany } from "./components";
 
-import { SearchDataContextProvider } from "context";
+import { SearchDataContextProvider } from "../../context";
 
 export const SearchLayout = () => {
   let match = useRouteMatch();

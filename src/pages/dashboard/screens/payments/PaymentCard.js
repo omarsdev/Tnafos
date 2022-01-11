@@ -31,21 +31,19 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { AxiosInstance } from "api";
+import { useForm } from "react-hook-form";
+import { MdOutlinePermMedia } from "react-icons/md";
+import { FiEdit } from "react-icons/fi";
 
+import { PaymentMedia } from "./";
+
+import { AlertContext } from "../../../../context/AlertContext";
+import { AxiosInstance, media } from "../../../../api";
 import {
   RegularInputControl,
   SecondaryButton,
   PrimaryButton,
-} from "components";
-
-import { useForm } from "react-hook-form";
-import { AlertContext } from "context/AlertContext";
-import { PaymentMedia } from "./";
-import { media } from "api/media";
-
-import { MdOutlinePermMedia } from "react-icons/md";
-import { FiEdit } from "react-icons/fi";
+} from "../../../../components";
 
 export const PaymentCard = () => {
   const { alertProviderValue } = useContext(AlertContext);

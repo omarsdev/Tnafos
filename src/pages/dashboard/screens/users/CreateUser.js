@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useContext,
-  useRef,
-  useCallback,
-  useEffect,
-} from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import {
   Heading,
   Box,
@@ -13,62 +7,44 @@ import {
   Text,
   Spacer,
   Center,
-  Stack,
   Spinner,
 } from "@chakra-ui/react";
-import {
-  Link,
-  useHistory,
-  useRouteMatch,
-  Route,
-  Switch,
-} from "react-router-dom";
-
-import { AxiosInstance } from "api/AxiosInstance";
-import { CheckBox } from "components";
-
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { AlertContext } from "context";
+import { CustomAddForm } from "../../components";
 
+import { AlertContext } from "../../../../context";
 import {
-  RegularInput,
   PrimaryButton,
-  PasswordInput,
   SecondaryButton,
-  RegularInputControl,
-  PasswordInputControl,
-} from "components";
-import { CustomAddForm } from "pages";
-import { CustomSelect } from "components";
+  CheckBox,
+} from "../../../../components";
+import { AxiosInstance } from "../../../../api";
 
-//* form validation rules
-const validationSchema = yup.object({
-  password: yup
-    .string()
-    .required("Password is required")
-    .min(8, "Password must be at least 8 characters !"),
-  //   .matches(RegExp("(.*[a-z].*)"), "Lowercase")
-  //   .matches(RegExp("(.*[A-Z].*)"), "at least one Uppercase character")
-  //   .matches(RegExp('[!@#$%^&*(),.?":{}|<>]'), "Special")
-  //   .matches(RegExp("(.*\\d.*)"), "Number"),
-
-  password_confirmation: yup
-    .string()
-    .required("Confirm Password is required !")
-    .oneOf([yup.ref("password")], "Passwords must match !"),
-
-  first_name: yup.string().required("first name is required!"),
-  last_name: yup.string().required("last name is required!"),
-  email: yup.string().email().required("Email is required!"),
-  phone_number: yup
-    .number()
-    .min(10, "Invalid phone number, minium 10 numbers! ")
-    .required("Phone number is required!"),
-});
 export const CreateUser = () => {
+  const validationSchema = yup.object({
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters !"),
+
+    password_confirmation: yup
+      .string()
+      .required("Confirm Password is required !")
+      .oneOf([yup.ref("password")], "Passwords must match !"),
+
+    first_name: yup.string().required("first name is required!"),
+    last_name: yup.string().required("last name is required!"),
+    email: yup.string().email().required("Email is required!"),
+    phone_number: yup
+      .number()
+      .min(10, "Invalid phone number, minium 10 numbers! ")
+      .required("Phone number is required!"),
+  });
+
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 

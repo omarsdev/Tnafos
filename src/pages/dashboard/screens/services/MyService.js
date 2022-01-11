@@ -7,29 +7,17 @@ import {
   Spinner,
   Text,
   useDisclosure,
-  HStack,
   Stack,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Spacer,
   Flex,
   Image,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
-import { AxiosInstance } from "api/AxiosInstance";
-import { RegularInputControl } from "components";
 
 import { useForm } from "react-hook-form";
-import { PrimaryButton } from "components";
-import { SecondaryButton } from "components";
-import { AlertContext } from "context/AlertContext";
-import { media } from "api/media";
-import { CustomEditForm } from "pages";
-import { CustomAddForm } from "pages";
+import { CustomEditForm, CustomAddForm } from "../../components";
+
+import { AlertContext } from "../../../../context/AlertContext";
+import { AxiosInstance, media } from "../../../../api";
 
 export const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);

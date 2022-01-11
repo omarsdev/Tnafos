@@ -3,9 +3,10 @@ import React, { useContext, useEffect } from "react";
 import { Box, Grid, Text, VStack, Spinner } from "@chakra-ui/react";
 import { useRouteMatch } from "react-router-dom";
 
-import { CardItem, CardCompany } from "../components";
-import { AxiosInstance } from "api";
-import { SearchDataContext } from "context";
+import { CardCompany } from "../components";
+
+import { AxiosInstance } from "../../../api";
+import { SearchDataContext } from "../../../context";
 
 export const Vender = () => {
   const match = useRouteMatch();

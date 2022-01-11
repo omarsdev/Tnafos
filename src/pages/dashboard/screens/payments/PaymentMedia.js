@@ -15,9 +15,10 @@ import {
   IconButton,
   Text,
 } from "@chakra-ui/react";
-import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
 import { NoData } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
 
 export const PaymentMedia = () => {
   const [media, setMedia] = useState([]);

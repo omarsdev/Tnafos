@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Image, VStack, Text } from "@chakra-ui/react";
 import { Link, useRouteMatch } from "react-router-dom";
 
-import { SecondaryButton } from "components";
+import { SecondaryButton } from "../../../../components";
 
 export const CardComponent = ({ userData }) => {
   const match = useRouteMatch();

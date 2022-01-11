@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Drawer,
   DrawerBody,
@@ -10,9 +12,7 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { PrimaryButton } from "components";
-import { SecondaryButton } from "components";
-import React from "react";
+import { PrimaryButton, SecondaryButton } from "../../../components";
 
 export const CustomEditForm = ({
   children,

@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
@@ -31,23 +25,22 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { AxiosInstance } from "api";
 
 import { MdOutlinePermMedia } from "react-icons/md";
 import { AiOutlineContacts } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import { useForm } from "react-hook-form";
 
+import { ClientContacts, ClientMedia } from "./";
+
+import { AlertContext } from "../../../../context/AlertContext";
+import { media } from "../../../../api/media";
 import {
   RegularInputControl,
   SecondaryButton,
   PrimaryButton,
-} from "components";
-
-import { ClientContacts, ClientMedia } from "./";
-
-import { useForm } from "react-hook-form";
-import { AlertContext } from "context/AlertContext";
-import { media } from "api/media";
+} from "../../../../components";
+import { AxiosInstance } from "../../../../api";
 
 export const ClientCard = () => {
   const { alertProviderValue } = useContext(AlertContext);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../api";
 import { useHistory } from "react-router-dom";
 
 export const useCompany = () => {

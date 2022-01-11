@@ -23,9 +23,6 @@ import {
   InputLeftElement,
   Stack,
 } from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BiUpload, BiChevronsUp } from "react-icons/bi";
 import {
   Link,
   useRouteMatch,
@@ -33,12 +30,15 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
+import { GrContactInfo } from "react-icons/gr";
+import { Search2Icon } from "@chakra-ui/icons";
+import { AiOutlinePlus } from "react-icons/ai";
+import { BiUpload, BiChevronsUp } from "react-icons/bi";
 
 import { AddClient, ClientCard } from "./";
-import { AxiosInstance } from "api";
-import { SecondaryButton } from "components";
-import { GrContactInfo } from "react-icons/gr";
-import { BsTrash } from "react-icons/bs";
+
+import { AxiosInstance } from "../../../../api";
+import { SecondaryButton } from "../../../../components";
 
 export const ClientsHome = () => {
   const [list, setList] = useState(null);

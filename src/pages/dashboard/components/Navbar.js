@@ -14,9 +14,8 @@ import { useRouteMatch, Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { removeUserSession } from "../../../utils";
 import { useHistory } from "react-router-dom";
-import { UserDataContext } from "context";
-import { AxiosInstance } from "api";
-import { height } from "tailwindcss/defaultTheme";
+import { UserDataContext } from "../../../context";
+import { AxiosInstance } from "../../../api";
 
 export const Navbar = () => {
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);

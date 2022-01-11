@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { AxiosInstance } from "api/AxiosInstance";
 import { Box, Text, Center, useColorModeValue } from "@chakra-ui/react";
+
+import { AxiosInstance } from "../../../../api";
 
 export const MyProfile = () => {
   const [profile, setProfile] = useState(null);
