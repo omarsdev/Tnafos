@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
@@ -23,16 +17,15 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../../../../api";
 
 import { CustomAddForm, CustomEditForm } from "../../components";
 
 import { useForm } from "react-hook-form";
-import { AlertContext } from "context/AlertContext";
-import { media } from "api/media";
+import { AlertContext } from "../../../../context/AlertContext";
 import { FiEdit } from "react-icons/fi";
 
-export const UpdatePurchase = () => {
+const UpdatePurchase = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -208,3 +201,5 @@ export const UpdatePurchase = () => {
     </Switch>
   );
 };
+
+export default UpdatePurchase;

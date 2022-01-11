@@ -1,5 +1,7 @@
 import React from "react";
 
-export const InvoiceCard = () => {
+const InvoiceCard = () => {
   return <div>invoice details..</div>;
 };
+
+export default InvoiceCard;

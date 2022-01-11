@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   List,
   ListItem,
-  ListIcon,
   HStack,
   Box,
   Text,
-  UnorderedList,
   Button,
   Divider,
   Menu,
@@ -22,7 +20,7 @@ import { SidebarMenu } from "../../../constants";
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
 export const Sidebar = () => {
-  let match = useRouteMatch();
+  const match = useRouteMatch();
 
   return (
     <Box className="bg-CBlack w-52 h-screen">

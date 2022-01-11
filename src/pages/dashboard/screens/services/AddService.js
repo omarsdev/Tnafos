@@ -2,17 +2,14 @@ import React, { useState, useContext, useCallback, useEffect } from "react";
 import { HStack, Text, Box, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { AxiosInstance } from "api/AxiosInstance";
-import { AlertContext } from "context";
 
-import {
-  PrimaryButton,
-  SecondaryButton,
-  RegularInputControl,
-} from "components";
-import { CustomAddForm } from "pages";
+import { CustomAddForm } from "../../components";
 
-export const AddService = () => {
+import { PrimaryButton, SecondaryButton } from "../../../../components";
+import { AxiosInstance } from "../../../../api";
+import { AlertContext } from "../../../../context";
+
+const AddService = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -153,3 +150,5 @@ export const AddService = () => {
     </Center>
   );
 };
+
+export default AddService;

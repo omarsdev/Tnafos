@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Box,
-  Heading,
-  Button,
   IconButton,
   HStack,
   Center,
@@ -14,22 +12,19 @@ import {
   Th,
   Td,
   Select,
-  Divider,
   Text,
   Spacer,
   Flex,
   Input,
   InputGroup,
   InputLeftElement,
-  Stack,
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
-import { AiOutlinePlus } from "react-icons/ai";
 import { BiUpload, BiChevronsUp } from "react-icons/bi";
-import { Link, useRouteMatch, useHistory } from "react-router-dom";
-import { NoData } from "./";
 
-import { SecondaryButton } from "components";
+import { SecondaryButton } from "../../../components";
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import { NoData } from "../components";
 import { FiEdit } from "react-icons/fi";
 
 export const CustomTable = ({

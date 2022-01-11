@@ -1,5 +1,7 @@
 import React from "react";
 
-export const ConvertToInvoice = () => {
+const ConvertToInvoice = () => {
   return <div></div>;
 };
+
+export default ConvertToInvoice;

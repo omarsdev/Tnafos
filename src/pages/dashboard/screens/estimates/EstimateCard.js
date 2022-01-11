@@ -31,18 +31,19 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../../../../api";
 
 import { CustomEditForm, CustomAddForm } from "../../components";
 
 import { useForm } from "react-hook-form";
-import { AlertContext } from "context/AlertContext";
-import { UpdateStatus, ConvertToInvoice } from "./";
+import { AlertContext } from "../../../../context/AlertContext";
+import UpdateStatus from "./UpdateStatus";
+import ConvertToInvoice from "./ConvertToInvoice";
 
 import { MdOutlinePermMedia } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 
-export const EstimateCard = () => {
+const EstimateCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -125,7 +126,7 @@ export const EstimateCard = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        {!card ? (
+        {/* {!card ? (
           <Center h="70vh" w="100%">
             <Spinner size="xl" color="#F8B916" />
           </Center>
@@ -158,16 +159,14 @@ export const EstimateCard = () => {
                     <Text textColor="gray.600">Total:{card?.total}</Text>
                     <Text textColor="gray.600">
                       Contact personal-info:
-                      {card.assigned_to.map((ele, idx) => (
-                        <Stack key={idx}>
-                          <Text>{ele?.first_name}</Text>
-                          <Text>{ele?.last_name}</Text>
-                          <Text>{ele?.email}</Text>
-                          <Text>{ele?.phone_number}</Text>
-                          <Text>{ele?.uuid}</Text>
-                          <Text>{ele?.is_admin}</Text>
-                        </Stack>
-                      ))}
+                      <Stack>
+                        <Text>{card?.assigned_to?.first_name}</Text>
+                        <Text>{card?.assigned_to?.last_name}</Text>
+                        <Text>{card?.assigned_to?.email}</Text>
+                        <Text>{card?.assigned_to?.phone_number}</Text>
+                        <Text>{card?.assigned_to?.uuid}</Text>
+                        <Text>{card?.assigned_to?.is_admin}</Text>
+                      </Stack>
                     </Text>
                     <Text textColor="gray.600">
                       Company Info:{" "}
@@ -249,8 +248,6 @@ export const EstimateCard = () => {
                 </VStack>
               </Box>
             </Center>
-
-            {/* updating user info. */}
 
             <CustomEditForm
               isOpen={isOpen}
@@ -351,7 +348,8 @@ export const EstimateCard = () => {
               />
             </CustomEditForm>
           </>
-        )}
+        )} */}
+        <h1>HEllo WOrld</h1>
       </Route>
       <Route path={`${match.path}/updatestatus`} component={UpdateStatus} />
       <Route
@@ -361,3 +359,5 @@ export const EstimateCard = () => {
     </Switch>
   );
 };
+
+export default EstimateCard;

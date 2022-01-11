@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
-import Login from "assets/images/login.jpg";
 import { Linkedin, Twitter, Link, Mail, Phone } from "react-feather";
 
-import { PrimaryButton } from "components";
+import { PrimaryButton } from "../../../components";
+import Login from "../../../assets/images/login.jpg";
 
 export const MainCompany = () => {
   return (

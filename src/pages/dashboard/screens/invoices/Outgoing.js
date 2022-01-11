@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
-import { AxiosInstance } from "api";
-import { CustomTable, NoData } from "pages";
+import { useHistory } from "react-router-dom";
 
-export const Outgoing = () => {
+import { CustomTable, NoData } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
+
+const Outgoing = () => {
   const [list, setList] = useState(null);
   const history = useHistory();
 
@@ -58,3 +60,5 @@ export const Outgoing = () => {
     </Box>
   );
 };
+
+export default Outgoing;

@@ -1,4 +1,4 @@
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../api";
 
 export const media = async (id, type, file) => {
   const formData = new FormData();

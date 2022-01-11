@@ -20,34 +20,26 @@ import {
   useLocation,
   useHistory,
 } from "react-router-dom";
-import { FiInbox } from "react-icons/fi";
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../../api";
 
-import {
-  Settings,
-  Incoming,
-  Outgoing,
-  UserHome,
-  IncomingPurchases,
-  OutgoingPurchases,
-  ServiceHome,
-  CompanyLayout,
-  IncomingEstimates,
-  OutgoingEstimates,
-  ClientsHome,
-  Ratings,
-  PaymentHome,
-} from "./screens";
+import DashboardHome from "./screens/home/DashboardHome";
+import ClientLayout from "./screens/clients/ClientLayout";
+import CompanyLayout from "./screens/company/CompanyLayout";
+import EstimateLayout from "./screens/estimates/EstimateLayout";
+import InvoiceHome from "./screens/invoices/InvoiceHome";
+import PaymentLayout from "./screens/payments/PaymentLayout";
+// import Proposal from "./screens/proposals/Proposal"
+import PurchasesLayout from "./screens/purchase-requests/PurchasesLayout";
+import Ratings from "./screens/rating/Ratings";
+import ServiceLayout from "./screens/services/ServiceLayout";
+import SettingLayout from "./screens/settings/SettingLayout";
+import UserLayout from "./screens/users/UserLayout";
 
-import { UserDataContext } from "context";
+import { UserDataContext } from "../../context";
+import InvoiceLayout from "./screens/invoices/InvoiceLayout";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
-export const DashboardLayout = () => {
-  const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
-
-  //* set border color:
-  const randomElement = colors[Math.floor(Math.random() * colors.length)];
-
+const DashboardLayout = () => {
   const match = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
@@ -91,136 +83,29 @@ export const DashboardLayout = () => {
             {/* {body} */}
 
             <Switch>
-              <Route exact path={match.path}>
-                <Box>
-                  <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
-                    <Box
-                      mt="5"
-                      w="240px"
-                      h="70px"
-                      rounded="xl"
-                      boxShadow="2xl"
-                      relative
-                      bg={"white"}
-                      borderLeftColor={randomElement}
-                      borderLeftWidth="4px"
-                    >
-                      <HStack w="full">
-                        <Stat px="5%" w="full">
-                          <StatLabel py="1">Title</StatLabel>
-                          <StatNumber fontSize="xl">number</StatNumber>
-                        </Stat>
-                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                          <FiInbox color="#AEAEAE" />
-                        </Box>
-                      </HStack>
-                    </Box>
-
-                    <Box
-                      mt="5"
-                      w="240px"
-                      h="70px"
-                      rounded="xl"
-                      boxShadow="2xl"
-                      relative
-                      bg={"white"}
-                      borderLeftColor={randomElement}
-                      borderLeftWidth="4px"
-                    >
-                      <HStack w="full">
-                        <Stat px="5%" w="full">
-                          <StatLabel py="1">Title</StatLabel>
-                          <StatNumber fontSize="xl">number</StatNumber>
-                        </Stat>
-                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                          <FiInbox color="#AEAEAE" />
-                        </Box>
-                      </HStack>
-                    </Box>
-
-                    <Box
-                      mt="5"
-                      w="240px"
-                      h="70px"
-                      rounded="xl"
-                      boxShadow="2xl"
-                      relative
-                      bg={"white"}
-                      borderLeftColor={randomElement}
-                      borderLeftWidth="4px"
-                    >
-                      <HStack w="full">
-                        <Stat px="5%" w="full">
-                          <StatLabel py="1">Title</StatLabel>
-                          <StatNumber fontSize="xl">number</StatNumber>
-                        </Stat>
-                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                          <FiInbox color="#AEAEAE" />
-                        </Box>
-                      </HStack>
-                    </Box>
-
-                    <Box
-                      mt="5"
-                      w="240px"
-                      h="70px"
-                      rounded="xl"
-                      boxShadow="2xl"
-                      relative
-                      bg={"white"}
-                      borderLeftColor={randomElement}
-                      borderLeftWidth="4px"
-                    >
-                      <HStack w="full">
-                        <Stat px="5%" w="full">
-                          <StatLabel py="1">Title</StatLabel>
-                          <StatNumber fontSize="xl">number</StatNumber>
-                        </Stat>
-                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                          <FiInbox color="#AEAEAE" />
-                        </Box>
-                      </HStack>
-                    </Box>
-                  </Grid>
-                </Box>
-              </Route>
+              <Route exact path={match.path} component={DashboardHome} />
               <Route path={`${match.path}/company`} component={CompanyLayout} />
               <Route path={`${match.path}/rating`} component={Ratings} />
-              <Route path={`${match.path}/user`} component={UserHome} />
-              <Route path={`${match.path}/service`} component={ServiceHome} />
+              <Route path={`${match.path}/user`} component={UserLayout} />
+              <Route path={`${match.path}/service`} component={ServiceLayout} />
               <Route
-                path={`${match.path}/purchase-request/incoming`}
-                component={IncomingPurchases}
-              />
-              <Route
-                path={`${match.path}/purchase-request/outgoing`}
-                component={OutgoingPurchases}
+                path={`${match.path}/purchase-request`}
+                component={PurchasesLayout}
               />
 
-              <Route path={`${match.path}/payment`} component={PaymentHome} />
-              <Route
-                path={`${match.path}/estimate/incoming`}
-                component={IncomingEstimates}
-              />
-              <Route
-                path={`${match.path}/estimate/outgoing`}
-                component={OutgoingEstimates}
-              />
+              <Route path={`${match.path}/payment`} component={PaymentLayout} />
+
+              <Route path={`${match.path}/invoice`} component={InvoiceLayout} />
 
               <Route
-                path={`${match.path}/invoice/incoming`}
-                component={Incoming}
+                path={`${match.path}/estimate`}
+                component={EstimateLayout}
               />
+              <Route path={`${match.path}/client`} component={ClientLayout} />
               <Route
-                path={`${match.path}/invoice/outgoing`}
-                component={Outgoing}
+                path={`${match.path}/settings`}
+                component={SettingLayout}
               />
-
-              <Route
-                path={`${match.path}/clientshome`}
-                component={ClientsHome}
-              />
-              <Route path={`${match.path}/settings`} component={Settings} />
             </Switch>
           </VStack>
         </HStack>
@@ -232,3 +117,5 @@ export const DashboardLayout = () => {
     </>
   );
 };
+
+export default DashboardLayout;

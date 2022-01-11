@@ -13,11 +13,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link, useHistory } from "react-router-dom";
-
-import { SecondaryButton, PrimaryButton } from "components";
-import { UserDataContext } from "context";
 import { FaChevronDown } from "react-icons/fa";
-import { removeUserSession } from "utils";
+
+import { SecondaryButton, PrimaryButton } from "../../../components";
+import { UserDataContext } from "../../../context";
+import { removeUserSession } from "../../../utils";
 
 export const Navbar = () => {
   const history = useHistory();

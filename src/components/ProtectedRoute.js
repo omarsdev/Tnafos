@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Route, Redirect, useHistory } from "react-router-dom";
-import { AxiosInstance } from "api";
-import { UserDataContext } from "context";
+import { AxiosInstance } from "../api";
+import { UserDataContext } from "../context";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
   const { companyProviderValue } = useContext(UserDataContext);

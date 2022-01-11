@@ -1,13 +1,14 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext } from "react";
 import { Box, Text, Heading, Center } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { AxiosInstance } from "../../../../api/AxiosInstance";
-import { AlertContext } from "context";
-import { PrimaryButton } from "components";
-import { CustomAddForm } from "../../components";
 
-export const CreateCompany = () => {
+import { CustomAddForm } from "../../components";
+import { PrimaryButton, RegularInputControl } from "../../../../components";
+import { AlertContext } from "../../../../context";
+import { AxiosInstance } from "../../../../api";
+
+const CreateCompany = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -224,3 +225,5 @@ export const CreateCompany = () => {
     </Box>
   );
 };
+
+export default CreateCompany;

@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Heading,
-  IconButton,
-  HStack,
-  Button,
-  Spinner,
-  Center,
-} from "@chakra-ui/react";
-
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import { AxiosInstance } from "api";
-import { CustomTable } from "../../components";
-import { EstimateCard } from "./";
 
-export const OutgoingEstimates = () => {
-  const [list, setList] = useState([]);
+import { NoData, CustomTable } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
+
+import EstimateCard from "./EstimateCard";
+
+const OutgoingEstimates = () => {
+  const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
   const match = useRouteMatch();
@@ -49,46 +43,34 @@ export const OutgoingEstimates = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        <Box w="full" overflowY="scroll" padding="10">
-          <HStack justifyContent="space-between" paddingBottom="5">
-            <Heading
-              textColor="gray.600"
-              fontSize="xx-large"
-              fontWeight="lg"
-              alignItems="baseline"
-            >
-              Outgoing Estimates
-            </Heading>
-          </HStack>
+    <Box w="full" overflowY="scroll" padding="10">
+      <HStack justifyContent="space-between" paddingBottom="5">
+        <Heading
+          textColor="gray.600"
+          fontSize="xx-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          Outgoing Estimates
+        </Heading>
+      </HStack>
 
-          <CustomTable
-            thHeading="List of outgoing estimates"
-            list={list}
-            theData={[
-              "UUID",
-              "Subject",
-              "Name",
-              "Date",
-              "Company",
-              "Valid-till",
-              "Status",
-              "Action",
-            ]}
-            listData={[
-              "uuid",
-              "subject",
-              "assigned_to",
-              "date",
-              "company_name",
-              "valid_till",
-              "status",
-            ]}
-          />
-        </Box>
-      </Route>
-      <Route path={`${match.path}/:uuid`} component={EstimateCard} />
-    </Switch>
+      <CustomTable
+        PageHeadLine="estimate"
+        thHeading="List of outgoing estimates"
+        list={list}
+        thData={[
+          "Transaction-ID",
+          "Subject",
+          "Date",
+          "Valid-till",
+          "Status",
+          "Action",
+        ]}
+        listData={["uuid", "subject", "date", "valid_till", "status"]}
+      />
+    </Box>
   );
 };
+
+export default OutgoingEstimates;

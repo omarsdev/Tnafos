@@ -11,7 +11,7 @@ import {
 import { Link, useRouteMatch } from "react-router-dom";
 
 import { PrimaryButton, SecondaryButton } from "../../../components";
-import { SearchDataContext } from "context";
+import { SearchDataContext } from "../../../context";
 
 export const CardItem = ({ data, isSelected, isCompany }) => {
   const match = useRouteMatch();

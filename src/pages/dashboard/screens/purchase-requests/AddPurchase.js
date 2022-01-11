@@ -1,14 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { AxiosInstance } from "api";
 import { useHistory } from "react-router-dom";
-import { SecondaryButton, PrimaryButton } from "components";
-import { AlertContext } from "context";
 
 import { CustomAddForm } from "../../components";
 
-export const AddPurchase = () => {
+import { SecondaryButton, PrimaryButton } from "../../../../components";
+import { AlertContext } from "../../../../context";
+import { AxiosInstance } from "../../../../api";
+
+const AddPurchase = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -116,3 +117,5 @@ export const AddPurchase = () => {
     </Box>
   );
 };
+
+export default AddPurchase;

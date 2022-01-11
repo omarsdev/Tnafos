@@ -1,11 +1,10 @@
 import React from "react";
-
 import { Box, HStack, Image, Text, VStack } from "@chakra-ui/react";
 import { PhoneCall } from "react-feather";
 import { Link, useRouteMatch } from "react-router-dom";
 
-import { PrimaryButton } from "components";
-import Login from "assets/images/login.jpg";
+import Login from "../../../assets/images/login.jpg";
+import { PrimaryButton } from "../../../components";
 
 export const CardCompany = ({ data }) => {
   const match = useRouteMatch();

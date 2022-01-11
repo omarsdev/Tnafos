@@ -1,32 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
 import {
-  Box,
-  Heading,
-  Button,
-  IconButton,
-  HStack,
-  Center,
-  Spinner,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Select,
-  Divider,
-  Text,
-  Spacer,
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-} from "@chakra-ui/react";
-
-import { BiUpload, BiChevronsUp } from "react-icons/bi";
-import {
-  Link,
   useRouteMatch,
   Switch,
   Route,
@@ -34,11 +8,13 @@ import {
   useParams,
 } from "react-router-dom";
 import { CustomTable, NoData } from "../../components";
-import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
-import { UpdatePurchase } from "./";
 
-export const OutgoingPurchases = () => {
+import { AxiosInstance } from "../../../../api";
+
+import UpdatePurchase from "./UpdatePurchase";
+
+const OutgoingPurchases = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
@@ -110,3 +86,5 @@ export const OutgoingPurchases = () => {
     </Switch>
   );
 };
+
+export default OutgoingPurchases;

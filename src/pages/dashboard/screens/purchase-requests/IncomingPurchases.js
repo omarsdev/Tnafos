@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import { CustomTable } from "../../components";
-import { AxiosInstance } from "api";
-import { UpdatePurchase } from "./";
 
-export const IncomingPurchases = () => {
+import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+
+import { NoData } from "../../components";
+import { CustomTable } from "../../components";
+import UpdatePurchase from "./UpdatePurchase";
+import { AxiosInstance } from "../../../../api";
+
+const IncomingPurchases = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
@@ -50,3 +53,5 @@ export const IncomingPurchases = () => {
     </Switch>
   );
 };
+
+export default IncomingPurchases;

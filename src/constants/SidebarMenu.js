@@ -167,7 +167,7 @@ export const SidebarMenu = [
         id: 8,
         title: "Clients",
         icon: <HiOutlineUserGroup />,
-        to: "/clientshome",
+        to: "/client",
         // submenu: [
         //   {
         //     title: "Incoming",

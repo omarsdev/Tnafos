@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Box, Grid } from "@chakra-ui/react";
-
-import { AxiosInstance } from "api/AxiosInstance";
 import {
   useParams,
   Link,
@@ -10,8 +8,9 @@ import {
   Switch,
 } from "react-router-dom";
 import { MyRating, RatingCard } from "./";
+import { AxiosInstance } from "../../../../api";
 
-export const Ratings = () => {
+const Ratings = () => {
   const [ratings, setRatings] = useState([]);
 
   const { uuid } = useParams();
@@ -51,3 +50,5 @@ export const Ratings = () => {
     </Switch>
   );
 };
+
+export default Ratings;

@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useRouteMatch, useHistory } from "react-router-dom";
-import { CompanyCard, CreateCompany } from "./";
 import {
   Center,
   Spinner,
@@ -22,17 +21,21 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
-import { AxiosInstance } from "api/AxiosInstance";
-import { PrimaryButton, SecondaryButton } from "components";
-import { RegularInputControl } from "components";
 
-import { useForm } from "react-hook-form";
+import CompanyCard from "./CompanyCard";
 
-import { AlertContext } from "context/AlertContext";
+import { AlertContext } from "../../../../context/AlertContext";
+import { AxiosInstance } from "../../../../api";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  RegularInputControl,
+} from "../../../../components";
 
-export const CompanyHome = () => {
+const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState(null);
 
   const { alertProviderValue } = useContext(AlertContext);
@@ -491,3 +494,5 @@ export const CompanyHome = () => {
     </>
   );
 };
+
+export default CompanyHome;

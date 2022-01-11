@@ -10,19 +10,17 @@ import {
   VStack,
   Spinner,
 } from "@chakra-ui/react";
-
 import { useHistory } from "react-router-dom";
-
-import { TnafosHomeLogo } from "assets/icons";
 import { SearchIcon } from "@chakra-ui/icons";
 
 import { Navbar } from "./components";
 
 import { AxiosInstance } from "../../api";
-import { UserDataContext } from "context";
-import { getToken } from "utils";
+import { UserDataContext } from "../../context";
+import { getToken } from "../../utils";
+import { TnafosHomeLogo } from "../../assets/icons";
 
-export const Homepage = () => {
+const Homepage = () => {
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
   const { setUserData } = dataProviderValue;
@@ -122,3 +120,5 @@ export const Homepage = () => {
     </Box>
   );
 };
+
+export default Homepage;

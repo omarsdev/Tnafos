@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import { CustomTable } from "../../components";
-import { AxiosInstance } from "api";
-import { InvoiceCard } from "./";
 
-export const Incoming = () => {
+import { CustomTable, NoData } from "../../components";
+import { AxiosInstance } from "../../../../api";
+
+import InvoiceCard from "./InvoiceCard";
+
+const Incoming = () => {
   const [list, setList] = useState(null);
   const match = useRouteMatch();
   const history = useHistory();
@@ -54,3 +56,5 @@ export const Incoming = () => {
     </Switch>
   );
 };
+
+export default Incoming;

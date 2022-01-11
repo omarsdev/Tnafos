@@ -1,37 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import {
-  Box,
-  Heading,
-  Button,
-  IconButton,
-  HStack,
-  Center,
-  Spinner,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Select,
-  Divider,
-  Text,
-  Spacer,
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-} from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BiUpload, BiChevronsUp } from "react-icons/bi";
-import { AddPayment, PaymentCard } from "./";
-import { AxiosInstance } from "api";
-import { CustomTable } from "pages";
 
-export const PaymentHome = () => {
+import { CustomTable } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
+
+const PaymentHome = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
@@ -60,33 +34,29 @@ export const PaymentHome = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        <CustomTable
-          PageHeadLine="Payments"
-          thHeading="List of payments"
-          thData={[
-            "Transaction-ID",
-            "Amount",
-            "Date",
-            "Method",
-            "Transaction Number",
-            "Notes",
-            "options",
-          ]}
-          list={list}
-          listData={[
-            "uuid",
-            "amount",
-            "date",
-            "method",
-            "transaction_number",
-            "notes",
-          ]}
-        />
-      </Route>
-      <Route path={`${match.path}/addpayment`} component={AddPayment} />
-      <Route path={`${match.path}/:uuid`} component={PaymentCard} />
-    </Switch>
+    <CustomTable
+      PageHeadLine="Payments"
+      thHeading="List of payments"
+      thData={[
+        "Transaction-ID",
+        "Amount",
+        "Date",
+        "Method",
+        "Transaction Number",
+        "Notes",
+        "options",
+      ]}
+      list={list}
+      listData={[
+        "uuid",
+        "amount",
+        "date",
+        "method",
+        "transaction_number",
+        "notes",
+      ]}
+    />
   );
 };
+
+export default PaymentHome;

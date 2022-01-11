@@ -1,23 +1,20 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import {
-  Homepage,
-  NotFound,
-  SearchLayout,
-  DashboardLayout,
-  Login,
-  Register,
-  E404,
-} from "./pages";
+import Login from "./pages/auth/screens/Login";
+import Register from "./pages/auth/screens/Register";
+import E404 from "./pages/common/E404";
+import Homepage from "./pages/homepage/Homepage";
+import SearchLayout from "./pages/search/SearchLayout";
+import DashboardLayout from "./pages/dashboard/DashboardLayout";
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { withFocusVisible } from "@v1v2/chakra";
-import { AlertContextProvider } from "context/AlertContext";
-import { UserDataContextProvider } from "context";
+import { AlertContextProvider } from "./context/AlertContext";
+import { UserDataContextProvider } from "./context";
 import { ErrorBoundary } from "react-error-boundary";
-import { FallBack } from "components/FallBack";
+import { FallBack } from "./components/FallBack";
 
 const theme = extendTheme(
   {

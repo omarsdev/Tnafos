@@ -5,7 +5,7 @@ import {
   RegularInputControl,
   PasswordInputControl,
   CustomSelect,
-} from "components";
+} from "../../../components";
 
 export const CustomAddForm = ({ listForm, control, register }) => {
   return listForm.map((element) => (

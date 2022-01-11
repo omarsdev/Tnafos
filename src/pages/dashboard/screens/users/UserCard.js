@@ -1,39 +1,26 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
   Text,
   Image,
-  HStack,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   Center,
   Spinner,
   Flex,
-  Spacer,
   VStack,
 } from "@chakra-ui/react";
-import { FiEdit } from "react-icons/fi";
 import { useHistory, useParams } from "react-router-dom";
-import { AxiosInstance } from "api";
+import { FiEdit } from "react-icons/fi";
+
+import { AlertContext } from "../../../../context/AlertContext";
+import { AxiosInstance, media } from "../../../../api";
 
 import { useForm } from "react-hook-form";
-import { AlertContext } from "context/AlertContext";
-import { media } from "api/media";
+
 import { CustomAddForm, CustomEditForm } from "../../components";
 
-export const UserCard = () => {
+const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
@@ -237,3 +224,5 @@ export const UserCard = () => {
     </>
   );
 };
+
+export default UserCard;

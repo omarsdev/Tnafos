@@ -15,11 +15,13 @@ import {
   IconButton,
   Text,
 } from "@chakra-ui/react";
-import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
+
 import { NoData } from "../../components";
 
-export const ClientMedia = () => {
+import { AxiosInstance } from "../../../../api";
+
+const ClientMedia = () => {
   const [media, setMedia] = useState([]);
 
   const match = useRouteMatch();
@@ -98,3 +100,5 @@ export const ClientMedia = () => {
     </Switch>
   );
 };
+
+export default ClientMedia;

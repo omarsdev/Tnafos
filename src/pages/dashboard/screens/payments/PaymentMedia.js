@@ -15,11 +15,12 @@ import {
   IconButton,
   Text,
 } from "@chakra-ui/react";
-import { AxiosInstance } from "api";
 import { AiOutlineHome } from "react-icons/ai";
 import { NoData } from "../../components";
 
-export const PaymentMedia = () => {
+import { AxiosInstance } from "../../../../api";
+
+const PaymentMedia = () => {
   const [media, setMedia] = useState([]);
 
   const match = useRouteMatch();
@@ -98,3 +99,5 @@ export const PaymentMedia = () => {
     </Switch>
   );
 };
+
+export default PaymentMedia;

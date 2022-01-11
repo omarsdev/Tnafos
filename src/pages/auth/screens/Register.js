@@ -18,17 +18,17 @@ import {
   PasswordInput,
   PrimaryButton,
   CheckBox,
-} from "components";
+  RegularInputControl,
+  PasswordInputControl,
+} from "../../../components";
 
 import { AuthLayout } from "../AuthLayout";
-import RegisterImage from "assets/images/register.jpg";
+import RegisterImage from "../../../assets/images/register.jpg";
 import { useForm } from "react-hook-form";
 
-import { apiAuth } from "api";
-import { UserDataContext } from "context";
-import { RegularInputControl } from "components";
-import { PasswordInputControl } from "components";
-import { setUserSession } from "utils";
+import { apiAuth } from "../../../api";
+import { UserDataContext } from "../../../context";
+import { setUserSession } from "../../../utils";
 
 export const Register = () => {
   const { tokenProviderValue } = useContext(UserDataContext);
@@ -174,3 +174,5 @@ export const Register = () => {
     </div>
   );
 };
+
+export default Register;
