@@ -12,7 +12,8 @@ export const Outgoing = () => {
         setList(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        history.push("/dashboard/invoicehome");
       });
   };
 
