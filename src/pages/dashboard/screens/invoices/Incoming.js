@@ -6,6 +6,8 @@ import { InvoiceCard } from "./";
 
 export const Incoming = () => {
   const [list, setList] = useState(null);
+  const match = useRouteMatch();
+  const history = useHistory();
 
   const getIncomingInvo = async () => {
     await AxiosInstance.get("/api/dashboard/invoice/incoming")

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
 import { AxiosInstance } from "api";
 import { CustomTable, NoData } from "pages";
 
 export const Outgoing = () => {
   const [list, setList] = useState(null);
+  const history = useHistory();
 
   const invoiceIncomingList = async () => {
     await AxiosInstance.get("/api/dashboard/invoice/outgoing")
