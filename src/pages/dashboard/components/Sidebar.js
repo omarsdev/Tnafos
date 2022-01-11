@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   List,
   ListItem,
-  ListIcon,
   HStack,
   Box,
   Text,
-  UnorderedList,
   Button,
   Divider,
   Menu,
@@ -17,24 +15,62 @@ import {
 } from "@chakra-ui/react";
 import { FaAngleRight } from "react-icons/fa";
 import { Link, useRouteMatch } from "react-router-dom";
-import { SidebarMenu } from "../../../constants";
+import SidebarMenu, { updatedMneu } from "../../../constants/SidebarMenu";
 
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
-export const Sidebar = () => {
-  let match = useRouteMatch();
+const LogoLink = () => {
+  return (
+    <Stack w-full h-32 ml="3" my="2">
+      <Link to="/">
+        <TnafosSearchLogo />
+      </Link>
+    </Stack>
+  );
+};
 
+const NvabarItemText = ({ item }) => {
+  let { path, url } = useRouteMatch();
+  console.log(path, url);
+  return (
+    <Link to={`${path}${item.to ?? "/"}`}>
+      <HStack px="2" mb="2">
+        <Text className="text-CWhite">{item.icon}</Text>
+        <Text className="text-CWhite">{item.title}</Text>
+      </HStack>
+    </Link>
+  );
+};
+
+const NavbarItem = ({ item }) => {
+  return (
+    <ListItem>
+      <Box px="2" my="2">
+        <Text
+          className="text-CWhite p-1 font-extralight"
+          opacity="0.50"
+          fontSize="xs"
+        >
+          {item.heading}
+        </Text>
+      </Box>
+      {!!item.items &&
+        item.items.map((item) => <NvabarItemText item={item} key={item.id} />)}
+    </ListItem>
+  );
+};
+
+export const Sidebar = () => {
   return (
     <Box className="bg-CBlack w-52 h-screen">
-      <Stack w-full h-32 ml="3" my="2">
-        <Link to="/">
-          <TnafosSearchLogo />
-        </Link>
-      </Stack>
+      <LogoLink />
 
       <Box className="css-0 w-auto">
         <List className="gap-y-2">
-          {SidebarMenu.map((item, idxxx) => (
+          {updatedMneu.map((item) => (
+            <NavbarItem item={item} key={item.id} />
+          ))}
+          {/* {SidebarMenu.map((item, idxxx) => (
             <Box key={idxxx}>
               <Divider />
               <ListItem>
@@ -149,7 +185,7 @@ export const Sidebar = () => {
                 </Box>
               </ListItem>
             </Box>
-          ))}
+          ))} */}
         </List>
       </Box>
     </Box>
