@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import {
-  Link,
-  useRouteMatch,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
+import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import { CustomTable } from "../../components";
 import { AxiosInstance } from "api";
 import { UpdatePurchase } from "./";
@@ -25,7 +18,8 @@ export const IncomingPurchases = () => {
         setList(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        history.push("/dashboard/purchase-request");
       });
   };
   const handleKeypress = (e) => {
@@ -45,7 +39,6 @@ export const IncomingPurchases = () => {
     <Switch>
       <Route exact path={`${match.path}`}>
         <CustomTable
-          PageHeadLine="IncomingPurchases"
           list={list}
           component="purchase-request"
           theHeading="List of incoming purchase requests"
@@ -53,7 +46,7 @@ export const IncomingPurchases = () => {
           listData={["uuid", "details", "date", "service[name]"]}
         />
       </Route>
-      <Route path={`${match.path}/incoming/:uuid`} component={UpdatePurchase} />
+      <Route path={`${match.path}/:uuid`} component={UpdatePurchase} />
     </Switch>
   );
 };

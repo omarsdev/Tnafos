@@ -1,355 +1,363 @@
-// import React, {
-//   useContext,
-//   useEffect,
-//   useRef,
-//   useState,
-//   useCallback,
-// } from "react";
-// import {
-//   IconButton,
-//   Box,
-//   Text,
-//   Image,
-//   HStack,
-//   Drawer,
-//   DrawerBody,
-//   DrawerHeader,
-//   DrawerOverlay,
-//   DrawerContent,
-//   DrawerCloseButton,
-//   useDisclosure,
-//   Center,
-//   Spinner,
-//   Flex,
-//   Spacer,
-//   VStack,
-// } from "@chakra-ui/react";
-// import {
-//   useHistory,
-//   useParams,
-//   useRouteMatch,
-//   Switch,
-//   Route,
-// } from "react-router-dom";
-// import { AxiosInstance } from "api";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
+import {
+  IconButton,
+  Box,
+  Text,
+  Stack,
+  HStack,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  useDisclosure,
+  Center,
+  Spinner,
+  Flex,
+  Spacer,
+  VStack,
+} from "@chakra-ui/react";
+import {
+  useHistory,
+  useParams,
+  useRouteMatch,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { AxiosInstance } from "api";
 
-// import {
-//   RegularInputControl,
-//   SecondaryButton,
-//   PrimaryButton,
-// } from "components";
+import { CustomEditForm, CustomAddForm } from "../../components";
 
-// import { useForm } from "react-hook-form";
-// import { AlertContext } from "context/AlertContext";
-// import { PaymentMedia } from "./";
-// import { media } from "api/media";
+import { useForm } from "react-hook-form";
+import { AlertContext } from "context/AlertContext";
+import { UpdateStatus, ConvertToInvoice } from "./";
 
-// import { MdOutlinePermMedia } from "react-icons/md";
-// import { FiEdit } from "react-icons/fi";
+import { MdOutlinePermMedia } from "react-icons/md";
+import { FiEdit } from "react-icons/fi";
 
-// export const EstimateCard = () => {
-//   const { alertProviderValue } = useContext(AlertContext);
-//   const { setAlert } = alertProviderValue;
+export const EstimateCard = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
 
-//   const history = useHistory();
-//   const match = useRouteMatch();
+  const history = useHistory();
+  const match = useRouteMatch();
 
-//   const { uuid } = useParams();
+  const { uuid } = useParams();
 
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-//   const { register, handleSubmit, reset, control } = useForm();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { register, handleSubmit, reset, control } = useForm();
 
-//   const [card, setCard] = useState(null);
-//   const [errors, setErrors] = useState(null);
-//   const [isUpdating, setIsUpdating] = useState(false);
+  const [card, setCard] = useState(null);
+  const [errors, setErrors] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
 
-//   const [photo, setPhoto] = useState(null);
-//   // let inputRef = useRef(null);
+  const resetHooksForm = (data) => {
+    reset({
+      subject: data.subject,
+      status: data.status,
+      date: data.date,
+      valid_till: data.valid_till,
+      currency: data.currency,
+      customer_id: data.customer_id,
+      assigned_to: data.assigned_to,
+      discount_type: data.discount_type,
+      discount_amount: data.discount_amount,
+      subtotal: data.subtotal,
+      total: data.total,
+      //   lines: data.lines,
+    });
+  };
 
-//   const resetHooksForm = (data) => {
-//     reset({
-//       // amount: data.amount,
-//       // method: data.method,
-//       // transaction_number: data.transaction_number,
-//       // date: data.date,
-//       // notes: data.notes,
-//       // uuid: data.uuid,
-//     });
-//   };
+  const getEstimate = async () => {
+    await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`)
+      .then((res) => {
+        console.log(res.data.data);
+        resetHooksForm(res.data.data);
+        setCard(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        history.push("/dashboard/estimate");
+      });
+  };
 
-//   const getEstimate = async () => {
-//     await AxiosInstance.get(`/api/dashboard/payment/${uuid}`)
-//       .then((res) => {
-//         console.log(res.data.data);
-//         resetHooksForm(res.data.data);
-//         setCard(res.data.data);
-//       })
-//       .catch((err) => {
-//         console.log(err.response.data);
-//         history.push("/dashboard/payment");
-//       });
-//   };
+  const updateEstimate = async (data) => {
+    setErrors(null);
+    setIsUpdating(true);
+    await AxiosInstance.put(`/api/dashboard/estimate/${uuid}/update`, data)
+      .then((res) => {
+        console.log(res);
+        setIsUpdating(false);
+        setAlert({
+          message: "Estimate's info has been updated!",
+          type: "info",
+        });
+        history.push(`/dashboard/estimate`);
+      })
+      .catch((err) => {
+        setIsUpdating(false);
+        setErrors(err.response.data);
+        setAlert({
+          message: `${err.response.data.message}`,
+          type: "error",
+        });
+      });
+  };
 
-//   const updateEstimate = async (data) => {
-//     setErrors(null);
-//     setIsUpdating(true);
-//     await AxiosInstance.put(`/api/dashboard/estimate/${uuid}/update`, data)
-//       .then((res) => {
-//         console.log(res);
-//         setIsUpdating(false);
-//         setAlert({
-//           message: "Estimate's info has been updated!",
-//           type: "info",
-//         });
-//         history.push(`/dashboard/estimate`);
-//       })
-//       .catch((err) => {
-//         setIsUpdating(false);
-//         setErrors(err.response.data);
-//         setAlert({
-//           message: `${err.response.data.message}`,
-//           type: "error",
-//         });
-//       });
-//   };
+  const onCancelHandler = () => {
+    if (isUpdating) return;
+    resetHooksForm(card);
+    setErrors(null);
+    onClose();
+  };
 
-//   const onCancelHandler = () => {
-//     if (isUpdating) return;
-//     resetHooksForm(card);
-//     setErrors(null);
-//     onClose();
-//   };
+  useEffect(() => {
+    getEstimate();
+  }, []);
 
-//   useEffect(() => {
-//     getEstimate();
-//   }, []);
+  return (
+    <Switch>
+      <Route exact path={`${match.path}`}>
+        {!card ? (
+          <Center h="70vh" w="100%">
+            <Spinner size="xl" color="#F8B916" />
+          </Center>
+        ) : (
+          <>
+            <Center py="5">
+              <Box
+                className="rounded-3xl relative bg-white shadow-2xl"
+                w="400px"
+                h="500px"
+              >
+                <VStack spacing="20px" mx="5%" mt="5">
+                  <Box mr="0">
+                    <Text py="1" textColor="gray.600">
+                      Subject: {card?.subject}
+                    </Text>
+                    <Text textColor="gray.600">Status: {card?.status}</Text>
+                    <Text textColor="gray.600">Date:{card?.date}</Text>
+                    <Text textColor="gray.600">
+                      Valid-till:{card?.valid_till}
+                    </Text>
+                    <Text textColor="gray.600">Currency:{card?.currency}</Text>
+                    <Text textColor="gray.600">
+                      Type of discount:{card?.discount_type}
+                    </Text>
+                    <Text textColor="gray.600">
+                      Amount of discount:{card?.discount_amount}
+                    </Text>
+                    <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
+                    <Text textColor="gray.600">Total:{card?.total}</Text>
+                    <Text textColor="gray.600">
+                      Contact personal-info:
+                      {card.assigned_to.map((ele, idx) => (
+                        <Stack key={idx}>
+                          <Text>{ele?.first_name}</Text>
+                          <Text>{ele?.last_name}</Text>
+                          <Text>{ele?.email}</Text>
+                          <Text>{ele?.phone_number}</Text>
+                          <Text>{ele?.uuid}</Text>
+                          <Text>{ele?.is_admin}</Text>
+                        </Stack>
+                      ))}
+                    </Text>
+                    <Text textColor="gray.600">
+                      Company Info:{" "}
+                      {card.customer.map((element, idxx) => (
+                        <Stack key={idxx}>
+                          <Text>
+                            {element?.primary_contact.map((item, index) => (
+                              <Stack>
+                                <Text>{item?.first_name}</Text>
+                                <Text>{item?.last_name}</Text>
+                                <Text>{item?.position}</Text>
+                                <Text>{item?.email}</Text>
+                                <Text>{item?.phone_number}</Text>
+                                <Text>{item?.uuid}</Text>
+                              </Stack>
+                            ))}
+                          </Text>
+                          <Text>{element?.company_name}</Text>
+                          <Text>{element?.vat_number}</Text>
+                          <Text>{element?.phone}</Text>
+                          <Text>{element?.fax}</Text>
+                          <Text>{element?.website}</Text>
+                          <Text>{element?.currency}</Text>
+                          <Text>{element?.state}</Text>
+                          <Text>{element?.city}</Text>
+                          <Text>{element?.zipcode}</Text>
+                          <Text>{element?.address}</Text>
+                          <Text>
+                            {element.country.map((e, id) => (
+                              <Stack key={id}>
+                                <Text>{e?.name}</Text>
+                                <Text>{e?.short_name}</Text>
+                                <Text>{e?.country_code}</Text>
+                                <Text>{e?.currency}</Text>
+                                <Text>{e?.uuid}</Text>
+                              </Stack>
+                            ))}
+                          </Text>
+                        </Stack>
+                      ))}
+                    </Text>
+                  </Box>
 
-//   //* media file upload:
-//   const uploadFile = (photo) => {
-//     if (!photo) return;
-//     media(uuid, "payment", photo);
-//   };
+                  <Flex justify={"center"} w="full" gap="15px">
+                    <IconButton
+                      justify={"center"}
+                      fontSize={"lg"}
+                      rounded={"full"}
+                      bg={"#F8B916"}
+                      color={"white"}
+                      boxShadow={
+                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                      }
+                      _hover={{
+                        bg: "orange.400",
+                      }}
+                      icon={<MdOutlinePermMedia />}
+                      onClick={() => {
+                        history.push(`${match.url}/media`);
+                      }}
+                    />
 
-//   return (
-//     <Switch>
-//       <Route exact path={`${match.path}`}>
-//         {!card ? (
-//           <Center h="70vh" w="100%">
-//             <Spinner size="xl" color="#F8B916" />
-//           </Center>
-//         ) : (
-//           <>
-//             <Center py="5">
-//               <Box
-//                 className="rounded-3xl relative bg-white shadow-2xl"
-//                 w="400px"
-//                 h="500px"
-//               >
-//                 <Image
-//                   src={"https://bit.ly/sage-adebayo"}
-//                   alt="Segun Adebayo"
-//                   objectFit="cover"
-//                   roundedTop="3xl"
-//                   w="100%"
-//                   h="220px"
-//                   layout={"fill"}
-//                 />
-//                 <VStack spacing="20px" mx="5%" mt="5">
-//                   <Box mr="0">
-//                     <Text py="1" textColor="gray.600">
-//                       Amount: {card?.amount}
-//                     </Text>
-//                     <Text textColor="gray.600">Method: {card?.method}</Text>
-//                     <Text textColor="gray.600">
-//                       Transaction_Number: {card?.transaction_number}
-//                     </Text>
-//                     <Text textColor="gray.600">Date:{card?.date}</Text>
-//                     <Text textColor="gray.600">Notes:{card?.notes}</Text>
-//                     <Text textColor="gray.600">UUID:{card?.uuid}</Text>
-//                   </Box>
+                    <IconButton
+                      justify={"center"}
+                      fontSize={"lg"}
+                      rounded={"full"}
+                      bg={"#F8B916"}
+                      color={"white"}
+                      boxShadow={
+                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                      }
+                      _hover={{
+                        bg: "orange.400",
+                      }}
+                      icon={<FiEdit />}
+                      onClick={onOpen}
+                    />
+                  </Flex>
+                </VStack>
+              </Box>
+            </Center>
 
-//                   <Flex justify={"center"} w="full" gap="15px">
-//                     <IconButton
-//                       justify={"center"}
-//                       fontSize={"lg"}
-//                       rounded={"full"}
-//                       bg={"#F8B916"}
-//                       color={"white"}
-//                       boxShadow={
-//                         "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-//                       }
-//                       _hover={{
-//                         bg: "orange.400",
-//                       }}
-//                       icon={<MdOutlinePermMedia />}
-//                       onClick={() => {
-//                         history.push(`${match.url}/media`);
-//                       }}
-//                     />
+            {/* updating user info. */}
 
-//                     <IconButton
-//                       justify={"center"}
-//                       fontSize={"lg"}
-//                       rounded={"full"}
-//                       bg={"#F8B916"}
-//                       color={"white"}
-//                       boxShadow={
-//                         "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-//                       }
-//                       _hover={{
-//                         bg: "orange.400",
-//                       }}
-//                       icon={<FiEdit />}
-//                       onClick={onOpen}
-//                     />
-//                   </Flex>
-//                 </VStack>
-//               </Box>
-//             </Center>
-
-//             {/* updating user info. */}
-//             <Drawer
-//               isOpen={isOpen}
-//               placement="right"
-//               onClose={onCancelHandler}
-//               size="lg"
-//             >
-//               <DrawerOverlay />
-//               <DrawerContent>
-//                 <DrawerCloseButton />
-//                 <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-//                   Edit your Info by filling up this form
-//                 </DrawerHeader>
-
-//                 <DrawerBody>
-//                   <HStack
-//                     align="flex-end"
-//                     w="full"
-//                     alignItems="baseline"
-//                     mb="14"
-//                     mt="5"
-//                   >
-//                     <input
-//                       type="file"
-//                       onChange={(e) => setPhoto(e.target.files[0])}
-//                       name="choose file"
-//                     />
-//                     <Spacer />
-//                     <SecondaryButton name="Upload File" onClick={uploadFile} />
-//                   </HStack>
-//                   <form>
-//                     {/* <Box className="mt-4">
-//                   <label className="w-32 text-left text-gray-500 ">
-//                     Amount :
-//                     <RegularInputControl
-//                       placeHolder="amount"
-//                       name="amount"
-//                       control={control}
-//                       register={register}
-//                       width="100%"
-//                       error={errors}
-//                     />
-//                   </label>
-//                 </Box> */}
-
-//                     <Box className="mt-4">
-//                       <label className="w-32 text-left text-gray-500 ">
-//                         Method:
-//                         <RegularInputControl
-//                           placeHolder="method"
-//                           name="method"
-//                           control={control}
-//                           register={register}
-//                           width="100%"
-//                           error={errors}
-//                         />
-//                       </label>
-//                     </Box>
-
-//                     <Box className="mt-4">
-//                       <label className="w-32 text-left text-gray-500">
-//                         Transaction - Number:
-//                         <RegularInputControl
-//                           placeHolder="Transaction - number"
-//                           name="transaction_number"
-//                           control={control}
-//                           register={register}
-//                           width="100%"
-//                           error={errors}
-//                         />
-//                       </label>
-//                     </Box>
-
-//                     <Box className="mt-4">
-//                       <label className="w-32 text-left text-gray-500">
-//                         Date:
-//                         <RegularInputControl
-//                           placeHolder="date"
-//                           name="date"
-//                           control={control}
-//                           register={register}
-//                           width="100%"
-//                           error={errors}
-//                         />
-//                       </label>
-//                     </Box>
-
-//                     <Box className="mt-4">
-//                       <label className="w-32 text-left text-gray-500">
-//                         Notes:
-//                         <RegularInputControl
-//                           placeHolder="notes"
-//                           name="notes"
-//                           control={control}
-//                           register={register}
-//                           width="100%"
-//                           error={errors}
-//                         />
-//                       </label>
-//                     </Box>
-
-//                     <Box className="mt-4">
-//                       <label className="w-32 text-left text-gray-500">
-//                         UUID:
-//                         <RegularInputControl
-//                           placeHolder="uuid"
-//                           name="uuid"
-//                           control={control}
-//                           register={register}
-//                           width="100%"
-//                           error={errors}
-//                         />
-//                       </label>
-//                     </Box>
-
-//                     <Flex mt="5" w="full" ml="320px">
-//                       <PrimaryButton
-//                         name="Update"
-//                         onClick={handleSubmit(updatePayment)}
-//                         loadingButton={isUpdating}
-//                         buttonType="submit"
-//                         mx="2"
-//                       />
-
-//                       <SecondaryButton
-//                         name="Cancel"
-//                         onClick={onCancelHandler}
-//                         buttonType="button"
-//                       />
-//                     </Flex>
-//                     {errors?.message && (
-//                       <Text className="text-center mt-4" color="red">
-//                         {errors?.message}
-//                       </Text>
-//                     )}
-//                   </form>
-//                 </DrawerBody>
-//               </DrawerContent>
-//             </Drawer>
-//           </>
-//         )}
-//       </Route>
-//       <Route path={`${match.path}/media`} component={PaymentMedia} />
-//     </Switch>
-//   );
-// };
+            <CustomEditForm
+              isOpen={isOpen}
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(updateEstimate)}
+              isUpdating={isUpdating}
+              errors={errors}
+            >
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Subject : ",
+                    placeHolder: "Enter Subject",
+                    name: "subject",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Status : ",
+                    placeHolder: "Enter Status",
+                    name: "status",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Date : ",
+                    placeHolder: "Enter Date",
+                    name: "date",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Valid - till : ",
+                    placeHolder: "valid - till",
+                    name: "valid_till",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Currency : ",
+                    placeHolder: "Enter Currency",
+                    name: "currency",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Customer Id : ",
+                    placeHolder: "Enter customer_id",
+                    name: "customer_id",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Assigned - to : ",
+                    placeHolder: "Enter the uuid here",
+                    name: "assigned_to",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Discount- type : ",
+                    placeHolder: "Enter discount_type",
+                    name: "discount_type",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Discount - amount : ",
+                    placeHolder: "Enter discount_amount",
+                    name: "discount_amount",
+                    inputType: "number",
+                    errors: errors,
+                  },
+                  {
+                    head: "Sub-total : ",
+                    placeHolder: "Enter sub-total",
+                    name: "subtotal",
+                    inputType: "number",
+                    errors: errors,
+                  },
+                  {
+                    head: "Total : ",
+                    placeHolder: "Enter Total",
+                    name: "total",
+                    inputType: "number",
+                    errors: errors,
+                  },
+                  //   {
+                  //     head: "Lines : ",
+                  //     placeHolder: "Enter Lines",
+                  //     name: "lines",
+                  //     inputType: "text",
+                  //     errors: errors,
+                  //   },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
+          </>
+        )}
+      </Route>
+      <Route path={`${match.path}/updatestatus`} component={UpdateStatus} />
+      <Route
+        path={`${match.path}/converttoinvoice`}
+        component={ConvertToInvoice}
+      />
+    </Switch>
+  );
+};

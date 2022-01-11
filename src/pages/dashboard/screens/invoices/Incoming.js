@@ -1,34 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
-import { CustomTable, NoData } from "../../components";
+import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+import { CustomTable } from "../../components";
 import { AxiosInstance } from "api";
+import { InvoiceCard } from "./";
 
 export const Incoming = () => {
   const [list, setList] = useState(null);
 
-  const invoiceIncomingList = async () => {
+  const getIncomingInvo = async () => {
     await AxiosInstance.get("/api/dashboard/invoice/incoming")
       .then((res) => {
         setList(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        history.push("/dashboard/invoicehome");
       });
   };
 
   useEffect(() => {
-    invoiceIncomingList();
+    getIncomingInvo();
   }, []);
 
   return (
-    <Box>
-      {!list ? (
-        <Center h="70vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
-        </Center>
-      ) : list.length === 0 ? (
-        <NoData />
-      ) : (
+    <Switch>
+      <Route>
         <CustomTable
           PageHeadLine="Invoices - Incoming"
           thHeading="List of Invoices - Incoming"
@@ -51,7 +47,8 @@ export const Incoming = () => {
             "notes",
           ]}
         />
-      )}
-    </Box>
+      </Route>
+      <Route path={`${match.path}/:uuid`} component={InvoiceCard} />
+    </Switch>
   );
 };

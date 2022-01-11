@@ -53,7 +53,8 @@ export const OutgoingPurchases = () => {
         setList(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        history.push("/dashboard/purchase-request");
       });
   };
 
@@ -91,22 +92,21 @@ export const OutgoingPurchases = () => {
               icon={<AiOutlineHome />}
               rounded="full"
               onClick={() => {
-                history.push(`${match.url}/estimatehome`);
+                history.push(`${match.url}/purchase-request`);
               }}
             />
           </HStack>
 
           <CustomTable
-            PageHeadLine="Purchase Requests"
             thHeading="List of outgoing purchase-requests"
             thData={["Transaction-ID", "Details", "Date", "Service", "options"]}
             list={list}
             listData={["uuid", "details", "date", "service"]}
-            component={"purchase-requset"}
+            component="purchase-requset"
           />
         </Box>
       </Route>
-      <Route path={`${match.path}/outgoing/:uuid`} component={UpdatePurchase} />
+      <Route path={`${match.path}/:uuid`} component={UpdatePurchase} />
     </Switch>
   );
 };

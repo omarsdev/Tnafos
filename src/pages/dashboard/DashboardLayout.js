@@ -24,16 +24,16 @@ import { FiInbox } from "react-icons/fi";
 import { AxiosInstance } from "api";
 
 import {
-  EstimateHome,
   Settings,
+  Incoming,
+  Outgoing,
   UserHome,
   IncomingPurchases,
   OutgoingPurchases,
   ServiceHome,
   CompanyLayout,
-  InvoiceHome,
-  Incoming,
-  Outgoing,
+  IncomingEstimates,
+  OutgoinEstimates,
   ClientsHome,
   Ratings,
   PaymentHome,
@@ -198,10 +198,24 @@ export const DashboardLayout = () => {
               />
 
               <Route path={`${match.path}/payment`} component={PaymentHome} />
+              <Route
+                path={`${match.path}/estimate/incoming`}
+                component={IncomingEstimates}
+              />
+              <Route
+                path={`${match.path}/estimate/outgoing`}
+                component={OutgoinEstimates}
+              />
 
-              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
+              <Route
+                path={`${match.path}/invoice/incoming`}
+                component={Incoming}
+              />
+              <Route
+                path={`${match.path}/invoice/outgoing`}
+                component={Outgoing}
+              />
 
-              <Route path={`${match.path}/estimate`} component={EstimateHome} />
               <Route
                 path={`${match.path}/clientshome`}
                 component={ClientsHome}

@@ -3,11 +3,7 @@ import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { AxiosInstance } from "api";
 import { useHistory } from "react-router-dom";
-import {
-  RegularInputControl,
-  SecondaryButton,
-  PrimaryButton,
-} from "components";
+import { SecondaryButton, PrimaryButton } from "components";
 import { AlertContext } from "context";
 
 import { CustomAddForm } from "../../components";
@@ -81,90 +77,25 @@ export const AddPurchase = () => {
           <CustomAddForm
             listForm={[
               {
-                head: "Enter Company Name ",
-                placeHolder: "Enter Company Name",
-                name: "company_name",
+                head: "Date ",
+                placeHolder: "Enter Date",
+                name: "date",
                 err: err,
+                inputType: "text",
               },
               {
-                head: "Enter VAT Number",
-                placeHolder: "Enter VAT Number ",
-                name: "vat_number",
+                head: "Details",
+                placeHolder: "Enter Details ",
+                name: "details",
                 err: err,
+                inputType: "text",
               },
               {
-                head: "Enter Phone",
-                placeHolder: "Enter Phone",
-                name: "phone",
+                head: "Lines",
+                placeHolder: "Enter Lines",
+                name: "lines",
                 err: err,
-                inputType: "number",
-              },
-              {
-                head: "Enter Fax",
-                placeHolder: "Enter Fax ",
-                name: "fax",
-                err: err,
-              },
-              {
-                head: "Enter Currency",
-                placeHolder: "Currency",
-                name: "currency",
-                err: err,
-                isPassword: true,
-              },
-              {
-                head: "Enter Website ",
-                placeHolder: "Website",
-                name: "website",
-                err: err,
-              },
-              {
-                head: "Enter Language ",
-                placeHolder: "Language",
-                name: "language",
-                err: err,
-              },
-              {
-                head: "Enter Country Id",
-                placeHolder: "Country Id",
-                name: "country_id",
-                err: err,
-              },
-              {
-                head: "Enter Address ",
-                placeHolder: "Address",
-                name: "address",
-                err: err,
-              },
-              {
-                head: "Enter City ",
-                placeHolder: "City",
-                name: "city",
-                err: err,
-              },
-              {
-                head: "Enter State",
-                placeHolder: "State",
-                name: "state",
-                err: err,
-              },
-              {
-                head: "Enter ZIP Code ",
-                placeHolder: "ZIP Code",
-                name: "zipcode",
-                err: err,
-              },
-              {
-                head: "Enter Is Registered ",
-                placeHolder: "Is Registered",
-                name: "is_regisered",
-                err: err,
-              },
-              {
-                head: "Enter Is Country code ",
-                placeHolder: "Is Country code",
-                name: "country_code",
-                err: err,
+                inputType: "text",
               },
             ]}
             control={control}
