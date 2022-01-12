@@ -257,6 +257,8 @@ const PaymentCard = () => {
                           errors: errors,
                         },
                       ]}
+                      control={control}
+                      register={register}
                     />
                   </CustomEditForm>
                 </DrawerBody>
