@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 
 import { CustomTable } from "../../components";
@@ -34,28 +35,36 @@ const PaymentHome = () => {
   }, []);
 
   return (
-    <CustomTable
-      PageHeadLine="Payments"
-      thHeading="List of payments"
-      thData={[
-        "Transaction-ID",
-        "Amount",
-        "Date",
-        "Method",
-        "Transaction Number",
-        "Notes",
-        "options",
-      ]}
-      list={list}
-      listData={[
-        "uuid",
-        "amount",
-        "date",
-        "method",
-        "transaction_number",
-        "notes",
-      ]}
-    />
+    <Switch>
+      <Route exact path={`${match.path}`}>
+        <Box w="full" overflowY="scroll" padding="10">
+          <HStack justifyContent="space-between" paddingBottom="5">
+            <Heading
+              textColor="gray.600"
+              fontSize="xx-large"
+              fontWeight="lg"
+              alignItems="baseline"
+            >
+              Payments
+            </Heading>
+          </HStack>
+          <CustomTable
+            PageHeadLine="Payments"
+            thHeading="List of payments"
+            thData={[
+              "Transaction-ID",
+              "Amount",
+              "Date",
+              "Transaction Number",
+              "Notes",
+              "options",
+            ]}
+            list={list}
+            listData={["uuid", "amount", "date", "transaction_number", "notes"]}
+          />
+        </Box>
+      </Route>
+    </Switch>
   );
 };
 

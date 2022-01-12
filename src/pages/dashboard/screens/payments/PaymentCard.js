@@ -37,11 +37,7 @@ import { FiEdit } from "react-icons/fi";
 
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
-import {
-  RegularInputControl,
-  SecondaryButton,
-  PrimaryButton,
-} from "../../../../components";
+import { CustomAddForm, CustomEditForm } from "../../components";
 
 const PaymentCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -126,220 +122,150 @@ const PaymentCard = () => {
     media(uuid, "payment", photo);
   };
 
-  return !card ? (
-    <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
-    </Center>
-  ) : (
-    <>
-      <Center py="5">
-        <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="400px"
-          h="500px"
-        >
-          <Image
-            src={"https://bit.ly/sage-adebayo"}
-            alt="Segun Adebayo"
-            objectFit="cover"
-            roundedTop="3xl"
-            w="100%"
-            h="220px"
-            layout={"fill"}
-          />
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text py="1" textColor="gray.600">
-                Amount: {card?.amount}
-              </Text>
-              <Text textColor="gray.600">Method: {card?.method}</Text>
-              <Text textColor="gray.600">
-                Transaction_Number: {card?.transaction_number}
-              </Text>
-              <Text textColor="gray.600">Date:{card?.date}</Text>
-              <Text textColor="gray.600">Notes:{card?.notes}</Text>
-              <Text textColor="gray.600">UUID:{card?.uuid}</Text>
-            </Box>
+  return (
+    <Switch>
+      <Route exact path={`${match.path}`}>
+        {!card ? (
+          <Center h="70vh" w="100%">
+            <Spinner size="xl" color="#F8B916" />
+          </Center>
+        ) : (
+          <>
+            <Center py="5">
+              <Box
+                className="rounded-3xl relative bg-white shadow-2xl"
+                w="400px"
+                h="300px"
+              >
+                <VStack spacing="20px" mx="5%" mt="5">
+                  <Box mr="0">
+                    <Text py="1" textColor="gray.600">
+                      Amount: {card?.amount}
+                    </Text>
+                    <Text textColor="gray.600">Method: {card?.method}</Text>
+                    <Text textColor="gray.600">
+                      Transaction_Number: {card?.transaction_number}
+                    </Text>
+                    <Text textColor="gray.600">Date:{card?.date}</Text>
+                    <Text textColor="gray.600">Notes:{card?.notes}</Text>
+                    <Text textColor="gray.600">UUID:{card?.uuid}</Text>
+                  </Box>
 
-            <Flex justify={"center"} w="full" gap="15px">
-              <IconButton
-                justify={"center"}
-                fontSize={"lg"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<MdOutlinePermMedia />}
-                onClick={() => {
-                  history.push(`${match.url}/media`);
-                }}
-              />
+                  <Flex justify={"center"} w="full" gap="15px">
+                    <IconButton
+                      justify={"center"}
+                      fontSize={"lg"}
+                      rounded={"full"}
+                      bg={"#F8B916"}
+                      color={"white"}
+                      boxShadow={
+                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                      }
+                      _hover={{
+                        bg: "orange.400",
+                      }}
+                      icon={<MdOutlinePermMedia />}
+                      onClick={() => {
+                        history.push(`${match.url}/media`);
+                      }}
+                    />
 
-              <IconButton
-                justify={"center"}
-                fontSize={"lg"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<FiEdit />}
-                onClick={onOpen}
-              />
-            </Flex>
-          </VStack>
-        </Box>
-      </Center>
+                    <IconButton
+                      justify={"center"}
+                      fontSize={"lg"}
+                      rounded={"full"}
+                      bg={"#F8B916"}
+                      color={"white"}
+                      boxShadow={
+                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                      }
+                      _hover={{
+                        bg: "orange.400",
+                      }}
+                      icon={<FiEdit />}
+                      onClick={onOpen}
+                    />
+                  </Flex>
+                </VStack>
+              </Box>
+            </Center>
 
-      {/* updating user info. */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <HStack
-              align="flex-end"
-              w="full"
-              alignItems="baseline"
-              mb="14"
-              mt="5"
+            {/* updating payment card*/}
+            <Drawer
+              isOpen={isOpen}
+              placement="right"
+              onClose={onCancelHandler}
+              size="lg"
             >
-              <input
-                type="file"
-                onChange={(e) => setPhoto(e.target.files[0])}
-                name="choose file"
-              />
-              <Spacer />
-              <SecondaryButton name="Upload File" onClick={uploadFile} />
-            </HStack>
-            <form>
-              {/* <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Amount :
-                  <RegularInputControl
-                    placeHolder="amount"
-                    name="amount"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box> */}
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+                  Edit your Info by filling up this form
+                </DrawerHeader>
 
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Method:
-                  <RegularInputControl
-                    placeHolder="method"
-                    name="method"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  Transaction - Number:
-                  <RegularInputControl
-                    placeHolder="Transaction - number"
-                    name="transaction_number"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  Date:
-                  <RegularInputControl
-                    placeHolder="date"
-                    name="date"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  Notes:
-                  <RegularInputControl
-                    placeHolder="notes"
-                    name="notes"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  UUID:
-                  <RegularInputControl
-                    placeHolder="uuid"
-                    name="uuid"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Flex mt="5" w="full" ml="320px">
-                <PrimaryButton
-                  name="Update"
-                  onClick={handleSubmit(updatePayment)}
-                  loadingButton={isUpdating}
-                  buttonType="submit"
-                  mx="2"
-                />
-
-                <SecondaryButton
-                  name="Cancel"
-                  onClick={onCancelHandler}
-                  buttonType="button"
-                />
-              </Flex>
-              {errors?.message && (
-                <Text className="text-center mt-4" color="red">
-                  {errors?.message}
-                </Text>
-              )}
-            </form>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </>
+                <DrawerBody>
+                  <CustomEditForm
+                    isOpen={isOpen}
+                    onCancelHandler={onCancelHandler}
+                    onUpdate={handleSubmit(updatePayment)}
+                    isUpdating={isUpdating}
+                    errors={errors}
+                  >
+                    <CustomAddForm
+                      listForm={[
+                        {
+                          head: "Amount : ",
+                          placeHolder: "Enter amount",
+                          name: "amount",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Method : ",
+                          placeHolder: "Enter Method",
+                          name: "method",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Transaction -number : ",
+                          placeHolder: "Enter transaction-number",
+                          name: "transaction_number",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Date : ",
+                          placeHolder: "Enter Date",
+                          name: "date",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Notes : ",
+                          placeHolder: "Enter notes",
+                          name: "notes",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "UUID : ",
+                          placeHolder: "Enter UUID",
+                          name: "uuid",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                      ]}
+                    />
+                  </CustomEditForm>
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
+          </>
+        )}
+      </Route>
+    </Switch>
   );
 };
 

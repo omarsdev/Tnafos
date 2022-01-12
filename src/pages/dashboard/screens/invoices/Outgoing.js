@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
+import { Box, HStack, Heading, Spinner } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
 import { CustomTable, NoData } from "../../components";
@@ -26,37 +26,31 @@ const Outgoing = () => {
   }, []);
 
   return (
-    <Box>
-      {!list ? (
-        <Center h="70vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
-        </Center>
-      ) : list.length === 0 ? (
-        <NoData />
-      ) : (
-        <CustomTable
-          PageHeadLine="Invoices - Outgoing"
-          thHeading="List of Invoices - Outgoing"
-          thData={[
-            "Invoices-ID",
-            "Subject",
-            "Date",
-            "Discount Amount",
-            "Vat Amount",
-            "Total",
-            "options",
-          ]}
-          list={list}
-          listData={[
-            "uuid",
-            "subject",
-            "date",
-            "discount_amount",
-            "vat_amount",
-            "total",
-          ]}
-        />
-      )}
+    <Box w="full" overflowY="scroll" padding="10">
+      <HStack justifyContent="space-between" paddingBottom="5">
+        <Heading
+          textColor="gray.600"
+          fontSize="xx-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          Outgoing Invoices
+        </Heading>
+      </HStack>
+      <CustomTable
+        PageHeadLine="Invoices - Outgoing"
+        thHeading="List of Invoices - Outgoing"
+        thData={[
+          "Invoices-ID",
+          "Subject",
+          "Date",
+          "Discount Amount",
+          "Total",
+          "options",
+        ]}
+        list={list}
+        listData={["uuid", "subject", "date", "discount_amount", "total"]}
+      />
     </Box>
   );
 };
