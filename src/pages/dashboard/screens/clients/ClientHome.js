@@ -3,6 +3,7 @@ import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import { CustomTable } from "../../components";
 import { AxiosInstance } from "../../../../api";
+import ClientCard from "./ClientCard";
 
 const ClientHome = () => {
   const [list, setList] = useState(null);
@@ -54,11 +55,10 @@ const ClientHome = () => {
               fontWeight="lg"
               alignItems="baseline"
             >
-              Payments
+              Clients
             </Heading>
           </HStack>
           <CustomTable
-            PageHeadLine="Clients"
             thHeading="List of Clients"
             thData={[
               "Client-number",
@@ -71,7 +71,8 @@ const ClientHome = () => {
             ]}
             list={list}
             listData={[
-              "first_name, first_name",
+              "uuid",
+              "first_name",
               "email",
               "company_name",
               "website",
@@ -80,6 +81,7 @@ const ClientHome = () => {
           />
         </Box>
       </Route>
+      <Route path={`${match.path}/:uuid`} component={ClientCard} />
     </Switch>
   );
 };

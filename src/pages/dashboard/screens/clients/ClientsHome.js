@@ -1,28 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Heading,
-  Button,
-  IconButton,
-  HStack,
-  Center,
-  Spinner,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Select,
-  Divider,
-  Text,
-  Spacer,
-  Flex,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { CustomTable } from "../../components";
 import {
@@ -32,11 +9,11 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-
-import { AddClient, ClientCard } from "./";
+import AddClient from "./AddClient";
+import ClientCard from "./ClientCard";
 import { AxiosInstance } from "api";
 
-export const ClientsHome = () => {
+const ClientsHome = () => {
   const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -133,3 +110,5 @@ export const ClientsHome = () => {
     </Switch>
   );
 };
+
+export default ClientsHome;
