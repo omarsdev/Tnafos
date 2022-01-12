@@ -34,11 +34,11 @@ const LogoLink = () => {
   );
 };
 
-const NavbarItemLink = ({ item }) => {
+const NavbarItemLink = ({ item, isChild }) => {
   let { path } = useRouteMatch();
   return (
     <Link to={`${path}${item.to ?? "/"}`}>
-      <HStack px="2" mb="2" key={item.id}>
+      <HStack mb="2" key={item.id} ml={isChild ? 6 : 2}>
         <Text className="text-CWhite">{item.icon}</Text>
         <Text className="text-CWhite">{item.title}</Text>
       </HStack>
@@ -57,9 +57,9 @@ const NavbarItemText = ({ item }) => {
           </HStack>
           <AccordionIcon mr={2} />
         </AccordionButton>
-        <AccordionPanel padding={0}>
+        <AccordionPanel padding={0} backgroundColor={"grey"}>
           {item.items.map((item) => (
-            <NavbarItemLink key={item.id} item={item} />
+            <NavbarItemLink key={item.id} item={item} isChild={true} />
           ))}
         </AccordionPanel>
       </AccordionItem>
