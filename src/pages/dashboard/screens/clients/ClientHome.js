@@ -8,9 +8,6 @@ const ClientHome = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
-  //* representing certain number of rows based on select option:
-  const [rowsNumber, setRowsNumber] = useState("10");
-
   const match = useRouteMatch();
   const history = useHistory();
 
@@ -61,7 +58,7 @@ const ClientHome = () => {
             </Heading>
           </HStack>
           <CustomTable
-            PageHeadLine="Payments"
+            PageHeadLine="Clients"
             thHeading="List of Clients"
             thData={[
               "Client-number",
