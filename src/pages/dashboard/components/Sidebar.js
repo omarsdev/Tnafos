@@ -12,10 +12,15 @@ import {
   MenuList,
   MenuItem,
   Stack,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
 } from "@chakra-ui/react";
 import { FaAngleRight } from "react-icons/fa";
 import { Link, useRouteMatch } from "react-router-dom";
-import SidebarMenu, { updatedMneu } from "../../../constants/SidebarMenu";
+import SidebarMenu from "../../../constants/SidebarMenu";
 
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
@@ -29,16 +34,38 @@ const LogoLink = () => {
   );
 };
 
-const NvabarItemText = ({ item }) => {
-  let { path, url } = useRouteMatch();
-  console.log(path, url);
+const NavbarItemLink = ({ item }) => {
+  let { path } = useRouteMatch();
   return (
     <Link to={`${path}${item.to ?? "/"}`}>
-      <HStack px="2" mb="2">
+      <HStack px="2" mb="2" key={item.id}>
         <Text className="text-CWhite">{item.icon}</Text>
         <Text className="text-CWhite">{item.title}</Text>
       </HStack>
     </Link>
+  );
+};
+
+const NavbarItemText = ({ item }) => {
+  return !!!item.to ? (
+    <Accordion allowMultiple margin={0}>
+      <AccordionItem border="0px">
+        <AccordionButton padding={0} margin={0} color="white">
+          <HStack flex="1" px="2" mb="2">
+            <Text>{item.icon}</Text>
+            <Text>{item.title}</Text>
+          </HStack>
+          <AccordionIcon mr={2} />
+        </AccordionButton>
+        <AccordionPanel padding={0}>
+          {item.items.map((item) => (
+            <NavbarItemLink key={item.id} item={item} />
+          ))}
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  ) : (
+    <NavbarItemLink key={item.id} item={item} />
   );
 };
 
@@ -55,7 +82,7 @@ const NavbarItem = ({ item }) => {
         </Text>
       </Box>
       {!!item.items &&
-        item.items.map((item) => <NvabarItemText item={item} key={item.id} />)}
+        item.items.map((item) => <NavbarItemText item={item} key={item.id} />)}
     </ListItem>
   );
 };
@@ -63,12 +90,12 @@ const NavbarItem = ({ item }) => {
 export const Sidebar = () => {
   const match = useRouteMatch();
   return (
-    <Box className="bg-CBlack w-52 h-screen">
+    <Box className="bg-CBlack w-60 h-screen overflow-scroll">
       <LogoLink />
 
       <Box className="css-0 w-auto">
         <List className="gap-y-2">
-          {updatedMneu.map((item) => (
+          {SidebarMenu.map((item) => (
             <NavbarItem item={item} key={item.id} />
           ))}
           {/* {SidebarMenu.map((item, idxxx) => (

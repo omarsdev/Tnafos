@@ -13,7 +13,7 @@ import { GiMoneyStack } from "react-icons/gi";
 
 import { ImLibrary } from "react-icons/im";
 
-export const updatedMneu = [
+const SidebarMenu = [
   {
     id: 1,
     heading: null,
@@ -42,14 +42,14 @@ export const updatedMneu = [
         id: 2,
         title: "Users",
         icon: <BiUser />,
-        to: "/users",
+        to: "/user",
         items: null,
       },
       {
         id: 3,
         title: "Services",
         icon: <VscTools />,
-        to: "/services",
+        to: "/service",
         items: null,
       },
       {
@@ -69,28 +69,28 @@ export const updatedMneu = [
         id: 1,
         title: "Customers",
         icon: <VscTools />,
-        to: "/services",
+        to: "/client",
         items: null,
       },
       {
         id: 2,
         title: "Supplier",
         icon: <VscTools />,
-        to: "/services",
+        to: "/",
         items: null,
       },
       {
         id: 3,
         title: "Leads",
         icon: <VscTools />,
-        to: "/leads",
+        to: "/",
         items: null,
       },
       {
         id: 4,
         title: "All Contacts",
         icon: <VscTools />,
-        to: "/contacts",
+        to: "/",
         items: null,
       },
     ],
@@ -115,7 +115,7 @@ export const updatedMneu = [
           {
             id: 1,
             title: "Outgoing",
-            icon: 1,
+            icon: null,
             to: "/purchase-request/outgoing",
             items: null,
           },
@@ -131,14 +131,14 @@ export const updatedMneu = [
             id: 1,
             title: "Incoming",
             icon: null,
-            to: "/estimates/incoming",
+            to: "/estimate/incoming",
             items: null,
           },
           {
             id: 1,
             title: "Outgoing",
-            icon: 1,
-            to: "/estimates/outgoing",
+            icon: null,
+            to: "/estimate/outgoing",
             items: null,
           },
         ],
@@ -153,14 +153,14 @@ export const updatedMneu = [
             id: 1,
             title: "Incoming",
             icon: null,
-            to: "/invoices/incoming",
+            to: "/invoice/incoming",
             items: null,
           },
           {
             id: 1,
             title: "Outgoing",
-            icon: 1,
-            to: "/invoices/outgoing",
+            icon: null,
+            to: "/invoice/outgoing",
             items: null,
           },
         ],
@@ -181,7 +181,7 @@ export const updatedMneu = [
           {
             id: 1,
             title: "Outgoing",
-            icon: 1,
+            icon: null,
             to: "/proposals/outgoing",
             items: null,
           },
@@ -191,7 +191,7 @@ export const updatedMneu = [
         id: 5,
         title: "Payments",
         icon: <BsCurrencyExchange />,
-        to: "/payments",
+        to: "/payment",
         items: null,
       },
     ],
@@ -204,185 +204,15 @@ export const updatedMneu = [
         id: 1,
         title: "Settings",
         icon: <VscTools />,
-        to: "/services",
+        to: "/settings",
         items: null,
       },
       {
         id: 2,
         title: "Lead Sources",
         icon: <VscTools />,
-        to: "/services",
+        to: "/",
         items: null,
-      },
-    ],
-  },
-];
-
-const SidebarMenu = [
-  {
-    id: 0,
-    title: "Dashboard",
-    icon: <FiMenu />,
-    to: "/",
-    heading: null,
-  },
-  {
-    id: 1,
-    heading: "Organization",
-
-    navitem: [
-      {
-        id: 0,
-        title: "Company",
-        icon: <ImLibrary />,
-        to: "/company",
-        // submenu: [
-        //   {
-        //     title: "Incoming",
-        //     to: "/",
-        //   },
-        //   {
-        //     title: "Outgoing",
-        //     to: "/",
-        //   },
-        // ],
-      },
-      {
-        id: 1,
-        title: "Users",
-        icon: <BiUser />,
-        to: "/user",
-        // submenu: [
-        //   {
-        //     title: "Incoming",
-        //     to: "/",
-        //   },
-        //   {
-        //     title: "Outgoing",
-        //     to: "/",
-        //   },
-        // ],
-      },
-      {
-        id: 2,
-        title: "Services",
-        icon: <VscTools />,
-        to: "/service",
-        // submenu: [
-        //   {
-        //     title: "Incoming",
-        //     to: "/",
-        //   },
-        //   {
-        //     title: "Outgoing",
-        //     to: "/",
-        //   },
-        // ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    heading: "Documents",
-    navitem: [
-      {
-        id: 3,
-        title: "Purchase Requests",
-        icon: <BsListCheck />,
-        submenu: [
-          {
-            title: "Incoming",
-            to: "/purchase-request/incoming",
-          },
-          {
-            title: "Outgoing",
-            to: "/purchase-request/outgoing",
-          },
-        ],
-      },
-      {
-        id: 4,
-        title: "Estimates",
-        icon: <BiLineChart />,
-        submenu: [
-          {
-            title: "Incoming",
-            to: "/estimate/incoming",
-          },
-          {
-            title: "Outgoing",
-            to: "/estimate/outgoing",
-          },
-        ],
-      },
-      {
-        id: 5,
-        title: "Invoices",
-        icon: <BsCurrencyExchange />,
-        submenu: [
-          {
-            title: "Incoming",
-            to: "/invoice/incoming",
-          },
-          {
-            title: "Outgoing",
-            to: "/invoice/outgoing",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 6,
-    heading: "App Settings",
-    navitem: [
-      {
-        id: 6,
-        title: "Settings",
-        icon: <BiCog />,
-        to: "/settings",
-        // submenu: [
-        //   {
-        //     title: "Incoming",
-        //     to: "/",
-        //   },
-        //   {
-        //     title: "Outgoing",
-        //     to: "/",
-        //   },
-        // ],
-      },
-      {
-        id: 7,
-        title: "Payments",
-        icon: <GiMoneyStack />,
-        to: "/payment",
-        // submenu: [
-        //   {
-        //     title: "Incoming",
-        //     to: "/payment/incoming",
-        //   },
-        //   {
-        //     title: "Outgoing",
-        //     to: "/payment/outgoing",
-        //   },
-        // ],
-      },
-      {
-        id: 8,
-        title: "Clients",
-        icon: <HiOutlineUserGroup />,
-        to: "/client",
-        // submenu: [
-        //   {
-        //     title: "Incoming",
-        //     to: "/",
-        //   },
-        //   {
-        //     title: "Outgoing",
-        //     to: "/",
-        //   },
-        // ],
       },
     ],
   },
