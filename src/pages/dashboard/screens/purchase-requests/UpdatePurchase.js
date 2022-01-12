@@ -9,6 +9,12 @@ import {
   Flex,
   Stack,
   VStack,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
 } from "@chakra-ui/react";
 import {
   useHistory,
@@ -68,15 +74,18 @@ const UpdatePurchase = () => {
   const updatePurchase = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(`/api/dashboard/payment/${uuid}/update`, data)
+    await AxiosInstance.put(
+      `/api/dashboard/purchase-request/${uuid}/update`,
+      data
+    )
       .then((res) => {
         console.log(res);
         setIsUpdating(false);
         setAlert({
-          message: "Payment's info has been updated!",
+          message: "Purchase-request has been updated!",
           type: "info",
         });
-        history.push(`/dashboard/payment`);
+        history.push(`/dashboard/purchase-request`);
       })
       .catch((err) => {
         setIsUpdating(false);
@@ -160,41 +169,58 @@ const UpdatePurchase = () => {
             </Center>
 
             {/* updating purchase-request*/}
-            <CustomEditForm
+            <Drawer
               isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updatePurchase)}
-              isUpdating={isUpdating}
-              errors={errors}
+              placement="right"
+              onClose={onCancelHandler}
+              size="lg"
             >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Date : ",
-                    placeHolder: "Enter Date",
-                    name: "date",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Details : ",
-                    placeHolder: "Enter Details",
-                    name: "details",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Lines : ",
-                    placeHolder: "Enter Lines",
-                    name: "lines",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+                  Edit your Info by filling up this form
+                </DrawerHeader>
+
+                <DrawerBody>
+                  <CustomEditForm
+                    isOpen={isOpen}
+                    onCancelHandler={onCancelHandler}
+                    onUpdate={handleSubmit(updatePurchase)}
+                    isUpdating={isUpdating}
+                    errors={errors}
+                  >
+                    <CustomAddForm
+                      listForm={[
+                        {
+                          head: "Date : ",
+                          placeHolder: "Enter Date",
+                          name: "date",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Details : ",
+                          placeHolder: "Enter Details",
+                          name: "details",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                        {
+                          head: "Lines : ",
+                          placeHolder: "Enter Lines",
+                          name: "lines",
+                          inputType: "text",
+                          errors: errors,
+                        },
+                      ]}
+                      control={control}
+                      register={register}
+                    />
+                  </CustomEditForm>
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
           </>
         )}
       </Route>

@@ -23,6 +23,13 @@ import {
   Flex,
   Spacer,
   VStack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import {
   useHistory,
@@ -40,7 +47,7 @@ import { AlertContext } from "../../../../context/AlertContext";
 import UpdateStatus from "./UpdateStatus";
 import ConvertToInvoice from "./ConvertToInvoice";
 
-import { MdOutlinePermMedia } from "react-icons/md";
+import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 
 const EstimateCard = () => {
@@ -85,7 +92,7 @@ const EstimateCard = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        history.push("/dashboard/estimate");
+        history.push("/dashboard/estimatehome");
       });
   };
 
@@ -100,7 +107,7 @@ const EstimateCard = () => {
           message: "Estimate's info has been updated!",
           type: "info",
         });
-        history.push(`/dashboard/estimate`);
+        history.push(`/dashboard/estimatehome`);
       })
       .catch((err) => {
         setIsUpdating(false);
@@ -136,10 +143,11 @@ const EstimateCard = () => {
               <Box
                 className="rounded-3xl relative bg-white shadow-2xl"
                 w="500px"
-                h="900px"
+                h="1250px"
               >
                 <VStack spacing="20px" mx="5%" mt="5">
                   <Box mr="0">
+                    <Text fontSize="large">Estimate's details: </Text>
                     <Text py="1" textColor="gray.600">
                       Subject: {card?.subject}
                     </Text>
@@ -205,13 +213,15 @@ const EstimateCard = () => {
                       <Stack>
                         <Text>
                           {" "}
-                          {card?.primary_contact?.first_name}{" "}
-                          {card?.primary_contact?.last_name}
+                          {card?.customer?.primary_contact?.first_name}{" "}
+                          {card?.customer?.primary_contact?.last_name}
                         </Text>
-                        <Text>{card?.primary_contact?.position}</Text>
-                        <Text>{card?.primary_contact?.email}</Text>
-                        <Text>{card?.primary_contact?.phone_number}</Text>
-                        <Text>{card?.primary_contact?.uuid}</Text>
+                        <Text>{card?.customer?.primary_contact?.position}</Text>
+                        <Text>{card?.customer?.primary_contact?.email}</Text>
+                        <Text>
+                          {card?.customer?.primary_contact?.phone_number}
+                        </Text>
+                        <Text>{card?.customer?.primary_contact?.uuid}</Text>
                       </Stack>
                     </Box>
                   </Box>
@@ -219,7 +229,7 @@ const EstimateCard = () => {
                   <Flex justify={"center"} w="full" gap="15px">
                     <IconButton
                       justify={"center"}
-                      fontSize={"lg"}
+                      fontSize={"x-large"}
                       rounded={"full"}
                       bg={"#F8B916"}
                       color={"white"}
@@ -229,9 +239,27 @@ const EstimateCard = () => {
                       _hover={{
                         bg: "orange.400",
                       }}
-                      icon={<MdOutlinePermMedia />}
+                      icon={<RiExchangeDollarLine />}
                       onClick={() => {
-                        history.push(`${match.url}/media`);
+                        history.push(`${match.url}/convert-to-invoice`);
+                      }}
+                    />
+
+                    <IconButton
+                      justify={"center"}
+                      fontSize={"x-large"}
+                      rounded={"full"}
+                      bg={"#F8B916"}
+                      color={"white"}
+                      boxShadow={
+                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                      }
+                      _hover={{
+                        bg: "orange.400",
+                      }}
+                      icon={<RiRefreshLine />}
+                      onClick={() => {
+                        history.push(`${match.url}/update-status`);
                       }}
                     />
 
@@ -270,21 +298,6 @@ const EstimateCard = () => {
                 </DrawerHeader>
 
                 <DrawerBody>
-                  <HStack
-                    align="flex-end"
-                    w="full"
-                    alignItems="baseline"
-                    mb="14"
-                    mt="5"
-                  >
-                    <input
-                      type="file"
-                      onChange={(e) => setPhoto(e.target.files[0])}
-                      name="choose file"
-                    />
-                    <Spacer />
-                    <SecondaryButton name="Upload File" onClick={uploadFile} />
-                  </HStack>
                   <CustomEditForm
                     isOpen={isOpen}
                     onCancelHandler={onCancelHandler}
