@@ -13,7 +13,212 @@ import { GiMoneyStack } from "react-icons/gi";
 
 import { ImLibrary } from "react-icons/im";
 
-export const SidebarMenu = [
+export const updatedMneu = [
+  {
+    id: 1,
+    heading: null,
+    items: [
+      {
+        id: 1,
+        title: "Dashboard",
+        icon: <FiMenu />,
+        to: "/",
+        items: null,
+      },
+    ],
+  },
+  {
+    id: 2,
+    heading: "Organization",
+    items: [
+      {
+        id: 1,
+        title: "Company",
+        icon: <ImLibrary />,
+        to: "/company",
+        items: null,
+      },
+      {
+        id: 2,
+        title: "Users",
+        icon: <BiUser />,
+        to: "/users",
+        items: null,
+      },
+      {
+        id: 3,
+        title: "Services",
+        icon: <VscTools />,
+        to: "/services",
+        items: null,
+      },
+      {
+        id: 7,
+        title: "Media",
+        icon: <VscTools />,
+        to: "/media",
+        items: null,
+      },
+    ],
+  },
+  {
+    id: 3,
+    heading: "Contacts",
+    items: [
+      {
+        id: 1,
+        title: "Customers",
+        icon: <VscTools />,
+        to: "/services",
+        items: null,
+      },
+      {
+        id: 2,
+        title: "Supplier",
+        icon: <VscTools />,
+        to: "/services",
+        items: null,
+      },
+      {
+        id: 3,
+        title: "Leads",
+        icon: <VscTools />,
+        to: "/leads",
+        items: null,
+      },
+      {
+        id: 4,
+        title: "All Contacts",
+        icon: <VscTools />,
+        to: "/contacts",
+        items: null,
+      },
+    ],
+  },
+  {
+    id: 4,
+    heading: "Documents",
+    items: [
+      {
+        id: 1,
+        title: "Purchase Requests",
+        icon: <BsListCheck />,
+        to: null,
+        items: [
+          {
+            id: 1,
+            title: "Incoming",
+            icon: null,
+            to: "/purchase-request/incoming",
+            items: null,
+          },
+          {
+            id: 1,
+            title: "Outgoing",
+            icon: 1,
+            to: "/purchase-request/outgoing",
+            items: null,
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: "Estimates",
+        icon: <BiLineChart />,
+        to: null,
+        items: [
+          {
+            id: 1,
+            title: "Incoming",
+            icon: null,
+            to: "/estimates/incoming",
+            items: null,
+          },
+          {
+            id: 1,
+            title: "Outgoing",
+            icon: 1,
+            to: "/estimates/outgoing",
+            items: null,
+          },
+        ],
+      },
+      {
+        id: 3,
+        title: "Invoices",
+        icon: <BsCurrencyExchange />,
+        to: null,
+        items: [
+          {
+            id: 1,
+            title: "Incoming",
+            icon: null,
+            to: "/invoices/incoming",
+            items: null,
+          },
+          {
+            id: 1,
+            title: "Outgoing",
+            icon: 1,
+            to: "/invoices/outgoing",
+            items: null,
+          },
+        ],
+      },
+      {
+        id: 4,
+        title: "Proposal",
+        icon: <BsCurrencyExchange />,
+        to: null,
+        items: [
+          {
+            id: 1,
+            title: "Incoming",
+            icon: null,
+            to: "/proposals/incoming",
+            items: null,
+          },
+          {
+            id: 1,
+            title: "Outgoing",
+            icon: 1,
+            to: "/proposals/outgoing",
+            items: null,
+          },
+        ],
+      },
+      {
+        id: 5,
+        title: "Payments",
+        icon: <BsCurrencyExchange />,
+        to: "/payments",
+        items: null,
+      },
+    ],
+  },
+  {
+    id: 5,
+    heading: "App Settings",
+    items: [
+      {
+        id: 1,
+        title: "Settings",
+        icon: <VscTools />,
+        to: "/services",
+        items: null,
+      },
+      {
+        id: 2,
+        title: "Lead Sources",
+        icon: <VscTools />,
+        to: "/services",
+        items: null,
+      },
+    ],
+  },
+];
+
+const SidebarMenu = [
   {
     id: 0,
     title: "Dashboard",
@@ -182,3 +387,5 @@ export const SidebarMenu = [
     ],
   },
 ];
+
+export default SidebarMenu;

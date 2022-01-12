@@ -1,5 +1,6 @@
 import React from "react";
 
-export const FallBack = () => {
+const FallBack = () => {
   return <h1>Something Went Wrong</h1>;
 };
+export default FallBack;

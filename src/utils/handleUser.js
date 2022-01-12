@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+// https://www.npmjs.com/package/js-cookie
 
 export const getToken = () => {
   return Cookies.get("tnafos_auth");
