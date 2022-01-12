@@ -7,7 +7,7 @@ import {
   Center,
   Spinner,
   Flex,
-  Stack,
+  HStack,
   VStack,
   Drawer,
   DrawerBody,
@@ -120,8 +120,8 @@ const UpdatePurchase = () => {
             <Center py="5">
               <Box
                 className="rounded-3xl relative bg-white shadow-2xl"
-                w="400px"
-                h="500px"
+                w="350px"
+                h="300px"
               >
                 <VStack spacing="20px" mx="5%" mt="5">
                   <Box mr="0">
@@ -133,7 +133,7 @@ const UpdatePurchase = () => {
                     <Text textColor="gray.600">
                       Services:
                       {card.services.map((el, idx) => (
-                        <Stack key={idx}>
+                        <HStack key={idx}>
                           <Text textColor="gray.600">
                             [ {el?.service?.name}
                           </Text>
@@ -142,7 +142,7 @@ const UpdatePurchase = () => {
                           </Text>
                           <Text textColor="gray.600">{el?.service?.price}</Text>
                           <Text textColor="gray.600">{el?.service?.type}]</Text>
-                        </Stack>
+                        </HStack>
                       ))}
                     </Text>
                   </Box>
