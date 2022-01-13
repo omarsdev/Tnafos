@@ -18,14 +18,17 @@ import {
   PasswordInput,
   PrimaryButton,
   CheckBox,
-} from "components";
+  RegularInputControl,
+  PasswordInputControl,
+} from "../../../components";
 
 import { AuthLayout } from "../AuthLayout";
-import RegisterImage from "assets/images/register.jpg";
+import RegisterImage from "../../../assets/images/register.jpg";
 import { useForm } from "react-hook-form";
 
-import { apiAuth } from "api";
-import { UserDataContext } from "context";
+import { apiAuth } from "../../../api";
+import { UserDataContext } from "../../../context";
+import { setUserSession } from "../../../utils";
 
 export const Register = () => {
   const { tokenProviderValue } = useContext(UserDataContext);
@@ -33,12 +36,7 @@ export const Register = () => {
 
   const history = useHistory();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   const [error, setError] = useState(null);
   const [loadingButton, setLoadingButton] = useState(false);
@@ -48,15 +46,15 @@ export const Register = () => {
     setLoadingButton(true);
     const res = await apiAuth(data, "register");
     if (res.success) {
+      let maxAge = 2;
       if (data.rememberMe) {
-        localStorage.setItem("token", res.token);
-      } else {
-        setUserToken(res.token);
+        maxAge = 365;
       }
-      history.push("/dashboard");
+      setUserSession(res.token, maxAge);
+      setUserToken(res.token);
+      history.push("/dashboard/company/create");
     } else {
-      console.log(res.error);
-      setError(res.error);
+      setError(res.error.errors);
       setLoadingButton(false);
     }
   };
@@ -72,69 +70,53 @@ export const Register = () => {
               <Stack spacing={4}>
                 <Flex>
                   <Flex direction="column">
-                    <RegularInput
-                      placeHolder="First name"
-                      inputType="text"
-                      width="180px"
+                    <RegularInputControl
+                      placeHolder="First Name"
                       name="first_name"
+                      control={control}
                       register={register}
-                      error={error?.errors?.first_name ? true : false}
+                      width="180px"
+                      errors={error}
                     />
-                    {error?.errors?.first_name &&
-                      error?.errors?.first_name.map((e) => (
-                        <Text color="red" maxWidth="180px" textAlign="center">
-                          {e}
-                        </Text>
-                      ))}
                   </Flex>
                   <Spacer />
                   <Flex direction="column">
-                    <RegularInput
-                      placeHolder="Last name"
-                      inputType="text"
-                      width="180px"
+                    <RegularInputControl
+                      placeHolder="Last Name"
                       name="last_name"
+                      control={control}
                       register={register}
-                      error={error?.errors?.last_name ? true : false}
+                      width="180px"
+                      errors={error}
                     />
-                    {error?.errors?.last_name &&
-                      error?.errors?.last_name.map((e) => (
-                        <Text color="red" maxWidth="180px" textAlign="center">
-                          {e}
-                        </Text>
-                      ))}
                   </Flex>
                 </Flex>
                 <Box>
-                  <RegularInput
+                  <RegularInputControl
                     placeHolder="Email"
-                    inputType="email"
                     name="email"
+                    control={control}
                     register={register}
-                    error={error?.errors?.email ? true : false}
+                    errors={error}
                   />
-                  {error?.errors?.email &&
-                    error?.errors?.email.map((e) => (
-                      <Text color="red">{e}</Text>
-                    ))}
                 </Box>
-                <PasswordInput
-                  placeHolder="Password"
-                  name="password"
-                  register={register}
-                  error={error?.errors?.password ? true : false}
-                />
                 <Box>
-                  <PasswordInput
+                  <PasswordInputControl
+                    placeHolder="Password"
+                    name="password"
+                    control={control}
+                    register={register}
+                    errors={error}
+                  />
+                </Box>
+                <Box>
+                  <PasswordInputControl
+                    control={control}
+                    register={register}
                     placeHolder="Confirm password"
                     name="password_confirmation"
-                    register={register}
-                    error={error?.errors?.password ? true : false}
+                    errors={error}
                   />
-                  {error?.errors?.password &&
-                    error?.errors?.password.map((e) => (
-                      <Text color="red">{e}</Text>
-                    ))}
                 </Box>
                 <Box>
                   <InputGroup>
@@ -144,24 +126,19 @@ export const Register = () => {
                       position={"absolute"}
                       zIndex={"10"}
                       borderRadius="25px"
-                      borderColor={
-                        error?.errors?.phone_number ? "red" : "#AEAEAE"
-                      }
+                      borderColor={error?.phone_number ? "red" : "#AEAEAE"}
                       borderRightWidth="1px"
                       borderRightColor="#AEAEAE"
                     />
-                    <RegularInput
+                    <RegularInputControl
                       placeHolder="Mobile"
-                      inputType="tel"
                       name="phone_number"
+                      control={control}
                       register={register}
-                      error={error?.errors?.phone_number ? true : false}
+                      inputType="tel"
+                      errors={error}
                     />
                   </InputGroup>
-                  {error?.errors?.phone_number &&
-                    error?.errors?.phone_number.map((e) => (
-                      <Text color="red">{e}</Text>
-                    ))}
                 </Box>
                 <Flex>
                   <Flex>
@@ -197,3 +174,5 @@ export const Register = () => {
     </div>
   );
 };
+
+export default Register;

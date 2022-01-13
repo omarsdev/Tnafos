@@ -6,6 +6,7 @@ export const UserDataContextProvider = (props) => {
   const [userToken, setUserToken] = useState("");
   const [userData, setUserData] = useState(null);
   const [userCard, setUserCard] = useState([]);
+  const [companyInfo, setCompanyInfo] = useState(null);
 
   const tokenProviderValue = useMemo(
     () => ({
@@ -31,12 +32,21 @@ export const UserDataContextProvider = (props) => {
     [userCard, setUserCard]
   );
 
+  const companyProviderValue = useMemo(
+    () => ({
+      companyInfo,
+      setCompanyInfo,
+    }),
+    [companyInfo, setCompanyInfo]
+  );
+
   return (
     <UserDataContext.Provider
       value={{
         tokenProviderValue,
         dataProviderValue,
         cardProviderValue,
+        companyProviderValue,
       }}
     >
       {props.children}

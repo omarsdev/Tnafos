@@ -1,21 +1,22 @@
 import React, { useState, useContext } from "react";
 
 import { Stack, Flex, Spacer, Box, Center, Text } from "@chakra-ui/react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, Redirect } from "react-router-dom";
 
-import { UserDataContext } from "context";
+import { UserDataContext } from "../../../context";
 import {
   RegularInput,
   PasswordInput,
   PrimaryButton,
   CheckBox,
-} from "components";
+} from "../../../components";
 import { AuthLayout } from "../AuthLayout";
-import LoginImage from "assets/images/login.jpg";
+import LoginImage from "../../../assets/images/login.jpg";
 
 import { apiAuth } from "../../../api";
+import { setUserSession } from "../../../utils";
 
-export const Login = () => {
+const Login = () => {
   const { tokenProviderValue } = useContext(UserDataContext);
   const { setUserToken } = tokenProviderValue;
 
@@ -32,13 +33,15 @@ export const Login = () => {
     setError(null);
     setLoadingButton(true);
     const res = await apiAuth({ password: password, email: email }, "login");
+
     if (res.success) {
+      let maxAge = 2;
       if (rememberMe) {
-        localStorage.setItem("token", res.token);
-      } else {
-        setUserToken(res.token);
+        maxAge = 365;
       }
-      history.push("/dashboard");
+      setUserSession(res.token, maxAge);
+      setUserToken(res.token);
+      history.push("/dashboard/rating");
     } else {
       setError(res.error);
       setLoadingButton(false);
@@ -103,3 +106,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;

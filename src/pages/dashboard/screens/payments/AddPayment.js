@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-import { Box, Heading, Input, Button, HStack } from "@chakra-ui/react";
+import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { AxiosInstance } from "../../../../api";
 import { useHistory } from "react-router-dom";
 
-export const AddPayment = () => {
+import { CustomAddForm } from "../../components";
+
+import { SecondaryButton, PrimaryButton } from "../../../../components";
+import { AxiosInstance } from "../../../../api";
+
+const AddPayment = () => {
+  const [err, setErr] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
   const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm();
 
-  //   const [input, setInput] = useState({
-  //     amount: "",
-  //     method: "",
-  //     transaction_number: "",
-  //     date: "",
-  //     notes: "",
-  //     invoice_id: "",
-  //   });
-
-  const createPayment = async (e, data) => {
-    e.preventDefault();
+  const createPayment = async (data) => {
+    // e.preventDefault();
     await AxiosInstance.post("/api/dashboard/payment/create", data)
       .then((res) => {
         console.log(res);
@@ -37,107 +36,84 @@ export const AddPayment = () => {
   };
 
   return (
-    <Box
-      borderRadius="lg"
-      overflow="hidden"
-      borderWidth="1px"
-      w="2xl"
-      px="15"
-      pt="5"
-      h="2xl"
-    >
-      <Box>
+    <Box overflowY="scroll" w="full">
+      <Box
+        px="20"
+        mt="6"
+        boxShadow="2xl"
+        rounded="3xl"
+        w="750px"
+        ml="40"
+        bg="white"
+      >
         <Heading
-          color="yellow.500"
-          fontWeight="medium"
-          fontSize="x-large"
-          fontFamily="inhirit"
+          color="#F8B916"
+          fontSize="3xl"
+          fontWeight="lg"
           alignItems="baseline"
+          pt="4"
+          mb="12"
         >
-          Fill in this form to add payment ...
+          Fill in this form to add payment.
         </Heading>
+
+        <form>
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Enter amount",
+                placeHolder: "Enter amount ",
+                name: "amount",
+                err: err,
+              },
+              {
+                head: "Enter method",
+                placeHolder: "Enter method ",
+                name: "method",
+                err: err,
+              },
+              {
+                head: "Enter Transaction-number ",
+                placeHolder: "Enter Transaction-number",
+                name: "transaction-number",
+                err: err,
+              },
+              {
+                head: "Enter Date  ",
+                placeHolder: "Enter date ",
+                name: "date",
+                err: err,
+              },
+              {
+                head: "Enter invoice-id ",
+                placeHolder: "invoice_id",
+                name: "invoice_id",
+                err: err,
+              },
+              {
+                head: "Enter notes ",
+                placeHolder: "notes",
+                name: "notes",
+                err: err,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+
+          <HStack spacing="10px" py="10" ml="40">
+            <PrimaryButton
+              name="SAVE"
+              onClick={handleSubmit(createPayment)}
+              loadingButton={isUpdating}
+            />
+
+            <SecondaryButton onClick={handleCancel} name="CANCEL" />
+          </HStack>
+        </form>
       </Box>
-
-      <form onSubmit={handleSubmit(createPayment)}>
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          amount :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("amount", { required: "This field is required!" })}
-          />
-          {errors.amount && <p>{errors.amount?.message}</p>}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          method :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("method", { required: "This field is required!" })}
-          />
-          {errors.method && <p>{errors.method?.message}</p>}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          transaction_number :
-          <Input
-            size="sm"
-            type="number"
-            borderRadius="lg"
-            {...register("transaction_number", {
-              required: "This field is required!",
-            })}
-          />
-          {errors.transaction_number && (
-            <p>{errors.transaction_number?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          date :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("date", { required: "This field is required!" })}
-          />
-          {errors.date && <p>{errors.date.message}</p>}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          notes :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("notes", { required: "This field is required!" })}
-          />
-          {errors.notes && <p>{errors.notes?.message}</p>}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          invoice_id :
-          <Input
-            size="sm"
-            type="number"
-            borderRadius="lg"
-            {...register("invoice_id", { required: "This field is required!" })}
-          />
-          {errors.invoice_id && <p>{errors.invoice_id?.message}</p>}
-        </label>
-        <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
-          <Button type="submit" colorScheme="blue" size="sm">
-            SAVE
-          </Button>
-
-          <Button onClick={handleCancel} colorScheme="blackAlpha" size="sm">
-            CANCEL
-          </Button>
-        </HStack>
-      </form>
     </Box>
   );
 };
+
+export default AddPayment;

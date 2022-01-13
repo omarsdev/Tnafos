@@ -1,55 +1,98 @@
+import React, { useState, useContext, useRef, useEffect } from "react";
 import {
   Heading,
   Box,
-  Button,
   HStack,
-  Checkbox,
-  Input,
+  Flex,
   Text,
+  Spacer,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Link, useHistory } from "react-router-dom";
-import { AxiosInstance } from "api/AxiosInstance";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-export const CreateUser = () => {
-  //* form validation rules
+import { CustomAddForm } from "../../components";
+
+import { AlertContext } from "../../../../context";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  CheckBox,
+} from "../../../../components";
+import { AxiosInstance } from "../../../../api";
+
+const CreateUser = () => {
   const validationSchema = yup.object({
     password: yup
       .string()
       .required("Password is required")
       .min(8, "Password must be at least 8 characters !"),
+
     password_confirmation: yup
       .string()
-      .required("Confirm Password is required")
+      .required("Confirm Password is required !")
       .oneOf([yup.ref("password")], "Passwords must match !"),
+
+    first_name: yup.string().required("first name is required!"),
+    last_name: yup.string().required("last name is required!"),
+    email: yup.string().email().required("Email is required!"),
+    phone_number: yup
+      .number()
+      .min(10, "Invalid phone number, minium 10 numbers! ")
+      .required("Phone number is required!"),
   });
 
-  //* get functions to build form with useForm() hook
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(validationSchema) });
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
 
   const history = useHistory();
 
-  // const [check, setCheck] = useState(false);
-  const [err, setErr] = useState(null);
+  const [countryList, setCountryList] = useState(null);
+  const match = useRouteMatch();
 
-  //* onSubmit function:
+  const [err, setErr] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const [checked, setChecked] = useState(false);
+  const [ch, setCh] = useState(false);
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [photo, setPhoto] = useState(null);
+  let inputRef = useRef(null);
+
+  const { register, handleSubmit, control } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const handleFileInput = (e) => {
+    setPhoto(e.target.files[0]);
+  };
+
+  // * onSubmit function:
   const addUser = async (userData) => {
     // console.log(userData);
+    setIsUpdating(true);
     await AxiosInstance.post("/api/dashboard/user/create", userData)
       .then((res) => {
-        console.log(res);
+        setAlert({
+          message: `New user has been added!`,
+          type: "success",
+        });
         history.push("/dashboard/user");
       })
       .catch((error) => {
-        setErr(error);
-        console.log(error);
+        console.log(error.response.data);
+        setErr(error.response.data.errors);
+        setAlert({
+          message: `${error.response.data.message}`,
+          type: "error",
+        });
+      })
+      .finally(() => {
+        setIsUpdating(false);
       });
   };
 
@@ -57,152 +100,161 @@ export const CreateUser = () => {
     history.push("/dashboard/user");
   };
 
-  return (
-    <Box
-      borderRadius="lg"
-      overflow="hidden"
-      borderWidth="1px"
-      w="2xl"
-      px="15"
-      pt="5"
-      h="6xl"
-    >
-      <Box>
+  const getAllCountry = async () => {
+    await AxiosInstance.get("/api/country")
+      .then((res) => {
+        setCountryList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  useEffect(() => {
+    getAllCountry();
+  }, []);
+
+  return countryList ? (
+    <Box overflowY="scroll" w="full">
+      <Box
+        px="20"
+        mt="6"
+        boxShadow="2xl"
+        rounded="3xl"
+        w="750px"
+        ml="40"
+        bg="white"
+      >
         <Heading
-          color="yellow.500"
-          fontWeight="medium"
-          fontSize="x-large"
-          fontFamily="inhirit"
+          color="#F8B916"
+          fontSize="3xl"
+          fontWeight="lg"
           alignItems="baseline"
+          pt="4"
         >
-          Add new User
+          Add user
         </Heading>
+
+        <Flex w="full" pl="5" mt="16">
+          <input
+            type="file"
+            onChange={(ev) => handleFileInput(ev)}
+            ref={inputRef}
+          />
+          <Spacer />
+          <SecondaryButton
+            // onClick={photoUploadHandler}
+            name="Upload photo"
+          />
+        </Flex>
+        <Center>
+          <form>
+            <CustomAddForm
+              listForm={[
+                {
+                  head: "First name : ",
+                  placeHolder: "Enter first name : ",
+                  name: "first_name",
+                  err: err,
+                },
+                {
+                  head: "Last name : ",
+                  placeHolder: "Enter last name : ",
+                  name: "last_name",
+                  err: err,
+                },
+                {
+                  head: "Email : ",
+                  placeHolder: "Enter email : ",
+                  name: "email",
+                  err: err,
+                },
+                {
+                  head: "Password : ",
+                  placeHolder: "Enter password : ",
+                  name: "password",
+                  err: err,
+                  isPassword: true,
+                },
+                {
+                  head: "Confirm Password : ",
+                  placeHolder: "confirm your password",
+                  name: "password_confirmation",
+                  err: err,
+                  isPassword: true,
+                },
+                {
+                  head: "Phone Number : ",
+                  placeHolder: "enter phone number",
+                  name: "phone_number",
+                  err: err,
+                },
+                {
+                  head: "Country Code : ",
+                  placeHolder: "Select Country Code : ex SA",
+                  name: "country_code",
+                  err: err,
+                  isSelect: true,
+                  optionList: countryList,
+                  value: "short_name",
+                  key: "uuid",
+                  displayValue: "short_name",
+                },
+              ]}
+              control={control}
+              register={register}
+            />
+
+            <Box className="flex flex-col items-center gap-2 mt-10">
+              <Heading fontSize="xl" color="grey" fontWeight="normal">
+                Terms and Conditions agreement
+              </Heading>
+              <CheckBox
+                name="I agree to Tnafos"
+                value={checked}
+                setValue={setChecked}
+              />
+
+              <HStack>
+                <Link to="/" className="hover:underline text-CInfo">
+                  <Text>terms of service</Text>
+                </Link>{" "}
+                <Text>and</Text>
+                <Link to="/" className="hover:underline text-CInfo">
+                  <Text>Privacy policy</Text>
+                </Link>
+              </HStack>
+              <Box>
+                <Heading fontSize="xl" color="grey" fontWeight="normal">
+                  Decleration of Valid Information
+                </Heading>
+              </Box>
+              <CheckBox
+                name="I confirm that the information given in this form is true,
+            complete and accurate."
+                value={ch}
+                setValue={setCh}
+              />
+
+              <HStack spacing="10px" py="5">
+                <PrimaryButton
+                  name="SAVE"
+                  onClick={handleSubmit(addUser)}
+                  loadingButton={isUpdating}
+                />
+
+                <SecondaryButton onClick={handleCancel} name="CANCEL" />
+              </HStack>
+            </Box>
+          </form>
+        </Center>
       </Box>
-      <form onSubmit={handleSubmit(addUser)}>
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          First Name :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("first_name", { required: "This field is required!" })}
-          />
-          {errors.first_name && (
-            <p className="text-red-600 font-bold">
-              {errors.first_name?.message}
-            </p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          Last Name :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("last_name", { required: "This field is required!" })}
-          />
-          {errors.last_name && (
-            <p className="text-red-600 font-bold">
-              {errors?.last_name?.message}
-            </p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 ttext-sm">
-          Email :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            {...register("email", { required: "This field is required!" })}
-          />
-          {errors.email && (
-            <p className="text-red-600 font-bold">{errors.email?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          Password :
-          <Input
-            size="sm"
-            type="password"
-            borderRadius="lg"
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className="text-red-600 font-bold">{errors.password?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          Password Confirmation :
-          <Input
-            size="sm"
-            type="password"
-            borderRadius="lg"
-            {...register("password_confirmation")}
-          />
-          {errors.password_confirmation && (
-            <p className="text-red-600 font-bold">
-              {errors.password_confirmation?.message}
-            </p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-sm">
-          Phone Number:
-          <Input
-            size="sm"
-            type="number"
-            borderRadius="lg"
-            {...register("phone_number", {
-              required: "This field is required!",
-              length: { value: 10, message: "Invalid phone number !" },
-            })}
-          />
-          {errors.phone_number && (
-            <p className="text-red-600 font-bold">
-              {errors.phone_number?.message}
-            </p>
-          )}
-        </label>
-
-        <Box className="flex flex-col items-center gap-2">
-          <Heading fontSize="md" color="gray.500" fontWeight="normal">
-            Terms and Conditions agreement
-          </Heading>
-          <Checkbox size="sm" colorScheme="blue">
-            I agree to Tnafos
-          </Checkbox>
-          <HStack>
-            <Link to="#" className="text-blue-700 hover:underline">
-              <Text>terms of service</Text>
-            </Link>{" "}
-            <Text>and</Text>
-            <Link className="text-blue-700 hover:underline">
-              Privacy policy
-            </Link>
-          </HStack>
-          <Box>
-            <Heading fontSize="md" color="gray.500" fontWeight="normal">
-              Decleration of Valid Information
-            </Heading>
-          </Box>
-          <Checkbox>
-            I confirm that the information given in this form is true, complete
-            and accurate.
-          </Checkbox>
-          <HStack spacing="10px">
-            <Button colorScheme="blue" size="sm" type="submit">
-              SAVE
-            </Button>
-            <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>
-              CANCEL
-            </Button>
-          </HStack>
-        </Box>
-      </form>
     </Box>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };
+
+export default CreateUser;

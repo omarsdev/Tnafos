@@ -11,7 +11,7 @@ import {
 import { Link, useRouteMatch } from "react-router-dom";
 
 import { PrimaryButton, SecondaryButton } from "../../../components";
-import { SearchDataContext } from "context";
+import { SearchDataContext } from "../../../context";
 
 export const CardItem = ({ data, isSelected, isCompany }) => {
   const match = useRouteMatch();
@@ -94,6 +94,7 @@ export const CardItem = ({ data, isSelected, isCompany }) => {
                 <Link to={`${match.url}/${data.uuid}`}>
                   <SecondaryButton
                     name="View"
+                    width={"120px"}
                     onClick={() => setVendorsList(null)}
                   />
                 </Link>
@@ -101,6 +102,7 @@ export const CardItem = ({ data, isSelected, isCompany }) => {
 
               <PrimaryButton
                 name={addedToMyList ? "Added" : "Add To List"}
+                width={"120px"}
                 onClick={addToMyListHandler}
                 loadingButton={loading}
                 buttonType="submit"

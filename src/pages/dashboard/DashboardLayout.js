@@ -1,24 +1,48 @@
-import React, { useState, useEffect, useContext } from "react";
-import { DashboardContent } from "./DasboardContent";
-import { Navbar, Sidebar } from "./components/index";
-import { HStack, VStack, Center, Spinner } from "@chakra-ui/react";
-import { useRouteMatch, Route, Switch } from "react-router-dom";
-import { AxiosInstance } from "api";
-import {
-  Estimate,
-  PurchaseRequest,
-  Settings,
-  UserHome,
-  ServiceHome,
-  CompanyHome,
-  InvoiceHome,
-  ClientsHome,
-} from "./screens";
-import { PaymentHome } from "./screens/payments";
-import { UserDataContext } from "context";
+// TODO purchase for incoming and outgoing
 
-export const DashboardLayout = () => {
-  let match = useRouteMatch();
+import React, { useState, useEffect, useContext } from "react";
+import { Navbar, Sidebar } from "./components/index";
+import {
+  HStack,
+  VStack,
+  Center,
+  Spinner,
+  Box,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Grid,
+} from "@chakra-ui/react";
+import {
+  useRouteMatch,
+  Route,
+  Switch,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
+import { AxiosInstance } from "../../api";
+
+import DashboardHome from "./screens/home/DashboardHome";
+import ClientLayout from "./screens/clients/ClientLayout";
+import CompanyLayout from "./screens/company/CompanyLayout";
+import EstimateLayout from "./screens/estimates/EstimateLayout";
+import InvoiceHome from "./screens/invoices/InvoiceHome";
+import PaymentLayout from "./screens/payments/PaymentLayout";
+// import Proposal from "./screens/proposals/Proposal"
+import PurchasesLayout from "./screens/purchase-requests/PurchasesLayout";
+import Ratings from "./screens/rating/Ratings";
+import ServiceLayout from "./screens/services/ServiceLayout";
+import SettingLayout from "./screens/settings/SettingLayout";
+import UserLayout from "./screens/users/UserLayout";
+
+import { UserDataContext } from "../../context";
+import InvoiceLayout from "./screens/invoices/InvoiceLayout";
+// import { PrivateRoute } from "./components/PrivateRoute";
+
+const DashboardLayout = () => {
+  const match = useRouteMatch();
+  const location = useLocation();
+  const history = useHistory();
 
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
@@ -26,59 +50,62 @@ export const DashboardLayout = () => {
 
   const [loading, setLoading] = useState(true);
 
-  const fetchTokenMe = async () => {
+  const fetchTokenMe = async (token) => {
     try {
-      const res = await AxiosInstance.get("/api/dashboard/user/my-profile", {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-        },
-      });
-      //* save user. info in the context provider which will be invoked later in Home page
+      const res = await AxiosInstance.get("/api/dashboard/user/my-profile");
       setUserData(res.data.data);
       setLoading(false);
     } catch (error) {
+      setUserData(error.response);
       setLoading(false);
     }
   };
 
-  const getUser = async () => {
-    if (!userData) {
-      //* grab token wether from local storage or context
-      let token = localStorage.getItem("token") || userToken;
-      if (token) {
-        fetchTokenMe();
-      }
+  const removeForwardSlashFromUrl = () => {
+    if (location.pathname === "/dashboard/") {
+      history.push("/dashboard");
     }
   };
 
   useEffect(() => {
-    getUser();
+    if (userData) return;
+    fetchTokenMe();
+    removeForwardSlashFromUrl();
   }, []);
 
-  //*  note: we picked user information below from the (userData) variable that we've stored in context provider
   return (
     <>
-      {userData ? (
+      {!loading && userData ? (
         <HStack spacing={0}>
           <Sidebar />
-          <VStack className="chakra-stack w-full h-screen">
+          <VStack className="chakra-stack w-full h-screen overflow-scroll">
             <Navbar />
-
             {/* {body} */}
+
             <Switch>
-              <Route exact path={match.path} component={DashboardContent} />
-              <Route path={`${match.path}/company`} component={CompanyHome} />
-              <Route path={`${match.path}/user`} component={UserHome} />
-              <Route path={`${match.path}/service`} component={ServiceHome} />
+              <Route exact path={match.path} component={DashboardHome} />
+              <Route path={`${match.path}/company`} component={CompanyLayout} />
+              <Route path={`${match.path}/rating`} component={Ratings} />
+              <Route path={`${match.path}/user`} component={UserLayout} />
+              <Route path={`${match.path}/service`} component={ServiceLayout} />
               <Route
-                path={`${match.path}/purchase-requests`}
-                component={PurchaseRequest}
+                path={`${match.path}/purchase-request`}
+                component={PurchasesLayout}
               />
-              <Route path={`${match.path}/payment`} component={PaymentHome} />
-              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
-              <Route path={`${match.path}/estimate`} component={Estimate} />
-              <Route path={`${match.path}/client`} component={ClientsHome} />
-              <Route path={`${match.path}/settings`} component={Settings} />
+
+              <Route path={`${match.path}/payment`} component={PaymentLayout} />
+
+              <Route path={`${match.path}/invoice`} component={InvoiceLayout} />
+
+              <Route
+                path={`${match.path}/estimate`}
+                component={EstimateLayout}
+              />
+              <Route path={`${match.path}/client`} component={ClientLayout} />
+              <Route
+                path={`${match.path}/settings`}
+                component={SettingLayout}
+              />
             </Switch>
           </VStack>
         </HStack>
@@ -90,3 +117,5 @@ export const DashboardLayout = () => {
     </>
   );
 };
+
+export default DashboardLayout;

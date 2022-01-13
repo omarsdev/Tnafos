@@ -1,92 +1,118 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   List,
   ListItem,
-  ListIcon,
   HStack,
   Box,
   Text,
-  UnorderedList,
   Button,
   Divider,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
+  Stack,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
 } from "@chakra-ui/react";
-import { FaAngleRight, FaHome } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 import { Link, useRouteMatch } from "react-router-dom";
-import { SidebarMenu } from "../../../constants";
+import SidebarMenu from "../../../constants/SidebarMenu";
 
 import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
-const Heading = () => {
-  return <span>{SidebarMenu.heading}</span>;
+const LogoLink = () => {
+  return (
+    <Stack w-full h-32 ml="3" my="2">
+      <Link to="/">
+        <TnafosSearchLogo />
+      </Link>
+    </Stack>
+  );
 };
 
-const NavItem = ({ to, title, submenu, heading }) => {
-  const [isActive, setIsActive] = useState(false);
-
-  const handleToggle = () => {
-    setIsActive(!isActive);
-  };
-
-  //*if nav-item is a link, then:
-  if (to) {
-    return (
-      <List>
-        <Link to="#" className="">
-          <ListItem>
-            <ListIcon as={FaHome} />
-            {title}
-          </ListItem>
-        </Link>
-      </List>
-    );
-  }
+const NavbarItemLink = ({ item, isChild }) => {
+  let { path } = useRouteMatch();
   return (
-    <List>
-      <Button onClick={handleToggle}>
-        <FaAngleRight />
-        {title}
-      </Button>
-      {isActive && Array.isArray(submenu) && (
-        <UnorderedList>
-          <Heading heading={heading} />
-          {submenu.map((item) => (
-            <NavItem className="" {...item} />
+    <Link to={`${path}${item.to ?? "/"}`}>
+      <HStack mb="2" key={item.id} ml={isChild ? 6 : 2}>
+        <Text className="text-CWhite">{item.icon}</Text>
+        <Text className="text-CWhite">{item.title}</Text>
+      </HStack>
+    </Link>
+  );
+};
+
+const NavbarItemText = ({ item }) => {
+  return !!!item.to ? (
+    <Accordion allowMultiple margin={0}>
+      <AccordionItem border="0px">
+        <AccordionButton padding={0} margin={0} color="white">
+          <HStack flex="1" px="2" mb="2">
+            <Text>{item.icon}</Text>
+            <Text>{item.title}</Text>
+          </HStack>
+          <AccordionIcon mr={2} />
+        </AccordionButton>
+        <AccordionPanel padding={0} backgroundColor={"grey"}>
+          {item.items.map((item) => (
+            <NavbarItemLink key={item.id} item={item} isChild={true} />
           ))}
-        </UnorderedList>
-      )}
-    </List>
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  ) : (
+    <NavbarItemLink key={item.id} item={item} />
+  );
+};
+
+const NavbarItem = ({ item }) => {
+  return (
+    <ListItem>
+      <Box px="2" my="2">
+        <Text
+          className="text-CWhite p-1 font-extralight"
+          opacity="0.50"
+          fontSize="xs"
+        >
+          {item.heading}
+        </Text>
+      </Box>
+      {!!item.items &&
+        item.items.map((item) => <NavbarItemText item={item} key={item.id} />)}
+    </ListItem>
   );
 };
 
 export const Sidebar = () => {
-  let match = useRouteMatch();
-
+  const match = useRouteMatch();
   return (
-    <Box className="bg-gray-800 w-52 h-screen">
-      <Box className="h-28 w-full">
-        <TnafosSearchLogo />
-      </Box>
+    <Box className="bg-CBlack w-60 h-screen overflow-scroll">
+      <LogoLink />
 
       <Box className="css-0 w-auto">
         <List className="gap-y-2">
-          {SidebarMenu.map((item, idxxx) => (
+          {SidebarMenu.map((item) => (
+            <NavbarItem item={item} key={item.id} />
+          ))}
+          {/* {SidebarMenu.map((item, idxxx) => (
             <Box key={idxxx}>
               <Divider />
               <ListItem>
-                <Box>
+                <Box px="2" my="2">
                   <Text
                     className="text-CWhite p-1 font-extralight"
+                    opacity="0.50"
                     fontSize="xs"
                   >
                     {item.heading}
                   </Text>
                   {item.id === 0 ? (
                     <Link to={`${match.url}`} key={idxxx}>
-                      <HStack paddingX="1" className="py-2">
+                      <HStack px="2" mb="2">
                         {item.icon && (
                           <Text className="text-CWhite">{item.icon}</Text>
                         )}
@@ -104,7 +130,7 @@ export const Sidebar = () => {
                               {ele.to && !ele.submenu ? (
                                 <Link
                                   to={`${match.url}${ele.to}`}
-                                  // className="font-medium"
+                                  className=" font-medium  hover: 'opacity-0'"
                                   key={idx}
                                 >
                                   <Box
@@ -113,16 +139,19 @@ export const Sidebar = () => {
                                     bg="transparent"
                                     width="60%"
                                     height="10"
-                                    _hover="transparent"
-                                    // fontSize="md"
                                   >
-                                    <HStack>
-                                      <Text className="text-CWhite font-medium">
-                                        {ele.icon}
-                                      </Text>
-                                      <Text className="text-CWhite">
-                                        {ele.title}
-                                      </Text>
+                                    <HStack
+                                      px="2"
+                                      className="text-CWhite text-opacity-60"
+                                      _hover={{
+                                        textColor: "#FFFFFF",
+                                      }}
+                                      _focus={{
+                                        textColor: "#FFFFFF",
+                                      }}
+                                    >
+                                      <Text fontSize="medium">{ele.icon}</Text>
+                                      <Text fontSize="medium">{ele.title}</Text>
                                     </HStack>
                                   </Box>
                                 </Link>
@@ -130,8 +159,8 @@ export const Sidebar = () => {
                                 <Menu
                                   isLazy
                                   placement="bottom"
-                                  size="20"
                                   preventOverflow="true"
+                                  closeOnSelect="true"
                                 >
                                   <>
                                     <MenuButton
@@ -139,32 +168,38 @@ export const Sidebar = () => {
                                       paddingX="1"
                                       as={Button}
                                       _expanded={{
-                                        bg: "gray.600",
+                                        bg: "transparent",
                                       }}
-                                      _focus={{ border: "hidden" }}
                                       rightIcon={<FaAngleRight />}
-                                      className="text-CWhite"
+                                      className="text-CWhite text-opacity-60"
                                       bg="transparent"
                                       width="100%"
                                       height="10"
                                       fontSize="md"
                                       fontWeight="light"
-                                      _hover="transparent"
+                                      _hover={{
+                                        textColor: "#FFFFFF",
+                                      }}
+                                      _focus={{
+                                        textColor: "#FFFFFF",
+                                        border: "hidden",
+                                      }}
                                     >
-                                      <HStack>
+                                      <HStack px="2">
                                         <Text>{ele.icon}</Text>
                                         <Text>{ele.title}</Text>
                                       </HStack>
                                     </MenuButton>
-                                    <MenuList overflow="hidden" width="40">
+                                    <MenuList overflow="hidden" width="30">
                                       {ele.submenu.map((element, index) => (
-                                        <MenuItem key={index} width="100%">
-                                          <Link
-                                            to={`${match.url}${element.to}`}
-                                          >
+                                        <Link
+                                          to={`${match.url}${element.to}`}
+                                          key={index}
+                                        >
+                                          <MenuItem width="100%">
                                             {element.title}
-                                          </Link>
-                                        </MenuItem>
+                                          </MenuItem>
+                                        </Link>
                                       ))}
                                     </MenuList>
                                   </>
@@ -178,7 +213,7 @@ export const Sidebar = () => {
                 </Box>
               </ListItem>
             </Box>
-          ))}
+          ))} */}
         </List>
       </Box>
     </Box>

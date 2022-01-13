@@ -1,28 +1,46 @@
-import { HStack, VStack, Button, Input, Box, Heading } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useContext, useCallback, useEffect } from "react";
+import { HStack, Text, Box, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { AxiosInstance } from "api/AxiosInstance";
 
-export const AddService = () => {
+import { CustomAddForm } from "../../components";
+
+import { PrimaryButton, SecondaryButton } from "../../../../components";
+import { AxiosInstance } from "../../../../api";
+import { AlertContext } from "../../../../context";
+
+const AddService = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm();
+  const [err, setErr] = useState(null);
+
   const history = useHistory();
-  // const [err, setErr] = useState(null);
+
+  const [categoriesList, setCategoriesList] = useState(null);
 
   //* service adding function:
   const createService = async (data) => {
     await AxiosInstance.post("/api/dashboard/service/create", data)
       .then((res) => {
-        console.log(res);
+        setAlert({
+          message: "new service has been added!",
+          type: "success",
+        });
         history.push("/dashboard/service");
       })
       .catch((err) => {
-        console.log(err.responce.data);
-        // setErr(err);
+        setErr(err.response.data.errors);
+        setAlert({
+          message: `${err.response.data.message}`,
+          type: "error",
+        });
       });
   };
 
@@ -30,111 +48,107 @@ export const AddService = () => {
     history.push("/dashboard/service");
   };
 
-  return (
-    <Box
-      borderRadius="lg"
-      overflow="hidden"
-      borderWidth="1px"
-      w="xl"
-      px="20"
-      pt="5"
-      h="lg"
-    >
-      <Box>
+  const getAllCategories = async () => {
+    await AxiosInstance.get("/api/category")
+      .then((res) => {
+        setCategoriesList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
+  useEffect(() => {
+    getAllCategories();
+  }, []);
+
+  return categoriesList ? (
+    <Box boxShadow="2xl" rounded="3xl" boxSize="2xl">
+      <Box px="20" mt="10">
         <Heading
-          color="yellow.500"
-          fontWeight="medium"
+          color="#F8B916"
           fontSize="x-large"
-          fontFamily="inhirit"
+          fontWeight="lg"
           alignItems="baseline"
-          m={4}
         >
           New Service
         </Heading>
+
+        <form mt="5">
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Name of service : ",
+                placeHolder: "Enter first name : ",
+                name: "name",
+                err: err,
+                inputType: "text",
+              },
+              {
+                head: "Description : ",
+                placeHolder: "Enter Description : ",
+                name: "description",
+                inputType: "text",
+                err: err,
+              },
+              {
+                head: "Category : ",
+                placeHolder: "Select category",
+                name: "category_id",
+                err: err,
+                isSelect: true,
+                optionList: categoriesList,
+                value: "uuid",
+                key: "uuid",
+                displayValue: "name",
+              },
+              {
+                head: "Price : ",
+                placeHolder: "Enter Price : ",
+                name: "price",
+                inputType: "number",
+                err: err,
+              },
+              {
+                head: "Type : ",
+                placeHolder: "Enter Type : ",
+                name: "type",
+                inputType: "text",
+                err: err,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+
+          <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
+            <PrimaryButton
+              name="ADD SERVICE"
+              onClick={handleSubmit(createService)}
+              buttonType="submit"
+            />
+
+            <SecondaryButton
+              name="Cancel"
+              onClick={handleCancel}
+              buttonType="button"
+            />
+          </HStack>
+          <Box>
+            {errors?.message && (
+              <Text className="text-center mt-4" color="red">
+                {errors?.message}
+              </Text>
+            )}
+          </Box>
+        </form>
       </Box>
-      <form onSubmit={handleSubmit(createService)}>
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          name:
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("name", { required: "This field is required!" })}
-          />
-          {errors.name && (
-            <p className="text-red-700">{errors.name?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          description :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("description", {
-              required: "This field is required!",
-            })}
-          />
-          {errors.description && (
-            <p className="text-red-700">{errors.description?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          category_id :
-          <Input
-            size="sm"
-            type="number"
-            borderRadius="lg"
-            m={2}
-            {...register("category_id", {
-              required: "This field is required!",
-            })}
-          />
-          {errors.category_id && (
-            <p className="text-red-700">{errors.category_id?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          price :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("price", { required: "This field is required!" })}
-          />
-          {errors.price && (
-            <p className="text-red-700">{errors.price?.message}</p>
-          )}
-        </label>
-
-        <label className="ml-3 font-normal text-gray-600 text-lg">
-          type :
-          <Input
-            size="sm"
-            type="text"
-            borderRadius="lg"
-            m={2}
-            {...register("type", { required: "This field is required!" })}
-          />
-          {errors.type && (
-            <p className="text-red-700">{errors.type?.message}</p>
-          )}
-        </label>
-        <HStack m={3} className="flex flex-row gap-2" ml={"24"}>
-          <Button colorScheme="blue" size="sm" type="submit">
-            ADD SERVICE
-          </Button>
-          <Button colorScheme="blackAlpha" size="sm" onClick={handleCancel}>
-            CANCEL
-          </Button>
-        </HStack>
-      </form>
     </Box>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };
+
+export default AddService;

@@ -14,8 +14,8 @@ import { useRouteMatch, Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { removeUserSession } from "../../../utils";
 import { useHistory } from "react-router-dom";
-import { UserDataContext } from "context";
-import { AxiosInstance } from "api";
+import { UserDataContext } from "../../../context";
+import { AxiosInstance } from "../../../api";
 
 export const Navbar = () => {
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
@@ -53,6 +53,7 @@ export const Navbar = () => {
 
   const handleLogOut = () => {
     removeUserSession();
+    setUserData(null);
     history.push("/login");
   };
 
@@ -67,10 +68,9 @@ export const Navbar = () => {
         mr="15px"
       >
         <HStack className="font-medium h-10 justify-center text-gray-700 text-md w-24">
-          <span className="my-auto mr-7">
+          <span className="my-auto ">
             {userData.first_name} {userData.last_name}
           </span>
-          {/* <Text>User name</Text> */}
         </HStack>
         <Image
           src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
@@ -78,15 +78,19 @@ export const Navbar = () => {
           borderRadius="full"
           boxSize="70px"
           p="1"
+          objectFit="cover"
         />
-        <Menu>
+        <Menu isLazy closeOnSelect="true">
           <MenuButton
-            as={Button}
-            rightIcon={<FaChevronDown />}
-            bg="transparent"
-            _hover="transparent"
-          />
-          <MenuList w="28">
+            px="3"
+            _hover={{ color: "#AEAEAE" }}
+            _focus={{
+              color: "#AEAEAE",
+            }}
+          >
+            <FaChevronDown />
+          </MenuButton>
+          <MenuList w="28" mt="4">
             <Link to={`${match.url}/user/profile`}>
               <MenuItem className="hover:bg-gray-200">My Profile</MenuItem>
             </Link>

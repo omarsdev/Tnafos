@@ -1,46 +1,62 @@
-import React from "react";
-import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
-import { AiOutlinePlus } from "react-icons/ai";
-import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
-import { Table } from "./";
-import { AddPayment } from "./";
+import React, { useState, useEffect } from "react";
+import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 
-export const PaymentHome = () => {
+import { CustomTable } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
+
+const PaymentHome = () => {
+  const [list, setList] = useState(null);
+  const [searchInput, setSearchInput] = useState("");
+
+  //* representing certain number of rows based on select option:
+  const [rowsNumber, setRowsNumber] = useState("10");
+
   const match = useRouteMatch();
+  const history = useHistory();
+
+  const paymentsList = async () => {
+    await AxiosInstance.get("/api/dashboard/payment/")
+      .then((res) => {
+        setList(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const searchHandler = () => {
+    history.push(`/${searchInput}`);
+  };
+
+  useEffect(() => {
+    paymentsList();
+  }, []);
+
   return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        <Box w="full" h="fit-content">
-          <HStack w="full" spacing={"900px"}>
-            <Heading
-              color="black"
-              fontWeight="medium"
-              fontSize="xx-large"
-              fontFamily="inhirit"
-              alignItems="baseline"
-              py="4"
-              px="5"
-              textColor="gray.600"
-              justifyItems="start"
-            >
-              Payments
-            </Heading>
-            <Box>
-              <Link to={`${match.url}/addpayment`}>
-                <IconButton
-                  as={Button}
-                  colorScheme="yellow"
-                  size="lg"
-                  icon={<AiOutlinePlus />}
-                  rounded="full"
-                ></IconButton>
-              </Link>
-            </Box>
-          </HStack>
-          <Table />
-        </Box>
-      </Route>
-      <Route path={`${match.path}/addpayment`} component={AddPayment} />
-    </Switch>
+    <CustomTable
+      PageHeadLine="Payments"
+      thHeading="List of payments"
+      thData={[
+        "Transaction-ID",
+        "Amount",
+        "Date",
+        "Method",
+        "Transaction Number",
+        "Notes",
+        "options",
+      ]}
+      list={list}
+      listData={[
+        "uuid",
+        "amount",
+        "date",
+        "method",
+        "transaction_number",
+        "notes",
+      ]}
+    />
   );
 };
+
+export default PaymentHome;

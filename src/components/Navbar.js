@@ -11,9 +11,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
-
-import { TnafosSearchLogo } from "assets/icons";
 import { SearchIcon } from "@chakra-ui/icons";
+
+import { TnafosSearchLogo } from "../assets/icons";
 
 export const Navbar = () => {
   let { search } = useParams();
