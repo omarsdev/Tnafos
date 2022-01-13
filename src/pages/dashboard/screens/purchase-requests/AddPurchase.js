@@ -49,7 +49,7 @@ const AddPurchase = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/purchase-request");
+    history.push("/dashboard/purchaseshome");
   };
 
   return (

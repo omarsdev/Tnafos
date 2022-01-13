@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 
-import { NoData } from "../../components";
-import { CustomTable } from "../../components";
+import CustomTable from "../../components/CustomTable";
 import UpdatePurchase from "./UpdatePurchase";
 import { AxiosInstance } from "../../../../api";
 
@@ -41,13 +40,25 @@ const IncomingPurchases = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        <CustomTable
-          list={list}
-          component="purchase-request"
-          theHeading="List of incoming purchase requests"
-          theData={["Transaction-ID", "Details", "Date", "Service", "Action"]}
-          listData={["uuid", "details", "date", "service[name]"]}
-        />
+        <Box w="full" overflowY="scroll" padding="10">
+          <HStack justifyContent="space-between" paddingBottom="5">
+            <Heading
+              textColor="gray.600"
+              fontSize="xx-large"
+              fontWeight="lg"
+              alignItems="baseline"
+            >
+              Payments
+            </Heading>
+          </HStack>
+          <CustomTable
+            list={list}
+            component="purchase-request"
+            theHeading="List of incoming purchase requests"
+            theData={["Transaction-ID", "Details", "Date", "Service", "Action"]}
+            listData={["uuid", "details", "date", "service[name]"]}
+          />
+        </Box>
       </Route>
       <Route path={`${match.path}/:uuid`} component={UpdatePurchase} />
     </Switch>

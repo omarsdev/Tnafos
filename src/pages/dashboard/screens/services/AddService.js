@@ -46,7 +46,7 @@ const AddService = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/service");
+    history.push("/dashboard/servicehome");
   };
 
   const getAllCategories = async () => {

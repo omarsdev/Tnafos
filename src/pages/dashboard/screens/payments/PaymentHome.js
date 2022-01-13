@@ -16,7 +16,7 @@ import PaymentCard from "./PaymentCard";
 import AddPayment from "./AddPayment";
 
 const PaymentHome = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   //* representing certain number of rows based on select option:

@@ -103,7 +103,7 @@ const CreateUser = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/user");
+    history.push("/dashboard/userhome");
   };
 
   const getAllCountry = async () => {

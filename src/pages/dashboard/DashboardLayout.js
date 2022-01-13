@@ -22,7 +22,6 @@ import { AxiosInstance } from "../../api";
 
 import { FiInbox } from "react-icons/fi";
 
-import InvoiceHome from "./screens/invoices/InvoiceHome";
 // import Proposal from "./screens/proposals/Proposal"
 import Ratings from "./screens/rating/Ratings";
 import { UserDataContext } from "../../context";
@@ -30,6 +29,8 @@ import ClientsHome from "./screens/clients/ClientsHome";
 import PurchasesHome from "./screens/purchase-requests/PurchasesHome";
 import PaymentHome from "./screens/payments/PaymentHome";
 import EstimateHome from "./screens/estimates/EstimateHome";
+import OutgoingEstimates from "./screens/estimates/OutgoingEstimates";
+import IncomingEstimates from "./screens/estimates/IncomingEstimates";
 import ServiceHome from "./screens/services/ServiceHome";
 import SettingHome from "./screens/settings/SettingHome";
 import Incoming from "./screens/invoices/Incoming";
@@ -38,6 +39,8 @@ import UserHome from "./screens/users/UserHome";
 import CompanyHome from "./screens/company/CompanyHome";
 import OutgoingPurchases from "./screens/purchase-requests/OutgoingPurchases";
 import IncomingPurchases from "./screens/purchase-requests/IncomingPurchases";
+import InvoiceHome from "./screens/invoices/InvoiceHome";
+
 // import { PrivateRoute } from "./components/PrivateRoute";
 
 const DashboardLayout = () => {
@@ -195,7 +198,7 @@ const DashboardLayout = () => {
                 component={IncomingPurchases}
               />
               <Route
-                path={`${match.path}/purchase-request/ioutgoingpurchases`}
+                path={`${match.path}/purchase-request/outgoingpurchases`}
                 component={OutgoingPurchases}
               />
               <Route path={`${match.path}/payment`} component={PaymentHome} />
@@ -207,6 +210,11 @@ const DashboardLayout = () => {
               <Route
                 path={`${match.path}/invoice/outgoing`}
                 component={Outgoing}
+              />
+              <Route path={`${match.path}/estimate`} component={EstimateHome} />
+              <Route
+                path={`${match.path}/estimate/`}
+                component={EstimateHome}
               />
               <Route path={`${match.path}/estimate`} component={EstimateHome} />
               <Route path={`${match.path}/client`} component={ClientsHome} />

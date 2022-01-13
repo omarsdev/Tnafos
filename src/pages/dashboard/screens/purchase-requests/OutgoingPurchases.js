@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import {
   useRouteMatch,
   Switch,
@@ -29,7 +29,7 @@ const OutgoingPurchases = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        history.push("/dashboard/purchase-request");
+        history.push("/dashboard/purchaseshome");
       });
   };
 

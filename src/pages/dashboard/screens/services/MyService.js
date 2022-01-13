@@ -19,7 +19,13 @@ import {
   HStack,
   Spacer,
 } from "@chakra-ui/react";
-import { useHistory, useParams, Route, Switch } from "react-router-dom";
+import {
+  useHistory,
+  useParams,
+  Route,
+  Switch,
+  useRouteMatch,
+} from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { CustomEditForm, CustomAddForm } from "../../components";
@@ -34,6 +40,7 @@ const MyService = () => {
   const [service, setService] = useState(null);
 
   const history = useHistory();
+  const match = useRouteMatch();
 
   const { uuid } = useParams();
 
@@ -58,7 +65,7 @@ const MyService = () => {
         setService(res.data.data);
       })
       .catch((err) => {
-        history.push("/dashboard/service");
+        history.push("/dashboard/servicehome");
       });
   };
 

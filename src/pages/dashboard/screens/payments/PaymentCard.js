@@ -78,7 +78,7 @@ const PaymentCard = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        history.push("/dashboard/payment");
+        history.push("/dashboard/paymenthome");
       });
   };
 

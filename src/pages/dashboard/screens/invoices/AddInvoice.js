@@ -32,7 +32,7 @@ const AddInvoice = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/invoice");
+    history.push("/dashboard/invoicehome");
   };
 
   return (

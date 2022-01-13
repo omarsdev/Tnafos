@@ -16,6 +16,7 @@ import CardComponent from "./CardComponent";
 import CreateUser from "./CreateUser";
 
 import { AxiosInstance } from "../../../../api";
+import UserCard from "./UserCard";
 
 const UserHome = () => {
   const [usersList, setUsersList] = useState(null);
@@ -76,6 +77,7 @@ const UserHome = () => {
         </Box>
       </Route>
       <Route path={`${match.path}/createuser`} component={CreateUser} />
+      <Route path={`${match.path}/:uuid`} component={UserCard} />
     </Switch>
   );
 };

@@ -22,7 +22,7 @@ import { NoData } from "../../components";
 import { AxiosInstance } from "../../../../api";
 
 const ClientMedia = () => {
-  const [media, setMedia] = useState([]);
+  const [media, setMedia] = useState(null);
 
   const match = useRouteMatch();
   const [card, setCard] = useState(null);

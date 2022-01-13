@@ -23,6 +23,7 @@ import ServiceCard from "./ServiceCard";
 
 import { AxiosInstance } from "../../../../api";
 import AddService from "./AddService";
+import MyService from "./MyService";
 
 const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -83,6 +84,7 @@ const ServiceHome = () => {
         </Box>
       </Route>
       <Route path={`${match.path}/addservice`} component={AddService} />
+      <Route path={`${match.path}/:uuid`} component={MyService} />
     </Switch>
   );
 };

@@ -87,11 +87,11 @@ export const SidebarMenu = [
         submenu: [
           {
             title: "Incoming",
-            to: "/purchase-request/incoming",
+            to: "/purchase-request/incomingpurchases",
           },
           {
             title: "Outgoing",
-            to: "/purchase-request/outgoing",
+            to: "/purchase-request/outgoingpurchases",
           },
         ],
       },
@@ -102,11 +102,11 @@ export const SidebarMenu = [
         submenu: [
           {
             title: "Incoming",
-            to: "/estimate/incoming",
+            to: "/estimate/incomingestimtes",
           },
           {
             title: "Outgoing",
-            to: "/estimate/outgoing",
+            to: "/estimate/outgoingestimates",
           },
         ],
       },

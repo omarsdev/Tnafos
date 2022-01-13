@@ -18,7 +18,13 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from "@chakra-ui/react";
-import { useHistory, useParams } from "react-router-dom";
+import {
+  useHistory,
+  useParams,
+  Route,
+  Switch,
+  useRouteMatch,
+} from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 
 import { AlertContext } from "../../../../context/AlertContext";
@@ -34,6 +40,7 @@ const UserCard = () => {
   const { setAlert } = alertProviderValue;
 
   const history = useHistory();
+  const match = useRouteMatch();
 
   const { uuid } = useParams();
 
@@ -65,7 +72,7 @@ const UserCard = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        history.push("/dashboard/user");
+        history.push("/dashboard/userhome");
       });
   };
 
@@ -109,161 +116,169 @@ const UserCard = () => {
     media(uuid, "user", photo);
   };
 
-  return !card ? (
-    <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
-    </Center>
-  ) : (
-    <>
-      <Center py="5">
-        <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="350px"
-          h="430px"
-        >
-          <Image
-            src={"https://bit.ly/sage-adebayo"}
-            alt="Segun Adebayo"
-            objectFit="cover"
-            roundedTop="3xl"
-            w="100%"
-            h="220px"
-            layout={"fill"}
-          />
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text py="1" textColor="gray.600">
-                Name: {card?.first_name}
-                {card?.last_name}
-              </Text>
-              <Text textColor="gray.600">E-mail: {card?.email}</Text>
-              <Text textColor="gray.600">Telephone: {card?.phone_number}</Text>
-              <Text textColor="gray.600">Id :{card?.uuid}</Text>
-            </Box>
+  return (
+    <Switch>
+      <Route exact path={`${match.path}`}>
+        {!card ? (
+          <Center h="70vh" w="100%">
+            <Spinner size="xl" color="#F8B916" />
+          </Center>
+        ) : (
+          <>
+            <Center py="5">
+              <Box
+                className="rounded-3xl relative bg-white shadow-2xl"
+                w="350px"
+                h="430px"
+              >
+                <Image
+                  src={"https://bit.ly/sage-adebayo"}
+                  alt="Segun Adebayo"
+                  objectFit="cover"
+                  roundedTop="3xl"
+                  w="100%"
+                  h="220px"
+                  layout={"fill"}
+                />
+                <VStack spacing="20px" mx="5%" mt="5">
+                  <Box mr="0">
+                    <Text py="1" textColor="gray.600">
+                      Name: {card?.first_name}
+                      {card?.last_name}
+                    </Text>
+                    <Text textColor="gray.600">E-mail: {card?.email}</Text>
+                    <Text textColor="gray.600">
+                      Telephone: {card?.phone_number}
+                    </Text>
+                    <Text textColor="gray.600">Id :{card?.uuid}</Text>
+                  </Box>
 
-            <Flex justify={"center"} mt={-12}>
-              <IconButton
-                justify={"center"}
-                fontSize={"large"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<FiEdit />}
-                onClick={onOpen}
-              />
-            </Flex>
-          </VStack>
-        </Box>
-      </Center>
+                  <Flex justify={"center"} mt={-12}>
+                    <IconButton
+                      justify={"center"}
+                      fontSize={"large"}
+                      rounded={"full"}
+                      bg={"#F8B916"}
+                      color={"white"}
+                      boxShadow={
+                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                      }
+                      _hover={{
+                        bg: "orange.400",
+                      }}
+                      icon={<FiEdit />}
+                      onClick={onOpen}
+                    />
+                  </Flex>
+                </VStack>
+              </Box>
+            </Center>
 
-      {/* updating user info. */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <HStack
-              align="flex-end"
-              w="full"
-              alignItems="baseline"
-              mb="14"
-              mt="5"
-            >
-              <input
-                type="file"
-                onChange={(e) => setPhoto(e.target.files[0])}
-                name="choose file"
-              />
-              <Spacer />
-              <SecondaryButton name="Upload File" onClick={uploadFile} />
-            </HStack>
-
-            <CustomEditForm
+            {/* updating user info. */}
+            <Drawer
               isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(onUpdateUserInfo)}
-              isUpdating={isUpdating}
-              errors={errors}
+              placement="right"
+              onClose={onCancelHandler}
+              size="lg"
             >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "First Name : ",
-                    placeHolder: "Enter First Name",
-                    name: "first_name",
-                    errors: errors,
-                    inputType: "text",
-                  },
-                  {
-                    head: "Last Name : ",
-                    placeHolder: "Enter Last Name",
-                    name: "last_name",
-                    errors: errors,
-                    inputType: "text",
-                  },
-                  {
-                    head: "Phone Number : ",
-                    placeHolder: "Enter Phone Number",
-                    name: "phone_number",
-                    errors: errors,
-                    inputType: "number",
-                  },
-                  {
-                    head: "Email : ",
-                    placeHolder: "Enter Email",
-                    name: "email",
-                    errors: errors,
-                    inputType: "text",
-                  },
-                  {
-                    head: "Password : ",
-                    placeHolder: "Enter Password",
-                    name: "password",
-                    errors: errors,
-                    isPassword: true,
-                  },
-                  {
-                    head: "Confirm Password : ",
-                    placeHolder: "confirm your password",
-                    name: "password_confirmation",
-                    errors: errors,
-                    isPassword: true,
-                  },
-                  // {
-                  //   head: "Country Code : ",
-                  //   placeHolder: "Select Country Code : ex SA",
-                  //   name: "country_code",
-                  //   errors: errors,
-                  //   isSelect: true,
-                  //   optionList: countryList,
-                  //   value: "short_name",
-                  //   key: "uuid",
-                  //   displayValue: "short_name",
-                  // },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+                  Edit your Info by filling up this form
+                </DrawerHeader>
+
+                <DrawerBody>
+                  <HStack
+                    align="flex-end"
+                    w="full"
+                    alignItems="baseline"
+                    mb="14"
+                    mt="5"
+                  >
+                    <input
+                      type="file"
+                      onChange={(e) => setPhoto(e.target.files[0])}
+                      name="choose file"
+                    />
+                    <Spacer />
+                    <SecondaryButton name="Upload File" onClick={uploadFile} />
+                  </HStack>
+
+                  <CustomEditForm
+                    isOpen={isOpen}
+                    onCancelHandler={onCancelHandler}
+                    onUpdate={handleSubmit(onUpdateUserInfo)}
+                    isUpdating={isUpdating}
+                    errors={errors}
+                  >
+                    <CustomAddForm
+                      listForm={[
+                        {
+                          head: "First Name : ",
+                          placeHolder: "Enter First Name",
+                          name: "first_name",
+                          errors: errors,
+                          inputType: "text",
+                        },
+                        {
+                          head: "Last Name : ",
+                          placeHolder: "Enter Last Name",
+                          name: "last_name",
+                          errors: errors,
+                          inputType: "text",
+                        },
+                        {
+                          head: "Phone Number : ",
+                          placeHolder: "Enter Phone Number",
+                          name: "phone_number",
+                          errors: errors,
+                          inputType: "number",
+                        },
+                        {
+                          head: "Email : ",
+                          placeHolder: "Enter Email",
+                          name: "email",
+                          errors: errors,
+                          inputType: "text",
+                        },
+                        {
+                          head: "Password : ",
+                          placeHolder: "Enter Password",
+                          name: "password",
+                          errors: errors,
+                          isPassword: true,
+                        },
+                        {
+                          head: "Confirm Password : ",
+                          placeHolder: "confirm your password",
+                          name: "password_confirmation",
+                          errors: errors,
+                          isPassword: true,
+                        },
+                        // {
+                        //   head: "Country Code : ",
+                        //   placeHolder: "Select Country Code : ex SA",
+                        //   name: "country_code",
+                        //   errors: errors,
+                        //   isSelect: true,
+                        //   optionList: countryList,
+                        //   value: "short_name",
+                        //   key: "uuid",
+                        //   displayValue: "short_name",
+                        // },
+                      ]}
+                      control={control}
+                      register={register}
+                    />
+                  </CustomEditForm>
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
+          </>
+        )}
+      </Route>
+    </Switch>
   );
 };
 

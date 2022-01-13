@@ -15,8 +15,7 @@ import {
   IconButton,
   Text,
 } from "@chakra-ui/react";
-import { AiOutlineHome } from "react-icons/ai";
-import { NoData } from "../../components";
+import NoData from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 

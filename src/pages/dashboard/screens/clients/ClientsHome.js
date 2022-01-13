@@ -14,7 +14,7 @@ import ClientCard from "./ClientCard";
 import { AxiosInstance } from "api";
 
 const ClientsHome = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   //* representing certain number of rows based on select option:

@@ -67,7 +67,7 @@ const UpdatePurchase = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        history.push("/dashboard/purchase-request");
+        history.push("/dashboard/purchaseshome");
       });
   };
 
@@ -85,7 +85,7 @@ const UpdatePurchase = () => {
           message: "Purchase-request has been updated!",
           type: "info",
         });
-        history.push(`/dashboard/purchase-request`);
+        history.push(`/dashboard/purchaseshome`);
       })
       .catch((err) => {
         setIsUpdating(false);
