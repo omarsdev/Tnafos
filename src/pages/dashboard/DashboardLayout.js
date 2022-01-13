@@ -22,11 +22,9 @@ import { AxiosInstance } from "../../api";
 
 import { FiInbox } from "react-icons/fi";
 
-import CompanyLayout from "./screens/company/CompanyLayout";
 import InvoiceHome from "./screens/invoices/InvoiceHome";
 // import Proposal from "./screens/proposals/Proposal"
 import Ratings from "./screens/rating/Ratings";
-import UserLayout from "./screens/users/UserLayout";
 import { UserDataContext } from "../../context";
 import ClientsHome from "./screens/clients/ClientsHome";
 import PurchasesHome from "./screens/purchase-requests/PurchasesHome";
