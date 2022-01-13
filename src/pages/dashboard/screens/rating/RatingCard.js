@@ -2,7 +2,7 @@ import React from "react";
 import { Stat, StatLabel, StatNumber, Box, HStack } from "@chakra-ui/react";
 import { FiInbox } from "react-icons/fi";
 
-export const RatingCard = ({ ratDetails }) => {
+const RatingCard = ({ ratDetails }) => {
   const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
 
   //* set border color:
@@ -32,3 +32,4 @@ export const RatingCard = ({ ratDetails }) => {
     </Box>
   );
 };
+export default RatingCard;

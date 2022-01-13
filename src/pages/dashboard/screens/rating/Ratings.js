@@ -7,7 +7,9 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import { MyRating, RatingCard } from "./";
+import MyRating from "./MyRating";
+import RatingCard from "./RatingCard";
+
 import { AxiosInstance } from "../../../../api";
 
 const Ratings = () => {

@@ -4,7 +4,7 @@ import { useParams, Switch, Route, useRouteMatch } from "react-router-dom";
 
 import { AxiosInstance } from "../../../../api";
 
-export const MyRating = () => {
+const MyRating = () => {
   const [data, setData] = useState(null);
   const { uuid } = useParams();
   const match = useRouteMatch();
@@ -33,3 +33,4 @@ export const MyRating = () => {
     </Switch>
   );
 };
+export default MyRating;
