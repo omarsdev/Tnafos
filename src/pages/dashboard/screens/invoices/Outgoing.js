@@ -3,12 +3,12 @@ import { Box, HStack, Heading, Spinner } from "@chakra-ui/react";
 import { useHistory, Switch, Route, useRouteMatch } from "react-router-dom";
 import InvoiceCard from "../invoices/InvoiceCard";
 
-import { CustomTable } from "../../components";
+import CustomTable from "../../components/CustomTable";
 
 import { AxiosInstance } from "../../../../api";
 
 const Outgoing = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
   const history = useHistory();
   const match = useRouteMatch();
 

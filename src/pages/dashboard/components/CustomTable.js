@@ -27,13 +27,7 @@ import { Link, useRouteMatch, useHistory } from "react-router-dom";
 import { NoData } from "../components";
 import { FiEdit } from "react-icons/fi";
 
-export const CustomTable = ({
-  thHeading,
-  thData,
-  list,
-  component,
-  listData,
-}) => {
+const CustomTable = ({ thHeading, thData, list, component, listData }) => {
   const match = useRouteMatch();
   const history = useHistory();
   return !list ? (
@@ -153,3 +147,4 @@ export const CustomTable = ({
     </Box>
   );
 };
+export default CustomTable;

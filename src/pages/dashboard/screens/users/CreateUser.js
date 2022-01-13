@@ -56,7 +56,7 @@ const CreateUser = () => {
 
   const history = useHistory();
 
-  const [list, setList] = useState([]);
+  const [countryList, setCountryList] = useState(null);
   const match = useRouteMatch();
 
   const [err, setErr] = useState(null);
@@ -109,7 +109,7 @@ const CreateUser = () => {
   const getAllCountry = async () => {
     await AxiosInstance.get("/api/country")
       .then((res) => {
-        setList(res.data.data);
+        setCountryList(res.data.data);
       })
       .catch((err) => {
         console.log(err.response);
@@ -123,7 +123,7 @@ const CreateUser = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        {list ? (
+        {countryList ? (
           <Box overflowY="scroll" w="full">
             <Box
               px="20"

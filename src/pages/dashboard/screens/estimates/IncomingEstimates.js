@@ -3,7 +3,7 @@ import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import EstimateCard from "./EstimateCard";
 
-import { CustomTable } from "../../components";
+import CustomTable from "../../components/CustomTable";
 import { AxiosInstance } from "../../../../api";
 
 const IncomingEstimates = () => {
@@ -39,43 +39,48 @@ const IncomingEstimates = () => {
   }, []);
 
   return (
-    <Box w="full" overflowY="scroll" padding="10">
-      <HStack justifyContent="space-between" paddingBottom="5">
-        <Heading
-          textColor="gray.600"
-          fontSize="xx-large"
-          fontWeight="lg"
-          alignItems="baseline"
-        >
-          Incoming Estimates
-        </Heading>
-      </HStack>
+    <Switch>
+      <Route exact path={`${match.path}`}>
+        <Box w="full" overflowY="scroll" padding="10">
+          <HStack justifyContent="space-between" paddingBottom="5">
+            <Heading
+              textColor="gray.600"
+              fontSize="xx-large"
+              fontWeight="lg"
+              alignItems="baseline"
+            >
+              Incoming Estimates
+            </Heading>
+          </HStack>
 
-      <CustomTable
-        list={list}
-        component="estimate"
-        theHeading="List of incoming estimates"
-        theData={[
-          "Transaction-ID",
-          "Subject",
-          "Name",
-          "Date",
-          "Company",
-          "Valid-till",
-          "Status",
-          "Action",
-        ]}
-        listData={[
-          "uuid",
-          "subject",
-          "assigned_to",
-          "date",
-          "company_name",
-          "valid_till",
-          "status",
-        ]}
-      />
-    </Box>
+          <CustomTable
+            list={list}
+            component="estimate"
+            theHeading="List of incoming estimates"
+            theData={[
+              "Transaction-ID",
+              "Subject",
+              "Name",
+              "Date",
+              "Company",
+              "Valid-till",
+              "Status",
+              "Action",
+            ]}
+            listData={[
+              "uuid",
+              "subject",
+              "assigned_to",
+              "date",
+              "company_name",
+              "valid_till",
+              "status",
+            ]}
+          />
+        </Box>
+      </Route>
+      <Route path={`${match.path}/:uuid`} component={EstimateCard} />
+    </Switch>
   );
 };
 

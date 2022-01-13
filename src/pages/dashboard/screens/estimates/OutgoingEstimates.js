@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 
-import { NoData, CustomTable } from "../../components";
-
+import CustomTable from "../../components/CustomTable";
 import { AxiosInstance } from "../../../../api";
 
 import EstimateCard from "./EstimateCard";
@@ -43,33 +42,38 @@ const OutgoingEstimates = () => {
   }, []);
 
   return (
-    <Box w="full" overflowY="scroll" padding="10">
-      <HStack justifyContent="space-between" paddingBottom="5">
-        <Heading
-          textColor="gray.600"
-          fontSize="xx-large"
-          fontWeight="lg"
-          alignItems="baseline"
-        >
-          Outgoing Estimates
-        </Heading>
-      </HStack>
+    <Switch>
+      <Route exact path={`${match.path}`}>
+        <Box w="full" overflowY="scroll" padding="10">
+          <HStack justifyContent="space-between" paddingBottom="5">
+            <Heading
+              textColor="gray.600"
+              fontSize="xx-large"
+              fontWeight="lg"
+              alignItems="baseline"
+            >
+              Outgoing Estimates
+            </Heading>
+          </HStack>
 
-      <CustomTable
-        PageHeadLine="estimate"
-        thHeading="List of outgoing estimates"
-        list={list}
-        thData={[
-          "Transaction-ID",
-          "Subject",
-          "Date",
-          "Valid-till",
-          "Status",
-          "Action",
-        ]}
-        listData={["uuid", "subject", "date", "valid_till", "status"]}
-      />
-    </Box>
+          <CustomTable
+            PageHeadLine="estimate"
+            thHeading="List of outgoing estimates"
+            list={list}
+            thData={[
+              "Transaction-ID",
+              "Subject",
+              "Date",
+              "Valid-till",
+              "Status",
+              "Action",
+            ]}
+            listData={["uuid", "subject", "date", "valid_till", "status"]}
+          />
+        </Box>
+      </Route>
+      <Route path={`${match.path}/:uuid`} component={EstimateCard} />
+    </Switch>
   );
 };
 

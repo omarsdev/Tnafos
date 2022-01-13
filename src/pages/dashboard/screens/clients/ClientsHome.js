@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { CustomTable } from "../../components";
+import CustomTable from "../../components/CustomTable";
 import {
   Link,
   useRouteMatch,
@@ -14,7 +14,7 @@ import ClientCard from "./ClientCard";
 import { AxiosInstance } from "api";
 
 const ClientsHome = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
   //* representing certain number of rows based on select option:
@@ -44,15 +44,6 @@ const ClientsHome = () => {
     history.push(`/${searchInput}`);
   };
 
-  const handleDeleteClick = (clientId) => {
-    const newList = [...list];
-
-    const index = list.findIndex((el) => el.uuid === clientId);
-
-    newList.splice(index, 1);
-    setList(newList);
-  };
-
   useEffect(() => {
     clientsList();
   }, []);
@@ -77,15 +68,14 @@ const ClientsHome = () => {
                 size="lg"
                 icon={<AiOutlinePlus />}
                 rounded="full"
-              />
+              ></IconButton>
             </Link>
           </HStack>
-
           <CustomTable
             theHeading="List of clients"
             theData={[
               "Client-number",
-              "Primary Contact",
+              "Vat Number",
               "E-mail",
               "Company Name",
               "Website",
@@ -95,13 +85,13 @@ const ClientsHome = () => {
             list={list}
             listData={[
               "uuid",
-              "first_name",
+              "vat_number",
               "email",
               "company_name",
               "website",
               "phone",
             ]}
-            component="customer"
+            component={"client"}
           />
         </Box>
       </Route>

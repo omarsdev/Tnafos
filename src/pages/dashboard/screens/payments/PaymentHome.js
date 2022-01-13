@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, HStack } from "@chakra-ui/react";
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+import { Box, Heading, HStack, IconButton, Button } from "@chakra-ui/react";
+import {
+  useRouteMatch,
+  Switch,
+  Route,
+  useHistory,
+  Link,
+} from "react-router-dom";
+import { AiOutlinePlus } from "react-icons/ai";
 
-import { CustomTable } from "../../components";
+import CustomTable from "../../components/CustomTable";
 
 import { AxiosInstance } from "../../../../api";
+import PaymentCard from "./PaymentCard";
+import AddPayment from "./AddPayment";
 
 const PaymentHome = () => {
   const [list, setList] = useState(null);
@@ -47,6 +56,15 @@ const PaymentHome = () => {
             >
               Payments
             </Heading>
+            <Link to={`${match.url}/addpayment`}>
+              <IconButton
+                as={Button}
+                colorScheme="yellow"
+                size="lg"
+                icon={<AiOutlinePlus />}
+                rounded="full"
+              ></IconButton>
+            </Link>
           </HStack>
           <CustomTable
             thHeading="List of payments"
@@ -60,9 +78,12 @@ const PaymentHome = () => {
             ]}
             list={list}
             listData={["uuid", "amount", "date", "transaction_number", "notes"]}
+            component={"payment"}
           />
         </Box>
       </Route>
+      <Route path={`${match.path}/:uuid`} component={PaymentCard} />
+      <Route path={`${match.path}/addpayment`} component={AddPayment} />
     </Switch>
   );
 };

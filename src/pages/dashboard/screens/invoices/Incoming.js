@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 
-import { CustomTable, NoData } from "../../components";
+import CustomTable from "../../components/CustomTable";
 import { AxiosInstance } from "../../../../api";
 
 import InvoiceCard from "./InvoiceCard";

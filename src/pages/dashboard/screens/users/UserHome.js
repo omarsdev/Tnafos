@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRouteMatch, useHistory } from "react-router-dom";
+import { useRouteMatch, useHistory, Route, Switch } from "react-router-dom";
 import {
   Box,
   IconButton,
@@ -13,6 +13,7 @@ import {
 import { AiOutlinePlus } from "react-icons/ai";
 
 import CardComponent from "./CardComponent";
+import CreateUser from "./CreateUser";
 
 import { AxiosInstance } from "../../../../api";
 
@@ -36,41 +37,46 @@ const UserHome = () => {
     showUsersList();
   }, []);
   return (
-    <Box w="full" overflowY="scroll" padding="10">
-      <HStack justifyContent="space-between" paddingBottom="5">
-        <Heading
-          textColor="gray.600"
-          fontSize="xx-large"
-          fontWeight="lg"
-          alignItems="baseline"
-        >
-          Users
-        </Heading>
+    <Switch>
+      <Route exact path={`${match.path}`}>
+        <Box w="full" overflowY="scroll" padding="10">
+          <HStack justifyContent="space-between" paddingBottom="5">
+            <Heading
+              textColor="gray.600"
+              fontSize="xx-large"
+              fontWeight="lg"
+              alignItems="baseline"
+            >
+              Users
+            </Heading>
 
-        <IconButton
-          as={Button}
-          colorScheme="yellow"
-          size="lg"
-          icon={<AiOutlinePlus />}
-          rounded="full"
-          onClick={() => {
-            history.push(`${match.url}/createuser`);
-          }}
-        />
-      </HStack>
+            <IconButton
+              as={Button}
+              colorScheme="yellow"
+              size="lg"
+              icon={<AiOutlinePlus />}
+              rounded="full"
+              onClick={() => {
+                history.push(`${match.url}/createuser`);
+              }}
+            />
+          </HStack>
 
-      {!usersList ? (
-        <Center h="70vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
-        </Center>
-      ) : (
-        <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
-          {usersList.map((el, idx) => (
-            <CardComponent userData={el} key={idx} />
-          ))}
-        </Grid>
-      )}
-    </Box>
+          {!usersList ? (
+            <Center h="70vh" w="100%">
+              <Spinner size="xl" color="#F8B916" />
+            </Center>
+          ) : (
+            <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
+              {usersList.map((el, idx) => (
+                <CardComponent userData={el} key={idx} />
+              ))}
+            </Grid>
+          )}
+        </Box>
+      </Route>
+      <Route path={`${match.path}/createuser`} component={CreateUser} />
+    </Switch>
   );
 };
 

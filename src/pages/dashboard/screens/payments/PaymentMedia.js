@@ -70,26 +70,6 @@ const PaymentMedia = () => {
                     </Text>
                   </Stack>
                 ))}
-
-                <Box>
-                  <IconButton
-                    justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
-                    bg={"#F8B916"}
-                    color={"white"}
-                    boxShadow={
-                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                    }
-                    _hover={{
-                      bg: "orange.400",
-                    }}
-                    icon={<AiOutlineHome />}
-                    onClick={() => {
-                      history.push("/dashboard/paymenthome");
-                    }}
-                  />
-                </Box>
               </VStack>
             </Box>
           </Center>

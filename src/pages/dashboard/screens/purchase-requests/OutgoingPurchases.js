@@ -7,15 +7,14 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom";
-import { CustomTable, NoData } from "../../components";
-import { AiOutlineHome } from "react-icons/ai";
+import CustomTable from "../../components/CustomTable";
 
 import { AxiosInstance } from "../../../../api";
 
 import UpdatePurchase from "./UpdatePurchase";
 
 const OutgoingPurchases = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 
@@ -59,18 +58,8 @@ const OutgoingPurchases = () => {
               fontWeight="lg"
               alignItems="baseline"
             >
-              OutgoingPurchases
+              Outgoing Purchases
             </Heading>
-            <IconButton
-              as={Button}
-              colorScheme="yellow"
-              size="lg"
-              icon={<AiOutlineHome />}
-              rounded="full"
-              onClick={() => {
-                history.push(`${match.url}/purchase-request`);
-              }}
-            />
           </HStack>
 
           <CustomTable
