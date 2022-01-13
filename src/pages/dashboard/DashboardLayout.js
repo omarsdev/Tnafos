@@ -211,10 +211,13 @@ const DashboardLayout = () => {
                 path={`${match.path}/invoice/outgoing`}
                 component={Outgoing}
               />
-              <Route path={`${match.path}/estimate`} component={EstimateHome} />
               <Route
-                path={`${match.path}/estimate/`}
-                component={EstimateHome}
+                path={`${match.path}/estimate/outgoingestimates`}
+                component={OutgoingEstimates}
+              />
+              <Route
+                path={`${match.path}/estimate/incomingestimates`}
+                component={IncomingEstimates}
               />
               <Route path={`${match.path}/estimate`} component={EstimateHome} />
               <Route path={`${match.path}/client`} component={ClientsHome} />

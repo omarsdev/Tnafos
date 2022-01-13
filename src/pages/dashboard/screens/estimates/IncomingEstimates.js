@@ -7,7 +7,7 @@ import CustomTable from "../../components/CustomTable";
 import { AxiosInstance } from "../../../../api";
 
 const IncomingEstimates = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 

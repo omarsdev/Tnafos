@@ -8,7 +8,7 @@ import { AxiosInstance } from "../../../../api";
 import EstimateCard from "./EstimateCard";
 
 const OutgoingEstimates = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
   const match = useRouteMatch();
