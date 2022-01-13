@@ -93,7 +93,6 @@ const ClientsHome = () => {
               "actions",
             ]}
             list={list}
-            component="customer"
             listData={[
               "uuid",
               "first_name",
@@ -102,6 +101,7 @@ const ClientsHome = () => {
               "website",
               "phone",
             ]}
+            component="customer"
           />
         </Box>
       </Route>

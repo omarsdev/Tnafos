@@ -49,7 +49,6 @@ const PaymentHome = () => {
             </Heading>
           </HStack>
           <CustomTable
-            PageHeadLine="Payments"
             thHeading="List of payments"
             thData={[
               "Transaction-ID",

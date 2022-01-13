@@ -34,6 +34,8 @@ import PaymentHome from "./screens/payments/PaymentHome";
 import EstimateHome from "./screens/estimates/EstimateHome";
 import ServiceHome from "./screens/services/ServiceHome";
 import SettingHome from "./screens/settings/SettingHome";
+import Incoming from "./screens/invoices/Incoming";
+import Outgoing from "./screens/invoices/Outgoing";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
 const DashboardLayout = () => {
@@ -191,9 +193,10 @@ const DashboardLayout = () => {
         path={`${match.path}/purchase-request`}
         component={PurchasesHome}
       />
-      s
       <Route path={`${match.path}/payment`} component={PaymentHome} />
       <Route path={`${match.path}/invoice`} component={InvoiceHome} />
+      <Route path={`${match.path}/invoice/incoming`} component={Incoming} />
+      <Route path={`${match.path}/invoice/outgoing`} component={Outgoing} />
       <Route path={`${match.path}/estimate`} component={EstimateHome} />
       <Route path={`${match.path}/client`} component={ClientsHome} />
       <Route path={`${match.path}/settings`} component={SettingHome} />
