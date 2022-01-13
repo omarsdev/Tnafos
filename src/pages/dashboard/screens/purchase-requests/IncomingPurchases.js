@@ -7,7 +7,7 @@ import UpdatePurchase from "./UpdatePurchase";
 import { AxiosInstance } from "../../../../api";
 
 const IncomingPurchases = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 
@@ -48,15 +48,15 @@ const IncomingPurchases = () => {
               fontWeight="lg"
               alignItems="baseline"
             >
-              Payments
+              IncomingPurchases
             </Heading>
           </HStack>
           <CustomTable
             list={list}
-            component="purchase-request"
+            component={"purchase-request"}
             theHeading="List of incoming purchase requests"
-            theData={["Transaction-ID", "Details", "Date", "Service", "Action"]}
-            listData={["uuid", "details", "date", "service[name]"]}
+            theData={["Transaction-ID", "Details", "Date", "Action"]}
+            listData={["uuid", "details", "date"]}
           />
         </Box>
       </Route>

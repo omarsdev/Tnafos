@@ -55,7 +55,7 @@ const IncomingEstimates = () => {
 
           <CustomTable
             list={list}
-            component="estimate"
+            component={"estimate"}
             theHeading="List of incoming estimates"
             theData={[
               "Transaction-ID",

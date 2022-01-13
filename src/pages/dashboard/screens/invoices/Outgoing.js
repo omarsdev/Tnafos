@@ -8,7 +8,7 @@ import CustomTable from "../../components/CustomTable";
 import { AxiosInstance } from "../../../../api";
 
 const Outgoing = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const history = useHistory();
   const match = useRouteMatch();
 

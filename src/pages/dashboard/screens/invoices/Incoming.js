@@ -7,7 +7,7 @@ import { AxiosInstance } from "../../../../api";
 import InvoiceCard from "./InvoiceCard";
 
 const Incoming = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const match = useRouteMatch();
   const history = useHistory();
 

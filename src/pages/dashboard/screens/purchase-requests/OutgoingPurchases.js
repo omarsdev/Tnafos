@@ -14,7 +14,7 @@ import { AxiosInstance } from "../../../../api";
 import UpdatePurchase from "./UpdatePurchase";
 
 const OutgoingPurchases = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 
@@ -64,9 +64,9 @@ const OutgoingPurchases = () => {
 
           <CustomTable
             thHeading="List of outgoing purchase-requests"
-            thData={["Transaction-ID", "Details", "Date", "Service", "options"]}
+            thData={["Transaction-ID", "Details", "Date", "options"]}
             list={list}
-            listData={["uuid", "details", "date", "service"]}
+            listData={["uuid", "details", "date"]}
             component="purchase-requset"
           />
         </Box>
