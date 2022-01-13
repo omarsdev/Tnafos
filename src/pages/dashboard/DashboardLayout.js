@@ -36,6 +36,10 @@ import ServiceHome from "./screens/services/ServiceHome";
 import SettingHome from "./screens/settings/SettingHome";
 import Incoming from "./screens/invoices/Incoming";
 import Outgoing from "./screens/invoices/Outgoing";
+import UserHome from "./screens/users/UserHome";
+import CompanyHome from "./screens/company/CompanyHome";
+import OutgoingPurchases from "./screens/purchase-requests/OutgoingPurchases";
+import IncomingPurchases from "./screens/purchase-requests/IncomingPurchases";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
 const DashboardLayout = () => {
@@ -78,129 +82,146 @@ const DashboardLayout = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route exact path={match.path}>
-        {!loading && userData ? (
-          <HStack spacing={0}>
-            <Sidebar />
-            <VStack className="chakra-stack w-full h-screen overflow-scroll">
-              <Navbar />
-              {/* {body} */}
-              <Box>
-                <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
-                  <Box
-                    mt="5"
-                    w="240px"
-                    h="70px"
-                    rounded="xl"
-                    boxShadow="2xl"
-                    relative
-                    bg={"white"}
-                    borderLeftColor={randomElement}
-                    borderLeftWidth="4px"
-                  >
-                    <HStack w="full">
-                      <Stat px="5%" w="full">
-                        <StatLabel py="1">Title</StatLabel>
-                        <StatNumber fontSize="xl">number</StatNumber>
-                      </Stat>
-                      <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                        <FiInbox color="#AEAEAE" />
-                      </Box>
-                    </HStack>
-                  </Box>
+    <>
+      {!loading && userData ? (
+        <HStack spacing={0}>
+          <Sidebar />
+          <VStack className="chakra-stack w-full h-screen overflow-scroll">
+            <Navbar />
+            {/* {body} */}
 
-                  <Box
-                    mt="5"
-                    w="240px"
-                    h="70px"
-                    rounded="xl"
-                    boxShadow="2xl"
-                    relative
-                    bg={"white"}
-                    borderLeftColor={randomElement}
-                    borderLeftWidth="4px"
-                  >
-                    <HStack w="full">
-                      <Stat px="5%" w="full">
-                        <StatLabel py="1">Title</StatLabel>
-                        <StatNumber fontSize="xl">number</StatNumber>
-                      </Stat>
-                      <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                        <FiInbox color="#AEAEAE" />
-                      </Box>
-                    </HStack>
-                  </Box>
+            <Switch>
+              <Route exact path={match.path}>
+                <Box>
+                  <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
+                    <Box
+                      mt="5"
+                      w="240px"
+                      h="70px"
+                      rounded="xl"
+                      boxShadow="2xl"
+                      relative
+                      bg={"white"}
+                      borderLeftColor={randomElement}
+                      borderLeftWidth="4px"
+                    >
+                      <HStack w="full">
+                        <Stat px="5%" w="full">
+                          <StatLabel py="1">Title</StatLabel>
+                          <StatNumber fontSize="xl">number</StatNumber>
+                        </Stat>
+                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
+                          <FiInbox color="#AEAEAE" />
+                        </Box>
+                      </HStack>
+                    </Box>
 
-                  <Box
-                    mt="5"
-                    w="240px"
-                    h="70px"
-                    rounded="xl"
-                    boxShadow="2xl"
-                    relative
-                    bg={"white"}
-                    borderLeftColor={randomElement}
-                    borderLeftWidth="4px"
-                  >
-                    <HStack w="full">
-                      <Stat px="5%" w="full">
-                        <StatLabel py="1">Title</StatLabel>
-                        <StatNumber fontSize="xl">number</StatNumber>
-                      </Stat>
-                      <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                        <FiInbox color="#AEAEAE" />
-                      </Box>
-                    </HStack>
-                  </Box>
+                    <Box
+                      mt="5"
+                      w="240px"
+                      h="70px"
+                      rounded="xl"
+                      boxShadow="2xl"
+                      relative
+                      bg={"white"}
+                      borderLeftColor={randomElement}
+                      borderLeftWidth="4px"
+                    >
+                      <HStack w="full">
+                        <Stat px="5%" w="full">
+                          <StatLabel py="1">Title</StatLabel>
+                          <StatNumber fontSize="xl">number</StatNumber>
+                        </Stat>
+                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
+                          <FiInbox color="#AEAEAE" />
+                        </Box>
+                      </HStack>
+                    </Box>
 
-                  <Box
-                    mt="5"
-                    w="240px"
-                    h="70px"
-                    rounded="xl"
-                    boxShadow="2xl"
-                    relative
-                    bg={"white"}
-                    borderLeftColor={randomElement}
-                    borderLeftWidth="4px"
-                  >
-                    <HStack w="full">
-                      <Stat px="5%" w="full">
-                        <StatLabel py="1">Title</StatLabel>
-                        <StatNumber fontSize="xl">number</StatNumber>
-                      </Stat>
-                      <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                        <FiInbox color="#AEAEAE" />
-                      </Box>
-                    </HStack>
-                  </Box>
-                </Grid>
-              </Box>
-            </VStack>
-          </HStack>
-        ) : (
-          <Center h="100vh" w="100%">
-            <Spinner size="xl" color="#F8B916" />
-          </Center>
-        )}
-      </Route>
-      <Route path={`${match.path}/company`} component={CompanyLayout} />
-      <Route path={`${match.path}/rating`} component={Ratings} />
-      <Route path={`${match.path}/user`} component={UserLayout} />
-      <Route path={`${match.path}/service`} component={ServiceHome} />
-      <Route
-        path={`${match.path}/purchase-request`}
-        component={PurchasesHome}
-      />
-      <Route path={`${match.path}/payment`} component={PaymentHome} />
-      <Route path={`${match.path}/invoice`} component={InvoiceHome} />
-      <Route path={`${match.path}/invoice/incoming`} component={Incoming} />
-      <Route path={`${match.path}/invoice/outgoing`} component={Outgoing} />
-      <Route path={`${match.path}/estimate`} component={EstimateHome} />
-      <Route path={`${match.path}/client`} component={ClientsHome} />
-      <Route path={`${match.path}/settings`} component={SettingHome} />
-    </Switch>
+                    <Box
+                      mt="5"
+                      w="240px"
+                      h="70px"
+                      rounded="xl"
+                      boxShadow="2xl"
+                      relative
+                      bg={"white"}
+                      borderLeftColor={randomElement}
+                      borderLeftWidth="4px"
+                    >
+                      <HStack w="full">
+                        <Stat px="5%" w="full">
+                          <StatLabel py="1">Title</StatLabel>
+                          <StatNumber fontSize="xl">number</StatNumber>
+                        </Stat>
+                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
+                          <FiInbox color="#AEAEAE" />
+                        </Box>
+                      </HStack>
+                    </Box>
+
+                    <Box
+                      mt="5"
+                      w="240px"
+                      h="70px"
+                      rounded="xl"
+                      boxShadow="2xl"
+                      relative
+                      bg={"white"}
+                      borderLeftColor={randomElement}
+                      borderLeftWidth="4px"
+                    >
+                      <HStack w="full">
+                        <Stat px="5%" w="full">
+                          <StatLabel py="1">Title</StatLabel>
+                          <StatNumber fontSize="xl">number</StatNumber>
+                        </Stat>
+                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
+                          <FiInbox color="#AEAEAE" />
+                        </Box>
+                      </HStack>
+                    </Box>
+                  </Grid>
+                </Box>
+              </Route>
+              <Route path={`${match.path}/company`} component={CompanyHome} />
+              <Route path={`${match.path}/rating`} component={Ratings} />
+              <Route path={`${match.path}/user`} component={UserHome} />
+              <Route path={`${match.path}/service`} component={ServiceHome} />
+              <Route
+                path={`${match.path}/purchase-request`}
+                component={PurchasesHome}
+              />
+              <Route
+                path={`${match.path}/purchase-request/incomingpurchases`}
+                component={IncomingPurchases}
+              />
+              <Route
+                path={`${match.path}/purchase-request/ioutgoingpurchases`}
+                component={OutgoingPurchases}
+              />
+              <Route path={`${match.path}/payment`} component={PaymentHome} />
+              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
+              <Route
+                path={`${match.path}/invoice/incoming`}
+                component={Incoming}
+              />
+              <Route
+                path={`${match.path}/invoice/outgoing`}
+                component={Outgoing}
+              />
+              <Route path={`${match.path}/estimate`} component={EstimateHome} />
+              <Route path={`${match.path}/client`} component={ClientsHome} />
+              <Route path={`${match.path}/settings`} component={SettingHome} />
+            </Switch>
+          </VStack>
+        </HStack>
+      ) : (
+        <Center h="100vh" w="100%">
+          <Spinner size="xl" color="#F8B916" />
+        </Center>
+      )}
+    </>
   );
 };
 

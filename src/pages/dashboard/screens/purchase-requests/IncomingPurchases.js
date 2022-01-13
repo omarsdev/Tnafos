@@ -8,7 +8,7 @@ import UpdatePurchase from "./UpdatePurchase";
 import { AxiosInstance } from "../../../../api";
 
 const IncomingPurchases = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 

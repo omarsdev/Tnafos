@@ -15,7 +15,7 @@ import { AxiosInstance } from "../../../../api";
 import UpdatePurchase from "./UpdatePurchase";
 
 const OutgoingPurchases = () => {
-  const [list, setList] = useState(null);
+  const [list, setList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 
