@@ -12,7 +12,7 @@ const OutgoingProposal = () => {
   const [rowsNumber, setRowsNumber] = useState("10");
 
   const estOutgoingList = async () => {
-    await AxiosInstance.get("/api/dashboard/estimate/outgoing")
+    await AxiosInstance.get("/api/dashboard/proposal/outgoing")
       .then((res) => {
         console.log(res.data.data);
         setList(res.data.data);
