@@ -11,14 +11,11 @@ import {
 } from "react-router-dom";
 import AddClient from "./AddClient";
 import ClientCard from "./ClientCard";
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../../../../api";
 
 const ClientsHome = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-
-  //* representing certain number of rows based on select option:
-  const [rowsNumber, setRowsNumber] = useState("10");
 
   const match = useRouteMatch();
   const history = useHistory();
@@ -49,55 +46,49 @@ const ClientsHome = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        <Box w="full" overflowY="scroll" padding="10">
-          <HStack justifyContent="space-between" paddingBottom="5">
-            <Heading
-              textColor="gray.600"
-              fontSize="xx-large"
-              fontWeight="lg"
-              alignItems="baseline"
-            >
-              Clients
-            </Heading>
-            <Link to={`${match.url}/addclient`}>
-              <IconButton
-                as={Button}
-                colorScheme="yellow"
-                size="lg"
-                icon={<AiOutlinePlus />}
-                rounded="full"
-              ></IconButton>
-            </Link>
-          </HStack>
-          <CustomTable
-            theHeading="List of clients"
-            theData={[
-              "UUID",
-              "Company Name",
-              "Vat Number",
-              "Phone",
-              "Website",
-              "Address",
-              "actions",
-            ]}
-            list={list}
-            listData={[
-              "uuid",
-              "company_name",
-              "vat_number",
-              "phone",
-              "website",
-              "address",
-            ]}
-            component={"client"}
-          />
-        </Box>
-      </Route>
-      <Route path={`${match.path}/:uuid`} component={ClientCard} />
-      <Route path={`${match.path}/addclient`} component={AddClient} />
-    </Switch>
+    <Box w="full" overflowY="scroll" padding="10">
+      <HStack justifyContent="space-between" paddingBottom="5">
+        <Heading
+          textColor="gray.600"
+          fontSize="xx-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          Clients
+        </Heading>
+        <Link to={`${match.url}/addclient`}>
+          <IconButton
+            as={Button}
+            colorScheme="yellow"
+            size="lg"
+            icon={<AiOutlinePlus />}
+            rounded="full"
+          ></IconButton>
+        </Link>
+      </HStack>
+      <CustomTable
+        theHeading="List of clients"
+        thData={[
+          "UUID",
+          "Company Name",
+          "Vat Number",
+          "Phone",
+          "Website",
+          "Address",
+          "actions",
+        ]}
+        list={list}
+        listData={[
+          "uuid",
+          "company_name",
+          "vat_number",
+          "phone",
+          "website",
+          "address",
+        ]}
+        component={"client"}
+      />
+    </Box>
   );
 };
 

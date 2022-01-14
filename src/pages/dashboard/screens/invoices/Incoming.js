@@ -7,7 +7,7 @@ import { AxiosInstance } from "../../../../api";
 import InvoiceCard from "./InvoiceCard";
 
 const Incoming = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
   const match = useRouteMatch();
   const history = useHistory();
 
@@ -27,33 +27,28 @@ const Incoming = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route>
-        <CustomTable
-          thHeading="List of Invoices - Incoming"
-          thData={[
-            "Invoices-ID",
-            "Amount",
-            "Date",
-            "Method",
-            "Transaction Number",
-            "Notes",
-            "options",
-          ]}
-          list={list}
-          listData={[
-            "uuid",
-            "amount",
-            "date",
-            "method",
-            "transaction_number",
-            "notes",
-          ]}
-          component={"invoice"}
-        />
-      </Route>
-      <Route path={`${match.path}/:uuid`} component={InvoiceCard} />
-    </Switch>
+    <CustomTable
+      thHeading="List of Invoices - Incoming"
+      thData={[
+        "Invoices-ID",
+        "Amount",
+        "Date",
+        "Method",
+        "Transaction Number",
+        "Notes",
+        "options",
+      ]}
+      list={list}
+      listData={[
+        "uuid",
+        "amount",
+        "date",
+        "method",
+        "transaction_number",
+        "notes",
+      ]}
+      component={"invoice"}
+    />
   );
 };
 

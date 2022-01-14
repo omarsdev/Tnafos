@@ -28,8 +28,7 @@ import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
 
 import CompanyCard from "./CompanyCard";
-import { CustomAddForm } from "pages/dashboard/components/CustomAddForm";
-import { CustomEditForm } from "pages/dashboard/components/CustomEditForm";
+import { CustomAddForm, CustomEditForm } from "../../components";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance } from "../../../../api";
 import { PrimaryButton, SecondaryButton } from "../../../../components";
@@ -131,300 +130,293 @@ const CompanyHome = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        <>
-          <Box w="full" overflowY="scroll" padding="10">
-            <Heading
-              textColor="gray.600"
-              fontSize="xx-large"
-              fontWeight="lg"
-              alignItems="baseline"
-            >
-              Company
-            </Heading>
+    <>
+      <Box w="full" overflowY="scroll" padding="10">
+        <Heading
+          textColor="gray.600"
+          fontSize="xx-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          Company
+        </Heading>
 
-            {!companyInfo ? (
-              <Center h="70vh" w="100%">
-                <Spinner size="xl" color="#F8B916" />
-              </Center>
-            ) : (
-              <Grid templateColumns="repeat(3, 1fr)" gap={5} mt="10">
-                <GridItem colSpan={2}>
-                  <CompanyCard Data={companyInfo} />
-                </GridItem>
+        {!companyInfo ? (
+          <Center h="70vh" w="100%">
+            <Spinner size="xl" color="#F8B916" />
+          </Center>
+        ) : (
+          <Grid templateColumns="repeat(3, 1fr)" gap={5} mt="10">
+            <GridItem colSpan={2}>
+              <CompanyCard Data={companyInfo} />
+            </GridItem>
 
-                <GridItem>
-                  <VStack w="full" spacing="10">
-                    <Box
-                      className="rounded-3xl shadow-2xl relative bg-white"
-                      w="250px"
-                      h="350px"
-                      border="silver"
-                      borderRadius="2xl"
-                      boxShadow="2xl"
-                      borderWidth="2px"
-                      rounded="lg"
-                      textAlign={"center"}
-                      h="44"
-                      // mt="10px"
+            <GridItem>
+              <VStack w="full" spacing="10">
+                <Box
+                  className="rounded-3xl shadow-2xl relative bg-white"
+                  w="250px"
+                  h="350px"
+                  border="silver"
+                  borderRadius="2xl"
+                  boxShadow="2xl"
+                  borderWidth="2px"
+                  rounded="lg"
+                  textAlign={"center"}
+                  h="44"
+                  // mt="10px"
+                >
+                  <Text
+                    fontSize="LG"
+                    bg="#333333"
+                    roundedTop="lg"
+                    textColor="white"
+                    fontFamily="inherit"
+                    fontWeight="medium"
+                    paddingY="3"
+                  >
+                    Review
+                  </Text>
+                  <Divider />
+                  <Box>
+                    <Text
+                      textColor="#F8B916"
+                      fontSize="lg"
+                      alignItems="baseline"
+                      fontWeight="medium"
+                      py="5"
                     >
-                      <Text
-                        fontSize="LG"
-                        bg="#333333"
-                        roundedTop="lg"
-                        textColor="white"
-                        fontFamily="inherit"
-                        fontWeight="medium"
-                        paddingY="3"
-                      >
-                        Review
-                      </Text>
-                      <Divider />
-                      <Box>
-                        <Text
-                          textColor="#F8B916"
-                          fontSize="lg"
-                          alignItems="baseline"
-                          fontWeight="medium"
-                          py="5"
-                        >
-                          rating
-                          <Icon textColor="#F8B916">
-                            <FaStar size="medium" />
-                          </Icon>
-                        </Text>
-
-                        <SecondaryButton
-                          leftIcon={<FaSync />}
-                          name="VIEW ALL"
-                        />
-                      </Box>
-                    </Box>
-                    <PrimaryButton
-                      buttonType="button"
-                      leftIcon={<FiEdit />}
-                      onClick={onOpen}
-                      name=" Update Company"
-                      width="200px"
-                      h="45px"
-                      rounded="lg"
-                    />
-                  </VStack>
-                </GridItem>
-              </Grid>
-            )}
-          </Box>
-
-          {/* company update */}
-          <Modal isOpen={isOpen} onClose={onClose} size="xl">
-            <ModalOverlay />
-
-            <ModalContent>
-              <ModalHeader
-                fontWeight="medium"
-                fontSize="x-large"
-                fontFamily="inhirit"
-                textColor="#F8B916"
-              >
-                Update your company info
-              </ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                <HStack
-                  align="flex-end"
-                  w="full"
-                  alignItems="baseline"
-                  mb="14"
-                  mt="5"
-                >
-                  <input
-                    type="file"
-                    //   onChange={(e) => setPhoto(e.target.files[0])}
-                    name="choose file"
-                  />
-                  <Spacer />
-                  <SecondaryButton
-                    name="Upload File"
-                    // onClick={uploadFile}
-                  />
-                </HStack>
-
-                <CustomEditForm
-                  isOpen={isOpen}
-                  onCancelHandler={onCancelHandler}
-                  onUpdate={handleSubmit(onUpdateCompany)}
-                  isUpdating={isUpdating}
-                  errors={errors}
-                >
-                  <CustomAddForm
-                    listForm={[
-                      {
-                        head: "Company Name : ",
-                        placeHolder: "Enter Company Name",
-                        name: "name",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Type : ",
-                        placeHolder: "Enter Type",
-                        name: "type",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Total Employees : ",
-                        placeHolder: "Enter Total Employees",
-                        name: "total_employees",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "VAT Number ",
-                        placeHolder: "Enter VAT Number ",
-                        name: "vat",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Confirm Cr Number : ",
-                        placeHolder: "confirm your Cr Number",
-                        name: "cr",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Phone Establishment Year : ",
-                        placeHolder: "enter  Establishment Year",
-                        name: "establishment_year",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Phone Bio : ",
-                        placeHolder: "enter Bio",
-                        name: "bio",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Telephone : ",
-                        placeHolder: "Enter Telephone",
-                        name: "telephone",
-                        err: err,
-                        inputType: "number",
-                      },
-                      {
-                        head: "Fax : ",
-                        placeHolder: "Enter Fax",
-                        name: "fax",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "E-mail : ",
-                        placeHolder: "Enter E-mail",
-                        name: "email",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Website : ",
-                        placeHolder: "Enter Website",
-                        name: "website",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Country-Id  : ",
-                        placeHolder: "Enter Country-Id ",
-                        name: "country_id ",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "City  : ",
-                        placeHolder: "Enter City ",
-                        name: "city ",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "po-Box  : ",
-                        placeHolder: "Enter po-Box ",
-                        name: "po-box ",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "ZIP-Code  : ",
-                        placeHolder: "Enter ZIP-Code ",
-                        name: "zip_code ",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Address  : ",
-                        placeHolder: "Enter Address ",
-                        name: "address ",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Logo  : ",
-                        placeHolder: "Enter Logo ",
-                        name: "logo ",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Location : ",
-                        placeHolder: "Enter Location",
-                        name: "location",
-                        err: err,
-                        inputType: "text",
-                      },
-                      {
-                        head: "Category_id : ",
-                        placeHolder: "Enter Category_id",
-                        name: "category_id",
-                        err: err,
-                        inputType: "text",
-                      },
-                    ]}
-                    control={control}
-                    register={register}
-                  />
-                </CustomEditForm>
-              </ModalBody>
-              <ModalFooter my="5">
-                <PrimaryButton
-                  name="Update"
-                  onClick={handleSubmit(onUpdateCompany)}
-                  loadingButton={isUpdating}
-                  buttonType="submit"
-                />
-
-                <SecondaryButton
-                  name="Cancel"
-                  onClick={onCancelHandler}
-                  buttonType="button"
-                />
-
-                <Stack>
-                  {errors?.message && (
-                    <Text className="text-center mt-4" color="red">
-                      {errors?.message}
+                      rating
+                      <Icon textColor="#F8B916">
+                        <FaStar size="medium" />
+                      </Icon>
                     </Text>
-                  )}
-                </Stack>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
-        </>
-      </Route>
-    </Switch>
+
+                    <SecondaryButton leftIcon={<FaSync />} name="VIEW ALL" />
+                  </Box>
+                </Box>
+                <PrimaryButton
+                  buttonType="button"
+                  leftIcon={<FiEdit />}
+                  onClick={onOpen}
+                  name=" Update Company"
+                  width="200px"
+                  h="45px"
+                  rounded="lg"
+                />
+              </VStack>
+            </GridItem>
+          </Grid>
+        )}
+      </Box>
+
+      {/* company update */}
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+        <ModalOverlay />
+
+        <ModalContent>
+          <ModalHeader
+            fontWeight="medium"
+            fontSize="x-large"
+            fontFamily="inhirit"
+            textColor="#F8B916"
+          >
+            Update your company info
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
+              <input
+                type="file"
+                //   onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton
+                name="Upload File"
+                // onClick={uploadFile}
+              />
+            </HStack>
+
+            <CustomEditForm
+              isOpen={isOpen}
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(onUpdateCompany)}
+              isUpdating={isUpdating}
+              errors={errors}
+            >
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Company Name : ",
+                    placeHolder: "Enter Company Name",
+                    name: "name",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Type : ",
+                    placeHolder: "Enter Type",
+                    name: "type",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Total Employees : ",
+                    placeHolder: "Enter Total Employees",
+                    name: "total_employees",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "VAT Number ",
+                    placeHolder: "Enter VAT Number ",
+                    name: "vat",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Confirm Cr Number : ",
+                    placeHolder: "confirm your Cr Number",
+                    name: "cr",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Phone Establishment Year : ",
+                    placeHolder: "enter  Establishment Year",
+                    name: "establishment_year",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Phone Bio : ",
+                    placeHolder: "enter Bio",
+                    name: "bio",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Telephone : ",
+                    placeHolder: "Enter Telephone",
+                    name: "telephone",
+                    err: err,
+                    inputType: "number",
+                  },
+                  {
+                    head: "Fax : ",
+                    placeHolder: "Enter Fax",
+                    name: "fax",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "E-mail : ",
+                    placeHolder: "Enter E-mail",
+                    name: "email",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Website : ",
+                    placeHolder: "Enter Website",
+                    name: "website",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Country-Id  : ",
+                    placeHolder: "Enter Country-Id ",
+                    name: "country_id ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "City  : ",
+                    placeHolder: "Enter City ",
+                    name: "city ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "po-Box  : ",
+                    placeHolder: "Enter po-Box ",
+                    name: "po-box ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "ZIP-Code  : ",
+                    placeHolder: "Enter ZIP-Code ",
+                    name: "zip_code ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Address  : ",
+                    placeHolder: "Enter Address ",
+                    name: "address ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Logo  : ",
+                    placeHolder: "Enter Logo ",
+                    name: "logo ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Location : ",
+                    placeHolder: "Enter Location",
+                    name: "location",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Category_id : ",
+                    placeHolder: "Enter Category_id",
+                    name: "category_id",
+                    err: err,
+                    inputType: "text",
+                  },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
+          </ModalBody>
+          <ModalFooter my="5">
+            <PrimaryButton
+              name="Update"
+              onClick={handleSubmit(onUpdateCompany)}
+              loadingButton={isUpdating}
+              buttonType="submit"
+            />
+
+            <SecondaryButton
+              name="Cancel"
+              onClick={onCancelHandler}
+              buttonType="button"
+            />
+
+            <Stack>
+              {errors?.message && (
+                <Text className="text-center mt-4" color="red">
+                  {errors?.message}
+                </Text>
+              )}
+            </Stack>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

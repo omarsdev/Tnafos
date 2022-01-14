@@ -130,284 +130,269 @@ const EstimateCard = () => {
     getEstimate();
   }, []);
 
-  return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        {!card ? (
-          <Center h="70vh" w="100%">
-            <Spinner size="xl" color="#F8B916" />
-          </Center>
-        ) : (
-          <>
-            <Center py="5">
-              <Box
-                className="rounded-3xl relative bg-white shadow-2xl"
-                w="500px"
-                h="1250px"
-              >
-                <VStack spacing="20px" mx="5%" mt="5">
-                  <Box mr="0">
-                    <Text fontSize="large">Estimate's details: </Text>
-                    <Text py="1" textColor="gray.600">
-                      Subject: {card?.subject}
-                    </Text>
-                    <Text textColor="gray.600">Status: {card?.status}</Text>
-                    <Text textColor="gray.600">Date:{card?.date}</Text>
-                    <Text textColor="gray.600">
-                      Valid-till:{card?.valid_till}
-                    </Text>
-                    <Text textColor="gray.600">Currency:{card?.currency}</Text>
-                    <Text textColor="gray.600">
-                      Type of discount:{card?.discount_type}
-                    </Text>
-                    <Text textColor="gray.600">
-                      Amount of discount:{card?.discount_amount}
-                    </Text>
-                    <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
-                    <Text textColor="gray.600">Total:{card?.total}</Text>
-                    <Box textColor="gray.600" my="3">
-                      <Text fontWeight="bold">Assigned - to :</Text>
-                      <Stack>
-                        <Text>
-                          {card?.assigned_to?.first_name}{" "}
-                          {card?.assigned_to?.last_name}
-                        </Text>
-                        <Text>{card?.assigned_to?.email}</Text>
-                        <Text>{card?.assigned_to?.phone_number}</Text>
-                        <Text>{card?.assigned_to?.uuid}</Text>
-                        <Text>{card?.assigned_to?.is_admin}</Text>
-                      </Stack>
-                    </Box>
-                    <Box textColor="gray.600" my="3">
-                      {" "}
-                      <Text fontWeight="bold">Company Info:</Text>
-                      <Stack>
-                        <Text> {card?.customer?.company_name}</Text>
-                        <Text>{card?.customer?.vat_number}</Text>
-                        <Text>{card?.customer?.phone}</Text>
-                        <Text>{card?.customer?.fax}</Text>
-                        <Text>{card?.customer?.website}</Text>
-                        <Text>{card?.customer?.currency}</Text>
-                        <Text>{card?.customer?.state}</Text>
-                        <Text>{card?.customer?.city}</Text>
-                        <Text>{card?.customer?.zipcode}</Text>
-                        <Text>{card?.customer?.address}</Text>
-                      </Stack>
-                    </Box>
-
-                    <Box textColor="gray.600" my="3">
-                      {" "}
-                      <Text fontWeight="bold">Country:</Text>
-                      <Stack>
-                        <Text> {card?.customer?.country?.name}</Text>
-                        <Text>{card?.customer?.country?.short_name}</Text>
-                        <Text>{card?.customer?.country?.country_code}</Text>
-                        <Text>{card?.customer?.country?.currency}</Text>
-                        <Text>{card?.customer?.country?.uuid}</Text>
-                      </Stack>
-                    </Box>
-
-                    <Box textColor="gray.600" my="3">
-                      {" "}
-                      <Text fontWeight="bold">Contact personal-info:</Text>
-                      <Stack>
-                        <Text>
-                          {" "}
-                          {card?.customer?.primary_contact?.first_name}{" "}
-                          {card?.customer?.primary_contact?.last_name}
-                        </Text>
-                        <Text>{card?.customer?.primary_contact?.position}</Text>
-                        <Text>{card?.customer?.primary_contact?.email}</Text>
-                        <Text>
-                          {card?.customer?.primary_contact?.phone_number}
-                        </Text>
-                        <Text>{card?.customer?.primary_contact?.uuid}</Text>
-                      </Stack>
-                    </Box>
-                  </Box>
-
-                  <Flex justify={"center"} w="full" gap="15px">
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"x-large"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<RiExchangeDollarLine />}
-                      onClick={() => {
-                        history.push(`${match.url}/convert-to-invoice`);
-                      }}
-                    />
-
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"x-large"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<RiRefreshLine />}
-                      onClick={() => {
-                        history.push(`${match.url}/update-status`);
-                      }}
-                    />
-
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"lg"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<FiEdit />}
-                      onClick={onOpen}
-                    />
-                  </Flex>
-                </VStack>
+  return !card ? (
+    <Center h="70vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
+  ) : (
+    <>
+      <Center py="5">
+        <Box
+          className="rounded-3xl relative bg-white shadow-2xl"
+          w="500px"
+          h="1250px"
+        >
+          <VStack spacing="20px" mx="5%" mt="5">
+            <Box mr="0">
+              <Text fontSize="large">Estimate's details: </Text>
+              <Text py="1" textColor="gray.600">
+                Subject: {card?.subject}
+              </Text>
+              <Text textColor="gray.600">Status: {card?.status}</Text>
+              <Text textColor="gray.600">Date:{card?.date}</Text>
+              <Text textColor="gray.600">Valid-till:{card?.valid_till}</Text>
+              <Text textColor="gray.600">Currency:{card?.currency}</Text>
+              <Text textColor="gray.600">
+                Type of discount:{card?.discount_type}
+              </Text>
+              <Text textColor="gray.600">
+                Amount of discount:{card?.discount_amount}
+              </Text>
+              <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
+              <Text textColor="gray.600">Total:{card?.total}</Text>
+              <Box textColor="gray.600" my="3">
+                <Text fontWeight="bold">Assigned - to :</Text>
+                <Stack>
+                  <Text>
+                    {card?.assigned_to?.first_name}{" "}
+                    {card?.assigned_to?.last_name}
+                  </Text>
+                  <Text>{card?.assigned_to?.email}</Text>
+                  <Text>{card?.assigned_to?.phone_number}</Text>
+                  <Text>{card?.assigned_to?.uuid}</Text>
+                  <Text>{card?.assigned_to?.is_admin}</Text>
+                </Stack>
               </Box>
-            </Center>
+              <Box textColor="gray.600" my="3">
+                {" "}
+                <Text fontWeight="bold">Company Info:</Text>
+                <Stack>
+                  <Text> {card?.customer?.company_name}</Text>
+                  <Text>{card?.customer?.vat_number}</Text>
+                  <Text>{card?.customer?.phone}</Text>
+                  <Text>{card?.customer?.fax}</Text>
+                  <Text>{card?.customer?.website}</Text>
+                  <Text>{card?.customer?.currency}</Text>
+                  <Text>{card?.customer?.state}</Text>
+                  <Text>{card?.customer?.city}</Text>
+                  <Text>{card?.customer?.zipcode}</Text>
+                  <Text>{card?.customer?.address}</Text>
+                </Stack>
+              </Box>
 
-            {/* updating estimate */}
-            <Drawer
+              <Box textColor="gray.600" my="3">
+                {" "}
+                <Text fontWeight="bold">Country:</Text>
+                <Stack>
+                  <Text> {card?.customer?.country?.name}</Text>
+                  <Text>{card?.customer?.country?.short_name}</Text>
+                  <Text>{card?.customer?.country?.country_code}</Text>
+                  <Text>{card?.customer?.country?.currency}</Text>
+                  <Text>{card?.customer?.country?.uuid}</Text>
+                </Stack>
+              </Box>
+
+              <Box textColor="gray.600" my="3">
+                {" "}
+                <Text fontWeight="bold">Contact personal-info:</Text>
+                <Stack>
+                  <Text>
+                    {" "}
+                    {card?.customer?.primary_contact?.first_name}{" "}
+                    {card?.customer?.primary_contact?.last_name}
+                  </Text>
+                  <Text>{card?.customer?.primary_contact?.position}</Text>
+                  <Text>{card?.customer?.primary_contact?.email}</Text>
+                  <Text>{card?.customer?.primary_contact?.phone_number}</Text>
+                  <Text>{card?.customer?.primary_contact?.uuid}</Text>
+                </Stack>
+              </Box>
+            </Box>
+
+            <Flex justify={"center"} w="full" gap="15px">
+              <IconButton
+                justify={"center"}
+                fontSize={"x-large"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                icon={<RiExchangeDollarLine />}
+                onClick={() => {
+                  history.push(`${match.url}/convert-to-invoice`);
+                }}
+              />
+
+              <IconButton
+                justify={"center"}
+                fontSize={"x-large"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                icon={<RiRefreshLine />}
+                onClick={() => {
+                  history.push(`${match.url}/update-status`);
+                }}
+              />
+
+              <IconButton
+                justify={"center"}
+                fontSize={"lg"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                icon={<FiEdit />}
+                onClick={onOpen}
+              />
+            </Flex>
+          </VStack>
+        </Box>
+      </Center>
+
+      {/* updating estimate */}
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
+
+          <DrawerBody>
+            <CustomEditForm
               isOpen={isOpen}
-              placement="right"
-              onClose={onCancelHandler}
-              size="lg"
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(updateEstimate)}
+              isUpdating={isUpdating}
+              errors={errors}
             >
-              <DrawerOverlay />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-                  Edit your Info by filling up this form
-                </DrawerHeader>
-
-                <DrawerBody>
-                  <CustomEditForm
-                    isOpen={isOpen}
-                    onCancelHandler={onCancelHandler}
-                    onUpdate={handleSubmit(updateEstimate)}
-                    isUpdating={isUpdating}
-                    errors={errors}
-                  >
-                    <CustomAddForm
-                      listForm={[
-                        {
-                          head: "Subject : ",
-                          placeHolder: "Enter Subject",
-                          name: "subject",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Status : ",
-                          placeHolder: "Enter Status",
-                          name: "status",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Date : ",
-                          placeHolder: "Enter Date",
-                          name: "date",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Valid - till : ",
-                          placeHolder: "valid - till",
-                          name: "valid_till",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Currency : ",
-                          placeHolder: "Enter Currency",
-                          name: "currency",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Customer Id : ",
-                          placeHolder: "Enter customer_id",
-                          name: "customer_id",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Assigned - to : ",
-                          placeHolder: "Enter the uuid here",
-                          name: "assigned_to",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Discount- type : ",
-                          placeHolder: "Enter discount_type",
-                          name: "discount_type",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Discount - amount : ",
-                          placeHolder: "Enter discount_amount",
-                          name: "discount_amount",
-                          inputType: "number",
-                          errors: errors,
-                        },
-                        {
-                          head: "Sub-total : ",
-                          placeHolder: "Enter sub-total",
-                          name: "subtotal",
-                          inputType: "number",
-                          errors: errors,
-                        },
-                        {
-                          head: "Total : ",
-                          placeHolder: "Enter Total",
-                          name: "total",
-                          inputType: "number",
-                          errors: errors,
-                        },
-                        //   {
-                        //     head: "Lines : ",
-                        //     placeHolder: "Enter Lines",
-                        //     name: "lines",
-                        //     inputType: "text",
-                        //     errors: errors,
-                        //   },
-                      ]}
-                      control={control}
-                      register={register}
-                    />
-                  </CustomEditForm>
-                </DrawerBody>
-              </DrawerContent>
-            </Drawer>
-          </>
-        )}
-      </Route>
-      <Route path={`${match.path}/updatestatus`} component={UpdateStatus} />
-      <Route
-        path={`${match.path}/converttoinvoice`}
-        component={ConvertToInvoice}
-      />
-    </Switch>
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Subject : ",
+                    placeHolder: "Enter Subject",
+                    name: "subject",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Status : ",
+                    placeHolder: "Enter Status",
+                    name: "status",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Date : ",
+                    placeHolder: "Enter Date",
+                    name: "date",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Valid - till : ",
+                    placeHolder: "valid - till",
+                    name: "valid_till",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Currency : ",
+                    placeHolder: "Enter Currency",
+                    name: "currency",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Customer Id : ",
+                    placeHolder: "Enter customer_id",
+                    name: "customer_id",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Assigned - to : ",
+                    placeHolder: "Enter the uuid here",
+                    name: "assigned_to",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Discount- type : ",
+                    placeHolder: "Enter discount_type",
+                    name: "discount_type",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Discount - amount : ",
+                    placeHolder: "Enter discount_amount",
+                    name: "discount_amount",
+                    inputType: "number",
+                    errors: errors,
+                  },
+                  {
+                    head: "Sub-total : ",
+                    placeHolder: "Enter sub-total",
+                    name: "subtotal",
+                    inputType: "number",
+                    errors: errors,
+                  },
+                  {
+                    head: "Total : ",
+                    placeHolder: "Enter Total",
+                    name: "total",
+                    inputType: "number",
+                    errors: errors,
+                  },
+                  //   {
+                  //     head: "Lines : ",
+                  //     placeHolder: "Enter Lines",
+                  //     name: "lines",
+                  //     inputType: "text",
+                  //     errors: errors,
+                  //   },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
 

@@ -122,152 +122,146 @@ const PaymentCard = () => {
     media(uuid, "payment", photo);
   };
 
-  return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        {!card ? (
-          <Center h="70vh" w="100%">
-            <Spinner size="xl" color="#F8B916" />
-          </Center>
-        ) : (
-          <>
-            <Center py="5">
-              <Box
-                className="rounded-3xl relative bg-white shadow-2xl"
-                w="400px"
-                h="300px"
-              >
-                <VStack spacing="20px" mx="5%" mt="5">
-                  <Box mr="0">
-                    <Text py="1" textColor="gray.600">
-                      Amount: {card?.amount}
-                    </Text>
-                    <Text textColor="gray.600">Method: {card?.method}</Text>
-                    <Text textColor="gray.600">
-                      Transaction_Number: {card?.transaction_number}
-                    </Text>
-                    <Text textColor="gray.600">Date:{card?.date}</Text>
-                    <Text textColor="gray.600">Notes:{card?.notes}</Text>
-                    <Text textColor="gray.600">UUID:{card?.uuid}</Text>
-                  </Box>
+  return !card ? (
+    <Center h="70vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
+  ) : (
+    <>
+      <Center py="5">
+        <Box
+          className="rounded-3xl relative bg-white shadow-2xl"
+          w="400px"
+          h="300px"
+        >
+          <VStack spacing="20px" mx="5%" mt="5">
+            <Box mr="0">
+              <Text py="1" textColor="gray.600">
+                Amount: {card?.amount}
+              </Text>
+              <Text textColor="gray.600">Method: {card?.method}</Text>
+              <Text textColor="gray.600">
+                Transaction_Number: {card?.transaction_number}
+              </Text>
+              <Text textColor="gray.600">Date:{card?.date}</Text>
+              <Text textColor="gray.600">Notes:{card?.notes}</Text>
+              <Text textColor="gray.600">UUID:{card?.uuid}</Text>
+            </Box>
 
-                  <Flex justify={"center"} w="full" gap="15px">
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"lg"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<MdOutlinePermMedia />}
-                      onClick={() => {
-                        history.push(`${match.url}/media`);
-                      }}
-                    />
+            <Flex justify={"center"} w="full" gap="15px">
+              <IconButton
+                justify={"center"}
+                fontSize={"lg"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                icon={<MdOutlinePermMedia />}
+                onClick={() => {
+                  history.push(`${match.url}/media`);
+                }}
+              />
 
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"lg"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<FiEdit />}
-                      onClick={onOpen}
-                    />
-                  </Flex>
-                </VStack>
-              </Box>
-            </Center>
+              <IconButton
+                justify={"center"}
+                fontSize={"lg"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                icon={<FiEdit />}
+                onClick={onOpen}
+              />
+            </Flex>
+          </VStack>
+        </Box>
+      </Center>
 
-            {/* updating payment card*/}
-            <Drawer
+      {/* updating payment card*/}
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
+
+          <DrawerBody>
+            <CustomEditForm
               isOpen={isOpen}
-              placement="right"
-              onClose={onCancelHandler}
-              size="lg"
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(updatePayment)}
+              isUpdating={isUpdating}
+              errors={errors}
             >
-              <DrawerOverlay />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-                  Edit your Info by filling up this form
-                </DrawerHeader>
-
-                <DrawerBody>
-                  <CustomEditForm
-                    isOpen={isOpen}
-                    onCancelHandler={onCancelHandler}
-                    onUpdate={handleSubmit(updatePayment)}
-                    isUpdating={isUpdating}
-                    errors={errors}
-                  >
-                    <CustomAddForm
-                      listForm={[
-                        {
-                          head: "Amount : ",
-                          placeHolder: "Enter amount",
-                          name: "amount",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Method : ",
-                          placeHolder: "Enter Method",
-                          name: "method",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Transaction -number : ",
-                          placeHolder: "Enter transaction-number",
-                          name: "transaction_number",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Date : ",
-                          placeHolder: "Enter Date",
-                          name: "date",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Notes : ",
-                          placeHolder: "Enter notes",
-                          name: "notes",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "UUID : ",
-                          placeHolder: "Enter UUID",
-                          name: "uuid",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                      ]}
-                      control={control}
-                      register={register}
-                    />
-                  </CustomEditForm>
-                </DrawerBody>
-              </DrawerContent>
-            </Drawer>
-          </>
-        )}
-      </Route>
-    </Switch>
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Amount : ",
+                    placeHolder: "Enter amount",
+                    name: "amount",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Method : ",
+                    placeHolder: "Enter Method",
+                    name: "method",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Transaction -number : ",
+                    placeHolder: "Enter transaction-number",
+                    name: "transaction_number",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Date : ",
+                    placeHolder: "Enter Date",
+                    name: "date",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Notes : ",
+                    placeHolder: "Enter notes",
+                    name: "notes",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "UUID : ",
+                    placeHolder: "Enter UUID",
+                    name: "uuid",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
 

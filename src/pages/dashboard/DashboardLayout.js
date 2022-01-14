@@ -1,3 +1,5 @@
+// TODO purchase for incoming and outgoing
+
 import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Sidebar } from "./components/index";
 import {
@@ -20,27 +22,20 @@ import {
 } from "react-router-dom";
 import { AxiosInstance } from "../../api";
 
-import { FiInbox } from "react-icons/fi";
-
-// import Proposal from "./screens/proposals/Proposal"
+import DashboardHome from "./screens/home/DashboardHome";
+import ClientLayout from "./screens/clients/ClientLayout";
+import CompanyLayout from "./screens/company/CompanyLayout";
+import EstimateLayout from "./screens/estimates/EstimateLayout";
+import PaymentLayout from "./screens/payments/PaymentLayout";
+import PurchasesLayout from "./screens/purchase-requests/PurchasesLayout";
 import Ratings from "./screens/rating/Ratings";
-import { UserDataContext } from "../../context";
-import ClientsHome from "./screens/clients/ClientsHome";
-import PurchasesHome from "./screens/purchase-requests/PurchasesHome";
-import PaymentHome from "./screens/payments/PaymentHome";
-import EstimateHome from "./screens/estimates/EstimateHome";
-import OutgoingEstimates from "./screens/estimates/OutgoingEstimates";
-import IncomingEstimates from "./screens/estimates/IncomingEstimates";
-import ServiceHome from "./screens/services/ServiceHome";
-import SettingHome from "./screens/settings/SettingHome";
-import Incoming from "./screens/invoices/Incoming";
-import Outgoing from "./screens/invoices/Outgoing";
-import UserHome from "./screens/users/UserHome";
-import CompanyHome from "./screens/company/CompanyHome";
-import OutgoingPurchases from "./screens/purchase-requests/OutgoingPurchases";
-import IncomingPurchases from "./screens/purchase-requests/IncomingPurchases";
-import InvoiceHome from "./screens/invoices/InvoiceHome";
+import ServiceLayout from "./screens/services/ServiceLayout";
+import SettingLayout from "./screens/settings/SettingLayout";
+import UserLayout from "./screens/users/UserLayout";
+import InvoiceLayout from "./screens/invoices/InvoiceLayout";
+// import Proposal from "./screens/proposals/Proposal"
 
+import { UserDataContext } from "../../context";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
 const DashboardLayout = () => {
@@ -53,11 +48,6 @@ const DashboardLayout = () => {
   const { userData, setUserData } = dataProviderValue;
 
   const [loading, setLoading] = useState(true);
-
-  const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
-
-  //* set border color:
-  const randomElement = colors[Math.floor(Math.random() * colors.length)];
 
   const fetchTokenMe = async (token) => {
     try {
@@ -82,155 +72,38 @@ const DashboardLayout = () => {
     removeForwardSlashFromUrl();
   }, []);
 
-  return (
-    <>
-      {!loading && userData ? (
-        <HStack spacing={0}>
-          <Sidebar />
-          <VStack className="chakra-stack w-full h-screen overflow-scroll">
-            <Navbar />
-            {/* {body} */}
+  return !loading && userData ? (
+    <HStack spacing={0}>
+      <Sidebar />
+      <VStack className="chakra-stack w-full h-screen overflow-scroll">
+        <Navbar />
+        {/* {body} */}
 
-            <Switch>
-              <Route exact path={match.path}>
-                <Box>
-                  <Grid templateColumns="repeat(4, 1fr)" gap={10} pt="20px">
-                    <Box
-                      mt="5"
-                      w="240px"
-                      h="70px"
-                      rounded="xl"
-                      boxShadow="2xl"
-                      relative
-                      bg={"white"}
-                      borderLeftColor={randomElement}
-                      borderLeftWidth="4px"
-                    >
-                      <HStack w="full">
-                        <Stat px="5%" w="full">
-                          <StatLabel py="1">Title</StatLabel>
-                          <StatNumber fontSize="xl">number</StatNumber>
-                        </Stat>
-                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                          <FiInbox color="#AEAEAE" />
-                        </Box>
-                      </HStack>
-                    </Box>
+        <Switch>
+          <Route exact path={match.path} component={DashboardHome} />
+          <Route path={`${match.path}/company`} component={CompanyLayout} />
+          <Route path={`${match.path}/rating`} component={Ratings} />
+          <Route path={`${match.path}/user`} component={UserLayout} />
+          <Route path={`${match.path}/service`} component={ServiceLayout} />
+          <Route
+            path={`${match.path}/purchase-request`}
+            component={PurchasesLayout}
+          />
 
-                    <Box
-                      mt="5"
-                      w="240px"
-                      h="70px"
-                      rounded="xl"
-                      boxShadow="2xl"
-                      relative
-                      bg={"white"}
-                      borderLeftColor={randomElement}
-                      borderLeftWidth="4px"
-                    >
-                      <HStack w="full">
-                        <Stat px="5%" w="full">
-                          <StatLabel py="1">Title</StatLabel>
-                          <StatNumber fontSize="xl">number</StatNumber>
-                        </Stat>
-                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                          <FiInbox color="#AEAEAE" />
-                        </Box>
-                      </HStack>
-                    </Box>
+          <Route path={`${match.path}/payment`} component={PaymentLayout} />
 
-                    <Box
-                      mt="5"
-                      w="240px"
-                      h="70px"
-                      rounded="xl"
-                      boxShadow="2xl"
-                      relative
-                      bg={"white"}
-                      borderLeftColor={randomElement}
-                      borderLeftWidth="4px"
-                    >
-                      <HStack w="full">
-                        <Stat px="5%" w="full">
-                          <StatLabel py="1">Title</StatLabel>
-                          <StatNumber fontSize="xl">number</StatNumber>
-                        </Stat>
-                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                          <FiInbox color="#AEAEAE" />
-                        </Box>
-                      </HStack>
-                    </Box>
+          <Route path={`${match.path}/invoice`} component={InvoiceLayout} />
 
-                    <Box
-                      mt="5"
-                      w="240px"
-                      h="70px"
-                      rounded="xl"
-                      boxShadow="2xl"
-                      relative
-                      bg={"white"}
-                      borderLeftColor={randomElement}
-                      borderLeftWidth="4px"
-                    >
-                      <HStack w="full">
-                        <Stat px="5%" w="full">
-                          <StatLabel py="1">Title</StatLabel>
-                          <StatNumber fontSize="xl">number</StatNumber>
-                        </Stat>
-                        <Box pr="7%" fontSize="4xl" fontWeight="light" pt="2%">
-                          <FiInbox color="#AEAEAE" />
-                        </Box>
-                      </HStack>
-                    </Box>
-                  </Grid>
-                </Box>
-              </Route>
-              <Route path={`${match.path}/company`} component={CompanyHome} />
-              <Route path={`${match.path}/rating`} component={Ratings} />
-              <Route path={`${match.path}/user`} component={UserHome} />
-              <Route path={`${match.path}/service`} component={ServiceHome} />
-              <Route
-                path={`${match.path}/purchase-request`}
-                component={PurchasesHome}
-              />
-              <Route
-                path={`${match.path}/purchase-request/incomingpurchases`}
-                component={IncomingPurchases}
-              />
-              <Route
-                path={`${match.path}/purchase-request/outgoingpurchases`}
-                component={OutgoingPurchases}
-              />
-              <Route path={`${match.path}/payment`} component={PaymentHome} />
-              <Route path={`${match.path}/invoice`} component={InvoiceHome} />
-              <Route
-                path={`${match.path}/invoice/incoming`}
-                component={Incoming}
-              />
-              <Route
-                path={`${match.path}/invoice/outgoing`}
-                component={Outgoing}
-              />
-              <Route
-                path={`${match.path}/estimate/outgoingestimates`}
-                component={OutgoingEstimates}
-              />
-              <Route
-                path={`${match.path}/estimate/incomingestimates`}
-                component={IncomingEstimates}
-              />
-              <Route path={`${match.path}/estimate`} component={EstimateHome} />
-              <Route path={`${match.path}/client`} component={ClientsHome} />
-              <Route path={`${match.path}/settings`} component={SettingHome} />
-            </Switch>
-          </VStack>
-        </HStack>
-      ) : (
-        <Center h="100vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
-        </Center>
-      )}
-    </>
+          <Route path={`${match.path}/estimate`} component={EstimateLayout} />
+          <Route path={`${match.path}/client`} component={ClientLayout} />
+          <Route path={`${match.path}/settings`} component={SettingLayout} />
+        </Switch>
+      </VStack>
+    </HStack>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };
 
