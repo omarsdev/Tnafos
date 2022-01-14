@@ -1,5 +1,6 @@
 import React from "react";
 
-export const ProposalHome = () => {
+const ProposalHome = () => {
   return <div>proposals ...</div>;
 };
+export default ProposalHome;

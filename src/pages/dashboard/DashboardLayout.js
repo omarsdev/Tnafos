@@ -36,6 +36,7 @@ import InvoiceLayout from "./screens/invoices/InvoiceLayout";
 // import Proposal from "./screens/proposals/Proposal"
 
 import { UserDataContext } from "../../context";
+import ProposalLayout from "./screens/proposals/proposalLayout";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
 const DashboardLayout = () => {
@@ -85,6 +86,8 @@ const DashboardLayout = () => {
           <Route path={`${match.path}/rating`} component={Ratings} />
           <Route path={`${match.path}/user`} component={UserLayout} />
           <Route path={`${match.path}/service`} component={ServiceLayout} />
+          <Route path={`${match.path}/proposal`} component={ProposalLayout} />
+
           <Route
             path={`${match.path}/purchase-request`}
             component={PurchasesLayout}
