@@ -42,7 +42,6 @@ const Outgoing = () => {
             </Heading>
           </HStack>
           <CustomTable
-            PageHeadLine="Invoices - Outgoing"
             thHeading="List of Invoices - Outgoing"
             thData={[
               "Invoices-ID",
@@ -54,6 +53,7 @@ const Outgoing = () => {
             ]}
             list={list}
             listData={["uuid", "subject", "date", "discount_amount", "total"]}
+            component="invoice"
           />
         </Box>
       </Route>

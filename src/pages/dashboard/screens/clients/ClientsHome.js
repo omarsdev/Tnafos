@@ -24,7 +24,7 @@ const ClientsHome = () => {
   const history = useHistory();
 
   const clientsList = async () => {
-    await AxiosInstance.get("/api/dashboard/customer/")
+    await AxiosInstance.get("/api/dashboard/customer")
       .then((res) => {
         console.log(res.data.data);
         setList(res.data.data);
@@ -34,11 +34,11 @@ const ClientsHome = () => {
       });
   };
 
-  const handleKeypress = (e) => {
-    if (e.key === "Enter") {
-      searchHandler();
-    }
-  };
+  // const handleKeypress = (e) => {
+  //   if (e.key === "Enter") {
+  //     searchHandler();
+  //   }
+  // };
 
   const searchHandler = () => {
     history.push(`/${searchInput}`);
@@ -74,22 +74,22 @@ const ClientsHome = () => {
           <CustomTable
             theHeading="List of clients"
             theData={[
-              "Client-number",
-              "Vat Number",
-              "E-mail",
+              "UUID",
               "Company Name",
-              "Website",
+              "Vat Number",
               "Phone",
+              "Website",
+              "Address",
               "actions",
             ]}
             list={list}
             listData={[
               "uuid",
-              "vat_number",
-              "email",
               "company_name",
-              "website",
+              "vat_number",
               "phone",
+              "website",
+              "address",
             ]}
             component={"client"}
           />

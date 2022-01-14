@@ -57,7 +57,6 @@ const OutgoingEstimates = () => {
           </HStack>
 
           <CustomTable
-            PageHeadLine="estimate"
             thHeading="List of outgoing estimates"
             list={list}
             thData={[
@@ -69,6 +68,7 @@ const OutgoingEstimates = () => {
               "Action",
             ]}
             listData={["uuid", "subject", "date", "valid_till", "status"]}
+            component={"estimate"}
           />
         </Box>
       </Route>

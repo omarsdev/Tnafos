@@ -30,7 +30,6 @@ const Incoming = () => {
     <Switch>
       <Route>
         <CustomTable
-          PageHeadLine="Invoices - Incoming"
           thHeading="List of Invoices - Incoming"
           thData={[
             "Invoices-ID",
@@ -50,6 +49,7 @@ const Incoming = () => {
             "transaction_number",
             "notes",
           ]}
+          component={"invoice"}
         />
       </Route>
       <Route path={`${match.path}/:uuid`} component={InvoiceCard} />
