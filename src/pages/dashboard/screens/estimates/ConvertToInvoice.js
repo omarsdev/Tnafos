@@ -66,8 +66,6 @@ const ConvertToInvoice = () => {
       //   subtotal: data.subtotal,
       //   total: data.total,
       //   lines: data.lines,
-
-      due_date: data.due_date,
     });
   };
 
