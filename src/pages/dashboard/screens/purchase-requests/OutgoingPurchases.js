@@ -7,7 +7,7 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom";
-import CustomTable from "../../components/CustomTable";
+import { CustomTable } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 

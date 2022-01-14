@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Box, HStack, Heading, Spinner } from "@chakra-ui/react";
-import { useHistory, Switch, Route, useRouteMatch } from "react-router-dom";
-import InvoiceCard from "../invoices/InvoiceCard";
+import { Box, HStack, Heading } from "@chakra-ui/react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
-import CustomTable from "../../components/CustomTable";
+import { CustomTable } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 

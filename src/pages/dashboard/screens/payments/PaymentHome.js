@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import CustomTable from "../../components/CustomTable";
+import { CustomTable } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 import PaymentCard from "./PaymentCard";
