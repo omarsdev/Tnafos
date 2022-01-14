@@ -41,14 +41,16 @@ const ConvertToInvoice = () => {
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const estOutgoingList = async () => {
-    await AxiosInstance.get("/api/dashboard/estimate/outgoing")
+  const getEstimate = async () => {
+    await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`)
       .then((res) => {
         console.log(res.data.data);
         resetHooksForm(res.data.data);
+        setCard(res.data.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        history.push("/dashboard/estimatehome");
       });
   };
 
@@ -69,7 +71,7 @@ const ConvertToInvoice = () => {
     });
   };
 
-  const converttoinvoice = async (dataToUpdate) => {
+  const convertToInvoice = async (dataToUpdate) => {
     setErrors(null);
     setIsUpdating(true);
     await AxiosInstance.put(
@@ -103,7 +105,7 @@ const ConvertToInvoice = () => {
   };
 
   useEffect(() => {
-    estOutgoingList();
+    getEstimate();
   }, []);
 
   return (
@@ -143,7 +145,7 @@ const ConvertToInvoice = () => {
             <CustomEditForm
               isOpen={isOpen}
               onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(converttoinvoice)}
+              onUpdate={handleSubmit(convertToInvoice)}
               isUpdating={isUpdating}
               errors={errors}
             >
