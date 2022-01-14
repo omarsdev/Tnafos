@@ -36,7 +36,7 @@ import InvoiceLayout from "./screens/invoices/InvoiceLayout";
 // import Proposal from "./screens/proposals/Proposal"
 
 import { UserDataContext } from "../../context";
-import ProposalLayout from "./screens/proposals/proposalLayout";
+import ProposalLayout from "./screens/proposals/ProposalLayout";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
 const DashboardLayout = () => {

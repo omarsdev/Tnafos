@@ -36,8 +36,6 @@ import { CustomEditForm, CustomAddForm } from "../../components";
 
 import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
-import UpdateStatus from "./UpdateStatus";
-import ConvertToInvoice from "./ConvertToInvoice";
 
 import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
@@ -75,7 +73,7 @@ const ProposalCard = () => {
     });
   };
 
-  const getEstimate = async () => {
+  const getProposal = async () => {
     await AxiosInstance.get(`/api/dashboard/proposal/${uuid}`)
       .then((res) => {
         console.log(res.data.data);
@@ -119,7 +117,7 @@ const ProposalCard = () => {
   };
 
   useEffect(() => {
-    getEstimate();
+    getProposal();
   }, []);
 
   return !card ? (
@@ -309,7 +307,7 @@ const ProposalCard = () => {
                 }}
                 icon={<RiExchangeDollarLine />}
                 onClick={() => {
-                  history.push(`${match.url}/convert-to-estimate`);
+                  history.push(`${match.url}/coverttoestimate`);
                 }}
               />
 

@@ -226,7 +226,7 @@ const EstimateCard = () => {
                 }}
                 icon={<RiExchangeDollarLine />}
                 onClick={() => {
-                  history.push(`${match.url}/convert-to-invoice`);
+                  history.push(`${match.url}/converttoinvoice`);
                 }}
               />
 

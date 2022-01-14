@@ -1,5 +1,15 @@
-import React from "react";
-import { useHistory, useRouteMatch, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
+import {
+  useRouteMatch,
+  Switch,
+  Route,
+  useHistory,
+  useParams,
+} from "react-router-dom";
+import { CustomTable } from "../../components";
+
+import { AxiosInstance } from "../../../../api";
 
 const OutgoingProposal = () => {
   const [list, setList] = useState(null);
