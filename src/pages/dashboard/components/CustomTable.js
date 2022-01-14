@@ -109,7 +109,7 @@ export const CustomTable = ({
           <Thead>
             <Tr bg="#333333" borderRadius="full">
               {thData.map((e, i) => (
-                <Th>
+                <Th key={i}>
                   <Flex justifyContent="center" alignItems="center">
                     {i !== 0 && <BiChevronsUp size="25px" color="white" />}
                     <Text color="white">{e}</Text>
@@ -121,8 +121,8 @@ export const CustomTable = ({
           <Tbody>
             {list.map((el, idx) => (
               <Tr key={idx} _hover={{ bg: "gray.100" }}>
-                {listData.map((e) => (
-                  <Td>{el[e]}</Td>
+                {listData.map((e, id) => (
+                  <Td key={id}>{el[e]}</Td>
                 ))}
                 <Td>
                   <Flex justify={"center"} gap="10px">

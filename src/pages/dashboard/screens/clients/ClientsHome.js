@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
-import CustomTable from "../../components/CustomTable";
+import { CustomTable } from "../../components";
 import {
   Link,
   useRouteMatch,
@@ -9,8 +9,7 @@ import {
   Route,
   useHistory,
 } from "react-router-dom";
-import AddClient from "./AddClient";
-import ClientCard from "./ClientCard";
+
 import { AxiosInstance } from "../../../../api";
 
 const ClientsHome = () => {

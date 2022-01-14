@@ -3,7 +3,7 @@ import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
 import EstimateCard from "./EstimateCard";
 
-import CustomTable from "../../components/CustomTable";
+import { CustomTable } from "../../components";
 import { AxiosInstance } from "../../../../api";
 
 const IncomingEstimates = () => {
