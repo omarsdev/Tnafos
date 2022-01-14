@@ -307,7 +307,7 @@ const ProposalCard = () => {
                 }}
                 icon={<RiExchangeDollarLine />}
                 onClick={() => {
-                  history.push(`${match.url}/coverttoestimate`);
+                  history.push(`${match.url}/convert-to-estimate`);
                 }}
               />
 
