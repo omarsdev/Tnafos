@@ -108,123 +108,113 @@ const UpdatePurchase = () => {
     getPurchaseCard();
   }, []);
 
-  return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        {!card ? (
-          <Center h="70vh" w="100%">
-            <Spinner size="xl" color="#F8B916" />
-          </Center>
-        ) : (
-          <>
-            <Center py="5">
-              <Box
-                className="rounded-3xl relative bg-white shadow-2xl"
-                w="350px"
-                h="300px"
-              >
-                <VStack spacing="20px" mx="5%" mt="5">
-                  <Box mr="0">
-                    <Text textColor="gray.600">Id: {card?.id}</Text>
-                    <Text py="1" textColor="gray.600">
-                      Details: {card?.details}
-                    </Text>
-                    <Text textColor="gray.600">Date: {card?.date}</Text>
-                    <Text textColor="gray.600">
-                      Services:
-                      {card.services.map((el, idx) => (
-                        <HStack key={idx}>
-                          <Text textColor="gray.600">
-                            [ {el?.service?.name}
-                          </Text>
-                          <Text textColor="gray.600">
-                            {el?.service?.description}
-                          </Text>
-                          <Text textColor="gray.600">{el?.service?.price}</Text>
-                          <Text textColor="gray.600">{el?.service?.type}]</Text>
-                        </HStack>
-                      ))}
-                    </Text>
-                  </Box>
+  return !card ? (
+    <Center h="70vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
+  ) : (
+    <>
+      <Center py="5">
+        <Box
+          className="rounded-3xl relative bg-white shadow-2xl"
+          w="350px"
+          h="300px"
+        >
+          <VStack spacing="20px" mx="5%" mt="5">
+            <Box mr="0">
+              <Text textColor="gray.600">Id: {card?.id}</Text>
+              <Text py="1" textColor="gray.600">
+                Details: {card?.details}
+              </Text>
+              <Text textColor="gray.600">Date: {card?.date}</Text>
+              <Text textColor="gray.600">
+                Services:
+                {card.services.map((el, idx) => (
+                  <HStack key={idx}>
+                    <Text textColor="gray.600">[ {el?.service?.name}</Text>
+                    <Text textColor="gray.600">{el?.service?.description}</Text>
+                    <Text textColor="gray.600">{el?.service?.price}</Text>
+                    <Text textColor="gray.600">{el?.service?.type}]</Text>
+                  </HStack>
+                ))}
+              </Text>
+            </Box>
 
-                  <Flex justify={"center"} w="full" gap="15px">
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"lg"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<FiEdit />}
-                      onClick={onOpen}
-                    />
-                  </Flex>
-                </VStack>
-              </Box>
-            </Center>
+            <Flex justify={"center"} w="full" gap="15px">
+              <IconButton
+                justify={"center"}
+                fontSize={"lg"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                icon={<FiEdit />}
+                onClick={onOpen}
+              />
+            </Flex>
+          </VStack>
+        </Box>
+      </Center>
 
-            {/* updating purchase-request*/}
-            <Drawer
+      {/* updating purchase-request*/}
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
+
+          <DrawerBody>
+            <CustomEditForm
               isOpen={isOpen}
-              placement="right"
-              onClose={onCancelHandler}
-              size="lg"
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(updatePurchase)}
+              isUpdating={isUpdating}
+              errors={errors}
             >
-              <DrawerOverlay />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-                  Edit your Info by filling up this form
-                </DrawerHeader>
-
-                <DrawerBody>
-                  <CustomEditForm
-                    isOpen={isOpen}
-                    onCancelHandler={onCancelHandler}
-                    onUpdate={handleSubmit(updatePurchase)}
-                    isUpdating={isUpdating}
-                    errors={errors}
-                  >
-                    <CustomAddForm
-                      listForm={[
-                        {
-                          head: "Date : ",
-                          placeHolder: "Enter Date",
-                          name: "date",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Details : ",
-                          placeHolder: "Enter Details",
-                          name: "details",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                        {
-                          head: "Lines : ",
-                          placeHolder: "Enter Lines",
-                          name: "lines",
-                          inputType: "text",
-                          errors: errors,
-                        },
-                      ]}
-                      control={control}
-                      register={register}
-                    />
-                  </CustomEditForm>
-                </DrawerBody>
-              </DrawerContent>
-            </Drawer>
-          </>
-        )}
-      </Route>
-    </Switch>
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Date : ",
+                    placeHolder: "Enter Date",
+                    name: "date",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Details : ",
+                    placeHolder: "Enter Details",
+                    name: "details",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Lines : ",
+                    placeHolder: "Enter Lines",
+                    name: "lines",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
 

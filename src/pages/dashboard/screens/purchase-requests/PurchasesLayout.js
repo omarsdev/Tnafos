@@ -1,0 +1,23 @@
+import React from "react";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
+
+import AddPurchase from "./AddPurchase";
+import IncomingPurchases from "./IncomingPurchases";
+import OutgoingPurchases from "./OutgoingPurchases";
+import PurchasesHome from "./PurchasesHome";
+
+const PurchasesLayout = () => {
+  const match = useRouteMatch();
+
+  return (
+    <Switch>
+      <Route exact path={`${match.path}`} component={PurchasesHome} />
+      <Route path={`${match.path}/addpurchase`} component={AddPurchase} />
+      <Route path={`${match.path}/incoming`} component={IncomingPurchases} />
+      <Route path={`${match.path}/outgoing`} component={OutgoingPurchases} />
+      {/* TODO add outgoing/:uuid and incoming/:uuid  */}
+    </Switch>
+  );
+};
+
+export default PurchasesLayout;

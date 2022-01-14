@@ -14,7 +14,7 @@ import { AxiosInstance } from "../../../../api";
 import UpdatePurchase from "./UpdatePurchase";
 
 const OutgoingPurchases = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 
@@ -48,31 +48,26 @@ const OutgoingPurchases = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        <Box w="full" overflowY="scroll" padding="10">
-          <HStack justifyContent="space-between" paddingBottom="5">
-            <Heading
-              textColor="gray.600"
-              fontSize="xx-large"
-              fontWeight="lg"
-              alignItems="baseline"
-            >
-              Outgoing Purchases
-            </Heading>
-          </HStack>
+    <Box w="full" overflowY="scroll" padding="10">
+      <HStack justifyContent="space-between" paddingBottom="5">
+        <Heading
+          textColor="gray.600"
+          fontSize="xx-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          Outgoing Purchases
+        </Heading>
+      </HStack>
 
-          <CustomTable
-            thHeading="List of outgoing purchase-requests"
-            thData={["Transaction-ID", "Details", "Date", "options"]}
-            list={list}
-            listData={["uuid", "details", "date"]}
-            component="purchase-requset"
-          />
-        </Box>
-      </Route>
-      <Route path={`${match.path}/:uuid`} component={UpdatePurchase} />
-    </Switch>
+      <CustomTable
+        thHeading="List of outgoing purchase-requests"
+        thData={["Transaction-ID", "Details", "Date", "options"]}
+        list={list}
+        listData={["uuid", "details", "date"]}
+        component="purchase-requset"
+      />
+    </Box>
   );
 };
 

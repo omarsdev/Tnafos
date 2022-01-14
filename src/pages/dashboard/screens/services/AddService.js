@@ -64,98 +64,92 @@ const AddService = () => {
     getAllCategories();
   }, []);
 
-  return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        {categoriesList ? (
-          <Box boxShadow="2xl" rounded="3xl" boxSize="2xl">
-            <Box px="20" mt="10">
-              <Heading
-                color="#F8B916"
-                fontSize="x-large"
-                fontWeight="lg"
-                alignItems="baseline"
-              >
-                New Service
-              </Heading>
+  return categoriesList ? (
+    <Box boxShadow="2xl" rounded="3xl" boxSize="2xl">
+      <Box px="20" mt="10">
+        <Heading
+          color="#F8B916"
+          fontSize="x-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          New Service
+        </Heading>
 
-              <form mt="5">
-                <CustomAddForm
-                  listForm={[
-                    {
-                      head: "Name of service : ",
-                      placeHolder: "Enter first name : ",
-                      name: "name",
-                      err: err,
-                      inputType: "text",
-                    },
-                    {
-                      head: "Description : ",
-                      placeHolder: "Enter Description : ",
-                      name: "description",
-                      inputType: "text",
-                      err: err,
-                    },
-                    {
-                      head: "Category : ",
-                      placeHolder: "Select category",
-                      name: "category_id",
-                      err: err,
-                      isSelect: true,
-                      optionList: categoriesList,
-                      value: "uuid",
-                      key: "uuid",
-                      displayValue: "name",
-                    },
-                    {
-                      head: "Price : ",
-                      placeHolder: "Enter Price : ",
-                      name: "price",
-                      inputType: "number",
-                      err: err,
-                    },
-                    {
-                      head: "Type : ",
-                      placeHolder: "Enter Type : ",
-                      name: "type",
-                      inputType: "text",
-                      err: err,
-                    },
-                  ]}
-                  control={control}
-                  register={register}
-                />
+        <form mt="5">
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Name of service : ",
+                placeHolder: "Enter first name : ",
+                name: "name",
+                err: err,
+                inputType: "text",
+              },
+              {
+                head: "Description : ",
+                placeHolder: "Enter Description : ",
+                name: "description",
+                inputType: "text",
+                err: err,
+              },
+              {
+                head: "Category : ",
+                placeHolder: "Select category",
+                name: "category_id",
+                err: err,
+                isSelect: true,
+                optionList: categoriesList,
+                value: "uuid",
+                key: "uuid",
+                displayValue: "name",
+              },
+              {
+                head: "Price : ",
+                placeHolder: "Enter Price : ",
+                name: "price",
+                inputType: "number",
+                err: err,
+              },
+              {
+                head: "Type : ",
+                placeHolder: "Enter Type : ",
+                name: "type",
+                inputType: "text",
+                err: err,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
 
-                <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
-                  <PrimaryButton
-                    name="ADD SERVICE"
-                    onClick={handleSubmit(createService)}
-                    buttonType="submit"
-                  />
+          <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
+            <PrimaryButton
+              name="ADD SERVICE"
+              onClick={handleSubmit(createService)}
+              buttonType="submit"
+            />
 
-                  <SecondaryButton
-                    name="Cancel"
-                    onClick={handleCancel}
-                    buttonType="button"
-                  />
-                </HStack>
-                <Box>
-                  {errors?.message && (
-                    <Text className="text-center mt-4" color="red">
-                      {errors?.message}
-                    </Text>
-                  )}
-                </Box>
-              </form>
-            </Box>
+            <SecondaryButton
+              name="Cancel"
+              onClick={handleCancel}
+              buttonType="button"
+            />
+          </HStack>
+          <Box>
+            {errors?.message && (
+              <Text className="text-center mt-4" color="red">
+                {errors?.message}
+              </Text>
+            )}
           </Box>
-        ) : (
-          <Center h="100vh" w="100%">
-            <Spinner size="xl" color="#F8B916" />
-          </Center>
-        )}
-      </Route>
-    </Switch>
+        </form>
+      </Box>
+    </Box>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };
 

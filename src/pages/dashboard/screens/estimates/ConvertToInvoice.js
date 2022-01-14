@@ -109,73 +109,69 @@ const ConvertToInvoice = () => {
   }, []);
 
   return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        <>
-          <Center>
-            <IconButton
-              justify={"center"}
-              fontSize={"x-large"}
-              rounded={"full"}
-              bg={"#F8B916"}
-              color={"white"}
-              boxShadow={
-                "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-              }
-              _hover={{
-                bg: "orange.400",
-              }}
-              icon={<RiExchangeDollarLine />}
-              onClick={onOpen}
-            />
-          </Center>
-          {/* conert to invoice */}
-          <Modal isOpen={isOpen} onClose={onClose} size="xl">
-            <ModalOverlay />
+    <>
+      <Center>
+        <IconButton
+          justify={"center"}
+          fontSize={"x-large"}
+          rounded={"full"}
+          bg={"#F8B916"}
+          color={"white"}
+          boxShadow={
+            "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+          }
+          _hover={{
+            bg: "orange.400",
+          }}
+          icon={<RiExchangeDollarLine />}
+          onClick={onOpen}
+        />
+      </Center>
+      {/* conert to invoice */}
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+        <ModalOverlay />
 
-            <ModalContent>
-              <ModalHeader
-                fontWeight="medium"
-                fontSize="x-large"
-                fontFamily="inhirit"
-                textColor="#F8B916"
-              >
-                Update your estimate's info
-              </ModalHeader>
-              <ModalCloseButton />
-              <ModalBody>
-                <CustomEditForm
-                  isOpen={isOpen}
-                  onCancelHandler={onCancelHandler}
-                  onUpdate={handleSubmit(converttoinvoice)}
-                  isUpdating={isUpdating}
-                  errors={errors}
-                >
-                  <CustomAddForm
-                    listForm={[
-                      {
-                        head: "Date : ",
-                        placeHolder: "Enter Date",
-                        name: "date",
-                        inputType: "text",
-                        errors: errors,
-                      },
-                      {
-                        head: "Due_date : ",
-                        placeHolder: "Enter Due_date",
-                        name: "due_date",
-                        inputType: "text",
-                        errors: errors,
-                      },
-                    ]}
-                  ></CustomAddForm>
-                </CustomEditForm>
-              </ModalBody>
-            </ModalContent>
-          </Modal>
-        </>
-      </Route>
-    </Switch>
+        <ModalContent>
+          <ModalHeader
+            fontWeight="medium"
+            fontSize="x-large"
+            fontFamily="inhirit"
+            textColor="#F8B916"
+          >
+            Update your estimate's info
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <CustomEditForm
+              isOpen={isOpen}
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(converttoinvoice)}
+              isUpdating={isUpdating}
+              errors={errors}
+            >
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Date : ",
+                    placeHolder: "Enter Date",
+                    name: "date",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Due_date : ",
+                    placeHolder: "Enter Due_date",
+                    name: "due_date",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                ]}
+              ></CustomAddForm>
+            </CustomEditForm>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

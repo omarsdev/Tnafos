@@ -24,7 +24,7 @@ import { BiUpload, BiChevronsUp } from "react-icons/bi";
 
 import { SecondaryButton } from "../../../components";
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
-import NoData from "./NoData";
+import { NoData } from "./index";
 import { FiEdit } from "react-icons/fi";
 
 const CustomTable = ({ thHeading, thData, list, component, listData }) => {

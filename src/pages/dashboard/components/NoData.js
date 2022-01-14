@@ -3,7 +3,7 @@ import { Box, Text, IconButton, HStack, Heading } from "@chakra-ui/react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 
-const NoData = ({ component }) => {
+export const NoData = ({ component }) => {
   const match = useRouteMatch();
   const history = useHistory();
 
@@ -45,4 +45,3 @@ const NoData = ({ component }) => {
     </Switch>
   );
 };
-export default NoData;

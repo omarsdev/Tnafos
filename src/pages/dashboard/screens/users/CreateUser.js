@@ -120,152 +120,146 @@ const CreateUser = () => {
     getAllCountry();
   }, []);
 
-  return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        {countryList ? (
-          <Box overflowY="scroll" w="full">
-            <Box
-              px="20"
-              mt="6"
-              boxShadow="2xl"
-              rounded="3xl"
-              w="750px"
-              ml="40"
-              bg="white"
-            >
-              <Heading
-                color="#F8B916"
-                fontSize="3xl"
-                fontWeight="lg"
-                alignItems="baseline"
-                pt="4"
-              >
-                Add user
+  return countryList ? (
+    <Box overflowY="scroll" w="full">
+      <Box
+        px="20"
+        mt="6"
+        boxShadow="2xl"
+        rounded="3xl"
+        w="750px"
+        ml="40"
+        bg="white"
+      >
+        <Heading
+          color="#F8B916"
+          fontSize="3xl"
+          fontWeight="lg"
+          alignItems="baseline"
+          pt="4"
+        >
+          Add user
+        </Heading>
+
+        <Flex w="full" pl="5" mt="16">
+          <input
+            type="file"
+            onChange={(ev) => handleFileInput(ev)}
+            ref={inputRef}
+          />
+          <Spacer />
+          <SecondaryButton
+            // onClick={photoUploadHandler}
+            name="Upload photo"
+          />
+        </Flex>
+        <Center>
+          <form>
+            <CustomAddForm
+              listForm={[
+                {
+                  head: "First name : ",
+                  placeHolder: "Enter first name : ",
+                  name: "first_name",
+                  err: err,
+                },
+                {
+                  head: "Last name : ",
+                  placeHolder: "Enter last name : ",
+                  name: "last_name",
+                  err: err,
+                },
+                {
+                  head: "Email : ",
+                  placeHolder: "Enter email : ",
+                  name: "email",
+                  err: err,
+                },
+                {
+                  head: "Password : ",
+                  placeHolder: "Enter password : ",
+                  name: "password",
+                  err: err,
+                  isPassword: true,
+                },
+                {
+                  head: "Confirm Password : ",
+                  placeHolder: "confirm your password",
+                  name: "password_confirmation",
+                  err: err,
+                  isPassword: true,
+                },
+                {
+                  head: "Phone Number : ",
+                  placeHolder: "enter phone number",
+                  name: "phone_number",
+                  err: err,
+                },
+                {
+                  head: "Country Code : ",
+                  placeHolder: "Select Country Code : ex SA",
+                  name: "country_code",
+                  err: err,
+                  isSelect: true,
+                  optionList: countryList,
+                  value: "short_name",
+                  key: "uuid",
+                  displayValue: "short_name",
+                },
+              ]}
+              control={control}
+              register={register}
+            />
+
+            <Box className="flex flex-col items-center gap-2 mt-10">
+              <Heading fontSize="xl" color="grey" fontWeight="normal">
+                Terms and Conditions agreement
               </Heading>
+              <CheckBox
+                name="I agree to Tnafos"
+                value={checked}
+                setValue={setChecked}
+              />
 
-              <Flex w="full" pl="5" mt="16">
-                <input
-                  type="file"
-                  onChange={(ev) => handleFileInput(ev)}
-                  ref={inputRef}
-                />
-                <Spacer />
-                <SecondaryButton
-                  // onClick={photoUploadHandler}
-                  name="Upload photo"
-                />
-              </Flex>
-              <Center>
-                <form>
-                  <CustomAddForm
-                    listForm={[
-                      {
-                        head: "First name : ",
-                        placeHolder: "Enter first name : ",
-                        name: "first_name",
-                        err: err,
-                      },
-                      {
-                        head: "Last name : ",
-                        placeHolder: "Enter last name : ",
-                        name: "last_name",
-                        err: err,
-                      },
-                      {
-                        head: "Email : ",
-                        placeHolder: "Enter email : ",
-                        name: "email",
-                        err: err,
-                      },
-                      {
-                        head: "Password : ",
-                        placeHolder: "Enter password : ",
-                        name: "password",
-                        err: err,
-                        isPassword: true,
-                      },
-                      {
-                        head: "Confirm Password : ",
-                        placeHolder: "confirm your password",
-                        name: "password_confirmation",
-                        err: err,
-                        isPassword: true,
-                      },
-                      {
-                        head: "Phone Number : ",
-                        placeHolder: "enter phone number",
-                        name: "phone_number",
-                        err: err,
-                      },
-                      {
-                        head: "Country Code : ",
-                        placeHolder: "Select Country Code : ex SA",
-                        name: "country_code",
-                        err: err,
-                        isSelect: true,
-                        optionList: countryList,
-                        value: "short_name",
-                        key: "uuid",
-                        displayValue: "short_name",
-                      },
-                    ]}
-                    control={control}
-                    register={register}
-                  />
-
-                  <Box className="flex flex-col items-center gap-2 mt-10">
-                    <Heading fontSize="xl" color="grey" fontWeight="normal">
-                      Terms and Conditions agreement
-                    </Heading>
-                    <CheckBox
-                      name="I agree to Tnafos"
-                      value={checked}
-                      setValue={setChecked}
-                    />
-
-                    <HStack>
-                      <Link to="/" className="hover:underline text-CInfo">
-                        <Text>terms of service</Text>
-                      </Link>{" "}
-                      <Text>and</Text>
-                      <Link to="/" className="hover:underline text-CInfo">
-                        <Text>Privacy policy</Text>
-                      </Link>
-                    </HStack>
-                    <Box>
-                      <Heading fontSize="xl" color="grey" fontWeight="normal">
-                        Decleration of Valid Information
-                      </Heading>
-                    </Box>
-                    <CheckBox
-                      name="I confirm that the information given in this form is true,
+              <HStack>
+                <Link to="/" className="hover:underline text-CInfo">
+                  <Text>terms of service</Text>
+                </Link>{" "}
+                <Text>and</Text>
+                <Link to="/" className="hover:underline text-CInfo">
+                  <Text>Privacy policy</Text>
+                </Link>
+              </HStack>
+              <Box>
+                <Heading fontSize="xl" color="grey" fontWeight="normal">
+                  Decleration of Valid Information
+                </Heading>
+              </Box>
+              <CheckBox
+                name="I confirm that the information given in this form is true,
             complete and accurate."
-                      value={ch}
-                      setValue={setCh}
-                    />
+                value={ch}
+                setValue={setCh}
+              />
 
-                    <HStack spacing="10px" py="5">
-                      <PrimaryButton
-                        name="SAVE"
-                        onClick={handleSubmit(addUser)}
-                        loadingButton={isUpdating}
-                      />
+              <HStack spacing="10px" py="5">
+                <PrimaryButton
+                  name="SAVE"
+                  onClick={handleSubmit(addUser)}
+                  loadingButton={isUpdating}
+                />
 
-                      <SecondaryButton onClick={handleCancel} name="CANCEL" />
-                    </HStack>
-                  </Box>
-                </form>
-              </Center>
+                <SecondaryButton onClick={handleCancel} name="CANCEL" />
+              </HStack>
             </Box>
-          </Box>
-        ) : (
-          <Center h="100vh" w="100%">
-            <Spinner size="xl" color="#F8B916" />
-          </Center>
-        )}
-      </Route>
-    </Switch>
+          </form>
+        </Center>
+      </Box>
+    </Box>
+  ) : (
+    <Center h="100vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
   );
 };
 
