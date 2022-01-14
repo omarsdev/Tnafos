@@ -26,7 +26,7 @@ const ProposalLayout = () => {
         component={UpdateStatus}
       />
 
-      <Route path={`${match.path}/outgoing/:uuid`} component={EstimateCard} />
+      <Route path={`${match.path}/outgoing/:uuid`} component={ProposalCard} />
       <Route
         path={`${match.path}/outgoing/:uuid/convert-to-estimate`}
         component={ConvertToEstimate}

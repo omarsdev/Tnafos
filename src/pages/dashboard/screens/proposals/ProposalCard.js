@@ -551,4 +551,4 @@ const ProposalCard = () => {
   );
 };
 
-export default EstimateCard;
+export default ProposalCard;
