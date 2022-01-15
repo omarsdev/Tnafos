@@ -15,7 +15,7 @@ export const RatingCard = ({ ratDetails }) => {
       h="70px"
       rounded="xl"
       boxShadow="2xl"
-      relative
+      relative={"true"}
       bg={"white"}
       borderLeftColor={randomElement}
       borderLeftWidth="4px"
