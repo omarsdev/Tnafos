@@ -18,10 +18,10 @@ const SearchLayout = () => {
     <SearchDataContextProvider>
       <Box h={"100vh"}>
         <Navbar />
-        <Box className="w-full h-96 bg-blue-300" />
+        <Box h={48} className="w-full bg-blue-300" />
         <Box h={"91%"} marginTop="50px">
           <Flex>
-            <Box w="70%" px="80px" pb="100px">
+            <Box w="75%" px="40px" pb="100px">
               <Switch>
                 <Route exact path={`${match.path}`} component={Service} />
                 <Route
@@ -31,9 +31,9 @@ const SearchLayout = () => {
                 <Route path={`${match.path}/:serviceId`} component={Vender} />
               </Switch>
             </Box>
-            <Box w="30%">
-              <Flex>
-                <Box w="2px" h="700px" className="bg-CBlack" mt={0} />
+            <Box mx={"auto"}>
+              <Flex mx={"auto"}>
+                <Box w="1px" h="700px" bg={"brand.grey"} />
                 <Box mx="auto" pb="100px">
                   <Switch>
                     <Route exact path={`${match.path}`}>
@@ -43,7 +43,7 @@ const SearchLayout = () => {
                       <MainCompany />
                     </Route>
                     <Route path={`${match.path}/:serviceId`}>
-                      <VStack spacing="40px">
+                      <VStack>
                         <CardItem isSelected={true} />
                         <MyList />
                       </VStack>

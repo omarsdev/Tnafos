@@ -40,7 +40,7 @@ export const SecondaryButton = ({
       }
       loadingText="Loading"
       width={width}
-      height={height}
+      // height={height}
       borderColor="#F8B916"
       borderWidth="2px"
       backgroundColor={backgroundColor}
@@ -52,7 +52,7 @@ export const SecondaryButton = ({
       }}
       {...buttonProps}
     >
-      {name}
+      <Text fontSize={14}>{name}</Text>
     </Button>
   );
 };

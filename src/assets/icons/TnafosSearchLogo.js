@@ -1,11 +1,11 @@
 import React from "react";
 
-export const TnafosSearchLogo = () => {
+export const TnafosSearchLogo = ({ height = "70" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="140.979"
-      height="70"
+      height={height}
       viewBox="0 0 157.979 76"
     >
       <g

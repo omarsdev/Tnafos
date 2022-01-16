@@ -9,8 +9,9 @@ import {
   InputRightAddon,
   Spacer,
   Text,
+  Center,
 } from "@chakra-ui/react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 
 import { TnafosSearchLogo } from "../../../assets/icons";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -33,8 +34,8 @@ export const Navbar = () => {
   };
 
   return (
-    <Box h={"9%"} bgColor={"#333333"}>
-      <Flex mx="40px">
+    <Box h={"10%"} bgColor={"#333333"}>
+      <Flex mx={10}>
         <HStack spacing="40px">
           <TnafosSearchLogo />
           <InputGroup size="sm">

@@ -11,6 +11,7 @@ import {
   MenuList,
   MenuItem,
   Text,
+  Avatar,
 } from "@chakra-ui/react";
 import { Link, useHistory } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
@@ -18,6 +19,8 @@ import { FaChevronDown } from "react-icons/fa";
 import { SecondaryButton, PrimaryButton } from "../../../components";
 import { UserDataContext } from "../../../context";
 import { removeUserSession } from "../../../utils";
+
+const UserProfile = {};
 
 export const Navbar = () => {
   const history = useHistory();
@@ -30,12 +33,12 @@ export const Navbar = () => {
     setUserData(null);
     history.go(0);
   };
-  const handlePress = () => {
-    alert("hit");
-  };
+  // const handlePress = () => {
+  //   alert("hit");
+  // };
 
   return (
-    <Flex mx={10} py={5} h={"8vh"}>
+    <Flex mx={10} my={4} h={"8vh"}>
       <Spacer />
       <HStack spacing={5}>
         {!userData ? (
@@ -54,11 +57,12 @@ export const Navbar = () => {
           </Link>
         ) : (
           <HStack>
-            <Image
+            <Avatar
+              name={`${userData.first_name} ${userData.last_name}`}
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
               alt="User Profile Photo"
               borderRadius="full"
-              boxSize="60px"
+              size="md"
             />
             <Text>
               {userData.first_name} {userData.last_name}
