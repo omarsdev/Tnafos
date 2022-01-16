@@ -13,7 +13,7 @@ export const CustomEditForm = ({
   return (
     <form pt="5">
       {children}
-      <Flex my="10" w="full" ml="320px">
+      <Flex my="10" w="full" ml="220px">
         <PrimaryButton
           name="Update"
           onClick={onUpdate}

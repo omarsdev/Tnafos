@@ -1,5 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import {
+  IconButton,
+  Box,
+  Text,
+  useDisclosure,
+  Spinner,
+  Flex,
+  VStack,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -7,11 +14,9 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
   Center,
-  IconButton,
 } from "@chakra-ui/react";
-import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
+import { RiExchangeDollarLine } from "react-icons/ri";
 
 import {
   useHistory,
@@ -108,25 +113,43 @@ const ConvertToInvoice = () => {
     getEstimate();
   }, []);
 
-  return (
+  return !card ? (
+    <Center h="70vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
+  ) : (
     <>
-      <Center>
-        <IconButton
-          justify={"center"}
-          fontSize={"x-large"}
-          rounded={"full"}
-          bg={"#F8B916"}
-          color={"white"}
-          boxShadow={
-            "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-          }
-          _hover={{
-            bg: "orange.400",
-          }}
-          icon={<RiExchangeDollarLine />}
-          onClick={onOpen}
-        />
+      <Center py="5">
+        <Box
+          className="rounded-3xl relative bg-white shadow-2xl"
+          w="400px"
+          h="200px"
+        >
+          <VStack spacing="20px" mx="5%" mt="5">
+            <Box mr="0">
+              <Text fontSize="large">Date: {card?.date}</Text>
+            </Box>
+            <Flex>
+              <IconButton
+                justify={"center"}
+                fontSize={"x-large"}
+                rounded={"full"}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                icon={<RiExchangeDollarLine />}
+                onClick={onOpen}
+              />
+            </Flex>
+          </VStack>
+        </Box>
       </Center>
+
       {/* conert to invoice */}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
@@ -166,7 +189,9 @@ const ConvertToInvoice = () => {
                     errors: errors,
                   },
                 ]}
-              ></CustomAddForm>
+                control={control}
+                register={register}
+              />
             </CustomEditForm>
           </ModalBody>
         </ModalContent>
