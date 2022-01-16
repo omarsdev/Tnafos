@@ -136,9 +136,7 @@ const UpdateStatus = () => {
                   bg: "orange.400",
                 }}
                 icon={<RiRefreshLine />}
-                onClick={() => {
-                  history.push(`${match.url}/update-status`);
-                }}
+                onClick={onOpen}
               />
             </Flex>
           </VStack>

@@ -23,7 +23,7 @@ const MediaCard = ({ info }) => {
             h="160px"
             marginTop={"10px"}
           />
-          <Box className="flex flex-col justify-center">
+          <Box className="flex flex-col justify-center" w="full">
             <Text>{info?.file_name}</Text>
             <Text color="#007BFF">UUID : {info?.uuid} SAR</Text>
             <Text>{info?.url}</Text>

@@ -82,39 +82,15 @@ const MyMedia = ({ service }) => {
         />
         <Stack mr="0" h="270px" mx="5%">
           <Text mt="1" fontSize="x-large" textColor="gray.600">
-            {service?.name}
+            {media?.file_name}
           </Text>
-          <Text color="#007BFF">Price: {service?.price} SAR</Text>
+
           <Text fontSize="large" textColor="gray.600">
-            Description:{service?.description}
-          </Text>
-          <Text fontSize="large" textColor="gray.600">
-            Category-id: {service?.category.uuid}
+            UUID: {media?.uuid}
           </Text>
           <Text fontSize="large" textColor="gray.600">
-            Type :{service?.type}
+            URL :{media?.url}
           </Text>
-          <Flex justify={"center"}>
-            <IconButton
-              justify={"center"}
-              mb={3}
-              fontSize={"large"}
-              rounded={"full"}
-              bg={"#F8B916"}
-              color={"white"}
-              boxShadow={
-                "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-              }
-              _hover={{
-                bg: "orange.400",
-              }}
-              _focus={{
-                bg: "orange.400",
-              }}
-              icon={<FiEdit />}
-              onClick={onOpen}
-            />
-          </Flex>
         </Stack>
       </Box>
     </Center>
