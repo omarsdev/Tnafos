@@ -22,8 +22,6 @@ import { AiOutlinePlus } from "react-icons/ai";
 import ServiceCard from "./ServiceCard";
 
 import { AxiosInstance } from "../../../../api";
-import AddService from "./AddService";
-import MyService from "./MyService";
 
 const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);
