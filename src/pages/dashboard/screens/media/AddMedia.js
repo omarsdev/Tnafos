@@ -85,7 +85,7 @@ const AddMedia = () => {
           <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
             <PrimaryButton
               name="Add Media"
-              onClick={handleSubmit(addNewMedia)}
+              // onClick={handleSubmit(addNewMedia)}
               buttonType="submit"
             />
 

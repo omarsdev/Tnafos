@@ -34,10 +34,12 @@ import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 import { SecondaryButton } from "../../../../components/button/SecondaryButton";
 
-const MyMedia = () => {
+const MyMedia = ({ service }) => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
   const [media, setMedia] = useState(null);
+
+  const [onOpen, setOnOpen] = useState(false);
 
   const history = useHistory();
   const match = useRouteMatch();
