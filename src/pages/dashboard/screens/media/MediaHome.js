@@ -12,7 +12,7 @@ import {
 import { useParams, useRouteMatch, useHistory } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import ServiceCard from "./ServiceCard";
+import MediaCard from "./MediaCard";
 
 import { AxiosInstance } from "../../../../api";
 
