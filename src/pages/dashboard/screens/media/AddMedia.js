@@ -80,7 +80,7 @@ const AddMedia = () => {
                 name: "category_id",
                 err: err,
                 isSelect: true,
-                optionList: categoriesList,
+                // optionList: categoriesList,
                 value: "uuid",
                 key: "uuid",
                 displayValue: "name",
@@ -107,7 +107,7 @@ const AddMedia = () => {
           <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
             <PrimaryButton
               name="ADD SERVICE"
-              onClick={handleSubmit(createService)}
+              // onClick={handleSubmit(createService)}
               buttonType="submit"
             />
 

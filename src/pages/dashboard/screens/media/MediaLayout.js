@@ -10,9 +10,9 @@ const MediaLayout = () => {
 
   return (
     <Switch>
-      <Route exact path={`${match.path}`} component={MediaHome} />
-      <Route path={`${match.path}/addmedia`} component={AddMedia} />
-      <Route path={`${match.path}/:uuid`} component={MyMedia} />
+      {/* <Route exact path={`${match.path}`} component={MediaHome} /> */}
+      {/* <Route path={`${match.path}/addmedia`} component={AddMedia} /> */}
+      {/* <Route path={`${match.path}/:uuid`} component={MyMedia} /> */}
     </Switch>
   );
 };

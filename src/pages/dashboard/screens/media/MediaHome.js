@@ -12,7 +12,7 @@ import {
 import { useParams, useRouteMatch, useHistory } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import ServiceCard from "./ServiceCard";
+// import ServiceCard from "./ServiceCard";
 
 import { AxiosInstance } from "../../../../api";
 
@@ -65,9 +65,9 @@ const MediaHome = () => {
         </Center>
       ) : (
         <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
-          {mediaList.map((media, idx) => (
+          {/* {mediaList.map((media, idx) => (
             <MediaCard info={media} key={idx} />
-          ))}
+          ))} */}
         </Grid>
       )}
     </Box>
