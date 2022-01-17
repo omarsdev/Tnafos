@@ -19,13 +19,7 @@ import {
   HStack,
   Spacer,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  Route,
-  Switch,
-  useRouteMatch,
-} from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { CustomEditForm, CustomAddForm } from "../../components";
@@ -40,8 +34,6 @@ const MyService = () => {
   const [service, setService] = useState(null);
 
   const history = useHistory();
-  const match = useRouteMatch();
-
   const { uuid } = useParams();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,40 +51,38 @@ const MyService = () => {
   };
 
   const getMyService = async () => {
-    await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
-      .then((res) => {
-        resetHooksForm(res.data.data);
-        setService(res.data.data);
-      })
-      .catch((err) => {
-        history.push("/dashboard/servicehome");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/service/${uuid}`);
+      resetHooksForm(res.data.data);
+      setService(res.data.data);
+    } catch (err) {
+      history.push("/dashboard/servicehome");
+    }
   };
 
   const onUpdateService = async (dataToBeUpdataed) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(
-      `/api/dashboard/service/${uuid}/update`,
-      dataToBeUpdataed
-    )
-      .then((res) => {
-        setIsUpdating(false);
-        setAlert({
-          message: "Service Has Been Updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/service`);
-      })
-      .catch((err) => {
-        // console.log(err.response.data);
-        setIsUpdating(false);
-        setErrors(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/service/${uuid}/update`,
+        dataToBeUpdataed
+      );
+
+      setIsUpdating(false);
+      setAlert({
+        message: "Service Has Been Updated!",
+        type: "info",
       });
+      history.push(`/dashboard/service`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {
