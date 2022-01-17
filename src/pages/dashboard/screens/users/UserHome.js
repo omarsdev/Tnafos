@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRouteMatch, useHistory, Route, Switch } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import {
   Box,
   IconButton,
@@ -13,10 +13,8 @@ import {
 import { AiOutlinePlus } from "react-icons/ai";
 
 import CardComponent from "./CardComponent";
-import CreateUser from "./CreateUser";
 
 import { AxiosInstance } from "../../../../api";
-import UserCard from "./UserCard";
 
 const UserHome = () => {
   const [usersList, setUsersList] = useState(null);
@@ -25,13 +23,12 @@ const UserHome = () => {
   const history = useHistory();
 
   const showUsersList = async () => {
-    await AxiosInstance.get("/api/dashboard/user")
-      .then((res) => {
-        setUsersList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/user");
+      setUsersList(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {

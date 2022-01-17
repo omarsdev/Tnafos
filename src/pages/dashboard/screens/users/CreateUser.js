@@ -9,13 +9,7 @@ import {
   Center,
   Spinner,
 } from "@chakra-ui/react";
-import {
-  Link,
-  useHistory,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -65,7 +59,6 @@ const CreateUser = () => {
   const [checked, setChecked] = useState(false);
   const [ch, setCh] = useState(false);
 
-  const [selectedFile, setSelectedFile] = useState(null);
   const [photo, setPhoto] = useState(null);
   let inputRef = useRef(null);
 
@@ -77,29 +70,28 @@ const CreateUser = () => {
     setPhoto(e.target.files[0]);
   };
 
-  // * onSubmit function:
   const addUser = async (userData) => {
-    // console.log(userData);
-    setIsUpdating(true);
-    await AxiosInstance.post("/api/dashboard/user/create", userData)
-      .then((res) => {
-        setAlert({
-          message: `New user has been added!`,
-          type: "success",
-        });
-        history.push("/dashboard/user");
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-        setErr(error.response.data.errors);
-        setAlert({
-          message: `${error.response.data.message}`,
-          type: "error",
-        });
-      })
-      .finally(() => {
-        setIsUpdating(false);
+    try {
+      setIsUpdating(true);
+      const res = await AxiosInstance.post(
+        "/api/dashboard/user/create",
+        userData
+      );
+      setAlert({
+        message: `New user has been added!`,
+        type: "success",
       });
+      history.push("/dashboard/user");
+    } catch (error) {
+      console.log(error.response.data);
+      setErr(error.response.data.errors);
+      setAlert({
+        message: `${error.response.data.message}`,
+        type: "error",
+      });
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   const handleCancel = () => {
@@ -107,13 +99,12 @@ const CreateUser = () => {
   };
 
   const getAllCountry = async () => {
-    await AxiosInstance.get("/api/country")
-      .then((res) => {
-        setCountryList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    await AxiosInstance.get("/api/country");
+    try {
+      setCountryList(res.data.data);
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 
   useEffect(() => {
