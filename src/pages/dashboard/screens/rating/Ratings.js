@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { Box, Grid } from "@chakra-ui/react";
+import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
+import { AxiosInstance } from "../../../../api";
 
 import MyRating from "./MyRating";
-
-import { AxiosInstance } from "../../../../api";
+import RatingCard from "./RatingCard";
 
 const Ratings = () => {
   const [ratings, setRatings] = useState(null);
+
+  const match = useRouteMatch();
 
   const getAllRatings = async () => {
     try {

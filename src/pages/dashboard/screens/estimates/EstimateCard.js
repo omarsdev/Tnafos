@@ -23,7 +23,6 @@ import { CustomEditForm, CustomAddForm } from "../../components";
 
 import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
-s;
 import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 

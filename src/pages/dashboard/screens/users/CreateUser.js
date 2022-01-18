@@ -99,8 +99,8 @@ const CreateUser = () => {
   };
 
   const getAllCountry = async () => {
-    await AxiosInstance.get("/api/country");
     try {
+      const res = await AxiosInstance.get("/api/country");
       setCountryList(res.data.data);
     } catch (err) {
       console.log(err.response);

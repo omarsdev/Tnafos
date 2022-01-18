@@ -18,16 +18,16 @@ const ClientsHome = () => {
       const res = await AxiosInstance.get("/api/dashboard/customer");
       console.log(res.data.data);
       setList(res.data.data);
-    } catch (error) {
+    } catch (err) {
       console.log(err);
     }
   };
 
-  // const handleKeypress = (e) => {
-  //   if (e.key === "Enter") {
-  //     searchHandler();
-  //   }
-  // };
+  const handleKeypress = (e) => {
+    if (e.key === "Enter") {
+      searchHandler();
+    }
+  };
 
   const searchHandler = () => {
     history.push(`/${searchInput}`);

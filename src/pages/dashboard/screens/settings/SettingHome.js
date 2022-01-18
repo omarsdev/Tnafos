@@ -1,3 +1,4 @@
+import { AxiosInstance } from "../../../../api/AxiosInstance";
 import React, { useState, useEffect } from "react";
 
 const SettingHome = () => {
