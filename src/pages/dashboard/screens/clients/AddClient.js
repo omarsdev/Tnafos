@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Box, Heading, HStack, Button } from "@chakra-ui/react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
@@ -25,24 +25,26 @@ const AddClient = () => {
   } = useForm();
 
   const createClient = async (data) => {
-    // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/customer/create", data)
-      .then((res) => {
-        setIsUpdating(false);
-        setAlert({
-          message: `New client has been added!`,
-          type: "success",
-        });
-        history.push("/dashboard/clientshome");
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErr(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.post(
+        "/api/dashboard/customer/create",
+        data
+      );
+
+      setIsUpdating(false);
+      setAlert({
+        message: `New client has been added!`,
+        type: "success",
       });
+      history.push("/dashboard/clientshome");
+    } catch (err) {
+      setIsUpdating(false);
+      setErr(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const handleCancel = () => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, HStack } from "@chakra-ui/react";
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
-import EstimateCard from "./EstimateCard";
+import { useHistory } from "react-router-dom";
 
 import { CustomTable } from "../../components";
 import { AxiosInstance } from "../../../../api";
@@ -9,19 +8,16 @@ import { AxiosInstance } from "../../../../api";
 const IncomingEstimates = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-  const [rowsNumber, setRowsNumber] = useState("10");
 
-  const match = useRouteMatch();
   const history = useHistory();
 
   const getIncomingEst = async () => {
-    await AxiosInstance.get("/api/dashboard/estimate/incoming")
-      .then((res) => {
-        setList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/estimate/incoming");
+      setList(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleKeypress = (e) => {

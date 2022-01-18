@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { CustomTable } from "../../components";
 import { AxiosInstance } from "../../../../api";
 
-import InvoiceCard from "./InvoiceCard";
-
 const Incoming = () => {
   const [list, setList] = useState(null);
-  const match = useRouteMatch();
   const history = useHistory();
 
   const getIncomingInvo = async () => {
-    await AxiosInstance.get("/api/dashboard/invoice/incoming")
-      .then((res) => {
-        setList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/invoicehome");
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/invoice/incoming");
+      setList(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/invoicehome");
+    }
   };
 
   useEffect(() => {

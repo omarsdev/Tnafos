@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { CustomTable } from "../../components";
-import {
-  Link,
-  useRouteMatch,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
 
 import { AxiosInstance } from "../../../../api";
 
@@ -20,14 +14,13 @@ const ClientsHome = () => {
   const history = useHistory();
 
   const clientsList = async () => {
-    await AxiosInstance.get("/api/dashboard/customer")
-      .then((res) => {
-        console.log(res.data.data);
-        setList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/customer");
+      console.log(res.data.data);
+      setList(res.data.data);
+    } catch (error) {
+      console.log(err);
+    }
   };
 
   // const handleKeypress = (e) => {

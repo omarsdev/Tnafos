@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, HStack } from "@chakra-ui/react";
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { CustomTable } from "../../components";
-import UpdatePurchase from "./UpdatePurchase";
 import { AxiosInstance } from "../../../../api";
 
 const IncomingPurchases = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-  const [rowsNumber, setRowsNumber] = useState("10");
 
-  const match = useRouteMatch();
   const history = useHistory();
 
   const purIncomingList = async () => {
-    await AxiosInstance.get("/api/dashboard/purchase-request/incoming")
-      .then((res) => {
-        setList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/purchase-request");
-      });
+    try {
+      const res = await AxiosInstance.get(
+        "/api/dashboard/purchase-request/incoming"
+      );
+      setList(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/purchase-request");
+    }
   };
   const handleKeypress = (e) => {
     if (e.key === "Enter") {

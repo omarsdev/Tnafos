@@ -16,13 +16,7 @@ import {
   Spacer,
   VStack,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 
 import { MdOutlinePermMedia } from "react-icons/md";
 import { AiOutlineContacts } from "react-icons/ai";
@@ -49,9 +43,6 @@ const ClientCard = () => {
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const [photo, setPhoto] = useState(null);
-  // let inputRef = useRef(null);
-
   const resetHooksForm = (data) => {
     reset({
       first_name: data.first_name,
@@ -64,39 +55,40 @@ const ClientCard = () => {
   };
 
   const getContact = async () => {
-    await AxiosInstance.get(`/api/dashboard/customer/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/clientsHome");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/customer/${uuid}`);
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/clientsHome");
+    }
   };
 
   const updateClient = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(`/api/dashboard/customer/${uuid}/update`, data)
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Customer's info has been updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/clientsHome`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/customer/${uuid}/update`,
+        data
+      );
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Customer's info has been updated!",
+        type: "info",
       });
+      history.push(`/dashboard/clientsHome`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {

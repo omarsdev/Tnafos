@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
@@ -21,14 +21,16 @@ const AddInvoice = () => {
   } = useForm();
 
   const createInvoice = async (data) => {
-    // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/invoice/create", data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await AxiosInstance.post(
+        "/api/dashboard/invoice/create",
+        data
+      );
+
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleCancel = () => {
@@ -146,7 +148,7 @@ const AddInvoice = () => {
           <HStack spacing="10px" py="10" ml="40">
             <PrimaryButton
               name="SAVE"
-              // onClick={handleSubmit(createPayment)}
+              onClick={handleSubmit(createInvoice)}
               loadingButton={isUpdating}
             />
 

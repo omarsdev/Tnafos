@@ -11,26 +11,19 @@ import {
   Center,
   IconButton,
 } from "@chakra-ui/react";
-import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
+import { RiExchangeDollarLine } from "react-icons/ri";
 
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../../../../api";
 import { AlertContext } from "../../../../context/AlertContext";
-import { CustomEditForm, CustomAddForm } from "../../components";
+import { CustomEditForm } from "../../components";
 
 const ConvertToEstimate = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
   const history = useHistory();
-  const match = useRouteMatch();
 
   const { uuid } = useParams();
 
@@ -56,45 +49,33 @@ const ConvertToEstimate = () => {
 
   const resetHooksForm = (data) => {
     reset({
-      //   subject: data.subject,
-      //   status: data.status,
       date: data.date,
-      //   valid_till: data.valid_till,
-      //   currency: data.currency,
-      //   customer_id: data.customer_id,
-      //   assigned_to: data.assigned_to,
-      //   discount_type: data.discount_type,
-      //   discount_amount: data.discount_amount,
-      //   subtotal: data.subtotal,
-      //   total: data.total,
-      //   lines: data.lines,
     });
   };
 
-  const convertToInvoice = async (dataToUpdate) => {
+  const ConvertToEstimate = async (dataToUpdate) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(
-      `/api/dashboard/proposal/${uuid}/convert-to-estimate`,
-      dataToUpdate
-    )
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Proposal has been concerted to invoice!",
-          type: "info",
-        });
-        history.push(`/dashboard/proposalhome`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/proposal/${uuid}/convert-to-estimate`,
+        dataToUpdate
+      );
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Proposal has been concerted to invoice!",
+        type: "info",
       });
+      history.push(`/dashboard/proposalhome`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {
@@ -149,7 +130,7 @@ const ConvertToEstimate = () => {
               isUpdating={isUpdating}
               errors={errors}
             >
-              {/* <CustomAddForm
+              <CustomAddForm
                 listForm={[
                   {
                     head: "Date : ",
@@ -158,15 +139,10 @@ const ConvertToEstimate = () => {
                     inputType: "text",
                     errors: errors,
                   },
-                  {
-                    head: "Due_date : ",
-                    placeHolder: "Enter Due_date",
-                    name: "due_date",
-                    inputType: "text",
-                    errors: errors,
-                  },
                 ]}
-              ></CustomAddForm> */}
+                control={control}
+                register={register}
+              ></CustomAddForm>
             </CustomEditForm>
           </ModalBody>
         </ModalContent>

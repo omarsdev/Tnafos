@@ -24,27 +24,28 @@ export const AddPurchase = () => {
   } = useForm();
 
   const createEstimate = async (data) => {
-    // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/estimate/create", data)
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: `New estimate has been added!`,
-          type: "success",
-        });
-        history.push("/dashboard/estimatehome");
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsUpdating(false);
-        setErr(err.response.data.errors);
-        console.log(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.post(
+        "/api/dashboard/estimate/create",
+        data
+      );
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: `New estimate has been added!`,
+        type: "success",
       });
+      history.push("/dashboard/estimatehome");
+    } catch (err) {
+      console.log(err);
+      setIsUpdating(false);
+      setErr(err.response.data.errors);
+      console.log(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const handleCancel = () => {
@@ -90,13 +91,6 @@ export const AddPurchase = () => {
                 err: err,
                 inputType: "text",
               },
-              //   {
-              //     head: "Lines",
-              //     placeHolder: "Enter Lines",
-              //     name: "lines",
-              //     err: err,
-              //     inputType: "text",
-              //   },
             ]}
             control={control}
             register={register}

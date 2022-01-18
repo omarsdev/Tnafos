@@ -69,9 +69,9 @@ const UserCard = () => {
   };
 
   const onUpdateUserInfo = async (data) => {
+    setErrors(null);
+    setIsUpdating(true);
     try {
-      setErrors(null);
-      setIsUpdating(true);
       const res = await AxiosInstance.put(
         `/api/dashboard/user/${uuid}/update`,
         data

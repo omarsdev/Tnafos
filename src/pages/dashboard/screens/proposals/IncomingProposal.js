@@ -10,17 +10,16 @@ const IncomingProposal = () => {
   const [searchInput, setSearchInput] = useState("");
   const [rowsNumber, setRowsNumber] = useState("10");
 
-  const match = useRouteMatch();
   const history = useHistory();
 
   const getIncomingEst = async () => {
-    await AxiosInstance.get("/api/dashboard/proposal/incoming")
-      .then((res) => {
-        setList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/proposal/incoming");
+
+      setList(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleKeypress = (e) => {

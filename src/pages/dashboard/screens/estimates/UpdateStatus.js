@@ -1,16 +1,8 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
   Text,
-  Stack,
-  HStack,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -21,7 +13,6 @@ import {
   Center,
   Spinner,
   Flex,
-  Spacer,
   VStack,
 } from "@chakra-ui/react";
 import { useHistory, useParams, useRouteMatch } from "react-router-dom";
@@ -39,7 +30,6 @@ const UpdateStatus = () => {
   const { setAlert } = alertProviderValue;
 
   const history = useHistory();
-  const match = useRouteMatch();
 
   const { uuid } = useParams();
 
@@ -57,42 +47,40 @@ const UpdateStatus = () => {
   };
 
   const getEstimate = async () => {
-    await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/estimatehome");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`);
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/estimatehome");
+    }
   };
 
   const statusUpdate = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(
-      `/api/dashboard/estimate/${uuid}/update-status`,
-      data
-    )
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Estimate's status has been updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/estimatehome`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/estimate/${uuid}/update-status`,
+        data
+      );
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Estimate's status has been updated!",
+        type: "info",
       });
+      history.push(`/dashboard/estimatehome`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {

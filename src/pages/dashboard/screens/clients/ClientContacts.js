@@ -22,22 +22,21 @@ import { AxiosInstance } from "../../../../api";
 
 export const ClientContacts = () => {
   const history = useHistory();
-  const match = useRouteMatch();
-
   const { uuid } = useParams();
-
   const [card, setCard] = useState([]);
 
   const getClientContacts = async () => {
-    await AxiosInstance.get(`/api/dashboard/customer/${uuid}/contacts`)
-      .then((res) => {
-        console.log(res?.data?.data);
-        setCard(res?.data?.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/clientshome");
-      });
+    try {
+      const res = await AxiosInstance.get(
+        `/api/dashboard/customer/${uuid}/contacts`
+      );
+
+      console.log(res?.data?.data);
+      setCard(res?.data?.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/clientshome");
+    }
   };
 
   useEffect(() => {

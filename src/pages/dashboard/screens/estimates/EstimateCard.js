@@ -1,16 +1,9 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
   Text,
   Stack,
-  HStack,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -23,22 +16,14 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
 import { CustomEditForm, CustomAddForm } from "../../components";
 
 import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
-import UpdateStatus from "./UpdateStatus";
-import ConvertToInvoice from "./ConvertToInvoice";
-
+s;
 import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 
@@ -76,39 +61,40 @@ const EstimateCard = () => {
   };
 
   const getEstimate = async () => {
-    await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/estimatehome");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`);
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/estimatehome");
+    }
   };
 
   const updateEstimate = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(`/api/dashboard/estimate/${uuid}/update`, data)
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Estimate's info has been updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/estimatehome`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/estimate/${uuid}/update`,
+        data
+      );
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Estimate's info has been updated!",
+        type: "info",
       });
+      history.push(`/dashboard/estimatehome`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {
@@ -369,13 +355,6 @@ const EstimateCard = () => {
                     inputType: "number",
                     errors: errors,
                   },
-                  //   {
-                  //     head: "Lines : ",
-                  //     placeHolder: "Enter Lines",
-                  //     name: "lines",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
                 ]}
                 control={control}
                 register={register}

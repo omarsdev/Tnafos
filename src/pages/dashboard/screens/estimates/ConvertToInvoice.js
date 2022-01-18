@@ -11,20 +11,13 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Center,
 } from "@chakra-ui/react";
 import { RiExchangeDollarLine } from "react-icons/ri";
 
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../../../../api";
 import { AlertContext } from "../../../../context/AlertContext";
@@ -47,59 +40,48 @@ const ConvertToInvoice = () => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const getEstimate = async () => {
-    await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/estimatehome");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`);
+
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/estimatehome");
+    }
   };
 
   const resetHooksForm = (data) => {
     reset({
-      //   subject: data.subject,
-      //   status: data.status,
       date: data.date,
-      //   valid_till: data.valid_till,
-      //   currency: data.currency,
-      //   customer_id: data.customer_id,
-      //   assigned_to: data.assigned_to,
-      //   discount_type: data.discount_type,
-      //   discount_amount: data.discount_amount,
-      //   subtotal: data.subtotal,
-      //   total: data.total,
-      //   lines: data.lines,
     });
   };
 
   const convertToInvoice = async (dataToUpdate) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(
-      `/api/dashboard/estimate/${uuid}/convert-to-invoice`,
-      dataToUpdate
-    )
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Estimate has been concerted to invoice!",
-          type: "info",
-        });
-        history.push(`/dashboard/estimatehome`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/estimate/${uuid}/convert-to-invoice`,
+        dataToUpdate
+      );
+
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Estimate has been concerted to invoice!",
+        type: "info",
       });
+      history.push(`/dashboard/estimatehome`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {

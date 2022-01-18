@@ -1,44 +1,28 @@
 import React, { useState, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  useRouteMatch,
-  useHistory,
-  useParams,
-} from "react-router-dom";
-import {
-  Box,
-  Center,
-  Spinner,
-  VStack,
-  Stack,
-  IconButton,
-  Text,
-} from "@chakra-ui/react";
+import { useHistory, useParams } from "react-router-dom";
+import { Box, Center, Spinner, VStack, Stack, Text } from "@chakra-ui/react";
 import { NoData } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 
 const PaymentMedia = () => {
-  const [media, setMedia] = useState([]);
-
-  const match = useRouteMatch();
-  const [card, setCard] = useState(null);
+  const [media, setMedia] = useState(null);
 
   const history = useHistory();
 
   const { uuid } = useParams();
 
   const getPaymentMedia = async () => {
-    await AxiosInstance.get(`/api/dashboard/payment/${uuid}/media`)
-      .then((res) => {
-        console.log(res.data.data);
-        setMedia(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/paymenthome");
-      });
+    try {
+      const res = await AxiosInstance.get(
+        `/api/dashboard/payment/${uuid}/media`
+      );
+      console.log(res.data.data);
+      setMedia(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/paymenthome");
+    }
   };
 
   useEffect(() => {

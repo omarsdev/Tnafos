@@ -12,7 +12,6 @@ import {
   AccordionIcon,
   AccordionPanel,
 } from "@chakra-ui/react";
-import { FaAngleRight } from "react-icons/fa";
 import { Link, useRouteMatch } from "react-router-dom";
 import SidebarMenu from "../../../constants/SidebarMenu";
 

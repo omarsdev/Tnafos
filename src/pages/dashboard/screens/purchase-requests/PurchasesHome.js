@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  useHistory,
-  useParams,
-  Route,
-  Switch,
-  useRouteMatch,
-  Link,
-} from "react-router-dom";
+import { useRouteMatch, Link } from "react-router-dom";
 import { Box, HStack, Heading, IconButton, Button } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 

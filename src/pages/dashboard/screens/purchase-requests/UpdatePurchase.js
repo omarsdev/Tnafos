@@ -16,13 +16,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
 import { CustomAddForm, CustomEditForm } from "../../components";
@@ -36,7 +30,6 @@ const UpdatePurchase = () => {
   const { setAlert } = alertProviderValue;
 
   const history = useHistory();
-  const match = useRouteMatch();
 
   const { uuid } = useParams();
 
@@ -47,9 +40,6 @@ const UpdatePurchase = () => {
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const [photo, setPhoto] = useState(null);
-  // let inputRef = useRef(null);
-
   const resetHooksForm = (data) => {
     reset({
       date: data.date,
@@ -59,42 +49,43 @@ const UpdatePurchase = () => {
   };
 
   const getPurchaseCard = async () => {
-    await AxiosInstance.get(`/api/dashboard/purchase-request/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/purchaseshome");
-      });
+    try {
+      const res = await AxiosInstance.get(
+        `/api/dashboard/purchase-request/${uuid}`
+      );
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/purchaseshome");
+    }
   };
 
   const updatePurchase = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(
-      `/api/dashboard/purchase-request/${uuid}/update`,
-      data
-    )
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Purchase-request has been updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/purchaseshome`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/purchase-request/${uuid}/update`,
+        data
+      );
+
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Purchase-request has been updated!",
+        type: "info",
       });
+      history.push(`/dashboard/purchaseshome`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {

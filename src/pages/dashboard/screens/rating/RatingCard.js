@@ -5,9 +5,8 @@ import { FiInbox } from "react-icons/fi";
 const RatingCard = ({ ratDetails }) => {
   const colors = ["#F8B916", "#007BFF", "#AEAEAE", "#B00020"];
 
-  //* set border color:
   const randomElement = colors[Math.floor(Math.random() * colors.length)];
-  // console.log(randomElement);
+
   return (
     <Box
       mt="5"

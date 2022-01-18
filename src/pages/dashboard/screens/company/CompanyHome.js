@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useRouteMatch, useHistory, Route, Switch } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import {
   Center,
   Spinner,
@@ -41,10 +41,6 @@ const CompanyHome = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [input, setInput] = useState(null);
-  const history = useHistory();
-  const match = useRouteMatch();
-
   const {
     register,
     handleSubmit,
@@ -55,6 +51,7 @@ const CompanyHome = () => {
 
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const history = useHistory();
 
   const resetHooksForm = (data) => {
     reset({
@@ -79,20 +76,18 @@ const CompanyHome = () => {
     });
   };
 
-  //* represent company data:
   const showCompany = async () => {
-    await AxiosInstance.get("/api/dashboard/company")
-      .then((res) => {
-        setcompanyInfo(res.data.data);
-        let company = res.data.data;
-        delete company.country;
-        delete company.admin;
-        delete company.category;
-        resetHooksForm(res.data.data);
-      })
-      .catch((err) => {
-        history.push("/dashboard/company");
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/company");
+      setcompanyInfo(res.data.data);
+      let company = res.data.data;
+      delete company.country;
+      delete company.admin;
+      delete company.category;
+      resetHooksForm(res.data.data);
+    } catch (err) {
+      history.push("/dashboard/company");
+    }
   };
 
   const onCancelHandler = () => {
@@ -102,27 +97,29 @@ const CompanyHome = () => {
     onClose();
   };
 
-  //* update company info:
   const onUpdateCompany = async (dataToBeUpdated) => {
     setErr(null);
     setIsUpdating(true);
-    await AxiosInstance.put("/api/dashboard/company/update", dataToBeUpdated)
-      .then((res) => {
-        setIsUpdating(false);
-        setAlert({
-          message: "Company info has been updated successfully!",
-          type: "success",
-        });
-        history.push(`/dashboard/company`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErr(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        "/api/dashboard/company/update",
+        dataToBeUpdated
+      );
+
+      setIsUpdating(false);
+      setAlert({
+        message: "Company info has been updated successfully!",
+        type: "success",
       });
+      history.push(`/dashboard/company`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErr(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   useEffect(() => {
@@ -164,7 +161,6 @@ const CompanyHome = () => {
                   rounded="lg"
                   textAlign={"center"}
                   h="44"
-                  // mt="10px"
                 >
                   <Text
                     fontSize="LG"

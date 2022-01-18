@@ -23,7 +23,7 @@ import { Search2Icon } from "@chakra-ui/icons";
 import { BiUpload, BiChevronsUp } from "react-icons/bi";
 
 import { SecondaryButton } from "../../../components";
-import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { NoData } from "./index";
 import { FiEdit } from "react-icons/fi";
 
@@ -47,7 +47,6 @@ export const CustomTable = ({
       <Text
         py="3"
         px="3"
-        // borderBottom="groove"
         borderWidth="2px"
         bg="#333333"
         width="100%"
@@ -71,17 +70,7 @@ export const CustomTable = ({
             leftIcon={<BiUpload size="20px" />}
           />
 
-          <Select
-            size="sm"
-            rounded="full"
-            height="40px"
-            width="120px"
-            // onChange={(e) => {
-            //   const selectedOption = e.target.value;
-            //   setRowsNumber(selectedOption);
-            // }}
-          >
-            {/* <Divider orientation="vertical" width="1px" /> */}
+          <Select size="sm" rounded="full" height="40px" width="120px">
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -97,9 +86,6 @@ export const CustomTable = ({
               placeholder="search"
               focusBorderColor="#F8B916"
               rounded="full"
-              //   value={searchInput}
-              //   onChange={(e) => setSearchInput(e.target.value)}
-              //   onKeyPress={handleKeypress}
             />
           </InputGroup>
         </Box>

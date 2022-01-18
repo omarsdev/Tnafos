@@ -1,32 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Box, Grid } from "@chakra-ui/react";
-import {
-  useParams,
-  Link,
-  useRouteMatch,
-  Route,
-  Switch,
-} from "react-router-dom";
+
 import MyRating from "./MyRating";
-import RatingCard from "./RatingCard";
 
 import { AxiosInstance } from "../../../../api";
 
 const Ratings = () => {
-  const [ratings, setRatings] = useState([]);
-
-  const { uuid } = useParams();
-  let match = useRouteMatch();
+  const [ratings, setRatings] = useState(null);
 
   const getAllRatings = async () => {
-    await AxiosInstance.get("/api/dashboard/rating/")
-      .then((res) => {
-        console.log(res.data.data);
-        setRatings(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/rating/");
+
+      console.log(res.data.data);
+      setRatings(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+    }
   };
 
   useEffect(() => {

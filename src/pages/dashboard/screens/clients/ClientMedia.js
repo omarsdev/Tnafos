@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  useRouteMatch,
-  useHistory,
-  useParams,
-} from "react-router-dom";
+import { useRouteMatch, useHistory, useParams } from "react-router-dom";
 import {
   Box,
   Center,
@@ -24,23 +18,20 @@ import { AxiosInstance } from "../../../../api";
 const ClientMedia = () => {
   const [media, setMedia] = useState(null);
 
-  const match = useRouteMatch();
-  const [card, setCard] = useState(null);
-
   const history = useHistory();
-
   const { uuid } = useParams();
 
   const getClientMedia = async () => {
-    await AxiosInstance.get(`/api/dashboard/customer/${uuid}/media`)
-      .then((res) => {
-        console.log(res.data.data);
-        setMedia(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/clientshome");
-      });
+    try {
+      const res = await AxiosInstance.get(
+        `/api/dashboard/customer/${uuid}/media`
+      );
+      console.log(res.data.data);
+      setMedia(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/clientshome");
+    }
   };
 
   useEffect(() => {

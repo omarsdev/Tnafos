@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
 import { CustomAddForm } from "../../components";
-import { PrimaryButton, RegularInputControl } from "../../../../components";
+import { PrimaryButton } from "../../../../components";
 import { AlertContext } from "../../../../context";
 import { AxiosInstance } from "../../../../api";
 
@@ -23,22 +23,25 @@ const CreateCompany = () => {
   } = useForm();
 
   const createCompany = async (input) => {
-    await AxiosInstance.post("/api/dashboard/company/create", input)
-      .then((res) => {
-        console.log(res.data.data);
-        setAlert({
-          message: "Company profile has been created!",
-          type: "success",
-        });
-        history.push("/dashboard/rating");
-      })
-      .catch((err) => {
-        setErr(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.post(
+        "/api/dashboard/company/create",
+        input
+      );
+
+      console.log(res.data.data);
+      setAlert({
+        message: "Company profile has been created!",
+        type: "success",
       });
+      history.push("/dashboard/rating");
+    } catch (error) {
+      setErr(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   return (

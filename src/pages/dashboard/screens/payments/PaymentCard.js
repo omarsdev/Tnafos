@@ -1,16 +1,8 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
   Text,
-  Image,
-  HStack,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -21,7 +13,6 @@ import {
   Center,
   Spinner,
   Flex,
-  Spacer,
   VStack,
 } from "@chakra-ui/react";
 import {
@@ -55,12 +46,9 @@ const PaymentCard = () => {
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const [photo, setPhoto] = useState(null);
-  // let inputRef = useRef(null);
-
   const resetHooksForm = (data) => {
     reset({
-      // amount: data.amount,
+      amount: data.amount,
       method: data.method,
       transaction_number: data.transaction_number,
       date: data.date,
@@ -70,39 +58,42 @@ const PaymentCard = () => {
   };
 
   const getPayment = async () => {
-    await AxiosInstance.get(`/api/dashboard/payment/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/paymenthome");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/payment/${uuid}`);
+
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/paymenthome");
+    }
   };
 
   const updatePayment = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(`/api/dashboard/payment/${uuid}/update`, data)
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Payment's info has been updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/payment`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/payment/${uuid}/update`,
+        data
+      );
+
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Payment's info has been updated!",
+        type: "info",
       });
+      history.push(`/dashboard/payment`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {
@@ -116,7 +107,6 @@ const PaymentCard = () => {
     getPayment();
   }, []);
 
-  //* media file upload:
   const uploadFile = (photo) => {
     if (!photo) return;
     media(uuid, "payment", photo);

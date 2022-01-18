@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
+import React, { useState, useContext } from "react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
@@ -25,27 +25,29 @@ const AddPurchase = () => {
   } = useForm();
 
   const createRequest = async (data) => {
-    // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/purchase-request/create", data)
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: `New purchase-request has been added!`,
-          type: "success",
-        });
-        history.push("/dashboard/purchaseshome");
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsUpdating(false);
-        setErr(err.response.data.errors);
-        console.log(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.post(
+        "/api/dashboard/purchase-request/create",
+        data
+      );
+
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: `New purchase-request has been added!`,
+        type: "success",
       });
+      history.push("/dashboard/purchaseshome");
+    } catch (err) {
+      console.log(err);
+      setIsUpdating(false);
+      setErr(err.response.data.errors);
+      console.log(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const handleCancel = () => {

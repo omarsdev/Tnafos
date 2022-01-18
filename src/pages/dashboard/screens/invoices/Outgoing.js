@@ -9,17 +9,15 @@ import { AxiosInstance } from "../../../../api";
 const Outgoing = () => {
   const [list, setList] = useState(null);
   const history = useHistory();
-  const match = useRouteMatch();
 
   const getOutgoingInvoi = async () => {
-    await AxiosInstance.get("/api/dashboard/invoice/outgoing")
-      .then((res) => {
-        setList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/invoicehome");
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/invoice/outgoing");
+      setList(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/invoicehome");
+    }
   };
 
   useEffect(() => {
