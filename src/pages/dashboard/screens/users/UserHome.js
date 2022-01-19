@@ -35,11 +35,11 @@ const UserHome = () => {
     showUsersList();
   }, []);
   return (
-    <Box w="full" overflowY="scroll" padding="10">
+    <Box w="full" overflowY="scroll" padding={{ base: 4, md: 2, lg: 2 }}>
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
-          fontSize="xx-large"
+          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
         >
@@ -49,7 +49,7 @@ const UserHome = () => {
         <IconButton
           as={Button}
           colorScheme="yellow"
-          size="lg"
+          size="md"
           icon={<AiOutlinePlus />}
           rounded="full"
           onClick={() => {
@@ -60,12 +60,26 @@ const UserHome = () => {
 
       {!usersList ? (
         <Center h="70vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
+          <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
         </Center>
       ) : (
-        <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
+        <Grid
+          templateColumns={{
+            base: "repeat(1,2fr)",
+            md: "repeat(2,2fr)",
+            lg: "repeat(3, 2fr)",
+          }}
+          gap={{ base: 8, md: 13, lg: 18 }}
+          mb={{ base: 1, md: 3, lg: 5 }}
+          ml={{ base: 3, md: "none", lg: "none" }}
+        >
           {usersList.map((el, idx) => (
-            <CardComponent userData={el} key={idx} />
+            <CardComponent
+              userData={el}
+              key={idx}
+              h={{ base: 75, md: 80, lg: 87.5 }}
+              w={{ base: 60, md: 68, lg: 75 }}
+            />
           ))}
         </Grid>
       )}

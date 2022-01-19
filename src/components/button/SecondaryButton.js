@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useState } from "react";
+// import { createBreakpoints } from "@chakra-ui/theme-tools";
 
 import { Button, Text } from "@chakra-ui/react";
 
 export const SecondaryButton = ({
   name,
+  // size = createBreakpoints(["xs", "md"]),
   width = { base: "7em", sm: "7em", md: "8em", lg: "9em", xl: "9em" },
   height = { base: "2.5em", sm: "2.5em", md: "3em", lg: "3em", xl: "3em" },
   backgroundColor = "#ffffff",
@@ -51,6 +53,7 @@ export const SecondaryButton = ({
         outline: "none",
       }}
       {...buttonProps}
+      // size={size}
     >
       {name}
     </Button>

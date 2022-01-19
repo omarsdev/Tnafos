@@ -7,7 +7,10 @@ export const TnafosSearchLogo = () => {
       width="140.979"
       height="70"
       viewBox="0 0 157.979 76"
-      className="h-24 ml-3 w-28"
+      h={{ base: 16, lg: 24 }}
+      ml={{ base: 1, md: 2, lg: 3 }}
+      w={{ base: 20, lg: 28 }}
+      // className="h-24 ml-3 w-28"
     >
       <g
         id="Group_14"
