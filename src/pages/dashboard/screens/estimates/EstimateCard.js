@@ -16,6 +16,8 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
+
+import { Tooltip } from "@chakra-ui/react";
 import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
@@ -197,57 +199,78 @@ const EstimateCard = () => {
             </Box>
 
             <Flex justify={"center"} w="full" gap="15px">
-              <IconButton
-                justify={"center"}
-                fontSize={"x-large"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<RiExchangeDollarLine />}
-                onClick={() => {
-                  history.push(`${match.url}/convert-to-invoice`);
-                }}
-              />
+              <Tooltip
+                label="convert to invoice"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"x-large"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<RiExchangeDollarLine />}
+                  onClick={() => {
+                    history.push(`${match.url}/convert-to-invoice`);
+                  }}
+                />
+              </Tooltip>
 
-              <IconButton
-                justify={"center"}
-                fontSize={"x-large"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<RiRefreshLine />}
-                onClick={() => {
-                  history.push(`${match.url}/update-status`);
-                }}
-              />
+              <Tooltip
+                label="update status"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"x-large"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<RiRefreshLine />}
+                  onClick={() => {
+                    history.push(`${match.url}/update-status`);
+                  }}
+                />
+              </Tooltip>
 
-              <IconButton
-                justify={"center"}
-                fontSize={"lg"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<FiEdit />}
-                onClick={onOpen}
-              />
+              <Tooltip
+                label="edit info"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"lg"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<FiEdit />}
+                  onClick={onOpen}
+                />
+              </Tooltip>
             </Flex>
           </VStack>
         </Box>
