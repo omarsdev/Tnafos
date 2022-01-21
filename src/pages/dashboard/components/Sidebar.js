@@ -19,7 +19,7 @@ import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
 const LogoLink = () => {
   return (
-    <Stack w-full h-32 m={{ base: 2, md: 2, lg: 3 }}>
+    <Stack w-full h-32 m={{ base: 8 }}>
       <Link to="/">
         <TnafosSearchLogo />
       </Link>

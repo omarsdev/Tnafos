@@ -4,8 +4,8 @@ export const TnafosSearchLogo = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="140.979"
-      height="70"
+      // width="140.979"
+      // height="70"
       viewBox="0 0 157.979 76"
       h={{ base: 16, lg: 24 }}
       ml={{ base: 1, md: 2, lg: 3 }}
