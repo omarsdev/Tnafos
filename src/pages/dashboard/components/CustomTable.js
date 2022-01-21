@@ -19,6 +19,8 @@ import {
   InputGroup,
   InputLeftElement,
 } from "@chakra-ui/react";
+
+import { Tooltip } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
 import { BiUpload, BiChevronsUp } from "react-icons/bi";
 
@@ -112,23 +114,30 @@ export const CustomTable = ({
                 ))}
                 <Td>
                   <Flex justify={"center"} gap="10px">
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"md"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<FiEdit />}
-                      onClick={() => {
-                        history.push(`${match.url}/${el.uuid}`);
-                      }}
-                    />
+                    <Tooltip
+                      label="more details"
+                      bg="white"
+                      placement="auto-start"
+                      color="#333333"
+                    >
+                      <IconButton
+                        justify={"center"}
+                        fontSize={"md"}
+                        rounded={"full"}
+                        bg={"#F8B916"}
+                        color={"white"}
+                        boxShadow={
+                          "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                        }
+                        _hover={{
+                          bg: "orange.400",
+                        }}
+                        icon={<FiEdit />}
+                        onClick={() => {
+                          history.push(`${match.url}/${el.uuid}`);
+                        }}
+                      />
+                    </Tooltip>
                   </Flex>
                 </Td>
               </Tr>
