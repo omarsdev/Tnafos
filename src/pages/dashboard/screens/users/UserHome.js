@@ -70,7 +70,7 @@ const UserHome = () => {
             md: "repeat(2,1fr)",
             lg: "repeat(3, 1fr)",
           }}
-          gap={{ base: 2, lg: 4 }}
+          gap={{ base: 2, md: 2, lg: 4 }}
           mb={{ base: 1, md: 3, lg: 5 }}
           ml={{ base: 3, md: "none", lg: "none" }}
         >
