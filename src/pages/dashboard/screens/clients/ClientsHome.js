@@ -48,6 +48,7 @@ const ClientsHome = () => {
         >
           Clients
         </Heading>
+
         <Link to={`${match.url}/addclient`}>
           <IconButton
             as={Button}
@@ -63,21 +64,13 @@ const ClientsHome = () => {
         thData={[
           "UUID",
           "Company Name",
-          "Vat Number",
           "Phone",
           "Website",
           "Address",
           "actions",
         ]}
         list={list}
-        listData={[
-          "uuid",
-          "company_name",
-          "vat_number",
-          "phone",
-          "website",
-          "address",
-        ]}
+        listData={["uuid", "company_name", "phone", "website", "address"]}
         component={"client"}
       />
     </Box>

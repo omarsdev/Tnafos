@@ -16,6 +16,8 @@ import {
   Spacer,
   VStack,
 } from "@chakra-ui/react";
+
+import { Tooltip } from "@chakra-ui/react";
 import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 
 import { MdOutlinePermMedia } from "react-icons/md";
@@ -147,56 +149,78 @@ const ClientCard = () => {
 
               {/* <Flex justify={"center"} mt={-12}> */}
               <VStack spacing="30px">
-                <IconButton
-                  justify={"center"}
-                  fontSize={"lg"}
-                  rounded={"full"}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  icon={<AiOutlineContacts />}
-                  onClick={() => {
-                    history.push(`${match.url}/contacts`);
-                  }}
-                />
-                <IconButton
-                  justify={"center"}
-                  fontSize={"lg"}
-                  rounded={"full"}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  icon={<MdOutlinePermMedia />}
-                  onClick={() => {
-                    history.push(`${match.url}/media`);
-                  }}
-                />
+                <Tooltip
+                  label="Show Contacts"
+                  bg="white"
+                  placement="top"
+                  color="#333333"
+                >
+                  <IconButton
+                    justify={"center"}
+                    fontSize={"lg"}
+                    rounded={"full"}
+                    bg={"#F8B916"}
+                    color={"white"}
+                    boxShadow={
+                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                    }
+                    _hover={{
+                      bg: "orange.400",
+                    }}
+                    icon={<AiOutlineContacts />}
+                    onClick={() => {
+                      history.push(`${match.url}/contacts`);
+                    }}
+                  />
+                </Tooltip>
 
-                <IconButton
-                  justify={"center"}
-                  fontSize={"lg"}
-                  rounded={"full"}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  icon={<FiEdit />}
-                  onClick={onOpen}
-                />
+                <Tooltip
+                  label="Show Media"
+                  bg="white"
+                  placement="top"
+                  color="#333333"
+                >
+                  <IconButton
+                    justify={"center"}
+                    fontSize={"lg"}
+                    rounded={"full"}
+                    bg={"#F8B916"}
+                    color={"white"}
+                    boxShadow={
+                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                    }
+                    _hover={{
+                      bg: "orange.400",
+                    }}
+                    icon={<MdOutlinePermMedia />}
+                    onClick={() => {
+                      history.push(`${match.url}/media`);
+                    }}
+                  />
+                </Tooltip>
+
+                <Tooltip
+                  label="Edit info"
+                  bg="white"
+                  placement="top"
+                  color="#333333"
+                >
+                  <IconButton
+                    justify={"center"}
+                    fontSize={"lg"}
+                    rounded={"full"}
+                    bg={"#F8B916"}
+                    color={"white"}
+                    boxShadow={
+                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                    }
+                    _hover={{
+                      bg: "orange.400",
+                    }}
+                    icon={<FiEdit />}
+                    onClick={onOpen}
+                  />
+                </Tooltip>
               </VStack>
             </HStack>
           </VStack>
