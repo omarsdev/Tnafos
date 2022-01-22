@@ -40,39 +40,50 @@ export const CustomTable = ({
   const history = useHistory();
   return !list ? (
     <Center h="100vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : list.length === 0 ? (
     <NoData component={component} />
   ) : (
-    <Box className="rounded-3xl shadow-2xl relative bg-white">
+    <Box bg="white" position="relative" shadow="2xl" rounded="3xl">
       <Text
-        py="3"
-        px="3"
+        py={{ base: 1, md: 2, lg: 3 }}
+        px={{ base: 1, md: 2, lg: 3 }}
         borderWidth="2px"
         bg="#333333"
         width="100%"
         roundedTop="2xl"
-        fontSize="lg"
+        fontSize={{ base: "sm", md: "medium", lg: "large" }}
         color="white"
       >
         {thHeading}
       </Text>
 
-      <Flex w="full" height="45px" my="8" spacing="30px">
-        <HStack pl="5">
+      <Flex
+        flexDirection={{ base: "column", md: "row" }}
+        w={{ base: "full", md: "full", lg: "full" }}
+        height={{ base: 16, md: 20, lg: 20 }}
+        my={{ base: 2, md: 4, lg: 4 }}
+        spacing={{ base: 3, md: 4, lg: 4 }}
+      >
+        <HStack pl={{ base: 1, md: 2, lg: 3 }}>
           <SecondaryButton
             rounded="full"
-            width="100px"
-            height="40px"
+            width={{ base: 8, md: 28, lg: 28 }}
+            height={{ base: 8, md: 10, lg: 10 }}
             variant="outline"
             colorScheme="gray"
             name="EXPORT"
-            fontSize="xs"
+            fontSize={{ base: "xx-small", md: "xs", lg: "xs" }}
             leftIcon={<BiUpload size="20px" />}
           />
 
-          <Select size="sm" rounded="full" height="40px" width="120px">
+          <Select
+            size={{ base: "xs", md: "sm", lg: "sm" }}
+            rounded="full"
+            height={{ base: 8, md: 10, lg: 10 }}
+            width={{ base: 8, md: 28, lg: 28 }}
+          >
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -80,7 +91,10 @@ export const CustomTable = ({
         </HStack>
         <Spacer />
 
-        <Box mr="5" w="200px">
+        <Box
+          mr={{ base: "none", md: 2, lg: 2 }}
+          width={{ base: 8, md: 36, lg: 44 }}
+        >
           <InputGroup>
             <InputLeftElement children={<Search2Icon color="gray.300" />} />
             <Input
@@ -93,14 +107,19 @@ export const CustomTable = ({
         </Box>
       </Flex>
       <form>
-        <Table size="md" w="full">
+        <Table size={{ base: "xs", lg: "md" }} w="full">
           <Thead>
             <Tr bg="#333333" borderRadius="full">
               {thData.map((e, i) => (
                 <Th key={i}>
                   <Flex justifyContent="center" alignItems="center">
                     {i !== 0 && <BiChevronsUp size="25px" color="white" />}
-                    <Text color="white">{e}</Text>
+                    <Text
+                      color="white"
+                      fontSize={{ base: "xx-small", md: "xs", lg: "xs" }}
+                    >
+                      {e}
+                    </Text>
                   </Flex>
                 </Th>
               ))}
