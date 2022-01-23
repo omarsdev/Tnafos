@@ -114,25 +114,32 @@ const CreateUser = () => {
   return countryList ? (
     <Box overflowY="scroll" w="full">
       <Box
-        px="20"
-        mt="6"
+        px={{ base: 1, md: 2 }}
+        mt={{ base: 1, md: 3 }}
         boxShadow="2xl"
         rounded="3xl"
-        w="750px"
-        ml="40"
+        w={{ base: 300, md: 550, lg: 700 }}
+        ml={{ base: 4, md: 8 }}
         bg="white"
       >
         <Heading
           color="#F8B916"
-          fontSize="3xl"
+          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
-          pt="4"
+          pt={{ base: 4, md: 6, lg: 8 }}
+          ml={{ base: 1, md: 2, lg: 4 }}
         >
           Add user
         </Heading>
 
-        <Flex w="full" pl="5" mt="16">
+        <Flex
+          w="75%"
+          ml={{ base: 4, md: 16 }}
+          mt={{ base: 8, md: 16 }}
+          direction={{ base: "column", md: "row" }}
+          gap={{ base: 2, md: 16 }}
+        >
           <input
             type="file"
             onChange={(ev) => handleFileInput(ev)}
@@ -142,9 +149,12 @@ const CreateUser = () => {
           <SecondaryButton
             // onClick={photoUploadHandler}
             name="Upload photo"
+            width={{ base: 24, md: 36, lg: 40 }}
+            height={{ base: 8, md: 12 }}
+            fontSize={{ base: "xs", md: "sm", lg: "md" }}
           />
         </Flex>
-        <Center>
+        <Center mx={{ base: "4%", md: "10%" }}>
           <form>
             <CustomAddForm
               listForm={[

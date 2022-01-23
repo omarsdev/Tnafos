@@ -112,15 +112,18 @@ const UserCard = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
-      <Center py="5">
+      <Center py={{ base: 1, lg: 2 }}>
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="350px"
-          h="430px"
+          rounded="3xl"
+          position="relative"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 200, md: 300, lg: 350 }}
+          h={{ base: 350, md: 380, lg: 380 }}
         >
           <Image
             src={"https://bit.ly/sage-adebayo"}
@@ -128,12 +131,12 @@ const UserCard = () => {
             objectFit="cover"
             roundedTop="3xl"
             w="100%"
-            h="220px"
+            h={{ base: 36, md: 40 }}
             layout={"fill"}
           />
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text py="1" textColor="gray.600">
+          <VStack spacing="20px" mx="5%" mt={{ base: 1, md: 2 }}>
+            <Box mr="0" fontSize={{ base: "sm", md: "md" }}>
+              <Text py={{ base: 0.5, md: 1 }} textColor="gray.600">
                 Name: {card?.first_name}
                 {card?.last_name}
               </Text>

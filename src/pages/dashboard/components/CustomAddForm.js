@@ -9,7 +9,7 @@ import {
 
 export const CustomAddForm = ({ listForm, control, register }) => {
   return listForm.map((element) => (
-    <Box className="mt-4">
+    <Box mt={{ base: 1, md: 3 }}>
       <label className="w-32 text-left text-gray-500 pl-3">
         {element.head}
         {element.isPassword ? (

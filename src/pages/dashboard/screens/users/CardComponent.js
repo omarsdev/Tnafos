@@ -14,7 +14,6 @@ const CardComponent = ({ userData }) => {
       shadow="2xl"
       bg="white"
       position="relative"
-      // w="300px"
       h="350px"
       width={["200", "250px", "350px"]}
     >
@@ -28,7 +27,7 @@ const CardComponent = ({ userData }) => {
           h="160px"
           marginTop={"20px"}
         />
-        <Box mr="0" fontSize={["sm", "md", "lg", "xl"]}>
+        <Box mr="0" fontSize={{ base: "sm", md: "md", lg: "large" }}>
           <Text>
             Name: {userData.first_name} {userData.last_name}
           </Text>
