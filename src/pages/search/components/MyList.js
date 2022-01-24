@@ -23,27 +23,29 @@ export const MyList = () => {
 
   return (
     <Box w="260px">
-      <Box h="76px" px="20px" backgroundColor="brand.dark" rounded="3xl">
-        <Flex h="full" justifyContent="space-between" alignItems="center">
-          <Text color="brand.white" fontSize="2xl">
-            My List
-          </Text>
-          <ChevronDown color="brand.white" />
-        </Flex>
-      </Box>
-      <Box bgColor="#F4F3EE" px="20px" pt="32px" rounded="3xl">
-        {myListData.map((e, i) => (
-          <MyListItem key={i} data={e} />
-        ))}
-        <Center mt="23px">
-          <SecondaryButton
-            name="PROCCED"
-            btnWidth="100%"
-            btnHeight="45px"
-            btnBg="#F4F3EE"
-          />
-        </Center>
-        <Box h="23px" />
+      <Box bgColor="brand.paper" rounded="3xl">
+        <Box h="76px" px="20px" backgroundColor="brand.dark" rounded="3xl">
+          <Flex h="full" justifyContent="space-between" alignItems="center">
+            <Text color="brand.white" fontSize="2xl">
+              My List
+            </Text>
+            <ChevronDown color="brand.white" />
+          </Flex>
+        </Box>
+        <Box bgColor="brand.paper" px="20px" pt="32px" rounded="3xl">
+          {myListData.map((e, i) => (
+            <MyListItem key={i} data={e} />
+          ))}
+          <Center mt="23px">
+            <SecondaryButton
+              name="PROCCED"
+              btnWidth="100%"
+              btnHeight="45px"
+              btnBg="brand.paper"
+            />
+          </Center>
+          <Box h="23px" />
+        </Box>
       </Box>
     </Box>
   );

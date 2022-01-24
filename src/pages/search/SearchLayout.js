@@ -19,30 +19,6 @@ const SearchLayout = () => {
       <Box h={"100vh"} w={"100%"}>
         <Navbar />
         <Box h={48} w="full" backgroundColor={"blue.300"} />
-        {/* <Box h={"91%"} marginTop="50px"> */}
-        {/* <Flex> */}
-        {/* <Box w="75%" px="40px" pb="100px">
-            <Switch>
-              <Route exact path={`${match.path}`} component={Service} />
-              <Route
-                path={`${match.path}/:serviceId/:companyId`}
-                component={Company}
-              />
-              <Route path={`${match.path}/:serviceId`} component={Vender} />
-            </Switch>
-          </Box> */}
-        {/* <Box mx={"auto"}>
-              <Flex mx={"auto"}>
-                <Box w="1px" h="700px" bg={"brand.grey"} /> */}
-        {/* <Switch>
-            <Route
-              path={`${match.path}/:serviceId/:companyId`}
-              component={Company}
-            />
-            <Route path={`${match.path}/:serviceId`} component={Vender} />
-            <Route path={`${match.path}`} component={Service} />
-          </Switch> */}
-        {/* </Box> */}
         <Flex flexDirection={{ base: "column-reverse", md: "row" }}>
           <Box flex="1" m="10">
             <Switch>
@@ -62,7 +38,7 @@ const SearchLayout = () => {
                 h="700px"
                 backgroundColor={"brand.black"}
               />
-              <Box mx="auto" m="10">
+              <Flex w="100%" m="10" justifyContent="center">
                 <Switch>
                   <Route exact path={`${match.path}`}>
                     <MyList />
@@ -71,13 +47,15 @@ const SearchLayout = () => {
                     <MainCompany />
                   </Route>
                   <Route path={`${match.path}/:serviceId`}>
-                    <VStack>
+                    <Flex
+                      flexDirection={{ base: "column-reverse", md: "column" }}
+                    >
                       <CardItem isSelected={true} />
                       <MyList />
-                    </VStack>
+                    </Flex>
                   </Route>
                 </Switch>
-              </Box>
+              </Flex>
             </Flex>
           </Box>
         </Flex>

@@ -57,6 +57,7 @@ export const CardItem = ({ data, isSelected, isCompany }) => {
       shadow="2xl"
       position="relative"
       backgroundColor="brand.white"
+      w="100%"
       // w="260px"
       // h="500px"
     >
