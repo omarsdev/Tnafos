@@ -14,6 +14,8 @@ const InvoiceLayout = () => {
     <Switch>
       <Route exact path={`${match.path}`} component={InvoiceHome} />
       <Route path={`${match.path}/addinvoice`} component={AddInvoice} />
+      <Route path={`${match.path}/incoming/:uuid`} component={InvoiceCard} />
+      <Route path={`${match.path}/outgoing/:uuid`} component={InvoiceCard} />
       <Route path={`${match.path}/incoming`} component={Incoming} />
       <Route path={`${match.path}/outgoing`} component={Outgoing} />
       <Route path={`${match.path}/invoicecard`} component={InvoiceCard} />

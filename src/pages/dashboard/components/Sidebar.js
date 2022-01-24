@@ -5,12 +5,6 @@ import {
   HStack,
   Box,
   Text,
-  // Button,
-  // Divider,
-  // Menu,
-  // MenuButton,
-  // MenuList,
-  // MenuItem,
   Stack,
   Accordion,
   AccordionItem,
@@ -18,7 +12,6 @@ import {
   AccordionIcon,
   AccordionPanel,
 } from "@chakra-ui/react";
-import { FaAngleRight } from "react-icons/fa";
 import { Link, useRouteMatch } from "react-router-dom";
 import SidebarMenu from "../../../constants/SidebarMenu";
 
@@ -38,9 +31,14 @@ const NavbarItemLink = ({ item, isChild }) => {
   let { path } = useRouteMatch();
   return (
     <Link to={`${path}${item.to ?? "/"}`}>
-      <HStack mb="2" key={item.id} ml={isChild ? 6 : 2}>
-        <Text className="text-CWhite">{item.icon}</Text>
-        <Text className="text-CWhite">{item.title}</Text>
+      <HStack
+        mb="2"
+        key={item.id}
+        ml={isChild ? 6 : 2}
+        fontSize={{ base: "small", lg: "medium" }}
+      >
+        <Text textColor="#ffffff">{item.icon}</Text>
+        <Text textColor="#ffffff">{item.title}</Text>
       </HStack>
     </Link>
   );
@@ -51,7 +49,12 @@ const NavbarItemText = ({ item }) => {
     <Accordion allowMultiple margin={0}>
       <AccordionItem border="0px">
         <AccordionButton padding={0} margin={0} color="white">
-          <HStack flex="1" px="2" mb="2">
+          <HStack
+            flex="1"
+            px={{ base: "1", lg: "2" }}
+            mb="2"
+            fontSize={{ base: "small", lg: "medium" }}
+          >
             <Text>{item.icon}</Text>
             <Text>{item.title}</Text>
           </HStack>
@@ -72,11 +75,13 @@ const NavbarItemText = ({ item }) => {
 const NavbarItem = ({ item }) => {
   return (
     <ListItem>
-      <Box px="2" my="2">
+      <Box px={{ base: "0.5", lg: "2" }} my={{ base: "0.5", lg: "2" }}>
         <Text
-          className="text-CWhite p-1 font-extralight"
+          textColor="#ffffff"
+          fontWeight="normal"
+          p={{ base: 0.4, lg: "1" }}
           opacity="0.50"
-          fontSize="xs"
+          fontSize={{ base: "xx-small", lg: "xs" }}
         >
           {item.heading}
         </Text>
@@ -88,13 +93,12 @@ const NavbarItem = ({ item }) => {
 };
 
 export const Sidebar = () => {
-  const match = useRouteMatch();
   return (
-    <Box className="bg-CBlack w-60 h-screen overflow-scroll">
+    <Box bg="#333333" overflowY="scroll" className="h-screen" w={{ base: 60 }}>
       <LogoLink />
 
-      <Box className="css-0 w-auto">
-        <List className="gap-y-2">
+      <Box w={{ base: "auto" }}>
+        <List gap="2">
           {SidebarMenu.map((item) => (
             <NavbarItem item={item} key={item.id} />
           ))}

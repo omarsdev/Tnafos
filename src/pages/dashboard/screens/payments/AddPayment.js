@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Box, Heading, Center, HStack, Button } from "@chakra-ui/react";
+import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 import { CustomAddForm } from "../../components";
 
@@ -13,6 +13,7 @@ const AddPayment = () => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -21,18 +22,19 @@ const AddPayment = () => {
   } = useForm();
 
   const createPayment = async (data) => {
-    // e.preventDefault();
-    await AxiosInstance.post("/api/dashboard/payment/create", data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await AxiosInstance.post(
+        "/api/dashboard/payment/create",
+        data
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/payment");
+    history.push("/dashboard/paymenthome");
   };
 
   return (

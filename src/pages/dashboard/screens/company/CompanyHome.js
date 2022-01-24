@@ -20,20 +20,18 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  HStack,
+  Spacer,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { FiEdit } from "react-icons/fi";
 import { FaStar, FaSync } from "react-icons/fa";
 
 import CompanyCard from "./CompanyCard";
-
+import { CustomAddForm, CustomEditForm } from "../../components";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance } from "../../../../api";
-import {
-  PrimaryButton,
-  SecondaryButton,
-  RegularInputControl,
-} from "../../../../components";
+import { PrimaryButton, SecondaryButton } from "../../../../components";
 
 const CompanyHome = () => {
   const [companyInfo, setcompanyInfo] = useState(null);
@@ -42,10 +40,6 @@ const CompanyHome = () => {
   const { setAlert } = alertProviderValue;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [input, setInput] = useState(null);
-  const history = useHistory();
-  const match = useRouteMatch();
 
   const {
     register,
@@ -57,6 +51,7 @@ const CompanyHome = () => {
 
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const history = useHistory();
 
   const resetHooksForm = (data) => {
     reset({
@@ -81,20 +76,18 @@ const CompanyHome = () => {
     });
   };
 
-  //* represent company data:
   const showCompany = async () => {
-    await AxiosInstance.get("/api/dashboard/company")
-      .then((res) => {
-        setcompanyInfo(res.data.data);
-        let company = res.data.data;
-        delete company.country;
-        delete company.admin;
-        delete company.category;
-        resetHooksForm(res.data.data);
-      })
-      .catch((err) => {
-        history.push("/dashboard/company");
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/company");
+      setcompanyInfo(res.data.data);
+      let company = res.data.data;
+      delete company.country;
+      delete company.admin;
+      delete company.category;
+      resetHooksForm(res.data.data);
+    } catch (err) {
+      history.push("/dashboard/company");
+    }
   };
 
   const onCancelHandler = () => {
@@ -104,27 +97,29 @@ const CompanyHome = () => {
     onClose();
   };
 
-  //* update company info:
   const onUpdateCompany = async (dataToBeUpdated) => {
     setErr(null);
     setIsUpdating(true);
-    await AxiosInstance.put("/api/dashboard/company/update", dataToBeUpdated)
-      .then((res) => {
-        setIsUpdating(false);
-        setAlert({
-          message: "Company info has been updated successfully!",
-          type: "success",
-        });
-        history.push(`/dashboard/company`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErr(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        "/api/dashboard/company/update",
+        dataToBeUpdated
+      );
+
+      setIsUpdating(false);
+      setAlert({
+        message: "Company info has been updated successfully!",
+        type: "success",
       });
+      history.push(`/dashboard/company`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErr(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   useEffect(() => {
@@ -166,13 +161,12 @@ const CompanyHome = () => {
                   rounded="lg"
                   textAlign={"center"}
                   h="44"
-                  // mt="10px"
                 >
                   <Text
                     fontSize="LG"
-                    bg="gray.200"
+                    bg="#333333"
                     roundedTop="lg"
-                    textColor="gray.700"
+                    textColor="white"
                     fontFamily="inherit"
                     fontWeight="medium"
                     paddingY="3"
@@ -215,6 +209,7 @@ const CompanyHome = () => {
       {/* company update */}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
+
         <ModalContent>
           <ModalHeader
             fontWeight="medium"
@@ -226,246 +221,172 @@ const CompanyHome = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <form>
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Company Name :
-                  <RegularInputControl
-                    placeHolder="Enter your company name here"
-                    name="name"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
+              <input
+                type="file"
+                //   onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton
+                name="Upload File"
+                // onClick={uploadFile}
+              />
+            </HStack>
 
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Type :
-                  <RegularInputControl
-                    placeHolder="Enter type"
-                    name="type"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  CR Number :
-                  <RegularInputControl
-                    placeHolder="Enter CR"
-                    name="cr"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  VAT Number :
-                  <RegularInputControl
-                    placeHolder="Enter VAT"
-                    name="vat"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Establishment Year :
-                  <RegularInputControl
-                    placeHolder="Enter establishment year"
-                    name="establishment_year"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Total Employees :
-                  <RegularInputControl
-                    placeHolder="Enter total employees"
-                    name="total_employees"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Bio :
-                  <RegularInputControl
-                    placeHolder="Enter Bio"
-                    name="bio"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Telephone :
-                  <RegularInputControl
-                    placeHolder="Enter telephone"
-                    name="telephone"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Fax :
-                  <RegularInputControl
-                    placeHolder="Enter fax"
-                    name="fax"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  E-mail :
-                  <RegularInputControl
-                    placeHolder="Enter email"
-                    name="email"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Website :
-                  <RegularInputControl
-                    placeHolder="Enter website"
-                    name="website"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  City :
-                  <RegularInputControl
-                    placeHolder="Enter city"
-                    name="city"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  po_box :
-                  <RegularInputControl
-                    placeHolder="Enter po box"
-                    name="po_box"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  ZIP-code :
-                  <RegularInputControl
-                    placeHolder="Enter zip code"
-                    name="zip_code"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Address :
-                  <RegularInputControl
-                    placeHolder="Enter address"
-                    name="address"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Location :
-                  <RegularInputControl
-                    placeHolder="Enter Location"
-                    name="location"
-                    inputType="text"
-                    width="100%"
-                    control={control}
-                    register={register}
-                    errors={err}
-                  />
-                </label>
-              </Box>
-            </form>
+            <CustomEditForm
+              isOpen={isOpen}
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(onUpdateCompany)}
+              isUpdating={isUpdating}
+              errors={errors}
+            >
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Company Name : ",
+                    placeHolder: "Enter Company Name",
+                    name: "name",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Type : ",
+                    placeHolder: "Enter Type",
+                    name: "type",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Total Employees : ",
+                    placeHolder: "Enter Total Employees",
+                    name: "total_employees",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "VAT Number ",
+                    placeHolder: "Enter VAT Number ",
+                    name: "vat",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Confirm Cr Number : ",
+                    placeHolder: "confirm your Cr Number",
+                    name: "cr",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Phone Establishment Year : ",
+                    placeHolder: "enter  Establishment Year",
+                    name: "establishment_year",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Phone Bio : ",
+                    placeHolder: "enter Bio",
+                    name: "bio",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Telephone : ",
+                    placeHolder: "Enter Telephone",
+                    name: "telephone",
+                    err: err,
+                    inputType: "number",
+                  },
+                  {
+                    head: "Fax : ",
+                    placeHolder: "Enter Fax",
+                    name: "fax",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "E-mail : ",
+                    placeHolder: "Enter E-mail",
+                    name: "email",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Website : ",
+                    placeHolder: "Enter Website",
+                    name: "website",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Country-Id  : ",
+                    placeHolder: "Enter Country-Id ",
+                    name: "country_id ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "City  : ",
+                    placeHolder: "Enter City ",
+                    name: "city ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "po-Box  : ",
+                    placeHolder: "Enter po-Box ",
+                    name: "po-box ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "ZIP-Code  : ",
+                    placeHolder: "Enter ZIP-Code ",
+                    name: "zip_code ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Address  : ",
+                    placeHolder: "Enter Address ",
+                    name: "address ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Logo  : ",
+                    placeHolder: "Enter Logo ",
+                    name: "logo ",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Location : ",
+                    placeHolder: "Enter Location",
+                    name: "location",
+                    err: err,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Category_id : ",
+                    placeHolder: "Enter Category_id",
+                    name: "category_id",
+                    err: err,
+                    inputType: "text",
+                  },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
           </ModalBody>
           <ModalFooter my="5">
             <PrimaryButton

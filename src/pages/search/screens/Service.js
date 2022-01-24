@@ -53,6 +53,26 @@ export const Service = () => {
         ))}
       </SimpleGrid>
       {/* <Box mt="40px"></Box> */}
+      {/* <button onClick={() => console.log(searchResult)}>Click me</button> */}
+      {/* <Box mt="40px"> */}
+      {/* <InfiniteScroll
+          dataLength={searchResult.length}
+          next={handleNextPage}
+          hasMore={true}
+          loader={<Spinner size="xl" color="#F8B916" />}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          <Grid templateColumns="repeat(3, 1fr)" gap={10}>
+            {searchResult.map((e, i) => (
+              <CardItem key={i} data={e} />
+            ))}
+          </Grid>
+        </InfiniteScroll> */}
+      {/* </Box> */}
     </>
   );
 };

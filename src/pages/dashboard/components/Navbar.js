@@ -32,14 +32,12 @@ export const Navbar = () => {
           Authorization: `Bearer ${userToken}`,
         },
       });
-      //* save user. info in the context provider which will be invoked later in Home page
       setUserData(res.data.data);
     } catch (error) {}
   };
 
   const getUser = async () => {
     if (!userData) {
-      //* grab token wether from local storage or context
       let token = localStorage.getItem("token") || userToken;
       if (token) {
         fetchTokenMe();

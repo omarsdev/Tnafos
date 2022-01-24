@@ -1,17 +1,22 @@
 import React from "react";
 import { Box, Image, VStack, Text } from "@chakra-ui/react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch, Link } from "react-router-dom";
 
 import { SecondaryButton } from "../../../../components";
 
 const CardComponent = ({ userData }) => {
   const match = useRouteMatch();
+  const history = useHistory();
 
   return (
     <Box
-      className="rounded-3xl shadow-2xl relative bg-white"
-      w="300px"
+      rounded="3xl"
+      shadow="2xl"
+      bg="white"
+      position="relative"
+      // w="300px"
       h="350px"
+      width={["200", "250px", "350px"]}
     >
       <VStack spacing="20px" mx="5%">
         <Image
@@ -23,16 +28,16 @@ const CardComponent = ({ userData }) => {
           h="160px"
           marginTop={"20px"}
         />
-        <Box mr="0">
+        <Box mr="0" fontSize={["sm", "md", "lg", "xl"]}>
           <Text>
             Name: {userData.first_name} {userData.last_name}
           </Text>
           <Text>Email : {userData.email}</Text>
           <Text>Phone Number: {userData.phone_number}</Text>
         </Box>
-        <Box position="absolute" bottom="5">
+        <Box position="relative" bottom="5">
           <Link to={`${match.url}/${userData.uuid}`}>
-            <SecondaryButton name="View" />
+            <SecondaryButton name="View" my="1" />
           </Link>
         </Box>
       </VStack>

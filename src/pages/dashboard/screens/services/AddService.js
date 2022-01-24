@@ -1,7 +1,7 @@
-import React, { useState, useContext, useCallback, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { HStack, Text, Box, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 import { CustomAddForm } from "../../components";
 
@@ -19,43 +19,45 @@ const AddService = () => {
     formState: { errors },
     control,
   } = useForm();
+
   const [err, setErr] = useState(null);
+  const [categoriesList, setCategoriesList] = useState(null);
 
   const history = useHistory();
 
-  const [categoriesList, setCategoriesList] = useState(null);
-
-  //* service adding function:
   const createService = async (data) => {
-    await AxiosInstance.post("/api/dashboard/service/create", data)
-      .then((res) => {
-        setAlert({
-          message: "new service has been added!",
-          type: "success",
-        });
-        history.push("/dashboard/service");
-      })
-      .catch((err) => {
-        setErr(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.post(
+        "/api/dashboard/service/create",
+        data
+      );
+
+      setAlert({
+        message: "new service has been added!",
+        type: "success",
       });
+      history.push("/dashboard/service");
+    } catch (error) {
+      setErr(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/service");
+    history.push("/dashboard/servicehome");
   };
 
   const getAllCategories = async () => {
-    await AxiosInstance.get("/api/category")
-      .then((res) => {
-        setCategoriesList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    try {
+      const res = await AxiosInstance.get("/api/category");
+      setCategoriesList(res.data.data);
+    } catch (err) {
+      console.log(err.response);
+      history.push("/dashboard/service");
+    }
   };
 
   useEffect(() => {

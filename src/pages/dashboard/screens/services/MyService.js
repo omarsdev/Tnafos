@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { FiEdit } from "react-icons/fi";
 import {
   Box,
@@ -10,14 +10,23 @@ import {
   Stack,
   Flex,
   Image,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  HStack,
+  Spacer,
 } from "@chakra-ui/react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { CustomEditForm, CustomAddForm } from "../../components";
 
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
+import { SecondaryButton } from "../../../../components/button/SecondaryButton";
 
 const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -25,7 +34,6 @@ const MyService = () => {
   const [service, setService] = useState(null);
 
   const history = useHistory();
-
   const { uuid } = useParams();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,40 +51,38 @@ const MyService = () => {
   };
 
   const getMyService = async () => {
-    await AxiosInstance.get(`/api/dashboard/service/${uuid}`)
-      .then((res) => {
-        resetHooksForm(res.data.data);
-        setService(res.data.data);
-      })
-      .catch((err) => {
-        history.push("/dashboard/service");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/service/${uuid}`);
+      resetHooksForm(res.data.data);
+      setService(res.data.data);
+    } catch (err) {
+      history.push("/dashboard/servicehome");
+    }
   };
 
   const onUpdateService = async (dataToBeUpdataed) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(
-      `/api/dashboard/service/${uuid}/update`,
-      dataToBeUpdataed
-    )
-      .then((res) => {
-        setIsUpdating(false);
-        setAlert({
-          message: "Service Has Been Updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/service`);
-      })
-      .catch((err) => {
-        // console.log(err.response.data);
-        setIsUpdating(false);
-        setErrors(err.response.data.errors);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/service/${uuid}/update`,
+        dataToBeUpdataed
+      );
+
+      setIsUpdating(false);
+      setAlert({
+        message: "Service Has Been Updated!",
+        type: "info",
       });
+      history.push(`/dashboard/service`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data.errors);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {
@@ -157,34 +163,66 @@ const MyService = () => {
       </Center>
 
       {/* updating service. */}
-      <CustomEditForm
+      <Drawer
         isOpen={isOpen}
-        onCancelHandler={onCancelHandler}
-        onUpdate={handleSubmit(onUpdateService)}
-        isUpdating={isUpdating}
-        errors={errors}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
       >
-        <CustomAddForm
-          listForm={[
-            {
-              head: "Price : ",
-              placeHolder: "Enter Price : ",
-              name: "price",
-              inputType: "number",
-              err: errors,
-            },
-            {
-              head: "Type : ",
-              placeHolder: "Enter Type : ",
-              name: "type",
-              inputType: "text",
-              err: errors,
-            },
-          ]}
-          control={control}
-          register={register}
-        />
-      </CustomEditForm>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
+
+          <DrawerBody>
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
+              <input
+                type="file"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton name="Upload File" onClick={uploadFile} />
+            </HStack>
+            <CustomEditForm
+              isOpen={isOpen}
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(onUpdateService)}
+              isUpdating={isUpdating}
+              errors={errors}
+            >
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Price : ",
+                    placeHolder: "Enter Price : ",
+                    name: "price",
+                    inputType: "number",
+                    err: errors,
+                  },
+                  {
+                    head: "Type : ",
+                    placeHolder: "Enter Type : ",
+                    name: "type",
+                    inputType: "text",
+                    err: errors,
+                  },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };

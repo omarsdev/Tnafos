@@ -1,7 +1,7 @@
 import { AxiosInstance } from "../api";
 import { useHistory } from "react-router-dom";
 
-const CompanyProfile = () => {
+export const CompanyProfile = () => {
   const [companyInfo, setcompanyInfo] = useState({});
   const history = useHistory();
   const showCompany = async () => {
@@ -20,4 +20,3 @@ const CompanyProfile = () => {
       });
   };
 };
-export default CompanyProfile;

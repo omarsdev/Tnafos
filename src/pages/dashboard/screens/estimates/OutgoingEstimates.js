@@ -1,32 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, HStack } from "@chakra-ui/react";
-import { useRouteMatch, Switch, Route, useHistory } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 
-import { NoData, CustomTable } from "../../components";
-
+import { CustomTable } from "../../components";
 import { AxiosInstance } from "../../../../api";
-
-import EstimateCard from "./EstimateCard";
 
 const OutgoingEstimates = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
 
-  const match = useRouteMatch();
   const history = useHistory();
 
-  //* representing certain number of rows based on select option:
-  const [rowsNumber, setRowsNumber] = useState("10");
-
   const estOutgoingList = async () => {
-    await AxiosInstance.get("/api/dashboard/estimate/outgoing")
-      .then((res) => {
-        console.log(res.data.data);
-        setList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/estimate/outgoing");
+      console.log(res.data.data);
+      setList(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleKeypress = (e) => {
@@ -43,20 +35,20 @@ const OutgoingEstimates = () => {
   }, []);
 
   return (
-    <Box w="full" overflowY="scroll" padding="10">
+    <Box w="full" overflowY="scroll" padding={{ base: 4, md: 4, lg: 6 }}>
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
-          fontSize="xx-large"
+          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
+          mb={{ base: 2, lg: 4 }}
         >
           Outgoing Estimates
         </Heading>
       </HStack>
 
       <CustomTable
-        PageHeadLine="estimate"
         thHeading="List of outgoing estimates"
         list={list}
         thData={[
@@ -68,6 +60,7 @@ const OutgoingEstimates = () => {
           "Action",
         ]}
         listData={["uuid", "subject", "date", "valid_till", "status"]}
+        component={"estimate"}
       />
     </Box>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 export const TnafosSearchLogo = ({ height = "70" }) => {
   return (
@@ -7,6 +8,7 @@ export const TnafosSearchLogo = ({ height = "70" }) => {
       width="140.979"
       height={height}
       viewBox="0 0 157.979 76"
+      onClick={() => history.push("/")}
     >
       <g
         id="Group_14"

@@ -9,6 +9,14 @@ import {
   Spinner,
   Flex,
   VStack,
+  HStack,
+  Spacer,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
@@ -19,6 +27,7 @@ import { AxiosInstance, media } from "../../../../api";
 import { useForm } from "react-hook-form";
 
 import { CustomAddForm, CustomEditForm } from "../../components";
+import { SecondaryButton } from "../../../../components/button/SecondaryButton";
 
 const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -36,7 +45,6 @@ const UserCard = () => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const [photo, setPhoto] = useState(null);
-  // let inputRef = useRef(null);
 
   const resetHooksForm = (data) => {
     reset({
@@ -48,39 +56,41 @@ const UserCard = () => {
   };
 
   const getUser = async () => {
-    await AxiosInstance.get(`/api/dashboard/user/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/user");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/user/${uuid}`);
+
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/userhome");
+    }
   };
 
   const onUpdateUserInfo = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(`/api/dashboard/user/${uuid}/update`, data)
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "User Has Been Updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/user`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/user/${uuid}/update`,
+        data
+      );
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "User Has Been Updated!",
+        type: "info",
       });
+      history.push(`/dashboard/user`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {
@@ -154,73 +164,106 @@ const UserCard = () => {
       </Center>
 
       {/* updating user info. */}
-      <CustomEditForm
+      <Drawer
         isOpen={isOpen}
-        onCancelHandler={onCancelHandler}
-        onUpdate={handleSubmit(onUpdateUserInfo)}
-        isUpdating={isUpdating}
-        errors={errors}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
       >
-        <CustomAddForm
-          listForm={[
-            {
-              head: "First Name : ",
-              placeHolder: "Enter First Name",
-              name: "first_name",
-              errors: errors,
-              inputType: "text",
-            },
-            {
-              head: "Last Name : ",
-              placeHolder: "Enter Last Name",
-              name: "last_name",
-              errors: errors,
-              inputType: "text",
-            },
-            {
-              head: "Phone Number : ",
-              placeHolder: "Enter Phone Number",
-              name: "phone_number",
-              errors: errors,
-              inputType: "number",
-            },
-            {
-              head: "Email : ",
-              placeHolder: "Enter Email",
-              name: "email",
-              errors: errors,
-              inputType: "text",
-            },
-            {
-              head: "Password : ",
-              placeHolder: "Enter Password",
-              name: "password",
-              errors: errors,
-              isPassword: true,
-            },
-            {
-              head: "Confirm Password : ",
-              placeHolder: "confirm your password",
-              name: "password_confirmation",
-              errors: errors,
-              isPassword: true,
-            },
-            // {
-            //   head: "Country Code : ",
-            //   placeHolder: "Select Country Code : ex SA",
-            //   name: "country_code",
-            //   errors: errors,
-            //   isSelect: true,
-            //   optionList: countryList,
-            //   value: "short_name",
-            //   key: "uuid",
-            //   displayValue: "short_name",
-            // },
-          ]}
-          control={control}
-          register={register}
-        />
-      </CustomEditForm>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
+
+          <DrawerBody>
+            <HStack
+              align="flex-end"
+              w="full"
+              alignItems="baseline"
+              mb="14"
+              mt="5"
+            >
+              <input
+                type="file"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                name="choose file"
+              />
+              <Spacer />
+              <SecondaryButton name="Upload File" onClick={uploadFile} />
+            </HStack>
+
+            <CustomEditForm
+              isOpen={isOpen}
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(onUpdateUserInfo)}
+              isUpdating={isUpdating}
+              errors={errors}
+            >
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "First Name : ",
+                    placeHolder: "Enter First Name",
+                    name: "first_name",
+                    errors: errors,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Last Name : ",
+                    placeHolder: "Enter Last Name",
+                    name: "last_name",
+                    errors: errors,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Phone Number : ",
+                    placeHolder: "Enter Phone Number",
+                    name: "phone_number",
+                    errors: errors,
+                    inputType: "number",
+                  },
+                  {
+                    head: "Email : ",
+                    placeHolder: "Enter Email",
+                    name: "email",
+                    errors: errors,
+                    inputType: "text",
+                  },
+                  {
+                    head: "Password : ",
+                    placeHolder: "Enter Password",
+                    name: "password",
+                    errors: errors,
+                    isPassword: true,
+                  },
+                  {
+                    head: "Confirm Password : ",
+                    placeHolder: "confirm your password",
+                    name: "password_confirmation",
+                    errors: errors,
+                    isPassword: true,
+                  },
+                  // {
+                  //   head: "Country Code : ",
+                  //   placeHolder: "Select Country Code : ex SA",
+                  //   name: "country_code",
+                  //   errors: errors,
+                  //   isSelect: true,
+                  //   optionList: countryList,
+                  //   value: "short_name",
+                  //   key: "uuid",
+                  //   displayValue: "short_name",
+                  // },
+                ]}
+                control={control}
+                register={register}
+              />
+            </CustomEditForm>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };

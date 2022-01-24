@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Box, Center, Heading, Spinner } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { Box, HStack, Heading } from "@chakra-ui/react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
-import { CustomTable, NoData } from "../../components";
+import { CustomTable } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
 
@@ -10,53 +10,46 @@ const Outgoing = () => {
   const [list, setList] = useState(null);
   const history = useHistory();
 
-  const invoiceIncomingList = async () => {
-    await AxiosInstance.get("/api/dashboard/invoice/outgoing")
-      .then((res) => {
-        setList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/invoicehome");
-      });
+  const getOutgoingInvoi = async () => {
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/invoice/outgoing");
+      setList(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/invoicehome");
+    }
   };
 
   useEffect(() => {
-    invoiceIncomingList();
+    getOutgoingInvoi();
   }, []);
 
   return (
-    <Box>
-      {!list ? (
-        <Center h="70vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
-        </Center>
-      ) : list.length === 0 ? (
-        <NoData />
-      ) : (
-        <CustomTable
-          PageHeadLine="Invoices - Outgoing"
-          thHeading="List of Invoices - Outgoing"
-          thData={[
-            "Invoices-ID",
-            "Subject",
-            "Date",
-            "Discount Amount",
-            "Vat Amount",
-            "Total",
-            "options",
-          ]}
-          list={list}
-          listData={[
-            "uuid",
-            "subject",
-            "date",
-            "discount_amount",
-            "vat_amount",
-            "total",
-          ]}
-        />
-      )}
+    <Box w="full" overflowY="scroll" padding="10">
+      <HStack justifyContent="space-between" paddingBottom="5">
+        <Heading
+          textColor="gray.600"
+          fontSize="xx-large"
+          fontWeight="lg"
+          alignItems="baseline"
+        >
+          Outgoing Invoices
+        </Heading>
+      </HStack>
+      <CustomTable
+        thHeading="List of Invoices - Outgoing"
+        thData={[
+          "Invoices-ID",
+          "Subject",
+          "Date",
+          "Discount Amount",
+          "Total",
+          "options",
+        ]}
+        list={list}
+        listData={["uuid", "subject", "date", "discount_amount", "total"]}
+        component="invoice"
+      />
     </Box>
   );
 };

@@ -1,16 +1,8 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
   Text,
-  Image,
-  HStack,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -21,7 +13,6 @@ import {
   Center,
   Spinner,
   Flex,
-  Spacer,
   VStack,
 } from "@chakra-ui/react";
 import {
@@ -37,11 +28,7 @@ import { FiEdit } from "react-icons/fi";
 
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
-import {
-  RegularInputControl,
-  SecondaryButton,
-  PrimaryButton,
-} from "../../../../components";
+import { CustomAddForm, CustomEditForm } from "../../components";
 
 const PaymentCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -59,12 +46,9 @@ const PaymentCard = () => {
   const [errors, setErrors] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const [photo, setPhoto] = useState(null);
-  // let inputRef = useRef(null);
-
   const resetHooksForm = (data) => {
     reset({
-      // amount: data.amount,
+      amount: data.amount,
       method: data.method,
       transaction_number: data.transaction_number,
       date: data.date,
@@ -74,39 +58,42 @@ const PaymentCard = () => {
   };
 
   const getPayment = async () => {
-    await AxiosInstance.get(`/api/dashboard/payment/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/payment");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/payment/${uuid}`);
+
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/paymenthome");
+    }
   };
 
   const updatePayment = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(`/api/dashboard/payment/${uuid}/update`, data)
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Payment's info has been updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/payment`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/payment/${uuid}/update`,
+        data
+      );
+
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Payment's info has been updated!",
+        type: "info",
       });
+      history.push(`/dashboard/payment`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {
@@ -120,7 +107,6 @@ const PaymentCard = () => {
     getPayment();
   }, []);
 
-  //* media file upload:
   const uploadFile = (photo) => {
     if (!photo) return;
     media(uuid, "payment", photo);
@@ -136,17 +122,8 @@ const PaymentCard = () => {
         <Box
           className="rounded-3xl relative bg-white shadow-2xl"
           w="400px"
-          h="500px"
+          h="300px"
         >
-          <Image
-            src={"https://bit.ly/sage-adebayo"}
-            alt="Segun Adebayo"
-            objectFit="cover"
-            roundedTop="3xl"
-            w="100%"
-            h="220px"
-            layout={"fill"}
-          />
           <VStack spacing="20px" mx="5%" mt="5">
             <Box mr="0">
               <Text py="1" textColor="gray.600">
@@ -200,7 +177,7 @@ const PaymentCard = () => {
         </Box>
       </Center>
 
-      {/* updating user info. */}
+      {/* updating payment card*/}
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -215,127 +192,62 @@ const PaymentCard = () => {
           </DrawerHeader>
 
           <DrawerBody>
-            <HStack
-              align="flex-end"
-              w="full"
-              alignItems="baseline"
-              mb="14"
-              mt="5"
+            <CustomEditForm
+              isOpen={isOpen}
+              onCancelHandler={onCancelHandler}
+              onUpdate={handleSubmit(updatePayment)}
+              isUpdating={isUpdating}
+              errors={errors}
             >
-              <input
-                type="file"
-                onChange={(e) => setPhoto(e.target.files[0])}
-                name="choose file"
+              <CustomAddForm
+                listForm={[
+                  {
+                    head: "Amount : ",
+                    placeHolder: "Enter amount",
+                    name: "amount",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Method : ",
+                    placeHolder: "Enter Method",
+                    name: "method",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Transaction -number : ",
+                    placeHolder: "Enter transaction-number",
+                    name: "transaction_number",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Date : ",
+                    placeHolder: "Enter Date",
+                    name: "date",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "Notes : ",
+                    placeHolder: "Enter notes",
+                    name: "notes",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                  {
+                    head: "UUID : ",
+                    placeHolder: "Enter UUID",
+                    name: "uuid",
+                    inputType: "text",
+                    errors: errors,
+                  },
+                ]}
+                control={control}
+                register={register}
               />
-              <Spacer />
-              <SecondaryButton name="Upload File" onClick={uploadFile} />
-            </HStack>
-            <form>
-              {/* <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Amount :
-                  <RegularInputControl
-                    placeHolder="amount"
-                    name="amount"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box> */}
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500 ">
-                  Method:
-                  <RegularInputControl
-                    placeHolder="method"
-                    name="method"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  Transaction - Number:
-                  <RegularInputControl
-                    placeHolder="Transaction - number"
-                    name="transaction_number"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  Date:
-                  <RegularInputControl
-                    placeHolder="date"
-                    name="date"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  Notes:
-                  <RegularInputControl
-                    placeHolder="notes"
-                    name="notes"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Box className="mt-4">
-                <label className="w-32 text-left text-gray-500">
-                  UUID:
-                  <RegularInputControl
-                    placeHolder="uuid"
-                    name="uuid"
-                    control={control}
-                    register={register}
-                    width="100%"
-                    error={errors}
-                  />
-                </label>
-              </Box>
-
-              <Flex mt="5" w="full" ml="320px">
-                <PrimaryButton
-                  name="Update"
-                  onClick={handleSubmit(updatePayment)}
-                  loadingButton={isUpdating}
-                  buttonType="submit"
-                  mx="2"
-                />
-
-                <SecondaryButton
-                  name="Cancel"
-                  onClick={onCancelHandler}
-                  buttonType="button"
-                />
-              </Flex>
-              {errors?.message && (
-                <Text className="text-center mt-4" color="red">
-                  {errors?.message}
-                </Text>
-              )}
-            </form>
+            </CustomEditForm>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

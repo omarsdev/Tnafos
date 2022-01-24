@@ -8,12 +8,13 @@ const MyProfile = () => {
 
   //* grab user's profile:
   const showProfile = async () => {
-    await AxiosInstance.get("/api/dashboard/user/my-profile/")
-      .then((res) => {
-        console.log(res.data.data);
-        setProfile(res.data.data);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/user/my-profile/");
+      console.log(res.data.data);
+      setProfile(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {

@@ -1,16 +1,9 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
   Text,
   Stack,
-  HStack,
   Drawer,
   DrawerBody,
   DrawerHeader,
@@ -21,26 +14,18 @@ import {
   Center,
   Spinner,
   Flex,
-  Spacer,
   VStack,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+
+import { Tooltip } from "@chakra-ui/react";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
 import { CustomEditForm, CustomAddForm } from "../../components";
 
 import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
-import UpdateStatus from "./UpdateStatus";
-import ConvertToInvoice from "./ConvertToInvoice";
-
-import { MdOutlinePermMedia } from "react-icons/md";
+import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 
 const EstimateCard = () => {
@@ -77,39 +62,40 @@ const EstimateCard = () => {
   };
 
   const getEstimate = async () => {
-    await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`)
-      .then((res) => {
-        console.log(res.data.data);
-        resetHooksForm(res.data.data);
-        setCard(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        history.push("/dashboard/estimate");
-      });
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/estimate/${uuid}`);
+      console.log(res.data.data);
+      resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/estimatehome");
+    }
   };
 
   const updateEstimate = async (data) => {
     setErrors(null);
     setIsUpdating(true);
-    await AxiosInstance.put(`/api/dashboard/estimate/${uuid}/update`, data)
-      .then((res) => {
-        console.log(res);
-        setIsUpdating(false);
-        setAlert({
-          message: "Estimate's info has been updated!",
-          type: "info",
-        });
-        history.push(`/dashboard/estimate`);
-      })
-      .catch((err) => {
-        setIsUpdating(false);
-        setErrors(err.response.data);
-        setAlert({
-          message: `${err.response.data.message}`,
-          type: "error",
-        });
+    try {
+      const res = await AxiosInstance.put(
+        `/api/dashboard/estimate/${uuid}/update`,
+        data
+      );
+      console.log(res);
+      setIsUpdating(false);
+      setAlert({
+        message: "Estimate's info has been updated!",
+        type: "info",
       });
+      history.push(`/dashboard/estimatehome`);
+    } catch (err) {
+      setIsUpdating(false);
+      setErrors(err.response.data);
+      setAlert({
+        message: `${err.response.data.message}`,
+        type: "error",
+      });
+    }
   };
 
   const onCancelHandler = () => {
@@ -123,132 +109,188 @@ const EstimateCard = () => {
     getEstimate();
   }, []);
 
-  return (
-    <Switch>
-      <Route exact path={`${match.path}`}>
-        {/* {!card ? (
-          <Center h="70vh" w="100%">
-            <Spinner size="xl" color="#F8B916" />
-          </Center>
-        ) : (
-          <>
-            <Center py="5">
-              <Box
-                className="rounded-3xl relative bg-white shadow-2xl"
-                w="400px"
-                h="500px"
-              >
-                <VStack spacing="20px" mx="5%" mt="5">
-                  <Box mr="0">
-                    <Text py="1" textColor="gray.600">
-                      Subject: {card?.subject}
-                    </Text>
-                    <Text textColor="gray.600">Status: {card?.status}</Text>
-                    <Text textColor="gray.600">Date:{card?.date}</Text>
-                    <Text textColor="gray.600">
-                      Valid-till:{card?.valid_till}
-                    </Text>
-                    <Text textColor="gray.600">Currency:{card?.currency}</Text>
-                    <Text textColor="gray.600">
-                      Type of discount:{card?.discount_type}
-                    </Text>
-                    <Text textColor="gray.600">
-                      Amount of discount:{card?.discount_amount}
-                    </Text>
-                    <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
-                    <Text textColor="gray.600">Total:{card?.total}</Text>
-                    <Text textColor="gray.600">
-                      Contact personal-info:
-                      <Stack>
-                        <Text>{card?.assigned_to?.first_name}</Text>
-                        <Text>{card?.assigned_to?.last_name}</Text>
-                        <Text>{card?.assigned_to?.email}</Text>
-                        <Text>{card?.assigned_to?.phone_number}</Text>
-                        <Text>{card?.assigned_to?.uuid}</Text>
-                        <Text>{card?.assigned_to?.is_admin}</Text>
-                      </Stack>
-                    </Text>
-                    <Text textColor="gray.600">
-                      Company Info:{" "}
-                      {card.customer.map((element, idxx) => (
-                        <Stack key={idxx}>
-                          <Text>
-                            {element?.primary_contact.map((item, index) => (
-                              <Stack>
-                                <Text>{item?.first_name}</Text>
-                                <Text>{item?.last_name}</Text>
-                                <Text>{item?.position}</Text>
-                                <Text>{item?.email}</Text>
-                                <Text>{item?.phone_number}</Text>
-                                <Text>{item?.uuid}</Text>
-                              </Stack>
-                            ))}
-                          </Text>
-                          <Text>{element?.company_name}</Text>
-                          <Text>{element?.vat_number}</Text>
-                          <Text>{element?.phone}</Text>
-                          <Text>{element?.fax}</Text>
-                          <Text>{element?.website}</Text>
-                          <Text>{element?.currency}</Text>
-                          <Text>{element?.state}</Text>
-                          <Text>{element?.city}</Text>
-                          <Text>{element?.zipcode}</Text>
-                          <Text>{element?.address}</Text>
-                          <Text>
-                            {element.country.map((e, id) => (
-                              <Stack key={id}>
-                                <Text>{e?.name}</Text>
-                                <Text>{e?.short_name}</Text>
-                                <Text>{e?.country_code}</Text>
-                                <Text>{e?.currency}</Text>
-                                <Text>{e?.uuid}</Text>
-                              </Stack>
-                            ))}
-                          </Text>
-                        </Stack>
-                      ))}
-                    </Text>
-                  </Box>
-
-                  <Flex justify={"center"} w="full" gap="15px">
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"lg"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<MdOutlinePermMedia />}
-                      onClick={() => {
-                        history.push(`${match.url}/media`);
-                      }}
-                    />
-
-                    <IconButton
-                      justify={"center"}
-                      fontSize={"lg"}
-                      rounded={"full"}
-                      bg={"#F8B916"}
-                      color={"white"}
-                      boxShadow={
-                        "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                      }
-                      _hover={{
-                        bg: "orange.400",
-                      }}
-                      icon={<FiEdit />}
-                      onClick={onOpen}
-                    />
-                  </Flex>
-                </VStack>
+  return !card ? (
+    <Center h="70vh" w="100%">
+      <Spinner size="xl" color="#F8B916" />
+    </Center>
+  ) : (
+    <>
+      <Center py="5">
+        <Box
+          className="rounded-3xl relative bg-white shadow-2xl"
+          w="500px"
+          h="1250px"
+        >
+          <VStack spacing="20px" mx="5%" mt="5">
+            <Box mr="0">
+              <Text fontSize="large">Estimate's details: </Text>
+              <Text py="1" textColor="gray.600">
+                Subject: {card?.subject}
+              </Text>
+              <Text textColor="gray.600">Status: {card?.status}</Text>
+              <Text textColor="gray.600">Date:{card?.date}</Text>
+              <Text textColor="gray.600">Valid-till:{card?.valid_till}</Text>
+              <Text textColor="gray.600">Currency:{card?.currency}</Text>
+              <Text textColor="gray.600">
+                Type of discount:{card?.discount_type}
+              </Text>
+              <Text textColor="gray.600">
+                Amount of discount:{card?.discount_amount}
+              </Text>
+              <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
+              <Text textColor="gray.600">Total:{card?.total}</Text>
+              <Box textColor="gray.600" my="3">
+                <Text fontWeight="bold">Assigned - to :</Text>
+                <Stack>
+                  <Text>
+                    {card?.assigned_to?.first_name}{" "}
+                    {card?.assigned_to?.last_name}
+                  </Text>
+                  <Text>{card?.assigned_to?.email}</Text>
+                  <Text>{card?.assigned_to?.phone_number}</Text>
+                  <Text>{card?.assigned_to?.uuid}</Text>
+                  <Text>{card?.assigned_to?.is_admin}</Text>
+                </Stack>
               </Box>
-            </Center>
+              <Box textColor="gray.600" my="3">
+                {" "}
+                <Text fontWeight="bold">Company Info:</Text>
+                <Stack>
+                  <Text> {card?.customer?.company_name}</Text>
+                  <Text>{card?.customer?.vat_number}</Text>
+                  <Text>{card?.customer?.phone}</Text>
+                  <Text>{card?.customer?.fax}</Text>
+                  <Text>{card?.customer?.website}</Text>
+                  <Text>{card?.customer?.currency}</Text>
+                  <Text>{card?.customer?.state}</Text>
+                  <Text>{card?.customer?.city}</Text>
+                  <Text>{card?.customer?.zipcode}</Text>
+                  <Text>{card?.customer?.address}</Text>
+                </Stack>
+              </Box>
 
+              <Box textColor="gray.600" my="3">
+                {" "}
+                <Text fontWeight="bold">Country:</Text>
+                <Stack>
+                  <Text> {card?.customer?.country?.name}</Text>
+                  <Text>{card?.customer?.country?.short_name}</Text>
+                  <Text>{card?.customer?.country?.country_code}</Text>
+                  <Text>{card?.customer?.country?.currency}</Text>
+                  <Text>{card?.customer?.country?.uuid}</Text>
+                </Stack>
+              </Box>
+
+              <Box textColor="gray.600" my="3">
+                {" "}
+                <Text fontWeight="bold">Contact personal-info:</Text>
+                <Stack>
+                  <Text>
+                    {" "}
+                    {card?.customer?.primary_contact?.first_name}{" "}
+                    {card?.customer?.primary_contact?.last_name}
+                  </Text>
+                  <Text>{card?.customer?.primary_contact?.position}</Text>
+                  <Text>{card?.customer?.primary_contact?.email}</Text>
+                  <Text>{card?.customer?.primary_contact?.phone_number}</Text>
+                  <Text>{card?.customer?.primary_contact?.uuid}</Text>
+                </Stack>
+              </Box>
+            </Box>
+
+            <Flex justify={"center"} w="full" gap="15px">
+              <Tooltip
+                label="convert to invoice"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"x-large"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<RiExchangeDollarLine />}
+                  onClick={() => {
+                    history.push(`${match.url}/convert-to-invoice`);
+                  }}
+                />
+              </Tooltip>
+
+              <Tooltip
+                label="update status"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"x-large"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<RiRefreshLine />}
+                  onClick={() => {
+                    history.push(`${match.url}/update-status`);
+                  }}
+                />
+              </Tooltip>
+
+              <Tooltip
+                label="edit info"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"lg"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<FiEdit />}
+                  onClick={onOpen}
+                />
+              </Tooltip>
+            </Flex>
+          </VStack>
+        </Box>
+      </Center>
+
+      {/* updating estimate */}
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onCancelHandler}
+        size="lg"
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
+            Edit your Info by filling up this form
+          </DrawerHeader>
+
+          <DrawerBody>
             <CustomEditForm
               isOpen={isOpen}
               onCancelHandler={onCancelHandler}
@@ -335,28 +377,15 @@ const EstimateCard = () => {
                     inputType: "number",
                     errors: errors,
                   },
-                  //   {
-                  //     head: "Lines : ",
-                  //     placeHolder: "Enter Lines",
-                  //     name: "lines",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
                 ]}
                 control={control}
                 register={register}
               />
             </CustomEditForm>
-          </>
-        )} */}
-        <h1>HEllo WOrld</h1>
-      </Route>
-      <Route path={`${match.path}/updatestatus`} component={UpdateStatus} />
-      <Route
-        path={`${match.path}/converttoinvoice`}
-        component={ConvertToInvoice}
-      />
-    </Switch>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
 

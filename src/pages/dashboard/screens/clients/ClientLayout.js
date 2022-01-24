@@ -3,7 +3,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 import AddClient from "./AddClient";
 import ClientCard from "./ClientCard";
-import ClientHome from "./ClientHome";
+import ClientHome from "./ClientsHome";
 
 import ClientContacts from "./ClientContacts";
 import ClientMedia from "./ClientMedia";

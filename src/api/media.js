@@ -6,11 +6,14 @@ export const media = async (id, type, file) => {
   formData.append("model_type", type);
   formData.append("media", file);
 
-  await AxiosInstance.post("/api/dashboard/media/store", formData)
-    .then((res) => {
-      console.log(res.data.data);
-    })
-    .catch((err) => {
-      console.log(err.response.data);
-    });
+  try {
+    const res = await AxiosInstance.post(
+      "/api/dashboard/media/store",
+      formData
+    );
+
+    console.log(res.data.data);
+  } catch (err) {
+    console.log(err.response.data);
+  }
 };

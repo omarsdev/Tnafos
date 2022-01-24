@@ -9,13 +9,7 @@ import {
   Spinner,
   Grid,
 } from "@chakra-ui/react";
-import {
-  Link,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import ServiceCard from "./ServiceCard";
@@ -25,15 +19,15 @@ import { AxiosInstance } from "../../../../api";
 const ServiceHome = () => {
   const [servicesList, setServicesList] = useState([]);
   const match = useRouteMatch();
-  const { uuid } = useParams();
+  const history = useHistory();
 
-  //* represent all services:
   const showServicesList = async () => {
-    await AxiosInstance.get("/api/dashboard/service")
-      .then((res) => {
-        setServicesList(res.data.data);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await AxiosInstance.get("/api/dashboard/service");
+      setServicesList(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -51,15 +45,17 @@ const ServiceHome = () => {
         >
           Services
         </Heading>
-        <Link to={`${match.url}/addservice`}>
-          <IconButton
-            as={Button}
-            colorScheme="yellow"
-            size="lg"
-            icon={<AiOutlinePlus />}
-            rounded="full"
-          />
-        </Link>
+
+        <IconButton
+          as={Button}
+          colorScheme="yellow"
+          size="lg"
+          icon={<AiOutlinePlus />}
+          rounded="full"
+          onClick={() => {
+            history.push(`${match.url}/addservice`);
+          }}
+        />
       </HStack>
 
       {!servicesList ? (
