@@ -1,12 +1,15 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 export const TnafosSearchLogo = () => {
+  const history = useHistory();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      // width="140.979"
-      // height="70"
+      width="76"
+      height="157"
       viewBox="0 0 157.979 76"
+      onClick={() => history.push("/")}
     >
       <g
         id="Group_14"

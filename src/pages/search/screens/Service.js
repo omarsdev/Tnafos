@@ -34,7 +34,7 @@ export const Service = () => {
       <Text fontSize="35px">Services</Text>
       <button onClick={() => console.log(searchResult)}>Click me</button>
       <Box mt="40px">
-        <InfiniteScroll
+        {/* <InfiniteScroll
           dataLength={searchResult.length}
           next={handleNextPage}
           hasMore={true}
@@ -50,7 +50,7 @@ export const Service = () => {
               <CardItem key={i} data={e} />
             ))}
           </Grid>
-        </InfiniteScroll>
+        </InfiniteScroll> */}
       </Box>
     </>
   );
