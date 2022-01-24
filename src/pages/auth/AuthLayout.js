@@ -14,7 +14,7 @@ export const AuthLayout = ({ BGImage, children }) => {
   };
   return (
     <Flex w="100%" h="100vh" flexDirection="row">
-      <Box w="100%" h="100%">
+      <Box display={{ md: "block", base: "none" }} w="100%" h="100%">
         <Image w="full" h="full" src={BGImage} objectFit="cover" />
         <Box
           h="full"
