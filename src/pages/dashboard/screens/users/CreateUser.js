@@ -119,7 +119,7 @@ const CreateUser = () => {
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 300, md: 550, lg: 700 }}
-        ml={{ base: 4, md: 8 }}
+        ml={{ base: 12, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading
@@ -134,16 +134,17 @@ const CreateUser = () => {
         </Heading>
 
         <Flex
-          w="75%"
-          ml={{ base: 4, md: 16 }}
-          mt={{ base: 8, md: 16 }}
+          w="60%"
+          ml={{ base: 4, md: 16, lg: 20 }}
+          my={{ base: 8, md: 8 }}
           direction={{ base: "column", md: "row" }}
-          gap={{ base: 2, md: 16 }}
+          gap={{ base: 1, md: 8 }}
         >
           <input
             type="file"
             onChange={(ev) => handleFileInput(ev)}
             ref={inputRef}
+            fontSize={{ base: "xs", md: "sm", lg: "md" }}
           />
           <Spacer />
           <SecondaryButton
@@ -212,8 +213,19 @@ const CreateUser = () => {
               register={register}
             />
 
-            <Box className="flex flex-col items-center gap-2 mt-10">
-              <Heading fontSize="xl" color="grey" fontWeight="normal">
+            <Box
+              flex
+              flexDirection="column"
+              placeItems="center"
+              gap="2"
+              mt={{ base: 4, md: 6, lg: 6 }}
+              ml={{ base: 12, md: 20, lg: 24 }}
+            >
+              <Heading
+                fontSize={{ base: "md", md: "large", lg: "xl" }}
+                color="grey"
+                fontWeight="normal"
+              >
                 Terms and Conditions agreement
               </Heading>
               <CheckBox
@@ -224,15 +236,25 @@ const CreateUser = () => {
 
               <HStack>
                 <Link to="/" className="hover:underline text-CInfo">
-                  <Text>terms of service</Text>
+                  <Text fontSize={{ base: "sm", md: "md", lg: "large" }}>
+                    terms of service
+                  </Text>
                 </Link>{" "}
-                <Text>and</Text>
+                <Text fontSize={{ base: "sm", md: "md", lg: "large" }}>
+                  and
+                </Text>
                 <Link to="/" className="hover:underline text-CInfo">
-                  <Text>Privacy policy</Text>
+                  <Text fontSize={{ base: "sm", md: "md", lg: "large" }}>
+                    Privacy policy
+                  </Text>
                 </Link>
               </HStack>
               <Box>
-                <Heading fontSize="xl" color="grey" fontWeight="normal">
+                <Heading
+                  fontSize={{ base: "md", md: "large", lg: "xl" }}
+                  color="grey"
+                  fontWeight="normal"
+                >
                   Decleration of Valid Information
                 </Heading>
               </Box>
@@ -243,14 +265,23 @@ const CreateUser = () => {
                 setValue={setCh}
               />
 
-              <HStack spacing="10px" py="5">
+              <HStack spacing="10px" py={{ base: 2, md: 4, lg: 8 }}>
                 <PrimaryButton
                   name="SAVE"
                   onClick={handleSubmit(addUser)}
                   loadingButton={isUpdating}
+                  width={{ base: 24, md: 36, lg: 40 }}
+                  height={{ base: 8, md: 12 }}
+                  fontSize={{ base: "xs", md: "sm", lg: "md" }}
                 />
 
-                <SecondaryButton onClick={handleCancel} name="CANCEL" />
+                <SecondaryButton
+                  onClick={handleCancel}
+                  name="CANCEL"
+                  width={{ base: 24, md: 36, lg: 40 }}
+                  height={{ base: 8, md: 12 }}
+                  fontSize={{ base: "xs", md: "sm", lg: "md" }}
+                />
               </HStack>
             </Box>
           </form>
