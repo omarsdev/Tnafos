@@ -78,7 +78,7 @@ const DashboardLayout = () => {
   return !loading && userData ? (
     <HStack spacing={0}>
       <Sidebar />
-      <VStack className="chakra-stack w-full h-screen overflow-scroll">
+      <VStack w="100%" h="100vh" overflow="scroll">
         <Navbar />
         {/* {body} */}
 

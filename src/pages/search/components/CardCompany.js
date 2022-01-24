@@ -10,9 +10,16 @@ export const CardCompany = ({ data }) => {
   const match = useRouteMatch();
 
   return (
-    <Box className="rounded-3xl border-CPrimary border-2 h-56 w-full shadow-xl">
-      <HStack className="h-full" spacing="0" alignItems="unset">
-        <Box className="w-1/5 h-full">
+    <Box
+      rounded="3xl"
+      borderColor="brand.primary"
+      borderWidth="2"
+      h="56"
+      w="full"
+      shadow="xl"
+    >
+      <HStack h="full" spacing="0" alignItems="unset">
+        <Box h="full" w="20%">
           <Image
             src={Login}
             alt="Segun Adebayo"
@@ -23,12 +30,10 @@ export const CardCompany = ({ data }) => {
           />
         </Box>
 
-        <HStack className="w-4/5 h-full" spacing="0">
+        <HStack w="80%" h="full" spacing="0">
           <VStack width="65%" spacing="12px" alignItems="flex-start" pl="40px">
-            <Text fontSize="21px" className="">
-              {data.name || "Company Name"}
-            </Text>
-            <Text height="67px" className="overflow-hidden">
+            <Text fontSize="21px">{data.name || "Company Name"}</Text>
+            <Text height="67px" overflow="hidden">
               {data.bio ||
                 `Probably the best random sentence generator. More than 90 random
               sentences all of which are human written and easily understood.
@@ -40,9 +45,9 @@ export const CardCompany = ({ data }) => {
                   width="25%"
                   spacing="0px"
                   borderRightWidth="1px"
-                  className="border-CBlack"
+                  borderColor="brand.black"
                 >
-                  <Text className="text-CPrimary" fontSize="21px">
+                  <Text color="brand.primary" fontSize="21px">
                     5+
                   </Text>
                   <Text fontSize="21px">Years</Text>
@@ -51,9 +56,9 @@ export const CardCompany = ({ data }) => {
                   width="25%"
                   spacing="0px"
                   borderRightWidth="1px"
-                  className="border-CBlack"
+                  borderColor="brand.black"
                 >
-                  <Text className="text-CPrimary" fontSize="21px">
+                  <Text color="brand.primary" fontSize="21px">
                     4.6
                   </Text>
                   <Text fontSize="21px">Review</Text>
@@ -62,15 +67,15 @@ export const CardCompany = ({ data }) => {
                   width="25%"
                   spacing="0px"
                   borderRightWidth="1px"
-                  className="border-CBlack"
+                  borderColor="brand.black"
                 >
-                  <Text className="text-CPrimary" fontSize="21px">
+                  <Text color="brand.primary" fontSize="21px">
                     60+
                   </Text>
                   <Text fontSize="21px">Client</Text>
                 </VStack>
                 <VStack width="25%" spacing="0px">
-                  <Text className="text-CPrimary" fontSize="21px">
+                  <Text color="brand.primary" fontSize="21px">
                     97
                   </Text>
                   <Text fontSize="21px">Project</Text>
@@ -92,10 +97,14 @@ export const CardCompany = ({ data }) => {
             <Box
               w="50px"
               h="50px"
-              className="w-full h-full rounded-full border-CPrimary flex justify-center items-center"
+              rounded="full"
+              borderColor="brand.primary"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
               borderWidth="1px"
             >
-              <PhoneCall className="w-5 h-5" />
+              <PhoneCall w="5" h="5" />
             </Box>
           </HStack>
         </HStack>

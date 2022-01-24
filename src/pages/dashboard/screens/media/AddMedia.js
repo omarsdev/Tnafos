@@ -82,7 +82,13 @@ const AddMedia = () => {
         </Flex>
 
         <form mt="5">
-          <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
+          <HStack
+            mt="8"
+            display="flex"
+            flexDirection="row"
+            gap="0.5rem"
+            ml={"24"}
+          >
             <PrimaryButton
               name="Add Media"
               // onClick={handleSubmit(addNewMedia)}
@@ -97,7 +103,7 @@ const AddMedia = () => {
           </HStack>
           <Box>
             {errors?.message && (
-              <Text className="text-center mt-4" color="red">
+              <Text textAlign="center" mt="1rem" color="red">
                 {errors?.message}
               </Text>
             )}

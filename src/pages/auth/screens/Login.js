@@ -51,10 +51,25 @@ const Login = () => {
   return (
     <div>
       <AuthLayout BGImage={LoginImage}>
-        <div className="w-full h-full flex flex-col justify-center items-center ">
+        <Flex
+          w="100%"
+          h="100%"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
           <Stack spacing={4}>
-            <h1 className="select-none text-4xl">Welcome Back!</h1>
-            <h2 className="select-none text-3xl text-CPrimary">Sign in</h2>
+            <Text userSelect="none" fontSize="2.25rem" lineHeight="2.5rem">
+              Welcome Back!
+            </Text>
+            <Text
+              userSelect="none"
+              fontSize="1.875rem"
+              lineHeight="2.25rem"
+              color="brand.primary"
+            >
+              Sign in
+            </Text>
             <RegularInput
               value={email}
               setValue={setEmail}
@@ -75,9 +90,15 @@ const Login = () => {
                 />
               </Flex>
               <Spacer />
-              <h1 className="text-CGrey text-base cursor-pointer select-none">
+              <Text
+                color="brand.grey"
+                fontSize="1rem"
+                lineHeight="1.5rem"
+                cursor="pointer"
+                userSelect="none"
+              >
                 Forgot Password?
-              </h1>
+              </Text>
             </Flex>
 
             <Flex>
@@ -97,11 +118,13 @@ const Login = () => {
             </Flex>
             {error && (
               <Center>
-                <Text className="text-red-600 text-xl">{error?.message}</Text>
+                <Text color="red.500" fontSize="1.25rem" lineHeight="1.75rem">
+                  {error?.message}
+                </Text>
               </Center>
             )}
           </Stack>
-        </div>
+        </Flex>
       </AuthLayout>
     </div>
   );

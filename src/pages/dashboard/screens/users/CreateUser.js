@@ -202,7 +202,13 @@ const CreateUser = () => {
               register={register}
             />
 
-            <Box className="flex flex-col items-center gap-2 mt-10">
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              gap="0.5rem"
+              mt="2.5rem"
+            >
               <Heading fontSize="xl" color="grey" fontWeight="normal">
                 Terms and Conditions agreement
               </Heading>
@@ -213,11 +219,11 @@ const CreateUser = () => {
               />
 
               <HStack>
-                <Link to="/" className="hover:underline text-CInfo">
+                <Link to="/">
                   <Text>terms of service</Text>
                 </Link>{" "}
                 <Text>and</Text>
-                <Link to="/" className="hover:underline text-CInfo">
+                <Link to="/">
                   <Text>Privacy policy</Text>
                 </Link>
               </HStack>

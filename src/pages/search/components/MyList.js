@@ -8,11 +8,11 @@ import { SearchDataContext } from "../../../context";
 
 const MyListItem = ({ data }) => {
   return (
-    <Flex className="flex-col mt-3">
+    <Flex mt="3" flexDirection="column">
       <Text fontSize="16px" ml="0px">
         {data.name}
       </Text>
-      <Box className="w-full bg-CBlack mt-2" h="1px" />
+      <Box w="full" backgroundColor="brand.dark" mt="2" h="1px" />
     </Flex>
   );
 };
@@ -23,13 +23,15 @@ export const MyList = () => {
 
   return (
     <Box w="260px">
-      <Box h="76px" px="20px" className="bg-CBlack rounded-t-3xl">
-        <Flex className="h-full flex justify-between items-center">
-          <Text className="text-CWhite text-2xl">My List</Text>
-          <ChevronDown className="text-CWhite" />
+      <Box h="76px" px="20px" backgroundColor="brand.dark" rounded="3xl">
+        <Flex h="full" justifyContent="space-between" alignItems="center">
+          <Text color="brand.white" fontSize="2xl">
+            My List
+          </Text>
+          <ChevronDown color="brand.white" />
         </Flex>
       </Box>
-      <Box bgColor="#F4F3EE" px="20px" pt="32px" className="rounded-b-3xl">
+      <Box bgColor="#F4F3EE" px="20px" pt="32px" rounded="3xl">
         {myListData.map((e, i) => (
           <MyListItem key={i} data={e} />
         ))}

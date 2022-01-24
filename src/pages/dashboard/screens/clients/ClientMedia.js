@@ -47,7 +47,10 @@ const ClientMedia = () => {
   ) : (
     <Center py="5">
       <Box
-        className="rounded-3xl relative bg-white shadow-2xl"
+        rounded="3xl"
+        position="relative"
+        bg="brand.white"
+        shadow="2xl"
         w="350px"
         h="200px"
       >

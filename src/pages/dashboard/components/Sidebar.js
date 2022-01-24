@@ -94,7 +94,7 @@ const NavbarItem = ({ item }) => {
 
 export const Sidebar = () => {
   return (
-    <Box bg="#333333" overflowY="scroll" className="h-screen" w={{ base: 60 }}>
+    <Box bg="brand.dark" overflowY="scroll" h="100vh" w={{ base: 60 }}>
       <LogoLink />
 
       <Box w={{ base: "auto" }}>

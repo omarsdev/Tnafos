@@ -115,7 +115,10 @@ const ProposalCard = () => {
     <>
       <Center py="5">
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
+          rounded="3xl"
+          shadow="2xl"
+          position="relative"
+          bg="brand.white"
           w="500px"
           h="1250px"
         >

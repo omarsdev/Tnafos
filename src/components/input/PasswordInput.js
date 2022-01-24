@@ -33,7 +33,8 @@ export const PasswordInput = ({
           focusBorderColor="#F8B916"
           borderColor={!error ? "#AEAEAE" : "red"}
           backgroundColor="#fff"
-          className="rounded-3xl select-none"
+          rounded="3xl"
+          userSelect="none"
           borderRadius="25"
           placeholder={placeHolder}
           type={show ? "text" : "password"}
@@ -46,7 +47,8 @@ export const PasswordInput = ({
           focusBorderColor="#F8B916"
           borderColor={!error ? "#AEAEAE" : "red"}
           backgroundColor="#fff"
-          className="rounded-3xl select-none"
+          rounded="3xl"
+          userSelect="none"
           borderRadius="25"
           placeholder={placeHolder}
           value={value}
@@ -55,11 +57,7 @@ export const PasswordInput = ({
           {...rest}
         />
       )}
-      <InputRightElement
-        width="3rem"
-        onClick={handleClickEye}
-        className="cursor-pointer"
-      >
+      <InputRightElement width="3rem" onClick={handleClickEye} cursor="pointer">
         {show ? <Eye /> : <EyeOff />}
       </InputRightElement>
     </InputGroup>

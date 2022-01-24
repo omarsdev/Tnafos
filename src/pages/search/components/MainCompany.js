@@ -8,8 +8,8 @@ import Login from "../../../assets/images/login.jpg";
 
 export const MainCompany = () => {
   return (
-    <Box w="300px" px="20px" py="20px" className="shadow-2xl rounded-3xl">
-      <Image src={Login} w="100%" height="280px" className="rounded-3xl" />
+    <Box w="300px" px="20px" py="20px" shadow="2xl" rounded="3xl">
+      <Image src={Login} w="100%" height="280px" rounded="3xl" />
       <Text fontSize="22px" mt="30px">
         Company Name
       </Text>
@@ -19,83 +19,117 @@ export const MainCompany = () => {
         Native combines the best parts of native development with React, a
         best-in-class JavaScript library for building user interfaces.
       </Text>
-      <Box h="1px" className="w-full" bgColor="#AEAEAE" mt="15px" />
+      <Box h="1px" w="full" bgColor="#AEAEAE" mt="15px" />
       <Box mt="15px">
         <Flex direction="row">
           <Box
             borderRightWidth="1px"
             borderRightColor="#AEAEAE"
+            display="flex"
             flex={1}
-            className="flex flex-col justify-center items-center"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
           >
-            <Text className="text-CPrimary" fontSize="25px">
+            <Text color="brand.primary" fontSize="25px">
               5+
             </Text>
             <Text fontSize="24px">Year</Text>
           </Box>
-          <Box flex={1} className="flex flex-col justify-center items-center">
-            <Text className="text-CPrimary" fontSize="25px">
+          <Box
+            display="flex"
+            flex={1}
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text color="brand.primary" fontSize="25px">
               4.6
             </Text>
             <Text fontSize="24px">Review</Text>
           </Box>
         </Flex>
       </Box>
-      <Box h="1px" className="w-full" bgColor="#AEAEAE" mt="15px" />
+      <Box h="1px" w="full" bgColor="#AEAEAE" mt="15px" />
       <Box mt="15px">
         <Flex direction="row">
           <Box
             borderRightWidth="1px"
             borderRightColor="#AEAEAE"
+            display="flex"
             flex={1}
-            className="flex flex-col justify-center items-center"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
           >
-            <Text className="text-CPrimary" fontSize="25px">
+            <Text color="brand.primary" fontSize="25px">
               60+
             </Text>
             <Text fontSize="24px">Client</Text>
           </Box>
-          <Box flex={1} className="flex flex-col justify-center items-center">
-            <Text className="text-CPrimary" fontSize="25px">
+          <Box
+            display="flex"
+            flex={1}
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text color="brand.primary" fontSize="25px">
               97
             </Text>
             <Text fontSize="24px">Project</Text>
           </Box>
         </Flex>
       </Box>
-      <Box h="1px" className="w-full" bgColor="#AEAEAE" mt="15px" />
+      <Box h="1px" w="full" bgColor="#AEAEAE" mt="15px" />
       <Flex justifyContent="space-between" mt="30px">
         <Box
           w="50px"
           h="50px"
-          className="w-full h-full rounded-full border-CPrimary flex justify-center items-center"
+          rounded="full"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          borderColor="brand.primary"
           borderWidth="1px"
         >
-          <Linkedin className="w-5 h-5" />
+          <Linkedin w="5" h="5" />
         </Box>
         <Box
           w="50px"
           h="50px"
-          className="w-full h-full rounded-full border-CPrimary flex justify-center items-center"
+          rounded="full"
+          borderColor="brand.primary"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
           borderWidth="1px"
         >
-          <Twitter className="w-5 h-5" />
+          <Twitter w="5" h="5" />
         </Box>
         <Box
           w="50px"
           h="50px"
-          className="w-full h-full rounded-full border-CPrimary flex justify-center items-center"
+          rounded="full"
+          borderColor="brand.primary"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
           borderWidth="1px"
         >
-          <Mail className="w-5 h-5" />
+          <Mail w="5" h="5" />
         </Box>
         <Box
           w="50px"
           h="50px"
-          className="w-full h-full rounded-full border-CPrimary flex justify-center items-center"
+          rounded="full"
+          borderColor="brand.primary"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
           borderWidth="1px"
         >
-          <Link className="w-5 h-5" />
+          <Link w="5" h="5" />
         </Box>
       </Flex>
       <Box mt="15px">

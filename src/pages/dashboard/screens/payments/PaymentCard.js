@@ -120,7 +120,10 @@ const PaymentCard = () => {
     <>
       <Center py="5">
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
+          rounded="3xl"
+          shadow="2xl"
+          position="relative"
+          bg="brand.white"
           w="400px"
           h="300px"
         >

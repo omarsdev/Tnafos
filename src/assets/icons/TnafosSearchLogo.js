@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 export const TnafosSearchLogo = ({ height = "70" }) => {
+  const history = useHistory();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

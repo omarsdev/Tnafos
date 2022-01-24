@@ -9,7 +9,10 @@ const ServiceCard = ({ info }) => {
   return (
     <Center py="5">
       <Box
-        className="rounded-3xl shadow-2xl relative bg-white"
+        rounded="3xl"
+        shadow="2xl"
+        position="relative"
+        bg="brand.white"
         w="300px"
         h="340px"
       >
@@ -23,7 +26,7 @@ const ServiceCard = ({ info }) => {
             h="160px"
             marginTop={"10px"}
           />
-          <Box className="flex flex-col justify-center">
+          <Box display="flex" flexDirection="column" justifyContent="center">
             <Text>{info?.name}</Text>
             <Text color="#007BFF">Price : {info?.price} SAR</Text>
 

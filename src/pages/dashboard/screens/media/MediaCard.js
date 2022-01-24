@@ -9,7 +9,10 @@ const MediaCard = ({ info }) => {
   return (
     <Center py="5">
       <Box
-        className="rounded-3xl shadow-2xl relative bg-white"
+        rounded="3xl"
+        shadow="2xl"
+        position="relative"
+        bg="brand.white"
         w="300px"
         h="250px"
       >
@@ -23,7 +26,12 @@ const MediaCard = ({ info }) => {
             h="160px"
             marginTop={"10px"}
           />
-          <Box className="flex flex-col justify-center" w="full">
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            w="full"
+          >
             <Text>{info?.file_name}</Text>
             <Text color="#007BFF">UUID : {info?.uuid} SAR</Text>
             <Text>{info?.url}</Text>

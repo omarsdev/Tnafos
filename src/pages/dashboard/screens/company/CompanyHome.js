@@ -151,9 +151,11 @@ const CompanyHome = () => {
             <GridItem>
               <VStack w="full" spacing="10">
                 <Box
-                  className="rounded-3xl shadow-2xl relative bg-white"
+                  position="relative"
+                  bg="brand.white"
+                  shadow="2xl"
                   w="250px"
-                  h="350px"
+                  // h="350px"
                   border="silver"
                   borderRadius="2xl"
                   boxShadow="2xl"
@@ -404,7 +406,7 @@ const CompanyHome = () => {
 
             <Stack>
               {errors?.message && (
-                <Text className="text-center mt-4" color="red">
+                <Text textAlign="center" mt="1rem" color="red">
                   {errors?.message}
                 </Text>
               )}

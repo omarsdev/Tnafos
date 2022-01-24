@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, FormLabel } from "@chakra-ui/react";
 
 import {
   RegularInputControl,
@@ -9,8 +9,8 @@ import {
 
 export const CustomAddForm = ({ listForm, control, register }) => {
   return listForm.map((element) => (
-    <Box className="mt-4">
-      <label className="w-32 text-left text-gray-500 pl-3">
+    <Box mt="1rem">
+      <FormLabel w="8rem" textAlign="left" color="gray.500" pl="0.75rem">
         {element.head}
         {element.isPassword ? (
           <PasswordInputControl
@@ -42,7 +42,7 @@ export const CustomAddForm = ({ listForm, control, register }) => {
             inputType={element.inputType}
           />
         )}
-      </label>
+      </FormLabel>
     </Box>
   ));
 };

@@ -33,9 +33,6 @@ export const Navbar = () => {
     setUserData(null);
     history.go(0);
   };
-  // const handlePress = () => {
-  //   alert("hit");
-  // };
 
   return (
     <Flex mx={10} my={4} h={"8vh"}>
@@ -72,14 +69,29 @@ export const Navbar = () => {
                 as={Button}
                 rightIcon={<FaChevronDown />}
                 bg="transparent"
-                _hover="transparent"
-                className="hover:bg-CWhite focus:bg-CWhite"
+                _hover={{
+                  backgroundColor: "brand.white",
+                }}
+                _focus={{
+                  backgroundColor: "brand.white",
+                }}
               />
               <MenuList w="28">
                 <Link to={`/dashboard/user/profile`}>
-                  <MenuItem className="hover:bg-gray-200">My Profile</MenuItem>
+                  <MenuItem
+                    _hover={{
+                      backgroundColor: "gray-200",
+                    }}
+                  >
+                    My Profile
+                  </MenuItem>
                 </Link>
-                <MenuItem onClick={handleLogOut} className="hover:bg-gray-200">
+                <MenuItem
+                  onClick={handleLogOut}
+                  _hover={{
+                    backgroundColor: "gray-200",
+                  }}
+                >
                   Log out
                 </MenuItem>
               </MenuList>

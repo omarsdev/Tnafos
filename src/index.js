@@ -9,35 +9,57 @@ import {
 } from "react-icons/fa";
 
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
+import { Box, Text } from "@chakra-ui/react";
+
+const TemplateStyle = ({ backgroundColor, msg, children }) => {
+  return (
+    <Box
+      rounded="lg"
+      h="4rem"
+      w="18rem"
+      mb="2rem"
+      display="flex"
+      alignItems="baseline"
+      flexWrap="wrap"
+      alignContent="center"
+      pl="0.5rem"
+      gap="0.5rem"
+      bg={backgroundColor}
+    >
+      {children}
+      <Text
+        display="flex"
+        flexDirection="row"
+        justifyContent="center"
+        fontSize="1.125rem"
+        lineHeight="1.75rem"
+        color="brand.white"
+      >
+        {msg}
+      </Text>
+    </Box>
+  );
+};
 
 const AlertTemplate = ({ options, message }) => {
   return (
     <>
       {options.type === "success" && (
-        <div className="bg-green-600 rounded-lg h-16 w-72 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
-          <FaCheckCircle className="text-white " />
-          <p className="justify-center flex flex-row text-lg text-white">
-            {message}
-          </p>
-        </div>
+        <TemplateStyle backgroundColor="green.600" msg={message}>
+          <FaCheckCircle color="brand.white" />
+        </TemplateStyle>
       )}
 
       {options.type === "info" && (
-        <div className="bg-blue-500 rounded-lg h-16 w-72 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
-          <FaInfoCircle className="text-white " />{" "}
-          <p className="justify-center flex flex-row text-lg text-white">
-            {message}
-          </p>
-        </div>
+        <TemplateStyle backgroundColor="blue.600" msg={message}>
+          <FaInfoCircle color="brand.white" />
+        </TemplateStyle>
       )}
 
       {options.type === "error" && (
-        <div className="bg-red-500 rounded-lg h-16 w-72 mb-8 flex items-baseline flex-wrap content-center pl-2 gap-2">
-          <FaExclamationCircle className="text-white " />
-          <p className="justify-center flex flex-row text-lg text-white">
-            {message}
-          </p>
-        </div>
+        <TemplateStyle backgroundColor="red.600" msg={message}>
+          <FaExclamationCircle color="brand.white" />
+        </TemplateStyle>
       )}
     </>
   );

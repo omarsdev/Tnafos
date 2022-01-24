@@ -32,16 +32,16 @@ const MyProfile = () => {
         p={6}
         textAlign={"center"}
       >
-        <Text className="py-2 text-gray-600 font-semibold">
+        <Text color="gray.600" pt="0.5rem" pb="0.5rem" fontWeight="600">
           Name :{profile?.first_name} {profile?.last_name}
         </Text>
-        <Text className="py-2 text-gray-600 font-semibold">
+        <Text color="gray.600" pt="0.5rem" pb="0.5rem" fontWeight="600">
           Email: {profile?.email}
         </Text>
-        <Text className="py-2 text-gray-600 font-semibold">
+        <Text color="gray.600" pt="0.5rem" pb="0.5rem" fontWeight="600">
           Phone Number :{profile?.phone_number}
         </Text>
-        <Text className="py-2 text-gray-600 font-semibold">
+        <Text color="gray.600" pt="0.5rem" pb="0.5rem" fontWeight="600">
           UUID: {profile?.uuid}
         </Text>
       </Box>

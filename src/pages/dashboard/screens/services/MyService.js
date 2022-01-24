@@ -110,7 +110,10 @@ const MyService = () => {
     <>
       <Center py="5">
         <Box
-          className="rounded-3xl shadow-2xl relative bg-white"
+          rounded="3xl"
+          shadow="2xl"
+          position="relative"
+          bg="brand.white"
           w="400px"
           h="500px"
         >

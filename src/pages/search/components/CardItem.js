@@ -53,7 +53,10 @@ export const CardItem = ({ data, isSelected, isCompany }) => {
 
   return (
     <Box
-      className="rounded-3xl shadow-2xl relative bg-white"
+      rounded="3xl"
+      shadow="2xl"
+      position="relative"
+      backgroundColor="brand.white"
       // w="260px"
       // h="500px"
     >
@@ -94,7 +97,7 @@ export const CardItem = ({ data, isSelected, isCompany }) => {
                 <Link to={`${match.url}/${data.uuid}`}>
                   <SecondaryButton
                     name="View"
-                    // width={"120px"}
+                    width={"120px"}
                     onClick={() => setVendorsList(null)}
                   />
                 </Link>
@@ -102,7 +105,7 @@ export const CardItem = ({ data, isSelected, isCompany }) => {
 
               <PrimaryButton
                 name={addedToMyList ? "Added" : "Add To List"}
-                // width={"120px"}
+                width={"120px"}
                 onClick={addToMyListHandler}
                 loadingButton={loading}
                 buttonType="submit"

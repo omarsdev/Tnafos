@@ -123,7 +123,13 @@ const AddService = () => {
             register={register}
           />
 
-          <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
+          <HStack
+            mt="8"
+            display="flex"
+            flexDirection="row"
+            gap="0.5rem"
+            ml={"24"}
+          >
             <PrimaryButton
               name="ADD SERVICE"
               onClick={handleSubmit(createService)}
@@ -138,7 +144,7 @@ const AddService = () => {
           </HStack>
           <Box>
             {errors?.message && (
-              <Text className="text-center mt-4" color="red">
+              <Text textAlign="center" mt="1rem" color="red">
                 {errors?.message}
               </Text>
             )}
