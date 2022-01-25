@@ -39,9 +39,9 @@ export const MyList = () => {
           <Center mt="23px">
             <SecondaryButton
               name="PROCCED"
-              btnWidth="100%"
-              btnHeight="45px"
-              btnBg="brand.paper"
+              // btnWidth="100%"
+              // btnHeight="45px"
+              // btnBg="brand.paper"
             />
           </Center>
           <Box h="23px" />

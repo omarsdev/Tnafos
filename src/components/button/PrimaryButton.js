@@ -9,6 +9,7 @@ export const PrimaryButton = ({
   name,
   Logo,
   loadingButton,
+  buttonType,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
