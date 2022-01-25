@@ -64,9 +64,9 @@ export const CustomTable = ({
         w={{ base: "full", md: "full", lg: "full" }}
         height={{ base: 16, md: 20, lg: 20 }}
         my={{ base: 2, md: 4, lg: 4 }}
-        spacing={{ base: 3, md: 4, lg: 4 }}
+        spacing={{ base: 3, md: "none", lg: "none" }}
       >
-        <HStack pl={{ base: 1, md: 2, lg: 3 }}>
+        <HStack pl={{ base: 1, md: 2, lg: 2 }} justifyItems="baseline">
           <SecondaryButton
             rounded="full"
             width={{ base: 8, md: 28, lg: 28 }}
@@ -106,8 +106,8 @@ export const CustomTable = ({
           </InputGroup>
         </Box>
       </Flex>
-      <form>
-        <Table size={{ base: "xs", lg: "md" }} w="full">
+      <Box overflowY="scroll" overflowX="auto">
+        <Table size={{ base: "xs", lg: "md" }} minWidth="40">
           <Thead>
             <Tr bg="#333333" borderRadius="full">
               {thData.map((e, i) => (
@@ -163,7 +163,7 @@ export const CustomTable = ({
             ))}
           </Tbody>
         </Table>
-      </form>
+      </Box>
     </Box>
   );
 };

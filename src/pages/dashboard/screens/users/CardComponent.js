@@ -9,14 +9,7 @@ const CardComponent = ({ userData }) => {
   const history = useHistory();
 
   return (
-    <Box
-      rounded="3xl"
-      shadow="2xl"
-      bg="white"
-      position="relative"
-      h="350px"
-      width={["200", "250px", "350px"]}
-    >
+    <Box rounded="3xl" shadow="2xl" bg="white" position="relative">
       <VStack spacing="20px" mx="5%">
         <Image
           src={"https://bit.ly/sage-adebayo"}
@@ -24,7 +17,7 @@ const CardComponent = ({ userData }) => {
           objectFit="cover"
           rounded="3xl"
           w="100%"
-          h="160px"
+          h="200px"
           marginTop={"20px"}
         />
         <Box mr="0" fontSize={{ base: "sm", md: "md", lg: "large" }}>

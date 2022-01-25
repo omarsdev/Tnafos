@@ -78,8 +78,8 @@ const UserHome = () => {
             <CardComponent
               userData={el}
               key={idx}
-              h={{ base: 75, md: 80, lg: 87.5 }}
-              w={{ base: 60, md: 68, lg: 75 }}
+              h={{ base: 75, sm: 80, md: 80, lg: 87.5 }}
+              w={{ base: 60, sm: 72, lg: 75 }}
             />
           ))}
         </Grid>

@@ -116,14 +116,15 @@ const UserCard = () => {
     </Center>
   ) : (
     <>
-      <Center py={{ base: 1, lg: 2 }}>
+      <Center>
         <Box
+          my={{ base: 2, lg: 6 }}
           rounded="3xl"
           position="relative"
           bg="white"
           shadow="2xl"
-          w={{ base: 200, md: 300, lg: 350 }}
-          h={{ base: 350, md: 380, lg: 380 }}
+          w={{ base: 200, sm: 260, md: 300, lg: 350 }}
+          h={{ base: 350, sm: 360, md: 380, lg: 380 }}
         >
           <Image
             src={"https://bit.ly/sage-adebayo"}
