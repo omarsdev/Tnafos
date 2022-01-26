@@ -131,7 +131,12 @@ const CompanyHome = () => {
       <Box w="full" overflowY="scroll" padding="10">
         <Heading
           textColor="gray.600"
-          fontSize="xx-large"
+          fontSize={{
+            base: "large",
+            sm: "large",
+            md: "x-large",
+            lg: "xx-large",
+          }}
           fontWeight="lg"
           alignItems="baseline"
         >
@@ -140,36 +145,48 @@ const CompanyHome = () => {
 
         {!companyInfo ? (
           <Center h="70vh" w="100%">
-            <Spinner size="xl" color="#F8B916" />
+            <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
           </Center>
         ) : (
-          <Grid templateColumns="repeat(3, 1fr)" gap={5} mt="10">
-            <GridItem colSpan={2}>
+          <Grid
+            templateColumns={{
+              base: "repeat(1,1fr)",
+              md: "repeat(2,1fr)",
+              lg: "repeat(3, 1fr)",
+            }}
+            gap={{ base: 0.5, md: 0.5, lg: 2 }}
+            mt={{ base: 4, sm: 4, md: 8, lg: 10 }}
+          >
+            <GridItem colSpan={{ base: 1, md: 1, lg: 2 }}>
               <CompanyCard Data={companyInfo} />
             </GridItem>
 
-            <GridItem>
-              <VStack w="full" spacing="10">
+            <GridItem mt={{ base: 4, sm: "4", md: "none" }}>
+              <VStack w="full" spacing="15px">
                 <Box
                   className="rounded-3xl shadow-2xl relative bg-white"
-                  w="250px"
-                  h="350px"
+                  w={{ base: 28, sm: 32, md: 40, lg: 52 }}
+                  h={{ base: 100, sm: 120, md: 180, lg: 150 }}
                   border="silver"
                   borderRadius="2xl"
                   boxShadow="2xl"
                   borderWidth="2px"
                   rounded="lg"
                   textAlign={"center"}
-                  h="44"
                 >
                   <Text
-                    fontSize="LG"
+                    fontSize={{
+                      base: "x-small",
+                      sm: "small",
+                      md: "md",
+                      lg: "large",
+                    }}
                     bg="#333333"
                     roundedTop="lg"
                     textColor="white"
                     fontFamily="inherit"
                     fontWeight="medium"
-                    paddingY="3"
+                    paddingY={{ base: 0.5, sm: 1, md: 2, lg: 2 }}
                   >
                     Review
                   </Text>
@@ -177,10 +194,15 @@ const CompanyHome = () => {
                   <Box>
                     <Text
                       textColor="#F8B916"
-                      fontSize="lg"
+                      fontSize={{
+                        base: "x-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
                       alignItems="baseline"
                       fontWeight="medium"
-                      py="5"
+                      paddingY={{ base: 1, sm: 2, md: 4, lg: 4 }}
                     >
                       rating
                       <Icon textColor="#F8B916">
@@ -188,7 +210,18 @@ const CompanyHome = () => {
                       </Icon>
                     </Text>
 
-                    <SecondaryButton leftIcon={<FaSync />} name="VIEW ALL" />
+                    <SecondaryButton
+                      leftIcon={<FaSync />}
+                      name="VIEW ALL"
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "x-small",
+                        md: "sm",
+                        lg: "md",
+                      }}
+                      width={{ base: 20, sm: 24, md: 32, lg: 36 }}
+                      height={{ base: 6, md: 8, lg: 10 }}
+                    />
                   </Box>
                 </Box>
                 <PrimaryButton
@@ -196,9 +229,15 @@ const CompanyHome = () => {
                   leftIcon={<FiEdit />}
                   onClick={onOpen}
                   name=" Update Company"
-                  width="200px"
-                  h="45px"
                   rounded="lg"
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "x-small",
+                    md: "sm",
+                    lg: "md",
+                  }}
+                  width={{ base: 24, sm: 32, md: 36, lg: 40 }}
+                  height={{ base: 6, sm: 8, md: 8, lg: 10 }}
                 />
               </VStack>
             </GridItem>
@@ -213,7 +252,7 @@ const CompanyHome = () => {
         <ModalContent>
           <ModalHeader
             fontWeight="medium"
-            fontSize="x-large"
+            fontSize={{ base: "small", sm: "md", md: "large", lg: "xl" }}
             fontFamily="inhirit"
             textColor="#F8B916"
           >
@@ -225,8 +264,7 @@ const CompanyHome = () => {
               align="flex-end"
               w="full"
               alignItems="baseline"
-              mb="14"
-              mt="5"
+              my={{ base: 2, sm: 4, md: 6, lg: 8 }}
             >
               <input
                 type="file"
@@ -236,6 +274,14 @@ const CompanyHome = () => {
               <Spacer />
               <SecondaryButton
                 name="Upload File"
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 8, md: 12 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
                 // onClick={uploadFile}
               />
             </HStack>
@@ -388,28 +434,6 @@ const CompanyHome = () => {
               />
             </CustomEditForm>
           </ModalBody>
-          <ModalFooter my="5">
-            <PrimaryButton
-              name="Update"
-              onClick={handleSubmit(onUpdateCompany)}
-              loadingButton={isUpdating}
-              buttonType="submit"
-            />
-
-            <SecondaryButton
-              name="Cancel"
-              onClick={onCancelHandler}
-              buttonType="button"
-            />
-
-            <Stack>
-              {errors?.message && (
-                <Text className="text-center mt-4" color="red">
-                  {errors?.message}
-                </Text>
-              )}
-            </Stack>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
