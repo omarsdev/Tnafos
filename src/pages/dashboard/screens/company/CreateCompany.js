@@ -47,24 +47,25 @@ const CreateCompany = () => {
   return (
     <Box overflowY="scroll" w="full">
       <Box
-        px="20"
-        mt="6"
+        px={{ base: 1, md: 2 }}
+        mt={{ base: 1, md: 3 }}
         boxShadow="2xl"
         rounded="3xl"
-        w="750px"
-        ml="40"
+        w={{ base: 230, sm: 400, md: 550, lg: 700 }}
+        ml={{ base: 12, sm: 16, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading
           color="#F8B916"
-          fontSize="3xl"
+          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
-          pt="4"
+          pt={{ base: 4, sm: 8, md: 6, lg: 8 }}
+          ml={{ base: 2, sm: 4, md: 4, lg: 6 }}
         >
           Fill in your company info
         </Heading>
-        <Center mt="10">
+        <Center mx={{ base: "4%", md: "10%" }}>
           <form>
             <CustomAddForm
               listForm={[
@@ -205,22 +206,31 @@ const CreateCompany = () => {
               control={control}
               register={register}
             />
+            <Box spacing="10px" py={{ base: 2, md: 4, lg: 8 }}>
+              <PrimaryButton
+                colorScheme="yellow"
+                m="5"
+                ml="96"
+                name="SAVE"
+                buttonType="submit"
+                onClick={handleSubmit(createCompany)}
+                width={{ base: 24, sm: 24, md: 36, lg: 40 }}
+                height={{ base: 8, md: 12 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              />
 
-            <PrimaryButton
-              colorScheme="yellow"
-              m="5"
-              ml="96"
-              name="SAVE"
-              buttonType="submit"
-              onClick={handleSubmit(createCompany)}
-            />
-
-            <Box>
-              {err?.message && (
-                <Text className="text-center mt-4" color="red">
-                  {err?.message}
-                </Text>
-              )}
+              <Box>
+                {err?.message && (
+                  <Text className="text-center mt-4" color="red">
+                    {err?.message}
+                  </Text>
+                )}
+              </Box>
             </Box>
           </form>
         </Center>

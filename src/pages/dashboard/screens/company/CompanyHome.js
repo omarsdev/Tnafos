@@ -151,10 +151,11 @@ const CompanyHome = () => {
           <Grid
             templateColumns={{
               base: "repeat(1,1fr)",
+              sm: "repeat(1,1fr)",
               md: "repeat(2,1fr)",
               lg: "repeat(3, 1fr)",
             }}
-            gap={{ base: 0.5, md: 0.5, lg: 2 }}
+            gap={{ base: 0.5, sm: 0.5, md: 0.5, lg: 2 }}
             mt={{ base: 4, sm: 4, md: 8, lg: 10 }}
           >
             <GridItem colSpan={{ base: 1, md: 1, lg: 2 }}>
@@ -164,15 +165,17 @@ const CompanyHome = () => {
             <GridItem mt={{ base: 4, sm: "4", md: "none" }}>
               <VStack w="full" spacing="15px">
                 <Box
-                  className="rounded-3xl shadow-2xl relative bg-white"
                   w={{ base: 28, sm: 32, md: 40, lg: 52 }}
-                  h={{ base: 100, sm: 120, md: 180, lg: 150 }}
+                  h={{ base: 100, sm: 120, md: 140, lg: 150 }}
                   border="silver"
                   borderRadius="2xl"
                   boxShadow="2xl"
                   borderWidth="2px"
-                  rounded="lg"
+                  rounded="xl"
                   textAlign={"center"}
+                  shadow="2xl"
+                  position="relative"
+                  bg="white"
                 >
                   <Text
                     fontSize={{
@@ -219,8 +222,8 @@ const CompanyHome = () => {
                         md: "sm",
                         lg: "md",
                       }}
-                      width={{ base: 20, sm: 24, md: 32, lg: 36 }}
-                      height={{ base: 6, md: 8, lg: 10 }}
+                      width={{ base: 20, sm: 24, md: 32, lg: 32 }}
+                      height={{ base: 6, md: 8, lg: 8 }}
                     />
                   </Box>
                 </Box>
@@ -236,7 +239,7 @@ const CompanyHome = () => {
                     md: "sm",
                     lg: "md",
                   }}
-                  width={{ base: 24, sm: 32, md: 36, lg: 40 }}
+                  width={{ base: 24, sm: 32, md: 36, lg: 44 }}
                   height={{ base: 6, sm: 8, md: 8, lg: 10 }}
                 />
               </VStack>

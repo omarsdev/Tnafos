@@ -40,7 +40,7 @@ const CompanyCard = ({ Data }) => {
       </Thead>
 
       <Tbody
-        fontSize={{ base: "xx-small", sm: "x-small", md: "small", lg: "md" }}
+        fontSize={{ base: "xx-small", sm: "x-small", md: "small", lg: "small" }}
       >
         <Tr blockSize="max-content">
           <Td textColor="blue.400" pl="2">
