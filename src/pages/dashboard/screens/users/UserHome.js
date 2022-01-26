@@ -39,7 +39,12 @@ const UserHome = () => {
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
-          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
+          fontSize={{
+            base: "large",
+            sm: "large",
+            md: "x-large",
+            lg: "xx-large",
+          }}
           fontWeight="lg"
           alignItems="baseline"
           mb={{ base: 2, md: 4 }}
@@ -50,7 +55,7 @@ const UserHome = () => {
         <IconButton
           as={Button}
           colorScheme="yellow"
-          size="md"
+          size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
           icon={<AiOutlinePlus />}
           rounded="full"
           onClick={() => {

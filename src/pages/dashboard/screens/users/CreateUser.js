@@ -8,6 +8,7 @@ import {
   Spacer,
   Center,
   Spinner,
+  VStack,
 } from "@chakra-ui/react";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -118,8 +119,8 @@ const CreateUser = () => {
         mt={{ base: 1, md: 3 }}
         boxShadow="2xl"
         rounded="3xl"
-        w={{ base: 300, md: 550, lg: 700 }}
-        ml={{ base: 12, md: 16, lg: 24 }}
+        w={{ base: 230, sm: 400, md: 550, lg: 700 }}
+        ml={{ base: 12, sm: 16, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading
@@ -127,18 +128,18 @@ const CreateUser = () => {
           fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
-          pt={{ base: 4, md: 6, lg: 8 }}
-          ml={{ base: 1, md: 2, lg: 4 }}
+          pt={{ base: 4, sm: 8, md: 6, lg: 8 }}
+          ml={{ base: 2, sm: 4, md: 4, lg: 6 }}
         >
           Add user
         </Heading>
 
         <Flex
-          w="60%"
+          w="80%"
           ml={{ base: 4, md: 16, lg: 20 }}
-          my={{ base: 8, md: 8 }}
+          pt={{ base: 4, sm: 4, md: 12, lg: 12 }}
           direction={{ base: "column", md: "row" }}
-          gap={{ base: 1, md: 8 }}
+          gap={{ base: 0.5, sm: 1, md: "none" }}
         >
           <input
             type="file"
@@ -150,12 +151,12 @@ const CreateUser = () => {
           <SecondaryButton
             // onClick={photoUploadHandler}
             name="Upload photo"
-            width={{ base: 24, md: 36, lg: 40 }}
-            height={{ base: 8, md: 12 }}
-            fontSize={{ base: "xs", md: "sm", lg: "md" }}
+            width={{ base: 24, sm: 24, md: 32, lg: 40 }}
+            height={{ base: 8, md: 8 }}
+            fontSize={{ base: "xx-small", md: "x-small", lg: "md" }}
           />
         </Flex>
-        <Center mx={{ base: "4%", md: "10%" }}>
+        <Center mx={{ base: "2%", md: "5%" }}>
           <form>
             <CustomAddForm
               listForm={[
@@ -213,16 +214,20 @@ const CreateUser = () => {
               register={register}
             />
 
-            <Box
+            <VStack
               flex
               flexDirection="column"
-              placeItems="center"
-              gap="2"
+              justify="center"
               mt={{ base: 4, md: 6, lg: 6 }}
               ml={{ base: 12, md: 20, lg: 24 }}
             >
               <Heading
-                fontSize={{ base: "md", md: "large", lg: "xl" }}
+                fontSize={{
+                  base: "small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
                 color="grey"
                 fontWeight="normal"
               >
@@ -234,30 +239,55 @@ const CreateUser = () => {
                 setValue={setChecked}
               />
 
-              <HStack>
+              <HStack justify="center">
                 <Link to="/" className="hover:underline text-CInfo">
-                  <Text fontSize={{ base: "sm", md: "md", lg: "large" }}>
+                  <Text
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "x-small",
+                      md: "small",
+                      lg: "md",
+                    }}
+                  >
                     terms of service
                   </Text>
                 </Link>{" "}
-                <Text fontSize={{ base: "sm", md: "md", lg: "large" }}>
+                <Text
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "x-small",
+                    md: "small",
+                    lg: "md",
+                  }}
+                >
                   and
                 </Text>
                 <Link to="/" className="hover:underline text-CInfo">
-                  <Text fontSize={{ base: "sm", md: "md", lg: "large" }}>
+                  <Text
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "x-small",
+                      md: "small",
+                      lg: "md",
+                    }}
+                  >
                     Privacy policy
                   </Text>
                 </Link>
               </HStack>
-              <Box>
-                <Heading
-                  fontSize={{ base: "md", md: "large", lg: "xl" }}
-                  color="grey"
-                  fontWeight="normal"
-                >
-                  Decleration of Valid Information
-                </Heading>
-              </Box>
+
+              <Heading
+                color="grey"
+                fontWeight="normal"
+                fontSize={{
+                  base: "small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              >
+                Decleration of Valid Information
+              </Heading>
               <CheckBox
                 name="I confirm that the information given in this form is true,
             complete and accurate."
@@ -270,27 +300,37 @@ const CreateUser = () => {
                   name="SAVE"
                   onClick={handleSubmit(addUser)}
                   loadingButton={isUpdating}
-                  width={{ base: 24, md: 36, lg: 40 }}
+                  width={{ base: 20, sm: 20, md: 32, lg: 36 }}
                   height={{ base: 8, md: 12 }}
-                  fontSize={{ base: "xs", md: "sm", lg: "md" }}
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "xx-small",
+                    md: "sm",
+                    lg: "md",
+                  }}
                 />
 
                 <SecondaryButton
                   onClick={handleCancel}
                   name="CANCEL"
-                  width={{ base: 24, md: 36, lg: 40 }}
+                  width={{ base: 20, sm: 20, md: 32, lg: 36 }}
                   height={{ base: 8, md: 12 }}
-                  fontSize={{ base: "xs", md: "sm", lg: "md" }}
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "xx-small",
+                    md: "sm",
+                    lg: "md",
+                  }}
                 />
               </HStack>
-            </Box>
+            </VStack>
           </form>
         </Center>
       </Box>
     </Box>
   ) : (
     <Center h="100vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "small", md: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   );
 };

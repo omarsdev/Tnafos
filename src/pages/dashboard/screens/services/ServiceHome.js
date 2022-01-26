@@ -39,7 +39,12 @@ const ServiceHome = () => {
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
-          fontSize="xx-large"
+          fontSize={{
+            base: "large",
+            sm: "large",
+            md: "x-large",
+            lg: "xx-large",
+          }}
           fontWeight="lg"
           alignItems="baseline"
         >
@@ -49,7 +54,7 @@ const ServiceHome = () => {
         <IconButton
           as={Button}
           colorScheme="yellow"
-          size="lg"
+          size={{ base: "xx-small", sm: "xx-small", md: "md", lg: "large" }}
           icon={<AiOutlinePlus />}
           rounded="full"
           onClick={() => {
@@ -60,12 +65,26 @@ const ServiceHome = () => {
 
       {!servicesList ? (
         <Center h="70vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
+          <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
         </Center>
       ) : (
-        <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
+        <Grid
+          templateColumns={{
+            base: "repeat(1,1fr)",
+            md: "repeat(2,1fr)",
+            lg: "repeat(3, 1fr)",
+          }}
+          gap={{ base: 2, md: 2, lg: 4 }}
+          mb={{ base: 1, md: 3, lg: 5 }}
+          ml={{ base: 3, md: "none", lg: "none" }}
+        >
           {servicesList.map((service, idx) => (
-            <ServiceCard info={service} key={idx} />
+            <ServiceCard
+              info={service}
+              key={idx}
+              h={{ base: 80, sm: 80, md: 82, lg: 86 }}
+              w={{ base: 60, sm: 76, lg: 76 }}
+            />
           ))}
         </Grid>
       )}

@@ -7,7 +7,7 @@ import {
   Spinner,
   Text,
   useDisclosure,
-  Stack,
+  VStack,
   Flex,
   Image,
   Drawer,
@@ -19,7 +19,7 @@ import {
   HStack,
   Spacer,
 } from "@chakra-ui/react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { CustomEditForm, CustomAddForm } from "../../components";
@@ -110,9 +110,13 @@ const MyService = () => {
     <>
       <Center py="5">
         <Box
-          className="rounded-3xl shadow-2xl relative bg-white"
-          w="400px"
-          h="500px"
+          my={{ base: 2, lg: 6 }}
+          rounded="3xl"
+          position="relative"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 160, sm: 200, md: 300, lg: 350 }}
+          h={{ base: 300, sm: 320, md: 380, lg: 400 }}
         >
           <Image
             src={"https://bit.ly/sage-adebayo"}
@@ -120,28 +124,33 @@ const MyService = () => {
             objectFit="cover"
             roundedTop="3xl"
             w="100%"
-            h="220px"
-            layout={"fill"}
+            h={{ base: 36, md: 40 }}
+            layout={"cover"}
           />
-          <Stack mr="0" h="270px" mx="5%">
-            <Text mt="1" fontSize="x-large" textColor="gray.600">
-              {service?.name}
-            </Text>
-            <Text color="#007BFF">Price: {service?.price} SAR</Text>
-            <Text fontSize="large" textColor="gray.600">
-              Description:{service?.description}
-            </Text>
-            <Text fontSize="large" textColor="gray.600">
-              Category-id: {service?.category.uuid}
-            </Text>
-            <Text fontSize="large" textColor="gray.600">
-              Type :{service?.type}
-            </Text>
-            <Flex justify={"center"}>
+          <VStack>
+            <Box
+              mr="0"
+              mx="5%"
+              mt={{ base: 1, md: 2 }}
+              fontSize={{ base: "x-small", sm: "small", md: "md", lg: "large" }}
+            >
+              <Text mt="1" textColor="gray.600">
+                {service?.name}
+              </Text>
+              <Text color="#007BFF">Price: {service?.price} SAR</Text>
+              <Text textColor="gray.600">
+                Description:{service?.description}
+              </Text>
+              <Text textColor="gray.600">
+                Category-id: {service?.category.uuid}
+              </Text>
+              <Text textColor="gray.600">Type :{service?.type}</Text>
+            </Box>
+            <Flex justify={"center"} pb="8px">
               <IconButton
                 justify={"center"}
-                mb={3}
-                fontSize={"large"}
+                mb="5px"
+                fontSize={{ base: "small", sm: "sm", md: "md", lg: "large" }}
                 rounded={"full"}
                 bg={"#F8B916"}
                 color={"white"}
@@ -158,7 +167,7 @@ const MyService = () => {
                 onClick={onOpen}
               />
             </Flex>
-          </Stack>
+          </VStack>
         </Box>
       </Center>
 

@@ -65,90 +65,118 @@ const AddService = () => {
   }, []);
 
   return categoriesList ? (
-    <Box boxShadow="2xl" rounded="3xl" boxSize="2xl">
-      <Box px="20" mt="10">
+    <Box overflowY="scroll" w="full">
+      <Box
+        px={{ base: 1, md: 2 }}
+        mt={{ base: 1, md: 3 }}
+        boxShadow="2xl"
+        rounded="3xl"
+        w={{ base: 230, sm: 400, md: 550, lg: 700 }}
+        ml={{ base: 12, sm: 16, md: 16, lg: 24 }}
+        bg="white"
+      >
         <Heading
           color="#F8B916"
-          fontSize="x-large"
+          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
+          pt={{ base: 4, sm: 8, md: 6, lg: 8 }}
+          ml={{ base: 2, sm: 4, md: 4, lg: 6 }}
         >
           New Service
         </Heading>
 
-        <form mt="5">
-          <CustomAddForm
-            listForm={[
-              {
-                head: "Name of service : ",
-                placeHolder: "Enter first name : ",
-                name: "name",
-                err: err,
-                inputType: "text",
-              },
-              {
-                head: "Description : ",
-                placeHolder: "Enter Description : ",
-                name: "description",
-                inputType: "text",
-                err: err,
-              },
-              {
-                head: "Category : ",
-                placeHolder: "Select category",
-                name: "category_id",
-                err: err,
-                isSelect: true,
-                optionList: categoriesList,
-                value: "uuid",
-                key: "uuid",
-                displayValue: "name",
-              },
-              {
-                head: "Price : ",
-                placeHolder: "Enter Price : ",
-                name: "price",
-                inputType: "number",
-                err: err,
-              },
-              {
-                head: "Type : ",
-                placeHolder: "Enter Type : ",
-                name: "type",
-                inputType: "text",
-                err: err,
-              },
-            ]}
-            control={control}
-            register={register}
-          />
-
-          <HStack mt="8" className="flex flex-row gap-2" ml={"24"}>
-            <PrimaryButton
-              name="ADD SERVICE"
-              onClick={handleSubmit(createService)}
-              buttonType="submit"
+        <Center mx={{ base: "4%", md: "10%" }}>
+          <form>
+            <CustomAddForm
+              listForm={[
+                {
+                  head: "Name of service : ",
+                  placeHolder: "Enter first name : ",
+                  name: "name",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Description : ",
+                  placeHolder: "Enter Description : ",
+                  name: "description",
+                  inputType: "text",
+                  err: err,
+                },
+                {
+                  head: "Category : ",
+                  placeHolder: "Select category",
+                  name: "category_id",
+                  err: err,
+                  isSelect: true,
+                  optionList: categoriesList,
+                  value: "uuid",
+                  key: "uuid",
+                  displayValue: "name",
+                },
+                {
+                  head: "Price : ",
+                  placeHolder: "Enter Price : ",
+                  name: "price",
+                  inputType: "number",
+                  err: err,
+                },
+                {
+                  head: "Type : ",
+                  placeHolder: "Enter Type : ",
+                  name: "type",
+                  inputType: "text",
+                  err: err,
+                },
+              ]}
+              control={control}
+              register={register}
             />
 
-            <SecondaryButton
-              name="Cancel"
-              onClick={handleCancel}
-              buttonType="button"
-            />
-          </HStack>
-          <Box>
-            {errors?.message && (
-              <Text className="text-center mt-4" color="red">
-                {errors?.message}
-              </Text>
-            )}
-          </Box>
-        </form>
+            <HStack spacing="10px" py={{ base: 2, md: 4, lg: 8 }}>
+              <PrimaryButton
+                name="ADD SERVICE"
+                onClick={handleSubmit(createService)}
+                buttonType="submit"
+                width={{ base: 24, sm: 24, md: 36, lg: 40 }}
+                height={{ base: 8, md: 12 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              />
+
+              <SecondaryButton
+                name="Cancel"
+                onClick={handleCancel}
+                buttonType="button"
+                width={{ base: 24, sm: 24, md: 36, lg: 40 }}
+                height={{ base: 8, md: 12 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              />
+            </HStack>
+            <Box>
+              {errors?.message && (
+                <Text className="text-center mt-4" color="red">
+                  {errors?.message}
+                </Text>
+              )}
+            </Box>
+          </form>
+        </Center>
       </Box>
     </Box>
   ) : (
     <Center h="100vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "small", md: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   );
 };
