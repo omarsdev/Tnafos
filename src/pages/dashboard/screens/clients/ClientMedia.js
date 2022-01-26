@@ -40,16 +40,20 @@ const ClientMedia = () => {
 
   return !media ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : media.length === 0 ? (
     <NoData component={"clientshome"} />
   ) : (
     <Center py="5">
       <Box
-        className="rounded-3xl relative bg-white shadow-2xl"
-        w="350px"
-        h="200px"
+        my={{ base: 2, lg: 6 }}
+        rounded="3xl"
+        position="relative"
+        bg="white"
+        shadow="2xl"
+        w={{ base: 200, sm: 260, md: 300, lg: 350 }}
+        h={{ base: 350, sm: 360, md: 380, lg: 380 }}
       >
         <VStack spacing="20px" mx="5%" mt="5">
           {media.map((el, idx) => (
@@ -60,10 +64,9 @@ const ClientMedia = () => {
             </Stack>
           ))}
 
-          <Box>
+          <Box fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}>
             <IconButton
               justify={"center"}
-              fontSize={"lg"}
               rounded={"full"}
               bg={"#F8B916"}
               color={"white"}
