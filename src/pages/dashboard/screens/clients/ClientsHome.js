@@ -54,7 +54,7 @@ const ClientsHome = () => {
           <IconButton
             as={Button}
             colorScheme="yellow"
-            size="lg"
+            size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
             icon={<AiOutlinePlus />}
             rounded="full"
           ></IconButton>

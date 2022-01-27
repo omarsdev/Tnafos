@@ -78,7 +78,7 @@ const ClientMedia = () => {
               }}
               icon={<AiOutlineHome />}
               onClick={() => {
-                history.push("/dashboard/clientshome");
+                history.push("/dashboard/client");
               }}
             />
           </Box>

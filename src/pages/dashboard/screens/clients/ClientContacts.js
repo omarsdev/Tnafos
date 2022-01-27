@@ -48,15 +48,26 @@ export const ClientContacts = () => {
       <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
-    <Center py="5">
+    <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
       <Box
-        className="rounded-3xl relative bg-white shadow-2xl"
-        w="400px"
-        h="450px"
+        rounded="3xl"
+        position="relative"
+        bg="white"
+        shadow="2xl"
+        w={{ base: 260, sm: 350, md: 450, lg: 550 }}
+        h={{ base: 260, sm: 360, md: 460, lg: 500 }}
       >
-        <VStack spacing="20px" mx="5%" mt="5">
+        <VStack spacing="20px" mx="5%" mt={{ base: 2, sm: 2, md: 4, lg: 4 }}>
           {card.map((el, idx) => (
-            <Stack key={idx}>
+            <Stack
+              key={idx}
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            >
               <Text py="1" textColor="gray.600">
                 Name: {el?.first_name}
                 {el?.last_name}
@@ -70,6 +81,7 @@ export const ClientContacts = () => {
 
           <Box>
             <IconButton
+              position="relative"
               justify={"center"}
               fontSize={"lg"}
               rounded={"full"}
@@ -83,7 +95,7 @@ export const ClientContacts = () => {
               }}
               icon={<AiOutlineHome />}
               onClick={() => {
-                history.push("/dashboard/clientshome");
+                history.push("/dashboard/client");
               }}
             />
           </Box>
