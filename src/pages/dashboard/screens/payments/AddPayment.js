@@ -34,7 +34,7 @@ const AddPayment = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/paymenthome");
+    history.push("/dashboard/payment");
   };
 
   return (

@@ -73,7 +73,7 @@ const AddPurchase = () => {
           pt="4"
           mb="12"
         >
-          Fill in this form to add new purchase-request.
+          Fill in this form to add purchase-request.
         </Heading>
 
         <form>
