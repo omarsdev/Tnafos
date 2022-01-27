@@ -36,15 +36,16 @@ const IncomingPurchases = () => {
     purIncomingList();
   }, []);
   return (
-    <Box w="full" overflowY="scroll" padding="10">
+    <Box w="full" overflowY="scroll" padding={{ base: 4, md: 4, lg: 6 }}>
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
-          fontSize="xx-large"
+          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
+          mb={{ base: 2, lg: 4 }}
         >
-          IncomingPurchases
+          Incoming Purchases
         </Heading>
       </HStack>
       <CustomTable

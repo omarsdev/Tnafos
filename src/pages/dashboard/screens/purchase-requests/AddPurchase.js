@@ -110,9 +110,28 @@ const AddPurchase = () => {
               name="SAVE"
               onClick={handleSubmit(createRequest)}
               loadingButton={isUpdating}
+              width={{ base: 16, sm: 20, md: 32, lg: 36 }}
+              height={{ base: 6, sm: 8, md: 12 }}
+              fontSize={{
+                base: "xx-small",
+                sm: "xx-small",
+                md: "sm",
+                lg: "md",
+              }}
             />
 
-            <SecondaryButton onClick={handleCancel} name="CANCEL" />
+            <SecondaryButton
+              onClick={handleCancel}
+              name="CANCEL"
+              width={{ base: 16, sm: 20, md: 32, lg: 36 }}
+              height={{ base: 6, sm: 8, md: 12 }}
+              fontSize={{
+                base: "xx-small",
+                sm: "xx-small",
+                md: "sm",
+                lg: "md",
+              }}
+            />
           </HStack>
         </form>
       </Box>

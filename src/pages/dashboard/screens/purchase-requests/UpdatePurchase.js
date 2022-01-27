@@ -16,7 +16,8 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from "@chakra-ui/react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { Tooltip } from "@chakra-ui/react";
+import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
 import { CustomAddForm, CustomEditForm } from "../../components";
@@ -58,7 +59,7 @@ const UpdatePurchase = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/purchaseshome");
+      history.push("/dashboard/purchase-request");
     }
   };
 
@@ -101,18 +102,29 @@ const UpdatePurchase = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
-      <Center py="5">
+      <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="350px"
-          h="300px"
+          rounded="3xl"
+          position="relative"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 200, sm: 300, md: 450, lg: 550 }}
+          h={{ base: 210, sm: 250, md: 300, lg: 320 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
+            <Box
+              mr="0"
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            >
               <Text textColor="gray.600">Id: {card?.id}</Text>
               <Text py="1" textColor="gray.600">
                 Details: {card?.details}
@@ -122,7 +134,7 @@ const UpdatePurchase = () => {
                 Services:
                 {card.services.map((el, idx) => (
                   <HStack key={idx}>
-                    <Text textColor="gray.600">[ {el?.service?.name}</Text>
+                    <Text textColor="gray.600">{el?.service?.name}</Text>
                     <Text textColor="gray.600">{el?.service?.description}</Text>
                     <Text textColor="gray.600">{el?.service?.price}</Text>
                     <Text textColor="gray.600">{el?.service?.type}]</Text>
@@ -131,22 +143,33 @@ const UpdatePurchase = () => {
               </Text>
             </Box>
 
-            <Flex justify={"center"} w="full" gap="15px">
-              <IconButton
-                justify={"center"}
-                fontSize={"lg"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<FiEdit />}
-                onClick={onOpen}
-              />
+            <Flex
+              justify={"center"}
+              w="full"
+              spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}
+            >
+              <Tooltip
+                label="edit purchase's info"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"lg"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<FiEdit />}
+                  onClick={onOpen}
+                />
+              </Tooltip>
             </Flex>
           </VStack>
         </Box>
