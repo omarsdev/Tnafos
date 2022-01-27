@@ -116,16 +116,27 @@ const ClientCard = () => {
     </Center>
   ) : (
     <>
-      <Center py="10">
+      <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="550px"
-          h="450px"
+          rounded="3xl"
+          position="relative"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 260, sm: 350, md: 450, lg: 550 }}
+          h={{ base: 260, sm: 360, md: 460, lg: 536 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
             {/* <Box mr="0"> */}
             <HStack w="full">
-              <Box ml="14">
+              <Box
+                ml="14"
+                fontSize={{
+                  base: "xx-small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              >
                 <Text py="1" textColor="gray.600">
                   Company Name: {card?.company_name}
                 </Text>
@@ -148,7 +159,7 @@ const ClientCard = () => {
               <Spacer />
 
               {/* <Flex justify={"center"} mt={-12}> */}
-              <VStack spacing="30px">
+              <VStack spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}>
                 <Tooltip
                   label="Show Contacts"
                   bg="white"
