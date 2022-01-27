@@ -110,18 +110,29 @@ const PaymentCard = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
-      <Center py="5">
+      <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="400px"
-          h="300px"
+          rounded="3xl"
+          position="relative"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 200, sm: 300, md: 450, lg: 550 }}
+          h={{ base: 210, sm: 250, md: 300, lg: 320 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
+            <Box
+              mr="0"
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            >
               <Text py="1" textColor="gray.600">
                 Amount: {card?.amount}
               </Text>
@@ -134,7 +145,11 @@ const PaymentCard = () => {
               <Text textColor="gray.600">UUID:{card?.uuid}</Text>
             </Box>
 
-            <Flex justify={"center"} w="full" gap="15px">
+            <Flex
+              justify={"center"}
+              w="full"
+              spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}
+            >
               <Tooltip
                 label="Show Media"
                 bg="white"
