@@ -15,13 +15,9 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+
+import { Tooltip } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { MdOutlinePermMedia } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
@@ -139,39 +135,53 @@ const PaymentCard = () => {
             </Box>
 
             <Flex justify={"center"} w="full" gap="15px">
-              <IconButton
-                justify={"center"}
-                fontSize={"lg"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<MdOutlinePermMedia />}
-                onClick={() => {
-                  history.push(`${match.url}/media`);
-                }}
-              />
+              <Tooltip
+                label="Show Media"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"lg"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<MdOutlinePermMedia />}
+                  onClick={() => {
+                    history.push(`${match.url}/media`);
+                  }}
+                />
+              </Tooltip>
 
-              <IconButton
-                justify={"center"}
-                fontSize={"lg"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<FiEdit />}
-                onClick={onOpen}
-              />
+              <Tooltip
+                label="edit payment"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <IconButton
+                  justify={"center"}
+                  fontSize={"lg"}
+                  rounded={"full"}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  icon={<FiEdit />}
+                  onClick={onOpen}
+                />
+              </Tooltip>
             </Flex>
           </VStack>
         </Box>

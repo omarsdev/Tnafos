@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, HStack, IconButton, Button } from "@chakra-ui/react";
+import { Tooltip } from "@chakra-ui/react";
+
 import { useRouteMatch, useHistory, Link } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 
@@ -9,8 +11,6 @@ import { AxiosInstance } from "../../../../api";
 const PaymentHome = () => {
   const [list, setList] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-
-  const [rowsNumber, setRowsNumber] = useState("10");
 
   const match = useRouteMatch();
   const history = useHistory();
@@ -45,13 +45,20 @@ const PaymentHome = () => {
           Payments
         </Heading>
         <Link to={`${match.url}/addpayment`}>
-          <IconButton
-            as={Button}
-            colorScheme="yellow"
-            size="lg"
-            icon={<AiOutlinePlus />}
-            rounded="full"
-          ></IconButton>
+          <Tooltip
+            label="add new payment"
+            bg="white"
+            placement="top"
+            color="#333333"
+          >
+            <IconButton
+              as={Button}
+              colorScheme="yellow"
+              size="lg"
+              icon={<AiOutlinePlus />}
+              rounded="full"
+            ></IconButton>
+          </Tooltip>
         </Link>
       </HStack>
       <CustomTable
