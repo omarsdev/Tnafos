@@ -82,7 +82,7 @@ const ClientCard = () => {
         message: "Customer's info has been updated!",
         type: "info",
       });
-      history.push(`/dashboard/clientsHome`);
+      history.push(`/dashboard/client`);
     } catch (err) {
       setIsUpdating(false);
       setErrors(err.response.data);
@@ -158,7 +158,6 @@ const ClientCard = () => {
               </Box>
               <Spacer />
 
-              {/* <Flex justify={"center"} mt={-12}> */}
               <VStack spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}>
                 <Tooltip
                   label="Show Contacts"
