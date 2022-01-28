@@ -126,8 +126,8 @@ const InvoiceCard = () => {
           position="relative"
           bg="white"
           shadow="2xl"
-          w={{ base: 260, sm: 350, md: 450, lg: 550 }}
-          h={{ base: 260, sm: 360, md: 460, lg: 536 }}
+          w={{ base: 200, sm: 350, md: 450, lg: 550 }}
+          h={{ base: 1550, sm: 2000, md: 2300, lg: 2600 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
             <Box
