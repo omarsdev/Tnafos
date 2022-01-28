@@ -27,7 +27,10 @@ export const PasswordInput = ({
   const handleChange = (event) => setValue(event.target.value);
 
   return (
-    <InputGroup width={width}>
+    <InputGroup
+      width={{ base: 150, sm: 250, md: 480, lg: 500 }}
+      height={{ base: 4, sm: 6, md: 8, lg: 10 }}
+    >
       {!value && !setValue ? (
         <ChakraInput
           focusBorderColor="#F8B916"
@@ -55,10 +58,11 @@ export const PasswordInput = ({
           {...rest}
         />
       )}
+
       <InputRightElement
-        width="3rem"
         onClick={handleClickEye}
         className="cursor-pointer"
+        width={{ base: 2, sm: 8, md: 12, lg: 20 }}
       >
         {show ? <Eye /> : <EyeOff />}
       </InputRightElement>
@@ -85,10 +89,11 @@ export const PasswordInputControl = ({
       }) => (
         <VStack>
           <PasswordInput
+            width={{ base: 150, sm: 250, md: 480, lg: 500 }}
+            height={{ base: 4, sm: 6, md: 8, lg: 10 }}
             placeholder={placeHolder}
             register={register(`${name}`, { required: true })}
             error={error || (errors && errors[name])}
-            width={width}
           />
           {error?.message && <Text color="#ff0000">{error?.message}</Text>}
           {errors &&

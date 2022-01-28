@@ -45,7 +45,7 @@ const AddPayment = () => {
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 230, sm: 400, md: 550, lg: 700 }}
-        ml={{ base: 12, sm: 16, md: 16, lg: 24 }}
+        ml={{ base: 4, sm: 16, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading

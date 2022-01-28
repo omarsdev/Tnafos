@@ -22,18 +22,29 @@ export const CustomSelect = ({
       render={({ field: { name }, fieldState: { error } }) => (
         <VStack>
           <Select
+            width={{ base: 150, sm: 250, md: 480, lg: 500 }}
+            height={{ base: 4, sm: 6, md: 8, lg: 10 }}
             focusBorderColor="#F8B916"
             borderColor={!error ? "#AEAEAE" : "red"}
             backgroundColor="#fff"
             className="rounded-3xl select-none"
             borderRadius="25"
             placeholder={placeHolder}
-            width={!width ? "100%" : width}
+            // width={!width ? "100%" : width}
             {...register(`${name}`, { required: true })}
             {...rest}
           >
             {optionList.map((e) => (
-              <option value={e[value]} key={e[key]}>
+              <option
+                value={e[value]}
+                key={e[key]}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              >
                 {e[displayValue]}
               </option>
             ))}
