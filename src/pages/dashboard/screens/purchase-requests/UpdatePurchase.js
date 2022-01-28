@@ -78,7 +78,7 @@ const UpdatePurchase = () => {
         message: "Purchase-request has been updated!",
         type: "info",
       });
-      history.push(`/dashboard/purchaseshome`);
+      history.push(`/dashboard/purchase-request`);
     } catch (err) {
       setIsUpdating(false);
       setErrors(err.response.data);
@@ -112,7 +112,7 @@ const UpdatePurchase = () => {
           position="relative"
           bg="white"
           shadow="2xl"
-          w={{ base: 200, sm: 300, md: 450, lg: 550 }}
+          w={{ base: 170, sm: 260, md: 450, lg: 550 }}
           h={{ base: 210, sm: 250, md: 300, lg: 320 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">

@@ -19,7 +19,7 @@ const OutgoingPurchases = () => {
       setList(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/purchaseshome");
+      history.push("/dashboard/purchase-request");
     }
   };
 
