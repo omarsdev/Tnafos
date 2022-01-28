@@ -126,7 +126,6 @@ const ClientCard = () => {
           h={{ base: 260, sm: 360, md: 460, lg: 536 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            {/* <Box mr="0"> */}
             <HStack w="full">
               <Box
                 ml="14"
