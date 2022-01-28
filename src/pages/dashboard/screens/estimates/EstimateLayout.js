@@ -7,6 +7,7 @@ import EstimateHome from "./EstimateHome";
 import EstimateCard from "./EstimateCard";
 import UpdateStatus from "./UpdateStatus";
 import ConvertToInvoice from "./ConvertToInvoice";
+import AddEstimate from "./AddEstimate";
 
 const EstimateLayout = () => {
   const match = useRouteMatch();
@@ -36,6 +37,7 @@ const EstimateLayout = () => {
       />
       <Route path={`${match.path}/outgoing/:uuid`} component={EstimateCard} />
       <Route path={`${match.path}/outgoing`} component={OutgoingEstimates} />
+      <Route path={`${match.path}/addestimate`} component={AddEstimate} />
     </Switch>
   );
 };

@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../../../../api/AxiosInstance";
 import { useHistory } from "react-router-dom";
-import { SecondaryButton, PrimaryButton } from "components";
-import { AlertContext } from "context";
+import { SecondaryButton, PrimaryButton } from "../../../../components";
+import { AlertContext } from "../../../../context/AlertContext";
 
 import { CustomAddForm } from "../../components";
 
-export const AddPurchase = () => {
+const AddEstimate = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -35,7 +35,7 @@ export const AddPurchase = () => {
         message: `New estimate has been added!`,
         type: "success",
       });
-      history.push("/dashboard/estimatehome");
+      history.push("/dashboard/estimate");
     } catch (err) {
       console.log(err);
       setIsUpdating(false);
@@ -49,23 +49,23 @@ export const AddPurchase = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/estimatehome");
+    history.push("/dashboard/estimate");
   };
 
   return (
-    <Box overflowY="scroll" w="full">
+    <Box height="full" w="full">
       <Box
         px={{ base: 1, md: 2 }}
         mt={{ base: 1, md: 3 }}
         boxShadow="2xl"
         rounded="3xl"
-        w={{ base: 230, sm: 400, md: 550, lg: 700 }}
-        ml={{ base: 4, sm: 16, md: 16, lg: 24 }}
+        w={{ base: 200, sm: 350, md: 550, lg: 700 }}
+        ml={{ base: 2, sm: 8, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading
           color="#F8B916"
-          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
+          fontSize={{ base: "sm", sm: "md", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
           pt={{ base: 4, sm: 8, md: 6, lg: 8 }}
@@ -96,7 +96,7 @@ export const AddPurchase = () => {
             register={register}
           />
 
-          <HStack spacing="10px" py="10" ml="40">
+          <HStack spacing="5px" py="10" justify="center">
             <PrimaryButton
               name="SAVE"
               onClick={handleSubmit(createEstimate)}
@@ -129,3 +129,4 @@ export const AddPurchase = () => {
     </Box>
   );
 };
+export default AddEstimate;

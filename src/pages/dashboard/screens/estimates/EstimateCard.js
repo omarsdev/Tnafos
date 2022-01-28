@@ -115,15 +115,26 @@ const EstimateCard = () => {
     </Center>
   ) : (
     <>
-      <Center py="5">
+      <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="500px"
-          h="1250px"
+          rounded="3xl"
+          position="relative"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 250, sm: 330, md: 450, lg: 550 }}
+          h={{ base: 850, sm: 1100, md: 1300, lg: 1400 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text fontSize="large">Estimate's details: </Text>
+            <Box
+              mr="0"
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            >
+              <Text fontWeight="bold">Estimate's details: </Text>
               <Text py="1" textColor="gray.600">
                 Subject: {card?.subject}
               </Text>

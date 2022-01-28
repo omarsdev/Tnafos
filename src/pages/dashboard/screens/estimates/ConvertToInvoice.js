@@ -97,19 +97,26 @@ const ConvertToInvoice = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
       <Center py="5">
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="400px"
-          h="200px"
+          my={{ base: 2, lg: 6 }}
+          rounded="3xl"
+          position="relative"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 170, sm: 260, md: 300, lg: 350 }}
+          h={{ base: 110, sm: 130, md: 160, lg: 200 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text fontSize="large">Date: {card?.date}</Text>
+            <Box
+              mr="0"
+              fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
+            >
+              <Text>Date: {card?.date}</Text>
             </Box>
             <Flex>
               <IconButton

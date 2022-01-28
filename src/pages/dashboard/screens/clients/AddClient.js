@@ -36,7 +36,7 @@ const AddClient = () => {
         message: `New client has been added!`,
         type: "success",
       });
-      history.push("/dashboard/clientshome");
+      history.push("/dashboard/client");
     } catch (err) {
       setIsUpdating(false);
       setErr(err.response.data.errors);
@@ -48,7 +48,7 @@ const AddClient = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/clientshome");
+    history.push("/dashboard/client");
   };
 
   return (
