@@ -64,7 +64,7 @@ const ClientCard = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/clientsHome");
+      history.push("/dashboard/client");
     }
   };
 

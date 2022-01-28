@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, HStack, Heading } from "@chakra-ui/react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { CustomTable } from "../../components";
 
@@ -25,13 +25,19 @@ const Outgoing = () => {
   }, []);
 
   return (
-    <Box w="full" overflowY="scroll" padding="10">
+    <Box w="full" overflowY="scroll" padding={{ base: 4, sm: 4, md: 4, lg: 6 }}>
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
-          fontSize="xx-large"
+          fontSize={{
+            base: "large",
+            sm: "large",
+            md: "x-large",
+            lg: "xx-large",
+          }}
           fontWeight="lg"
           alignItems="baseline"
+          mb={{ base: 2, lg: 4 }}
         >
           Outgoing Invoices
         </Heading>
