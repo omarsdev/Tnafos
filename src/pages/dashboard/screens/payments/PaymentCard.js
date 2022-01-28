@@ -62,7 +62,7 @@ const PaymentCard = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/paymenthome");
+      history.push("/dashboard/payment");
     }
   };
 

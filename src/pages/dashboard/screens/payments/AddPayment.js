@@ -40,23 +40,23 @@ const AddPayment = () => {
   return (
     <Box overflowY="scroll" w="full">
       <Box
-        px="20"
-        mt="6"
+        px={{ base: 1, md: 2 }}
+        mt={{ base: 1, md: 3 }}
         boxShadow="2xl"
         rounded="3xl"
-        w="750px"
-        ml="40"
+        w={{ base: 230, sm: 400, md: 550, lg: 700 }}
+        ml={{ base: 12, sm: 16, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading
           color="#F8B916"
-          fontSize="3xl"
+          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
-          pt="4"
-          mb="12"
+          pt={{ base: 4, sm: 8, md: 6, lg: 8 }}
+          ml={{ base: 2, sm: 4, md: 4, lg: 6 }}
         >
-          Fill in this form to add payment.
+          Fill in this form to add new payment
         </Heading>
 
         <form>

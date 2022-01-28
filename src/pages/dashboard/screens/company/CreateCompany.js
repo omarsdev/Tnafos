@@ -206,7 +206,7 @@ const CreateCompany = () => {
               control={control}
               register={register}
             />
-            <Box spacing="10px" py={{ base: 2, md: 4, lg: 8 }}>
+            <Box spacing="10px" py={{ base: 2, sm: 2, md: 4, lg: 8 }}>
               <PrimaryButton
                 colorScheme="yellow"
                 m="5"

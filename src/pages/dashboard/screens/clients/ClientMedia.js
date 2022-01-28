@@ -57,7 +57,10 @@ const ClientMedia = () => {
       >
         <VStack spacing="20px" mx="5%" mt="5">
           {media.map((el, idx) => (
-            <Stack key={idx}>
+            <Stack
+              key={idx}
+              fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
+            >
               <Text py="1" textColor="gray.600">
                 {el}
               </Text>

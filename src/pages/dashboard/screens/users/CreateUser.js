@@ -145,7 +145,14 @@ const CreateUser = () => {
             type="file"
             onChange={(ev) => handleFileInput(ev)}
             ref={inputRef}
-            fontSize={{ base: "xs", md: "sm", lg: "md" }}
+            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+            height={{ base: 8, md: 12 }}
+            fontSize={{
+              base: "xx-small",
+              sm: "xx-small",
+              md: "sm",
+              lg: "md",
+            }}
           />
           <Spacer />
           <SecondaryButton

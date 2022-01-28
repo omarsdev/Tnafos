@@ -116,19 +116,30 @@ const InvoiceCard = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
-      <Center py="5">
+      <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
         <Box
-          className="rounded-3xl relative bg-white shadow-2xl"
-          w="500px"
-          h="1250px"
+          rounded="3xl"
+          position="relative"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 260, sm: 350, md: 450, lg: 550 }}
+          h={{ base: 260, sm: 360, md: 460, lg: 536 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text fontSize="large">Invoice's details: </Text>
+            <Box
+              ml="14"
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            >
+              <Text fontWeight="bold">Invoice's details: </Text>
               <Text py="1" textColor="gray.600">
                 Subject: {card?.subject}
               </Text>
@@ -253,7 +264,7 @@ const InvoiceCard = () => {
 
               <Flex justify={"center"} w="full" gap="15px">
                 <Tooltip
-                  label="edit info"
+                  label="edit invoice"
                   bg="white"
                   placement="top"
                   color="#333333"

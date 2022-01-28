@@ -197,9 +197,28 @@ const MyService = () => {
                 type="file"
                 onChange={(e) => setPhoto(e.target.files[0])}
                 name="choose file"
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 8, md: 12 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
               />
               <Spacer />
-              <SecondaryButton name="Upload File" onClick={uploadFile} />
+              <SecondaryButton
+                name="Upload File"
+                onClick={uploadFile}
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 8, md: 12 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              />
             </HStack>
             <CustomEditForm
               isOpen={isOpen}
