@@ -6,6 +6,7 @@ import {
   InputRightElement,
   Text,
   VStack,
+  Box,
 } from "@chakra-ui/react";
 
 import { Eye, EyeOff } from "react-feather";
@@ -39,6 +40,7 @@ export const PasswordInput = ({
           className="rounded-3xl select-none"
           borderRadius="25"
           placeholder={placeHolder}
+          _placeholder={{ fontSize: { base: 12, sm: 16, md: 16, lg: 20 } }}
           type={show ? "text" : "password"}
           // {...register(`${name}`)}
           {...register}
@@ -52,20 +54,22 @@ export const PasswordInput = ({
           className="rounded-3xl select-none"
           borderRadius="25"
           placeholder={placeHolder}
+          _placeholder={{ fontSize: { base: 12, sm: 16, md: 16, lg: 20 } }}
           value={value}
           onChange={handleChange}
           type={show ? "text" : "password"}
           {...rest}
         />
       )}
-
-      <InputRightElement
-        onClick={handleClickEye}
-        className="cursor-pointer"
-        width={{ base: 2, sm: 8, md: 12, lg: 20 }}
-      >
-        {show ? <Eye /> : <EyeOff />}
-      </InputRightElement>
+      <Box fontSize={{ base: 12, sm: 16, md: 16, lg: 20 }}>
+        <InputRightElement
+          onClick={handleClickEye}
+          className="cursor-pointer"
+          width={{ base: 2, sm: 8, md: 12, lg: 20 }}
+        >
+          {show ? <Eye /> : <EyeOff />}
+        </InputRightElement>
+      </Box>
     </InputGroup>
   );
 };

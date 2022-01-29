@@ -44,8 +44,8 @@ const AddProposal = () => {
         mt={{ base: 1, md: 3 }}
         boxShadow="2xl"
         rounded="3xl"
-        w={{ base: 230, sm: 400, md: 550, lg: 700 }}
-        ml={{ base: 4, sm: 16, md: 16, lg: 24 }}
+        w={{ base: 230, sm: 340, md: 550, lg: 700 }}
+        ml={{ base: 2, sm: 16, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading

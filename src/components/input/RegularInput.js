@@ -34,6 +34,7 @@ export const RegularInput = ({
       type={inputType}
       {...register}
       {...rest}
+      _placeholder={{ fontSize: { base: 12, sm: 16, md: 16, lg: 20 } }}
     />
   ) : (
     <ChakraInput
@@ -51,6 +52,7 @@ export const RegularInput = ({
       type={inputType}
       autoComplete="off"
       autoFocus="off"
+      _placeholder={{ fontSize: { base: 12, sm: 16, md: 16, lg: 20 } }}
       {...rest}
     />
   );
