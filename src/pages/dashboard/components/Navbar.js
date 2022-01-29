@@ -64,20 +64,11 @@ export const Navbar = () => {
       // className="flex flex-row-reverse opacity-100 shadow-xl w-full"
       h="20"
     >
-      <Box
-        // alignItems="center"
-        // placeItems="center"
-        // flex
-        // flexDirection="row"
-        // justify="start"
-        className="css-0 flex flex-row items-center justify-end"
-        mr="15px"
-      >
+      <Box className="css-0 flex flex-row items-center justify-end" mr="15px">
         <HStack
-          // className="font-medium h-10 justify-center text-gray-700 text-md w-24"
           fontSize={{ base: "xx-small", sm: "xx-small", md: "small", lg: "md" }}
           textColor="gray.700"
-          justify="center"
+          justify="end"
           fontWeight="medium"
           h={{ base: 2, sm: 4, md: 6, lg: 8 }}
           w={{ base: 12, sm: 16, md: 20, lg: 24 }}
