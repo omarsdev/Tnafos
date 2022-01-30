@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   Stack,
@@ -74,7 +74,7 @@ const InvoiceCard = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/invoicehome");
+      history.push("/dashboard/invoice");
     }
   };
 
@@ -92,7 +92,7 @@ const InvoiceCard = () => {
         message: "Invoice's info has been updated!",
         type: "info",
       });
-      history.push(`/dashboard/invoicehome`);
+      history.push(`/dashboard/invoice`);
     } catch (err) {
       setIsUpdating(false);
       setErrors(err.response.data);
@@ -269,10 +269,17 @@ const InvoiceCard = () => {
                   placement="top"
                   color="#333333"
                 >
-                  <IconButton
+                  <Button
                     justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
+                    size={{
+                      base: "x-small",
+                      sm: "x-small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                    rounded="full"
+                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                     bg={"#F8B916"}
                     color={"white"}
                     boxShadow={
@@ -281,9 +288,17 @@ const InvoiceCard = () => {
                     _hover={{
                       bg: "orange.400",
                     }}
-                    icon={<FiEdit />}
                     onClick={onOpen}
-                  />
+                  >
+                    <FiEdit
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
+                    />
+                  </Button>
                 </Tooltip>
               </Flex>
             </Box>

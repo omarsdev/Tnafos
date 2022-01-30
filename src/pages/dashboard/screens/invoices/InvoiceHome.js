@@ -21,13 +21,28 @@ const InvoiceHome = () => {
 
       <Box>
         <Link to={`${match.url}/addinvoice`}>
-          <IconButton
+          <Button
             as={Button}
             colorScheme="yellow"
-            size="lg"
-            icon={<AiOutlinePlus />}
+            size={{
+              base: "x-small",
+              sm: "x-small",
+              md: "md",
+              lg: "large",
+            }}
             rounded="full"
-          ></IconButton>
+            h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+            w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+          >
+            <AiOutlinePlus
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            />
+          </Button>
         </Link>
       </Box>
     </HStack>

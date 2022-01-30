@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
-  Image,
   Center,
   Spinner,
   VStack,
   Stack,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 
 import { AxiosInstance } from "../../../../api";
@@ -35,7 +28,7 @@ export const ClientContacts = () => {
       setCard(res?.data?.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/clientshome");
+      history.push("/dashboard/client");
     }
   };
 
@@ -80,11 +73,18 @@ export const ClientContacts = () => {
           ))}
 
           <Box>
-            <IconButton
+            <Button
               position="relative"
               justify={"center"}
-              fontSize={"lg"}
-              rounded={"full"}
+              size={{
+                base: "x-small",
+                sm: "x-small",
+                md: "md",
+                lg: "large",
+              }}
+              rounded="full"
+              h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+              w={{ base: 6, sm: 8, md: 10, lg: 12 }}
               bg={"#F8B916"}
               color={"white"}
               boxShadow={
@@ -93,11 +93,19 @@ export const ClientContacts = () => {
               _hover={{
                 bg: "orange.400",
               }}
-              icon={<AiOutlineHome />}
               onClick={() => {
                 history.push("/dashboard/client");
               }}
-            />
+            >
+              <AiOutlineHome
+                fontSize={{
+                  base: "xx-small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              />
+            </Button>
           </Box>
         </VStack>
       </Box>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   Drawer,
@@ -164,10 +164,17 @@ const ClientCard = () => {
                   placement="top"
                   color="#333333"
                 >
-                  <IconButton
+                  <Button
                     justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
+                    size={{
+                      base: "x-small",
+                      sm: "x-small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                    rounded="full"
+                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                     bg={"#F8B916"}
                     color={"white"}
                     boxShadow={
@@ -176,11 +183,19 @@ const ClientCard = () => {
                     _hover={{
                       bg: "orange.400",
                     }}
-                    icon={<AiOutlineContacts />}
                     onClick={() => {
                       history.push(`${match.url}/contacts`);
                     }}
-                  />
+                  >
+                    <AiOutlineContacts
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
+                    />
+                  </Button>
                 </Tooltip>
 
                 <Tooltip
@@ -189,10 +204,17 @@ const ClientCard = () => {
                   placement="top"
                   color="#333333"
                 >
-                  <IconButton
+                  <Button
                     justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
+                    size={{
+                      base: "x-small",
+                      sm: "x-small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                    rounded="full"
+                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                     bg={"#F8B916"}
                     color={"white"}
                     boxShadow={
@@ -201,11 +223,19 @@ const ClientCard = () => {
                     _hover={{
                       bg: "orange.400",
                     }}
-                    icon={<MdOutlinePermMedia />}
                     onClick={() => {
                       history.push(`${match.url}/media`);
                     }}
-                  />
+                  >
+                    <MdOutlinePermMedia
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
+                    />
+                  </Button>
                 </Tooltip>
 
                 <Tooltip
@@ -214,10 +244,17 @@ const ClientCard = () => {
                   placement="top"
                   color="#333333"
                 >
-                  <IconButton
+                  <Button
                     justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
+                    size={{
+                      base: "x-small",
+                      sm: "x-small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                    rounded="full"
+                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                     bg={"#F8B916"}
                     color={"white"}
                     boxShadow={
@@ -226,9 +263,17 @@ const ClientCard = () => {
                     _hover={{
                       bg: "orange.400",
                     }}
-                    icon={<FiEdit />}
                     onClick={onOpen}
-                  />
+                  >
+                    <FiEdit
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
+                    />
+                  </Button>
                 </Tooltip>
               </VStack>
             </HStack>

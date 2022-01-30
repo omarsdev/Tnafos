@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   Image,
@@ -112,7 +112,7 @@ const UserCard = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
+      <Spinner size={{ base: "md", sm: "large", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
@@ -123,7 +123,7 @@ const UserCard = () => {
           position="relative"
           bg="white"
           shadow="2xl"
-          w={{ base: 200, sm: 260, md: 300, lg: 350 }}
+          w={{ base: 180, sm: 260, md: 300, lg: 350 }}
           h={{ base: 350, sm: 360, md: 380, lg: 380 }}
         >
           <Image
@@ -147,10 +147,12 @@ const UserCard = () => {
             </Box>
 
             <Flex justify={"center"} mt={-12}>
-              <IconButton
+              <Button
                 justify={"center"}
-                fontSize={"large"}
-                rounded={"full"}
+                size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                 bg={"#F8B916"}
                 color={"white"}
                 boxShadow={
@@ -159,9 +161,17 @@ const UserCard = () => {
                 _hover={{
                   bg: "orange.400",
                 }}
-                icon={<FiEdit />}
                 onClick={onOpen}
-              />
+              >
+                <FiEdit
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
             </Flex>
           </VStack>
         </Box>
@@ -193,14 +203,6 @@ const UserCard = () => {
                 type="file"
                 onChange={(e) => setPhoto(e.target.files[0])}
                 name="choose file"
-                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-                height={{ base: 8, md: 12 }}
-                fontSize={{
-                  base: "xx-small",
-                  sm: "xx-small",
-                  md: "sm",
-                  lg: "md",
-                }}
               />
               <Spacer />
               <SecondaryButton

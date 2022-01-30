@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { FiEdit } from "react-icons/fi";
 import {
   Box,
-  IconButton,
+  Button,
   Center,
   Spinner,
   Text,
@@ -56,7 +56,7 @@ const MyService = () => {
       resetHooksForm(res.data.data);
       setService(res.data.data);
     } catch (err) {
-      history.push("/dashboard/servicehome");
+      history.push("/dashboard/service");
     }
   };
 
@@ -104,7 +104,7 @@ const MyService = () => {
 
   return !service ? (
     <Center h="70vh" w="100%">
-      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
+      <Spinner size={{ base: "large", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
@@ -147,11 +147,13 @@ const MyService = () => {
               <Text textColor="gray.600">Type :{service?.type}</Text>
             </Box>
             <Flex justify={"center"} pb="8px">
-              <IconButton
+              <Button
                 justify={"center"}
                 mb="5px"
-                fontSize={{ base: "small", sm: "sm", md: "md", lg: "large" }}
-                rounded={"full"}
+                size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                 bg={"#F8B916"}
                 color={"white"}
                 boxShadow={
@@ -163,9 +165,17 @@ const MyService = () => {
                 _focus={{
                   bg: "orange.400",
                 }}
-                icon={<FiEdit />}
                 onClick={onOpen}
-              />
+              >
+                <FiEdit
+                  fontSize={{
+                    base: "x-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
             </Flex>
           </VStack>
         </Box>

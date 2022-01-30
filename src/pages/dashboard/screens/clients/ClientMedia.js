@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useRouteMatch, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
   Box,
   Center,
@@ -8,6 +8,7 @@ import {
   Stack,
   IconButton,
   Text,
+  Button,
 } from "@chakra-ui/react";
 import { AiOutlineHome } from "react-icons/ai";
 
@@ -30,7 +31,7 @@ const ClientMedia = () => {
       setMedia(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/clientshome");
+      history.push("/dashboard/client");
     }
   };
 
@@ -68,9 +69,17 @@ const ClientMedia = () => {
           ))}
 
           <Box fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}>
-            <IconButton
+            <Button
               justify={"center"}
-              rounded={"full"}
+              size={{
+                base: "x-small",
+                sm: "x-small",
+                md: "md",
+                lg: "large",
+              }}
+              rounded="full"
+              h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+              w={{ base: 6, sm: 8, md: 10, lg: 12 }}
               bg={"#F8B916"}
               color={"white"}
               boxShadow={
@@ -79,11 +88,20 @@ const ClientMedia = () => {
               _hover={{
                 bg: "orange.400",
               }}
-              icon={<AiOutlineHome />}
               onClick={() => {
                 history.push("/dashboard/client");
               }}
-            />
+            >
+              {" "}
+              <AiOutlineHome
+                fontSize={{
+                  base: "xx-small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              />
+            </Button>
           </Box>
         </VStack>
       </Box>

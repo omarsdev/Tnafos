@@ -20,7 +20,11 @@ const CardComponent = ({ userData }) => {
           h="200px"
           marginTop={"20px"}
         />
-        <Box mr="0" fontSize={{ base: "sm", md: "md", lg: "large" }}>
+        <Box
+          mr="0"
+          fontSize={{ base: "sm", md: "md", lg: "large" }}
+          justify="center"
+        >
           <Text>
             Name: {userData.first_name} {userData.last_name}
           </Text>
@@ -29,7 +33,18 @@ const CardComponent = ({ userData }) => {
         </Box>
         <Box position="relative" bottom="5">
           <Link to={`${match.url}/${userData.uuid}`}>
-            <SecondaryButton name="View" my="1" />
+            <SecondaryButton
+              name="View"
+              my="1"
+              fontSize={{
+                base: "xx-small",
+                sm: "x-small",
+                md: "sm",
+                lg: "md",
+              }}
+              width={{ base: 20, sm: 24, md: 32, lg: 32 }}
+              height={{ base: 6, md: 8, lg: 10 }}
+            />
           </Link>
         </Box>
       </VStack>

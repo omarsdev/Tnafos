@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouteMatch, Link } from "react-router-dom";
-import { Box, HStack, Heading, IconButton, Button } from "@chakra-ui/react";
+import { Box, HStack, Heading, Button } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const PurchasesHome = () => {
@@ -19,13 +19,20 @@ const PurchasesHome = () => {
           Purchases - Requests
         </Heading>
         <Link to={`${match.url}/addpayment`}>
-          <IconButton
+          <Button
             as={Button}
             colorScheme="yellow"
-            size="lg"
-            icon={<AiOutlinePlus />}
+            size={{
+              base: "x-small",
+              sm: "x-small",
+              md: "md",
+              lg: "large",
+            }}
             rounded="full"
-          ></IconButton>
+            h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+            w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+            icon={<AiOutlinePlus />}
+          ></Button>
         </Link>
       </HStack>
     </Box>

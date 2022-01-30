@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, HStack, IconButton, Button } from "@chakra-ui/react";
+import { Box, Heading, HStack, Button } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/react";
 
 import { useRouteMatch, useHistory, Link } from "react-router-dom";
@@ -53,13 +53,22 @@ const PaymentHome = () => {
             placement="top"
             color="#333333"
           >
-            <IconButton
-              as={Button}
+            <Button
               colorScheme="yellow"
-              size="lg"
-              icon={<AiOutlinePlus />}
               rounded="full"
-            ></IconButton>
+              h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+              w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+              rounded="full"
+            >
+              <AiOutlinePlus
+                fontSize={{
+                  base: "xx-small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              />
+            </Button>
           </Tooltip>
         </Link>
       </HStack>

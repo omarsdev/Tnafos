@@ -35,8 +35,8 @@ const ServiceHome = () => {
   }, []);
 
   return (
-    <Box w="full" overflowY="scroll" padding="10">
-      <HStack justifyContent="space-between" paddingBottom="5">
+    <Box w="full" overflowY="scroll" padding={{ base: 1, sm: 3, md: 4, lg: 6 }}>
+      <HStack justifyContent="space-between" paddingBottom="5" px="3%">
         <Heading
           textColor="gray.600"
           fontSize={{
@@ -51,16 +51,20 @@ const ServiceHome = () => {
           Services
         </Heading>
 
-        <IconButton
-          as={Button}
+        <Button
           colorScheme="yellow"
-          size={{ base: "xx-small", sm: "xx-small", md: "md", lg: "large" }}
-          icon={<AiOutlinePlus />}
+          size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
           rounded="full"
+          h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+          w={{ base: 6, sm: 8, md: 10, lg: 12 }}
           onClick={() => {
             history.push(`${match.url}/addservice`);
           }}
-        />
+        >
+          <AiOutlinePlus
+            fontSize={{ base: "xx-small", sm: "small", md: "md", lg: "large" }}
+          />
+        </Button>
       </HStack>
 
       {!servicesList ? (
@@ -76,7 +80,7 @@ const ServiceHome = () => {
           }}
           gap={{ base: 2, md: 2, lg: 4 }}
           mb={{ base: 1, md: 3, lg: 5 }}
-          ml={{ base: 3, md: "none", lg: "none" }}
+          mx={{ base: 3, md: "none", lg: "none" }}
         >
           {servicesList.map((service, idx) => (
             <ServiceCard

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   Drawer,
@@ -15,7 +15,7 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
 import { CustomEditForm, CustomAddForm } from "../../components";
@@ -118,10 +118,17 @@ const UpdateStatus = () => {
               <Text>Status: {card?.status}</Text>
             </Box>
             <Flex>
-              <IconButton
+              <Button
                 justify={"center"}
-                fontSize={"x-large"}
-                rounded={"full"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                 bg={"#F8B916"}
                 color={"white"}
                 boxShadow={
@@ -130,9 +137,17 @@ const UpdateStatus = () => {
                 _hover={{
                   bg: "orange.400",
                 }}
-                icon={<RiRefreshLine />}
                 onClick={onOpen}
-              />
+              >
+                <RiRefreshLine
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
             </Flex>
           </VStack>
         </Box>

@@ -4,12 +4,11 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
   Center,
-  IconButton,
+  Button,
 } from "@chakra-ui/react";
 import { RiExchangeDollarLine } from "react-icons/ri";
 import { Tooltip } from "@chakra-ui/react";
@@ -99,10 +98,17 @@ const ConvertToEstimate = () => {
           placement="top"
           color="#333333"
         >
-          <IconButton
+          <Button
             justify={"center"}
-            fontSize={"x-large"}
-            rounded={"full"}
+            size={{
+              base: "x-small",
+              sm: "x-small",
+              md: "md",
+              lg: "large",
+            }}
+            rounded="full"
+            h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+            w={{ base: 6, sm: 8, md: 10, lg: 12 }}
             bg={"#F8B916"}
             color={"white"}
             boxShadow={
@@ -113,7 +119,7 @@ const ConvertToEstimate = () => {
             }}
             icon={<RiExchangeDollarLine />}
             onClick={onOpen}
-          />
+          ></Button>
         </Tooltip>
       </Center>
       {/* conert to invoice */}

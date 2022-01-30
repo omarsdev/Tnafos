@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   useDisclosure,
@@ -119,10 +119,17 @@ const ConvertToInvoice = () => {
               <Text>Date: {card?.date}</Text>
             </Box>
             <Flex>
-              <IconButton
+              <Button
                 justify={"center"}
-                fontSize={"x-large"}
-                rounded={"full"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                 bg={"#F8B916"}
                 color={"white"}
                 boxShadow={
@@ -131,9 +138,17 @@ const ConvertToInvoice = () => {
                 _hover={{
                   bg: "orange.400",
                 }}
-                icon={<RiExchangeDollarLine />}
                 onClick={onOpen}
-              />
+              >
+                <RiExchangeDollarLine
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
             </Flex>
           </VStack>
         </Box>

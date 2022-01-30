@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   Stack,
@@ -69,7 +69,7 @@ const EstimateCard = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/estimatehome");
+      history.push("/dashboard/estimate");
     }
   };
 
@@ -87,7 +87,7 @@ const EstimateCard = () => {
         message: "Estimate's info has been updated!",
         type: "info",
       });
-      history.push(`/dashboard/estimatehome`);
+      history.push(`/dashboard/estimate`);
     } catch (err) {
       setIsUpdating(false);
       setErrors(err.response.data);
@@ -216,10 +216,17 @@ const EstimateCard = () => {
                 placement="top"
                 color="#333333"
               >
-                <IconButton
+                <Button
                   justify={"center"}
-                  fontSize={"x-large"}
-                  rounded={"full"}
+                  size={{
+                    base: "x-small",
+                    sm: "x-small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                  rounded="full"
+                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                   bg={"#F8B916"}
                   color={"white"}
                   boxShadow={
@@ -228,11 +235,19 @@ const EstimateCard = () => {
                   _hover={{
                     bg: "orange.400",
                   }}
-                  icon={<RiExchangeDollarLine />}
                   onClick={() => {
                     history.push(`${match.url}/convert-to-invoice`);
                   }}
-                />
+                >
+                  <RiExchangeDollarLine
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                  />
+                </Button>
               </Tooltip>
 
               <Tooltip
@@ -241,10 +256,17 @@ const EstimateCard = () => {
                 placement="top"
                 color="#333333"
               >
-                <IconButton
+                <Button
                   justify={"center"}
-                  fontSize={"x-large"}
-                  rounded={"full"}
+                  size={{
+                    base: "x-small",
+                    sm: "x-small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                  rounded="full"
+                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                   bg={"#F8B916"}
                   color={"white"}
                   boxShadow={
@@ -253,11 +275,19 @@ const EstimateCard = () => {
                   _hover={{
                     bg: "orange.400",
                   }}
-                  icon={<RiRefreshLine />}
                   onClick={() => {
                     history.push(`${match.url}/update-status`);
                   }}
-                />
+                >
+                  <RiRefreshLine
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                  />
+                </Button>
               </Tooltip>
 
               <Tooltip
@@ -266,10 +296,17 @@ const EstimateCard = () => {
                 placement="top"
                 color="#333333"
               >
-                <IconButton
+                <Button
                   justify={"center"}
-                  fontSize={"lg"}
-                  rounded={"full"}
+                  size={{
+                    base: "x-small",
+                    sm: "x-small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                  rounded="full"
+                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                   bg={"#F8B916"}
                   color={"white"}
                   boxShadow={
@@ -278,9 +315,17 @@ const EstimateCard = () => {
                   _hover={{
                     bg: "orange.400",
                   }}
-                  icon={<FiEdit />}
                   onClick={onOpen}
-                />
+                >
+                  <FiEdit
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                  />
+                </Button>
               </Tooltip>
             </Flex>
           </VStack>

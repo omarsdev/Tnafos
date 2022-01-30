@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Box,
-  IconButton,
+  Button,
   HStack,
   Center,
   Spinner,
@@ -167,15 +167,17 @@ export const CustomTable = ({
                       placement="auto-start"
                       color="#333333"
                     >
-                      <IconButton
+                      <Button
                         justify={"center"}
-                        fontSize={{
+                        size={{
                           base: "x-small",
                           sm: "x-small",
-                          md: "sm",
-                          lg: "md",
+                          md: "md",
+                          lg: "large",
                         }}
-                        rounded={"full"}
+                        rounded="full"
+                        h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                        w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                         bg={"#F8B916"}
                         color={"white"}
                         boxShadow={
@@ -184,11 +186,19 @@ export const CustomTable = ({
                         _hover={{
                           bg: "orange.400",
                         }}
-                        icon={<FiEdit />}
                         onClick={() => {
                           history.push(`${match.url}/${el.uuid}`);
                         }}
-                      />
+                      >
+                        <FiEdit
+                          fontSize={{
+                            base: "xx-small",
+                            sm: "small",
+                            md: "md",
+                            lg: "large",
+                          }}
+                        />
+                      </Button>
                     </Tooltip>
                   </Flex>
                 </Td>
