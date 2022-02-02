@@ -18,10 +18,7 @@ import { PrimaryButton } from "../../../components";
 
 export const CardCompany = ({ data }) => {
   const match = useRouteMatch();
-
   const [isMobile] = useMediaQuery("(max-width: 1200px)");
-
-  console.log(isMobile);
 
   return (
     <Flex
