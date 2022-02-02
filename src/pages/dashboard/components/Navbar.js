@@ -7,6 +7,7 @@ import {
   MenuItem,
   MenuList,
   HStack,
+  Text,
 } from "@chakra-ui/react";
 import { useRouteMatch, Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";

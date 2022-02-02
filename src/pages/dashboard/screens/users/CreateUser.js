@@ -249,9 +249,6 @@ const CreateUser = () => {
               <HStack justify="center">
                 <Link to="/">
                   <Text
-                    _hover={{
-                      under,
-                    }}
                     fontSize={{
                       base: "xx-small",
                       sm: "x-small",
