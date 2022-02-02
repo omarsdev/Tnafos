@@ -74,7 +74,7 @@ export const CustomTable = ({
             variant="outline"
             colorScheme="gray"
             name="EXPORT"
-            fontSize={{ base: "xx-small", sm: "xx-small", md: "xs", lg: "xs" }}
+            fontSize={{ md: "xs", lg: "xs" }}
             leftIcon={<BiUpload size="20px" />}
           />
 
@@ -118,6 +118,12 @@ export const CustomTable = ({
           <Input
             type="text"
             placeholder="search"
+            // display={{
+            //   base: "none",
+            //   sm: "contents",
+            //   md: "contents",
+            //   lg: "contents",
+            // }}
             focusBorderColor="#F8B916"
             rounded="full"
             fontSize={{
