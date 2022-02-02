@@ -2,17 +2,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Sidebar } from "./components/index";
-import {
-  HStack,
-  VStack,
-  Center,
-  Spinner,
-  Box,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Grid,
-} from "@chakra-ui/react";
+import { HStack, VStack, Center, Spinner } from "@chakra-ui/react";
 import {
   useRouteMatch,
   Route,
