@@ -110,7 +110,7 @@ const UpdatePurchase = () => {
         <Box
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 170, sm: 260, md: 450, lg: 550 }}
           h={{ base: 210, sm: 250, md: 300, lg: 320 }}

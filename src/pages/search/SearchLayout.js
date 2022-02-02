@@ -16,44 +16,50 @@ const SearchLayout = () => {
 
   return (
     <SearchDataContextProvider>
-      <Box h={"100vh"}>
+      <Box h={"100vh"} w={"100%"}>
         <Navbar />
-        <Box className="w-full h-96 bg-blue-300" />
-        <Box h={"91%"} marginTop="50px">
-          <Flex>
-            <Box w="70%" px="80px" pb="100px">
-              <Switch>
-                <Route exact path={`${match.path}`} component={Service} />
-                <Route
-                  path={`${match.path}/:serviceId/:companyId`}
-                  component={Company}
-                />
-                <Route path={`${match.path}/:serviceId`} component={Vender} />
-              </Switch>
-            </Box>
-            <Box w="30%">
-              <Flex>
-                <Box w="2px" h="700px" className="bg-CBlack" mt={0} />
-                <Box mx="auto" pb="100px">
-                  <Switch>
-                    <Route exact path={`${match.path}`}>
+        <Box h={48} w="full" backgroundColor={"blue.300"} />
+        <Flex flexDirection={{ base: "column-reverse", md: "row" }}>
+          <Box flex="1" m="10">
+            <Switch>
+              <Route exact path={`${match.path}`} component={Service} />
+              <Route
+                path={`${match.path}/:serviceId/:companyId`}
+                component={Company}
+              />
+              <Route path={`${match.path}/:serviceId`} component={Vender} />
+            </Switch>
+          </Box>
+          <Box mt="10">
+            <Flex>
+              <Box
+                display={{ base: "none", md: "flex" }}
+                w="2px"
+                h="700px"
+                backgroundColor={"brand.black"}
+              />
+              <Flex w="100%" m="10" justifyContent="center">
+                <Switch>
+                  <Route exact path={`${match.path}`}>
+                    <MyList />
+                  </Route>
+                  <Route path={`${match.path}/:serviceId/:companyId`}>
+                    <MainCompany />
+                  </Route>
+                  <Route path={`${match.path}/:serviceId`}>
+                    <Flex
+                      flexDirection={{ base: "column-reverse", md: "column" }}
+                    >
+                      <CardItem isSelected={true} />
                       <MyList />
-                    </Route>
-                    <Route path={`${match.path}/:serviceId/:companyId`}>
-                      <MainCompany />
-                    </Route>
-                    <Route path={`${match.path}/:serviceId`}>
-                      <VStack spacing="40px">
-                        <CardItem isSelected={true} />
-                        <MyList />
-                      </VStack>
-                    </Route>
-                  </Switch>
-                </Box>
+                    </Flex>
+                  </Route>
+                </Switch>
               </Flex>
-            </Box>
-          </Flex>
-        </Box>
+            </Flex>
+          </Box>
+        </Flex>
+        {/* </Box> */}
       </Box>
     </SearchDataContextProvider>
   );

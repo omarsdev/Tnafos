@@ -19,7 +19,9 @@ const ServiceCard = ({ info }) => {
           marginTop={"20px"}
         />
         <Box
-          className="flex flex-col justify-center"
+          display="flex"
+          flexDir="column"
+          justifyContent="center"
           mr="0"
           fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
         >

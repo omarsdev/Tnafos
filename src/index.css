@@ -12,10 +12,6 @@
   margin: 0;
 }
 
-/* ./src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 /* google fonts */
 @import url("https://fonts.googleapis.com/css2?family=Almarai:wght@200;300;400;500;700;800;900");
 

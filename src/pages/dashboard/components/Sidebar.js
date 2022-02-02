@@ -19,7 +19,7 @@ import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
 const LogoLink = () => {
   return (
-    <Stack w-full h-32 m={{ base: 8 }}>
+    <Stack w={"w-full"} h={"h-32"} ml="3" my="2">
       <Link to="/">
         <TnafosSearchLogo />
       </Link>
@@ -94,7 +94,7 @@ const NavbarItem = ({ item }) => {
 
 export const Sidebar = () => {
   return (
-    <Box bg="#333333" overflowY="scroll" className="h-screen" w={{ base: 60 }}>
+    <Box bg="brand.dark" overflowY="scroll" h="100vh" w={{ base: 60 }}>
       <LogoLink />
 
       <Box w={{ base: "auto" }}>

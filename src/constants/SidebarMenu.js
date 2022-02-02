@@ -113,7 +113,7 @@ const SidebarMenu = [
             items: null,
           },
           {
-            id: 1,
+            id: 2,
             title: "Outgoing",
             icon: null,
             to: "/purchase-request/outgoing",
@@ -135,7 +135,7 @@ const SidebarMenu = [
             items: null,
           },
           {
-            id: 1,
+            id: 2,
             title: "Outgoing",
             icon: null,
             to: "/estimate/outgoing",
@@ -157,7 +157,7 @@ const SidebarMenu = [
             items: null,
           },
           {
-            id: 1,
+            id: 2,
             title: "Outgoing",
             icon: null,
             to: "/invoice/outgoing",
@@ -179,7 +179,7 @@ const SidebarMenu = [
             items: null,
           },
           {
-            id: 1,
+            id: 2,
             title: "Outgoing",
             icon: null,
             to: "/proposal/outgoing",

@@ -64,7 +64,13 @@ export const Navbar = () => {
       // className="flex flex-row-reverse opacity-100 shadow-xl w-full"
       h="20"
     >
-      <Box className="css-0 flex flex-row items-center justify-end" mr="15px">
+      <Box
+        display="flex"
+        flexDir="row"
+        alignItems="center"
+        justifyContent="end"
+        mr="15px"
+      >
         <HStack
           fontSize={{ base: "xx-small", sm: "xx-small", md: "small", lg: "md" }}
           textColor="gray.700"
@@ -73,9 +79,9 @@ export const Navbar = () => {
           h={{ base: 2, sm: 4, md: 6, lg: 8 }}
           w={{ base: 12, sm: 16, md: 20, lg: 24 }}
         >
-          <span my="auto">
+          <Text my="auto">
             {userData.first_name} {userData.last_name}
-          </span>
+          </Text>
         </HStack>
         <Image
           src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"

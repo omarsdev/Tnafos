@@ -22,7 +22,8 @@ export const RegularInput = ({
 
   return !value && !setValue ? (
     <ChakraInput
-      className="rounded-3xl select-none"
+      rounded="3xl"
+      userSelect="none"
       borderRadius="25"
       focusBorderColor="#F8B916"
       borderColor={!error ? "#AEAEAE" : "#ff0000"}
@@ -38,7 +39,8 @@ export const RegularInput = ({
     />
   ) : (
     <ChakraInput
-      className="rounded-3xl select-none"
+      rounded="3xl"
+      userSelect="none"
       borderRadius="25"
       focusBorderColor="#F8B916"
       borderColor={!error ? "#AEAEAE" : "red"}

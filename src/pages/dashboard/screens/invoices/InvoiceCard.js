@@ -124,7 +124,7 @@ const InvoiceCard = () => {
         <Box
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 200, sm: 350, md: 450, lg: 550 }}
           h={{ base: 1550, sm: 2000, md: 2300, lg: 2600 }}

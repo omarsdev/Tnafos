@@ -119,7 +119,7 @@ const EstimateCard = () => {
         <Box
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 250, sm: 330, md: 450, lg: 550 }}
           h={{ base: 850, sm: 1100, md: 1300, lg: 1400 }}

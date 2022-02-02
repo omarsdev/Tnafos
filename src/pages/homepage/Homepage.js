@@ -9,6 +9,8 @@ import {
   InputRightAddon,
   VStack,
   Spinner,
+  SimpleGrid,
+  Text,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -57,66 +59,63 @@ const Homepage = () => {
     }
   }, []);
 
+  if (loading)
+    return (
+      <Center h={"100vh"} w={"100%"}>
+        <Spinner size={"xl"} color={"#F8B916"} />
+      </Center>
+    );
+
   return (
     <Box h={"100vh"}>
-      {loading ? (
-        <Center h="100vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
-        </Center>
-      ) : (
-        <>
-          <Navbar />
-          <Center h="92vh">
-            <VStack spacing={10}>
-              <TnafosHomeLogo />
-              <InputGroup
-                alignItems={"center"}
-                justifyContent={"center"}
-                size="lg"
-              >
-                <Input
-                  width={{
-                    base: "18em",
-                    sm: "22em",
-                    md: "28em",
-                    lg: "32em",
-                  }}
-                  borderBottomLeftRadius={"99em"}
-                  borderTopLeftRadius={"99em"}
-                  focusBorderColor="#F8B916"
-                  borderColor="#AEAEAE"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  onKeyPress={handleKeypress}
-                />
-                <InputRightAddon
-                  children={<SearchIcon color="white" />}
-                  cursor={"pointer"}
-                  borderBottomRightRadius={"99em"}
-                  borderTopRightRadius={"99em"}
-                  bgColor={"#F8B916"}
-                  borderColor={"#F8B916"}
-                  onClick={searchHandler}
-                />
-              </InputGroup>
-              <Stack
-                direction={["column", "row"]}
-                justify={"center"}
-                spacing={"2em"}
-                shouldWrapChildren={true}
-                wrap={"flexWrap"}
-              >
-                <h1>Products</h1>
-                <h1>Services</h1>
-                <h1>Categories</h1>
-                <h1>Blog</h1>
-                <h1>GitHub</h1>
-                {/* <h1>Forge</h1> */}
-              </Stack>
-            </VStack>
-          </Center>
-        </>
-      )}
+      <Navbar />
+      <Center h="92vh">
+        <VStack spacing={10}>
+          <TnafosHomeLogo />
+          <InputGroup alignItems={"center"} justifyContent={"center"} size="lg">
+            <Input
+              width={{
+                base: "18em",
+                sm: "22em",
+                md: "28em",
+                lg: "32em",
+              }}
+              borderBottomLeftRadius={"99em"}
+              borderTopLeftRadius={"99em"}
+              focusBorderColor="#F8B916"
+              borderColor="#AEAEAE"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyPress={handleKeypress}
+            />
+            <InputRightAddon
+              children={<SearchIcon color="white" />}
+              cursor={"pointer"}
+              borderBottomRightRadius={"99em"}
+              borderTopRightRadius={"99em"}
+              bgColor={"#F8B916"}
+              borderColor={"#F8B916"}
+              onClick={searchHandler}
+            />
+          </InputGroup>
+          <SimpleGrid
+            columns={{ sm: 2, md: 4, lg: 5 }}
+            spacing={8}
+            // direction={["column", "row"]}
+            // justify={"center"}
+            justifyContent={"center"}
+            justifyItems={"center"}
+            justifySelf={"center"}
+            alignItems={"center"}
+          >
+            <Text>Products</Text>
+            <Text>Services</Text>
+            <Text>Categories</Text>
+            <Text>Blog</Text>
+            <Text>GitHub</Text>
+          </SimpleGrid>
+        </VStack>
+      </Center>
     </Box>
   );
 };

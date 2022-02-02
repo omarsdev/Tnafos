@@ -120,7 +120,7 @@ const ClientCard = () => {
         <Box
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 260, sm: 350, md: 450, lg: 550 }}
           h={{ base: 260, sm: 360, md: 460, lg: 536 }}

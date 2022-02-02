@@ -41,7 +41,7 @@ const PaymentMedia = () => {
         my={{ base: 2, lg: 6 }}
         rounded="3xl"
         position="relative"
-        bg="white"
+        bg="brand.white"
         shadow="2xl"
         w={{ base: 200, sm: 260, md: 300, lg: 350 }}
         h={{ base: 350, sm: 360, md: 380, lg: 380 }}

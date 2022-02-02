@@ -247,8 +247,11 @@ const CreateUser = () => {
               />
 
               <HStack justify="center">
-                <Link to="/" className="hover:underline text-CInfo">
+                <Link to="/">
                   <Text
+                    _hover={{
+                      under,
+                    }}
                     fontSize={{
                       base: "xx-small",
                       sm: "x-small",
@@ -269,7 +272,7 @@ const CreateUser = () => {
                 >
                   and
                 </Text>
-                <Link to="/" className="hover:underline text-CInfo">
+                <Link to="/">
                   <Text
                     fontSize={{
                       base: "xx-small",

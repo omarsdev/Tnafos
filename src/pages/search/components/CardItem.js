@@ -53,9 +53,13 @@ export const CardItem = ({ data, isSelected, isCompany }) => {
 
   return (
     <Box
-      className="rounded-3xl shadow-2xl relative bg-white"
-      w="300px"
-      h="500px"
+      rounded="3xl"
+      shadow="2xl"
+      position="relative"
+      backgroundColor="brand.white"
+      w="100%"
+      // w="260px"
+      // h="500px"
     >
       {!vendorsList && isSelected ? (
         <Center h="100vh" w="100%">

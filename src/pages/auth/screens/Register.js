@@ -64,8 +64,17 @@ export const Register = () => {
       <AuthLayout BGImage={RegisterImage}>
         <Center h="100vh">
           <Stack spacing={4}>
-            <h1 className="select-none text-4xl">Ready To</h1>
-            <h2 className="select-none text-3xl text-CPrimary">Signup</h2>
+            <Text userSelect="none" fontSize="2.25rem" lineHeight="2.5rem">
+              Ready To
+            </Text>
+            <Text
+              userSelect="none"
+              fontSize="1.875rem"
+              lineHeight="2.25rem"
+              color="brand.primary"
+            >
+              Signup
+            </Text>
             <form>
               <Stack spacing={4}>
                 <Flex>
@@ -145,9 +154,15 @@ export const Register = () => {
                     <CheckBox name="rememberMe" register={register} />
                   </Flex>
                   <Spacer />
-                  <h1 className="text-CGrey text-base cursor-pointer select-none">
+                  <Text
+                    color="brand.grey"
+                    fontSize="1rem"
+                    lineHeight="1.5rem"
+                    cursor="pointer"
+                    userSelect="none"
+                  >
                     Forgot Password?
-                  </h1>
+                  </Text>
                 </Flex>
 
                 <Flex>
