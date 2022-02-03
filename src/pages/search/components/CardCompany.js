@@ -25,11 +25,9 @@ export const CardCompany = ({ data }) => {
       rounded="3xl"
       borderColor="brand.primary"
       shadow="xl"
-      // minH="56"
       h={!isMobile ? "56" : "auto"}
-      // h={isMobile ? "auto" : "56"}
       w="full"
-      flexDirection={{ md: "row", base: "column" }}
+      flexDirection={{ lg: "row", base: "column" }}
     >
       <Flex flex="1">
         <Image
@@ -38,8 +36,7 @@ export const CardCompany = ({ data }) => {
           objectFit="cover"
           rounded="3xl"
           w="100%"
-          // h={{ md: "100%", base: "100px" }}
-          h={{ md: "100%", base: "200px" }}
+          h={{ lg: "100%", base: "200px" }}
         />
       </Flex>
       <Flex flex="3">
@@ -56,7 +53,13 @@ export const CardCompany = ({ data }) => {
             </Text>
           </Box>
           <Flex w="100%" mt="5" flexDirection={isMobile && "column"}>
-            <HStack w="100%">
+            <HStack
+              w={
+                isMobile
+                  ? { base: "100%", lg: "100%" }
+                  : { base: "100%", lg: "90%" }
+              }
+            >
               <VStack
                 width="25%"
                 spacing="0px"
@@ -110,10 +113,16 @@ export const CardCompany = ({ data }) => {
               </VStack>
             </HStack>
 
-            <Center h="100%" my="1rem" px={isMobile && "10%"}>
+            <Center
+              h="100%"
+              my="1rem"
+              px={isMobile ? "10%" : "1rem"}
+              w={isMobile ? { md: "100%" } : { md: "100%", lg: "auto" }}
+            >
               <Link to={`${match.url}/${data.uuid}`}>
                 <PrimaryButton name="View Profile" height="50px" />
               </Link>
+              {!isMobile && <Box w="20px" />}
               <Spacer />
               <Box
                 w="50px"

@@ -8,8 +8,21 @@ import Login from "../../../assets/images/login.jpg";
 
 export const MainCompany = () => {
   return (
-    <Box w="300px" px="20px" py="20px" shadow="2xl" rounded="3xl">
-      <Image src={Login} w="100%" height="280px" rounded="3xl" />
+    <Box
+      // w="300px"
+      w={{ base: "auto", md: "300px" }}
+      px="20px"
+      py="20px"
+      shadow="2xl"
+      rounded="3xl"
+    >
+      <Image
+        src={Login}
+        w="100%"
+        height="280px"
+        rounded="3xl"
+        objectFit="cover"
+      />
       <Text fontSize="22px" mt="30px">
         Company Name
       </Text>
