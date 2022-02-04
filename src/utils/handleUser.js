@@ -13,7 +13,7 @@ export const setUserSession = (token, maxAge) => {
   //   sameSite: "lax",
   // });
   // https://curity.io/resources/learn/token-handler-spa-tutorial/
-  localStorage.setItem("tnafos_auth");
+  localStorage.setItem("tnafos_auth", token);
 };
 
 export const removeUserSession = () => {
