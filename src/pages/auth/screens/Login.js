@@ -41,7 +41,7 @@ const Login = () => {
       }
       setUserSession(res.token, maxAge);
       setUserToken(res.token);
-      history.push("/dashboard/rating");
+      history.push("/dashboard");
     } else {
       setError(res.error);
       setLoadingButton(false);
