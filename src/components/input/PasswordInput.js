@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import {
   Input as ChakraInput,
   InputGroup,
   InputRightElement,
   Text,
-  VStack,
   Box,
+  VStack,
 } from "@chakra-ui/react";
 
 import { Eye, EyeOff } from "react-feather";
@@ -31,6 +31,8 @@ export const PasswordInput = ({
     <InputGroup
       width={{ base: 150, sm: 250, md: 480, lg: 500 }}
       height={{ base: 4, sm: 6, md: 8, lg: 10 }}
+      flex
+      flexDirection="row"
     >
       {!value && !setValue ? (
         <ChakraInput
@@ -61,11 +63,11 @@ export const PasswordInput = ({
           {...rest}
         />
       )}
-      <Box fontSize={{ base: 12, sm: 16, md: 16, lg: 20 }}>
+      <Box>
         <InputRightElement
           onClick={handleClickEye}
           className="cursor-pointer"
-          width={{ base: 2, sm: 8, md: 12, lg: 20 }}
+          // width={{ base: 2, sm: 8, md: 12, lg: 20 }}
         >
           {show ? <Eye /> : <EyeOff />}
         </InputRightElement>

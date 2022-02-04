@@ -22,14 +22,16 @@ export const CustomSelect = ({
       render={({ field: { name }, fieldState: { error } }) => (
         <VStack>
           <Select
+            rounded="3xl"
+            _selection="none"
             width={{ base: 150, sm: 250, md: 480, lg: 500 }}
             height={{ base: 4, sm: 6, md: 8, lg: 10 }}
             focusBorderColor="#F8B916"
             borderColor={!error ? "#AEAEAE" : "red"}
             backgroundColor="#fff"
-            className="rounded-3xl select-none"
             borderRadius="25"
             placeholder={placeHolder}
+            fontSize={{ base: 12, sm: 16, md: 16, lg: 20 }}
             // width={!width ? "100%" : width}
             {...register(`${name}`, { required: true })}
             {...rest}
