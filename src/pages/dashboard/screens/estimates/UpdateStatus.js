@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
 
 import { RiRefreshLine } from "react-icons/ri";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const UpdateStatus = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -154,44 +155,29 @@ const UpdateStatus = () => {
       </Center>
 
       {/* updating estimate's status*/}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(statusUpdate)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Status : ",
-                    placeHolder: "Enter Status",
-                    name: "status",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(statusUpdate)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Status : ",
+                placeHolder: "Enter Status",
+                name: "status",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

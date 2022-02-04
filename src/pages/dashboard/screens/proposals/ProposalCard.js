@@ -26,6 +26,7 @@ import { AlertContext } from "../../../../context/AlertContext";
 
 import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const ProposalCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -414,201 +415,186 @@ const ProposalCard = () => {
       </Center>
 
       {/* updating proposal info */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updateProposal)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Subject : ",
-                    placeHolder: "Enter Subject",
-                    name: "subject",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Status : ",
-                    placeHolder: "Enter Status",
-                    name: "status",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Date : ",
-                    placeHolder: "Enter Date",
-                    name: "date",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Valid - till : ",
-                    placeHolder: "valid - till",
-                    name: "valid_till",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Currency : ",
-                    placeHolder: "Enter Currency",
-                    name: "currency",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Discount- type : ",
-                    placeHolder: "Enter discount_type",
-                    name: "discount_type",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Discount - amount : ",
-                    placeHolder: "Enter discount_amount",
-                    name: "discount_amount",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Sub-total : ",
-                    placeHolder: "Enter sub-total",
-                    name: "subtotal",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Total : ",
-                    placeHolder: "Enter Total",
-                    name: "total",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Customer Id : ",
-                    placeHolder: "Enter customer_id",
-                    name: "customer_id",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Assigned - to : ",
-                    placeHolder: "Enter the uuid here",
-                    name: "assigned_to",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Lead : ",
-                    placeHolder: "Enter lead info",
-                    name: "lead",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    /* the upcoming ones related to the lead:  */
-                  },
-                  //   {
-                  //     head: "Country : ",
-                  //     placeHolder: "Enter Country info",
-                  //     name: "country",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  //   {
-                  //     head: "Address : ",
-                  //     placeHolder: "Enter Address info",
-                  //     name: "address",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  //   {
-                  //     head: "City : ",
-                  //     placeHolder: "Enter City info",
-                  //     name: "city",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  //   {
-                  //     head: "State : ",
-                  //     placeHolder: "Enter State info",
-                  //     name: "state",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  //   {
-                  //     head: "Zip-Code : ",
-                  //     placeHolder: "Enter Zip-Code info",
-                  //     name: "zipcode",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  //   {
-                  //     head: "Status : ",
-                  //     placeHolder: "Enter Status info",
-                  //     name: "status",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  //   {
-                  //     head: "Assigned-to : ",
-                  //     placeHolder: "Enter Assigned-to info",
-                  //     name: "assigned_to",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  //   {
-                  //     head: "Source : ",
-                  //     placeHolder: "Enter Source info",
-                  //     name: "source",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  //   {
-                  //     head: "UUID : ",
-                  //     placeHolder: "Enter UUID info",
-                  //     name: "uuid",
-                  //     inputType: "text",
-                  //     errors: errors,
-                  //   },
-                  {
-                    head: "Company : ",
-                    placeHolder: "Enter Company info",
-                    name: "company",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Lines : ",
-                    placeHolder: "Enter Lines",
-                    name: "lines",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(updateProposal)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Subject : ",
+                placeHolder: "Enter Subject",
+                name: "subject",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Status : ",
+                placeHolder: "Enter Status",
+                name: "status",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Date : ",
+                placeHolder: "Enter Date",
+                name: "date",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Valid - till : ",
+                placeHolder: "valid - till",
+                name: "valid_till",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Currency : ",
+                placeHolder: "Enter Currency",
+                name: "currency",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Discount- type : ",
+                placeHolder: "Enter discount_type",
+                name: "discount_type",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Discount - amount : ",
+                placeHolder: "Enter discount_amount",
+                name: "discount_amount",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Sub-total : ",
+                placeHolder: "Enter sub-total",
+                name: "subtotal",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Total : ",
+                placeHolder: "Enter Total",
+                name: "total",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Customer Id : ",
+                placeHolder: "Enter customer_id",
+                name: "customer_id",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Assigned - to : ",
+                placeHolder: "Enter the uuid here",
+                name: "assigned_to",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Lead : ",
+                placeHolder: "Enter lead info",
+                name: "lead",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                /* the upcoming ones related to the lead:  */
+              },
+              //   {
+              //     head: "Country : ",
+              //     placeHolder: "Enter Country info",
+              //     name: "country",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              //   {
+              //     head: "Address : ",
+              //     placeHolder: "Enter Address info",
+              //     name: "address",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              //   {
+              //     head: "City : ",
+              //     placeHolder: "Enter City info",
+              //     name: "city",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              //   {
+              //     head: "State : ",
+              //     placeHolder: "Enter State info",
+              //     name: "state",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              //   {
+              //     head: "Zip-Code : ",
+              //     placeHolder: "Enter Zip-Code info",
+              //     name: "zipcode",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              //   {
+              //     head: "Status : ",
+              //     placeHolder: "Enter Status info",
+              //     name: "status",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              //   {
+              //     head: "Assigned-to : ",
+              //     placeHolder: "Enter Assigned-to info",
+              //     name: "assigned_to",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              //   {
+              //     head: "Source : ",
+              //     placeHolder: "Enter Source info",
+              //     name: "source",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              //   {
+              //     head: "UUID : ",
+              //     placeHolder: "Enter UUID info",
+              //     name: "uuid",
+              //     inputType: "text",
+              //     errors: errors,
+              //   },
+              {
+                head: "Company : ",
+                placeHolder: "Enter Company info",
+                name: "company",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Lines : ",
+                placeHolder: "Enter Lines",
+                name: "lines",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

@@ -27,6 +27,7 @@ import { CustomEditForm, CustomAddForm } from "../../components";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 import { SecondaryButton } from "../../../../components/button/SecondaryButton";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -182,85 +183,64 @@ const MyService = () => {
       </Center>
 
       {/* updating service. */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <HStack
-              align="flex-end"
-              w="full"
-              alignItems="baseline"
-              mb="14"
-              mt="5"
-            >
-              <input
-                type="file"
-                onChange={(e) => setPhoto(e.target.files[0])}
-                name="choose file"
-                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-                height={{ base: 8, md: 12 }}
-                fontSize={{
-                  base: "xx-small",
-                  sm: "xx-small",
-                  md: "sm",
-                  lg: "md",
-                }}
-              />
-              <Spacer />
-              <SecondaryButton
-                name="Upload File"
-                onClick={uploadFile}
-                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-                height={{ base: 8, md: 12 }}
-                fontSize={{
-                  base: "xx-small",
-                  sm: "xx-small",
-                  md: "sm",
-                  lg: "md",
-                }}
-              />
-            </HStack>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(onUpdateService)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Price : ",
-                    placeHolder: "Enter Price : ",
-                    name: "price",
-                    inputType: "number",
-                    err: errors,
-                  },
-                  {
-                    head: "Type : ",
-                    placeHolder: "Enter Type : ",
-                    name: "type",
-                    inputType: "text",
-                    err: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <HStack align="flex-end" w="full" alignItems="baseline" mb="14" mt="5">
+          <input
+            type="file"
+            onChange={(e) => setPhoto(e.target.files[0])}
+            name="choose file"
+            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+            height={{ base: 8, md: 12 }}
+            fontSize={{
+              base: "xx-small",
+              sm: "xx-small",
+              md: "sm",
+              lg: "md",
+            }}
+          />
+          <Spacer />
+          <SecondaryButton
+            name="Upload File"
+            onClick={uploadFile}
+            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+            height={{ base: 8, md: 12 }}
+            fontSize={{
+              base: "xx-small",
+              sm: "xx-small",
+              md: "sm",
+              lg: "md",
+            }}
+          />
+        </HStack>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(onUpdateService)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Price : ",
+                placeHolder: "Enter Price : ",
+                name: "price",
+                inputType: "number",
+                err: errors,
+              },
+              {
+                head: "Type : ",
+                placeHolder: "Enter Type : ",
+                name: "type",
+                inputType: "text",
+                err: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };
