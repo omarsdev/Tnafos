@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import { getToken } from "../utils";
 
 export const AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_BASE,
@@ -8,8 +8,7 @@ export const AxiosInstance = axios.create({
 });
 
 AxiosInstance.interceptors.request.use(function (config) {
-  // const token = localStorage.getItem("token");
-  const token = Cookies.get("tnafos_auth")
+  const token = getToken();
   if (token) config.headers.Authorization = "Bearer " + token;
 
   return config;

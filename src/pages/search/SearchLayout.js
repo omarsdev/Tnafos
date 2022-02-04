@@ -51,6 +51,7 @@ const SearchLayout = () => {
                       flexDirection={{ base: "column-reverse", md: "column" }}
                     >
                       <CardItem isSelected={true} />
+                      <Box h="1rem" />
                       <MyList />
                     </Flex>
                   </Route>
