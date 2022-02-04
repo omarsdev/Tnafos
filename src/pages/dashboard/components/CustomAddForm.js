@@ -8,8 +8,8 @@ import {
 } from "../../../components";
 
 export const CustomAddForm = ({ listForm, control, register }) => {
-  return listForm.map((element) => (
-    <Box pt={{ base: 1, sm: 1, md: 2, lg: 4 }}>
+  return listForm.map((element, index) => (
+    <Box pt={{ base: 1, sm: 1, md: 2, lg: 4 }} key={index}>
       <VStack fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "md" }}>
         <FormLabel textAlign="left" color="gray.500">
           {element.head}
@@ -20,6 +20,7 @@ export const CustomAddForm = ({ listForm, control, register }) => {
               control={control}
               register={register}
               error={element.err}
+              width={element.width}
             />
           ) : element.isSelect ? (
             <CustomSelect
@@ -41,6 +42,7 @@ export const CustomAddForm = ({ listForm, control, register }) => {
               register={register}
               errors={element.err}
               inputType={element.inputType}
+              width={element.width}
             />
           )}
         </FormLabel>
