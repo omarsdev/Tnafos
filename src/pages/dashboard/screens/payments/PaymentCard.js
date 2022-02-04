@@ -25,6 +25,7 @@ import { FiEdit } from "react-icons/fi";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 import { CustomAddForm, CustomEditForm } from "../../components";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const PaymentCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -118,7 +119,7 @@ const PaymentCard = () => {
         <Box
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 200, sm: 300, md: 450, lg: 550 }}
           h={{ base: 210, sm: 250, md: 300, lg: 320 }}
@@ -234,79 +235,64 @@ const PaymentCard = () => {
       </Center>
 
       {/* updating payment card*/}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updatePayment)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Amount : ",
-                    placeHolder: "Enter amount",
-                    name: "amount",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Method : ",
-                    placeHolder: "Enter Method",
-                    name: "method",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Transaction -number : ",
-                    placeHolder: "Enter transaction-number",
-                    name: "transaction_number",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Date : ",
-                    placeHolder: "Enter Date",
-                    name: "date",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Notes : ",
-                    placeHolder: "Enter notes",
-                    name: "notes",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "UUID : ",
-                    placeHolder: "Enter UUID",
-                    name: "uuid",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(updatePayment)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Amount : ",
+                placeHolder: "Enter amount",
+                name: "amount",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Method : ",
+                placeHolder: "Enter Method",
+                name: "method",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Transaction -number : ",
+                placeHolder: "Enter transaction-number",
+                name: "transaction_number",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Date : ",
+                placeHolder: "Enter Date",
+                name: "date",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Notes : ",
+                placeHolder: "Enter notes",
+                name: "notes",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "UUID : ",
+                placeHolder: "Enter UUID",
+                name: "uuid",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

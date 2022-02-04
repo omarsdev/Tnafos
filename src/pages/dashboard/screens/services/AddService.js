@@ -165,7 +165,7 @@ const AddService = () => {
             </HStack>
             <Box>
               {errors?.message && (
-                <Text className="text-center mt-4" color="red">
+                <Text textAlign="center" mt="4" color="red">
                   {errors?.message}
                 </Text>
               )}

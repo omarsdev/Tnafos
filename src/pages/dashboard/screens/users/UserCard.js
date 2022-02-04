@@ -28,6 +28,7 @@ import { useForm } from "react-hook-form";
 
 import { CustomAddForm, CustomEditForm } from "../../components";
 import { SecondaryButton } from "../../../../components/button/SecondaryButton";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const UserCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -58,8 +59,6 @@ const UserCard = () => {
   const getUser = async () => {
     try {
       const res = await AxiosInstance.get(`/api/dashboard/user/${uuid}`);
-
-      console.log(res.data.data);
       resetHooksForm(res.data.data);
       setCard(res.data.data);
     } catch (err) {
@@ -121,7 +120,7 @@ const UserCard = () => {
           my={{ base: 2, lg: 6 }}
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 180, sm: 260, md: 300, lg: 350 }}
           h={{ base: 350, sm: 360, md: 380, lg: 380 }}
@@ -178,117 +177,90 @@ const UserCard = () => {
       </Center>
 
       {/* updating user info. */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size={["xs", "sm", "sm", "sm"]}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <HStack align="flex-end" w="full" alignItems="baseline" mb="14" mt="5">
+          <input
+            type="file"
+            onChange={(e) => setPhoto(e.target.files[0])}
+            name="choose file"
+          />
+          <Spacer />
+          <SecondaryButton
+            name="Upload File"
+            onClick={uploadFile}
+            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+            height={{ base: 8, md: 12 }}
+            fontSize={{
+              base: "xx-small",
+              sm: "xx-small",
+              md: "sm",
+              lg: "md",
+            }}
+          />
+        </HStack>
 
-          <DrawerBody>
-            <HStack
-              align="flex-end"
-              w="full"
-              alignItems="baseline"
-              mb="14"
-              mt="5"
-            >
-              <input
-                type="file"
-                onChange={(e) => setPhoto(e.target.files[0])}
-                name="choose file"
-              />
-              <Spacer />
-              <SecondaryButton
-                name="Upload File"
-                onClick={uploadFile}
-                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-                height={{ base: 8, md: 12 }}
-                fontSize={{
-                  base: "xx-small",
-                  sm: "xx-small",
-                  md: "sm",
-                  lg: "md",
-                }}
-              />
-            </HStack>
-
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(onUpdateUserInfo)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "First Name : ",
-                    placeHolder: "Enter First Name",
-                    name: "first_name",
-                    errors: errors,
-                    inputType: "text",
-                  },
-                  {
-                    head: "Last Name : ",
-                    placeHolder: "Enter Last Name",
-                    name: "last_name",
-                    errors: errors,
-                    inputType: "text",
-                  },
-                  {
-                    head: "Phone Number : ",
-                    placeHolder: "Enter Phone Number",
-                    name: "phone_number",
-                    errors: errors,
-                    inputType: "number",
-                  },
-                  {
-                    head: "Email : ",
-                    placeHolder: "Enter Email",
-                    name: "email",
-                    errors: errors,
-                    inputType: "text",
-                  },
-                  {
-                    head: "Password : ",
-                    placeHolder: "Enter Password",
-                    name: "password",
-                    errors: errors,
-                    isPassword: true,
-                  },
-                  {
-                    head: "Confirm Password : ",
-                    placeHolder: "confirm your password",
-                    name: "password_confirmation",
-                    errors: errors,
-                    isPassword: true,
-                  },
-                  // {
-                  //   head: "Country Code : ",
-                  //   placeHolder: "Select Country Code : ex SA",
-                  //   name: "country_code",
-                  //   errors: errors,
-                  //   isSelect: true,
-                  //   optionList: countryList,
-                  //   value: "short_name",
-                  //   key: "uuid",
-                  //   displayValue: "short_name",
-                  // },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+        <CustomEditForm
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(onUpdateUserInfo)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "First Name : ",
+                placeHolder: "Enter First Name",
+                name: "first_name",
+                errors: errors,
+                inputType: "text",
+                width: "100%",
+              },
+              {
+                head: "Last Name : ",
+                placeHolder: "Enter Last Name",
+                name: "last_name",
+                errors: errors,
+                inputType: "text",
+                width: "100%",
+              },
+              {
+                head: "Phone Number : ",
+                placeHolder: "Enter Phone Number",
+                name: "phone_number",
+                errors: errors,
+                inputType: "number",
+                width: "100%",
+              },
+              {
+                head: "Email : ",
+                placeHolder: "Enter Email",
+                name: "email",
+                errors: errors,
+                inputType: "text",
+                width: "100%",
+              },
+              {
+                head: "Password : ",
+                placeHolder: "Enter Password",
+                name: "password",
+                errors: errors,
+                isPassword: true,
+                width: "100%",
+              },
+              {
+                head: "Confirm Password : ",
+                placeHolder: "confirm your password",
+                name: "password_confirmation",
+                errors: errors,
+                isPassword: true,
+                width: "100%",
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

@@ -63,9 +63,15 @@ export const Navbar = () => {
         </HStack>
         <Spacer />
         <HStack spacing={"20px"}>
-          <Text className="text-white cursor-pointer">Home</Text>
-          <Text className="text-white cursor-pointer">Become a Vendor</Text>
-          <Text className="text-white cursor-pointer">Login</Text>
+          <Text color="brand.white" cursor="pointer">
+            Home
+          </Text>
+          <Text color="brand.white" cursor="pointer">
+            Become a Vendor
+          </Text>
+          <Text color="brand.white" cursor="pointer">
+            Login
+          </Text>
         </HStack>
       </Flex>
     </Box>

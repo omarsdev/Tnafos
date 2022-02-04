@@ -29,7 +29,7 @@ export const PasswordInput = ({
 
   return (
     <InputGroup
-      width={{ base: 150, sm: 250, md: 480, lg: 500 }}
+      width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
       height={{ base: 4, sm: 6, md: 8, lg: 10 }}
       flex
       flexDirection="row"
@@ -39,12 +39,12 @@ export const PasswordInput = ({
           focusBorderColor="#F8B916"
           borderColor={!error ? "#AEAEAE" : "red"}
           backgroundColor="#fff"
-          className="rounded-3xl select-none"
+          rounded="3xl"
+          userSelect="none"
           borderRadius="25"
           placeholder={placeHolder}
-          _placeholder={{ fontSize: { base: 12, sm: 16, md: 16, lg: 20 } }}
+          _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
           type={show ? "text" : "password"}
-          // {...register(`${name}`)}
           {...register}
           {...rest}
         />
@@ -53,23 +53,27 @@ export const PasswordInput = ({
           focusBorderColor="#F8B916"
           borderColor={!error ? "#AEAEAE" : "red"}
           backgroundColor="#fff"
-          className="rounded-3xl select-none"
+          rounded="3xl"
+          userSelect="none"
           borderRadius="25"
           placeholder={placeHolder}
-          _placeholder={{ fontSize: { base: 12, sm: 16, md: 16, lg: 20 } }}
+          _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
           value={value}
           onChange={handleChange}
           type={show ? "text" : "password"}
           {...rest}
         />
       )}
-      <Box>
+      <Box w="auto" h="100%" backgroundColor="red">
         <InputRightElement
+          width="auto"
+          height="100%"
           onClick={handleClickEye}
-          className="cursor-pointer"
-          // width={{ base: 2, sm: 8, md: 12, lg: 20 }}
+          cursor="pointer"
+          m="auto"
+          mr="0.8rem"
         >
-          {show ? <Eye /> : <EyeOff />}
+          {show ? <Eye size="16" /> : <EyeOff size="16" />}
         </InputRightElement>
       </Box>
     </InputGroup>
@@ -88,14 +92,10 @@ export const PasswordInputControl = ({
     <Controller
       control={control}
       name={name}
-      render={({
-        field: { onChange, onBlur, value, name, ref },
-        fieldState: { invalid, isTouched, isDirty, error },
-        formState,
-      }) => (
+      render={({ field: { name }, fieldState: { error } }) => (
         <VStack>
           <PasswordInput
-            width={{ base: 150, sm: 250, md: 480, lg: 500 }}
+            width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
             height={{ base: 4, sm: 6, md: 8, lg: 10 }}
             placeholder={placeHolder}
             register={register(`${name}`, { required: true })}

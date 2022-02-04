@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
 
 import { RiRefreshLine } from "react-icons/ri";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const UpdateStatus = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -105,7 +106,7 @@ const UpdateStatus = () => {
           my={{ base: 2, lg: 6 }}
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 170, sm: 260, md: 300, lg: 350 }}
           h={{ base: 110, sm: 130, md: 160, lg: 200 }}
@@ -154,44 +155,29 @@ const UpdateStatus = () => {
       </Center>
 
       {/* updating estimate's status*/}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(statusUpdate)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Status : ",
-                    placeHolder: "Enter Status",
-                    name: "status",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(statusUpdate)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Status : ",
+                placeHolder: "Enter Status",
+                name: "status",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

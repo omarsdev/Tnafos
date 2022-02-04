@@ -106,7 +106,7 @@ const ConvertToInvoice = () => {
           my={{ base: 2, lg: 6 }}
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 170, sm: 260, md: 300, lg: 350 }}
           h={{ base: 110, sm: 130, md: 160, lg: 200 }}

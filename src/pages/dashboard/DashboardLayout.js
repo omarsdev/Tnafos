@@ -41,6 +41,7 @@ const DashboardLayout = () => {
   const { userData, setUserData } = dataProviderValue;
 
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = React.useState(true);
 
   const fetchTokenMe = async (token) => {
     try {
@@ -59,6 +60,10 @@ const DashboardLayout = () => {
     }
   };
 
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   useEffect(() => {
     if (userData) return;
     fetchTokenMe();
@@ -67,9 +72,9 @@ const DashboardLayout = () => {
 
   return !loading && userData ? (
     <HStack spacing={0}>
-      <Sidebar />
-      <VStack className="chakra-stack w-full h-screen overflow-scroll">
-        <Navbar />
+      <Sidebar isOpen={isOpen} />
+      <VStack w="100%" h="100vh" overflow="scroll">
+        <Navbar handleToggle={handleToggle} />
         {/* {body} */}
 
         <Switch>

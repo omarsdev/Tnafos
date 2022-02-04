@@ -27,6 +27,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
 import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const EstimateCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -119,7 +120,7 @@ const EstimateCard = () => {
         <Box
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 250, sm: 330, md: 450, lg: 550 }}
           h={{ base: 850, sm: 1100, md: 1300, lg: 1400 }}
@@ -333,114 +334,99 @@ const EstimateCard = () => {
       </Center>
 
       {/* updating estimate */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updateEstimate)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Subject : ",
-                    placeHolder: "Enter Subject",
-                    name: "subject",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Status : ",
-                    placeHolder: "Enter Status",
-                    name: "status",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Date : ",
-                    placeHolder: "Enter Date",
-                    name: "date",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Valid - till : ",
-                    placeHolder: "valid - till",
-                    name: "valid_till",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Currency : ",
-                    placeHolder: "Enter Currency",
-                    name: "currency",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Customer Id : ",
-                    placeHolder: "Enter customer_id",
-                    name: "customer_id",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Assigned - to : ",
-                    placeHolder: "Enter the uuid here",
-                    name: "assigned_to",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Discount- type : ",
-                    placeHolder: "Enter discount_type",
-                    name: "discount_type",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Discount - amount : ",
-                    placeHolder: "Enter discount_amount",
-                    name: "discount_amount",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Sub-total : ",
-                    placeHolder: "Enter sub-total",
-                    name: "subtotal",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Total : ",
-                    placeHolder: "Enter Total",
-                    name: "total",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(updateEstimate)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Subject : ",
+                placeHolder: "Enter Subject",
+                name: "subject",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Status : ",
+                placeHolder: "Enter Status",
+                name: "status",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Date : ",
+                placeHolder: "Enter Date",
+                name: "date",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Valid - till : ",
+                placeHolder: "valid - till",
+                name: "valid_till",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Currency : ",
+                placeHolder: "Enter Currency",
+                name: "currency",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Customer Id : ",
+                placeHolder: "Enter customer_id",
+                name: "customer_id",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Assigned - to : ",
+                placeHolder: "Enter the uuid here",
+                name: "assigned_to",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Discount- type : ",
+                placeHolder: "Enter discount_type",
+                name: "discount_type",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Discount - amount : ",
+                placeHolder: "Enter discount_amount",
+                name: "discount_amount",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Sub-total : ",
+                placeHolder: "Enter sub-total",
+                name: "subtotal",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Total : ",
+                placeHolder: "Enter Total",
+                name: "total",
+                inputType: "number",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

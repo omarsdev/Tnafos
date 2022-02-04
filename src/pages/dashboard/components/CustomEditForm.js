@@ -46,7 +46,7 @@ export const CustomEditForm = ({
         {/* </HStack> */}
       </Flex>
       {errors?.message && (
-        <Text className="text-center mt-4" color="red">
+        <Text textAlign="center" mt="1rem" color="red">
           {errors?.message}
         </Text>
       )}

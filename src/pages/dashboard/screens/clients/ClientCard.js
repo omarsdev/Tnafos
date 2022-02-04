@@ -3,12 +3,6 @@ import {
   Button,
   Box,
   Text,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   HStack,
   Center,
@@ -28,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 import { CustomEditForm, CustomAddForm } from "../../components";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const ClientCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -120,7 +115,7 @@ const ClientCard = () => {
         <Box
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 260, sm: 350, md: 450, lg: 550 }}
           h={{ base: 260, sm: 360, md: 460, lg: 536 }}
@@ -282,86 +277,71 @@ const ClientCard = () => {
       </Center>
 
       {/* updating client card*/}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updateClient)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Company Name : ",
-                    placeHolder: "Enter Company Name : ",
-                    name: "company_name",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "First Name : ",
-                    placeHolder: "Enter First Name : ",
-                    name: "first_name",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Last Name : ",
-                    placeHolder: "Enter Last Name : ",
-                    name: "last_name",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Position : ",
-                    placeHolder: "Enter Position : ",
-                    name: "position",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Email : ",
-                    placeHolder: "Enter Email : ",
-                    name: "email",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Phone Number : ",
-                    placeHolder: "Enter Phone Number : ",
-                    name: "phone_number",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Country code : ",
-                    placeHolder: "Enter Country code : ",
-                    name: "country_code",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(updateClient)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Company Name : ",
+                placeHolder: "Enter Company Name : ",
+                name: "company_name",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "First Name : ",
+                placeHolder: "Enter First Name : ",
+                name: "first_name",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Last Name : ",
+                placeHolder: "Enter Last Name : ",
+                name: "last_name",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Position : ",
+                placeHolder: "Enter Position : ",
+                name: "position",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Email : ",
+                placeHolder: "Enter Email : ",
+                name: "email",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Phone Number : ",
+                placeHolder: "Enter Phone Number : ",
+                name: "phone_number",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Country code : ",
+                placeHolder: "Enter Country code : ",
+                name: "country_code",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

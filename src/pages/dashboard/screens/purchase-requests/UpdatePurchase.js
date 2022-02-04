@@ -25,6 +25,7 @@ import { CustomAddForm, CustomEditForm } from "../../components";
 import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
 import { FiEdit } from "react-icons/fi";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const UpdatePurchase = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -110,7 +111,7 @@ const UpdatePurchase = () => {
         <Box
           rounded="3xl"
           position="relative"
-          bg="white"
+          bg="brand.white"
           shadow="2xl"
           w={{ base: 170, sm: 260, md: 450, lg: 550 }}
           h={{ base: 210, sm: 250, md: 300, lg: 320 }}
@@ -192,58 +193,43 @@ const UpdatePurchase = () => {
       </Center>
 
       {/* updating purchase-request*/}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updatePurchase)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Date : ",
-                    placeHolder: "Enter Date",
-                    name: "date",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Details : ",
-                    placeHolder: "Enter Details",
-                    name: "details",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Lines : ",
-                    placeHolder: "Enter Lines",
-                    name: "lines",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(updatePurchase)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Date : ",
+                placeHolder: "Enter Date",
+                name: "date",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Details : ",
+                placeHolder: "Enter Details",
+                name: "details",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Lines : ",
+                placeHolder: "Enter Lines",
+                name: "lines",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

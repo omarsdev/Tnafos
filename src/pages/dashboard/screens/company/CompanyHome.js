@@ -175,7 +175,7 @@ const CompanyHome = () => {
                   textAlign={"center"}
                   shadow="2xl"
                   position="relative"
-                  bg="white"
+                  bg="brand.white"
                 >
                   <Text
                     fontSize={{

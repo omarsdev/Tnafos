@@ -9,6 +9,7 @@ export const PrimaryButton = ({
   name,
   Logo,
   loadingButton,
+  buttonType,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
@@ -38,7 +39,7 @@ export const PrimaryButton = ({
       }
       loadingText="Loading"
       width={width}
-      height={height}
+      // height={height}
       backgroundColor="brand.primary"
       _hover={{ bg: "primary.600" }}
       borderRadius="99em"
@@ -54,7 +55,7 @@ export const PrimaryButton = ({
           <Logo />
         </Box>
       )}
-      <Text>{name}</Text>
+      <Text fontSize={14}>{name}</Text>
     </Button>
   );
 };

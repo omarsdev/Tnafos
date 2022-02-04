@@ -22,7 +22,8 @@ export const RegularInput = ({
 
   return !value && !setValue ? (
     <ChakraInput
-      className="rounded-3xl select-none"
+      rounded="3xl"
+      userSelect="none"
       borderRadius="25"
       focusBorderColor="#F8B916"
       borderColor={!error ? "#AEAEAE" : "#ff0000"}
@@ -38,7 +39,8 @@ export const RegularInput = ({
     />
   ) : (
     <ChakraInput
-      className="rounded-3xl select-none"
+      rounded="3xl"
+      userSelect="none"
       borderRadius="25"
       focusBorderColor="#F8B916"
       borderColor={!error ? "#AEAEAE" : "red"}
@@ -63,7 +65,7 @@ export const RegularInputControl = ({
   name,
   placeHolder,
   register,
-
+  width,
   inputType,
   errors,
 }) => {
@@ -81,7 +83,7 @@ export const RegularInputControl = ({
             placeholder={placeHolder}
             register={register(`${name}`, { required: true })}
             error={error || (errors && errors[name])}
-            width={{ base: 150, sm: 250, md: 480, lg: 500 }}
+            width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
             height={{ base: 4, sm: 6, md: 8, lg: 10 }}
             inputType={inputType}
           />
