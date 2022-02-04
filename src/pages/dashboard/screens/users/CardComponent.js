@@ -9,15 +9,7 @@ const CardComponent = ({ userData }) => {
   const history = useHistory();
 
   return (
-    <Box
-      rounded="3xl"
-      shadow="2xl"
-      bg="white"
-      position="relative"
-      // w="300px"
-      h="350px"
-      width={["200", "250px", "350px"]}
-    >
+    <Box rounded="3xl" shadow="2xl" bg="white" position="relative">
       <VStack spacing="20px" mx="5%">
         <Image
           src={"https://bit.ly/sage-adebayo"}
@@ -25,10 +17,14 @@ const CardComponent = ({ userData }) => {
           objectFit="cover"
           rounded="3xl"
           w="100%"
-          h="160px"
+          h="200px"
           marginTop={"20px"}
         />
-        <Box mr="0" fontSize={["sm", "md", "lg", "xl"]}>
+        <Box
+          mr="0"
+          fontSize={{ base: "sm", md: "md", lg: "large" }}
+          justify="center"
+        >
           <Text>
             Name: {userData.first_name} {userData.last_name}
           </Text>
@@ -37,7 +33,18 @@ const CardComponent = ({ userData }) => {
         </Box>
         <Box position="relative" bottom="5">
           <Link to={`${match.url}/${userData.uuid}`}>
-            <SecondaryButton name="View" my="1" />
+            <SecondaryButton
+              name="View"
+              my="1"
+              fontSize={{
+                base: "xx-small",
+                sm: "x-small",
+                md: "sm",
+                lg: "md",
+              }}
+              width={{ base: 20, sm: 24, md: 32, lg: 32 }}
+              height={{ base: 6, md: 8, lg: 10 }}
+            />
           </Link>
         </Box>
       </VStack>

@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
-  Image,
   Center,
   Spinner,
   VStack,
   Stack,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
 
 import { AxiosInstance } from "../../../../api";
@@ -35,7 +28,7 @@ export const ClientContacts = () => {
       setCard(res?.data?.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/clientshome");
+      history.push("/dashboard/client");
     }
   };
 
@@ -45,21 +38,29 @@ export const ClientContacts = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
-    <Center py="5">
+    <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
       <Box
         rounded="3xl"
         position="relative"
         bg="brand.white"
         shadow="2xl"
-        w="400px"
-        h="450px"
+        w={{ base: 260, sm: 350, md: 450, lg: 550 }}
+        h={{ base: 260, sm: 360, md: 460, lg: 500 }}
       >
-        <VStack spacing="20px" mx="5%" mt="5">
+        <VStack spacing="20px" mx="5%" mt={{ base: 2, sm: 2, md: 4, lg: 4 }}>
           {card.map((el, idx) => (
-            <Stack key={idx}>
+            <Stack
+              key={idx}
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            >
               <Text py="1" textColor="gray.600">
                 Name: {el?.first_name}
                 {el?.last_name}
@@ -72,10 +73,18 @@ export const ClientContacts = () => {
           ))}
 
           <Box>
-            <IconButton
+            <Button
+              position="relative"
               justify={"center"}
-              fontSize={"lg"}
-              rounded={"full"}
+              size={{
+                base: "x-small",
+                sm: "x-small",
+                md: "md",
+                lg: "large",
+              }}
+              rounded="full"
+              h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+              w={{ base: 6, sm: 8, md: 10, lg: 12 }}
               bg={"#F8B916"}
               color={"white"}
               boxShadow={
@@ -84,11 +93,19 @@ export const ClientContacts = () => {
               _hover={{
                 bg: "orange.400",
               }}
-              icon={<AiOutlineHome />}
               onClick={() => {
-                history.push("/dashboard/clientshome");
+                history.push("/dashboard/client");
               }}
-            />
+            >
+              <AiOutlineHome
+                fontSize={{
+                  base: "xx-small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              />
+            </Button>
           </Box>
         </VStack>
       </Box>

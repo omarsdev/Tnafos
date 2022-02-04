@@ -1,14 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   HStack,
   Center,
@@ -28,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 import { CustomEditForm, CustomAddForm } from "../../components";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const ClientCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -64,7 +59,7 @@ const ClientCard = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/clientsHome");
+      history.push("/dashboard/client");
     }
   };
 
@@ -82,7 +77,7 @@ const ClientCard = () => {
         message: "Customer's info has been updated!",
         type: "info",
       });
-      history.push(`/dashboard/clientsHome`);
+      history.push(`/dashboard/client`);
     } catch (err) {
       setIsUpdating(false);
       setErrors(err.response.data);
@@ -112,23 +107,30 @@ const ClientCard = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
-      <Center py="10">
+      <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
         <Box
           rounded="3xl"
           position="relative"
           bg="brand.white"
           shadow="2xl"
-          w="550px"
-          h="450px"
+          w={{ base: 260, sm: 350, md: 450, lg: 550 }}
+          h={{ base: 260, sm: 360, md: 460, lg: 536 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            {/* <Box mr="0"> */}
             <HStack w="full">
-              <Box ml="14">
+              <Box
+                ml="14"
+                fontSize={{
+                  base: "xx-small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              >
                 <Text py="1" textColor="gray.600">
                   Company Name: {card?.company_name}
                 </Text>
@@ -150,18 +152,24 @@ const ClientCard = () => {
               </Box>
               <Spacer />
 
-              {/* <Flex justify={"center"} mt={-12}> */}
-              <VStack spacing="30px">
+              <VStack spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}>
                 <Tooltip
                   label="Show Contacts"
                   bg="white"
                   placement="top"
                   color="#333333"
                 >
-                  <IconButton
+                  <Button
                     justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
+                    size={{
+                      base: "x-small",
+                      sm: "x-small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                    rounded="full"
+                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                     bg={"#F8B916"}
                     color={"white"}
                     boxShadow={
@@ -170,11 +178,19 @@ const ClientCard = () => {
                     _hover={{
                       bg: "orange.400",
                     }}
-                    icon={<AiOutlineContacts />}
                     onClick={() => {
                       history.push(`${match.url}/contacts`);
                     }}
-                  />
+                  >
+                    <AiOutlineContacts
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
+                    />
+                  </Button>
                 </Tooltip>
 
                 <Tooltip
@@ -183,10 +199,17 @@ const ClientCard = () => {
                   placement="top"
                   color="#333333"
                 >
-                  <IconButton
+                  <Button
                     justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
+                    size={{
+                      base: "x-small",
+                      sm: "x-small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                    rounded="full"
+                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                     bg={"#F8B916"}
                     color={"white"}
                     boxShadow={
@@ -195,11 +218,19 @@ const ClientCard = () => {
                     _hover={{
                       bg: "orange.400",
                     }}
-                    icon={<MdOutlinePermMedia />}
                     onClick={() => {
                       history.push(`${match.url}/media`);
                     }}
-                  />
+                  >
+                    <MdOutlinePermMedia
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
+                    />
+                  </Button>
                 </Tooltip>
 
                 <Tooltip
@@ -208,10 +239,17 @@ const ClientCard = () => {
                   placement="top"
                   color="#333333"
                 >
-                  <IconButton
+                  <Button
                     justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
+                    size={{
+                      base: "x-small",
+                      sm: "x-small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                    rounded="full"
+                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                     bg={"#F8B916"}
                     color={"white"}
                     boxShadow={
@@ -220,9 +258,17 @@ const ClientCard = () => {
                     _hover={{
                       bg: "orange.400",
                     }}
-                    icon={<FiEdit />}
                     onClick={onOpen}
-                  />
+                  >
+                    <FiEdit
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
+                    />
+                  </Button>
                 </Tooltip>
               </VStack>
             </HStack>
@@ -231,86 +277,71 @@ const ClientCard = () => {
       </Center>
 
       {/* updating client card*/}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updateClient)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Company Name : ",
-                    placeHolder: "Enter Company Name : ",
-                    name: "company_name",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "First Name : ",
-                    placeHolder: "Enter First Name : ",
-                    name: "first_name",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Last Name : ",
-                    placeHolder: "Enter Last Name : ",
-                    name: "last_name",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Position : ",
-                    placeHolder: "Enter Position : ",
-                    name: "position",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Email : ",
-                    placeHolder: "Enter Email : ",
-                    name: "email",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Phone Number : ",
-                    placeHolder: "Enter Phone Number : ",
-                    name: "phone_number",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Country code : ",
-                    placeHolder: "Enter Country code : ",
-                    name: "country_code",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(updateClient)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Company Name : ",
+                placeHolder: "Enter Company Name : ",
+                name: "company_name",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "First Name : ",
+                placeHolder: "Enter First Name : ",
+                name: "first_name",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Last Name : ",
+                placeHolder: "Enter Last Name : ",
+                name: "last_name",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Position : ",
+                placeHolder: "Enter Position : ",
+                name: "position",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Email : ",
+                placeHolder: "Enter Email : ",
+                name: "email",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Phone Number : ",
+                placeHolder: "Enter Phone Number : ",
+                name: "phone_number",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Country code : ",
+                placeHolder: "Enter Country code : ",
+                name: "country_code",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

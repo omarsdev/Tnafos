@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   useDisclosure,
@@ -97,28 +97,39 @@ const ConvertToInvoice = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
       <Center py="5">
         <Box
+          my={{ base: 2, lg: 6 }}
           rounded="3xl"
           position="relative"
           bg="brand.white"
           shadow="2xl"
-          w="400px"
-          h="200px"
+          w={{ base: 170, sm: 260, md: 300, lg: 350 }}
+          h={{ base: 110, sm: 130, md: 160, lg: 200 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text fontSize="large">Date: {card?.date}</Text>
+            <Box
+              mr="0"
+              fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
+            >
+              <Text>Date: {card?.date}</Text>
             </Box>
             <Flex>
-              <IconButton
+              <Button
                 justify={"center"}
-                fontSize={"x-large"}
-                rounded={"full"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                 bg={"#F8B916"}
                 color={"white"}
                 boxShadow={
@@ -127,9 +138,17 @@ const ConvertToInvoice = () => {
                 _hover={{
                   bg: "orange.400",
                 }}
-                icon={<RiExchangeDollarLine />}
                 onClick={onOpen}
-              />
+              >
+                <RiExchangeDollarLine
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
             </Flex>
           </VStack>
         </Box>

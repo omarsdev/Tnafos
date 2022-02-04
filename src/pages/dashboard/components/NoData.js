@@ -10,18 +10,22 @@ export const NoData = ({ component }) => {
   return (
     <Switch>
       <Route exact path={`${match.path}`}>
-        <Box w="full" padding="10">
+        <Box w="full" overflowY="scroll" padding={{ base: 4, md: 4, lg: 6 }}>
           <HStack justifyContent="space-between" paddingBottom="5">
             <Text
               textColor="gray.600"
-              fontSize="large"
+              fontSize={{
+                base: "large",
+                sm: "large",
+                md: "x-large",
+                lg: "xx-large",
+              }}
               fontWeight="lg"
               alignItems="baseline"
-              justifySelf="center"
+              mb={{ base: 2, md: 4 }}
             >
-              Ther's no data to show!
+              There's no data to show
             </Text>
-
             <IconButton
               justify={"center"}
               fontSize={"lg"}

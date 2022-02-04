@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import { FiEdit } from "react-icons/fi";
 import {
   Box,
-  IconButton,
+  Button,
   Center,
   Spinner,
   Text,
   useDisclosure,
-  Stack,
+  VStack,
   Flex,
   Image,
   Drawer,
@@ -19,7 +19,7 @@ import {
   HStack,
   Spacer,
 } from "@chakra-ui/react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { CustomEditForm, CustomAddForm } from "../../components";
@@ -27,6 +27,7 @@ import { CustomEditForm, CustomAddForm } from "../../components";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 import { SecondaryButton } from "../../../../components/button/SecondaryButton";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const MyService = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -56,7 +57,7 @@ const MyService = () => {
       resetHooksForm(res.data.data);
       setService(res.data.data);
     } catch (err) {
-      history.push("/dashboard/servicehome");
+      history.push("/dashboard/service");
     }
   };
 
@@ -104,18 +105,19 @@ const MyService = () => {
 
   return !service ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "large", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
       <Center py="5">
         <Box
+          my={{ base: 2, lg: 6 }}
           rounded="3xl"
-          shadow="2xl"
           position="relative"
-          bg="brand.white"
-          w="400px"
-          h="500px"
+          bg="white"
+          shadow="2xl"
+          w={{ base: 160, sm: 200, md: 300, lg: 350 }}
+          h={{ base: 300, sm: 320, md: 380, lg: 400 }}
         >
           <Image
             src={"https://bit.ly/sage-adebayo"}
@@ -123,29 +125,36 @@ const MyService = () => {
             objectFit="cover"
             roundedTop="3xl"
             w="100%"
-            h="220px"
-            layout={"fill"}
+            h={{ base: 36, md: 40 }}
+            layout={"cover"}
           />
-          <Stack mr="0" h="270px" mx="5%">
-            <Text mt="1" fontSize="x-large" textColor="gray.600">
-              {service?.name}
-            </Text>
-            <Text color="#007BFF">Price: {service?.price} SAR</Text>
-            <Text fontSize="large" textColor="gray.600">
-              Description:{service?.description}
-            </Text>
-            <Text fontSize="large" textColor="gray.600">
-              Category-id: {service?.category.uuid}
-            </Text>
-            <Text fontSize="large" textColor="gray.600">
-              Type :{service?.type}
-            </Text>
-            <Flex justify={"center"}>
-              <IconButton
+          <VStack>
+            <Box
+              mr="0"
+              mx="5%"
+              mt={{ base: 1, md: 2 }}
+              fontSize={{ base: "x-small", sm: "small", md: "md", lg: "large" }}
+            >
+              <Text mt="1" textColor="gray.600">
+                {service?.name}
+              </Text>
+              <Text color="#007BFF">Price: {service?.price} SAR</Text>
+              <Text textColor="gray.600">
+                Description:{service?.description}
+              </Text>
+              <Text textColor="gray.600">
+                Category-id: {service?.category.uuid}
+              </Text>
+              <Text textColor="gray.600">Type :{service?.type}</Text>
+            </Box>
+            <Flex justify={"center"} pb="8px">
+              <Button
                 justify={"center"}
-                mb={3}
-                fontSize={"large"}
-                rounded={"full"}
+                mb="5px"
+                size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                 bg={"#F8B916"}
                 color={"white"}
                 boxShadow={
@@ -157,75 +166,81 @@ const MyService = () => {
                 _focus={{
                   bg: "orange.400",
                 }}
-                icon={<FiEdit />}
                 onClick={onOpen}
-              />
+              >
+                <FiEdit
+                  fontSize={{
+                    base: "x-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
             </Flex>
-          </Stack>
+          </VStack>
         </Box>
       </Center>
 
       {/* updating service. */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <HStack
-              align="flex-end"
-              w="full"
-              alignItems="baseline"
-              mb="14"
-              mt="5"
-            >
-              <input
-                type="file"
-                onChange={(e) => setPhoto(e.target.files[0])}
-                name="choose file"
-              />
-              <Spacer />
-              <SecondaryButton name="Upload File" onClick={uploadFile} />
-            </HStack>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(onUpdateService)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Price : ",
-                    placeHolder: "Enter Price : ",
-                    name: "price",
-                    inputType: "number",
-                    err: errors,
-                  },
-                  {
-                    head: "Type : ",
-                    placeHolder: "Enter Type : ",
-                    name: "type",
-                    inputType: "text",
-                    err: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <HStack align="flex-end" w="full" alignItems="baseline" mb="14" mt="5">
+          <input
+            type="file"
+            onChange={(e) => setPhoto(e.target.files[0])}
+            name="choose file"
+            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+            height={{ base: 8, md: 12 }}
+            fontSize={{
+              base: "xx-small",
+              sm: "xx-small",
+              md: "sm",
+              lg: "md",
+            }}
+          />
+          <Spacer />
+          <SecondaryButton
+            name="Upload File"
+            onClick={uploadFile}
+            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+            height={{ base: 8, md: 12 }}
+            fontSize={{
+              base: "xx-small",
+              sm: "xx-small",
+              md: "sm",
+              lg: "md",
+            }}
+          />
+        </HStack>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(onUpdateService)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Price : ",
+                placeHolder: "Enter Price : ",
+                name: "price",
+                inputType: "number",
+                err: errors,
+              },
+              {
+                head: "Type : ",
+                placeHolder: "Enter Type : ",
+                name: "type",
+                inputType: "text",
+                err: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

@@ -35,37 +35,60 @@ const ServiceHome = () => {
   }, []);
 
   return (
-    <Box w="full" overflowY="scroll" padding="10">
-      <HStack justifyContent="space-between" paddingBottom="5">
+    <Box w="full" overflowY="scroll" padding={{ base: 1, sm: 3, md: 4, lg: 6 }}>
+      <HStack justifyContent="space-between" paddingBottom="5" px="3%">
         <Heading
           textColor="gray.600"
-          fontSize="xx-large"
+          fontSize={{
+            base: "large",
+            sm: "large",
+            md: "x-large",
+            lg: "xx-large",
+          }}
           fontWeight="lg"
           alignItems="baseline"
         >
           Services
         </Heading>
 
-        <IconButton
-          as={Button}
+        <Button
           colorScheme="yellow"
-          size="lg"
-          icon={<AiOutlinePlus />}
+          size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
           rounded="full"
+          h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+          w={{ base: 6, sm: 8, md: 10, lg: 12 }}
           onClick={() => {
             history.push(`${match.url}/addservice`);
           }}
-        />
+        >
+          <AiOutlinePlus
+            fontSize={{ base: "xx-small", sm: "small", md: "md", lg: "large" }}
+          />
+        </Button>
       </HStack>
 
       {!servicesList ? (
         <Center h="70vh" w="100%">
-          <Spinner size="xl" color="#F8B916" />
+          <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
         </Center>
       ) : (
-        <Grid templateColumns="repeat(3, 1fr)" gap={20} mb="20px">
+        <Grid
+          templateColumns={{
+            base: "repeat(1,1fr)",
+            md: "repeat(2,1fr)",
+            lg: "repeat(3, 1fr)",
+          }}
+          gap={{ base: 2, md: 2, lg: 4 }}
+          mb={{ base: 1, md: 3, lg: 5 }}
+          mx={{ base: 3, md: "none", lg: "none" }}
+        >
           {servicesList.map((service, idx) => (
-            <ServiceCard info={service} key={idx} />
+            <ServiceCard
+              info={service}
+              key={idx}
+              h={{ base: 80, sm: 80, md: 82, lg: 86 }}
+              w={{ base: 60, sm: 76, lg: 76 }}
+            />
           ))}
         </Grid>
       )}

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   Drawer,
@@ -15,7 +15,7 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
-import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
 
 import { CustomEditForm, CustomAddForm } from "../../components";
@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
 
 import { RiRefreshLine } from "react-icons/ri";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const UpdateStatus = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -96,28 +97,39 @@ const UpdateStatus = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
       <Center py="5">
         <Box
+          my={{ base: 2, lg: 6 }}
           rounded="3xl"
           position="relative"
           bg="brand.white"
           shadow="2xl"
-          w="400px"
-          h="200px"
+          w={{ base: 170, sm: 260, md: 300, lg: 350 }}
+          h={{ base: 110, sm: 130, md: 160, lg: 200 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text fontSize="large">Status: {card?.status}</Text>
+            <Box
+              mr="0"
+              fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
+            >
+              <Text>Status: {card?.status}</Text>
             </Box>
             <Flex>
-              <IconButton
+              <Button
                 justify={"center"}
-                fontSize={"x-large"}
-                rounded={"full"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                 bg={"#F8B916"}
                 color={"white"}
                 boxShadow={
@@ -126,53 +138,46 @@ const UpdateStatus = () => {
                 _hover={{
                   bg: "orange.400",
                 }}
-                icon={<RiRefreshLine />}
                 onClick={onOpen}
-              />
+              >
+                <RiRefreshLine
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
             </Flex>
           </VStack>
         </Box>
       </Center>
 
       {/* updating estimate's status*/}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(statusUpdate)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Status : ",
-                    placeHolder: "Enter Status",
-                    name: "status",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(statusUpdate)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Status : ",
+                placeHolder: "Enter Status",
+                name: "status",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

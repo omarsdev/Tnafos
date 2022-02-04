@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useRouteMatch, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
   Box,
   Center,
@@ -8,6 +8,7 @@ import {
   Stack,
   IconButton,
   Text,
+  Button,
 } from "@chakra-ui/react";
 import { AiOutlineHome } from "react-icons/ai";
 
@@ -30,7 +31,7 @@ const ClientMedia = () => {
       setMedia(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/clientshome");
+      history.push("/dashboard/client");
     }
   };
 
@@ -40,34 +41,45 @@ const ClientMedia = () => {
 
   return !media ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : media.length === 0 ? (
     <NoData component={"clientshome"} />
   ) : (
     <Center py="5">
       <Box
+        my={{ base: 2, lg: 6 }}
         rounded="3xl"
         position="relative"
         bg="brand.white"
         shadow="2xl"
-        w="350px"
-        h="200px"
+        w={{ base: 200, sm: 260, md: 300, lg: 350 }}
+        h={{ base: 350, sm: 360, md: 380, lg: 380 }}
       >
         <VStack spacing="20px" mx="5%" mt="5">
           {media.map((el, idx) => (
-            <Stack key={idx}>
+            <Stack
+              key={idx}
+              fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
+            >
               <Text py="1" textColor="gray.600">
                 {el}
               </Text>
             </Stack>
           ))}
 
-          <Box>
-            <IconButton
+          <Box fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}>
+            <Button
               justify={"center"}
-              fontSize={"lg"}
-              rounded={"full"}
+              size={{
+                base: "x-small",
+                sm: "x-small",
+                md: "md",
+                lg: "large",
+              }}
+              rounded="full"
+              h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+              w={{ base: 6, sm: 8, md: 10, lg: 12 }}
               bg={"#F8B916"}
               color={"white"}
               boxShadow={
@@ -76,11 +88,20 @@ const ClientMedia = () => {
               _hover={{
                 bg: "orange.400",
               }}
-              icon={<AiOutlineHome />}
               onClick={() => {
-                history.push("/dashboard/clientshome");
+                history.push("/dashboard/client");
               }}
-            />
+            >
+              {" "}
+              <AiOutlineHome
+                fontSize={{
+                  base: "xx-small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              />
+            </Button>
           </Box>
         </VStack>
       </Box>

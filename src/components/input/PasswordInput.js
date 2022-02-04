@@ -6,6 +6,7 @@ import {
   InputRightElement,
   Text,
   VStack,
+  Box,
 } from "@chakra-ui/react";
 
 import { Eye, EyeOff } from "react-feather";
@@ -27,7 +28,10 @@ export const PasswordInput = ({
   const handleChange = (event) => setValue(event.target.value);
 
   return (
-    <InputGroup width={width}>
+    <InputGroup
+      width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
+      height={{ base: 4, sm: 6, md: 8, lg: 10 }}
+    >
       {!value && !setValue ? (
         <ChakraInput
           focusBorderColor="#F8B916"
@@ -37,8 +41,8 @@ export const PasswordInput = ({
           userSelect="none"
           borderRadius="25"
           placeholder={placeHolder}
+          _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
           type={show ? "text" : "password"}
-          // {...register(`${name}`)}
           {...register}
           {...rest}
         />
@@ -51,15 +55,25 @@ export const PasswordInput = ({
           userSelect="none"
           borderRadius="25"
           placeholder={placeHolder}
+          _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
           value={value}
           onChange={handleChange}
           type={show ? "text" : "password"}
           {...rest}
         />
       )}
-      <InputRightElement width="3rem" onClick={handleClickEye} cursor="pointer">
-        {show ? <Eye /> : <EyeOff />}
-      </InputRightElement>
+      <Box w="auto" h="100%" backgroundColor="red">
+        <InputRightElement
+          width="auto"
+          height="100%"
+          onClick={handleClickEye}
+          cursor="pointer"
+          m="auto"
+          mr="0.8rem"
+        >
+          {show ? <Eye size="16" /> : <EyeOff size="16" />}
+        </InputRightElement>
+      </Box>
     </InputGroup>
   );
 };
@@ -76,17 +90,14 @@ export const PasswordInputControl = ({
     <Controller
       control={control}
       name={name}
-      render={({
-        field: { onChange, onBlur, value, name, ref },
-        fieldState: { invalid, isTouched, isDirty, error },
-        formState,
-      }) => (
+      render={({ field: { name }, fieldState: { error } }) => (
         <VStack>
           <PasswordInput
+            width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
+            height={{ base: 4, sm: 6, md: 8, lg: 10 }}
             placeholder={placeHolder}
             register={register(`${name}`, { required: true })}
             error={error || (errors && errors[name])}
-            width={width}
           />
           {error?.message && <Text color="#ff0000">{error?.message}</Text>}
           {errors &&

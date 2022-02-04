@@ -23,14 +23,16 @@ const MyProfile = () => {
   return (
     <Center>
       <Box
-        mt="40px"
-        maxW={"400px"}
+        my={{ base: 2, lg: 6 }}
         w={"full"}
         bg={useColorModeValue("white", "gray.900")}
         boxShadow={"2xl"}
         rounded="xl"
-        p={6}
         textAlign={"center"}
+        w={{ base: 200, sm: 260, md: 360, lg: 380 }}
+        h={{ base: 200, sm: 230, md: 250, lg: 280 }}
+        p={{ base: 2, sm: 2, md: 6, lg: 6 }}
+        fontSize={{ base: "xs", sm: "xs", md: "sm", lg: "md" }}
       >
         <Text color="gray.600" pt="0.5rem" pb="0.5rem" fontWeight="600">
           Name :{profile?.first_name} {profile?.last_name}

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   Stack,
@@ -27,6 +27,7 @@ import { useForm } from "react-hook-form";
 import { AlertContext } from "../../../../context/AlertContext";
 import { RiExchangeDollarLine, RiRefreshLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const InvoiceCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -74,7 +75,7 @@ const InvoiceCard = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/invoicehome");
+      history.push("/dashboard/invoice");
     }
   };
 
@@ -92,7 +93,7 @@ const InvoiceCard = () => {
         message: "Invoice's info has been updated!",
         type: "info",
       });
-      history.push(`/dashboard/invoicehome`);
+      history.push(`/dashboard/invoice`);
     } catch (err) {
       setIsUpdating(false);
       setErrors(err.response.data);
@@ -116,22 +117,30 @@ const InvoiceCard = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
-      <Center py="5">
+      <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
         <Box
           rounded="3xl"
           position="relative"
           bg="brand.white"
           shadow="2xl"
-          w="500px"
-          h="1250px"
+          w={{ base: 200, sm: 350, md: 450, lg: 550 }}
+          h={{ base: 1550, sm: 2000, md: 2300, lg: 2600 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
-              <Text fontSize="large">Invoice's details: </Text>
+            <Box
+              ml="14"
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            >
+              <Text fontWeight="bold">Invoice's details: </Text>
               <Text py="1" textColor="gray.600">
                 Subject: {card?.subject}
               </Text>
@@ -256,15 +265,22 @@ const InvoiceCard = () => {
 
               <Flex justify={"center"} w="full" gap="15px">
                 <Tooltip
-                  label="edit info"
+                  label="edit invoice"
                   bg="white"
                   placement="top"
                   color="#333333"
                 >
-                  <IconButton
+                  <Button
                     justify={"center"}
-                    fontSize={"lg"}
-                    rounded={"full"}
+                    size={{
+                      base: "x-small",
+                      sm: "x-small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                    rounded="full"
+                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
                     bg={"#F8B916"}
                     color={"white"}
                     boxShadow={
@@ -273,9 +289,17 @@ const InvoiceCard = () => {
                     _hover={{
                       bg: "orange.400",
                     }}
-                    icon={<FiEdit />}
                     onClick={onOpen}
-                  />
+                  >
+                    <FiEdit
+                      fontSize={{
+                        base: "xx-small",
+                        sm: "small",
+                        md: "md",
+                        lg: "large",
+                      }}
+                    />
+                  </Button>
                 </Tooltip>
               </Flex>
             </Box>
@@ -284,121 +308,106 @@ const InvoiceCard = () => {
       </Center>
 
       {/* updating invoice */}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updateInvoice)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Subject : ",
-                    placeHolder: "Enter Subject",
-                    name: "subject",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Status : ",
-                    placeHolder: "Enter Status",
-                    name: "status",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Date : ",
-                    placeHolder: "Enter Date",
-                    name: "date",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Valid - till : ",
-                    placeHolder: "valid - till",
-                    name: "valid_till",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Currency : ",
-                    placeHolder: "Enter Currency",
-                    name: "currency",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Discount- type : ",
-                    placeHolder: "Enter discount_type",
-                    name: "discount_type",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Discount - amount : ",
-                    placeHolder: "Enter discount_amount",
-                    name: "discount_amount",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Sub-total : ",
-                    placeHolder: "Enter sub-total",
-                    name: "subtotal",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Total : ",
-                    placeHolder: "Enter Total",
-                    name: "total",
-                    inputType: "number",
-                    errors: errors,
-                  },
-                  {
-                    head: "Assigned - to : ",
-                    placeHolder: "Enter the uuid here",
-                    name: "assigned_to",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Customer  : ",
-                    placeHolder: "Enter customer",
-                    name: "customer",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Company  : ",
-                    placeHolder: "Enter company",
-                    name: "company",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(updateInvoice)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Subject : ",
+                placeHolder: "Enter Subject",
+                name: "subject",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Status : ",
+                placeHolder: "Enter Status",
+                name: "status",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Date : ",
+                placeHolder: "Enter Date",
+                name: "date",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Valid - till : ",
+                placeHolder: "valid - till",
+                name: "valid_till",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Currency : ",
+                placeHolder: "Enter Currency",
+                name: "currency",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Discount- type : ",
+                placeHolder: "Enter discount_type",
+                name: "discount_type",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Discount - amount : ",
+                placeHolder: "Enter discount_amount",
+                name: "discount_amount",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Sub-total : ",
+                placeHolder: "Enter sub-total",
+                name: "subtotal",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Total : ",
+                placeHolder: "Enter Total",
+                name: "total",
+                inputType: "number",
+                errors: errors,
+              },
+              {
+                head: "Assigned - to : ",
+                placeHolder: "Enter the uuid here",
+                name: "assigned_to",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Customer  : ",
+                placeHolder: "Enter customer",
+                name: "customer",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Company  : ",
+                placeHolder: "Enter company",
+                name: "company",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

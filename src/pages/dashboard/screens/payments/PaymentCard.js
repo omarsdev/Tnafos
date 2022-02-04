@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  IconButton,
+  Button,
   Box,
   Text,
   Drawer,
@@ -15,13 +15,9 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
-import {
-  useHistory,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { useHistory, useParams, useRouteMatch } from "react-router-dom";
+
+import { Tooltip } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { MdOutlinePermMedia } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
@@ -29,6 +25,7 @@ import { FiEdit } from "react-icons/fi";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 import { CustomAddForm, CustomEditForm } from "../../components";
+import CustomDrawer from "../../components/CustomDrawer";
 
 const PaymentCard = () => {
   const { alertProviderValue } = useContext(AlertContext);
@@ -66,7 +63,7 @@ const PaymentCard = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/paymenthome");
+      history.push("/dashboard/payment");
     }
   };
 
@@ -114,21 +111,29 @@ const PaymentCard = () => {
 
   return !card ? (
     <Center h="70vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   ) : (
     <>
-      <Center py="5">
+      <Center py={{ base: 2, sm: 2, md: 4, lg: 4 }}>
         <Box
           rounded="3xl"
-          shadow="2xl"
           position="relative"
           bg="brand.white"
-          w="400px"
-          h="300px"
+          shadow="2xl"
+          w={{ base: 200, sm: 300, md: 450, lg: 550 }}
+          h={{ base: 210, sm: 250, md: 300, lg: 320 }}
         >
           <VStack spacing="20px" mx="5%" mt="5">
-            <Box mr="0">
+            <Box
+              mr="0"
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            >
               <Text py="1" textColor="gray.600">
                 Amount: {card?.amount}
               </Text>
@@ -141,119 +146,153 @@ const PaymentCard = () => {
               <Text textColor="gray.600">UUID:{card?.uuid}</Text>
             </Box>
 
-            <Flex justify={"center"} w="full" gap="15px">
-              <IconButton
-                justify={"center"}
-                fontSize={"lg"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<MdOutlinePermMedia />}
-                onClick={() => {
-                  history.push(`${match.url}/media`);
-                }}
-              />
+            <Flex
+              justify={"center"}
+              w="full"
+              spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}
+            >
+              <Tooltip
+                label="Show Media"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <Button
+                  justify={"center"}
+                  size={{
+                    base: "x-small",
+                    sm: "x-small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                  rounded="full"
+                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  onClick={() => {
+                    history.push(`${match.url}/media`);
+                  }}
+                >
+                  {" "}
+                  <MdOutlinePermMedia
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                  />
+                </Button>
+              </Tooltip>
 
-              <IconButton
-                justify={"center"}
-                fontSize={"lg"}
-                rounded={"full"}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                icon={<FiEdit />}
-                onClick={onOpen}
-              />
+              <Tooltip
+                label="edit payment"
+                bg="white"
+                placement="top"
+                color="#333333"
+              >
+                <Button
+                  justify={"center"}
+                  size={{
+                    base: "x-small",
+                    sm: "x-small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                  rounded="full"
+                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                  bg={"#F8B916"}
+                  color={"white"}
+                  boxShadow={
+                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                    bg: "orange.400",
+                  }}
+                  onClick={onOpen}
+                >
+                  <FiEdit
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "small",
+                      md: "md",
+                      lg: "large",
+                    }}
+                  />
+                </Button>
+              </Tooltip>
             </Flex>
           </VStack>
         </Box>
       </Center>
 
       {/* updating payment card*/}
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onCancelHandler}
-        size="lg"
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px" color="#F8B916">
-            Edit your Info by filling up this form
-          </DrawerHeader>
-
-          <DrawerBody>
-            <CustomEditForm
-              isOpen={isOpen}
-              onCancelHandler={onCancelHandler}
-              onUpdate={handleSubmit(updatePayment)}
-              isUpdating={isUpdating}
-              errors={errors}
-            >
-              <CustomAddForm
-                listForm={[
-                  {
-                    head: "Amount : ",
-                    placeHolder: "Enter amount",
-                    name: "amount",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Method : ",
-                    placeHolder: "Enter Method",
-                    name: "method",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Transaction -number : ",
-                    placeHolder: "Enter transaction-number",
-                    name: "transaction_number",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Date : ",
-                    placeHolder: "Enter Date",
-                    name: "date",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "Notes : ",
-                    placeHolder: "Enter notes",
-                    name: "notes",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                  {
-                    head: "UUID : ",
-                    placeHolder: "Enter UUID",
-                    name: "uuid",
-                    inputType: "text",
-                    errors: errors,
-                  },
-                ]}
-                control={control}
-                register={register}
-              />
-            </CustomEditForm>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
+        <CustomEditForm
+          isOpen={isOpen}
+          onCancelHandler={onCancelHandler}
+          onUpdate={handleSubmit(updatePayment)}
+          isUpdating={isUpdating}
+          errors={errors}
+        >
+          <CustomAddForm
+            listForm={[
+              {
+                head: "Amount : ",
+                placeHolder: "Enter amount",
+                name: "amount",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Method : ",
+                placeHolder: "Enter Method",
+                name: "method",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Transaction -number : ",
+                placeHolder: "Enter transaction-number",
+                name: "transaction_number",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Date : ",
+                placeHolder: "Enter Date",
+                name: "date",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "Notes : ",
+                placeHolder: "Enter notes",
+                name: "notes",
+                inputType: "text",
+                errors: errors,
+              },
+              {
+                head: "UUID : ",
+                placeHolder: "Enter UUID",
+                name: "uuid",
+                inputType: "text",
+                errors: errors,
+              },
+            ]}
+            control={control}
+            register={register}
+          />
+        </CustomEditForm>
+      </CustomDrawer>
     </>
   );
 };

@@ -35,11 +35,16 @@ const UserHome = () => {
     showUsersList();
   }, []);
   return (
-    <Box w="full" overflowY="scroll" padding={{ base: 4, md: 4, lg: 6 }}>
-      <HStack justifyContent="space-between" paddingBottom="5">
+    <Box w="full" overflowY="scroll" padding={{ base: 1, sm: 3, md: 4, lg: 6 }}>
+      <HStack justifyContent="space-between" paddingBottom="5" px="3%">
         <Heading
           textColor="gray.600"
-          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
+          fontSize={{
+            base: "large",
+            sm: "large",
+            md: "x-large",
+            lg: "xx-large",
+          }}
           fontWeight="lg"
           alignItems="baseline"
           mb={{ base: 2, md: 4 }}
@@ -47,16 +52,20 @@ const UserHome = () => {
           Users
         </Heading>
 
-        <IconButton
-          as={Button}
+        <Button
           colorScheme="yellow"
-          size="md"
-          icon={<AiOutlinePlus />}
+          size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
           rounded="full"
+          h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+          w={{ base: 6, sm: 8, md: 10, lg: 12 }}
           onClick={() => {
             history.push(`${match.url}/createuser`);
           }}
-        />
+        >
+          <AiOutlinePlus
+            fontSize={{ base: "xx-small", sm: "small", md: "md", lg: "large" }}
+          />
+        </Button>
       </HStack>
 
       {!usersList ? (
@@ -70,16 +79,16 @@ const UserHome = () => {
             md: "repeat(2,1fr)",
             lg: "repeat(3, 1fr)",
           }}
-          gap={{ base: 2, md: 2, lg: 4 }}
+          gap={{ base: 1, sm: 1, md: 2, lg: 4 }}
           mb={{ base: 1, md: 3, lg: 5 }}
-          ml={{ base: 3, md: "none", lg: "none" }}
+          ml={{ base: 1, sm: 2, md: "none", lg: "none" }}
         >
           {usersList.map((el, idx) => (
             <CardComponent
               userData={el}
               key={idx}
-              h={{ base: 75, md: 80, lg: 87.5 }}
-              w={{ base: 60, md: 68, lg: 75 }}
+              h={{ base: 75, sm: 80, md: 80, lg: 87.5 }}
+              w={{ base: 60, sm: 72, lg: 75 }}
             />
           ))}
         </Grid>

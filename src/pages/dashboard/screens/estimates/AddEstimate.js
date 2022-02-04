@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Box, Heading, HStack } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { AxiosInstance } from "api";
+import { AxiosInstance } from "../../../../api/AxiosInstance";
 import { useHistory } from "react-router-dom";
-import { SecondaryButton, PrimaryButton } from "components";
-import { AlertContext } from "context";
+import { SecondaryButton, PrimaryButton } from "../../../../components";
+import { AlertContext } from "../../../../context/AlertContext";
 
 import { CustomAddForm } from "../../components";
 
-export const AddPurchase = () => {
+const AddEstimate = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -35,7 +35,7 @@ export const AddPurchase = () => {
         message: `New estimate has been added!`,
         type: "success",
       });
-      history.push("/dashboard/estimatehome");
+      history.push("/dashboard/estimate");
     } catch (err) {
       console.log(err);
       setIsUpdating(false);
@@ -49,29 +49,29 @@ export const AddPurchase = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/estimatehome");
+    history.push("/dashboard/estimate");
   };
 
   return (
-    <Box overflowY="scroll" w="full">
+    <Box height="full" w="full">
       <Box
-        px="20"
-        mt="6"
+        px={{ base: 1, md: 2 }}
+        mt={{ base: 1, md: 3 }}
         boxShadow="2xl"
         rounded="3xl"
-        w="750px"
-        ml="40"
+        w={{ base: 200, sm: 350, md: 550, lg: 700 }}
+        ml={{ base: 2, sm: 8, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading
           color="#F8B916"
-          fontSize="3xl"
+          fontSize={{ base: "sm", sm: "md", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
-          pt="4"
-          mb="12"
+          pt={{ base: 4, sm: 8, md: 6, lg: 8 }}
+          ml={{ base: 2, sm: 4, md: 4, lg: 6 }}
         >
-          Fill in this form to add new estimate.
+          Fill in this form to add new estimate
         </Heading>
 
         <form>
@@ -96,17 +96,37 @@ export const AddPurchase = () => {
             register={register}
           />
 
-          <HStack spacing="10px" py="10" ml="40">
+          <HStack spacing="5px" py="10" justify="center">
             <PrimaryButton
               name="SAVE"
               onClick={handleSubmit(createEstimate)}
               loadingButton={isUpdating}
+              width={{ base: 16, sm: 20, md: 32, lg: 36 }}
+              height={{ base: 6, sm: 8, md: 12 }}
+              fontSize={{
+                base: "xx-small",
+                sm: "xx-small",
+                md: "sm",
+                lg: "md",
+              }}
             />
 
-            <SecondaryButton onClick={handleCancel} name="CANCEL" />
+            <SecondaryButton
+              onClick={handleCancel}
+              name="CANCEL"
+              width={{ base: 16, sm: 20, md: 32, lg: 36 }}
+              height={{ base: 6, sm: 8, md: 12 }}
+              fontSize={{
+                base: "xx-small",
+                sm: "xx-small",
+                md: "sm",
+                lg: "md",
+              }}
+            />
           </HStack>
         </form>
       </Box>
     </Box>
   );
 };
+export default AddEstimate;

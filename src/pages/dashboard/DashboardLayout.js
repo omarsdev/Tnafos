@@ -2,17 +2,7 @@
 
 import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Sidebar } from "./components/index";
-import {
-  HStack,
-  VStack,
-  Center,
-  Spinner,
-  Box,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Grid,
-} from "@chakra-ui/react";
+import { HStack, VStack, Center, Spinner } from "@chakra-ui/react";
 import {
   useRouteMatch,
   Route,
@@ -51,6 +41,7 @@ const DashboardLayout = () => {
   const { userData, setUserData } = dataProviderValue;
 
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = React.useState(true);
 
   const fetchTokenMe = async (token) => {
     try {
@@ -69,6 +60,10 @@ const DashboardLayout = () => {
     }
   };
 
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   useEffect(() => {
     if (userData) return;
     fetchTokenMe();
@@ -77,9 +72,9 @@ const DashboardLayout = () => {
 
   return !loading && userData ? (
     <HStack spacing={0}>
-      <Sidebar />
+      <Sidebar isOpen={isOpen} />
       <VStack w="100%" h="100vh" overflow="scroll">
-        <Navbar />
+        <Navbar handleToggle={handleToggle} />
         {/* {body} */}
 
         <Switch>

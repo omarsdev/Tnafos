@@ -38,25 +38,45 @@ const ClientsHome = () => {
   }, []);
 
   return (
-    <Box w="full" overflowY="scroll" padding="10">
+    <Box w="full" overflowY="scroll" padding={{ base: 1, sm: 3, md: 4, lg: 6 }}>
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
-          fontSize="xx-large"
+          fontSize={{
+            base: "large",
+            sm: "large",
+            md: "x-large",
+            lg: "xx-large",
+          }}
           fontWeight="lg"
           alignItems="baseline"
+          mb={{ base: 2, lg: 4 }}
         >
           Clients
         </Heading>
 
         <Link to={`${match.url}/addclient`}>
-          <IconButton
-            as={Button}
+          <Button
             colorScheme="yellow"
-            size="lg"
-            icon={<AiOutlinePlus />}
+            size={{
+              base: "x-small",
+              sm: "x-small",
+              md: "md",
+              lg: "large",
+            }}
             rounded="full"
-          ></IconButton>
+            h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+            w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+          >
+            <AiOutlinePlus
+              fontSize={{
+                base: "xx-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
+              }}
+            />
+          </Button>
         </Link>
       </HStack>
       <CustomTable

@@ -8,6 +8,7 @@ import {
   Spacer,
   Center,
   Spinner,
+  VStack,
 } from "@chakra-ui/react";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -95,7 +96,7 @@ const CreateUser = () => {
   };
 
   const handleCancel = () => {
-    history.push("/dashboard/userhome");
+    history.push("/dashboard/user");
   };
 
   const getAllCountry = async () => {
@@ -114,37 +115,55 @@ const CreateUser = () => {
   return countryList ? (
     <Box overflowY="scroll" w="full">
       <Box
-        px="20"
-        mt="6"
+        px={{ base: 1, md: 2 }}
+        mt={{ base: 1, md: 3 }}
         boxShadow="2xl"
         rounded="3xl"
-        w="750px"
-        ml="40"
+        w={{ base: 230, sm: 340, md: 550, lg: 700 }}
+        ml={{ base: 2, sm: 16, md: 16, lg: 24 }}
         bg="white"
       >
         <Heading
           color="#F8B916"
-          fontSize="3xl"
+          fontSize={{ base: "large", md: "x-large", lg: "xx-large" }}
           fontWeight="lg"
           alignItems="baseline"
-          pt="4"
+          pt={{ base: 4, sm: 8, md: 6, lg: 8 }}
+          ml={{ base: 2, sm: 4, md: 4, lg: 6 }}
         >
           Add user
         </Heading>
 
-        <Flex w="full" pl="5" mt="16">
+        <Flex
+          w="80%"
+          ml={{ base: 4, md: 16, lg: 20 }}
+          pt={{ base: 4, sm: 4, md: 12, lg: 12 }}
+          direction={{ base: "column", md: "row" }}
+          gap={{ base: 0.5, sm: 1, md: "none" }}
+        >
           <input
             type="file"
             onChange={(ev) => handleFileInput(ev)}
             ref={inputRef}
+            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+            height={{ base: 8, md: 12 }}
+            fontSize={{
+              base: "xx-small",
+              sm: "xx-small",
+              md: "sm",
+              lg: "md",
+            }}
           />
           <Spacer />
           <SecondaryButton
             // onClick={photoUploadHandler}
             name="Upload photo"
+            width={{ base: 24, sm: 24, md: 32, lg: 40 }}
+            height={{ base: 8, md: 8 }}
+            fontSize={{ base: "xx-small", md: "x-small", lg: "md" }}
           />
         </Flex>
-        <Center>
+        <Center mx={{ base: "2%", md: "5%" }}>
           <form>
             <CustomAddForm
               listForm={[
@@ -202,14 +221,23 @@ const CreateUser = () => {
               register={register}
             />
 
-            <Box
-              display="flex"
+            <VStack
+              flex
               flexDirection="column"
-              alignItems="center"
-              gap="0.5rem"
-              mt="2.5rem"
+              justify="center"
+              mt={{ base: 4, md: 6, lg: 6 }}
+              ml={{ base: 12, md: 20, lg: 24 }}
             >
-              <Heading fontSize="xl" color="grey" fontWeight="normal">
+              <Heading
+                fontSize={{
+                  base: "small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+                color="grey"
+                fontWeight="normal"
+              >
                 Terms and Conditions agreement
               </Heading>
               <CheckBox
@@ -218,20 +246,55 @@ const CreateUser = () => {
                 setValue={setChecked}
               />
 
-              <HStack>
+              <HStack justify="center">
                 <Link to="/">
-                  <Text>terms of service</Text>
+                  <Text
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "x-small",
+                      md: "small",
+                      lg: "md",
+                    }}
+                  >
+                    terms of service
+                  </Text>
                 </Link>{" "}
-                <Text>and</Text>
+                <Text
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "x-small",
+                    md: "small",
+                    lg: "md",
+                  }}
+                >
+                  and
+                </Text>
                 <Link to="/">
-                  <Text>Privacy policy</Text>
+                  <Text
+                    fontSize={{
+                      base: "xx-small",
+                      sm: "x-small",
+                      md: "small",
+                      lg: "md",
+                    }}
+                  >
+                    Privacy policy
+                  </Text>
                 </Link>
               </HStack>
-              <Box>
-                <Heading fontSize="xl" color="grey" fontWeight="normal">
-                  Decleration of Valid Information
-                </Heading>
-              </Box>
+
+              <Heading
+                color="grey"
+                fontWeight="normal"
+                fontSize={{
+                  base: "small",
+                  sm: "small",
+                  md: "md",
+                  lg: "large",
+                }}
+              >
+                Decleration of Valid Information
+              </Heading>
               <CheckBox
                 name="I confirm that the information given in this form is true,
             complete and accurate."
@@ -239,23 +302,42 @@ const CreateUser = () => {
                 setValue={setCh}
               />
 
-              <HStack spacing="10px" py="5">
+              <HStack spacing="10px" py={{ base: 2, md: 4, lg: 8 }}>
                 <PrimaryButton
                   name="SAVE"
                   onClick={handleSubmit(addUser)}
                   loadingButton={isUpdating}
+                  width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                  height={{ base: 8, md: 12 }}
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "xx-small",
+                    md: "sm",
+                    lg: "md",
+                  }}
                 />
 
-                <SecondaryButton onClick={handleCancel} name="CANCEL" />
+                <SecondaryButton
+                  onClick={handleCancel}
+                  name="CANCEL"
+                  width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                  height={{ base: 8, md: 12 }}
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "xx-small",
+                    md: "sm",
+                    lg: "md",
+                  }}
+                />
               </HStack>
-            </Box>
+            </VStack>
           </form>
         </Center>
       </Box>
     </Box>
   ) : (
     <Center h="100vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
+      <Spinner size={{ base: "small", md: "md", lg: "xl" }} color="#F8B916" />
     </Center>
   );
 };

@@ -4,14 +4,14 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
   Center,
-  IconButton,
+  Button,
 } from "@chakra-ui/react";
 import { RiExchangeDollarLine } from "react-icons/ri";
+import { Tooltip } from "@chakra-ui/react";
 
 import { useHistory, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -43,7 +43,7 @@ const ConvertToEstimate = () => {
       })
       .catch((err) => {
         console.log(err.response.data);
-        history.push("/dashboard/proposalhome");
+        history.push("/dashboard/proposal");
       });
   };
 
@@ -92,21 +92,35 @@ const ConvertToEstimate = () => {
   return (
     <>
       <Center>
-        <IconButton
-          justify={"center"}
-          fontSize={"x-large"}
-          rounded={"full"}
-          bg={"#F8B916"}
-          color={"white"}
-          boxShadow={
-            "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-          }
-          _hover={{
-            bg: "orange.400",
-          }}
-          icon={<RiExchangeDollarLine />}
-          onClick={onOpen}
-        />
+        <Tooltip
+          label="convert to estimate"
+          bg="white"
+          placement="top"
+          color="#333333"
+        >
+          <Button
+            justify={"center"}
+            size={{
+              base: "x-small",
+              sm: "x-small",
+              md: "md",
+              lg: "large",
+            }}
+            rounded="full"
+            h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+            w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+            bg={"#F8B916"}
+            color={"white"}
+            boxShadow={
+              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+            }
+            _hover={{
+              bg: "orange.400",
+            }}
+            icon={<RiExchangeDollarLine />}
+            onClick={onOpen}
+          ></Button>
+        </Tooltip>
       </Center>
       {/* conert to invoice */}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">

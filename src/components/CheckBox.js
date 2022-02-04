@@ -4,7 +4,14 @@ import { Checkbox as ChakraCheckbox } from "@chakra-ui/react";
 
 import "focus-visible/dist/focus-visible";
 
-export const CheckBox = ({ name, value, setValue, register, ...rest }) => {
+export const CheckBox = ({
+  name,
+  value,
+  setValue,
+  register,
+  size,
+  ...rest
+}) => {
   const onCheckHandler = () => setValue(!value);
 
   return !value && !setValue ? (
