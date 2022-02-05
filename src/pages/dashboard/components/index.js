@@ -4,3 +4,6 @@ export * from "./CustomTable";
 export * from "./CustomAddForm";
 export * from "./CustomEditForm";
 export * from "./NoData";
+export * from "./CustomSpinner";
+export * from "./CustomDrawer";
+export * from "./CustomModal";
