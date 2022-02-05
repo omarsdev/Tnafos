@@ -19,8 +19,8 @@ const CustomModal = ({ isOpen, onClose, children }) => {
 
   useEffect(() => {
     if (isLargerThanLg) setDrawerSize("md");
-    else if (isLargerThanMd) return setDrawerSize("lg");
-    else if (isLargerThanSm) return setDrawerSize("full");
+    else if (isLargerThanMd) setDrawerSize("lg");
+    else if (isLargerThanSm) setDrawerSize("full");
   }, [isLargerThanLg, isLargerThanMd, isLargerThanSm]);
 
   return (

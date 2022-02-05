@@ -21,8 +21,8 @@ const CustomDrawer = ({ isOpen, onCancelHandler, children }) => {
   useEffect(() => {
     if (isLargerThanXl) setDrawerSize("sm");
     else if (isLargerThanLg) setDrawerSize("sm");
-    else if (isLargerThanMd) return setDrawerSize("lg");
-    else if (isLargerThanSm) return setDrawerSize("full");
+    else if (isLargerThanMd) setDrawerSize("lg");
+    else if (isLargerThanSm) setDrawerSize("full");
   }, [isLargerThanXl, isLargerThanLg, isLargerThanMd, isLargerThanSm]);
 
   return (
