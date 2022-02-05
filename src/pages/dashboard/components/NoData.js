@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Text, IconButton, HStack } from "@chakra-ui/react";
 import { Switch, Route, useRouteMatch, useHistory } from "react-router-dom";
 import { AiOutlineHome } from "react-icons/ai";
+import { useSize } from "../../../context";
 
 export const NoData = ({ component }) => {
+  const { size } = useSize();
+
   const match = useRouteMatch();
   const history = useHistory();
 
@@ -38,7 +41,11 @@ export const NoData = ({ component }) => {
               _hover={{
                 bg: "orange.400",
               }}
-              icon={<AiOutlineHome />}
+              icon={
+                <AiOutlineHome
+                  size={size === "lg" ? 20 : size === "md" ? 15 : 10}
+                />
+              }
               onClick={() => {
                 history.push(`/dashboard/${component}`);
               }}
