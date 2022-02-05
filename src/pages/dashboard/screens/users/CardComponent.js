@@ -1,12 +1,11 @@
 import React from "react";
 import { Box, Image, VStack, Text } from "@chakra-ui/react";
-import { useHistory, useRouteMatch, Link } from "react-router-dom";
+import { useRouteMatch, Link } from "react-router-dom";
 
 import { SecondaryButton } from "../../../../components";
 
 const CardComponent = ({ userData }) => {
   const match = useRouteMatch();
-  const history = useHistory();
 
   return (
     <Box rounded="3xl" shadow="2xl" bg="white" position="relative">
