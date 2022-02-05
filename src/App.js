@@ -12,7 +12,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { withFocusVisible } from "@v1v2/chakra";
 import { AlertContextProvider } from "./context/AlertContext";
-import { UserDataContextProvider } from "./context";
+import { SizeContextProvider, UserDataContextProvider } from "./context";
 import { ErrorBoundary } from "react-error-boundary";
 import { FallBack } from "./components/FallBack";
 
@@ -86,16 +86,18 @@ const App = () => {
       <ChakraProvider theme={theme}>
         <UserDataContextProvider>
           <AlertContextProvider>
-            <Router>
-              <Switch>
-                <Route exact path="/" component={Homepage} />
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                <Route path="/dashboard" component={DashboardLayout} />
-                <Route path="/:search" component={SearchLayout} />
-                <Route path="*" component={E404} />
-              </Switch>
-            </Router>
+            <SizeContextProvider>
+              <Router>
+                <Switch>
+                  <Route exact path="/" component={Homepage} />
+                  <Route path="/register" component={Register} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/dashboard" component={DashboardLayout} />
+                  <Route path="/:search" component={SearchLayout} />
+                  <Route path="*" component={E404} />
+                </Switch>
+              </Router>
+            </SizeContextProvider>
           </AlertContextProvider>
         </UserDataContextProvider>
       </ChakraProvider>

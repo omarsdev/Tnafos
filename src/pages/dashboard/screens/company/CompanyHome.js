@@ -251,40 +251,6 @@ const CompanyHome = () => {
 
       {/* company update */}
       <CustomModal isOpen={isOpen} onClose={onClose}>
-        <HStack
-          align="flex-end"
-          w="full"
-          alignItems="baseline"
-          my={{ base: 2, sm: 4, md: 6, lg: 8 }}
-        >
-          <input
-            type="file"
-            //   onChange={(e) => setPhoto(e.target.files[0])}
-            name="choose file"
-            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-            height={{ base: 8, md: 12 }}
-            fontSize={{
-              base: "xx-small",
-              sm: "xx-small",
-              md: "sm",
-              lg: "md",
-            }}
-          />
-          <Spacer />
-          <SecondaryButton
-            name="Upload File"
-            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-            height={{ base: 8, md: 12 }}
-            fontSize={{
-              base: "xx-small",
-              sm: "xx-small",
-              md: "sm",
-              lg: "md",
-            }}
-            // onClick={uploadFile}
-          />
-        </HStack>
-
         <CustomEditForm
           isOpen={isOpen}
           onCancelHandler={onCancelHandler}
@@ -449,6 +415,7 @@ const CompanyHome = () => {
             ]}
             control={control}
             register={register}
+            width={{ base: "100%" }}
           />
         </CustomEditForm>
       </CustomModal>

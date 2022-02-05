@@ -35,7 +35,7 @@ export const RegularInput = ({
       type={inputType}
       {...register}
       {...rest}
-      _placeholder={{ fontSize: { base: 12, sm: 16, md: 16, lg: 20 } }}
+      _placeholder={{ fontSize: { base: 16 } }}
     />
   ) : (
     <ChakraInput
@@ -54,7 +54,7 @@ export const RegularInput = ({
       type={inputType}
       autoComplete="off"
       autoFocus="off"
-      _placeholder={{ fontSize: { base: 12, sm: 16, md: 16, lg: 20 } }}
+      _placeholder={{ fontSize: { base: 16 } }}
       {...rest}
     />
   );
@@ -73,18 +73,14 @@ export const RegularInputControl = ({
     <Controller
       control={control}
       name={name}
-      render={({
-        field: { onChange, onBlur, value, name, ref },
-        fieldState: { invalid, isTouched, isDirty, error },
-        formState,
-      }) => (
+      render={({ field: { name }, fieldState: { error }, formState }) => (
         <VStack>
           <RegularInput
             placeholder={placeHolder}
             register={register(`${name}`, { required: true })}
             error={error || (errors && errors[name])}
-            width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
-            height={{ base: 4, sm: 6, md: 8, lg: 10 }}
+            width={width}
+            // height={{ base: 4, sm: 6, md: 8, lg: 10 }}
             inputType={inputType}
           />
           {error?.message && <Text color="#ff0000">{error?.message}</Text>}

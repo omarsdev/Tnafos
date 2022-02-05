@@ -9,22 +9,20 @@ import {
   ModalOverlay,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { useSize } from "../../../context";
 
 const CustomModal = ({ isOpen, onClose, children }) => {
-  const [isLargerThanLg] = useMediaQuery("(min-width: 960px)");
-  const [isLargerThanMd] = useMediaQuery("(min-width: 768px)");
-  const [isLargerThanSm] = useMediaQuery("(min-width: 320px)");
-
-  const [drawerSize, setDrawerSize] = useState("md");
+  const { size } = useSize();
+  const [modalSize, setModalSize] = useState(null);
 
   useEffect(() => {
-    if (isLargerThanLg) setDrawerSize("md");
-    else if (isLargerThanMd) return setDrawerSize("lg");
-    else if (isLargerThanSm) return setDrawerSize("full");
-  }, [isLargerThanLg, isLargerThanMd, isLargerThanSm]);
+    if (size === "lg") setModalSize("md");
+    else if (size === "md") setModalSize("lg");
+    else if (size === "sm" || size === "xs") setModalSize("full");
+  }, [size]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={drawerSize}>
+    <Modal isOpen={isOpen} onClose={onClose} size={modalSize}>
       <ModalOverlay />
 
       <ModalContent>

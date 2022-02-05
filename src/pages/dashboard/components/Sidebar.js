@@ -23,16 +23,12 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const LogoLink = ({ isToggleOpen }) => {
   return (
-    <Flex
-      mt="1rem"
-      w="100%"
-      ml={isToggleOpen ? "1rem" : "1.1rem"}
-      // justify={{ base: isToggleOpen ? "start" : "center" }}
-      // justify={{ base: "start" }}
-      // alignItems="center"
-    >
+    <Flex mt="1rem" w="100%" pl={isToggleOpen ? "1rem" : "1.5rem"}>
       <Link to="/">
-        <TnafosSearchLogo height="40px" isFullLogo={!isToggleOpen} />
+        <TnafosSearchLogo
+          height={isToggleOpen ? "3rem" : "1.5rem"}
+          isFullLogo={!isToggleOpen}
+        />
       </Link>
     </Flex>
   );
@@ -45,8 +41,8 @@ const NavbarItemLink = ({ item, isChild, isToggleOpen }) => {
       <Flex
         mb="2"
         key={item.id}
-        fontSize={{ base: "small", lg: "medium" }}
-        ml={isToggleOpen && "1rem"}
+        fontSize={{ base: "small" }}
+        pl={isToggleOpen && "1rem"}
       >
         <Flex
           justify={{ base: isToggleOpen ? "start" : "center" }}
@@ -54,8 +50,8 @@ const NavbarItemLink = ({ item, isChild, isToggleOpen }) => {
           w="100%"
         >
           <Text textColor="#ffffff">{item.icon}</Text>
-          {isToggleOpen && (
-            <Text textColor="#ffffff" ml="2">
+          {(isToggleOpen || isChild) && (
+            <Text textColor="#ffffff" pl="2">
               {item.title}
             </Text>
           )}
@@ -71,25 +67,22 @@ const NavbarItemText = ({ item, isToggleOpen }) => {
       justify={{ base: isToggleOpen ? "start" : "center" }}
       align="center"
       w="100%"
-      ml={isToggleOpen && "1rem"}
+      pl={isToggleOpen && "1rem"}
     >
-      <Accordion
-        allowMultiple
-        margin={0}
-        // pl="1"
-      >
+      <Accordion w="full" allowMultiple margin={0}>
         <AccordionItem border="0px">
           <AccordionButton padding={0} margin={0} color="white">
             <HStack
               flex="1"
-              // px={{ base: "1", lg: "2" }}
               mb="2"
-              fontSize={{ base: "small", lg: "medium" }}
+              fontSize={{ base: "small" }}
+              justify={{ base: isToggleOpen ? "start" : "center" }}
+              alignItems="center"
             >
               {item.icon}
               {isToggleOpen && <Text>{item.title}</Text>}
+              {isToggleOpen && <AccordionIcon mr={2} />}
             </HStack>
-            {isToggleOpen && <AccordionIcon mr={2} />}
           </AccordionButton>
           <AccordionPanel padding={0} backgroundColor={"grey"}>
             {item.items.map((item) => (
@@ -107,13 +100,12 @@ const NavbarItemText = ({ item, isToggleOpen }) => {
 const NavbarItem = ({ item, isToggleOpen }) => {
   return (
     <ListItem>
-      <Box px={{ base: "0.5", lg: "2" }} my={{ base: "2" }}>
+      <Box px={{ base: "1rem" }} my={{ base: "2" }}>
         <Text
           textColor="#ffffff"
           fontWeight="normal"
-          p={{ base: 0.4, lg: "1" }}
           opacity="0.50"
-          fontSize={{ base: "xx-small", lg: "xs" }}
+          fontSize={{ base: "xs" }}
           textAlign={!isToggleOpen && "center"}
         >
           {item.heading}

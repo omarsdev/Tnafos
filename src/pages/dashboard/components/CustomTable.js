@@ -28,6 +28,7 @@ import { SecondaryButton } from "../../../components";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { NoData } from "./index";
 import { FiEdit } from "react-icons/fi";
+import CustomSpinner from "./CustomSpinner";
 
 import { useBreakpointValue } from "@chakra-ui/react";
 
@@ -44,9 +45,7 @@ export const CustomTable = ({
   const Name = useBreakpointValue({ base: false, md: true });
 
   return !list ? (
-    <Center h="100vh" w="100%">
-      <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
-    </Center>
+    <CustomSpinner />
   ) : list.length === 0 ? (
     <NoData component={component} />
   ) : (

@@ -9,21 +9,18 @@ import {
   DrawerOverlay,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { useSize } from "../../../context";
 
 const CustomDrawer = ({ isOpen, onCancelHandler, children }) => {
-  const [isLargerThanXl] = useMediaQuery("(min-width: 1200px)");
-  const [isLargerThanLg] = useMediaQuery("(min-width: 960px)");
-  const [isLargerThanMd] = useMediaQuery("(min-width: 768px)");
-  const [isLargerThanSm] = useMediaQuery("(min-width: 320px)");
+  const { size } = useSize();
 
-  const [drawerSize, setDrawerSize] = useState("md");
+  const [drawerSize, setDrawerSize] = useState(null);
 
   useEffect(() => {
-    if (isLargerThanXl) setDrawerSize("sm");
-    else if (isLargerThanLg) setDrawerSize("sm");
-    else if (isLargerThanMd) return setDrawerSize("lg");
-    else if (isLargerThanSm) return setDrawerSize("full");
-  }, [isLargerThanXl, isLargerThanLg, isLargerThanMd, isLargerThanSm]);
+    if (size === "lg") setDrawerSize("md");
+    else if (size === "md") setDrawerSize("lg");
+    else if (size === "sm" || size === "xs") setDrawerSize("full");
+  }, [size]);
 
   return (
     <Drawer

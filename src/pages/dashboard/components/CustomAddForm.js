@@ -7,11 +7,11 @@ import {
   CustomSelect,
 } from "../../../components";
 
-export const CustomAddForm = ({ listForm, control, register }) => {
+export const CustomAddForm = ({ listForm, control, register, ...rest }) => {
   return listForm.map((element, index) => (
     <Box pt={{ base: 1, sm: 1, md: 2, lg: 4 }} key={index}>
-      <VStack fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "md" }}>
-        <FormLabel textAlign="left" color="gray.500">
+      <VStack>
+        <FormLabel textAlign="left" color="gray.500" {...rest}>
           {element.head}
           {element.isPassword ? (
             <PasswordInputControl
