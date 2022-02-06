@@ -11,15 +11,11 @@ import {
   VStack,
   HStack,
   Spacer,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
+import { IoIosMail } from "react-icons/io";
+import { BsFillTelephoneFill } from "react-icons/bs";
 
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
@@ -59,6 +55,7 @@ const UserCard = () => {
   const getUser = async () => {
     try {
       const res = await AxiosInstance.get(`/api/dashboard/user/${uuid}`);
+      console.log(res);
       resetHooksForm(res.data.data);
       setCard(res.data.data);
     } catch (err) {
@@ -123,7 +120,7 @@ const UserCard = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 180, sm: 260, md: 300, lg: 350 }}
-          h={{ base: 350, sm: 360, md: 380, lg: 380 }}
+          h={{ base: 330, sm: 330, md: 390, lg: 390 }}
         >
           <Image
             src={"https://bit.ly/sage-adebayo"}
@@ -132,20 +129,42 @@ const UserCard = () => {
             roundedTop="3xl"
             w="100%"
             h={{ base: 36, md: 40 }}
-            layout={"fill"}
+            objectFit={"cover"}
           />
-          <VStack spacing="20px" mx="5%" mt={{ base: 1, md: 2 }}>
-            <Box mr="0" fontSize={{ base: "sm", md: "md" }}>
-              <Text py={{ base: 0.5, md: 1 }} textColor="gray.600">
-                Name: {card?.first_name}
+          <VStack mx="5%" mt={{ base: 1, md: 2 }} textAlign="center">
+            <Box>
+              <Text
+                py={{ base: 1, md: 3 }}
+                textColor="gray.400"
+                fontSize={{ base: "large", md: "x-large" }}
+                fontWeight="2xl"
+              >
+                {card?.first_name}
                 {card?.last_name}
               </Text>
-              <Text textColor="gray.600">E-mail: {card?.email}</Text>
-              <Text textColor="gray.600">Telephone: {card?.phone_number}</Text>
-              <Text textColor="gray.600">Id :{card?.uuid}</Text>
+
+              <HStack
+                textColor="gray.600"
+                fontSize={{ base: "sm", md: "md" }}
+                justifyContent="center"
+              >
+                <IoIosMail />
+                <Text> {card?.email}</Text>
+              </HStack>
+              <HStack
+                fontSize={{ base: "sm", md: "md" }}
+                textColor="gray.600"
+                justifyContent="center"
+              >
+                <BsFillTelephoneFill />
+                <Text>{card?.phone_number}</Text>
+              </HStack>
+              <Text textColor="blue.400" fontSize={{ base: "sm", md: "md" }}>
+                {card?.uuid}
+              </Text>
             </Box>
 
-            <Flex justify={"center"} mt={-12}>
+            <Flex justify={"center"} mt={{ base: 1, md: 2 }}>
               <Button
                 justify={"center"}
                 size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
