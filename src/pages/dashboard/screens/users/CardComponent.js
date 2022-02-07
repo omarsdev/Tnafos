@@ -1,6 +1,9 @@
 import React from "react";
-import { Box, Image, VStack, Text } from "@chakra-ui/react";
+import { Box, Image, VStack, Text, HStack, Stack } from "@chakra-ui/react";
 import { useRouteMatch, Link } from "react-router-dom";
+
+import { IoIosMail } from "react-icons/io";
+import { BsFillTelephoneFill } from "react-icons/bs";
 
 import { SecondaryButton } from "../../../../components";
 
@@ -19,17 +22,30 @@ const CardComponent = ({ userData }) => {
           h="200px"
           marginTop={"20px"}
         />
-        <Box
+        <Stack
           mr="0"
           fontSize={{ base: "sm", md: "md", lg: "large" }}
           justify="center"
         >
-          <Text>
-            Name: {userData.first_name} {userData.last_name}
+          <Text
+            textColor="gray.400"
+            fontWeight="3xl"
+            textAlign="center"
+            size={{ base: "large", md: "x-large" }}
+          >
+            {userData?.first_name}
+            {userData?.last_name}
           </Text>
-          <Text>Email : {userData.email}</Text>
-          <Text>Phone Number: {userData.phone_number}</Text>
-        </Box>
+
+          <HStack justifyContent="center">
+            <IoIosMail />
+            <Text> {userData?.email}</Text>
+          </HStack>
+          <HStack justifyContent="center">
+            <BsFillTelephoneFill />
+            <Text>{userData.phone_number}</Text>
+          </HStack>
+        </Stack>
         <Box position="relative" bottom="5">
           <Link to={`${match.url}/${userData.uuid}`}>
             <SecondaryButton

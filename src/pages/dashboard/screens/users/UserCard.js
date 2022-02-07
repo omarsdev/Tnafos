@@ -60,7 +60,7 @@ const UserCard = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/userhome");
+      history.push("/dashboard/user");
     }
   };
 
@@ -120,7 +120,7 @@ const UserCard = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 180, sm: 260, md: 300, lg: 350 }}
-          h={{ base: 330, sm: 330, md: 390, lg: 390 }}
+          h={{ base: 330, sm: 330, md: 390, lg: 410 }}
         >
           <Image
             src={"https://bit.ly/sage-adebayo"}
@@ -162,10 +162,14 @@ const UserCard = () => {
               <Text textColor="blue.400" fontSize={{ base: "sm", md: "md" }}>
                 {card?.uuid}
               </Text>
+              <Text fontSize={{ base: "sm", md: "md" }} textColor="gray.600">
+                {card?.is_admin}
+              </Text>
             </Box>
 
-            <Flex justify={"center"} mt={{ base: 1, md: 2 }}>
+            <Flex>
               <Button
+                mt={{ base: 2, md: 4 }}
                 justify={"center"}
                 size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
                 rounded="full"
