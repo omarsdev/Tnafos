@@ -1,6 +1,8 @@
 import React from "react";
-import { Box, Text, VStack, Image, Center } from "@chakra-ui/react";
-import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
+import { Box, Text, VStack, Image, HStack } from "@chakra-ui/react";
+import { Link, useRouteMatch } from "react-router-dom";
+
+import { BsCurrencyDollar } from "react-icons/bs";
 
 import { SecondaryButton } from "../../../../components";
 
@@ -21,26 +23,33 @@ const ServiceCard = ({ info }) => {
         <Box
           display="flex"
           flexDir="column"
-          justifyContent="center"
+          textAlign="center"
           mr="0"
           fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
         >
-          <Text>{info?.name}</Text>
-          <Text color="#007BFF">Price : {info?.price} SAR</Text>
+          <Text fontWeight="extrabold">{info?.name}</Text>
 
           <Text>{info?.type}</Text>
+          <HStack
+            fontSize={{ base: "x-small", md: "sm" }}
+            justifyContent="center"
+            my="2px"
+          >
+            <BsCurrencyDollar color="#007BFF" />
+            <Text color="#007BFF"> {info?.price} SAR</Text>
+          </HStack>
         </Box>
-        <Box position="relative" pb="8px">
+        <Box position="relative" py="5px">
           <Link to={`${match.url}/${info.uuid}`}>
             <SecondaryButton
               name="View"
               fontSize={{
-                base: "xx-small",
-                sm: "x-small",
-                md: "sm",
-                lg: "md",
+                base: "x-small",
+                sm: "small",
+                md: "md",
+                lg: "large",
               }}
-              width={{ base: 20, sm: 24, md: 32, lg: 32 }}
+              width={{ base: 20, sm: 24, md: 28, lg: 28 }}
               height={{ base: 6, md: 8, lg: 10 }}
             />
           </Link>

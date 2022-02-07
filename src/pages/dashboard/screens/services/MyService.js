@@ -117,7 +117,7 @@ const MyService = () => {
           bg="white"
           shadow="2xl"
           w={{ base: 160, sm: 200, md: 300, lg: 350 }}
-          h={{ base: 300, sm: 320, md: 380, lg: 400 }}
+          h={{ base: 320, sm: 340, md: 400, lg: 430 }}
         >
           <Image
             src={"https://bit.ly/sage-adebayo"}
@@ -134,11 +134,16 @@ const MyService = () => {
               mx="5%"
               mt={{ base: 1, md: 2 }}
               fontSize={{ base: "x-small", sm: "small", md: "md", lg: "large" }}
+              textAlign="center"
             >
-              <Text mt="1" textColor="gray.600">
+              <Text
+                py={{ base: 1, md: 3 }}
+                textColor="gray.400"
+                fontSize={{ base: "large", md: "x-large" }}
+                fontWeight="2xl"
+              >
                 {service?.name}
               </Text>
-              <Text color="#007BFF">Price: {service?.price} SAR</Text>
               <Text textColor="gray.600">
                 Description:{service?.description}
               </Text>
@@ -146,6 +151,7 @@ const MyService = () => {
                 Category-id: {service?.category.uuid}
               </Text>
               <Text textColor="gray.600">Type :{service?.type}</Text>
+              <Text textColor="blue.400">Price: {service?.price} SAR</Text>
             </Box>
             <Flex justify={"center"} pb="8px">
               <Button
