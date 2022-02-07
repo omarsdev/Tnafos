@@ -4,24 +4,14 @@ import {
   Center,
   Spinner,
   GridItem,
-  Grid,
   Box,
   Text,
   Heading,
   VStack,
   Divider,
   Icon,
-  Stack,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  HStack,
-  Spacer,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { FiEdit } from "react-icons/fi";
@@ -149,25 +139,21 @@ const CompanyHome = () => {
             <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
           </Center>
         ) : (
-          <Grid
-            templateColumns={{
-              base: "repeat(1,1fr)",
-              sm: "repeat(1,1fr)",
-              md: "repeat(2,1fr)",
-              lg: "repeat(3, 1fr)",
-            }}
-            gap={{ base: 0.5, sm: 0.5, md: 0.5, lg: 2 }}
+          <SimpleGrid
+            minChildWidth={"260px"}
+            gap={{ base: 8, lg: "none" }}
             mt={{ base: 4, sm: 4, md: 8, lg: 10 }}
+            ml="10%"
           >
-            <GridItem colSpan={{ base: 1, md: 1, lg: 2 }}>
+            <GridItem>
               <CompanyCard Data={companyInfo} />
             </GridItem>
 
-            <GridItem mt={{ base: 4, sm: "4", md: "none" }}>
+            <GridItem>
               <VStack w="full" spacing="15px">
                 <Box
-                  w={{ base: 28, sm: 32, md: 40, lg: 52 }}
-                  h={{ base: 100, sm: 120, md: 140, lg: 150 }}
+                  w={{ base: 28, sm: 32, md: 52, lg: 52 }}
+                  h={{ base: 100, sm: 120, md: 150, lg: 160 }}
                   border="silver"
                   borderRadius="2xl"
                   boxShadow="2xl"
@@ -188,7 +174,6 @@ const CompanyHome = () => {
                     bg="#333333"
                     roundedTop="lg"
                     textColor="white"
-                    fontFamily="inherit"
                     fontWeight="medium"
                     paddingY={{ base: 0.5, sm: 1, md: 2, lg: 2 }}
                   >
@@ -223,7 +208,7 @@ const CompanyHome = () => {
                         md: "sm",
                         lg: "md",
                       }}
-                      width={{ base: 20, sm: 24, md: 32, lg: 32 }}
+                      width={{ base: 20, sm: 24, md: 28, lg: 28 }}
                       height={{ base: 6, md: 8, lg: 8 }}
                     />
                   </Box>
@@ -245,7 +230,7 @@ const CompanyHome = () => {
                 />
               </VStack>
             </GridItem>
-          </Grid>
+          </SimpleGrid>
         )}
       </Box>
 

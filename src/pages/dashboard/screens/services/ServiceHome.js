@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   HStack,
   Button,
-  IconButton,
+  SimpleGrid,
   Box,
   Heading,
   Center,
@@ -72,13 +72,9 @@ const ServiceHome = () => {
           <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
         </Center>
       ) : (
-        <Grid
-          templateColumns={{
-            base: "repeat(1,1fr)",
-            md: "repeat(2,1fr)",
-            lg: "repeat(3, 1fr)",
-          }}
-          gap={{ base: 2, md: 2, lg: 4 }}
+        <SimpleGrid
+          minChildWidth={"260px"}
+          gap={8}
           mb={{ base: 1, md: 3, lg: 5 }}
           mx={{ base: 3, md: "none", lg: "none" }}
         >
@@ -90,7 +86,7 @@ const ServiceHome = () => {
               w={{ base: 60, sm: 76, lg: 76 }}
             />
           ))}
-        </Grid>
+        </SimpleGrid>
       )}
     </Box>
   );

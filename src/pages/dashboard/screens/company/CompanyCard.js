@@ -11,7 +11,7 @@ const CompanyCard = ({ Data }) => {
       boxShadow="2xl"
       borderWidth="2px"
     >
-      <Thead height={{ base: 6, md: 12 }}>
+      <Thead height={{ base: 8, md: 12 }}>
         <Tr>
           <Th
             bg="#333333"

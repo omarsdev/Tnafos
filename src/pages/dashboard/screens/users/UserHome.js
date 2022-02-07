@@ -9,6 +9,7 @@ import {
   HStack,
   Center,
   Spinner,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
 
@@ -73,13 +74,9 @@ const UserHome = () => {
           <Spinner size={{ base: "md", lg: "xl" }} color="#F8B916" />
         </Center>
       ) : (
-        <Grid
-          templateColumns={{
-            base: "repeat(1,1fr)",
-            md: "repeat(2,1fr)",
-            lg: "repeat(3, 1fr)",
-          }}
-          gap={{ base: 1, sm: 1, md: 2, lg: 4 }}
+        <SimpleGrid
+          minChildWidth={"260px"}
+          gap={8}
           mb={{ base: 1, md: 3, lg: 5 }}
           ml={{ base: 1, sm: 2, md: "none", lg: "none" }}
         >
@@ -91,7 +88,7 @@ const UserHome = () => {
               w={{ base: 60, sm: 72, lg: 75 }}
             />
           ))}
-        </Grid>
+        </SimpleGrid>
       )}
     </Box>
   );
