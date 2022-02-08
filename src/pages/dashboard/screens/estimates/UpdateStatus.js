@@ -3,17 +3,11 @@ import {
   Button,
   Box,
   Text,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  Heading,
   useDisclosure,
   Center,
   Spinner,
   Flex,
-  VStack,
 } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
@@ -55,7 +49,7 @@ const UpdateStatus = () => {
       setCard(res.data.data);
     } catch (err) {
       console.log(err.response.data);
-      history.push("/dashboard/estimatehome");
+      history.push("/dashboard/estimate");
     }
   };
 
@@ -73,7 +67,7 @@ const UpdateStatus = () => {
         message: "Estimate's status has been updated!",
         type: "info",
       });
-      history.push(`/dashboard/estimatehome`);
+      history.push(`/dashboard/estimate`);
     } catch (err) {
       setIsUpdating(false);
       setErrors(err.response.data);
@@ -109,48 +103,68 @@ const UpdateStatus = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 170, sm: 260, md: 300, lg: 350 }}
-          h={{ base: 110, sm: 130, md: 160, lg: 200 }}
+          h={{ base: 120, sm: 150, md: 160, lg: 200 }}
         >
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box
-              mr="0"
-              fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
+          <Heading
+            fontSize={{ base: "small", md: "large", lg: "x-large" }}
+            ml="5%"
+            mt="5%"
+            textColor="brand.primary"
+            fontWeight="semibold"
+          >
+            Convert to invoice:
+          </Heading>
+
+          <Box
+            w="full"
+            mt="15px"
+            fontSize={{
+              base: "xx-small",
+              sm: "small",
+              md: "md",
+              lg: "large",
+            }}
+            bg="brand.dark"
+            opacity="90%"
+            textColor="white"
+            px="10%"
+            py="5%"
+          >
+            <Text>Status: {card?.status}</Text>
+          </Box>
+          <Flex justify={"center"} w="full" mt="10px">
+            <Button
+              justify={"center"}
+              size={{
+                base: "x-small",
+                sm: "x-small",
+                md: "md",
+                lg: "large",
+              }}
+              rounded="full"
+              h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+              w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+              bg={"#F8B916"}
+              color={"white"}
+              boxShadow={
+                "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+              }
+              _hover={{
+                bg: "orange.400",
+                transform: "scale(1.2)",
+              }}
+              onClick={onOpen}
             >
-              <Text>Status: {card?.status}</Text>
-            </Box>
-            <Flex>
-              <Button
-                justify={"center"}
-                size={{
-                  base: "x-small",
-                  sm: "x-small",
+              <RiRefreshLine
+                fontSize={{
+                  base: "xx-small",
+                  sm: "small",
                   md: "md",
                   lg: "large",
                 }}
-                rounded="full"
-                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                bg={"#F8B916"}
-                color={"white"}
-                boxShadow={
-                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                }
-                _hover={{
-                  bg: "orange.400",
-                }}
-                onClick={onOpen}
-              >
-                <RiRefreshLine
-                  fontSize={{
-                    base: "xx-small",
-                    sm: "small",
-                    md: "md",
-                    lg: "large",
-                  }}
-                />
-              </Button>
-            </Flex>
-          </VStack>
+              />
+            </Button>
+          </Flex>
         </Box>
       </Center>
 

@@ -4,12 +4,8 @@ import {
   Box,
   Text,
   Stack,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  HStack,
+  Heading,
   useDisclosure,
   Center,
   Spinner,
@@ -123,213 +119,215 @@ const EstimateCard = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 250, sm: 330, md: 450, lg: 550 }}
-          h={{ base: 850, sm: 1100, md: 1300, lg: 1400 }}
+          h={{ base: 950, sm: 1200, md: 1390, lg: 1530 }}
         >
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box
-              mr="0"
-              fontSize={{
-                base: "xx-small",
-                sm: "small",
-                md: "md",
-                lg: "large",
-              }}
-            >
-              <Text fontWeight="bold">Estimate's details: </Text>
-              <Text py="1" textColor="gray.600">
-                Subject: {card?.subject}
-              </Text>
-              <Text textColor="gray.600">Status: {card?.status}</Text>
-              <Text textColor="gray.600">Date:{card?.date}</Text>
-              <Text textColor="gray.600">Valid-till:{card?.valid_till}</Text>
-              <Text textColor="gray.600">Currency:{card?.currency}</Text>
-              <Text textColor="gray.600">
-                Type of discount:{card?.discount_type}
-              </Text>
-              <Text textColor="gray.600">
-                Amount of discount:{card?.discount_amount}
-              </Text>
-              <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
-              <Text textColor="gray.600">Total:{card?.total}</Text>
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">Assigned - to :</Text>
-                <Stack>
-                  <Text>
-                    {card?.assigned_to?.first_name}{" "}
-                    {card?.assigned_to?.last_name}
-                  </Text>
-                  <Text>{card?.assigned_to?.email}</Text>
-                  <Text>{card?.assigned_to?.phone_number}</Text>
-                  <Text>{card?.assigned_to?.uuid}</Text>
-                  <Text>{card?.assigned_to?.is_admin}</Text>
-                </Stack>
-              </Box>
-              <Box textColor="gray.600" my="3">
-                {" "}
-                <Text fontWeight="bold">Company Info:</Text>
-                <Stack>
-                  <Text> {card?.customer?.company_name}</Text>
-                  <Text>{card?.customer?.vat_number}</Text>
-                  <Text>{card?.customer?.phone}</Text>
-                  <Text>{card?.customer?.fax}</Text>
-                  <Text>{card?.customer?.website}</Text>
-                  <Text>{card?.customer?.currency}</Text>
-                  <Text>{card?.customer?.state}</Text>
-                  <Text>{card?.customer?.city}</Text>
-                  <Text>{card?.customer?.zipcode}</Text>
-                  <Text>{card?.customer?.address}</Text>
-                </Stack>
-              </Box>
+          <Heading
+            fontSize={{ base: "small", md: "large", lg: "x-large" }}
+            ml="5%"
+            mt="5%"
+            textColor="brand.primary"
+            fontWeight="semibold"
+          >
+            Estimate's details:
+          </Heading>
 
-              <Box textColor="gray.600" my="3">
-                {" "}
-                <Text fontWeight="bold">Country:</Text>
-                <Stack>
-                  <Text> {card?.customer?.country?.name}</Text>
-                  <Text>{card?.customer?.country?.short_name}</Text>
-                  <Text>{card?.customer?.country?.country_code}</Text>
-                  <Text>{card?.customer?.country?.currency}</Text>
-                  <Text>{card?.customer?.country?.uuid}</Text>
-                </Stack>
-              </Box>
+          <Box
+            w="full"
+            mt="15px"
+            fontSize={{
+              base: "xx-small",
+              sm: "small",
+              md: "md",
+              lg: "large",
+            }}
+            bg="brand.dark"
+            opacity="90%"
+            textColor="white"
+            px="10%"
+            py="5%"
+          >
+            <Text>Subject: {card?.subject}</Text>
+            <Text>Status: {card?.status}</Text>
+            <Text>Date:{card?.date}</Text>
+            <Text>Valid-till:{card?.valid_till}</Text>
+            <Text>Currency:{card?.currency}</Text>
+            <Text>Type of discount:{card?.discount_type}</Text>
+            <Text>Amount of discount:{card?.discount_amount}</Text>
+            <Text>Sub-total:{card?.subtotal}</Text>
+            <Text>Total:{card?.total}</Text>
+            <Box my="3">
+              <Text fontWeight="bold">Assigned - to :</Text>
 
-              <Box textColor="gray.600" my="3">
-                {" "}
-                <Text fontWeight="bold">Contact personal-info:</Text>
-                <Stack>
-                  <Text>
-                    {" "}
-                    {card?.customer?.primary_contact?.first_name}{" "}
-                    {card?.customer?.primary_contact?.last_name}
-                  </Text>
-                  <Text>{card?.customer?.primary_contact?.position}</Text>
-                  <Text>{card?.customer?.primary_contact?.email}</Text>
-                  <Text>{card?.customer?.primary_contact?.phone_number}</Text>
-                  <Text>{card?.customer?.primary_contact?.uuid}</Text>
-                </Stack>
-              </Box>
+              <Text>
+                {card?.assigned_to?.first_name} {card?.assigned_to?.last_name}
+              </Text>
+              <Text>{card?.assigned_to?.email}</Text>
+              <Text>{card?.assigned_to?.phone_number}</Text>
+              <Text>{card?.assigned_to?.uuid}</Text>
+              <Text>{card?.assigned_to?.is_admin}</Text>
+            </Box>
+            <Box my="3">
+              {" "}
+              <Text fontWeight="bold">Company Info:</Text>
+              <Text> {card?.customer?.company_name}</Text>
+              <Text>{card?.customer?.vat_number}</Text>
+              <Text>{card?.customer?.phone}</Text>
+              <Text>{card?.customer?.fax}</Text>
+              <Text>{card?.customer?.website}</Text>
+              <Text>{card?.customer?.currency}</Text>
+              <Text>{card?.customer?.state}</Text>
+              <Text>{card?.customer?.city}</Text>
+              <Text>{card?.customer?.zipcode}</Text>
+              <Text>{card?.customer?.address}</Text>
             </Box>
 
-            <Flex justify={"center"} w="full" gap="15px">
-              <Tooltip
-                label="convert to invoice"
-                bg="white"
-                placement="top"
-                color="#333333"
-              >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
-                    md: "md",
-                    lg: "large",
-                  }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  onClick={() => {
-                    history.push(`${match.url}/convert-to-invoice`);
-                  }}
-                >
-                  <RiExchangeDollarLine
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
+            <Box my="3">
+              {" "}
+              <Text fontWeight="bold">Country:</Text>
+              <Text> {card?.customer?.country?.name}</Text>
+              <Text>{card?.customer?.country?.short_name}</Text>
+              <Text>{card?.customer?.country?.country_code}</Text>
+              <Text>{card?.customer?.country?.currency}</Text>
+              <Text>{card?.customer?.country?.uuid}</Text>
+            </Box>
 
-              <Tooltip
-                label="update status"
-                bg="white"
-                placement="top"
-                color="#333333"
-              >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
-                    md: "md",
-                    lg: "large",
-                  }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  onClick={() => {
-                    history.push(`${match.url}/update-status`);
-                  }}
-                >
-                  <RiRefreshLine
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
+            <Box my="3">
+              {" "}
+              <Text fontWeight="bold">Contact personal-info:</Text>
+              <Text>
+                {" "}
+                {card?.customer?.primary_contact?.first_name}{" "}
+                {card?.customer?.primary_contact?.last_name}
+              </Text>
+              <Text>{card?.customer?.primary_contact?.position}</Text>
+              <Text>{card?.customer?.primary_contact?.email}</Text>
+              <Text>{card?.customer?.primary_contact?.phone_number}</Text>
+              <Text>{card?.customer?.primary_contact?.uuid}</Text>
+            </Box>
+          </Box>
 
-              <Tooltip
-                label="edit info"
-                bg="white"
-                placement="top"
-                color="#333333"
+          <HStack justify={"center"} w="full" mt="10px">
+            <Tooltip
+              label="convert to invoice"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={() => {
+                  history.push(`${match.url}/convert-to-invoice`);
+                }}
               >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
+                <RiExchangeDollarLine
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
                     md: "md",
                     lg: "large",
                   }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
+                />
+              </Button>
+            </Tooltip>
+
+            <Tooltip
+              label="update status"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={() => {
+                  history.push(`${match.url}/update-status`);
+                }}
+              >
+                <RiRefreshLine
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
                   }}
-                  onClick={onOpen}
-                >
-                  <FiEdit
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
-            </Flex>
-          </VStack>
+                />
+              </Button>
+            </Tooltip>
+
+            <Tooltip
+              label="edit info"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={onOpen}
+              >
+                <FiEdit
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
+            </Tooltip>
+          </HStack>
         </Box>
       </Center>
 
