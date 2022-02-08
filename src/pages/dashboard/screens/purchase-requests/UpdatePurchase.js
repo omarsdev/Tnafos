@@ -9,12 +9,7 @@ import {
   Flex,
   HStack,
   VStack,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
+  Heading,
 } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/react";
 import { useHistory, useParams } from "react-router-dom";
@@ -114,81 +109,90 @@ const UpdatePurchase = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 170, sm: 260, md: 450, lg: 550 }}
-          h={{ base: 210, sm: 250, md: 300, lg: 320 }}
+          h={{ base: 260, sm: 290, md: 370, lg: 420 }}
         >
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box
-              mr="0"
-              fontSize={{
-                base: "xx-small",
-                sm: "small",
-                md: "md",
-                lg: "large",
-              }}
-            >
-              <Text textColor="gray.600">Id: {card?.id}</Text>
-              <Text py="1" textColor="gray.600">
-                Details: {card?.details}
-              </Text>
-              <Text textColor="gray.600">Date: {card?.date}</Text>
-              <Text textColor="gray.600">
-                Services:
-                {card.services.map((el, idx) => (
-                  <HStack key={idx}>
-                    <Text textColor="gray.600">{el?.service?.name}</Text>
-                    <Text textColor="gray.600">{el?.service?.description}</Text>
-                    <Text textColor="gray.600">{el?.service?.price}</Text>
-                    <Text textColor="gray.600">{el?.service?.type}]</Text>
-                  </HStack>
-                ))}
-              </Text>
-            </Box>
+          <Heading
+            fontSize={{ base: "small", md: "large", lg: "x-large" }}
+            ml="5%"
+            mt="5%"
+            textColor="brand.primary"
+            fontWeight="semibold"
+          >
+            Purchase-request's details:
+          </Heading>
+          <Box
+            w="full"
+            mt="15px"
+            fontSize={{
+              base: "xx-small",
+              sm: "small",
+              md: "md",
+              lg: "large",
+            }}
+            bg="brand.dark"
+            opacity="90%"
+            textColor="white"
+            px="10%"
+            py="5%"
+          >
+            <Text py="1">Id: {card?.id}</Text>
+            <Text py="1" py="1">
+              Details: {card?.details}
+            </Text>
+            <Text py="1">Date: {card?.date}</Text>
+            <Text py="1">
+              Services:
+              {card.services.map((el, idx) => (
+                <HStack key={idx}>
+                  <Text py="1">{el?.service?.name}</Text>
+                  <Text py="1">{el?.service?.description}</Text>
+                  <Text py="1">{el?.service?.price}</Text>
+                  <Text py="1">{el?.service?.type}]</Text>
+                </HStack>
+              ))}
+            </Text>
+          </Box>
 
-            <Flex
-              justify={"center"}
-              w="full"
-              spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}
+          <Flex w="full" justify="center" mt="10px">
+            <Tooltip
+              label="edit purchase's info"
+              bg="white"
+              placement="top"
+              color="#333333"
             >
-              <Tooltip
-                label="edit purchase's info"
-                bg="white"
-                placement="top"
-                color="#333333"
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                }}
+                onClick={onOpen}
               >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
+                {" "}
+                <FiEdit
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
                     md: "md",
                     lg: "large",
                   }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  onClick={onOpen}
-                >
-                  {" "}
-                  <FiEdit
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
-            </Flex>
-          </VStack>
+                />
+              </Button>
+            </Tooltip>
+          </Flex>
         </Box>
       </Center>
 

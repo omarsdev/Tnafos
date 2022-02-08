@@ -119,9 +119,8 @@ const PaymentCard = () => {
           h={{ base: 260, sm: 330, md: 360, lg: 420 }}
         >
           <Heading
-            fontSize={{ base: "md", md: "xl", lg: "xx-large" }}
+            fontSize={{ base: "small", md: "large", lg: "x-large" }}
             ml="5%"
-            mt="5%"
             textColor="brand.primary"
             fontWeight="semibold"
           >
