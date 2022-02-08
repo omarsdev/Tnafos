@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Box, Center, Spinner, VStack, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Spinner,
+  VStack,
+  Stack,
+  Text,
+  Heading,
+} from "@chakra-ui/react";
 import { NoData } from "../../components";
 
 import { AxiosInstance } from "../../../../api";
@@ -46,6 +54,15 @@ const PaymentMedia = () => {
         w={{ base: 200, sm: 260, md: 300, lg: 350 }}
         h={{ base: 350, sm: 360, md: 380, lg: 380 }}
       >
+        <Heading
+          fontSize={{ base: "md", md: "xl", lg: "xx-large" }}
+          ml="5%"
+          mt="5%"
+          textColor="brand.primary"
+          fontWeight="semibold"
+        >
+          Payment's Media:
+        </Heading>
         <VStack spacing="20px" mx="5%" mt="5">
           {media.map((el, idx) => (
             <Stack

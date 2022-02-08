@@ -3,17 +3,11 @@ import {
   Button,
   Box,
   Text,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  Heading,
   useDisclosure,
   Center,
   Spinner,
-  Flex,
-  VStack,
+  HStack,
 } from "@chakra-ui/react";
 import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 
@@ -122,115 +116,122 @@ const PaymentCard = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 200, sm: 300, md: 450, lg: 550 }}
-          h={{ base: 210, sm: 250, md: 300, lg: 320 }}
+          h={{ base: 260, sm: 330, md: 360, lg: 420 }}
         >
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box
-              mr="0"
-              fontSize={{
-                base: "xx-small",
-                sm: "small",
-                md: "md",
-                lg: "large",
-              }}
-            >
-              <Text py="1" textColor="gray.600">
-                Amount: {card?.amount}
-              </Text>
-              <Text textColor="gray.600">Method: {card?.method}</Text>
-              <Text textColor="gray.600">
-                Transaction_Number: {card?.transaction_number}
-              </Text>
-              <Text textColor="gray.600">Date:{card?.date}</Text>
-              <Text textColor="gray.600">Notes:{card?.notes}</Text>
-              <Text textColor="gray.600">UUID:{card?.uuid}</Text>
-            </Box>
+          <Heading
+            fontSize={{ base: "md", md: "xl", lg: "xx-large" }}
+            ml="5%"
+            mt="5%"
+            textColor="brand.primary"
+            fontWeight="semibold"
+          >
+            Payment's details:
+          </Heading>
+          <Box
+            w="full"
+            mt="15px"
+            fontSize={{
+              base: "xx-small",
+              sm: "small",
+              md: "md",
+              lg: "large",
+            }}
+            bg="brand.dark"
+            opacity="90%"
+            textColor="white"
+            px="10%"
+            py="5%"
+          >
+            <Text py="1">Amount: {card?.amount}</Text>
+            <Text py="1">Method: {card?.method}</Text>
+            <Text py="1">Transaction_Number: {card?.transaction_number}</Text>
+            <Text py="1">Date:{card?.date}</Text>
+            <Text py="1">Notes:{card?.notes}</Text>
+            <Text py="1">UUID:{card?.uuid}</Text>
+          </Box>
 
-            <Flex
-              justify={"center"}
-              w="full"
-              spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}
+          <HStack justify={"center"} w="full" mt="10px">
+            <Tooltip
+              label="Show Media"
+              bg="white"
+              placement="top"
+              color="#333333"
             >
-              <Tooltip
-                label="Show Media"
-                bg="white"
-                placement="top"
-                color="#333333"
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={() => {
+                  history.push(`${match.url}/media`);
+                }}
               >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
+                {" "}
+                <MdOutlinePermMedia
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
                     md: "md",
                     lg: "large",
                   }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  onClick={() => {
-                    history.push(`${match.url}/media`);
-                  }}
-                >
-                  {" "}
-                  <MdOutlinePermMedia
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
+                />
+              </Button>
+            </Tooltip>
 
-              <Tooltip
-                label="edit payment"
-                bg="white"
-                placement="top"
-                color="#333333"
+            <Tooltip
+              label="edit payment"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={onOpen}
               >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
+                <FiEdit
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
                     md: "md",
                     lg: "large",
                   }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  onClick={onOpen}
-                >
-                  <FiEdit
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
-            </Flex>
-          </VStack>
+                />
+              </Button>
+            </Tooltip>
+          </HStack>
         </Box>
       </Center>
 
