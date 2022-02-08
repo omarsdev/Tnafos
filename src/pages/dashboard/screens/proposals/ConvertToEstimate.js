@@ -67,7 +67,7 @@ const ConvertToEstimate = () => {
         message: "Proposal has been concerted to invoice!",
         type: "info",
       });
-      history.push(`/dashboard/proposalhome`);
+      history.push(`/dashboard/proposal`);
     } catch (err) {
       setIsUpdating(false);
       setErrors(err.response.data);
@@ -116,12 +116,14 @@ const ConvertToEstimate = () => {
             }
             _hover={{
               bg: "orange.400",
+              transform: "scale(1.2)",
             }}
             icon={<RiExchangeDollarLine />}
             onClick={onOpen}
           ></Button>
         </Tooltip>
       </Center>
+
       {/* conert to invoice */}
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />

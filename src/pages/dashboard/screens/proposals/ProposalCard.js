@@ -3,17 +3,11 @@ import {
   Button,
   Box,
   Text,
-  Stack,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  Heading,
+  HStack,
   useDisclosure,
   Center,
   Spinner,
-  VStack,
 } from "@chakra-ui/react";
 import { useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { AxiosInstance } from "../../../../api";
@@ -123,294 +117,284 @@ const ProposalCard = () => {
           w={{ base: 260, sm: 350, md: 450, lg: 550 }}
           h={{ base: 260, sm: 360, md: 460, lg: 536 }}
         >
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box
-              ml="14"
-              fontSize={{
-                base: "xx-small",
-                sm: "small",
-                md: "md",
-                lg: "large",
-              }}
-            >
-              <Text fontWeight="bold">Proposals details: </Text>
-              <Text py="1" textColor="gray.600">
-                UUID: {card?.uuid}
-              </Text>
-              <Text py="1" textColor="gray.600">
-                Subject: {card?.subject}
-              </Text>
-              <Text textColor="gray.600">Status: {card?.status}</Text>
-              <Text textColor="gray.600">Date:{card?.date}</Text>
-              <Text textColor="gray.600">Valid-till:{card?.valid_till}</Text>
-              <Text textColor="gray.600">Currency:{card?.currency}</Text>
-              <Text textColor="gray.600">
-                Type of discount:{card?.discount_type}
-              </Text>
-              <Text textColor="gray.600">
-                Amount of discount:{card?.discount_amount}
-              </Text>
-              <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
-              <Text textColor="gray.600">Total:{card?.total}</Text>
+          <Heading
+            fontSize={{ base: "small", md: "large", lg: "x-large" }}
+            ml="5%"
+            mt="5%"
+            textColor="brand.primary"
+            fontWeight="semibold"
+          >
+            Proposal's details:
+          </Heading>
 
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">Company:</Text>
-                <Stack>
-                  <Text>{card?.company?.name}</Text>
-                  <Text>{card?.company?.type}</Text>
-                  <Text>{card?.company?.cr}</Text>
-                  <Text>{card?.company?.vat}</Text>
-                  <Text>{card?.company?.establishment_year}</Text>
-                  <Text>{card?.company?.total_employees}</Text>
-                  <Text>{card?.company?.bio}</Text>
-                  <Text>{card?.company?.telephone}</Text>
-                  <Text>{card?.company?.fax}</Text>
-                  <Text>{card?.company?.email}</Text>
-                  <Text>{card?.company?.website}</Text>
-                  <Text>{card?.company?.city}</Text>
-                  <Text>{card?.company?.po_box}</Text>
-                  <Text>{card?.company?.zip_code}</Text>
-                  <Text>{card?.company?.address}</Text>
-                  <Text>{card?.company?.location}</Text>
-                  <Text>{card?.company?.uuid}</Text>
-                  <Text>{card?.company?.logo}</Text>
-                </Stack>
+          <Box
+            w="full"
+            mt="15px"
+            fontSize={{
+              base: "xx-small",
+              sm: "small",
+              md: "md",
+              lg: "large",
+            }}
+            bg="brand.dark"
+            opacity="90%"
+            textColor="white"
+            px="10%"
+            py="5%"
+          >
+            <Text>UUID: {card?.uuid}</Text>
+            <Text>Subject: {card?.subject}</Text>
+            <Text>Status: {card?.status}</Text>
+            <Text>Date:{card?.date}</Text>
+            <Text>Valid-till:{card?.valid_till}</Text>
+            <Text>Currency:{card?.currency}</Text>
+            <Text>Type of discount:{card?.discount_type}</Text>
+            <Text>Amount of discount:{card?.discount_amount}</Text>
+            <Text>Sub-total:{card?.subtotal}</Text>
+            <Text>Total:{card?.total}</Text>
 
-                <Text fontWeight="bold">Company's country Info:</Text>
-                <Stack>
-                  <Text>{card?.company?.country?.name}</Text>
-                  <Text>{card?.company?.country?.country_code}</Text>
-                  <Text>{card?.company?.country?.short_name}</Text>
-                  <Text>{card?.company?.country?.currency}</Text>
-                  <Text>{card?.company?.country?.uuid}</Text>
-                </Stack>
+            <Box my="3">
+              <Text fontWeight="bold">Company:</Text>
 
-                <Text fontWeight="bold">Company's category Info:</Text>
-                <Stack>
-                  <Text>{card?.company?.category?.name}</Text>
-                  <Text>{card?.company?.category?.description}</Text>
-                  <Text>{card?.company?.category?.parent_id}</Text>
-                  <Text>{card?.company?.category?.uuid}</Text>
-                </Stack>
-
-                <Text fontWeight="bold">Company's Admin Info:</Text>
-                <Stack>
-                  <Text>{card?.company?.admin?.first_name}</Text>
-                  <Text>{card?.company?.admin?.last_name}</Text>
-                  <Text>{card?.company?.admin?.email}</Text>
-                  <Text>{card?.company?.admin?.phone_number}</Text>
-                  <Text>{card?.company?.admin?.uuid}</Text>
-                  <Text>{card?.company?.admin?.is_admin}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">Assigned - to :</Text>
-                <Stack>
-                  <Text>
-                    {card?.assigned_to?.first_name}{" "}
-                    {card?.assigned_to?.last_name}
-                  </Text>
-                  <Text>{card?.assigned_to?.email}</Text>
-                  <Text>{card?.assigned_to?.phone_number}</Text>
-                  <Text>{card?.assigned_to?.uuid}</Text>
-                  <Text>{card?.assigned_to?.is_admin}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                {" "}
-                <Text fontWeight="bold">Lead Info:</Text>
-                <Stack>
-                  <Text> {card?.lead?.first_name}</Text>
-                  <Text>{card?.lead?.last_name}</Text>
-                  <Text>{card?.lead?.position}</Text>
-                  <Text>{card?.lead?.email}</Text>
-                  <Text>{card?.lead?.phone_number}</Text>
-                  <Text>{card?.lead?.company_name}</Text>
-                  <Text>{card?.lead?.uuid}</Text>
-                  <Text>{card?.lead?.fax}</Text>
-                  <Text>{card?.lead?.website}</Text>
-                  <Text>{card?.lead?.currency}</Text>
-                  <Text>{card?.lead?.language}</Text>
-                  <Text>{card?.lead?.address}</Text>
-                  <Text>{card?.lead?.city}</Text>
-                  <Text>{card?.lead?.state}</Text>
-                  <Text>{card?.lead?.zipcode}</Text>
-                </Stack>
-                <Text fontWeight="bold">Lead's country Info:</Text>
-                <Stack>
-                  <Text>{card?.lead?.country?.name}</Text>
-                  <Text>{card?.lead?.country?.country_code}</Text>
-                  <Text>{card?.lead?.country?.short_name}</Text>
-                  <Text>{card?.lead?.country?.currency}</Text>
-                  <Text>{card?.lead?.country?.uuid}</Text>
-                </Stack>
-                <Text fontWeight="bold">Lead's Assigned_to:</Text>
-                <Stack>
-                  <Text>{card?.lead?.assigned_to?.first_name}</Text>
-                  <Text>{card?.lead?.assigned_to?.last_name}</Text>
-                  <Text>{card?.lead?.assigned_to?.email}</Text>
-                  <Text>{card?.lead?.assigned_to?.phone_number}</Text>
-                  <Text>{card?.lead?.assigned_to?.uuid}</Text>
-                  <Text>{card?.lead?.assigned_to?.is_admin}</Text>
-                </Stack>
-                <Text fontWeight="bold">Lead's source info:</Text>
-                <Stack>
-                  <Text>{card?.lead?.source?.name}</Text>
-                  <Text>{card?.lead?.source?.uuid}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                {" "}
-                <Text fontWeight="bold">Country:</Text>
-                <Stack>
-                  <Text> {card?.customer?.country?.name}</Text>
-                  <Text>{card?.customer?.country?.short_name}</Text>
-                  <Text>{card?.customer?.country?.country_code}</Text>
-                  <Text>{card?.customer?.country?.currency}</Text>
-                  <Text>{card?.customer?.country?.uuid}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                {" "}
-                <Text fontWeight="bold">Contact personal-info:</Text>
-                <Stack>
-                  <Text>
-                    {" "}
-                    {card?.customer?.primary_contact?.first_name}{" "}
-                    {card?.customer?.primary_contact?.last_name}
-                  </Text>
-                  <Text>{card?.customer?.primary_contact?.position}</Text>
-                  <Text>{card?.customer?.primary_contact?.email}</Text>
-                  <Text>{card?.customer?.primary_contact?.phone_number}</Text>
-                  <Text>{card?.customer?.primary_contact?.uuid}</Text>
-                </Stack>
-              </Box>
+              <Text>{card?.company?.name}</Text>
+              <Text>{card?.company?.type}</Text>
+              <Text>{card?.company?.cr}</Text>
+              <Text>{card?.company?.vat}</Text>
+              <Text>{card?.company?.establishment_year}</Text>
+              <Text>{card?.company?.total_employees}</Text>
+              <Text>{card?.company?.bio}</Text>
+              <Text>{card?.company?.telephone}</Text>
+              <Text>{card?.company?.fax}</Text>
+              <Text>{card?.company?.email}</Text>
+              <Text>{card?.company?.website}</Text>
+              <Text>{card?.company?.city}</Text>
+              <Text>{card?.company?.po_box}</Text>
+              <Text>{card?.company?.zip_code}</Text>
+              <Text>{card?.company?.address}</Text>
+              <Text>{card?.company?.location}</Text>
+              <Text>{card?.company?.uuid}</Text>
+              <Text>{card?.company?.logo}</Text>
             </Box>
 
-            <VStack spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}>
-              <Tooltip
-                label="convert to estimate"
-                bg="white"
-                placement="top"
-                color="#333333"
-              >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
-                    md: "md",
-                    lg: "large",
-                  }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  onClick={() => {
-                    history.push(`${match.url}/convert-to-estimate`);
-                  }}
-                >
-                  <RiExchangeDollarLine
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
+            <Box my="3">
+              <Text fontWeight="bold">Company's country Info:</Text>
 
-              <Tooltip
-                label="update status"
-                bg="white"
-                placement="top"
-                color="#333333"
-              >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
-                    md: "md",
-                    lg: "large",
-                  }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  onClick={() => {
-                    history.push(`${match.url}/update-status`);
-                  }}
-                >
-                  <RiRefreshLine
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
+              <Text>{card?.company?.country?.name}</Text>
+              <Text>{card?.company?.country?.country_code}</Text>
+              <Text>{card?.company?.country?.short_name}</Text>
+              <Text>{card?.company?.country?.currency}</Text>
+              <Text>{card?.company?.country?.uuid}</Text>
+            </Box>
 
-              <Tooltip
-                label="edit proposal"
-                bg="white"
-                placement="top"
-                color="#333333"
+            <Box my="3">
+              <Text fontWeight="bold">Company's category Info:</Text>
+              <Text>{card?.company?.category?.name}</Text>
+              <Text>{card?.company?.category?.description}</Text>
+              <Text>{card?.company?.category?.parent_id}</Text>
+              <Text>{card?.company?.category?.uuid}</Text>
+            </Box>
+
+            <Box my="3">
+              <Text fontWeight="bold">Company's Admin Info:</Text>
+              <Text>{card?.company?.admin?.first_name}</Text>
+              <Text>{card?.company?.admin?.last_name}</Text>
+              <Text>{card?.company?.admin?.email}</Text>
+              <Text>{card?.company?.admin?.phone_number}</Text>
+              <Text>{card?.company?.admin?.uuid}</Text>
+              <Text>{card?.company?.admin?.is_admin}</Text>
+            </Box>
+
+            <Box my="3">
+              <Text fontWeight="bold">Assigned - to :</Text>
+
+              <Text>
+                {card?.assigned_to?.first_name} {card?.assigned_to?.last_name}
+              </Text>
+              <Text>{card?.assigned_to?.email}</Text>
+              <Text>{card?.assigned_to?.phone_number}</Text>
+              <Text>{card?.assigned_to?.uuid}</Text>
+              <Text>{card?.assigned_to?.is_admin}</Text>
+            </Box>
+
+            <Box my="3">
+              <Text fontWeight="bold">Lead Info:</Text>
+              <Text> {card?.lead?.first_name}</Text>
+              <Text>{card?.lead?.last_name}</Text>
+              <Text>{card?.lead?.position}</Text>
+              <Text>{card?.lead?.email}</Text>
+              <Text>{card?.lead?.phone_number}</Text>
+              <Text>{card?.lead?.company_name}</Text>
+              <Text>{card?.lead?.uuid}</Text>
+              <Text>{card?.lead?.fax}</Text>
+              <Text>{card?.lead?.website}</Text>
+              <Text>{card?.lead?.currency}</Text>
+              <Text>{card?.lead?.language}</Text>
+              <Text>{card?.lead?.address}</Text>
+              <Text>{card?.lead?.city}</Text>
+              <Text>{card?.lead?.state}</Text>
+              <Text>{card?.lead?.zipcode}</Text>
+              <Text fontWeight="bold">Lead's country Info:</Text>
+              <Text>{card?.lead?.country?.name}</Text>
+              <Text>{card?.lead?.country?.country_code}</Text>
+              <Text>{card?.lead?.country?.short_name}</Text>
+              <Text>{card?.lead?.country?.currency}</Text>
+              <Text>{card?.lead?.country?.uuid}</Text>
+              <Text fontWeight="bold">Lead's Assigned_to:</Text>
+              <Text>{card?.lead?.assigned_to?.first_name}</Text>
+              <Text>{card?.lead?.assigned_to?.last_name}</Text>
+              <Text>{card?.lead?.assigned_to?.email}</Text>
+              <Text>{card?.lead?.assigned_to?.phone_number}</Text>
+              <Text>{card?.lead?.assigned_to?.uuid}</Text>
+              <Text>{card?.lead?.assigned_to?.is_admin}</Text>
+              <Text fontWeight="bold">Lead's source info:</Text>
+              <Text>{card?.lead?.source?.name}</Text>
+              <Text>{card?.lead?.source?.uuid}</Text>
+            </Box>
+
+            <Box my="3">
+              <Text fontWeight="bold">Country:</Text>
+              <Text> {card?.customer?.country?.name}</Text>
+              <Text>{card?.customer?.country?.short_name}</Text>
+              <Text>{card?.customer?.country?.country_code}</Text>
+              <Text>{card?.customer?.country?.currency}</Text>
+              <Text>{card?.customer?.country?.uuid}</Text>
+            </Box>
+
+            <Box my="3">
+              <Text fontWeight="bold">Contact personal-info:</Text>
+              <Text>
+                {card?.customer?.primary_contact?.first_name}{" "}
+                {card?.customer?.primary_contact?.last_name}
+              </Text>
+              <Text>{card?.customer?.primary_contact?.position}</Text>
+              <Text>{card?.customer?.primary_contact?.email}</Text>
+              <Text>{card?.customer?.primary_contact?.phone_number}</Text>
+              <Text>{card?.customer?.primary_contact?.uuid}</Text>
+            </Box>
+          </Box>
+
+          <HStack w="full" mt="10px" justify="center">
+            <Tooltip
+              label="convert to estimate"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={() => {
+                  history.push(`${match.url}/convert-to-estimate`);
+                }}
               >
-                <Button
-                  justify={"center"}
-                  size={{
-                    base: "x-small",
-                    sm: "x-small",
+                <RiExchangeDollarLine
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
                     md: "md",
                     lg: "large",
                   }}
-                  rounded="full"
-                  h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                  bg={"#F8B916"}
-                  color={"white"}
-                  boxShadow={
-                    "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                  }
-                  _hover={{
-                    bg: "orange.400",
+                />
+              </Button>
+            </Tooltip>
+
+            <Tooltip
+              label="update status"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={() => {
+                  history.push(`${match.url}/update-status`);
+                }}
+              >
+                <RiRefreshLine
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
                   }}
-                  onClick={onOpen}
-                >
-                  <FiEdit
-                    fontSize={{
-                      base: "xx-small",
-                      sm: "small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                  />
-                </Button>
-              </Tooltip>
-            </VStack>
-          </VStack>
+                />
+              </Button>
+            </Tooltip>
+
+            <Tooltip
+              label="edit proposal"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={onOpen}
+              >
+                <FiEdit
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
+            </Tooltip>
+          </HStack>
         </Box>
       </Center>
 

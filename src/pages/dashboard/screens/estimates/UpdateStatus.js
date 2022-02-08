@@ -112,7 +112,7 @@ const UpdateStatus = () => {
             textColor="brand.primary"
             fontWeight="semibold"
           >
-            Convert to invoice:
+            Update estimate's status:
           </Heading>
 
           <Box
