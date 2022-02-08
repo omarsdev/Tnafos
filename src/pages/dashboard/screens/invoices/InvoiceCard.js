@@ -4,17 +4,11 @@ import {
   Box,
   Text,
   Stack,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
+  Heading,
   useDisclosure,
   Center,
   Spinner,
   Flex,
-  VStack,
 } from "@chakra-ui/react";
 
 import { Tooltip } from "@chakra-ui/react";
@@ -34,7 +28,6 @@ const InvoiceCard = () => {
   const { setAlert } = alertProviderValue;
 
   const history = useHistory();
-  const match = useRouteMatch();
 
   const { uuid } = useParams();
 
@@ -128,182 +121,235 @@ const InvoiceCard = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 200, sm: 350, md: 450, lg: 550 }}
-          h={{ base: 1550, sm: 2000, md: 2300, lg: 2600 }}
+          h={{ base: 1780, sm: 2430, md: 2950, lg: 3290 }}
         >
-          <VStack spacing="20px" mx="5%" mt="5">
-            <Box
-              ml="14"
-              fontSize={{
-                base: "xx-small",
-                sm: "small",
-                md: "md",
-                lg: "large",
-              }}
-            >
-              <Text fontWeight="bold">Invoice's details: </Text>
-              <Text py="1" textColor="gray.600">
-                Subject: {card?.subject}
+          <Heading
+            fontSize={{ base: "small", md: "large", lg: "x-large" }}
+            ml="5%"
+            mt="5%"
+            textColor="brand.primary"
+            fontWeight="semibold"
+          >
+            Invoice's details:
+          </Heading>
+
+          <Box
+            w="full"
+            mt="15px"
+            fontSize={{
+              base: "xx-small",
+              sm: "small",
+              md: "md",
+              lg: "large",
+            }}
+            bg="brand.dark"
+            opacity="90%"
+            textColor="white"
+            px="10%"
+            py="5%"
+          >
+            <Text fontWeight="bold" pt="3">
+              Invoice's details:{" "}
+            </Text>
+            <Text>Subject: {card?.subject}</Text>
+            <Text>Status: {card?.status}</Text>
+            <Text>Date:{card?.date}</Text>
+            <Text>Valid-till:{card?.valid_till}</Text>
+            <Text>Currency:{card?.currency}</Text>
+            <Text>Type of discount:{card?.discount_type}</Text>
+            <Text>Amount of discount:{card?.discount_amount}</Text>
+            <Text>Sub-total:{card?.subtotal}</Text>
+            <Text>Total:{card?.total}</Text>
+
+            <Box my="4">
+              <Text fontWeight="bold">Assigned - to :</Text>
+
+              <Text>
+                {card?.assigned_to?.first_name} {card?.assigned_to?.last_name}
               </Text>
-              <Text textColor="gray.600">Status: {card?.status}</Text>
-              <Text textColor="gray.600">Date:{card?.date}</Text>
-              <Text textColor="gray.600">Valid-till:{card?.valid_till}</Text>
-              <Text textColor="gray.600">Currency:{card?.currency}</Text>
-              <Text textColor="gray.600">
-                Type of discount:{card?.discount_type}
-              </Text>
-              <Text textColor="gray.600">
-                Amount of discount:{card?.discount_amount}
-              </Text>
-              <Text textColor="gray.600">Sub-total:{card?.subtotal}</Text>
-              <Text textColor="gray.600">Total:{card?.total}</Text>
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">Assigned - to :</Text>
-                <Stack>
-                  <Text>
-                    {card?.assigned_to?.first_name}{" "}
-                    {card?.assigned_to?.last_name}
-                  </Text>
-                  <Text>{card?.assigned_to?.email}</Text>
-                  <Text>{card?.assigned_to?.phone_number}</Text>
-                  <Text>{card?.assigned_to?.uuid}</Text>
-                  <Text>{card?.assigned_to?.is_admin}</Text>
-                </Stack>
-              </Box>
-              <Box textColor="gray.600" my="3">
-                {" "}
-                <Text fontWeight="bold">Company Info:</Text>
-                <Stack>
-                  <Text> {card?.customer?.company_name}</Text>
-                  <Text>{card?.customer?.vat_number}</Text>
-                  <Text>{card?.customer?.phone}</Text>
-                  <Text>{card?.customer?.fax}</Text>
-                  <Text>{card?.customer?.website}</Text>
-                  <Text>{card?.customer?.currency}</Text>
-                  <Text>{card?.customer?.language}</Text>
-                  <Text>{card?.customer?.address}</Text>
-                  <Text>{card?.customer?.city}</Text>
-                  <Text>{card?.customer?.state}</Text>
-                  <Text>{card?.customer?.zipcode}</Text>
-                  <Text>{card?.customer?.uuid}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">country:</Text>
-                <Stack>
-                  <Text>{card?.customer?.country?.name}</Text>
-                  <Text>{card?.customer?.country?.country_code}</Text>
-                  <Text>{card?.customer?.country?.short_name}</Text>
-                  <Text>{card?.customer?.country?.currency}</Text>
-                  <Text>{card?.customer?.country?.uuid}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">primary - contact:</Text>
-                <Stack>
-                  <Text>{card?.customer?.primary_contact?.first_name}</Text>
-                  <Text>{card?.customer?.primary_contact?.last_name}</Text>
-                  <Text>{card?.customer?.primary_contact?.position}</Text>
-                  <Text>{card?.customer?.primary_contact?.email}</Text>
-                  <Text>{card?.customer?.primary_contact?.phone_number}</Text>
-                  <Text>{card?.customer?.primary_contact?.uuid}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">lead:</Text>
-                <Stack>
-                  <Text>{card?.customer?.lead?.first_name}</Text>
-                  <Text>{card?.customer?.lead?.last_name}</Text>
-                  <Text>{card?.customer?.lead?.position}</Text>
-                  <Text>{card?.customer?.lead?.email}</Text>
-                  <Text>{card?.customer?.lead?.phone_number}</Text>
-                  <Text>{card?.customer?.lead?.company_name}</Text>
-                  <Text>{card?.customer?.lead?.fax}</Text>
-                  <Text>{card?.customer?.lead?.website}</Text>
-                  <Text>{card?.customer?.lead?.currency}</Text>
-                  <Text>{card?.customer?.lead?.language}</Text>
-                  <Text>{card?.customer?.lead?.address}</Text>
-                  <Text>{card?.customer?.lead?.city}</Text>
-                  <Text>{card?.customer?.lead?.state}</Text>
-                  <Text>{card?.customer?.lead?.zipcode}</Text>
-                  <Text>{card?.customer?.lead?.status}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">lead/ country details:</Text>
-                <Stack>
-                  <Text>{card?.customer?.lead?.country?.name}</Text>
-                  <Text>{card?.customer?.lead?.country?.country_code}</Text>
-                  <Text>{card?.customer?.lead?.country?.short_name}</Text>
-                  <Text>{card?.customer?.lead?.country?.currency}</Text>
-                  <Text>{card?.customer?.lead?.country?.uuid}</Text>
-                </Stack>
-              </Box>
-
-              <Box textColor="gray.600" my="3">
-                <Text fontWeight="bold">lead/ assigned_to details:</Text>
-                <Stack>
-                  <Text>{card?.customer?.lead?.assigned_to?.first_name}</Text>
-                  <Text>{card?.customer?.lead?.assigned_to?.last_name}</Text>
-                  <Text>{card?.customer?.lead?.assigned_to?.email}</Text>
-                  <Text>{card?.customer?.lead?.assigned_to?.phone_number}</Text>
-                  <Text>{card?.customer?.lead?.assigned_to?.uuid}</Text>
-                  <Text>{card?.customer?.lead?.assigned_to?.is_admin}</Text>
-                </Stack>
-              </Box>
-
-              <Box>
-                <Text fontWeight="bold">lead/ source details:</Text>
-                <Stack>
-                  <Text>{card?.customer?.lead?.source?.name}</Text>
-                  <Text>{card?.customer?.lead?.source?.uuid}</Text>
-                </Stack>
-              </Box>
-
-              <Flex justify={"center"} w="full" gap="15px">
-                <Tooltip
-                  label="edit invoice"
-                  bg="white"
-                  placement="top"
-                  color="#333333"
-                >
-                  <Button
-                    justify={"center"}
-                    size={{
-                      base: "x-small",
-                      sm: "x-small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                    rounded="full"
-                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                    bg={"#F8B916"}
-                    color={"white"}
-                    boxShadow={
-                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                    }
-                    _hover={{
-                      bg: "orange.400",
-                    }}
-                    onClick={onOpen}
-                  >
-                    <FiEdit
-                      fontSize={{
-                        base: "xx-small",
-                        sm: "small",
-                        md: "md",
-                        lg: "large",
-                      }}
-                    />
-                  </Button>
-                </Tooltip>
-              </Flex>
+              <Text>{card?.assigned_to?.email}</Text>
+              <Text>{card?.assigned_to?.phone_number}</Text>
+              <Text>{card?.assigned_to?.uuid}</Text>
+              <Text>{card?.assigned_to?.is_admin}</Text>
             </Box>
-          </VStack>
+            <Box my="4">
+              {" "}
+              <Text fontWeight="bold">Customer's Info:</Text>
+              <Text> {card?.customer?.company_name}</Text>
+              <Text>{card?.customer?.vat_number}</Text>
+              <Text>{card?.customer?.phone}</Text>
+              <Text>{card?.customer?.fax}</Text>
+              <Text>{card?.customer?.website}</Text>
+              <Text>{card?.customer?.currency}</Text>
+              <Text>{card?.customer?.language}</Text>
+              <Text>{card?.customer?.address}</Text>
+              <Text>{card?.customer?.city}</Text>
+              <Text>{card?.customer?.state}</Text>
+              <Text>{card?.customer?.zipcode}</Text>
+              <Text>{card?.customer?.uuid}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">Customer's Info / country:</Text>
+
+              <Text>{card?.customer?.country?.name}</Text>
+              <Text>{card?.customer?.country?.country_code}</Text>
+              <Text>{card?.customer?.country?.short_name}</Text>
+              <Text>{card?.customer?.country?.currency}</Text>
+              <Text>{card?.customer?.country?.uuid}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">
+                Customer's Info / primary - contact:
+              </Text>
+
+              <Text>{card?.customer?.primary_contact?.first_name}</Text>
+              <Text>{card?.customer?.primary_contact?.last_name}</Text>
+              <Text>{card?.customer?.primary_contact?.position}</Text>
+              <Text>{card?.customer?.primary_contact?.email}</Text>
+              <Text>{card?.customer?.primary_contact?.phone_number}</Text>
+              <Text>{card?.customer?.primary_contact?.uuid}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold"> Customer's Info / lead:</Text>
+
+              <Text>{card?.customer?.lead?.first_name}</Text>
+              <Text>{card?.customer?.lead?.last_name}</Text>
+              <Text>{card?.customer?.lead?.position}</Text>
+              <Text>{card?.customer?.lead?.email}</Text>
+              <Text>{card?.customer?.lead?.phone_number}</Text>
+              <Text>{card?.customer?.lead?.company_name}</Text>
+              <Text>{card?.customer?.lead?.fax}</Text>
+              <Text>{card?.customer?.lead?.website}</Text>
+              <Text>{card?.customer?.lead?.currency}</Text>
+              <Text>{card?.customer?.lead?.language}</Text>
+              <Text>{card?.customer?.lead?.address}</Text>
+              <Text>{card?.customer?.lead?.city}</Text>
+              <Text>{card?.customer?.lead?.state}</Text>
+              <Text>{card?.customer?.lead?.zipcode}</Text>
+              <Text>{card?.customer?.lead?.status}</Text>
+              <Text>{card?.customer?.lead?.uuid}</Text>
+              <Text>{card?.customer?.lead?.media}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">lead/ country details:</Text>
+
+              <Text>{card?.customer?.lead?.country?.name}</Text>
+              <Text>{card?.customer?.lead?.country?.country_code}</Text>
+              <Text>{card?.customer?.lead?.country?.short_name}</Text>
+              <Text>{card?.customer?.lead?.country?.currency}</Text>
+              <Text>{card?.customer?.lead?.country?.uuid}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">lead/ assigned_to details:</Text>
+
+              <Text>{card?.customer?.lead?.assigned_to?.first_name}</Text>
+              <Text>{card?.customer?.lead?.assigned_to?.last_name}</Text>
+              <Text>{card?.customer?.lead?.assigned_to?.email}</Text>
+              <Text>{card?.customer?.lead?.assigned_to?.phone_number}</Text>
+              <Text>{card?.customer?.lead?.assigned_to?.uuid}</Text>
+              <Text>{card?.customer?.lead?.assigned_to?.is_admin}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">lead/ source details:</Text>
+              <Text>{card?.customer?.lead?.source?.name}</Text>
+              <Text>{card?.customer?.lead?.source?.uuid}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">Company info:</Text>
+              <Text>{card?.company?.name}</Text>
+              <Text>{card?.company?.type}</Text>
+              <Text>{card?.company?.cr}</Text>
+              <Text>{card?.company?.vat}</Text>
+              <Text>{card?.company?.establishment_year}</Text>
+              <Text>{card?.company?.total_employees}</Text>
+              <Text>{card?.company?.bio}</Text>
+              <Text>{card?.company?.telephone}</Text>
+              <Text>{card?.company?.fax}</Text>
+              <Text>{card?.company?.email}</Text>
+              <Text>{card?.company?.website}</Text>
+              <Text>{card?.company?.city}</Text>
+              <Text>{card?.company?.po_box}</Text>
+              <Text>{card?.company?.zip_code}</Text>
+              <Text>{card?.company?.address}</Text>
+              <Text>{card?.company?.location}</Text>
+              <Text>{card?.company?.uuid}</Text>
+              <Text>{card?.company?.logo}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">Company info / country :</Text>
+              <Text>{card?.company?.country?.name}</Text>
+              <Text>{card?.company?.country?.country_code}</Text>
+              <Text>{card?.company?.country?.short_name}</Text>
+              <Text>{card?.company?.country?.currency}</Text>
+              <Text>{card?.company?.country?.uuid}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">Company info / category :</Text>
+              <Text>{card?.company?.category?.name}</Text>
+              <Text>{card?.company?.category?.description}</Text>
+              <Text>{card?.company?.category?.parent_id}</Text>
+              <Text>{card?.company?.category?.uuid}</Text>
+            </Box>
+
+            <Box my="4">
+              <Text fontWeight="bold">Company info / admin :</Text>
+              <Text>{card?.company?.admin?.first_name}</Text>
+              <Text>{card?.company?.admin?.last_name}</Text>
+              <Text>{card?.company?.admin?.email}</Text>
+              <Text>{card?.company?.admin?.phone_number}</Text>
+              <Text>{card?.company?.admin?.uuid}</Text>
+              <Text>{card?.company?.admin?.is_admin}</Text>
+            </Box>
+          </Box>
+          <Flex justify={"center"} w="full" mt="10px">
+            <Tooltip
+              label="edit invoice"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={onOpen}
+              >
+                <FiEdit
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
+            </Tooltip>
+          </Flex>
         </Box>
       </Center>
 
