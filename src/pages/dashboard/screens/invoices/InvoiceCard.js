@@ -121,7 +121,7 @@ const InvoiceCard = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 200, sm: 350, md: 450, lg: 550 }}
-          h={{ base: 1780, sm: 2430, md: 2950, lg: 3290 }}
+          h={{ base: 1850, sm: 2500, md: 3040, lg: 3400 }}
         >
           <Heading
             fontSize={{ base: "small", md: "large", lg: "x-large" }}
@@ -160,6 +160,10 @@ const InvoiceCard = () => {
             <Text>Amount of discount:{card?.discount_amount}</Text>
             <Text>Sub-total:{card?.subtotal}</Text>
             <Text>Total:{card?.total}</Text>
+            <Text>Total:{card?.payments}</Text>
+            <Text>Total:{card?.vat_value}</Text>
+            <Text>Total:{card?.vat_amount}</Text>
+            <Text>Total:{card?.uuid}</Text>
 
             <Box my="4">
               <Text fontWeight="bold">Assigned - to :</Text>
