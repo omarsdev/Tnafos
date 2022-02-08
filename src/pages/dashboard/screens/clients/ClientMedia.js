@@ -6,7 +6,7 @@ import {
   Spinner,
   VStack,
   Stack,
-  IconButton,
+  Heading,
   Text,
   Button,
 } from "@chakra-ui/react";
@@ -56,6 +56,15 @@ const ClientMedia = () => {
         w={{ base: 200, sm: 260, md: 300, lg: 350 }}
         h={{ base: 350, sm: 360, md: 380, lg: 380 }}
       >
+        <Heading
+          fontSize={{ base: "md", md: "xl", lg: "xx-large" }}
+          ml="5%"
+          mt="5%"
+          textColor="brand.primary"
+          fontWeight="semibold"
+        >
+          Client's Media:
+        </Heading>
         <VStack spacing="20px" mx="5%" mt="5">
           {media.map((el, idx) => (
             <Stack
