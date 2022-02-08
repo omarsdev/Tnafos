@@ -9,6 +9,7 @@ import {
   Spinner,
   Spacer,
   VStack,
+  Heading,
 } from "@chakra-ui/react";
 
 import { Tooltip } from "@chakra-ui/react";
@@ -118,161 +119,175 @@ const ClientCard = () => {
           bg="brand.white"
           shadow="2xl"
           w={{ base: 260, sm: 350, md: 450, lg: 550 }}
-          h={{ base: 260, sm: 360, md: 460, lg: 536 }}
+          h={{ base: 430, sm: 530, md: 640, lg: 720 }}
+          // borderLeft="brand.primary"
+          // borderLeftWidth="20px"
         >
-          <VStack spacing="20px" mx="5%" mt="5">
-            <HStack w="full">
-              <Box
-                ml="14"
-                fontSize={{
-                  base: "xx-small",
-                  sm: "small",
+          <Heading
+            fontSize={{ base: "md", md: "xl", lg: "xx-large" }}
+            ml="5%"
+            mt="5%"
+            textColor="brand.primary"
+            fontWeight="semibold"
+          >
+            Client's details:
+          </Heading>
+
+          <Box
+            w="full"
+            mt="15px"
+            fontSize={{
+              base: "xx-small",
+              sm: "small",
+              md: "md",
+              lg: "large",
+            }}
+            bg="brand.dark"
+            opacity="90%"
+            textColor="white"
+            px="10%"
+            py="5%"
+          >
+            <Text py="1">Company Name: {card?.company_name}</Text>
+            <Text py="1">VAT Number: {card?.vat_number}</Text>
+            <Text py="1">Phone: {card?.phone}</Text>
+            <Text py="1">Fax: {card?.fax}</Text>
+            <Text py="1">Website:{card?.website}</Text>
+            <Text py="1">Currency:{card?.currency}</Text>
+            <Text py="1">Language:{card?.language}</Text>
+            <Text py="1">Country:{card?.country?.name}</Text>
+            <Text py="1">Address:{card?.address}</Text>
+            <Text py="1">City:{card?.city}</Text>
+            <Text py="1">State:{card?.state}</Text>
+            <Text py="1">ZIP Code:{card?.zipcode}</Text>
+            <Text py="1">Lead:{card?.lead}</Text>
+            <Text py="1">Id:{card?.uuid}</Text>
+          </Box>
+
+          <HStack w="full" justify="center" mt="10px">
+            <Tooltip
+              label="Show Contacts"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
                   md: "md",
                   lg: "large",
                 }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={() => {
+                  history.push(`${match.url}/contacts`);
+                }}
               >
-                <Text py="1" textColor="gray.600">
-                  Company Name: {card?.company_name}
-                </Text>
-                <Text py="1" textColor="gray.600">
-                  VAT Number: {card?.vat_number}
-                </Text>
-                <Text textColor="gray.600">Phone: {card?.phone}</Text>
-                <Text textColor="gray.600">Fax: {card?.fax}</Text>
-                <Text textColor="gray.600">Website:{card?.website}</Text>
-                <Text textColor="gray.600">Currency:{card?.currency}</Text>
-                <Text textColor="gray.600">Language:{card?.language}</Text>
-                <Text textColor="gray.600">Country:{card?.country?.name}</Text>
-                <Text textColor="gray.600">Address:{card?.address}</Text>
-                <Text textColor="gray.600">City:{card?.city}</Text>
-                <Text textColor="gray.600">State:{card?.state}</Text>
-                <Text textColor="gray.600">ZIP Code:{card?.zipcode}</Text>
-                <Text textColor="gray.600">Lead:{card?.lead}</Text>
-                <Text textColor="gray.600">UUID:{card?.uuid}</Text>
-              </Box>
-              <Spacer />
+                <AiOutlineContacts
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
+            </Tooltip>
 
-              <VStack spacing={{ base: 1, sm: 2, md: 4, lg: 8 }}>
-                <Tooltip
-                  label="Show Contacts"
-                  bg="white"
-                  placement="top"
-                  color="#333333"
-                >
-                  <Button
-                    justify={"center"}
-                    size={{
-                      base: "x-small",
-                      sm: "x-small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                    rounded="full"
-                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                    bg={"#F8B916"}
-                    color={"white"}
-                    boxShadow={
-                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                    }
-                    _hover={{
-                      bg: "orange.400",
-                    }}
-                    onClick={() => {
-                      history.push(`${match.url}/contacts`);
-                    }}
-                  >
-                    <AiOutlineContacts
-                      fontSize={{
-                        base: "xx-small",
-                        sm: "small",
-                        md: "md",
-                        lg: "large",
-                      }}
-                    />
-                  </Button>
-                </Tooltip>
+            <Tooltip
+              label="Show Media"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={() => {
+                  history.push(`${match.url}/media`);
+                }}
+              >
+                <MdOutlinePermMedia
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
+            </Tooltip>
 
-                <Tooltip
-                  label="Show Media"
-                  bg="white"
-                  placement="top"
-                  color="#333333"
-                >
-                  <Button
-                    justify={"center"}
-                    size={{
-                      base: "x-small",
-                      sm: "x-small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                    rounded="full"
-                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                    bg={"#F8B916"}
-                    color={"white"}
-                    boxShadow={
-                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                    }
-                    _hover={{
-                      bg: "orange.400",
-                    }}
-                    onClick={() => {
-                      history.push(`${match.url}/media`);
-                    }}
-                  >
-                    <MdOutlinePermMedia
-                      fontSize={{
-                        base: "xx-small",
-                        sm: "small",
-                        md: "md",
-                        lg: "large",
-                      }}
-                    />
-                  </Button>
-                </Tooltip>
-
-                <Tooltip
-                  label="Edit info"
-                  bg="white"
-                  placement="top"
-                  color="#333333"
-                >
-                  <Button
-                    justify={"center"}
-                    size={{
-                      base: "x-small",
-                      sm: "x-small",
-                      md: "md",
-                      lg: "large",
-                    }}
-                    rounded="full"
-                    h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                    w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                    bg={"#F8B916"}
-                    color={"white"}
-                    boxShadow={
-                      "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                    }
-                    _hover={{
-                      bg: "orange.400",
-                    }}
-                    onClick={onOpen}
-                  >
-                    <FiEdit
-                      fontSize={{
-                        base: "xx-small",
-                        sm: "small",
-                        md: "md",
-                        lg: "large",
-                      }}
-                    />
-                  </Button>
-                </Tooltip>
-              </VStack>
-            </HStack>
-          </VStack>
+            <Tooltip
+              label="Edit info"
+              bg="white"
+              placement="top"
+              color="#333333"
+            >
+              <Button
+                justify={"center"}
+                size={{
+                  base: "x-small",
+                  sm: "x-small",
+                  md: "md",
+                  lg: "large",
+                }}
+                rounded="full"
+                h={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                w={{ base: 6, sm: 8, md: 10, lg: 12 }}
+                bg={"#F8B916"}
+                color={"white"}
+                boxShadow={
+                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                }
+                _hover={{
+                  bg: "orange.400",
+                  transform: "scale(1.2)",
+                }}
+                onClick={onOpen}
+              >
+                <FiEdit
+                  fontSize={{
+                    base: "xx-small",
+                    sm: "small",
+                    md: "md",
+                    lg: "large",
+                  }}
+                />
+              </Button>
+            </Tooltip>
+            {/* </VStack> */}
+          </HStack>
+          {/* </VStack> */}
         </Box>
       </Center>
 
