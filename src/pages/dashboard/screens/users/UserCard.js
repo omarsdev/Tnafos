@@ -182,6 +182,7 @@ const UserCard = () => {
                 }
                 _hover={{
                   bg: "orange.400",
+                  transform: "scale(1.2)",
                 }}
                 onClick={onOpen}
               >

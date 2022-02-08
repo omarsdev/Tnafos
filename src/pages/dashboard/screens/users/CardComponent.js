@@ -22,13 +22,13 @@ const CardComponent = ({ userData }) => {
           h="200px"
           marginTop={"20px"}
         />
-        <Stack
+        <Box
           mr="0"
           fontSize={{ base: "sm", md: "md", lg: "large" }}
           justify="center"
         >
           <Text
-            textColor="gray.400"
+            textColor="gray.500"
             fontWeight="3xl"
             textAlign="center"
             size={{ base: "large", md: "x-large" }}
@@ -45,7 +45,7 @@ const CardComponent = ({ userData }) => {
             <BsFillTelephoneFill />
             <Text>{userData.phone_number}</Text>
           </HStack>
-        </Stack>
+        </Box>
         <Box position="relative" bottom="5">
           <Link to={`${match.url}/${userData.uuid}`}>
             <SecondaryButton

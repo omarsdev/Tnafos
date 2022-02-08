@@ -10,7 +10,7 @@ const ServiceCard = ({ info }) => {
   const match = useRouteMatch();
   return (
     <Box rounded="3xl" shadow="2xl" bg="white" position="relative">
-      <VStack gap={{ base: 0.5, sm: 0.5, md: 1, lg: 2 }} mx="5%">
+      <VStack spacing="20px" mx="5%">
         <Image
           src={"https://bit.ly/sage-adebayo"}
           alt="Segun Adebayo"
@@ -25,9 +25,11 @@ const ServiceCard = ({ info }) => {
           flexDir="column"
           textAlign="center"
           mr="0"
-          fontSize={{ base: "x-small", sm: "sm", md: "md", lg: "large" }}
+          fontSize={{ base: "small", sm: "md", md: "large", lg: "x-large" }}
         >
-          <Text fontWeight="extrabold">{info?.name}</Text>
+          <Text textColor="gray.500" fontWeight="medium" textAlign="center">
+            {info?.name}
+          </Text>
 
           <Text>{info?.type}</Text>
           <HStack
@@ -39,7 +41,7 @@ const ServiceCard = ({ info }) => {
             <Text color="#007BFF"> {info?.price} SAR</Text>
           </HStack>
         </Box>
-        <Box position="relative" py="5px">
+        <Box position="relative" bottom="3">
           <Link to={`${match.url}/${info.uuid}`}>
             <SecondaryButton
               name="View"
