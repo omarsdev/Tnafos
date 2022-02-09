@@ -29,9 +29,9 @@ export const PasswordInput = ({
 
   return (
     <InputGroup
-      width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
-      height={{ base: 4, sm: 6, md: 8, lg: 10 }}
-      flex
+      width={!width ? "100%" : width}
+      // height={{ base: 4, sm: 6, md: 8, lg: 10 }}
+      display="flex"
       flexDirection="row"
     >
       {!value && !setValue ? (
@@ -43,7 +43,7 @@ export const PasswordInput = ({
           userSelect="none"
           borderRadius="25"
           placeholder={placeHolder}
-          _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
+          _placeholder={{ fontSize: { base: 15, md: 16, lg: 17 } }}
           type={show ? "text" : "password"}
           {...register}
           {...rest}
@@ -57,7 +57,7 @@ export const PasswordInput = ({
           userSelect="none"
           borderRadius="25"
           placeholder={placeHolder}
-          _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
+          _placeholder={{ fontSize: { base: 15, md: 16, lg: 17 } }}
           value={value}
           onChange={handleChange}
           type={show ? "text" : "password"}
@@ -95,8 +95,8 @@ export const PasswordInputControl = ({
       render={({ field: { name }, fieldState: { error } }) => (
         <VStack>
           <PasswordInput
-            width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
-            height={{ base: 4, sm: 6, md: 8, lg: 10 }}
+            // width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
+            // width={"100%"}
             placeholder={placeHolder}
             register={register(`${name}`, { required: true })}
             error={error || (errors && errors[name])}

@@ -11,7 +11,7 @@ export const CustomEditForm = ({
   errors,
 }) => {
   return (
-    <form pt="5">
+    <form pt="5" width="100%">
       {children}
       <Flex my="10" w="full" justify="center">
         <PrimaryButton
@@ -43,7 +43,6 @@ export const CustomEditForm = ({
             lg: "md",
           }}
         />
-        {/* </HStack> */}
       </Flex>
       {errors?.message && (
         <Text textAlign="center" mt="1rem" color="red">

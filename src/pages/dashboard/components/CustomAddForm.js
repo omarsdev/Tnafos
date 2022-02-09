@@ -11,7 +11,7 @@ export const CustomAddForm = ({ listForm, control, register, ...rest }) => {
   return listForm.map((element, index) => (
     <Box pt={{ base: 1, sm: 1, md: 2, lg: 4 }} key={index}>
       <VStack>
-        <FormLabel textAlign="left" color="gray.500" {...rest}>
+        <FormLabel textAlign="left" color="gray.500" {...rest} width="100%">
           {element.head}
           {element.isPassword ? (
             <PasswordInputControl
@@ -31,7 +31,6 @@ export const CustomAddForm = ({ listForm, control, register, ...rest }) => {
               errors={element.err}
               optionList={element.optionList}
               value={element.value}
-              key={element.uuid}
               displayValue={element.displayValue}
             />
           ) : (

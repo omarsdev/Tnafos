@@ -50,7 +50,7 @@ export const CustomTable = ({
     <NoData component={component} />
   ) : (
     <Box bg="white" position="relative" shadow="2xl" rounded="3xl">
-      <Text
+      {/* <Text
         py={{ base: 1, md: 2, lg: 3 }}
         px={{ base: 1, md: 2, lg: 3 }}
         borderWidth="2px"
@@ -61,9 +61,9 @@ export const CustomTable = ({
         color="white"
       >
         {thHeading}
-      </Text>
+      </Text> */}
 
-      <Flex
+      {/* <Flex
         flexDirection={{ base: "column", sm: "row", md: "row" }}
         w="full"
         height={{ base: 16, sm: 16, md: 20, lg: 20 }}
@@ -138,8 +138,8 @@ export const CustomTable = ({
             }}
           />
         </InputGroup>
-      </Flex>
-      <Box overflow="scroll">
+      </Flex> */}
+      <Box overflow="scroll" roundedTop="2xl">
         <Table size={{ base: "xs", lg: "md" }} minWidth="40">
           <Thead>
             <Tr bg="#333333" borderRadius="full">

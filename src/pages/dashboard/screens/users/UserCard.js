@@ -202,27 +202,6 @@ const UserCard = () => {
 
       {/* updating user info. */}
       <CustomDrawer isOpen={isOpen} onCancelHandler={onCancelHandler}>
-        <HStack align="flex-end" w="full" alignItems="baseline" mb="14" mt="5">
-          <input
-            type="file"
-            onChange={(e) => setPhoto(e.target.files[0])}
-            name="choose file"
-          />
-          <Spacer />
-          <SecondaryButton
-            name="Upload File"
-            onClick={uploadFile}
-            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-            height={{ base: 8, md: 12 }}
-            fontSize={{
-              base: "xx-small",
-              sm: "xx-small",
-              md: "sm",
-              lg: "md",
-            }}
-          />
-        </HStack>
-
         <CustomEditForm
           onCancelHandler={onCancelHandler}
           onUpdate={handleSubmit(onUpdateUserInfo)}

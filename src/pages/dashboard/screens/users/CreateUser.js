@@ -133,36 +133,6 @@ const CreateUser = () => {
         >
           Add user
         </Heading>
-
-        <Flex
-          w="80%"
-          ml={{ base: 4, md: 16, lg: 20 }}
-          pt={{ base: 4, sm: 4, md: 12, lg: 12 }}
-          direction={{ base: "column", md: "row" }}
-          gap={{ base: 0.5, sm: 1, md: "none" }}
-        >
-          <input
-            type="file"
-            onChange={(ev) => handleFileInput(ev)}
-            ref={inputRef}
-            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-            height={{ base: 8, md: 12 }}
-            fontSize={{
-              base: "xx-small",
-              sm: "xx-small",
-              md: "sm",
-              lg: "md",
-            }}
-          />
-          <Spacer />
-          <SecondaryButton
-            // onClick={photoUploadHandler}
-            name="Upload photo"
-            width={{ base: 24, sm: 24, md: 32, lg: 40 }}
-            height={{ base: 8, md: 8 }}
-            fontSize={{ base: "xx-small", md: "x-small", lg: "md" }}
-          />
-        </Flex>
         <Center mx={{ base: "2%", md: "5%" }}>
           <form>
             <CustomAddForm
