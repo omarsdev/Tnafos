@@ -32,7 +32,6 @@ export const CustomSelect = ({
             borderRadius="25"
             placeholder={placeHolder}
             fontSize={{ base: 12, sm: 16, md: 16, lg: 20 }}
-            // width={!width ? "100%" : width}
             {...register(`${name}`, { required: true })}
             {...rest}
           >
