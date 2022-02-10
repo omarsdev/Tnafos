@@ -31,11 +31,12 @@ export const RegularInput = ({
       paddingLeft={inputType === "tel" && "80px"}
       placeholder={placeHolder}
       id={name}
-      width={!width ? "100%" : width}
+      width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
+      height={{ base: 4, sm: 6, md: 8, lg: 10 }}
       type={inputType}
       {...register}
       {...rest}
-      _placeholder={{ fontSize: { base: 16 } }}
+      _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
     />
   ) : (
     <ChakraInput
@@ -48,13 +49,14 @@ export const RegularInput = ({
       paddingLeft={inputType === "tel" && "80px"}
       placeholder={placeHolder}
       id={name}
-      width={!width ? "100%" : width}
+      width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
+      height={{ base: 4, sm: 6, md: 8, lg: 10 }}
       value={value}
       onChange={handleChange}
       type={inputType}
       autoComplete="off"
       autoFocus="off"
-      _placeholder={{ fontSize: { base: 16 } }}
+      _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
       {...rest}
     />
   );

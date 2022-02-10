@@ -116,11 +116,11 @@ const CreateUser = () => {
     <Box overflowY="scroll" w="full">
       <Box
         px={{ base: 1, md: 2 }}
-        mt={{ base: 1, md: 3 }}
+        mt={{ base: 4, md: 12 }}
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 230, sm: 340, md: 550, lg: 700 }}
-        ml={{ base: 2, sm: 16, md: 16, lg: 24 }}
+        ml={{ base: 2, sm: 16, md: 16, lg: 32 }}
         bg="white"
       >
         <Heading
@@ -134,36 +134,7 @@ const CreateUser = () => {
           Add user
         </Heading>
 
-        <Flex
-          w="80%"
-          ml={{ base: 4, md: 16, lg: 20 }}
-          pt={{ base: 4, sm: 4, md: 12, lg: 12 }}
-          direction={{ base: "column", md: "row" }}
-          gap={{ base: 0.5, sm: 1, md: "none" }}
-        >
-          <input
-            type="file"
-            onChange={(ev) => handleFileInput(ev)}
-            ref={inputRef}
-            width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-            height={{ base: 8, md: 12 }}
-            fontSize={{
-              base: "xx-small",
-              sm: "xx-small",
-              md: "sm",
-              lg: "md",
-            }}
-          />
-          <Spacer />
-          <SecondaryButton
-            // onClick={photoUploadHandler}
-            name="Upload photo"
-            width={{ base: 24, sm: 24, md: 32, lg: 40 }}
-            height={{ base: 8, md: 8 }}
-            fontSize={{ base: "xx-small", md: "x-small", lg: "md" }}
-          />
-        </Flex>
-        <Center mx={{ base: "2%", md: "5%" }}>
+        <Center mx={{ base: "2%", md: "5%" }} mt="10px">
           <form>
             <CustomAddForm
               listForm={[
@@ -222,21 +193,20 @@ const CreateUser = () => {
             />
 
             <VStack
-              flex
+              w="full"
               flexDirection="column"
               justify="center"
-              mt={{ base: 4, md: 6, lg: 6 }}
-              ml={{ base: 12, md: 20, lg: 24 }}
+              mt={{ base: 4, md: 6, lg: 8 }}
             >
               <Heading
                 fontSize={{
                   base: "small",
-                  sm: "small",
-                  md: "md",
-                  lg: "large",
+                  sm: "md",
+                  md: "large",
+                  lg: "x-large",
                 }}
                 color="grey"
-                fontWeight="normal"
+                fontWeight="semibold"
               >
                 Terms and Conditions agreement
               </Heading>
@@ -285,12 +255,12 @@ const CreateUser = () => {
 
               <Heading
                 color="grey"
-                fontWeight="normal"
+                fontWeight="semibold"
                 fontSize={{
                   base: "small",
-                  sm: "small",
-                  md: "md",
-                  lg: "large",
+                  sm: "md",
+                  md: "large",
+                  lg: "x-large",
                 }}
               >
                 Decleration of Valid Information
