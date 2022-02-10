@@ -113,7 +113,7 @@ const CreateUser = () => {
   }, []);
 
   return countryList ? (
-    <Box overflowY="scroll" w="full">
+    <Box overflowY="scroll" w="full" h="full">
       <Box
         px={{ base: 1, md: 2 }}
         mt={{ base: 4, md: 12 }}
@@ -267,6 +267,7 @@ const CreateUser = () => {
               >
                 Decleration of Valid Information
               </Heading>
+
               <CheckBox
                 name="I confirm that the information given in this form is true,
             complete and accurate."
@@ -275,13 +276,13 @@ const CreateUser = () => {
                 justify="center"
               />
 
-              <HStack spacing="10px" py={{ base: 2, md: 4, lg: 8 }}>
+              <HStack spacing="5px" py={{ base: 2, md: 4, lg: 8 }} mt="5px">
                 <PrimaryButton
                   name="SAVE"
                   onClick={handleSubmit(addUser)}
                   loadingButton={isUpdating}
                   width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-                  height={{ base: 8, md: 12 }}
+                  height={{ base: 6, sm: 8, md: 10 }}
                   fontSize={{
                     base: "xx-small",
                     sm: "xx-small",
@@ -294,7 +295,7 @@ const CreateUser = () => {
                   onClick={handleCancel}
                   name="CANCEL"
                   width={{ base: 20, sm: 20, md: 32, lg: 36 }}
-                  height={{ base: 8, md: 12 }}
+                  height={{ base: 6, sm: 8, md: 10 }}
                   fontSize={{
                     base: "xx-small",
                     sm: "xx-small",
@@ -310,7 +311,7 @@ const CreateUser = () => {
     </Box>
   ) : (
     <Center h="100vh" w="100%">
-      <Spinner size={{ base: "small", md: "md", lg: "xl" }} color="#F8B916" />
+      <Spinner size={{ base: "md", md: "large", lg: "xl" }} color="#F8B916" />
     </Center>
   );
 };

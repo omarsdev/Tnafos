@@ -65,14 +65,14 @@ const AddService = () => {
   }, []);
 
   return categoriesList ? (
-    <Box overflowY="scroll" w="full">
+    <Box overflowY="scroll" w="full" h="full">
       <Box
         px={{ base: 1, md: 2 }}
         mt={{ base: 4, md: 12 }}
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 230, sm: 340, md: 550, lg: 700 }}
-        ml={{ base: 2, sm: 16, md: 16, lg: 28 }}
+        ml={{ base: 8, sm: 16, md: 16, lg: 32 }}
         bg="white"
       >
         <Heading
@@ -86,7 +86,7 @@ const AddService = () => {
           New Service
         </Heading>
 
-        <Center mx={{ base: "4%", md: "10%" }}>
+        <Center mx={{ base: "2%", md: "5%" }} mt="10px">
           <form>
             <CustomAddForm
               listForm={[
@@ -134,13 +134,18 @@ const AddService = () => {
               register={register}
             />
 
-            <HStack spacing="10px" py={{ base: 2, md: 4, lg: 8 }}>
+            <HStack
+              spacing="5px"
+              py={{ base: 2, md: 4, lg: 8 }}
+              justify="center"
+              mt="5px"
+            >
               <PrimaryButton
-                name="ADD SERVICE"
+                name="SAVE"
                 onClick={handleSubmit(createService)}
                 buttonType="submit"
-                width={{ base: 24, sm: 24, md: 36, lg: 40 }}
-                height={{ base: 8, md: 12 }}
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 6, sm: 8, md: 10 }}
                 fontSize={{
                   base: "xx-small",
                   sm: "xx-small",
@@ -153,8 +158,8 @@ const AddService = () => {
                 name="Cancel"
                 onClick={handleCancel}
                 buttonType="button"
-                width={{ base: 24, sm: 24, md: 36, lg: 40 }}
-                height={{ base: 8, md: 12 }}
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 6, sm: 8, md: 10 }}
                 fontSize={{
                   base: "xx-small",
                   sm: "xx-small",
@@ -176,7 +181,7 @@ const AddService = () => {
     </Box>
   ) : (
     <Center h="100vh" w="100%">
-      <Spinner size={{ base: "small", md: "md", lg: "xl" }} color="#F8B916" />
+      <Spinner size={{ base: "md", md: "large", lg: "xl" }} color="#F8B916" />
     </Center>
   );
 };

@@ -39,7 +39,7 @@ export const PrimaryButton = ({
       }
       loadingText="Loading"
       width={width}
-      // height={height}
+      height={height}
       backgroundColor="brand.primary"
       _hover={{ bg: "primary.600" }}
       borderRadius="99em"
