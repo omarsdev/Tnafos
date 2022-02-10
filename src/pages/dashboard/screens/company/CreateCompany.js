@@ -45,14 +45,14 @@ const CreateCompany = () => {
   };
 
   return (
-    <Box overflowY="scroll" w="full">
+    <Box overflowY="scroll" w="full" h="full">
       <Box
         px={{ base: 1, md: 2 }}
-        mt={{ base: 1, md: 3 }}
+        mt={{ base: 4, md: 12 }}
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 230, sm: 380, md: 550, lg: 700 }}
-        ml={{ base: 2, sm: 16, md: 16, lg: 24 }}
+        ml={{ base: 8, sm: 16, md: 16, lg: 32 }}
         bg="white"
       >
         <Heading
@@ -65,7 +65,7 @@ const CreateCompany = () => {
         >
           Fill in your company info
         </Heading>
-        <Center mx={{ base: "4%", md: "10%" }}>
+        <Center mx={{ base: "4%", md: "10%" }} mt="20px">
           <form>
             <CustomAddForm
               listForm={[
@@ -210,12 +210,11 @@ const CreateCompany = () => {
               <PrimaryButton
                 colorScheme="yellow"
                 m="5"
-                ml="96"
                 name="SAVE"
                 buttonType="submit"
                 onClick={handleSubmit(createCompany)}
-                width={{ base: 24, sm: 24, md: 36, lg: 40 }}
-                height={{ base: 8, md: 12 }}
+                width={{ base: 36 }}
+                height={{ base: 6, sm: 8, md: 10 }}
                 fontSize={{
                   base: "xx-small",
                   sm: "xx-small",

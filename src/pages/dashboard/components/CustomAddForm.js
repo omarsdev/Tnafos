@@ -16,6 +16,7 @@ export const CustomAddForm = ({ listForm, control, register, ...rest }) => {
           color="gray.500"
           {...rest}
           fontSize={{ base: 12, sm: 12, md: 16, lg: 20 }}
+          ml="10px"
         >
           {element.head}
           {element.isPassword ? (
