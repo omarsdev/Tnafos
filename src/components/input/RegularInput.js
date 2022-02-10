@@ -34,6 +34,7 @@ export const RegularInput = ({
       width={width ? width : { base: 150, sm: 250, md: 480, lg: 500 }}
       height={{ base: 4, sm: 6, md: 8, lg: 10 }}
       type={inputType}
+      _placeholder={{ fontSize: { base: 15, md: 16 } }}
       {...register}
       {...rest}
       _placeholder={{ fontSize: { base: 12, md: 16, lg: 20 } }}
@@ -70,20 +71,20 @@ export const RegularInputControl = ({
   width,
   inputType,
   errors,
+  key,
 }) => {
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { name }, fieldState: { error }, formState }) => (
-        <VStack>
+        <VStack key={key}>
           <RegularInput
             placeholder={placeHolder}
             register={register(`${name}`, { required: true })}
             error={error || (errors && errors[name])}
-            width={width}
-            // height={{ base: 4, sm: 6, md: 8, lg: 10 }}
             inputType={inputType}
+            key={key}
           />
           {error?.message && <Text color="#ff0000">{error?.message}</Text>}
           {errors &&

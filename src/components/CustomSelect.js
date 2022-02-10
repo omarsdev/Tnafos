@@ -24,28 +24,19 @@ export const CustomSelect = ({
           <Select
             rounded="3xl"
             _selection="none"
-            width={{ base: 150, sm: 250, md: 480, lg: 500 }}
-            height={{ base: 4, sm: 6, md: 8, lg: 10 }}
+            width={!width ? "100%" : width}
             focusBorderColor="#F8B916"
             borderColor={!error ? "#AEAEAE" : "red"}
             backgroundColor="#fff"
             borderRadius="25"
             placeholder={placeHolder}
-            fontSize={{ base: 12, sm: 16, md: 16, lg: 20 }}
+            fontSize={{ base: 15, md: 16, lg: 17 }}
             {...register(`${name}`, { required: true })}
             {...rest}
+            key={key}
           >
-            {optionList.map((e) => (
-              <option
-                value={e[value]}
-                key={e[key]}
-                fontSize={{
-                  base: "xx-small",
-                  sm: "xx-small",
-                  md: "sm",
-                  lg: "md",
-                }}
-              >
+            {optionList.map((e, index) => (
+              <option value={e[value]} key={index}>
                 {e[displayValue]}
               </option>
             ))}

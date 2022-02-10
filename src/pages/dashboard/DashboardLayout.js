@@ -1,6 +1,6 @@
 // TODO purchase for incoming and outgoing
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useLayoutEffect } from "react";
 import { Navbar, Sidebar } from "./components/index";
 import { HStack, VStack, Center, Spinner } from "@chakra-ui/react";
 import {
@@ -25,7 +25,7 @@ import UserLayout from "./screens/users/UserLayout";
 import InvoiceLayout from "./screens/invoices/InvoiceLayout";
 // import Proposal from "./screens/proposals/Proposal"
 
-import { UserDataContext } from "../../context";
+import { UserDataContext, useSize } from "../../context";
 import ProposalLayout from "./screens/proposals/ProposalLayout";
 import MediaLayout from "./screens/media/MediaLayout";
 import SupplierLayout from "./screens/supplier/SupplierLayout";
@@ -35,6 +35,7 @@ const DashboardLayout = () => {
   const match = useRouteMatch();
   const location = useLocation();
   const history = useHistory();
+  const { size } = useSize()
 
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
@@ -69,6 +70,8 @@ const DashboardLayout = () => {
     fetchTokenMe();
     removeForwardSlashFromUrl();
   }, []);
+
+
 
   return !loading && userData ? (
     <HStack spacing={0}>
