@@ -55,10 +55,10 @@ const PaymentHome = () => {
           >
             <Button
               colorScheme="yellow"
+              size={{ base: "x-small", sm: "x-small", md: "md", lg: "large" }}
               rounded="full"
               h={{ base: 6, sm: 8, md: 10, lg: 12 }}
               w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-              rounded="full"
             >
               <AiOutlinePlus
                 fontSize={{
