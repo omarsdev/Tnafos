@@ -120,7 +120,7 @@ const CreateUser = () => {
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 230, sm: 340, md: 550, lg: 700 }}
-        ml={{ base: 2, sm: 16, md: 16, lg: 32 }}
+        ml={{ base: 8, sm: 16, md: 16, lg: 32 }}
         bg="white"
       >
         <Heading
@@ -216,7 +216,7 @@ const CreateUser = () => {
                 setValue={setChecked}
               />
 
-              <HStack justify="center">
+              <HStack justifyContent="center">
                 <Link to="/">
                   <Text
                     fontSize={{
@@ -225,6 +225,7 @@ const CreateUser = () => {
                       md: "small",
                       lg: "md",
                     }}
+                    color="blue.500"
                   >
                     terms of service
                   </Text>
@@ -247,6 +248,7 @@ const CreateUser = () => {
                       md: "small",
                       lg: "md",
                     }}
+                    color="blue.500"
                   >
                     Privacy policy
                   </Text>
@@ -270,6 +272,7 @@ const CreateUser = () => {
             complete and accurate."
                 value={ch}
                 setValue={setCh}
+                justify="center"
               />
 
               <HStack spacing="10px" py={{ base: 2, md: 4, lg: 8 }}>

@@ -68,11 +68,11 @@ const AddService = () => {
     <Box overflowY="scroll" w="full">
       <Box
         px={{ base: 1, md: 2 }}
-        mt={{ base: 1, md: 3 }}
+        mt={{ base: 4, md: 12 }}
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 230, sm: 340, md: 550, lg: 700 }}
-        ml={{ base: 2, sm: 16, md: 16, lg: 24 }}
+        ml={{ base: 2, sm: 16, md: 16, lg: 28 }}
         bg="white"
       >
         <Heading
