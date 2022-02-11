@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
+import AddProposal from "./AddProposal";
 
 import ConvertToEstimate from "./ConvertToEstimate";
 import IncomingProposal from "./IncomingProposal";
@@ -14,6 +15,7 @@ const ProposalLayout = () => {
   return (
     <Switch>
       <Route exact path={`${match.path}`} component={ProposalHome} />
+      <Route exact path={`${match.path}/addproposal`} component={AddProposal} />
 
       <Route path={`${match.path}/outgoing`} component={OutgoingProposal} />
       <Route path={`${match.path}/incoming`} component={IncomingProposal} />
