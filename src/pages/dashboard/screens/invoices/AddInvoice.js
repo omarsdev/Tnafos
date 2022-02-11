@@ -38,14 +38,14 @@ const AddInvoice = () => {
   };
 
   return (
-    <Box overflowY="scroll" w="full">
+    <Box overflowY="scroll" w="full" h="full">
       <Box
         px={{ base: 1, md: 2 }}
-        mt={{ base: 1, md: 3 }}
+        mt={{ base: 4, md: 12 }}
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 230, sm: 340, md: 550, lg: 700 }}
-        ml={{ base: 2, sm: 8, md: 16, lg: 24 }}
+        ml={{ base: 8, sm: 16, md: 16, lg: 32 }}
         bg="white"
       >
         <Heading
@@ -58,121 +58,124 @@ const AddInvoice = () => {
         >
           Fill in this form to add new invoice
         </Heading>
-        <form>
-          <CustomAddForm
-            listForm={[
-              {
-                head: "Subject",
-                placeHolder: "Enter Subject ",
-                name: "subject",
-                err: err,
-              },
-              {
-                head: " Status",
-                placeHolder: "Enter status ",
-                name: "status",
-                err: err,
-              },
-              {
-                head: "Enter Date  ",
-                placeHolder: "Enter date ",
-                name: "date",
-                err: err,
-              },
-              {
-                head: "Due - date ",
-                placeHolder: "Enter due_date",
-                name: "due_date",
-                err: err,
-              },
-              {
-                head: "Currency ",
-                placeHolder: "Enter currency",
-                name: "currency",
-                err: err,
-              },
-              {
-                head: "Customer_id ",
-                placeHolder: "Enter customer_id",
-                name: "customer_id",
-                err: err,
-              },
-              {
-                head: "Assigned_to ",
-                placeHolder: "assigned_to",
-                name: "assigned_to",
-                err: err,
-              },
-              {
-                head: " Discount_type ",
-                placeHolder: "Enter discount_type",
-                name: "discount_type",
-                err: err,
-              },
-              {
-                head: "Discount_amount ",
-                placeHolder: "discount_amount",
-                name: "discount_amount",
-                err: err,
-              },
-              {
-                head: "Subtotal ",
-                placeHolder: "Enter subtotal",
-                name: "subtotal",
-                err: err,
-              },
-              {
-                head: "Total ",
-                placeHolder: "total",
-                name: "total",
-                err: err,
-              },
-              {
-                head: "Vat-Id ",
-                placeHolder: "Enetr vat_id",
-                name: "vat_id",
-                err: err,
-              },
-              {
-                head: "Lines ",
-                placeHolder: "Enter lines",
-                name: "lines",
-                err: err,
-              },
-            ]}
-            control={control}
-            register={register}
-          />
 
-          <HStack spacing="5px" py="10" justify="center">
-            <PrimaryButton
-              name="SAVE"
-              onClick={handleSubmit(createInvoice)}
-              loadingButton={isUpdating}
-              width={{ base: 16, sm: 20, md: 32, lg: 36 }}
-              height={{ base: 6, sm: 8, md: 12 }}
-              fontSize={{
-                base: "xx-small",
-                sm: "xx-small",
-                md: "sm",
-                lg: "md",
-              }}
+        <Center mx={{ base: "2%", md: "5%" }} mt="10px">
+          <form>
+            <CustomAddForm
+              listForm={[
+                {
+                  head: "Subject",
+                  placeHolder: "Enter Subject ",
+                  name: "subject",
+                  err: err,
+                },
+                {
+                  head: " Status",
+                  placeHolder: "Enter status ",
+                  name: "status",
+                  err: err,
+                },
+                {
+                  head: "Enter Date  ",
+                  placeHolder: "Enter date ",
+                  name: "date",
+                  err: err,
+                },
+                {
+                  head: "Due - date ",
+                  placeHolder: "Enter due_date",
+                  name: "due_date",
+                  err: err,
+                },
+                {
+                  head: "Currency ",
+                  placeHolder: "Enter currency",
+                  name: "currency",
+                  err: err,
+                },
+                {
+                  head: "Customer_id ",
+                  placeHolder: "Enter customer_id",
+                  name: "customer_id",
+                  err: err,
+                },
+                {
+                  head: "Assigned_to ",
+                  placeHolder: "assigned_to",
+                  name: "assigned_to",
+                  err: err,
+                },
+                {
+                  head: " Discount_type ",
+                  placeHolder: "Enter discount_type",
+                  name: "discount_type",
+                  err: err,
+                },
+                {
+                  head: "Discount_amount ",
+                  placeHolder: "discount_amount",
+                  name: "discount_amount",
+                  err: err,
+                },
+                {
+                  head: "Subtotal ",
+                  placeHolder: "Enter subtotal",
+                  name: "subtotal",
+                  err: err,
+                },
+                {
+                  head: "Total ",
+                  placeHolder: "total",
+                  name: "total",
+                  err: err,
+                },
+                {
+                  head: "Vat-Id ",
+                  placeHolder: "Enetr vat_id",
+                  name: "vat_id",
+                  err: err,
+                },
+                {
+                  head: "Lines ",
+                  placeHolder: "Enter lines",
+                  name: "lines",
+                  err: err,
+                },
+              ]}
+              control={control}
+              register={register}
             />
 
-            <SecondaryButton
-              onClick={handleCancel}
-              name="CANCEL"
-              width={{ base: 16, sm: 20, md: 32, lg: 36 }}
-              height={{ base: 6, sm: 8, md: 12 }}
-              fontSize={{
-                base: "xx-small",
-                sm: "xx-small",
-                md: "sm",
-                lg: "md",
-              }}
-            />
-          </HStack>
-        </form>
+            <HStack spacing="5px" py="10" justify="center" mt="5px">
+              <PrimaryButton
+                name="SAVE"
+                onClick={handleSubmit(createInvoice)}
+                loadingButton={isUpdating}
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 6, sm: 8, md: 10 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              />
+
+              <SecondaryButton
+                onClick={handleCancel}
+                name="CANCEL"
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 6, sm: 8, md: 10 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              />
+            </HStack>
+          </form>
+        </Center>
       </Box>
     </Box>
   );

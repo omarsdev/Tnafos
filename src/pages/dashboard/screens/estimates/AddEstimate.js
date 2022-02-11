@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Box, Heading, HStack } from "@chakra-ui/react";
+import { Box, Heading, HStack, Center } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../../../../api/AxiosInstance";
 import { useHistory } from "react-router-dom";
@@ -53,14 +53,14 @@ const AddEstimate = () => {
   };
 
   return (
-    <Box height="full" w="full">
+    <Box height="full" w="full" h="full">
       <Box
         px={{ base: 1, md: 2 }}
-        mt={{ base: 1, md: 3 }}
+        mt={{ base: 4, md: 12 }}
         boxShadow="2xl"
         rounded="3xl"
         w={{ base: 200, sm: 350, md: 550, lg: 700 }}
-        ml={{ base: 2, sm: 8, md: 16, lg: 24 }}
+        ml={{ base: 8, sm: 16, md: 16, lg: 32 }}
         bg="white"
       >
         <Heading
@@ -74,57 +74,59 @@ const AddEstimate = () => {
           Fill in this form to add new estimate
         </Heading>
 
-        <form>
-          <CustomAddForm
-            listForm={[
-              {
-                head: "Date ",
-                placeHolder: "Enter Date",
-                name: "date",
-                err: err,
-                inputType: "text",
-              },
-              {
-                head: "Details",
-                placeHolder: "Enter Details ",
-                name: "details",
-                err: err,
-                inputType: "text",
-              },
-            ]}
-            control={control}
-            register={register}
-          />
-
-          <HStack spacing="5px" py="10" justify="center">
-            <PrimaryButton
-              name="SAVE"
-              onClick={handleSubmit(createEstimate)}
-              loadingButton={isUpdating}
-              width={{ base: 16, sm: 20, md: 32, lg: 36 }}
-              height={{ base: 6, sm: 8, md: 12 }}
-              fontSize={{
-                base: "xx-small",
-                sm: "xx-small",
-                md: "sm",
-                lg: "md",
-              }}
+        <Center mx={{ base: "2%", md: "5%" }} mt="10px">
+          <form>
+            <CustomAddForm
+              listForm={[
+                {
+                  head: "Date ",
+                  placeHolder: "Enter Date",
+                  name: "date",
+                  err: err,
+                  inputType: "text",
+                },
+                {
+                  head: "Details",
+                  placeHolder: "Enter Details ",
+                  name: "details",
+                  err: err,
+                  inputType: "text",
+                },
+              ]}
+              control={control}
+              register={register}
             />
 
-            <SecondaryButton
-              onClick={handleCancel}
-              name="CANCEL"
-              width={{ base: 16, sm: 20, md: 32, lg: 36 }}
-              height={{ base: 6, sm: 8, md: 12 }}
-              fontSize={{
-                base: "xx-small",
-                sm: "xx-small",
-                md: "sm",
-                lg: "md",
-              }}
-            />
-          </HStack>
-        </form>
+            <HStack spacing="5px" py="10" justify="center">
+              <PrimaryButton
+                name="SAVE"
+                onClick={handleSubmit(createEstimate)}
+                loadingButton={isUpdating}
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 6, sm: 8, md: 10 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              />
+
+              <SecondaryButton
+                onClick={handleCancel}
+                name="CANCEL"
+                width={{ base: 20, sm: 20, md: 32, lg: 36 }}
+                height={{ base: 6, sm: 8, md: 10 }}
+                fontSize={{
+                  base: "xx-small",
+                  sm: "xx-small",
+                  md: "sm",
+                  lg: "md",
+                }}
+              />
+            </HStack>
+          </form>
+        </Center>
       </Box>
     </Box>
   );
