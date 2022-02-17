@@ -1,5 +1,7 @@
-import React from "react";
+import React from 'react';
 
 export const FallBack = () => {
-  return <h1>Something Went Wrong</h1>;
-};
+    return (
+        <h1>Something went wrong</h1>
+    )
+}

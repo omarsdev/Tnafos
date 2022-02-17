@@ -15,7 +15,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { SearchIcon } from "@chakra-ui/icons";
 
-import { Navbar } from "./components";
+// import { Navbar } from "./components";
 
 import { AxiosInstance } from "../../api";
 import { UserDataContext } from "../../context";
@@ -68,7 +68,7 @@ const Homepage = () => {
 
   return (
     <Box h={"100vh"}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Center h="92vh">
         <VStack spacing={10}>
           <TnafosHomeLogo />

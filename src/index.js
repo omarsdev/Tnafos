@@ -11,6 +11,8 @@ import {
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import { Box, Text } from "@chakra-ui/react";
 
+import { SoftUIControllerProvider } from "context/SoftUI";
+
 const TemplateStyle = ({ backgroundColor, msg, children }) => {
   return (
     <Box
@@ -73,8 +75,10 @@ const options = {
 };
 
 ReactDOM.render(
-  <AlertProvider template={AlertTemplate} {...options}>
-    <App />
-  </AlertProvider>,
+  <SoftUIControllerProvider>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <App />
+    </AlertProvider>
+  </SoftUIControllerProvider>,
   document.getElementById("root")
 );

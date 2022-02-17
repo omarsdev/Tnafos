@@ -1,133 +1,116 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from 'react'
 
-import { Stack, Flex, Spacer, Box, Center, Text } from "@chakra-ui/react";
-import { Link, useHistory, Redirect } from "react-router-dom";
+// react-router-dom components
+import { Link, useHistory } from "react-router-dom";
 
-import { UserDataContext } from "../../../context";
-import {
-  RegularInput,
-  PasswordInput,
-  PrimaryButton,
-  CheckBox,
-} from "../../../components";
-import { AuthLayout } from "../AuthLayout";
-import LoginImage from "../../../assets/images/login.jpg";
+// @mui material components
+import Switch from "@mui/material/Switch";
 
-import { apiAuth } from "../../../api";
-import { setUserSession } from "../../../utils";
+// Soft UI Dashboard PRO React components
+import SuiBox from "components/SuiBox";
+import SuiTypography from "components/SuiTypography";
+import SuiInput from "components/SuiInput";
+import SuiButton from "components/SuiButton";
+
+// Authentication layout components
+import IllustrationLayout from "../components/IllustrationLayout";
+
+// Image
+import LoginCover from "assets/images/login.jpg";
+import { apiAuth } from 'api';
+import { setUserSession } from 'utils';
+import { Spinner } from '@chakra-ui/react';
 
 const Login = () => {
-  const { tokenProviderValue } = useContext(UserDataContext);
-  const { setUserToken } = tokenProviderValue;
+    const history = useHistory();
 
-  const history = useHistory();
+    const [error, setError] = useState(null);
+    const [rememberMe, setRememberMe] = useState(false);
+    const [loginData, setLoginData] = useState({
+        email: "",
+        password: "",
+    })
+    const [loadingButton, setLoadingButton] = useState(false);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState(null);
+    const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
-  const [loadingButton, setLoadingButton] = useState(false);
-
-  const handleLogin = async () => {
-    setError(null);
-    setLoadingButton(true);
-    const res = await apiAuth({ password: password, email: email }, "login");
-
-    if (res.success) {
-      let maxAge = 2;
-      if (rememberMe) {
-        maxAge = 365;
-      }
-      setUserSession(res.token, maxAge);
-      setUserToken(res.token);
-      history.push("/dashboard");
-    } else {
-      setError(res.error);
-      setLoadingButton(false);
+    const onChangeInput = (e) => {
+        const newData = { ...loginData }
+        newData[e.target.id] = e.target.value;
+        setLoginData(newData)
     }
-  };
 
-  return (
-    <div>
-      <AuthLayout BGImage={LoginImage}>
-        <Flex
-          w="100%"
-          h="100%"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
+    const loginHandler = async () => {
+        setError(null);
+        setLoadingButton(true);
+        const res = await apiAuth(loginData, "login");
+
+        if (res.success) {
+            let maxAge = 2;
+            if (rememberMe) {
+                maxAge = 365;
+            }
+            setUserSession(res.token, maxAge);
+            history.push("/dashboard");
+        } else {
+            setError(res.error);
+            console.log(res.error)
+            setLoadingButton(false);
+        }
+    }
+
+    return (
+        <IllustrationLayout
+            title="Sign In"
+            description="Enter your email and password to sign in"
+            illustration={{
+                image: LoginCover,
+                title: '"Attention is the new currency"',
+                description:
+                    "The more effortless the writing looks, the more effort the writer actually put into the process.",
+            }}
         >
-          <Stack spacing={4}>
-            <Text userSelect="none" fontSize="2.25rem" lineHeight="2.5rem">
-              Welcome Back!
-            </Text>
-            <Text
-              userSelect="none"
-              fontSize="1.875rem"
-              lineHeight="2.25rem"
-              color="brand.primary"
-            >
-              Sign in
-            </Text>
-            <RegularInput
-              value={email}
-              setValue={setEmail}
-              placeHolder="Email"
-              inputType="email"
-            />
-            <PasswordInput
-              value={password}
-              setValue={setPassword}
-              placeHolder="Password"
-            />
-            <Flex>
-              <Flex>
-                <CheckBox
-                  name="Remember me"
-                  value={rememberMe}
-                  setValue={setRememberMe}
-                />
-              </Flex>
-              <Spacer />
-              <Text
-                color="brand.grey"
-                fontSize="1rem"
-                lineHeight="1.5rem"
-                cursor="pointer"
-                userSelect="none"
-              >
-                Forgot Password?
-              </Text>
-            </Flex>
+            <SuiBox component="form" role="form">
+                <SuiBox mb={2}>
+                    <SuiInput id="email" type="email" placeholder="Email" size="large" onChange={onChangeInput} />
+                </SuiBox>
+                <SuiBox mb={2}>
+                    <SuiInput id="password" type="password" placeholder="Password" size="large" onChange={onChangeInput} />
+                </SuiBox>
+                <SuiBox display="flex" alignItems="center">
+                    <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+                    <SuiTypography
+                        variant="button"
+                        fontWeight="regular"
+                        onClick={handleSetRememberMe}
+                        sx={{ cursor: "pointer", userSelect: "none" }}
+                    >
+                        &nbsp;&nbsp;Remember me
+                    </SuiTypography>
+                </SuiBox>
+                <SuiBox mt={4} mb={1}>
+                    <SuiButton variant="gradient" color="info" size="large" fullWidth onClick={loginHandler}>
+                        sign in
+                    </SuiButton>
+                </SuiBox>
+                <SuiBox mt={3} textAlign="center">
+                    <SuiTypography variant="button" color="text" fontWeight="regular">
+                        Don&apos;t have an account?{" "}
+                        <SuiTypography
+                            component={Link}
+                            to="/authentication/sign-up/illustration"
+                            variant="button"
+                            color="info"
+                            fontWeight="medium"
+                            textGradient
+                        >
+                            Sign up
+                        </SuiTypography>
+                    </SuiTypography>
+                </SuiBox>
+            </SuiBox>
+        </IllustrationLayout>
+    )
+}
 
-            <Flex>
-              <PrimaryButton
-                name="Login"
-                onClick={handleLogin}
-                loadingButton={loadingButton}
-                buttonType="submit"
-              />
-              <Spacer />
-
-              <Link to="/register">
-                <Box w="126px" color="black">
-                  Dont have an account? Signup now! Its Free!
-                </Box>
-              </Link>
-            </Flex>
-            {error && (
-              <Center>
-                <Text color="red.500" fontSize="1.25rem" lineHeight="1.75rem">
-                  {error?.message}
-                </Text>
-              </Center>
-            )}
-          </Stack>
-        </Flex>
-      </AuthLayout>
-    </div>
-  );
-};
-
-export default Login;
+export default Login
