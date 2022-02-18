@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Heading, Button, IconButton, HStack } from "@chakra-ui/react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { BiLink } from "react-icons/bi";
 import { CustomTable } from "../../components";
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
 
@@ -38,7 +39,7 @@ const ClientsHome = () => {
   }, []);
 
   return (
-    <Box w="full" overflowY="scroll" padding={{ base: 1, sm: 3, md: 4, lg: 6 }}>
+    <Box w="full" padding={{ base: 1, sm: 3, md: 4, lg: 6 }}>
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"
@@ -81,16 +82,9 @@ const ClientsHome = () => {
       </HStack>
       <CustomTable
         theHeading="List of clients"
-        thData={[
-          "UUID",
-          "Company Name",
-          "Phone",
-          "Website",
-          "Address",
-          "actions",
-        ]}
+        thData={["UUID", "Company Name", "Phone", "Website", "actions"]}
         list={list}
-        listData={["uuid", "company_name", "phone", "website", "address"]}
+        listData={["uuid", "company_name", "phone", "website"]}
         component={"client"}
       />
     </Box>
