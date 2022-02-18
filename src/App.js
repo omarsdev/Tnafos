@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Login from "./pages/auth/screens/Login";
-// import Register from "./pages/auth/screens/Register";
+import Register from "./pages/auth/screens/Register";
 // import E404 from "./pages/common/E404";
 import Homepage from "./pages/homepage/Homepage";
 // import SearchLayout from "./pages/search/SearchLayout";
@@ -103,6 +103,7 @@ const App = () => {
                 <Switch>
                   <Route exact path="/" component={Homepage} />
                   <Route path="/login" component={Login} />
+                  <Route path="/register" component={Register} />
                   {/* 
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />
