@@ -36,7 +36,7 @@ const IncomingPurchases = () => {
     purIncomingList();
   }, []);
   return (
-    <Box w="full" overflowY="scroll" padding={{ base: 4, md: 4, lg: 6 }}>
+    <Box w="full" padding={{ base: 4, md: 4, lg: 6 }}>
       <HStack justifyContent="space-between" paddingBottom="5">
         <Heading
           textColor="gray.600"

@@ -27,7 +27,7 @@ import { BiUpload, BiChevronsUp } from "react-icons/bi";
 import { SecondaryButton } from "../../../components";
 import { useRouteMatch, useHistory } from "react-router-dom";
 import { NoData } from "./index";
-import { FiEdit } from "react-icons/fi";
+import { BsThreeDots } from "react-icons/bs";
 import CustomSpinner from "./CustomSpinner";
 
 import { useBreakpointValue } from "@chakra-ui/react";
@@ -139,13 +139,18 @@ export const CustomTable = ({
           />
         </InputGroup>
       </Flex> */}
-      <Box overflow="scroll" roundedTop="2xl">
-        <Table size={{ base: "xs", lg: "md" }} minWidth="40">
+      <Box overflowY="scroll">
+        <Table
+          size={{ base: "sm", lg: "lg" }}
+          minWidth="40"
+          variant="striped"
+          colorScheme="blackAlpha"
+        >
           <Thead>
             <Tr bg="#333333" borderRadius="full">
               {thData.map((e, i) => (
                 <Th key={i}>
-                  <Flex justifyContent="center" alignItems="center">
+                  <Flex mx="5%">
                     {i !== 0 && <BiChevronsUp size="20px" color="white" />}
                     <Text
                       color="white"
@@ -160,11 +165,13 @@ export const CustomTable = ({
           </Thead>
           <Tbody>
             {list.map((el, idx) => (
-              <Tr key={idx} _hover={{ bg: "gray.100" }}>
+              <Tr key={idx} _hover={{ transform: "scaleY(1.3)" }} px="5%">
                 {listData.map((e, id) => (
                   <Td
                     key={id}
                     fontSize={{ base: "x-small", sm: "sm", md: "sm", lg: "md" }}
+                    px="4px"
+                    color="#333333"
                   >
                     {el[e]}
                   </Td>
@@ -185,27 +192,21 @@ export const CustomTable = ({
                           md: "md",
                           lg: "large",
                         }}
-                        rounded="full"
-                        h={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                        w={{ base: 6, sm: 8, md: 10, lg: 12 }}
-                        bg={"#F8B916"}
-                        color={"white"}
-                        boxShadow={
-                          "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                        }
+                        bg="transparent"
+                        color={"#F8B916"}
                         _hover={{
-                          bg: "orange.400",
+                          transform: "scale(1.2)",
                         }}
                         onClick={() => {
                           history.push(`${match.url}/${el.uuid}`);
                         }}
                       >
-                        <FiEdit
+                        <BsThreeDots
                           fontSize={{
-                            base: "xx-small",
-                            sm: "small",
-                            md: "md",
-                            lg: "large",
+                            base: "x-small",
+                            sm: "md",
+                            md: "large",
+                            lg: "x-large",
                           }}
                         />
                       </Button>
