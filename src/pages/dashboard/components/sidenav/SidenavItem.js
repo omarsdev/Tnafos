@@ -26,7 +26,7 @@ import Icon from "@mui/material/Icon";
 import SuiBox from "components/SuiBox";
 
 // Custom styles for the SidenavItem
-import styles from "examples/Sidenav/styles/sidenavItem";
+import styles from "./styles/sidenavItem";
 
 // Soft UI Dashboard PRO React contexts
 import { useSoftUIController } from "context";

@@ -36,19 +36,19 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
-import SidenavList from "examples/Sidenav/SidenavList";
-import SidenavItem from "examples/Sidenav/SidenavItem";
-import SidenavCard from "examples/Sidenav/SidenavCard";
+import SidenavCollapse from "./SidenavCollapse";
+import SidenavList from "./SidenavList";
+import SidenavItem from "./SidenavItem";
 
 // Custom styles for the Sidenav
-import styles from "examples/Sidenav/styles/sidenav";
+import styles from "./styles/sidenav";
 
 // Images
-import SoftUILogo from "assets/images/logo-ct.png";
+import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 
 // Soft UI Dashboard PRO React context
 import { useSoftUIController } from "context";
+import SidebarMenu from "constants/SidebarMenu";
 
 function Sidenav({ routes, ...rest }) {
   const [openCollapse, setOpenCollapse] = useState(false);
@@ -115,7 +115,7 @@ function Sidenav({ routes, ...rest }) {
       if (collapse) {
         returnValue = (
           <SidenavItem
-            key={key}
+            key={item.id}
             name={name}
             active={key === itemName}
             open={openNestedCollapse === name}
@@ -149,22 +149,23 @@ function Sidenav({ routes, ...rest }) {
     });
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(
-    ({ type, name, icon, title, collapse, noCollapse, key, route }) => {
+  const renderRoutes = SidebarMenu.map(
+    ({ type, name, icon, title, item, collapse, noCollapse, key, route }) => {
       let returnValue;
 
       if (type === "collapse") {
-        returnValue = route ? (
+        returnValue = item.to ? (
           <Link
-            href={route}
-            key={key}
+            item={item}
+            href={item.to}
+            key={item.id}
             target="_blank"
             rel="noreferrer"
             className={classes.sidenav_navlink}
           >
             <SidenavCollapse
-              name={name}
-              icon={icon}
+              name={item.title}
+              icon={item.icon}
               active={key === collapseName}
               noCollapse={noCollapse}
             />
@@ -194,7 +195,7 @@ function Sidenav({ routes, ...rest }) {
             textTransform="uppercase"
             customClass={classes.sidenav_title}
           >
-            {title}
+            {item.heading}
           </SuiTypography>
         );
       } else if (type === "divider") {
@@ -233,30 +234,30 @@ function Sidenav({ routes, ...rest }) {
         <NavLink to="/">
           <SuiBox
             component="img"
-            src={SoftUILogo}
+            src={TnafosSearchLogo}
             alt="Soft UI Logo"
             customClass={classes.sidenav_logo}
           />
-          <SuiBox customClass={classes.sidenav_logoLabel}>
+          {/* <SuiBox customClass={classes.sidenav_logoLabel}>
             <SuiTypography component="h6" variant="button" fontWeight="medium">
               Soft UI Dashboard PRO
             </SuiTypography>
-          </SuiBox>
+          </SuiBox> */}
         </NavLink>
       </SuiBox>
       <Divider />
       <List>{renderRoutes}</List>
 
-      <SuiBox customClass={classes.sidenav_footer}>
+      {/* <SuiBox customClass={classes.sidenav_footer}>
         <SidenavCard />
-      </SuiBox>
+      </SuiBox> */}
     </Drawer>
   );
 }
 
 // Typechecking props for the Sidenav
 Sidenav.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  SidebarMenu: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Sidenav;

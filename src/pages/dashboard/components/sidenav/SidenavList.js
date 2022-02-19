@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 import List from "@mui/material/List";
 
 // Custom styles for the SidenavList
-import styles from "examples/Sidenav/styles/sidenavList";
+import styles from "./styles/sidenavList";
 
 function SidenavList({ children }) {
   const classes = styles();
