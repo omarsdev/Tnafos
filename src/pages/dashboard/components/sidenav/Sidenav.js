@@ -150,31 +150,42 @@ function Sidenav({ routes, ...rest }) {
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
   const renderRoutes = SidebarMenu.map(
-    ({ type, name, icon, title, item, collapse, noCollapse, key, route }) => {
+    ({
+      type,
+      name,
+      icon,
+      title,
+      item,
+      items,
+      collapse,
+      noCollapse,
+      key,
+      route,
+    }) => {
       let returnValue;
 
       if (type === "collapse") {
-        returnValue = item.to ? (
+        returnValue = items.to ? (
           <Link
-            item={item}
-            href={item.to}
-            key={item.id}
+            items={items}
+            href={item.items.to}
+            key={item.items.id}
             target="_blank"
             rel="noreferrer"
             className={classes.sidenav_navlink}
           >
             <SidenavCollapse
-              name={item.title}
-              icon={item.icon}
+              name={item.items.title}
+              icon={item.items.icon}
               active={key === collapseName}
               noCollapse={noCollapse}
             />
           </Link>
         ) : (
           <SidenavCollapse
-            key={key}
-            name={name}
-            icon={icon}
+            key={item.items.items.id}
+            name={item.items.items.title}
+            icon={item.items.items.icon}
             active={key === collapseName}
             open={openCollapse === name}
             onClick={() =>
@@ -189,7 +200,7 @@ function Sidenav({ routes, ...rest }) {
       } else if (type === "title") {
         returnValue = (
           <SuiTypography
-            key={key}
+            key={item.id}
             variant="caption"
             fontWeight="bold"
             textTransform="uppercase"
