@@ -139,6 +139,8 @@ const UserInfo = ({ formData }) => {
               name={phoneNumber.name}
               value={phoneNumberV}
               placeholder={phoneNumber.placeholder}
+              error={errors.phoneNumber && touched.phoneNumber}
+              success={phoneNumberV.length > 7 && !errors.phoneNumber}
             />
           </Grid>
         </Grid>
