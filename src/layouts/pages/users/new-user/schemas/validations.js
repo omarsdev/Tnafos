@@ -37,7 +37,7 @@ export default [
     [email.name]: Yup.string().required(email.errorMsg).email(email.invalidMsg),
     [phoneNumber.name]: Yup.string()
       .required(phoneNumber.errorMsg)
-      .phoneNumber(phoneNumber.invalidMsg),
+      .length(phoneNumber.invalidMsg),
     [password.name]: Yup.string()
       .required(password.errorMsg)
       .min(8, password.invalidMsg),
