@@ -93,6 +93,9 @@ import React from 'react'
 // import Error404 from "layouts/authentication/error/404";
 // import Error500 from "layouts/authentication/error/500";
 
+import DashboardHome from "./screens/home/DashboardHome"
+import CompanyLayout from "./screens/company/CompanyLayout"
+
 // // Soft UI Dashboard PRO React icons
 import Shop from "examples/Icons/Shop";
 // import Office from "examples/Icons/Office";
@@ -113,22 +116,88 @@ const routes = [
       {
         name: "Default",
         key: "default",
-        route: "/dashboards/default",
-        // component: Default,
+        route: "/dashboard",
+        component: DashboardHome,
+      },
+    ],
+  },
+  { type: "divider", key: "divider-1" },
+  { type: "title", title: "Organization", key: "divider-1" },
+  {
+    type: "collapse",
+    name: "Company",
+    key: "company",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Company",
+        key: "company",
+        route: "/dashboard/company"
+      },
+    ],
+  },
+  {
+    type: "collapse",
+    name: "User",
+    key: "user",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "User",
+        key: "user",
+        route: "/dashboard/user"
+      },
+    ],
+  },
+  {
+    type: "collapse",
+    name: "Service",
+    key: "service",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Service",
+        key: "service",
+        route: "/dashboard/service"
+      },
+    ],
+  },
+  { type: "divider", key: "divider-2" },
+  { type: "title", title: "Documents", key: "divider-2" },
+  {
+    type: "collapse",
+    name: "Purchase Requests",
+    key: "purchase-requests",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Incoming",
+        key: "purchase-requests-incoming",
+        route: "/dashboard/purchase-requests/incoming"
       },
       {
-        name: "Automotive",
-        key: "automotive",
-        route: "/dashboards/automotive",
-        // component: Automotive,
+        name: "Outgoing",
+        key: "purchase-requests-outgoing",
+        route: "/dashboard/purchase-requests/outgoing"
+      },
+    ],
+  },
+  {
+    type: "collapse",
+    name: "Estimates",
+    key: "estimates",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Incoming",
+        key: "estimates-incoming",
+        route: "/dashboard/estimates/incoming"
       },
       {
-        name: "Smart Home",
-        key: "smart-home",
-        route: "/dashboards/smart-home",
-        // component: SmartHome,
+        name: "Outgoing",
+        key: "estimates-outgoing",
+        route: "/dashboard/estimates/outgoing"
       },
-      { name: "CRM", key: "crm", route: "/dashboards/crm" },
     ],
   },
 ];

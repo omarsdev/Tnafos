@@ -35,7 +35,7 @@ export default styled(Drawer)(({ theme, ownerState }) => {
     }),
 
     [breakpoints.up("xl")]: {
-      backgroundColor: transparentSidenav ? transparent.main : "#333333",
+      backgroundColor: transparentSidenav ? transparent.main : white.main,
       boxShadow: transparentSidenav ? "none" : xxl,
       marginBottom: transparentSidenav ? 0 : "inherit",
       left: "0",
@@ -57,8 +57,7 @@ export default styled(Drawer)(({ theme, ownerState }) => {
     }),
 
     [breakpoints.up("xl")]: {
-      backgroundColor: "#333333",
-      // backgroundColor: transparentSidenav ? transparent.main : white.main,
+      backgroundColor: transparentSidenav ? transparent.main : white.main,
       boxShadow: transparentSidenav ? "none" : xxl,
       marginBottom: transparentSidenav ? 0 : "inherit",
       left: "0",

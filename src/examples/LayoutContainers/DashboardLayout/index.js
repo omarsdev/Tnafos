@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 // react-router-dom components
 import { useLocation } from "react-router-dom";
@@ -25,7 +25,7 @@ import PropTypes from "prop-types";
 import SuiBox from "components/SuiBox";
 
 // Soft UI Dashboard PRO React context
-import { useSoftUIController, setLayout } from "context";
+import { useSoftUIController, setLayout } from "context/SoftUI";
 
 function DashboardLayout({ children }) {
   const [controller, dispatch] = useSoftUIController();

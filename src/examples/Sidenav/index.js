@@ -228,10 +228,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       </SuiBox>
       <Divider />
       <List>{renderRoutes}</List>
-
-      <SuiBox pt={2} my={2} mx={2}>
-        <SidenavCard />
-      </SuiBox>
     </SidenavRoot>
   );
 }

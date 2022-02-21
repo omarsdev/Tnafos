@@ -39,8 +39,12 @@ import routes from "./routes";
 
 import brand from "assets/icons/tnafos.svg";
 import { setTransparentSidenav } from "context/SoftUI";
+import DashboardHome from "./screens/home/DashboardHome";
+import CompanyLayout from "./screens/company/CompanyLayout";
 
 const DashboardLayout = () => {
+    const match = useRouteMatch();
+
     const [controller, dispatch] = useSoftUIController();
     const { miniSidenav, direction, layout, openConfigurator, sidenavColor } = controller;
 
@@ -95,15 +99,20 @@ const DashboardLayout = () => {
     };
 
     return !loading && userData ? (
-        <Sidenav
-            color={sidenavColor}
-            brand={brand}
-            brandName="Tnafos"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-        />
-        // <h1>asd</h1>
+        <>
+            <Sidenav
+                color={sidenavColor}
+                brand={brand}
+                brandName="Tnafos"
+                routes={routes}
+                onMouseEnter={handleOnMouseEnter}
+                onMouseLeave={handleOnMouseLeave}
+            />
+            <Switch>
+                <Route exact path={match.path} component={DashboardHome} />
+                <Route path={`${match.path}/company`} component={CompanyLayout} />
+            </Switch>
+        </>
     ) : (
         <Center h="100vh" w="100%">
             <Spinner size="xl" color="#F8B916" />
