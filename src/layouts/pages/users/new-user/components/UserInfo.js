@@ -43,8 +43,9 @@ const UserInfo = ({ formData }) => {
     lastName: lastNameV,
     company: companyV,
     email: emailV,
+    phoneNumber: phoneNumberV,
     password: passwordV,
-    repeatPassword: repeatPasswordV,
+    confirmPassword: confirmPasswordV,
   } = values;
 
   return (
