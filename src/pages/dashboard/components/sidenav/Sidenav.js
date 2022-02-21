@@ -49,6 +49,7 @@ import { TnafosSearchLogo } from "../../../assets/icons/svg/TnafosSearchLogo";
 // Soft UI Dashboard PRO React context
 import { useSoftUIController } from "context";
 import SidebarMenu from "constants/SidebarMenu";
+import { ListItemSecondaryAction } from "@mui/material";
 
 function Sidenav({ routes, ...rest }) {
   const [openCollapse, setOpenCollapse] = useState(false);
@@ -86,20 +87,20 @@ function Sidenav({ routes, ...rest }) {
 
   // Render all the nested collapse items from the routes.js
   const renderNestedCollapse = (collapse) => {
-    const template = collapse.map(({ name, route, key, href }) =>
-      href ? (
+    const template = collapse.map(({ name, route, key, items, to }) =>
+      to ? (
         <Link
-          key={key}
-          href={href}
+          key={items.id}
+          href={items.to}
           target="_blank"
           rel="noreferrer"
           className={classes.sidenav_navlink}
         >
-          <SidenavItem name={name} nested />
+          <SidenavItem name={items.title} nested />
         </Link>
       ) : (
-        <NavLink to={route} key={key} className={classes.sidenav_navlink}>
-          <SidenavItem name={name} active={route === pathname} nested />
+        <NavLink to={route} key={items.id} className={classes.sidenav_navlink}>
+          <SidenavItem name={items.title} active={route === pathname} nested />
         </NavLink>
       )
     );
@@ -109,14 +110,14 @@ function Sidenav({ routes, ...rest }) {
 
   // Render the all the collpases from the routes.js
   const renderCollapse = (collapses) =>
-    collapses.map(({ name, collapse, route, href, key }) => {
+    collapses.map(({ name, collapse, item, route, href, key }) => {
       let returnValue;
 
       if (collapse) {
         returnValue = (
           <SidenavItem
             key={item.id}
-            name={name}
+            name={item.heading}
             active={key === itemName}
             open={openNestedCollapse === name}
             onClick={() =>
@@ -129,15 +130,15 @@ function Sidenav({ routes, ...rest }) {
           </SidenavItem>
         );
       } else {
-        returnValue = href ? (
+        returnValue = item.to ? (
           <Link
-            href={href}
-            key={key}
+            href={item.to}
+            key={item.id}
             target="_blank"
             rel="noreferrer"
             className={classes.sidenav_navlink}
           >
-            <SidenavItem name={name} active={key === itemName} />
+            <SidenavItem name={item.heading} active={key === itemName} />
           </Link>
         ) : (
           <NavLink to={route} key={key} className={classes.sidenav_navlink}>
@@ -145,47 +146,35 @@ function Sidenav({ routes, ...rest }) {
           </NavLink>
         );
       }
-      return <SidenavList key={key}>{returnValue}</SidenavList>;
+      return <SidenavList key={item.id}>{returnValue}</SidenavList>;
     });
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
   const renderRoutes = SidebarMenu.map(
-    ({
-      type,
-      name,
-      icon,
-      title,
-      item,
-      items,
-      collapse,
-      noCollapse,
-      key,
-      route,
-    }) => {
+    ({ type, name, icon, title, item, collapse, noCollapse, key, route }) => {
       let returnValue;
 
       if (type === "collapse") {
-        returnValue = items.to ? (
+        returnValue = item.to ? (
           <Link
-            items={items}
-            href={item.items.to}
-            key={item.items.id}
+            href={item.to}
+            key={item.id}
             target="_blank"
             rel="noreferrer"
             className={classes.sidenav_navlink}
           >
             <SidenavCollapse
-              name={item.items.title}
-              icon={item.items.icon}
+              name={item.heading}
+              icon={item.icon}
               active={key === collapseName}
               noCollapse={noCollapse}
             />
           </Link>
         ) : (
           <SidenavCollapse
-            key={item.items.items.id}
-            name={item.items.items.title}
-            icon={item.items.items.icon}
+            key={item.id}
+            name={item.heading}
+            icon={item.icon}
             active={key === collapseName}
             open={openCollapse === name}
             onClick={() =>
