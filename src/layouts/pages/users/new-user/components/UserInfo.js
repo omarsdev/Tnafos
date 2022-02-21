@@ -29,8 +29,15 @@ import FormField from "layouts/pages/users/new-user/components/FormField";
 
 const UserInfo = ({ formData }) => {
   const { formField, values, errors, touched } = formData;
-  const { firstName, lastName, company, email, password, repeatPassword } =
-    formField;
+  const {
+    firstName,
+    lastName,
+    company,
+    email,
+    phoneNumber,
+    password,
+    confirmPassword,
+  } = formField;
   const {
     firstName: firstNameV,
     lastName: lastNameV,
