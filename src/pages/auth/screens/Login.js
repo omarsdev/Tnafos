@@ -90,7 +90,7 @@ const Login = () => {
                 </SuiBox>
                 <SuiBox mt={4} mb={1}>
                     <SuiButton variant="gradient" color="info" size="large" fullWidth onClick={loginHandler}>
-                        sign in
+                        Login
                     </SuiButton>
                 </SuiBox>
                 <SuiBox mt={3} textAlign="center">
@@ -98,13 +98,13 @@ const Login = () => {
                         Don&apos;t have an account?{" "}
                         <SuiTypography
                             component={Link}
-                            to="/authentication/sign-up/illustration"
+                            to="/register"
                             variant="button"
                             color="info"
-                            fontWeight="medium"
+                            fontWeight="bold"
                             textGradient
                         >
-                            Sign up
+                            Register
                         </SuiTypography>
                     </SuiTypography>
                 </SuiBox>
