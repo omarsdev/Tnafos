@@ -140,7 +140,7 @@ const UserInfo = ({ formData }) => {
               value={phoneNumberV}
               placeholder={phoneNumber.placeholder}
               error={errors.phoneNumber && touched.phoneNumber}
-              success={phoneNumberV.length > 7 && !errors.phoneNumber}
+              success={phoneNumberV.length > 0 && !errors.phoneNumber}
             />
           </Grid>
         </Grid>
