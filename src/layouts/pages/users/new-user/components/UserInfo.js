@@ -27,8 +27,8 @@ import SuiTypography from "components/SuiTypography";
 // NewUser page components
 import FormField from "layouts/pages/users/new-user/components/FormField";
 
-const UserInfo = ({ formData }) => {
-  const { formField, values, errors, touched } = formData;
+const UserInfo = ({ userData }) => {
+  const { formField, values, errors, touched } = userData;
   const {
     firstName,
     lastName,
@@ -151,7 +151,7 @@ const UserInfo = ({ formData }) => {
 
 // typechecking props for UserInfo
 UserInfo.propTypes = {
-  formData: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
+  userData: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
 };
 
 export default UserInfo;

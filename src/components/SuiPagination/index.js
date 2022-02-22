@@ -1,3 +1,4 @@
+import React from "react";
 /**
 =========================================================
 * Soft UI Dashboard PRO React - v3.0.0
