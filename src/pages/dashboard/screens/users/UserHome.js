@@ -18,10 +18,12 @@ import { useRouteMatch, useHistory } from "react-router-dom";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
+import SuiButton from "components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -60,6 +62,11 @@ const UserHome = () => {
                 Users
               </SuiTypography>
             </SuiBox>
+            <SuiBox ml={{ xs: 0, sm: "auto" }} mt={{ xs: 2, sm: 0 }}>
+              <SuiButton variant="gradient" buttonColor="info" size="small">
+                <Icon className=" font-bold">add</Icon>&nbsp; follow
+              </SuiButton>
+            </SuiBox>
             <SuiBox mb={1}>
               <SuiTypography
                 variant="button"
@@ -78,7 +85,7 @@ const UserHome = () => {
                     // image={"https://bit.ly/sage-adebayo"}
                     action={{
                       type: "internal",
-                      route: "/pages/profile/profile-overview",
+                      route: `${match.url}/${userData.uuid}`,
                       color: "info",
                       label: "view User",
                     }}
