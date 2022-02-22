@@ -20,6 +20,7 @@
     "chroma-js": "^2.4.2",
     "feather-icons": "^4.28.0",
     "focus-visible": "^5.2.0",
+    "formik": "^2.2.9",
     "framer-motion": "4",
     "js-cookie": "^3.0.1",
     "prop-types": "^15.8.1",
