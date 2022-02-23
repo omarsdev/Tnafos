@@ -45,7 +45,7 @@ const ServiceHome = () => {
   useEffect(() => {
     showServicesList();
   }, []);
-  return (
+  return !servicesList ? (
     <SuiBox my={3}>
       <Card>
         <SuiBox
@@ -69,8 +69,8 @@ const ServiceHome = () => {
         </SuiBox>
         {/* <SuiBox p={2}>
           <Grid container spacing={3}>
-            {servicesList.map((el, idx) => (
-              <Grid item xs={12} md={6} xl={3} key={idx} userData={el}>
+            {servicesList.map((service, idx) => (
+              <Grid item xs={12} md={6} xl={3} key={idx} info={service}>
                 <CardComponent
                   // image={"https://bit.ly/sage-adebayo"}
                   action={{
@@ -86,7 +86,7 @@ const ServiceHome = () => {
         </SuiBox> */}
       </Card>
     </SuiBox>
-  );
+  ) : null;
 };
 
 export default ServiceHome;
