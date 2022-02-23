@@ -15,7 +15,13 @@ Coded by www.creative-tim.com
 
 import React, { useContext, useEffect, useState } from "react";
 
-import { useHistory, useParams } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  useHistory,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { IoIosMail } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
@@ -27,17 +33,15 @@ import Grid from "@mui/material/Grid";
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
+import SuiButton from "components/SuiButton";
 
-import { AlertContext } from "../../../../context/AlertContext";
-import { AxiosInstance, media } from "../../../../api";
+import { AxiosInstance } from "../../../../api";
+import EditUser from "./EditUser";
 
 const UserCard = () => {
-  const { alertProviderValue } = useContext(AlertContext);
-  const { setAlert } = alertProviderValue;
-
   const history = useHistory();
-
   const { uuid } = useParams();
+  const match = useRouteMatch();
 
   const [card, setCard] = useState(null);
 
@@ -58,109 +62,127 @@ const UserCard = () => {
   }, []);
 
   return !card ? (
-    <SuiBox py={3}>
-      <Card className="overflow-visible">
-        <SuiBox p={3}>
-          <SuiBox mb={3}>
-            <SuiTypography variant="h5" fontWeight="medium">
-              User Card's details ...
-            </SuiTypography>
-          </SuiBox>
+    <Switch>
+      <Route>
+        <SuiBox py={3}>
+          <Card className="overflow-visible">
+            <SuiBox p={3}>
+              <SuiBox mb={3}>
+                <SuiTypography variant="h5" fontWeight="medium">
+                  User Card's details ...
+                </SuiTypography>
+              </SuiBox>
 
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={6} xl={5}>
-              <SuiBox>
-                <SuiBox
-                  component="img"
-                  src={"https://bit.ly/sage-adebayo"}
-                  alt="Segun Adebayo"
-                  boxShadow="lg"
-                  borderRadius="lg"
-                  width="100%"
-                />
-              </SuiBox>
-            </Grid>
-            <Grid item xs={12} lg={5} className="mx-auto">
-              <SuiBox component="ul" m={0} pl={4} mb={2}>
-                <SuiBox
-                  component="li"
-                  color="text"
-                  fontSize="1.25rem"
-                  lineHeight={1}
-                >
-                  <SuiTypography
-                    variant="body2"
-                    textColor="text"
-                    verticalAlign="middle"
-                  >
-                    {card?.first_name}
-                    {card?.last_name}
-                  </SuiTypography>
-                </SuiBox>
-                <SuiBox
-                  component="li"
-                  color="text"
-                  fontSize="1.25rem"
-                  lineHeight={1}
-                >
-                  <SuiTypography
-                    variant="body2"
-                    textColor="text"
-                    verticalAlign="middle"
-                  >
-                    <IoIosMail />
-                    {card?.email}
-                  </SuiTypography>
-                </SuiBox>
-                <SuiBox
-                  component="li"
-                  color="text"
-                  fontSize="1.25rem"
-                  lineHeight={1}
-                >
-                  <SuiTypography
-                    variant="body2"
-                    textColor="text"
-                    verticalAlign="middle"
-                  >
-                    <BsFillTelephoneFill />
-                    {card?.phone_number}
-                  </SuiTypography>
-                </SuiBox>
-                <SuiBox
-                  component="li"
-                  color="text"
-                  fontSize="1.25rem"
-                  lineHeight={1}
-                >
-                  <SuiTypography
-                    variant="body2"
-                    textColor="text"
-                    verticalAlign="middle"
-                  >
-                    {card?.uuid}
-                  </SuiTypography>
-                </SuiBox>
-                <SuiBox
-                  component="li"
-                  color="text"
-                  fontSize="1.25rem"
-                  lineHeight={1}
-                >
-                  <SuiTypography
-                    variant="body2"
-                    textColor="text"
-                    verticalAlign="middle"
-                  >
-                    {card?.is_admin}
-                  </SuiTypography>
-                </SuiBox>
-              </SuiBox>
-            </Grid>
-          </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={12} lg={6} xl={5}>
+                  <SuiBox>
+                    <SuiBox
+                      component="img"
+                      src={"https://bit.ly/sage-adebayo"}
+                      alt="Segun Adebayo"
+                      boxShadow="lg"
+                      borderRadius="lg"
+                      width="100%"
+                    />
+                  </SuiBox>
+                </Grid>
+                <Grid item xs={12} lg={5} className="mx-auto">
+                  <SuiBox component="ul" m={0} pl={4} mb={2}>
+                    <SuiBox
+                      component="li"
+                      color="text"
+                      fontSize="1.25rem"
+                      lineHeight={1}
+                    >
+                      <SuiTypography
+                        variant="body2"
+                        textColor="text"
+                        verticalAlign="middle"
+                      >
+                        {card?.first_name}
+                        {card?.last_name}
+                      </SuiTypography>
+                    </SuiBox>
+                    <SuiBox
+                      component="li"
+                      color="text"
+                      fontSize="1.25rem"
+                      lineHeight={1}
+                    >
+                      <SuiTypography
+                        variant="body2"
+                        textColor="text"
+                        verticalAlign="middle"
+                      >
+                        <IoIosMail />
+                        {card?.email}
+                      </SuiTypography>
+                    </SuiBox>
+                    <SuiBox
+                      component="li"
+                      color="text"
+                      fontSize="1.25rem"
+                      lineHeight={1}
+                    >
+                      <SuiTypography
+                        variant="body2"
+                        textColor="text"
+                        verticalAlign="middle"
+                      >
+                        <BsFillTelephoneFill />
+                        {card?.phone_number}
+                      </SuiTypography>
+                    </SuiBox>
+                    <SuiBox
+                      component="li"
+                      color="text"
+                      fontSize="1.25rem"
+                      lineHeight={1}
+                    >
+                      <SuiTypography
+                        variant="body2"
+                        textColor="text"
+                        verticalAlign="middle"
+                      >
+                        {card?.uuid}
+                      </SuiTypography>
+                    </SuiBox>
+                    <SuiBox
+                      component="li"
+                      color="text"
+                      fontSize="1.25rem"
+                      lineHeight={1}
+                    >
+                      <SuiTypography
+                        variant="body2"
+                        textColor="text"
+                        verticalAlign="middle"
+                      >
+                        {card?.is_admin}
+                      </SuiTypography>
+                    </SuiBox>
+                  </SuiBox>
+
+                  <SuiBox mt={3}>
+                    <Grid item xs={12} lg={5} container>
+                      <SuiButton
+                        variant="gradient"
+                        buttonColor="info"
+                        fullWidth
+                        onClick={`${match.path}/update`}
+                      >
+                        edit
+                      </SuiButton>
+                    </Grid>
+                  </SuiBox>
+                </Grid>
+              </Grid>
+            </SuiBox>
+          </Card>
         </SuiBox>
-      </Card>
-    </SuiBox>
+      </Route>
+      <Route path={`${match.path}/:update`} component={EditUser} />
+    </Switch>
   ) : null;
 };
 

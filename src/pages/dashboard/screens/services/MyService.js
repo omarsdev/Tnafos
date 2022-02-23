@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import React, { useContext, useEffect, useState } from "react";
 
 import { Switch, Route, useHistory, useParams } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
+import EditService from "./EditService";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -26,13 +26,10 @@ import Grid from "@mui/material/Grid";
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
-import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance } from "../../../../api";
 import { Route } from "@mui/icons-material";
 
 const UserCard = () => {
-  const { alertProviderValue } = useContext(AlertContext);
-  //   const { setAlert } = alertProviderValue;
   const [service, setService] = useState(null);
 
   const history = useHistory();
