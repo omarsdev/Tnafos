@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { AxiosInstance } from "../../../../api";
 
+import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
+
+// Soft UI Dashboard PRO React components
+import SuiBox from "components/SuiBox";
+import Grid from "@mui/material/Grid";
+
 const MyProfile = () => {
   const [profile, setProfile] = useState(null);
 

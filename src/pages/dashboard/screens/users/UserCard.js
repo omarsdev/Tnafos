@@ -14,118 +14,154 @@ Coded by www.creative-tim.com
 */
 
 import React, { useContext, useEffect, useState } from "react";
-// react-routers components
-import { Link } from "react-router-dom";
 
-// prop-types is library for typechecking of props
-import PropTypes from "prop-types";
+import { useHistory, useParams } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
+import { IoIosMail } from "react-icons/io";
+import { BsFillTelephoneFill } from "react-icons/bs";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Divider from "@mui/material/Divider";
-import Tooltip from "@mui/material/Tooltip";
-import Icon from "@mui/material/Icon";
+import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
-// Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
+import { AlertContext } from "../../../../context/AlertContext";
+import { AxiosInstance, media } from "../../../../api";
 
-const UserCard = ({ description, info, action }) => {
-  const card = [];
-  const values = [];
+const UserCard = () => {
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
 
-  const { size } = typography;
+  const history = useHistory();
 
-  // Convert this form `objectKey` of the object key in to this `object key`
-  Object.keys(info).forEach((el) => {
-    if (el.match(/[A-Z\s]+/)) {
-      const uppercaseLetter = Array.from(el).find((i) => i.match(/[A-Z]+/));
-      const newElement = el.replace(
-        uppercaseLetter,
-        ` ${uppercaseLetter.toLowerCase()}`
-      );
+  const { uuid } = useParams();
 
-      card.push(newElement);
-    } else {
-      card.push(el);
+  const [card, setCard] = useState(null);
+
+  const getUser = async () => {
+    try {
+      const res = await AxiosInstance.get(`/api/dashboard/user/${uuid}`);
+      console.log(res);
+      // resetHooksForm(res.data.data);
+      setCard(res.data.data);
+    } catch (err) {
+      console.log(err.response.data);
+      history.push("/dashboard/user");
     }
-  });
+  };
 
-  // Push the object values into the values array
-  Object.values(info).forEach((el) => values.push(el));
+  useEffect(() => {
+    getUser();
+  }, []);
 
-  // Render the card info items
-  const renderItems = card.map((label, key) => (
-    <SuiBox key={label} display="flex" py={1} pr={2}>
-      <SuiTypography
-        variant="button"
-        fontWeight="bold"
-        textTransform="capitalize"
-      >
-        {label}: &nbsp;
-      </SuiTypography>
-      <SuiTypography variant="button" fontWeight="regular" textColor="text">
-        &nbsp;{values[key]}
-      </SuiTypography>
-    </SuiBox>
-  ));
+  return !card ? (
+    <SuiBox py={3}>
+      <Card className="overflow-visible">
+        <SuiBox p={3}>
+          <SuiBox mb={3}>
+            <SuiTypography variant="h5" fontWeight="medium">
+              User Card's details ...
+            </SuiTypography>
+          </SuiBox>
 
-  return (
-    <Card className="h-100">
-      <SuiBox
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        pt={2}
-        px={2}
-      >
-        <SuiTypography
-          variant="h6"
-          fontWeight="medium"
-          textTransform="capitalize"
-        >
-          "User's card info ..."
-        </SuiTypography>
-        <SuiTypography
-          component={Link}
-          to={action.route}
-          variant="body2"
-          textColor="secondary"
-        >
-          <Tooltip title={action.tooltip} placement="top">
-            <Icon className="">edit</Icon>
-          </Tooltip>
-        </SuiTypography>
-      </SuiBox>
-      <SuiBox p={2}>
-        //* here i wanna put the user's image instead of the description part.
-        {/* <SuiBox mb={2} lineHeight={1}>
-          <SuiTypography variant="button" textColor="text" fontWeight="regular">
-            {description}
-          </SuiTypography>
-        </SuiBox> */}
-        <SuiBox opacity={0.3}>
-          <Divider />
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={6} xl={5}>
+              <SuiBox>
+                <SuiBox
+                  component="img"
+                  src={"https://bit.ly/sage-adebayo"}
+                  alt="Segun Adebayo"
+                  boxShadow="lg"
+                  borderRadius="lg"
+                  width="100%"
+                />
+              </SuiBox>
+            </Grid>
+            <Grid item xs={12} lg={5} className="mx-auto">
+              <SuiBox component="ul" m={0} pl={4} mb={2}>
+                <SuiBox
+                  component="li"
+                  color="text"
+                  fontSize="1.25rem"
+                  lineHeight={1}
+                >
+                  <SuiTypography
+                    variant="body2"
+                    textColor="text"
+                    verticalAlign="middle"
+                  >
+                    {card?.first_name}
+                    {card?.last_name}
+                  </SuiTypography>
+                </SuiBox>
+                <SuiBox
+                  component="li"
+                  color="text"
+                  fontSize="1.25rem"
+                  lineHeight={1}
+                >
+                  <SuiTypography
+                    variant="body2"
+                    textColor="text"
+                    verticalAlign="middle"
+                  >
+                    <IoIosMail />
+                    {card?.email}
+                  </SuiTypography>
+                </SuiBox>
+                <SuiBox
+                  component="li"
+                  color="text"
+                  fontSize="1.25rem"
+                  lineHeight={1}
+                >
+                  <SuiTypography
+                    variant="body2"
+                    textColor="text"
+                    verticalAlign="middle"
+                  >
+                    <BsFillTelephoneFill />
+                    {card?.phone_number}
+                  </SuiTypography>
+                </SuiBox>
+                <SuiBox
+                  component="li"
+                  color="text"
+                  fontSize="1.25rem"
+                  lineHeight={1}
+                >
+                  <SuiTypography
+                    variant="body2"
+                    textColor="text"
+                    verticalAlign="middle"
+                  >
+                    {card?.uuid}
+                  </SuiTypography>
+                </SuiBox>
+                <SuiBox
+                  component="li"
+                  color="text"
+                  fontSize="1.25rem"
+                  lineHeight={1}
+                >
+                  <SuiTypography
+                    variant="body2"
+                    textColor="text"
+                    verticalAlign="middle"
+                  >
+                    {card?.is_admin}
+                  </SuiTypography>
+                </SuiBox>
+              </SuiBox>
+            </Grid>
+          </Grid>
         </SuiBox>
-        <SuiBox>{renderItems}</SuiBox>
-      </SuiBox>
-    </Card>
-  );
-};
-
-// Typechecking props for the UserCard
-UserCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  info: PropTypes.objectOf(PropTypes.string).isRequired,
-  social: PropTypes.arrayOf(PropTypes.object).isRequired,
-  action: PropTypes.shape({
-    route: PropTypes.string.isRequired,
-    tooltip: PropTypes.string.isRequired,
-  }).isRequired,
+      </Card>
+    </SuiBox>
+  ) : null;
 };
 
 export default UserCard;
