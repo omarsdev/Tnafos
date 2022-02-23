@@ -79,7 +79,7 @@ const UserHome = (userData) => {
           </SuiBox>
           <SuiBox p={2}>
             <Grid container spacing={3}>
-              {usersList.map((el, idx) => (
+              {/* {usersList.map((el, idx) => (
                 <Grid item xs={12} md={6} xl={3} key={idx} userData={el}>
                   <CardComponent
                     // image={"https://bit.ly/sage-adebayo"}
@@ -91,7 +91,7 @@ const UserHome = (userData) => {
                     }}
                   />
                 </Grid>
-              ))}
+              ))} */}
             </Grid>
           </SuiBox>
         </Card>
