@@ -27,7 +27,7 @@ import Grid from "@mui/material/Grid";
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
-import SuiSelect from "components/SuiSelect";
+// import SuiSelect from "components/SuiSelect";
 
 // NewUser page components
 import FormField from "layouts/pages/users/new-user/components/FormField";
@@ -157,7 +157,7 @@ const UserInfo = ({ formData }) => {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <SuiBox mb={3}>
-              <SuiBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
+              {/* <SuiBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
                 <SuiTypography
                   component="label"
                   variant="caption"
@@ -166,7 +166,7 @@ const UserInfo = ({ formData }) => {
                 >
                   Country Code
                 </SuiTypography>
-              </SuiBox>
+              </SuiBox> */}
               {/* <SuiSelect
                 defaultValue={{
                   value: "short_name",
