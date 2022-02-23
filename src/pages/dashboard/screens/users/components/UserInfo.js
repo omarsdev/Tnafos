@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import React, { useState, useEffect } from "react";
-import { AxiosInstance } from "../../../../api";
+import { AxiosInstance } from "../../../../../api/AxiosInstance";
 
 import { useRouteMatch } from "react-router-dom";
 
