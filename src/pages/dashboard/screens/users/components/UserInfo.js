@@ -167,13 +167,13 @@ const UserInfo = ({ formData }) => {
                   Country Code
                 </SuiTypography>
               </SuiBox>
-              <SuiSelect
+              {/* <SuiSelect
                 defaultValue={{
                   value: "short_name",
                   label: "Select Country Code : ex SA",
                 }}
                 options={countryList}
-              />
+              /> */}
             </SuiBox>
           </Grid>
         </Grid>

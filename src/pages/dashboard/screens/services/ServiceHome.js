@@ -31,25 +31,24 @@ import CardComponent from "./CardComponent";
 
 // Overview page components
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import { AxiosInstance } from "../../../../api";
+import { AxiosInstance } from "../../../../api/AxiosInstance";
 
-const ServiceHome = (userData) => {
-  const [usersList, setUsersList] = useState(null);
-
+const ServiceHome = () => {
+  const [servicesList, setServicesList] = useState([]);
   const match = useRouteMatch();
   const history = useHistory();
 
-  const showUsersList = async () => {
+  const showServicesList = async () => {
     try {
-      const res = await AxiosInstance.get("/api/dashboard/user");
-      setUsersList(res.data.data);
+      const res = await AxiosInstance.get("/api/dashboard/service");
+      setServicesList(res.data.data);
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    showUsersList();
+    showServicesList();
   }, []);
   return (
     <DashboardLayout>
@@ -59,27 +58,18 @@ const ServiceHome = (userData) => {
           <SuiBox pt={2} px={2}>
             <SuiBox mb={0.5}>
               <SuiTypography variant="h6" fontWeight="medium">
-                Users
+                Services list
               </SuiTypography>
             </SuiBox>
             <SuiBox ml={{ xs: 0, sm: "auto" }} mt={{ xs: 2, sm: 0 }}>
               <SuiButton variant="gradient" buttonColor="info" size="small">
-                <Icon className=" font-bold">add</Icon>&nbsp; follow
+                <Icon className=" font-bold">add</Icon>&nbsp; new service
               </SuiButton>
-            </SuiBox>
-            <SuiBox mb={1}>
-              <SuiTypography
-                variant="button"
-                fontWeight="regular"
-                textColor="text"
-              >
-                Users list
-              </SuiTypography>
             </SuiBox>
           </SuiBox>
           <SuiBox p={2}>
             <Grid container spacing={3}>
-              {usersList.map((el, idx) => (
+              {servicesList.map((el, idx) => (
                 <Grid item xs={12} md={6} xl={3} key={idx} userData={el}>
                   <CardComponent
                     // image={"https://bit.ly/sage-adebayo"}
@@ -87,7 +77,7 @@ const ServiceHome = (userData) => {
                       type: "internal",
                       route: `${match.url}/${userData.uuid}`,
                       color: "info",
-                      label: "view User",
+                      label: "view service",
                     }}
                   />
                 </Grid>
