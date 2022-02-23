@@ -33,7 +33,7 @@ import CardComponent from "./CardComponent";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { AxiosInstance } from "../../../../api";
 
-const UserHome = (userData) => {
+const ServiceHome = (userData) => {
   const [usersList, setUsersList] = useState(null);
 
   const match = useRouteMatch();
@@ -100,4 +100,4 @@ const UserHome = (userData) => {
   );
 };
 
-export default UserHome;
+export default ServiceHome;
