@@ -27,7 +27,7 @@ import SuiSelect from "components/SuiSelect";
 // NewProduct page components
 import FormField from "layouts/ecommerce/products/new-product/components/FormField";
 
-function ProductInfo() {
+const AddService = () => {
   const [editorValue, setEditorValue] = useState(
     "<p>Some initial <strong>bold</strong> text</p><br><br><br>"
   );
@@ -161,6 +161,6 @@ function ProductInfo() {
       </SuiBox>
     </SuiBox>
   );
-}
+};
 
-export default ProductInfo;
+export default AddService;
