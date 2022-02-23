@@ -1,4 +1,3 @@
-import React from "react";
 /**
 =========================================================
 * Soft UI Dashboard PRO React - v2.0.0
@@ -14,9 +13,11 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect, useContext } from "react";
-
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import { AlertContext } from "../../../../context";
+import { AxiosInstance } from "../../../../api";
+
 // formik components
 import { Formik, Form } from "formik";
 
@@ -28,84 +29,51 @@ import Card from "@mui/material/Card";
 import SuiBox from "components/SuiBox";
 import SuiButton from "components/SuiButton";
 
-// Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-// import Footer from "examples/Footer";
+// NewUser page components
+import UserInfo from "./components/UserInfo";
 
-// CreateUser page components
-import UserInfo from "layouts/pages/users/new-user/components/UserInfo";
-
-// CreateUser layout schemas for form and form feilds
+// NewUser layout schemas for form and form feilds
 import validations from "layouts/pages/users/new-user/schemas/validations";
 import form from "layouts/pages/users/new-user/schemas/form";
 import initialValues from "layouts/pages/users/new-user/schemas/initialValues";
-
-import { AxiosInstance } from "../../../../api";
-import { AlertContext } from "../../../../context";
 
 const getSteps = () => {
   return ["User Info"];
 };
 
-// const getStepContent = (stepIndex, userData) => {
-//   switch (stepIndex) {
-//     case 0:
-//       return <UserInfo userData={userData} />;
-//     case 1:
-//       return <Address formData={formData} />;
-//     case 2:
-//       return <Socials formData={formData} />;
-//     case 3:
-//       return <Profile formData={formData} />;
-//     default:
-//       return null;
-//   }
-// };
+const getStepContent = (formData) => {
+  return <UserInfo formData={formData} />;
+};
 
 const CreateUser = () => {
-  const [activeStep, setActiveStep] = useState(0);
-  //   const steps = getSteps();
-  const { formId, formField } = form;
-  const currentValidation = validations[activeStep];
-  //   const isLastStep = activeStep === steps.length - 1;
-
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  const handleBack = () => setActiveStep(activeStep - 1);
-
-  const history = useHistory();
-
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
+
+  const history = useHistory();
 
   const [countryList, setCountryList] = useState(null);
   const match = useRouteMatch();
 
+  //   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
   const [checked, setChecked] = useState(false);
   const [ch, setCh] = useState(false);
 
-  const submitForm = async (values, actions) => {
-    await sleep(1000);
+  const steps = getSteps();
+  const { formId, formField } = form;
+  const currentValidation = validations;
 
-    // eslint-disable-next-line no-alert
-    alert(JSON.stringify(values, null, 2));
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-    actions.setSubmitting(false);
-    actions.resetForm();
-
-    setActiveStep(0);
-  };
-
-  const addUser = async (values, actions, userData) => {
+  const addUser = async (userData, values, actions) => {
     try {
       setIsUpdating(true);
+      //   submitForm(values, actions);
       const res = await AxiosInstance.post(
         "/api/dashboard/user/create",
         userData
       );
-      submitForm(values, actions);
       setAlert({
         message: `New user has been added!`,
         type: "success",
@@ -114,16 +82,17 @@ const CreateUser = () => {
     } catch (error) {
       console.log(error.response.data);
       //   setErr(error.response.data.errors);
-      actions.setTouched({});
-      actions.setSubmitting(false);
       setAlert({
         message: `${error.response.data.message}`,
         type: "error",
       });
+      actions.setTouched({});
+      actions.setSubmitting(false);
     } finally {
       setIsUpdating(false);
     }
   };
+
   const handleCancel = () => {
     history.push("/dashboard/user");
   };
@@ -141,74 +110,61 @@ const CreateUser = () => {
     getAllCountry();
   }, []);
 
-  return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <SuiBox py={3} mb={20}>
-        <Grid container justifyContent="center" className="h-100">
-          <Grid item xs={12} lg={8}>
-            {/* <Stepper activeStep={activeStep} alternativeLabel>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper> */}
-            <Formik
-              initialValues={initialValues}
-              validationSchema={currentValidation}
-              onSubmit={addUser}
-            >
-              {({ values, errors, touched, isSubmitting, userData }) => (
-                <Form id={formId} autoComplete="off">
-                  <Card className="h-100">
-                    <UserInfo userData={userData} />
-                    {/* <SuiBox p={2}>
-                      <SuiBox>
-                        {getStepContent(activeStep, {
-                          values,
-                          touched,
-                          formField,
-                          errors,
-                        })}
-                        <SuiBox
-                          mt={2}
-                          width="100%"
-                          display="flex"
-                          justifyContent="space-between"
+  return countryList ? (
+    <SuiBox py={3} mb={20}>
+      <Grid container justifyContent="center" className="h-100">
+        <Grid item xs={12} lg={8}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={currentValidation}
+            onSubmit={addUser}
+          >
+            {({ values, errors, touched, isSubmitting }) => (
+              <Form id={formId} autoComplete="off">
+                <Card className="h-100">
+                  <SuiBox p={2}>
+                    <SuiBox>
+                      {getStepContent({
+                        values,
+                        touched,
+                        formField,
+                        errors,
+                      })}
+                      <SuiBox
+                        mt={2}
+                        width="100%"
+                        display="flex"
+                        justifyContent="space-between"
+                      >
+                        <SuiButton
+                          disabled={isSubmitting}
+                          type="submit"
+                          variant="gradient"
+                          buttonColor="dark"
+                          onClick={addUser}
                         >
-                          {activeStep === 0 ? (
-                            <SuiBox />
-                          ) : (
-                            <SuiButton
-                              variant="gradient"
-                              buttonColor="light"
-                              onClick={handleBack}
-                            >
-                              back
-                            </SuiButton>
-                          )}
-                          <SuiButton
-                            disabled={isSubmitting}
-                            type="submit"
-                            variant="gradient"
-                            buttonColor="dark"
-                          >
-                            {isLastStep ? "send" : "next"}
-                          </SuiButton>
-                        </SuiBox>
+                          add user
+                        </SuiButton>
+                        <SuiButton
+                          disabled={isSubmitting}
+                          type="submit"
+                          variant="gradient"
+                          buttonColor="dark"
+                          onClick={handleCancel}
+                        >
+                          Cancel
+                        </SuiButton>
                       </SuiBox>
-                    </SuiBox> */}
-                  </Card>
-                </Form>
-              )}
-            </Formik>
-          </Grid>
+                    </SuiBox>
+                  </SuiBox>
+                </Card>
+              </Form>
+            )}
+          </Formik>
         </Grid>
-      </SuiBox>
-      {/* <Footer /> */}
-    </DashboardLayout>
-  );
+      </Grid>
+    </SuiBox>
+  ) : null;
 };
 
 export default CreateUser;

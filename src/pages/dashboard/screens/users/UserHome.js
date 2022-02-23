@@ -71,13 +71,13 @@ const UserHome = () => {
             </Link>
           </Stack>
         </SuiBox>
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           {usersList.map((el, idx) => (
             <Grid item xs={12} lg={4} key={idx}>
               <CardComponent userData={el} />
             </Grid>
           ))}
-        </Grid>
+        </Grid> */}
       </Card>
     </SuiBox>
   );
