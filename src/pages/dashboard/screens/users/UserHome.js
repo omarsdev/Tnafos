@@ -14,26 +14,23 @@ Coded by www.creative-tim.com
 */
 
 import React, { useEffect, useState } from "react";
-import { useRouteMatch, useHistory } from "react-router-dom";
+// react-router-dom components
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
+
 // @mui material components
-import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
-// Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import { AxiosInstance } from "../../../../api";
 import CardComponent from "./CardComponent";
 
-// Overview page components
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import { AxiosInstance } from "../../../../api";
-
-const UserHome = (userData) => {
+const UserHome = () => {
   const [usersList, setUsersList] = useState(null);
 
   const match = useRouteMatch();
@@ -51,52 +48,38 @@ const UserHome = (userData) => {
   useEffect(() => {
     showUsersList();
   }, []);
+
   return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <SuiBox mb={3}>
-        <Card>
-          <SuiBox pt={2} px={2}>
-            <SuiBox mb={0.5}>
-              <SuiTypography variant="h6" fontWeight="medium">
-                Users
-              </SuiTypography>
-            </SuiBox>
-            <SuiBox ml={{ xs: 0, sm: "auto" }} mt={{ xs: 2, sm: 0 }}>
+    <SuiBox my={3}>
+      <Card>
+        <SuiBox
+          display="flex"
+          justifyContent="space-between"
+          alignItems="flex-start"
+          p={3}
+        >
+          <SuiBox lineHeight={1}>
+            <SuiTypography variant="h5" fontWeight="medium">
+              All Users
+            </SuiTypography>
+          </SuiBox>
+          <Stack spacing={1} direction="row">
+            <Link to={`${match.url}/createuser`} className="decoration-none">
               <SuiButton variant="gradient" buttonColor="info" size="small">
-                <Icon className=" font-bold">add</Icon>&nbsp; follow
+                + new user
               </SuiButton>
-            </SuiBox>
-            <SuiBox mb={1}>
-              <SuiTypography
-                variant="button"
-                fontWeight="regular"
-                textColor="text"
-              >
-                Users list
-              </SuiTypography>
-            </SuiBox>
-          </SuiBox>
-          <SuiBox p={2}>
-            <Grid container spacing={3}>
-              {/* {usersList.map((el, idx) => (
-                <Grid item xs={12} md={6} xl={3} key={idx} userData={el}>
-                  <CardComponent
-                    // image={"https://bit.ly/sage-adebayo"}
-                    action={{
-                      type: "internal",
-                      route: `${match.url}/${userData.uuid}`,
-                      color: "info",
-                      label: "view User",
-                    }}
-                  />
-                </Grid>
-              ))} */}
+            </Link>
+          </Stack>
+        </SuiBox>
+        <Grid container spacing={3}>
+          {usersList.map((el, idx) => (
+            <Grid item xs={12} lg={4} key={idx}>
+              <CardComponent userData={el} />
             </Grid>
-          </SuiBox>
-        </Card>
-      </SuiBox>
-    </DashboardLayout>
+          ))}
+        </Grid>
+      </Card>
+    </SuiBox>
   );
 };
 
