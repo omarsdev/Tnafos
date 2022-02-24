@@ -13,7 +13,11 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { AxiosInstance } from "../../../../api/AxiosInstance";
+import { AlertContext } from "../../../../context/AlertContext";
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -23,6 +27,7 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 import SuiEditor from "components/SuiEditor";
 import SuiSelect from "components/SuiSelect";
+import SuiButton from "components/SuiButton";
 
 // NewProduct page components
 import FormField from "layouts/ecommerce/products/new-product/components/FormField";
@@ -31,6 +36,12 @@ const AddService = () => {
   const [editorValue, setEditorValue] = useState(
     "<p>Some initial <strong>bold</strong> text</p><br><br><br>"
   );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm();
 
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;

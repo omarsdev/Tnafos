@@ -12,13 +12,13 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React from "react";
+import React, { useState, useContext } from "react";
 import { AlertContext } from "../../../../context/AlertContext";
 import { AxiosInstance, media } from "../../../../api";
 import { useHistory, useParams } from "react-router-dom";
-
 // @mui material components
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
@@ -26,7 +26,7 @@ import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
 // EditProduct page components
-import ProductInfo from "layouts/ecommerce/products/edit-product/components/ProductInfo";
+import ProductInfo from "./components/ProductInfo";
 
 const EditService = () => {
   const [errors, setErrors] = useState(null);
@@ -34,8 +34,8 @@ const EditService = () => {
   const { alertProviderValue } = useContext(AlertContext);
   const { setAlert } = alertProviderValue;
 
-  const history = useHistory();
   const { uuid } = useParams();
+  const history = useHistory();
 
   const onUpdateService = async (dataToBeUpdataed) => {
     setErrors(null);

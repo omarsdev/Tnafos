@@ -33,7 +33,7 @@ import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
 import { AxiosInstance } from "../../../../api";
-import EditUser from "./EditUser";
+import EditService from "./EditService";
 
 const UserCard = () => {
   const [service, setService] = useState(null);
@@ -45,7 +45,7 @@ const UserCard = () => {
   const getMyService = async () => {
     try {
       const res = await AxiosInstance.get(`/api/dashboard/service/${uuid}`);
-      resetHooksForm(res.data.data);
+      // resetHooksForm(res.data.data);
       setService(res.data.data);
     } catch (err) {
       history.push("/dashboard/service");
@@ -137,7 +137,7 @@ const UserCard = () => {
           </Card>
         </SuiBox>
       </Route>
-      <Route path={`${match.path}/edituser`} component={EditUser} />
+      <Route path={`${match.path}/editservice`} component={EditService} />
     </Switch>
   );
 };

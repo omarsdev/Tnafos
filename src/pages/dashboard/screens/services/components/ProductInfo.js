@@ -13,7 +13,9 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { AxiosInstance } from "../../../../../api/AxiosInstance";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -22,20 +24,14 @@ import Card from "@mui/material/Card";
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
-import SuiEditor from "components/SuiEditor";
-import SuiSelect from "components/SuiSelect";
 
 // NewProduct page components
-import FormField from "layouts/ecommerce/products/edit-product/components/FormField";
+import FormField from "./FormField";
 
 function ProductInfo() {
-  const [editorValue, setEditorValue] = useState(
-    `<p>
-      Long sleeves black denim jacket with a twisted design. Contrast stitching. Button up closure. White arrow prints on the back.
-    </p>`
-  );
-
   const [service, setService] = useState(null);
+  const { uuid } = useParams();
+  const history = useHistory();
 
   const getMyService = async () => {
     try {
