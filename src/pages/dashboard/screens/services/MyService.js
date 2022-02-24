@@ -13,10 +13,15 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Switch, Route, useHistory, useParams } from "react-router-dom";
-import EditService from "./EditService";
+import {
+  Switch,
+  Route,
+  useHistory,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -25,15 +30,17 @@ import Grid from "@mui/material/Grid";
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
+import SuiButton from "components/SuiButton";
 
 import { AxiosInstance } from "../../../../api";
-import { Route } from "@mui/icons-material";
+import EditUser from "./EditUser";
 
 const UserCard = () => {
   const [service, setService] = useState(null);
 
   const history = useHistory();
   const { uuid } = useParams();
+  const match = useRouteMatch();
 
   const getMyService = async () => {
     try {
@@ -48,10 +55,9 @@ const UserCard = () => {
   useEffect(() => {
     getMyService();
   }, []);
-
-  return !service ? (
+  return !service ? null : (
     <Switch>
-      <Route>
+      <Route path={`${match.path}`}>
         <SuiBox py={3}>
           <Card className="overflow-visible">
             <SuiBox p={3}>
@@ -74,76 +80,52 @@ const UserCard = () => {
                     />
                   </SuiBox>
                 </Grid>
-                <Grid item xs={12} lg={5} className="mx-auto">
-                  <SuiBox component="ul" m={0} pl={4} mb={2}>
-                    <SuiBox
-                      component="li"
-                      color="text"
-                      fontSize="1.25rem"
-                      lineHeight={1}
-                    >
-                      <SuiTypography
-                        variant="body2"
-                        textColor="text"
-                        verticalAlign="middle"
-                      >
-                        {service?.name}
-                      </SuiTypography>
-                    </SuiBox>
 
-                    <SuiBox mt={1}>
-                      <SuiTypography variant="h6" fontWeight="medium">
-                        Price
+                <Grid item xs={12} lg={5} className="mx-auto" mt={6}>
+                  <SuiBox m={0} pl={4} mb={2}>
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
+                        {" "}
+                        Name of service {service?.name}
                       </SuiTypography>
                     </SuiBox>
-                    <SuiBox mb={1}>
-                      <SuiTypography variant="h5" fontWeight="medium">
-                        {service?.price}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBadge
-                      variant="contained"
-                      color="success"
-                      badgeContent={service?.type}
-                      container
-                    />
-                    <SuiBox
-                      component="li"
-                      color="text"
-                      fontSize="1.25rem"
-                      lineHeight={1}
-                    >
-                      <SuiTypography
-                        variant="body2"
-                        textColor="text"
-                        verticalAlign="middle"
-                      >
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
                         Description:{service?.description}
                       </SuiTypography>
                     </SuiBox>
-                    <SuiBox
-                      component="li"
-                      color="text"
-                      fontSize="1.25rem"
-                      lineHeight={1}
-                    >
-                      <SuiTypography
-                        variant="body2"
-                        textColor="text"
-                        verticalAlign="middle"
-                      >
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
                         Category-id: {service?.category.uuid}
+                      </SuiTypography>
+                    </SuiBox>
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
+                        Type :{service?.type}
+                      </SuiTypography>
+                    </SuiBox>
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
+                        Price: {service?.price}
                       </SuiTypography>
                     </SuiBox>
                   </SuiBox>
 
-                  <SuiBox mt={3}>
+                  <SuiBox
+                    display="flex"
+                    width="100%"
+                    my={3}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
                     <Grid item xs={12} lg={5} container>
                       <SuiButton
                         variant="gradient"
                         buttonColor="info"
                         fullWidth
-                        onClick={`${match.path}/update`}
+                        onClick={() => {
+                          history.push(`${match.path}/editservice`);
+                        }}
                       >
                         edit
                       </SuiButton>
@@ -155,9 +137,9 @@ const UserCard = () => {
           </Card>
         </SuiBox>
       </Route>
-      <Route path={`${match.path}/:update`} component={EditService} />
+      <Route path={`${match.path}/edituser`} component={EditUser} />
     </Switch>
-  ) : null;
+  );
 };
 
 export default UserCard;
