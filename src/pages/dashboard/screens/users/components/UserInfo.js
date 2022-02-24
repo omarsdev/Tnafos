@@ -13,45 +13,98 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+
 import { AxiosInstance } from "../../../../../api/AxiosInstance";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-import { useRouteMatch } from "react-router-dom";
-
-// prop-type is a library for typechecking of props
-import PropTypes from "prop-types";
+import { useForm } from "react-hook-form";
+import { AlertContext } from "../../../../../context/AlertContext";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
+import Checkbox from "@mui/material/Checkbox";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
-// import SuiSelect from "components/SuiSelect";
+import SuiButton from "components/SuiButton";
+import SuiSelect from "components/SuiSelect";
 
-// NewUser page components
-import FormField from "layouts/pages/users/new-user/components/FormField";
+// NewProduct page components
+import FormField from "./FormField";
 
-const UserInfo = ({ formData }) => {
+function UserInfo() {
+  const validationSchema = yup.object({
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters !"),
+
+    password_confirmation: yup
+      .string()
+      .required("Confirm Password is required !")
+      .oneOf([yup.ref("password")], "Passwords must match !"),
+
+    first_name: yup.string().required("first name is required!"),
+    last_name: yup.string().required("last name is required!"),
+    email: yup.string().email().required("Email is required!"),
+    phone_number: yup
+      .number()
+      .min(10, "Invalid phone number, minium 10 numbers! ")
+      .required("Phone number is required!"),
+  });
+
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
+
+  const history = useHistory();
+
   const [countryList, setCountryList] = useState(null);
   const match = useRouteMatch();
-  const { formField, values, errors, touched } = formData;
-  const {
-    first_name,
-    last_name,
-    email,
-    phone_number,
-    password,
-    password_confirmation,
-  } = formField;
-  const {
-    first_name: firstNameV,
-    last_name: lastNameV,
-    email: emailV,
-    phone_number: phoneNumberV,
-    password: passwordV,
-    password_confirmation: passwordConfirmationV,
-  } = values;
+
+  const [err, setErr] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const [agreement, setAgreemnet] = useState(true);
+  const handleSetAgremment = () => setAgreemnet(!agreement);
+
+  const [ch, setCh] = useState(true);
+  const handleSetCh = () => setCh(!ch);
+
+  const { register, handleSubmit, control } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const addUser = async (userData) => {
+    try {
+      setIsUpdating(true);
+      const res = await AxiosInstance.post(
+        "/api/dashboard/user/create",
+        userData
+      );
+      setAlert({
+        message: `New user has been added!`,
+        type: "success",
+      });
+      history.push("/dashboard/user");
+    } catch (error) {
+      console.log(error.response.data);
+      setErr(error.response.data.errors);
+      setAlert({
+        message: `${error.response.data.message}`,
+        type: "error",
+      });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handleCancel = () => {
+    history.push("/dashboard/user");
+  };
 
   const getAllCountry = async () => {
     try {
@@ -68,96 +121,66 @@ const UserInfo = ({ formData }) => {
 
   return (
     <SuiBox>
-      <SuiBox lineHeight={0}>
-        <SuiTypography variant="h5" fontWeight="bold">
-          Add new user
-        </SuiTypography>
-        <SuiTypography variant="button" fontWeight="regular" textColor="text">
-          Mandatory informations
-        </SuiTypography>
+      <SuiTypography variant="h5">Add new user</SuiTypography>
+
+      <SuiBox mt={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <FormField
+              type="text"
+              label="first name "
+              placeholder="enter first name"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormField
+              type="text"
+              label="last name"
+              placeholder="enter last name "
+            />
+          </Grid>
+        </Grid>
       </SuiBox>
-      <SuiBox mt={1.625}>
+
+      <SuiBox mt={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
-            <FormField
-              type={first_name.type}
-              label={first_name.label}
-              name={first_name.name}
-              value={firstNameV}
-              placeholder={first_name.placeholder}
-              error={errors.first_name && touched.first_name}
-              success={firstNameV.length > 0 && !errors.first_name}
-            />
+            <FormField type="text" label="email" placeholder="enter email" />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormField
-              type={last_name.type}
-              label={last_name.label}
-              name={last_name.name}
-              value={lastNameV}
-              placeholder={last_name.placeholder}
-              error={errors.last_name && touched.last_name}
-              success={lastNameV.length > 0 && !errors.last_name}
+              type="text"
+              label="phone number"
+              placeholder="enter phone number"
             />
           </Grid>
         </Grid>
+      </SuiBox>
+
+      <SuiBox mt={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <FormField
-              type={phone_number.type}
-              label={phone_number.label}
-              name={phone_number.name}
-              value={phoneNumberV}
-              placeholder={phone_number.placeholder}
+              type="text"
+              label="password"
+              placeholder="enter password"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormField
-              type={email.type}
-              label={email.label}
-              name={email.name}
-              value={emailV}
-              placeholder={email.placeholder}
-              error={errors.email && touched.email}
-              success={emailV.length > 0 && !errors.email}
+              type="text"
+              label="confirm password"
+              placeholder="confirm your password"
             />
           </Grid>
         </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <FormField
-              type={password.type}
-              label={password.label}
-              name={password.name}
-              value={passwordV}
-              placeholder={password.placeholder}
-              error={errors.password && touched.password}
-              success={passwordV.length > 0 && !errors.password}
-              inputProps={{ autoComplete: "" }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormField
-              type={password_confirmation.type}
-              label={password_confirmation.label}
-              name={password_confirmation.name}
-              value={passwordConfirmationV}
-              placeholder={password_confirmation.placeholder}
-              error={
-                errors.password_confirmation && touched.password_confirmation
-              }
-              success={
-                passwordConfirmationV.length > 0 &&
-                !errors.password_confirmation
-              }
-              inputProps={{ autoComplete: "" }}
-            />
-          </Grid>
-        </Grid>
+      </SuiBox>
+
+      <SuiBox mt={2}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <SuiBox mb={3}>
-              {/* <SuiBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
+              <SuiBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
                 <SuiTypography
                   component="label"
                   variant="caption"
@@ -166,25 +189,133 @@ const UserInfo = ({ formData }) => {
                 >
                   Country Code
                 </SuiTypography>
-              </SuiBox> */}
-              {/* <SuiSelect
+              </SuiBox>
+              <SuiSelect
                 defaultValue={{
                   value: "short_name",
                   label: "Select Country Code : ex SA",
                 }}
                 options={countryList}
-              /> */}
+              />
             </SuiBox>
           </Grid>
         </Grid>
       </SuiBox>
+
+      <SuiBox
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        textAlign="center"
+      >
+        <SuiBox>
+          <SuiBox mb={1}>
+            <SuiTypography variant="h6" fontWeight="medium">
+              Terms and Conditions agreement
+            </SuiTypography>
+          </SuiBox>
+
+          <SuiBox display="flex" justifyContent="center" alignItems="center">
+            <Checkbox
+              checked={agreement}
+              onChange={handleSetAgremment}
+              alignItems="center"
+            />
+            <SuiTypography
+              variant="button"
+              fontWeight="regular"
+              onClick={handleSetAgremment}
+              sx={{ cursor: "pointer", userSelect: "none" }}
+            >
+              &nbsp;&nbsp;I agree to Tnafos&nbsp;
+            </SuiTypography>
+          </SuiBox>
+
+          <SuiBox
+            display="flex"
+            width="100%"
+            my={2}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="button"
+              fontWeight="bold"
+              textGradient
+              mx={1}
+            >
+              terms of service
+            </SuiTypography>
+            <SuiTypography
+              component="p"
+              variant="button"
+              fontWeight="regular"
+              textColor="text"
+            >
+              and
+            </SuiTypography>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="button"
+              fontWeight="bold"
+              textGradient
+              mx={1}
+            >
+              Privacy policy
+            </SuiTypography>
+          </SuiBox>
+
+          <SuiBox mb={1}>
+            <SuiTypography variant="h6" fontWeight="medium">
+              Decleration of Valid Information
+            </SuiTypography>
+          </SuiBox>
+
+          <SuiBox display="flex" justifyContent="center" alignItems="center">
+            <Checkbox checked={ch} onChange={handleSetCh} />
+            <SuiTypography
+              variant="button"
+              fontWeight="regular"
+              onClick={handleSetCh}
+              sx={{ cursor: "pointer", userSelect: "none" }}
+            >
+              &nbsp;&nbsp;I confirm that the information given in this form is
+              true, complete and accurate."&nbsp;
+            </SuiTypography>
+          </SuiBox>
+        </SuiBox>
+      </SuiBox>
+
+      <SuiBox
+        display="flex"
+        width="100%"
+        my={2}
+        justifyContent="center"
+        alignItems="center"
+      >
+        <SuiBox mr={1}>
+          <SuiButton
+            variant="gradient"
+            buttonColor="dark"
+            onClick={handleSubmit(addUser)}
+          >
+            add user
+          </SuiButton>
+        </SuiBox>
+
+        <SuiButton
+          variant="gradient"
+          buttonColor="secondary"
+          onClick={handleCancel}
+        >
+          cancel
+        </SuiButton>
+      </SuiBox>
     </SuiBox>
   );
-};
-
-// typechecking props for UserInfo
-UserInfo.propTypes = {
-  formData: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
-};
+}
 
 export default UserInfo;
