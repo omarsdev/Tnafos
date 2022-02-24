@@ -16,11 +16,11 @@ Coded by www.creative-tim.com
 import React, { useEffect, useState } from "react";
 
 import {
-  Switch,
-  Route,
   useHistory,
   useParams,
   useRouteMatch,
+  Switch,
+  Route,
 } from "react-router-dom";
 
 // @mui material components
@@ -55,89 +55,91 @@ const UserCard = () => {
   useEffect(() => {
     getMyService();
   }, []);
-  return !service ? null : (
+  return (
     <Switch>
       <Route path={`${match.path}`}>
-        <SuiBox py={3}>
-          <Card className="overflow-visible">
-            <SuiBox p={3}>
-              <SuiBox mb={3}>
-                <SuiTypography variant="h5" fontWeight="medium">
-                  Service details ...
-                </SuiTypography>
-              </SuiBox>
+        {!service ? null : (
+          <SuiBox py={3}>
+            <Card className="overflow-visible">
+              <SuiBox p={3}>
+                <SuiBox mb={3}>
+                  <SuiTypography variant="h5" fontWeight="medium">
+                    Service details ...
+                  </SuiTypography>
+                </SuiBox>
 
-              <Grid container spacing={3}>
-                <Grid item xs={12} lg={6} xl={5}>
-                  <SuiBox>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} lg={6} xl={5}>
+                    <SuiBox>
+                      <SuiBox
+                        component="img"
+                        src={"https://bit.ly/sage-adebayo"}
+                        alt="Segun Adebayo"
+                        boxShadow="lg"
+                        borderRadius="lg"
+                        width="100%"
+                      />
+                    </SuiBox>
+                  </Grid>
+
+                  <Grid item xs={12} lg={5} className="mx-auto" mt={6}>
+                    <SuiBox m={0} pl={4} mb={2}>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          {" "}
+                          <strong>Name of service: </strong> {service?.name}
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          <strong> Description: </strong> {service?.description}
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          <strong> Category-id: </strong>
+                          {service?.category.uuid}
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          <strong> Type : </strong>
+                          {service?.type}
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          <strong> Price: </strong> {service?.price}
+                        </SuiTypography>
+                      </SuiBox>
+                    </SuiBox>
+
                     <SuiBox
-                      component="img"
-                      src={"https://bit.ly/sage-adebayo"}
-                      alt="Segun Adebayo"
-                      boxShadow="lg"
-                      borderRadius="lg"
+                      display="flex"
                       width="100%"
-                    />
-                  </SuiBox>
+                      my={3}
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Grid item xs={12} lg={5} container>
+                        <SuiButton
+                          variant="gradient"
+                          buttonColor="info"
+                          fullWidth
+                          onClick={() => {
+                            history.push(`${match.path}/editservice`);
+                          }}
+                        >
+                          edit
+                        </SuiButton>
+                      </Grid>
+                    </SuiBox>
+                  </Grid>
                 </Grid>
-
-                <Grid item xs={12} lg={5} className="mx-auto" mt={6}>
-                  <SuiBox m={0} pl={4} mb={2}>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        {" "}
-                        <strong>Name of service: </strong> {service?.name}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        <strong> Description: </strong> {service?.description}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        <strong> Category-id: </strong>
-                        {service?.category.uuid}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        <strong> Type : </strong>
-                        {service?.type}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        <strong> Price: </strong> {service?.price}
-                      </SuiTypography>
-                    </SuiBox>
-                  </SuiBox>
-
-                  <SuiBox
-                    display="flex"
-                    width="100%"
-                    my={3}
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <Grid item xs={12} lg={5} container>
-                      <SuiButton
-                        variant="gradient"
-                        buttonColor="info"
-                        fullWidth
-                        onClick={() => {
-                          history.push(`${match.path}/editservice`);
-                        }}
-                      >
-                        edit
-                      </SuiButton>
-                    </Grid>
-                  </SuiBox>
-                </Grid>
-              </Grid>
-            </SuiBox>
-          </Card>
-        </SuiBox>
+              </SuiBox>
+            </Card>
+          </SuiBox>
+        )}
       </Route>
       <Route path={`${match.path}/editservice`} component={EditService} />
     </Switch>

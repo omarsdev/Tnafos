@@ -59,92 +59,94 @@ const UserCard = () => {
     getUser();
   }, []);
 
-  return !card ? null : (
+  return (
     <Switch>
-      <Route path={`${match.path}`}>
-        <SuiBox py={3}>
-          <Card className="overflow-visible">
-            <SuiBox p={3}>
-              <SuiBox mb={3}>
-                <SuiTypography variant="h5" fontWeight="medium">
-                  User Card's details ...
-                </SuiTypography>
-              </SuiBox>
+      {!card ? null : (
+        <Route path={`${match.path}`}>
+          <SuiBox py={3}>
+            <Card className="overflow-visible">
+              <SuiBox p={3}>
+                <SuiBox mb={3}>
+                  <SuiTypography variant="h5" fontWeight="medium">
+                    User Card's details ...
+                  </SuiTypography>
+                </SuiBox>
 
-              <Grid container spacing={3}>
-                <Grid item xs={12} lg={6} xl={5}>
-                  <SuiBox>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} lg={6} xl={5}>
+                    <SuiBox>
+                      <SuiBox
+                        component="img"
+                        src={"https://bit.ly/sage-adebayo"}
+                        alt="Segun Adebayo"
+                        boxShadow="lg"
+                        borderRadius="lg"
+                        width="100%"
+                      />
+                    </SuiBox>
+                  </Grid>
+
+                  <Grid item xs={12} lg={5} className="mx-auto" mt={6}>
+                    <SuiBox m={0} pl={4} mb={2}>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          {" "}
+                          Full Name:
+                          {card?.first_name}
+                          {card?.last_name}
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          Email:
+                          {card?.email}
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          Phone number:
+                          {card?.phone_number}
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          ID: {card?.uuid}
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                        <SuiTypography variant="body2" textColor="text">
+                          is admin: {card?.is_admin}
+                        </SuiTypography>
+                      </SuiBox>
+                    </SuiBox>
+
                     <SuiBox
-                      component="img"
-                      src={"https://bit.ly/sage-adebayo"}
-                      alt="Segun Adebayo"
-                      boxShadow="lg"
-                      borderRadius="lg"
+                      display="flex"
                       width="100%"
-                    />
-                  </SuiBox>
+                      my={3}
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Grid item xs={12} lg={5} container>
+                        <SuiButton
+                          variant="gradient"
+                          buttonColor="info"
+                          fullWidth
+                          onClick={() => {
+                            history.push(`${match.path}/edituser`);
+                          }}
+                        >
+                          edit
+                        </SuiButton>
+                      </Grid>
+                    </SuiBox>
+                  </Grid>
                 </Grid>
-
-                <Grid item xs={12} lg={5} className="mx-auto" mt={6}>
-                  <SuiBox m={0} pl={4} mb={2}>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        {" "}
-                        Full Name:
-                        {card?.first_name}
-                        {card?.last_name}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        Email:
-                        {card?.email}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        Phone number:
-                        {card?.phone_number}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        ID: {card?.uuid}
-                      </SuiTypography>
-                    </SuiBox>
-                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
-                      <SuiTypography variant="body2" textColor="text">
-                        is admin: {card?.is_admin}
-                      </SuiTypography>
-                    </SuiBox>
-                  </SuiBox>
-
-                  <SuiBox
-                    display="flex"
-                    width="100%"
-                    my={3}
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <Grid item xs={12} lg={5} container>
-                      <SuiButton
-                        variant="gradient"
-                        buttonColor="info"
-                        fullWidth
-                        onClick={() => {
-                          history.push(`${match.path}/edituser`);
-                        }}
-                      >
-                        edit
-                      </SuiButton>
-                    </Grid>
-                  </SuiBox>
-                </Grid>
-              </Grid>
-            </SuiBox>
-          </Card>
-        </SuiBox>
-      </Route>
+              </SuiBox>
+            </Card>
+          </SuiBox>
+        </Route>
+      )}
       <Route path={`${match.path}/edituser`} component={EditUser} />
     </Switch>
   );

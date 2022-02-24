@@ -165,8 +165,8 @@ const AddService = () => {
                         </SuiBox>
                         <SuiSelect
                           defaultValue={{
-                            value: "Select category",
-                            label: "Select category",
+                            value: `${categoriesList?.name}`,
+                            label: `${categoriesList?.name}`,
                           }}
                           options={categoriesList}
                         />

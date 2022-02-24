@@ -7,6 +7,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import ServiceHome from "./ServiceHome";
 import AddService from "./AddService";
 import MyService from "./MyService";
+import EditService from "./EditService";
 
 const ServiceLayout = () => {
   const match = useRouteMatch();
@@ -17,6 +18,10 @@ const ServiceLayout = () => {
       <Switch>
         <Route exact path={`${match.path}`} component={ServiceHome} />
         <Route path={`${match.path}/addservice`} component={AddService} />
+        <Route
+          path={`${match.path}/:uuid/editservice`}
+          component={EditService}
+        />
         <Route path={`${match.path}/:uuid`} component={MyService} />
       </Switch>
     </DashboardLayout>
