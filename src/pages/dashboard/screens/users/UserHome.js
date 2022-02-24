@@ -63,6 +63,7 @@ const UserHome = () => {
               All Users
             </SuiTypography>
           </SuiBox>
+
           <Stack spacing={1} direction="row">
             <Link to={`${match.url}/createuser`} className="decoration-none">
               <SuiButton variant="gradient" buttonColor="info" size="small">
@@ -71,13 +72,17 @@ const UserHome = () => {
             </Link>
           </Stack>
         </SuiBox>
-        {/* <Grid container spacing={3}>
-          {usersList.map((el, idx) => (
-            <Grid item xs={12} lg={4} key={idx}>
-              <CardComponent userData={el} />
+        {!usersList ? null : (
+          <SuiBox p={3}>
+            <Grid container spacing={3}>
+              {usersList.map((el, idx) => (
+                <Grid item xs={12} lg={4} key={idx}>
+                  <CardComponent userData={el} />
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid> */}
+          </SuiBox>
+        )}
       </Card>
     </SuiBox>
   );

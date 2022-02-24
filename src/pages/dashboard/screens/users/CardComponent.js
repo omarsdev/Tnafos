@@ -14,55 +14,94 @@ Coded by www.creative-tim.com
 */
 
 import React from "react";
+import { useRouteMatch, Link, useHistory } from "react-router-dom";
 
 import { IoIosMail } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
 
-import { useRouteMatch } from "react-router-dom";
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
+import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
 const CardComponent = ({ userData }) => {
   const match = useRouteMatch();
+  const history = useHistory();
+
   return (
-    <Card className="h-100">
-      <SuiBox p={3}>
-        <SuiBox
-          component="img"
-          src={"https://bit.ly/sage-adebayo"}
-          alt="User Image"
-          borderRadius="lg"
-          boxShadow="lg"
-          width="100%"
-          my={3}
-        />
-        <SuiBox mt={1}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
+    <Card className="overflow-visible">
+      <SuiBox p={2} mt={3}>
+        <Grid container alignItems="center">
+          <SuiBox
+            component="img"
+            src={"https://bit.ly/sage-adebayo"}
+            alt="User Image"
+            boxShadow="lg"
+            borderRadius="lg"
+            width="100%"
+          />
+        </Grid>
+      </SuiBox>
+
+      <SuiBox m={0} pl={4} mb={2}>
+        <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+          <SuiTypography
+            variant="body2"
+            textColor="text"
+            my={1}
+            // display="flex"
+            justifyContent="center"
+            textAlign="center"
+          >
+            <strong>
               {userData?.first_name}
               {userData?.last_name}
-            </Grid>
-            <Grid item xs={12}>
-              <IoIosMail />
-              {userData?.email}
-            </Grid>
-            <Grid item xs={12}>
-              <BsFillTelephoneFill />
-              {userData.phone_number}
-            </Grid>
-          </Grid>
-          <SuiButton
-            variant="outlined"
-            buttonColor="info"
-            size="small"
-            onClick={`${match.url}/${userData.uuid}`}
+            </strong>{" "}
+          </SuiTypography>
+        </SuiBox>
+        <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+          <SuiTypography
+            variant="body2"
+            textColor="text"
+            justifyContent="center"
+            textAlign="center"
           >
-            view details
+            <IoIosMail />
+            {userData?.email}
+          </SuiTypography>
+        </SuiBox>
+
+        <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+          <SuiTypography
+            variant="body2"
+            textColor="text"
+            justifyContent="center"
+            textAlign="center"
+          >
+            <BsFillTelephoneFill />
+            {userData.phone_number}
+          </SuiTypography>
+        </SuiBox>
+
+        <SuiBox
+          display="flex"
+          width="100%"
+          my={2}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <SuiButton
+            buttonColor="light"
+            alignItems="center"
+            onClick={() => {
+              history.push(`${match.url}/${userData.uuid}`);
+            }}
+          >
+            view{" "}
           </SuiButton>
         </SuiBox>
       </SuiBox>
