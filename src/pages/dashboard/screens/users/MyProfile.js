@@ -5,7 +5,7 @@ import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
-import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
 
 const MyProfile = () => {
   const [profile, setProfile] = useState(null);
@@ -26,21 +26,18 @@ const MyProfile = () => {
   }, []);
 
   return (
-    <SuiBox mt={5} mb={3}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6} xl={4}>
-          <ProfileInfoCard
-            title="profile information"
-            info={{
-              fullName: `${profile?.first_name} ${profile?.last_name}`,
-              PhoneNumber: `${profile?.phone_number}`,
-              email: `${profile?.email}`,
-              UUID: `${profile?.uuid}`,
-            }}
-            action={{ route: "", tooltip: "Edit Profile" }}
-          />
-        </Grid>
-      </Grid>
+    <SuiBox my={3}>
+      <Card>
+        <ProfileInfoCard
+          title="profile information"
+          info={{
+            fullName: `${profile?.first_name} ${profile?.last_name}`,
+            PhoneNumber: `${profile?.phone_number}`,
+            email: `${profile?.email}`,
+            UUID: `${profile?.uuid}`,
+          }}
+        />
+      </Card>
     </SuiBox>
   );
 };

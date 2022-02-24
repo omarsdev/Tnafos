@@ -23,8 +23,6 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
-import { IoIosMail } from "react-icons/io";
-import { BsFillTelephoneFill } from "react-icons/bs";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -61,9 +59,9 @@ const UserCard = () => {
     getUser();
   }, []);
 
-  return !card ? (
+  return !card ? null : (
     <Switch>
-      <Route>
+      <Route path={`${match.path}`}>
         <SuiBox py={3}>
           <Card className="overflow-visible">
             <SuiBox p={3}>
@@ -86,90 +84,56 @@ const UserCard = () => {
                     />
                   </SuiBox>
                 </Grid>
-                <Grid item xs={12} lg={5} className="mx-auto">
-                  <SuiBox component="ul" m={0} pl={4} mb={2}>
-                    <SuiBox
-                      component="li"
-                      color="text"
-                      fontSize="1.25rem"
-                      lineHeight={1}
-                    >
-                      <SuiTypography
-                        variant="body2"
-                        textColor="text"
-                        verticalAlign="middle"
-                      >
+
+                <Grid item xs={12} lg={5} className="mx-auto" mt={6}>
+                  <SuiBox m={0} pl={4} mb={2}>
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
+                        {" "}
+                        Full Name:
                         {card?.first_name}
                         {card?.last_name}
                       </SuiTypography>
                     </SuiBox>
-                    <SuiBox
-                      component="li"
-                      color="text"
-                      fontSize="1.25rem"
-                      lineHeight={1}
-                    >
-                      <SuiTypography
-                        variant="body2"
-                        textColor="text"
-                        verticalAlign="middle"
-                      >
-                        <IoIosMail />
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
+                        Email:
                         {card?.email}
                       </SuiTypography>
                     </SuiBox>
-                    <SuiBox
-                      component="li"
-                      color="text"
-                      fontSize="1.25rem"
-                      lineHeight={1}
-                    >
-                      <SuiTypography
-                        variant="body2"
-                        textColor="text"
-                        verticalAlign="middle"
-                      >
-                        <BsFillTelephoneFill />
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
+                        Phone number:
                         {card?.phone_number}
                       </SuiTypography>
                     </SuiBox>
-                    <SuiBox
-                      component="li"
-                      color="text"
-                      fontSize="1.25rem"
-                      lineHeight={1}
-                    >
-                      <SuiTypography
-                        variant="body2"
-                        textColor="text"
-                        verticalAlign="middle"
-                      >
-                        {card?.uuid}
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
+                        ID: {card?.uuid}
                       </SuiTypography>
                     </SuiBox>
-                    <SuiBox
-                      component="li"
-                      color="text"
-                      fontSize="1.25rem"
-                      lineHeight={1}
-                    >
-                      <SuiTypography
-                        variant="body2"
-                        textColor="text"
-                        verticalAlign="middle"
-                      >
-                        {card?.is_admin}
+                    <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
+                      <SuiTypography variant="body2" textColor="text">
+                        is admin: {card?.is_admin}
                       </SuiTypography>
                     </SuiBox>
                   </SuiBox>
 
-                  <SuiBox mt={3}>
+                  <SuiBox
+                    display="flex"
+                    width="100%"
+                    my={3}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
                     <Grid item xs={12} lg={5} container>
                       <SuiButton
                         variant="gradient"
                         buttonColor="info"
                         fullWidth
-                        onClick={`${match.path}/update`}
+                        onClick={() => {
+                          history.push(`${match.path}/edituser`);
+                        }}
                       >
                         edit
                       </SuiButton>
@@ -181,9 +145,9 @@ const UserCard = () => {
           </Card>
         </SuiBox>
       </Route>
-      <Route path={`${match.path}/:update`} component={EditUser} />
+      <Route path={`${match.path}/edituser`} component={EditUser} />
     </Switch>
-  ) : null;
+  );
 };
 
 export default UserCard;

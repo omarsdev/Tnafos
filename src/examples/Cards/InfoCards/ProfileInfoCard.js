@@ -31,11 +31,13 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
+import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 
-function ProfileInfoCard({ title, info, action }) {
+function ProfileInfoCard({ title, description, info, social, action }) {
   const labels = [];
   const values = [];
+  const { socialMediaColors } = colors;
   const { size } = typography;
 
   // Convert this form `objectKey` of the object key in to this `object key`
@@ -87,16 +89,6 @@ function ProfileInfoCard({ title, info, action }) {
           textTransform="capitalize"
         >
           {title}
-        </SuiTypography>
-        <SuiTypography
-          component={Link}
-          to={action.route}
-          variant="body2"
-          textColor="secondary"
-        >
-          <Tooltip title={action.tooltip} placement="top">
-            <Icon className="">edit</Icon>
-          </Tooltip>
         </SuiTypography>
       </SuiBox>
       <SuiBox p={2}>
