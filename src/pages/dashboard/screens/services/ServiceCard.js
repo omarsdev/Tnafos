@@ -14,9 +14,8 @@ Coded by www.creative-tim.com
 */
 
 import React from "react";
-import { useRouteMatch, Link, useHistory } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 
-import { IoIosMail } from "react-icons/io";
 import { BsCurrencyDollar } from "react-icons/bs";
 
 // @mui material components
@@ -66,20 +65,18 @@ const ServiceCard = ({ info }) => {
             justifyContent="center"
             textAlign="center"
           >
-            <IoIosMail />
             {info?.type}
           </SuiTypography>
         </SuiBox>
 
         <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
           <SuiTypography
-            variant="body2"
-            textColor="text"
+            variant="h5"
+            fontWeight="medium"
             justifyContent="center"
             textAlign="center"
           >
-            <BsCurrencyDollar color="#007BFF" />
-            {info?.price}
+            $ {info?.price}
           </SuiTypography>
         </SuiBox>
 

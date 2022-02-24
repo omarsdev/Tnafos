@@ -86,27 +86,29 @@ const UserCard = () => {
                     <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                       <SuiTypography variant="body2" textColor="text">
                         {" "}
-                        Name of service {service?.name}
+                        <strong>Name of service: </strong> {service?.name}
                       </SuiTypography>
                     </SuiBox>
                     <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                       <SuiTypography variant="body2" textColor="text">
-                        Description:{service?.description}
+                        <strong> Description: </strong> {service?.description}
                       </SuiTypography>
                     </SuiBox>
                     <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                       <SuiTypography variant="body2" textColor="text">
-                        Category-id: {service?.category.uuid}
+                        <strong> Category-id: </strong>
+                        {service?.category.uuid}
                       </SuiTypography>
                     </SuiBox>
                     <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                       <SuiTypography variant="body2" textColor="text">
-                        Type :{service?.type}
+                        <strong> Type : </strong>
+                        {service?.type}
                       </SuiTypography>
                     </SuiBox>
                     <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                       <SuiTypography variant="body2" textColor="text">
-                        Price: {service?.price}
+                        <strong> Price: </strong> {service?.price}
                       </SuiTypography>
                     </SuiBox>
                   </SuiBox>

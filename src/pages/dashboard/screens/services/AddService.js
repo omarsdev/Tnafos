@@ -21,6 +21,7 @@ import { useForm } from "react-hook-form";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
@@ -91,85 +92,126 @@ const AddService = () => {
   }, []);
 
   return (
-    <SuiBox>
-      <SuiTypography variant="h5">Add New Service</SuiTypography>
-      <SuiBox mt={3}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <FormField
-              type="text"
-              label="Name of service"
-              placeholder="Enter name of service"
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormField type="text" label="Price" placeholder="Enter Price" />
-          </Grid>
-        </Grid>
-      </SuiBox>
-      <SuiBox mt={2}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <SuiBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
-              <SuiTypography
-                component="label"
-                variant="caption"
-                fontWeight="bold"
-              >
-                Description &nbsp;&nbsp;
-                <SuiTypography
-                  variant="caption"
-                  fontWeight="regular"
-                  textColor="text"
-                >
-                  (optional)
-                </SuiTypography>
-              </SuiTypography>
-            </SuiBox>
-            <SuiEditor value={editorValue} onChange={setEditorValue} />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <SuiBox mb={3}>
-              <SuiBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
-                <SuiTypography
-                  component="label"
-                  variant="caption"
-                  fontWeight="bold"
-                  textTransform="capitalize"
-                >
-                  Category
-                </SuiTypography>
+    <SuiBox mt={1} mb={20}>
+      <Grid container justifyContent="center">
+        <Grid item xs={12} lg={8}>
+          <Card className="overflow-visible">
+            <SuiBox p={2}>
+              <SuiBox>
+                <SuiTypography variant="h5">Add New Service</SuiTypography>
+                <SuiBox mt={3}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <FormField
+                        type="text"
+                        label="Name of service"
+                        placeholder="Enter name of service"
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <FormField
+                        type="text"
+                        label="Price"
+                        placeholder="Enter Price"
+                      />
+                    </Grid>
+                  </Grid>
+                </SuiBox>
+                <SuiBox mt={2}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <SuiBox
+                        mb={1}
+                        ml={0.5}
+                        lineHeight={0}
+                        display="inline-block"
+                      >
+                        <SuiTypography
+                          component="label"
+                          variant="caption"
+                          fontWeight="bold"
+                        >
+                          Description &nbsp;&nbsp;
+                          <SuiTypography
+                            variant="caption"
+                            fontWeight="regular"
+                            textColor="text"
+                          >
+                            (optional)
+                          </SuiTypography>
+                        </SuiTypography>
+                      </SuiBox>
+                      <SuiEditor
+                        value={editorValue}
+                        onChange={setEditorValue}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <SuiBox mb={3}>
+                        <SuiBox
+                          mb={1}
+                          // ml={0.5}
+                          lineHeight={0}
+                          display="inline-block"
+                        >
+                          <SuiTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                            textTransform="capitalize"
+                          >
+                            Category
+                          </SuiTypography>
+                        </SuiBox>
+                        <SuiSelect
+                          defaultValue={{
+                            value: "Select category",
+                            label: "Select category",
+                          }}
+                          options={categoriesList}
+                        />
+                      </SuiBox>
+
+                      <Grid item xs={12} sm={6}>
+                        <FormField
+                          type="text"
+                          label="Type"
+                          placeholder="Enter Price"
+                        />
+                      </Grid>
+                    </Grid>
+                    <SuiBox
+                      display="flex"
+                      width="100%"
+                      mt={4}
+                      mb={2}
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <SuiBox mr={1}>
+                        <SuiButton
+                          variant="gradient"
+                          buttonColor="dark"
+                          onClick={handleSubmit(createService)}
+                        >
+                          SAVE
+                        </SuiButton>
+                      </SuiBox>
+                      <SuiButton
+                        variant="gradient"
+                        buttonColor="secondary"
+                        onClick={handleCancel}
+                      >
+                        Cancel
+                      </SuiButton>
+                    </SuiBox>
+                  </Grid>
+                </SuiBox>
               </SuiBox>
-              <SuiSelect
-                defaultValue={{
-                  value: "Select category",
-                  label: "Select category",
-                }}
-                options={`${categoriesList}`}
-              />
             </SuiBox>
-            <Grid item xs={12} sm={6}>
-              <FormField type="text" label="Type" placeholder="Enter Price" />
-            </Grid>
-          </Grid>
-          <SuiBox mt={3} width="100%" display="flex" justifyContent="end">
-            <SuiButton
-              variant="gradient"
-              buttonColor="dark"
-              onClick={handleSubmit(createService)}
-            >
-              SAVE
-            </SuiButton>
-            <SuiButton
-              variant="gradient"
-              buttonColor="secondary"
-              onClick={handleCancel}
-            >
-              Cancel
-            </SuiButton>
-          </SuiBox>
+          </Card>
         </Grid>
-      </SuiBox>
+      </Grid>
     </SuiBox>
   );
 };
