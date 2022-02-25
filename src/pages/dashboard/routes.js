@@ -122,7 +122,7 @@ const routes = [
     ],
   },
   { type: "divider", key: "divider-1" },
-  { type: "title", title: "Organization", key: "divider-1" },
+  { type: "title", title: "Organization", key: "title-1" },
   {
     type: "collapse",
     name: "Company",
@@ -163,7 +163,7 @@ const routes = [
     ],
   },
   { type: "divider", key: "divider-2" },
-  { type: "title", title: "Documents", key: "divider-2" },
+  { type: "title", title: "Documents", key: "title-2" },
   {
     type: "collapse",
     name: "Purchase Requests",
@@ -197,6 +197,24 @@ const routes = [
         name: "Outgoing",
         key: "estimates-outgoing",
         route: "/dashboard/estimates/outgoing"
+      },
+    ],
+  },
+  {
+    type: "collapse",
+    name: "Invoices",
+    key: "invoices",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Incoming",
+        key: "invoices-incoming",
+        route: "/dashboard/invoices/incoming"
+      },
+      {
+        name: "Outgoing",
+        key: "invoices-outgoing",
+        route: "/dashboard/invoices/outgoing"
       },
     ],
   },

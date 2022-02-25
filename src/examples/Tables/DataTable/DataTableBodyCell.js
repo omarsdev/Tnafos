@@ -1,10 +1,9 @@
-import React from "react";
 /**
 =========================================================
-* Soft UI Dashboard PRO React - v2.0.0
+* Soft UI Dashboard PRO React - v3.0.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -13,6 +12,8 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+
+import React from 'react'
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
@@ -43,7 +44,7 @@ function DataTableBodyCell({ noBorder, align, children }) {
         display="inline-block"
         width="max-content"
         color="text"
-        customClass="vertical-middle"
+        sx={{ verticalAlign: "middle" }}
       >
         {children}
       </SuiBox>

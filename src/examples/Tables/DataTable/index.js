@@ -1,10 +1,9 @@
-import React from "react";
 /**
 =========================================================
-* Soft UI Dashboard PRO React - v2.0.0
+* Soft UI Dashboard PRO React - v3.0.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -14,19 +13,13 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useMemo, useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
 // react-table components
-import {
-  useTable,
-  usePagination,
-  useGlobalFilter,
-  useAsyncDebounce,
-  useSortBy,
-} from "react-table";
+import { useTable, usePagination, useGlobalFilter, useAsyncDebounce, useSortBy } from "react-table";
 
 // @mui material components
 import Table from "@mui/material/Table";
@@ -55,7 +48,8 @@ function DataTable({
   isSorted,
   noEndBorder,
 }) {
-  const { defaultValue, entries } = entriesPerPage;
+  const defaultValue = entriesPerPage.defaultValue ? entriesPerPage.defaultValue : 10;
+  const entries = entriesPerPage.entries ? entriesPerPage.entries : [5, 10, 15, 20, 25];
   const columns = useMemo(() => table.columns, [table]);
   const data = useMemo(() => table.rows, [table]);
 
@@ -104,16 +98,13 @@ function DataTable({
 
   // Handler for the input to set the pagination index
   const handleInputPagination = ({ target: { value } }) =>
-    value > pageOptions.length || value < 0
-      ? gotoPage(0)
-      : gotoPage(Number(value));
+    value > pageOptions.length || value < 0 ? gotoPage(0) : gotoPage(Number(value));
 
   // Customized page options starting from 1
   const customizedPageOptions = pageOptions.map((option) => option + 1);
 
   // Setting value for the pagination input
-  const handleInputPaginationValue = ({ target: value }) =>
-    gotoPage(Number(value.value - 1));
+  const handleInputPaginationValue = ({ target: value }) => gotoPage(Number(value.value - 1));
 
   // Search input value state
   const [search, setSearch] = useState(globalFilter);
@@ -139,8 +130,7 @@ function DataTable({
   };
 
   // Setting the entries starting point
-  const entriesStart =
-    pageIndex === 0 ? pageIndex + 1 : pageIndex * pageSize + 1;
+  const entriesStart = pageIndex === 0 ? pageIndex + 1 : pageIndex * pageSize + 1;
 
   // Setting the entries ending point
   let entriesEnd;
@@ -154,26 +144,18 @@ function DataTable({
   }
 
   return (
-    <TableContainer className="shadow-none">
+    <TableContainer sx={{ boxShadow: "none" }}>
       {entriesPerPage || canSearch ? (
-        <SuiBox
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          p={3}
-        >
+        <SuiBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
           {entriesPerPage && (
             <SuiBox display="flex" alignItems="center">
               <SuiSelect
                 defaultValue={{ value: defaultValue, label: defaultValue }}
-                options={entries.map((entry) => ({
-                  value: entry,
-                  label: entry,
-                }))}
+                options={entries.map((entry) => ({ value: entry, label: entry }))}
                 onChange={setEntriesPerPage}
                 size="small"
               />
-              <SuiTypography variant="caption" textColor="secondary">
+              <SuiTypography variant="caption" color="secondary">
                 &nbsp;&nbsp;entries per page
               </SuiTypography>
             </SuiBox>
@@ -198,9 +180,7 @@ function DataTable({
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <DataTableHeadCell
-                  {...column.getHeaderProps(
-                    isSorted && column.getSortByToggleProps()
-                  )}
+                  {...column.getHeaderProps(isSorted && column.getSortByToggleProps())}
                   width={column.width ? column.width : "auto"}
                   align={column.align ? column.align : "left"}
                   sorted={setSortedValue(column)}
@@ -240,11 +220,7 @@ function DataTable({
       >
         {showTotalEntries && (
           <SuiBox mb={{ xs: 3, sm: 0 }}>
-            <SuiTypography
-              variant="button"
-              textColor="secondary"
-              fontWeight="regular"
-            >
+            <SuiTypography variant="button" color="secondary" fontWeight="regular">
               Showing {entriesStart} to {entriesEnd} of {rows.length} entries
             </SuiTypography>
           </SuiBox>
@@ -256,17 +232,13 @@ function DataTable({
           >
             {canPreviousPage && (
               <SuiPagination item onClick={() => previousPage()}>
-                <Icon className=" bold">chevron_left</Icon>
+                <Icon sx={{ fontWeight: "bold" }}>chevron_left</Icon>
               </SuiPagination>
             )}
             {renderPagination.length > 6 ? (
               <SuiBox width="5rem" mx={1}>
                 <SuiInput
-                  inputProps={{
-                    type: "number",
-                    min: 1,
-                    max: customizedPageOptions.length,
-                  }}
+                  inputProps={{ type: "number", min: 1, max: customizedPageOptions.length }}
                   value={customizedPageOptions[pageIndex]}
                   onChange={(handleInputPagination, handleInputPaginationValue)}
                 />
@@ -276,7 +248,7 @@ function DataTable({
             )}
             {canNextPage && (
               <SuiPagination item onClick={() => nextPage()}>
-                <Icon className=" font-bold">chevron_right</Icon>
+                <Icon sx={{ fontWeight: "bold" }}>chevron_right</Icon>
               </SuiPagination>
             )}
           </SuiPagination>

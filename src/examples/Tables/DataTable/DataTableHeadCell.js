@@ -1,10 +1,9 @@
-import React from "react";
 /**
 =========================================================
-* Soft UI Dashboard PRO React - v2.0.0
+* Soft UI Dashboard PRO React - v3.0.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -13,6 +12,8 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+
+import React from 'react'
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
@@ -49,9 +50,7 @@ function DataTableHeadCell({ width, children, sorted, align, ...rest }) {
         fontWeight={fontWeightBold}
         color="secondary"
         opacity={0.7}
-        customClass={`text-uppercase ${
-          sorted && "cursor-pointer user-select-none"
-        }`}
+        className={`text-uppercase ${sorted && "cursor-pointer user-select-none"}`}
       >
         {children}
         {sorted && (
@@ -68,7 +67,7 @@ function DataTableHeadCell({ width, children, sorted, align, ...rest }) {
               color={sorted === "asce" ? "text" : "secondary"}
               opacity={sorted === "asce" ? 1 : 0.5}
             >
-              <Icon className="">arrow_drop_up</Icon>
+              <Icon>arrow_drop_up</Icon>
             </SuiBox>
             <SuiBox
               position="absolute"
@@ -76,7 +75,7 @@ function DataTableHeadCell({ width, children, sorted, align, ...rest }) {
               color={sorted === "desc" ? "text" : "secondary"}
               opacity={sorted === "desc" ? 1 : 0.5}
             >
-              <Icon className="">arrow_drop_down</Icon>
+              <Icon>arrow_drop_down</Icon>
             </SuiBox>
           </SuiBox>
         )}

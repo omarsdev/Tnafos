@@ -28,27 +28,17 @@ import { setTransparentSidenav } from "context/SoftUI";
 
 import DashboardHome from "./screens/home/DashboardHome";
 import CompanyLayout from "./screens/company/CompanyLayout";
-// import ClientLayout from "./screens/clients/ClientLayout";
+import PurchaseRequestsLayout from "./screens/purchaseRequests/PurchaseRequestsLayout";
 import EstimateLayout from "./screens/estimates/EstimateLayout";
-// import PaymentLayout from "./screens/payments/PaymentLayout";
-// import PurchasesLayout from "./screens/purchase-requests/PurchasesLayout";
-// import Ratings from "./screens/rating/Ratings";
-// import ServiceLayout from "./screens/services/ServiceLayout";
-// import SettingLayout from "./screens/settings/SettingLayout";
-import UserLayout from "./screens/users/UserLayout";
+import InvoicesLayout from "./screens/invoices/InvoicesLayout";
 import ServiceLayout from "./screens/services/ServiceLayout";
-// import InvoiceLayout from "./screens/invoices/InvoiceLayout";
-// import Proposal from "./screens/proposals/Proposal";
-// import ProposalLayout from "./screens/proposals/ProposalLayout";
-// import MediaLayout from "./screens/media/MediaLayout";
-// import SupplierLayout from "./screens/supplier/SupplierLayout";
+import UserLayout from "./screens/services/ServiceLayout";
 
 const DashboardLayout = () => {
   const match = useRouteMatch();
 
   const [controller, dispatch] = useSoftUIController();
-  const { miniSidenav, direction, layout, openConfigurator, sidenavColor } =
-    controller;
+  const { miniSidenav, direction, layout, openConfigurator, sidenavColor } = controller;
 
   const { dataProviderValue } = useContext(UserDataContext);
   const { userData, setUserData } = dataProviderValue;
@@ -78,7 +68,7 @@ const DashboardLayout = () => {
   };
 
   useEffect(() => {
-    setTransparentSidenav(dispatch, false);
+    setTransparentSidenav(dispatch, false)
     if (userData) return;
     fetchTokenMe();
     removeForwardSlashFromUrl();
@@ -113,22 +103,11 @@ const DashboardLayout = () => {
       <Switch>
         <Route exact path={match.path} component={DashboardHome} />
         <Route path={`${match.path}/company`} component={CompanyLayout} />
-        {/* <Route path={`${match.path}/rating`} component={Ratings} />
-        <Route path={`${match.path}/supplier`} component={SupplierLayout} />
-        <Route path={`${match.path}/media`} component={MediaLayout} /> */}
         <Route path={`${match.path}/user`} component={UserLayout} />
         <Route path={`${match.path}/service`} component={ServiceLayout} />
-        {/* <Route path={`${match.path}/proposal`} component={ProposalLayout} />  */}
-        {/* <Route
-          path={`${match.path}/purchase-request`}
-          component={PurchasesLayout}
-        /> */}
-        {/* <Route path={`${match.path}/payment`} component={PaymentLayout} />
-
-        <Route path={`${match.path}/invoice`} component={InvoiceLayout} /> */}
-        <Route path={`${match.path}/estimate`} component={EstimateLayout} />
-        {/* <Route path={`${match.path}/client`} component={ClientLayout} />
-        <Route path={`${match.path}/settings`} component={SettingLayout} /> */}
+        <Route path={`${match.path}/purchase-requests`} component={PurchaseRequestsLayout} />
+        <Route path={`${match.path}/estimates`} component={EstimateLayout} />
+        <Route path={`${match.path}/invoices`} component={InvoicesLayout} />
       </Switch>
     </>
   ) : (

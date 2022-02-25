@@ -1,12 +1,25 @@
-// import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useEffect } from 'react'
 
-// // @mui material components
-// import Grid from "@mui/material/Grid";
-// import Menu from "@mui/material/Menu";
-// import MenuItem from "@mui/material/MenuItem";
-// import Tooltip from "@mui/material/Tooltip";
-// import Icon from "@mui/material/Icon";
-// import Card from "@mui/material/Card";
+import { AxiosInstance } from 'api'
+
+const Home = () => {
+
+  const getCompanyInfo = async () => {
+    await AxiosInstance.get("/api/dashboard/company").then((res) => {
+      console.log(res.data.data)
+    }).catch((err) => {
+
+    })
+  }
+
+  useEffect(() => {
+    getCompanyInfo();
+  }, [])
+
+  return (
+    <div>Company Home</div>
+  )
+}
 
 // // Soft UI Dashboard PRO React components
 // import SuiBox from "components/SuiBox";
