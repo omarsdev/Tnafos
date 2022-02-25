@@ -46,7 +46,7 @@ const ServiceCard = ({ info }) => {
         </Grid>
       </SuiBox>
 
-      <SuiBox m={0} pl={4} mb={2}>
+      <SuiBox m={0} mb={2}>
         <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
           <SuiTypography
             variant="body2"

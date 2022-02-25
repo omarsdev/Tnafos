@@ -34,7 +34,7 @@ import SuiButton from "components/SuiButton";
 import { Typography } from "@mui/material";
 
 import { checkout, initialValue, validation } from "./schema/form";
-import FormField from "components/FormField";
+import FormField from "./FormField";
 
 const UserForm = () => {
   const { formId, formField } = checkout;
@@ -187,7 +187,7 @@ const UserForm = () => {
               }
             />
           </SuiBox>
-          //* country code input ...
+
           {/* <SuiBox mt={2}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
@@ -240,6 +240,8 @@ const UserForm = () => {
             justifyContent="space-between"
             alignItems="center"
             textAlign="center"
+            mt={3}
+            width="100%"
           >
             <SuiBox>
               <SuiBox mb={1}>
@@ -247,7 +249,11 @@ const UserForm = () => {
                   Terms and Conditions agreement
                 </SuiTypography>
               </SuiBox>
-              <SuiBox display="flex" alignItems="center" alignItems="center">
+              <SuiBox
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
                 <Checkbox
                   checked={agreement}
                   onChange={handleSetAgremment}
@@ -262,7 +268,7 @@ const UserForm = () => {
                   &nbsp;&nbsp;I agree to Tnafos&nbsp;
                 </SuiTypography>
               </SuiBox>
-              ;
+
               <SuiBox
                 display="flex"
                 width="100%"
@@ -271,7 +277,7 @@ const UserForm = () => {
                 alignItems="center"
               >
                 <SuiTypography
-                  component={Link}
+                  component="a"
                   href="#"
                   variant="button"
                   fontWeight="bold"
@@ -289,7 +295,7 @@ const UserForm = () => {
                   and
                 </SuiTypography>
                 <SuiTypography
-                  component={Link}
+                  component="a"
                   href="#"
                   variant="button"
                   fontWeight="bold"
@@ -317,7 +323,7 @@ const UserForm = () => {
                   sx={{ cursor: "pointer", userSelect: "none" }}
                 >
                   &nbsp;&nbsp;I confirm that the information given in this form
-                  is true, complete and accurate."&nbsp;
+                  is true, complete and accurate.&nbsp;
                 </SuiTypography>
               </SuiBox>
             </SuiBox>

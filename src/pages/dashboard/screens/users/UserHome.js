@@ -66,7 +66,12 @@ const UserHome = () => {
 
           <Stack spacing={1} direction="row">
             <Link to={`${match.url}/createuser`} className="decoration-none">
-              <SuiButton variant="gradient" buttonColor="info" size="small">
+              <SuiButton
+                variant="gradient"
+                buttonColor={"#F8B916"}
+                size="small"
+                // on_Hover={{ buttonColor: "#F8B916" }}
+              >
                 + new user
               </SuiButton>
             </Link>

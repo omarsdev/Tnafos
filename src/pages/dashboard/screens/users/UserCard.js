@@ -68,7 +68,7 @@ const UserCard = () => {
               <SuiBox p={3}>
                 <SuiBox mb={3}>
                   <SuiTypography variant="h5" fontWeight="medium">
-                    User Card's details ...
+                    <strong>User Card's details ...</strong>
                   </SuiTypography>
                 </SuiBox>
 
@@ -91,31 +91,32 @@ const UserCard = () => {
                       <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                         <SuiTypography variant="body2" textColor="text">
                           {" "}
-                          Full Name:
+                          <strong> Full Name:</strong>
                           {card?.first_name}
                           {card?.last_name}
                         </SuiTypography>
                       </SuiBox>
                       <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                         <SuiTypography variant="body2" textColor="text">
-                          Email:
+                          <strong> Email:</strong>
                           {card?.email}
                         </SuiTypography>
                       </SuiBox>
                       <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                         <SuiTypography variant="body2" textColor="text">
-                          Phone number:
+                          <strong> Phone number:</strong>
                           {card?.phone_number}
                         </SuiTypography>
                       </SuiBox>
                       <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                         <SuiTypography variant="body2" textColor="text">
-                          ID: {card?.uuid}
+                          <strong> ID: </strong>
+                          {card?.uuid}
                         </SuiTypography>
                       </SuiBox>
                       <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                         <SuiTypography variant="body2" textColor="text">
-                          is admin: {card?.is_admin}
+                          <strong>is admin:</strong> {card?.is_admin}
                         </SuiTypography>
                       </SuiBox>
                     </SuiBox>
@@ -123,9 +124,13 @@ const UserCard = () => {
                     <SuiBox
                       display="flex"
                       width="100%"
-                      my={3}
-                      justifyContent="center"
-                      alignItems="center"
+                      // m={0}
+                      pl={4}
+                      mb={2}
+                      mb={3}
+                      mt={8}
+                      justifyContent="start"
+                      alignItems="start"
                     >
                       <Grid item xs={12} lg={5} container>
                         <SuiButton
