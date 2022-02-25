@@ -1,8 +1,6 @@
 // TODO purchase for incoming and outgoing
 
 import React, { useState, useEffect, useContext, useLayoutEffect } from "react";
-// import { Navbar, Sidebar } from "./components/index";
-// import { HStack, VStack, Center, Spinner } from "@chakra-ui/react";
 import {
   useRouteMatch,
   Route,
@@ -12,25 +10,13 @@ import {
 } from "react-router-dom";
 import { AxiosInstance } from "../../api";
 
-// import DashboardHome from "./screens/home/DashboardHome";
-// import ClientLayout from "./screens/clients/ClientLayout";
-// import CompanyLayout from "./screens/company/CompanyLayout";
-// import EstimateLayout from "./screens/estimates/EstimateLayout";
-// import PaymentLayout from "./screens/payments/PaymentLayout";
-// import PurchasesLayout from "./screens/purchase-requests/PurchasesLayout";
-// import Ratings from "./screens/rating/Ratings";
-// import ServiceLayout from "./screens/services/ServiceLayout";
-// import SettingLayout from "./screens/settings/SettingLayout";
-// import UserLayout from "./screens/users/UserLayout";
-// import InvoiceLayout from "./screens/invoices/InvoiceLayout";
-// import Proposal from "./screens/proposals/Proposal"
-// import ProposalLayout from "./screens/proposals/ProposalLayout";
-// import MediaLayout from "./screens/media/MediaLayout";
-// import SupplierLayout from "./screens/supplier/SupplierLayout";
-
 import { UserDataContext, useSize } from "context";
 import { Center, HStack, Spinner } from "@chakra-ui/react";
-import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context/SoftUI";
+import {
+  useSoftUIController,
+  setMiniSidenav,
+  setOpenConfigurator,
+} from "context/SoftUI";
 // import { PrivateRoute } from "./components/PrivateRoute";
 
 import Sidenav from "examples/Sidenav";
@@ -39,11 +25,14 @@ import routes from "./routes";
 
 import brand from "assets/icons/tnafos.svg";
 import { setTransparentSidenav } from "context/SoftUI";
+
 import DashboardHome from "./screens/home/DashboardHome";
 import CompanyLayout from "./screens/company/CompanyLayout";
 import PurchaseRequestsLayout from "./screens/purchaseRequests/PurchaseRequestsLayout";
 import EstimateLayout from "./screens/estimates/EstimateLayout";
 import InvoicesLayout from "./screens/invoices/InvoicesLayout";
+import ServiceLayout from "./screens/services/ServiceLayout";
+import UserLayout from "./screens/services/ServiceLayout";
 
 const DashboardLayout = () => {
   const match = useRouteMatch();
@@ -114,6 +103,8 @@ const DashboardLayout = () => {
       <Switch>
         <Route exact path={match.path} component={DashboardHome} />
         <Route path={`${match.path}/company`} component={CompanyLayout} />
+        <Route path={`${match.path}/user`} component={UserLayout} />
+        <Route path={`${match.path}/service`} component={ServiceLayout} />
         <Route path={`${match.path}/purchase-requests`} component={PurchaseRequestsLayout} />
         <Route path={`${match.path}/estimates`} component={EstimateLayout} />
         <Route path={`${match.path}/invoices`} component={InvoicesLayout} />

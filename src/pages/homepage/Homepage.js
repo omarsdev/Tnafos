@@ -13,7 +13,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
-import { SearchIcon } from "@chakra-ui/icons";
 
 // import { Navbar } from "./components";
 
@@ -89,7 +88,7 @@ const Homepage = () => {
               onKeyPress={handleKeypress}
             />
             <InputRightAddon
-              children={<SearchIcon color="white" />}
+              // children={<SearchIcon color="white" />}
               cursor={"pointer"}
               borderBottomRightRadius={"99em"}
               borderTopRightRadius={"99em"}

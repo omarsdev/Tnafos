@@ -1,3 +1,4 @@
+import React from "react";
 /**
 =========================================================
 * Soft UI Dashboard PRO React - v3.0.0
@@ -22,65 +23,73 @@ import PropTypes from "prop-types";
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 
-const SuiBadgeDot = forwardRef(({ variant, color, size, badgeContent, font, ...rest }, ref) => {
-  let finalSize;
-  let fontSize;
-  let padding;
+const SuiBadgeDot = forwardRef(
+  ({ variant, color, size, badgeContent, font, ...rest }, ref) => {
+    let finalSize;
+    let fontSize;
+    let padding;
 
-  if (size === "sm") {
-    finalSize = "0.5rem";
-    fontSize = "caption";
-    padding = "0.45em 0.775em";
-  } else if (size === "lg") {
-    finalSize = "0.625rem";
-    fontSize = "body2";
-    padding = "0.85em 1.375em";
-  } else if (size === "md") {
-    finalSize = "0.5rem";
-    fontSize = "button";
-    padding = "0.65em 1em";
-  } else {
-    finalSize = "0.375rem";
-    fontSize = "caption";
-    padding = "0.45em 0.775em";
-  }
+    if (size === "sm") {
+      finalSize = "0.5rem";
+      fontSize = "caption";
+      padding = "0.45em 0.775em";
+    } else if (size === "lg") {
+      finalSize = "0.625rem";
+      fontSize = "body2";
+      padding = "0.85em 1.375em";
+    } else if (size === "md") {
+      finalSize = "0.5rem";
+      fontSize = "button";
+      padding = "0.65em 1em";
+    } else {
+      finalSize = "0.375rem";
+      fontSize = "caption";
+      padding = "0.45em 0.775em";
+    }
 
-  const validColors = [
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "error",
-    "light",
-    "dark",
-  ];
+    const validColors = [
+      "primary",
+      "secondary",
+      "info",
+      "success",
+      "warning",
+      "error",
+      "light",
+      "dark",
+    ];
 
-  const validColorIndex = validColors.findIndex((el) => el === color);
+    const validColorIndex = validColors.findIndex((el) => el === color);
 
-  return (
-    <SuiBox ref={ref} display="flex" alignItems="center" p={padding} {...rest}>
+    return (
       <SuiBox
-        component="i"
-        display="inline-block"
-        width={finalSize}
-        height={finalSize}
-        borderRadius="50%"
-        bgColor={validColors[validColorIndex]}
-        variant={variant}
-        mr={1}
-      />
-      <SuiTypography
-        variant={fontSize}
-        fontWeight={font.weight ? font.weight : "regular"}
-        color={font.color ? font.color : "dark"}
-        sx={{ lineHeight: 0 }}
+        ref={ref}
+        display="flex"
+        alignItems="center"
+        p={padding}
+        {...rest}
       >
-        {badgeContent}
-      </SuiTypography>
-    </SuiBox>
-  );
-});
+        <SuiBox
+          component="i"
+          display="inline-block"
+          width={finalSize}
+          height={finalSize}
+          borderRadius="50%"
+          bgColor={validColors[validColorIndex]}
+          variant={variant}
+          mr={1}
+        />
+        <SuiTypography
+          variant={fontSize}
+          fontWeight={font.weight ? font.weight : "regular"}
+          color={font.color ? font.color : "dark"}
+          sx={{ lineHeight: 0 }}
+        >
+          {badgeContent}
+        </SuiTypography>
+      </SuiBox>
+    );
+  }
+);
 
 // Setting default values for the props of SuiBadge
 SuiBadgeDot.defaultProps = {
