@@ -65,7 +65,7 @@ function ProductInfo() {
     getMyService();
   }, []);
 
-  return (
+  return !service ? null : (
     <Card className="overflow-visible">
       <SuiBox p={3}>
         <SuiTypography variant="h5">Service Information</SuiTypography>
@@ -75,14 +75,14 @@ function ProductInfo() {
               <FormField
                 type="text"
                 label="Price "
-                defaultValue={`${service?.price}`}
+                defaultValue={service?.price}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FormField
                 type="text"
                 label="Type"
-                defaultValue={`${service?.type}`}
+                defaultValue={service?.type}
               />
             </Grid>
           </Grid>

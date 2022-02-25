@@ -64,7 +64,7 @@ const UserCard = () => {
               <SuiBox p={3}>
                 <SuiBox mb={3}>
                   <SuiTypography variant="h5" fontWeight="medium">
-                    Service details ...
+                    <strong> Service details ... </strong>
                   </SuiTypography>
                 </SuiBox>
 
@@ -117,9 +117,11 @@ const UserCard = () => {
                     <SuiBox
                       display="flex"
                       width="100%"
-                      my={3}
-                      justifyContent="center"
-                      alignItems="center"
+                      mb={3}
+                      mt={8}
+                      pl={4}
+                      justifyContent="start"
+                      alignItems="start"
                     >
                       <Grid item xs={12} lg={5} container>
                         <SuiButton

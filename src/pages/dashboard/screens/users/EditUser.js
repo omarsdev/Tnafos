@@ -53,8 +53,7 @@ const EditUser = () => {
       last_name: data.last_name,
       phone_number: data.phone_number,
       email: data.email,
-      password: data.password,
-      password_confirmation: data.password_confirmation,
+      uuid: data.uuid,
       country_code: data.country_code,
     });
   };
@@ -116,31 +115,31 @@ const EditUser = () => {
     getUser();
   }, []);
 
-  return (
-    <SuiBox mt={1} mb={20}>
+  return !card ? null : (
+    <SuiBox mt={2} mb={20}>
       <Grid container justifyContent="center">
         <Grid item xs={12} lg={8}>
           <Card className="overflow-visible">
             <SuiBox p={2}>
               <SuiBox>
                 <SuiTypography variant="h5">
-                  Fill up the fields below to update user
+                  <strong>Fill up the fields below to update user</strong>
                 </SuiTypography>
 
-                <SuiBox mt={3}>
+                <SuiBox mt={4}>
                   <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                       <FormField
                         type="text"
                         label="first name "
-                        placeholder="enter first name"
+                        defaultValue={card.first_name}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <FormField
                         type="text"
                         label="last name"
-                        placeholder="enter last name "
+                        defaultValue={card.last_name}
                       />
                     </Grid>
                   </Grid>
@@ -152,14 +151,14 @@ const EditUser = () => {
                       <FormField
                         type="text"
                         label="email"
-                        placeholder="enter email"
+                        defaultValue={card.email}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <FormField
                         type="text"
                         label="phone number"
-                        placeholder="enter phone number"
+                        defaultValue={card.phone_number}
                       />
                     </Grid>
                   </Grid>
@@ -170,22 +169,10 @@ const EditUser = () => {
                     <Grid item xs={12} sm={6}>
                       <FormField
                         type="text"
-                        label="password"
-                        placeholder="enter password"
+                        label="uuid"
+                        defaultValue={card.uuid}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <FormField
-                        type="text"
-                        label="confirm password"
-                        placeholder="confirm your password"
-                      />
-                    </Grid>
-                  </Grid>
-                </SuiBox>
-
-                <SuiBox mt={3}>
-                  <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                       <SuiBox mb={3}>
                         <SuiBox

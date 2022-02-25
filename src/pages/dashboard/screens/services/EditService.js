@@ -62,29 +62,7 @@ const EditService = () => {
     }
   };
   return (
-    <SuiBox my={4}>
-      <SuiBox mb={3}>
-        <Grid container spacing={3} alignItems="center" mt={2}>
-          <Grid item xs={12} lg={6}>
-            <SuiTypography variant="h4" fontWeight="medium">
-              Make the changes below to update service.
-            </SuiTypography>
-          </Grid>
-
-          <Grid item xs={12} lg={6}>
-            <SuiBox display="flex" justifyContent="flex-end" mr={2}>
-              <SuiButton
-                variant="gradient"
-                buttonColor="info"
-                onClick={onUpdateService}
-              >
-                save
-              </SuiButton>
-            </SuiBox>
-          </Grid>
-        </Grid>
-      </SuiBox>
-
+    <SuiBox my={4} mt={2}>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={4}>
           <Card className="h-100">
@@ -101,7 +79,11 @@ const EditService = () => {
                 width="100%"
                 my={3}
               />
-              <SuiBox display="flex">
+              <SuiBox
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
                 <SuiBox mr={1}>
                   <SuiButton variant="gradient" buttonColor="info" size="small">
                     edit
@@ -113,6 +95,27 @@ const EditService = () => {
         </Grid>
 
         <Grid item xs={12} lg={8}>
+          <SuiBox mb={3}>
+            <Grid container spacing={3} alignItems="center">
+              <Grid item xs={12} lg={6}>
+                <SuiTypography variant="h4" fontWeight="medium">
+                  Make the changes below to update service.
+                </SuiTypography>
+              </Grid>
+
+              <Grid item xs={12} lg={6}>
+                <SuiBox display="flex" justifyContent="flex-end" mr={2}>
+                  <SuiButton
+                    variant="gradient"
+                    buttonColor="info"
+                    onClick={onUpdateService}
+                  >
+                    save
+                  </SuiButton>
+                </SuiBox>
+              </Grid>
+            </Grid>
+          </SuiBox>
           <ProductInfo />
         </Grid>
       </Grid>
