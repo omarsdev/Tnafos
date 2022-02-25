@@ -82,7 +82,7 @@ export const validation = [
     [email.name]: Yup.string().required(email.errorMsg).email(email.invalidMsg),
     [password.name]: Yup.string()
       .required(password.errorMsg)
-      .min(6, password.invalidMsg),
+      .min(8, password.invalidMsg),
     [password_confirmation.name]: Yup.string()
       .required(password_confirmation.errorMsg)
       .oneOf([Yup.ref("password"), null], password_confirmation.invalidMsg),

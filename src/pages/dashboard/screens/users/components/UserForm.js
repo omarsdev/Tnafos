@@ -343,6 +343,11 @@ const UserForm = () => {
                 onClick={addUser}
               >
                 add user
+                {isSubmitting && (
+                  <SuiBox ml={1}>
+                    <CircularProgress size={20} />
+                  </SuiBox>
+                )}
               </SuiButton>
             </SuiBox>
 
