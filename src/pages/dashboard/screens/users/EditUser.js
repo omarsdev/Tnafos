@@ -28,6 +28,7 @@ import { AxiosInstance } from "../../../../api/AxiosInstance";
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
+import SuiSelect from "components/SuiSelect";
 
 // NewProduct page components
 import FormField from "./components/FormField";
@@ -41,6 +42,8 @@ const EditUser = () => {
 
   const { register, handleSubmit, reset, control } = useForm();
   const [errors, setErrors] = useState(null);
+  const [countryList, setCountryList] = useState(null);
+
   const [isUpdating, setIsUpdating] = useState(false);
   const [card, setCard] = useState(null);
 
@@ -50,6 +53,9 @@ const EditUser = () => {
       last_name: data.last_name,
       phone_number: data.phone_number,
       email: data.email,
+      password: data.password,
+      password_confirmation: data.password_confirmation,
+      country_code: data.country_code,
     });
   };
 
@@ -96,7 +102,17 @@ const EditUser = () => {
     setErrors(null);
   };
 
+  const getAllCountry = async () => {
+    try {
+      const res = await AxiosInstance.get("/api/country");
+      setCountryList(res.data.data);
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+
   useEffect(() => {
+    getAllCountry();
     getUser();
   }, []);
 
@@ -107,7 +123,9 @@ const EditUser = () => {
           <Card className="overflow-visible">
             <SuiBox p={2}>
               <SuiBox>
-                <SuiTypography variant="h5">Add new user</SuiTypography>
+                <SuiTypography variant="h5">
+                  Fill up the fields below to update user
+                </SuiTypography>
 
                 <SuiBox mt={3}>
                   <Grid container spacing={3}>
@@ -162,6 +180,37 @@ const EditUser = () => {
                         label="confirm password"
                         placeholder="confirm your password"
                       />
+                    </Grid>
+                  </Grid>
+                </SuiBox>
+
+                <SuiBox mt={3}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <SuiBox mb={3}>
+                        <SuiBox
+                          mb={1}
+                          ml={0.5}
+                          lineHeight={0}
+                          display="inline-block"
+                        >
+                          <SuiTypography
+                            component="label"
+                            variant="caption"
+                            fontWeight="bold"
+                            textTransform="capitalize"
+                          >
+                            Country Code
+                          </SuiTypography>
+                        </SuiBox>
+                        <SuiSelect
+                          defaultValue={{
+                            value: "short_name",
+                            label: "Select Country Code : ex SA",
+                          }}
+                          options={countryList}
+                        />
+                      </SuiBox>
                     </Grid>
                   </Grid>
                 </SuiBox>

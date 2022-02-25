@@ -23,7 +23,7 @@ import Card from "@mui/material/Card";
 import SuiBox from "components/SuiBox";
 // import SuiButton from "components/SuiButton";
 
-import UserInfo from "./components/UserInfo";
+import UserForm from "./components/UserForm";
 
 const CreateUser = () => {
   return (
@@ -32,7 +32,7 @@ const CreateUser = () => {
         <Grid item xs={12} lg={8}>
           <Card className="overflow-visible">
             <SuiBox p={2}>
-              <UserInfo />
+              <UserForm />
             </SuiBox>
           </Card>
         </Grid>
