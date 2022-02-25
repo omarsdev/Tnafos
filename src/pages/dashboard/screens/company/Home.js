@@ -1,21 +1,50 @@
 import React, { useState, useEffect } from "react";
 
+import Header from "../../components/Header"
+
 import { AxiosInstance } from "api";
+import SuiBox from "components/SuiBox";
+import SuiTypography from "components/SuiTypography";
+import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 
-const Home = () => {
-  const getCompanyInfo = async () => {
-    await AxiosInstance.get("/api/dashboard/company")
-      .then((res) => {
-        console.log(res.data.data);
-      })
-      .catch((err) => {});
-  };
+const Home = ({ company }) => {
+  return (<>
+    <Header name={company.name} type={company.type} />
+    <SuiBox mt={10}>
+      <ProfileInfoCard
+        title="profile information"
+        description={company.bio}
+        info={{
+          type: company.type,
+          Name: company.name,
+          Email: company.email,
+          establishment_year: company.establishment_year,
+          telephone: company.telephone,
+          Address: company.address,
+          total_employees: company.total_employees
+        }}
+        // social={[
+        //   {
+        //     link: "https://www.facebook.com/CreativeTim/",
+        //     icon: <FacebookIcon />,
+        //     color: "facebook",
+        //   },
+        //   {
+        //     link: "https://twitter.com/creativetim",
+        //     icon: <TwitterIcon />,
+        //     color: "twitter",
+        //   },
+        //   {
+        //     link: "https://www.instagram.com/creativetimofficial/",
+        //     icon: <InstagramIcon />,
+        //     color: "instagram",
+        //   },
+        // ]}
+        action={{ route: "company/edit", tooltip: "Edit Profile" }}
+      />
+    </SuiBox>
 
-  useEffect(() => {
-    getCompanyInfo();
-  }, []);
-
-  return <div>Company Home</div>;
+  </>);
 };
 
 // // Soft UI Dashboard PRO React components

@@ -11,7 +11,7 @@ import {
 import { AxiosInstance } from "../../api";
 
 import { UserDataContext, useSize } from "context";
-import { Center, HStack, Spinner } from "@chakra-ui/react";
+
 import {
   useSoftUIController,
   setMiniSidenav,
@@ -33,6 +33,7 @@ import EstimateLayout from "./screens/estimates/EstimateLayout";
 import InvoicesLayout from "./screens/invoices/InvoicesLayout";
 import ServiceLayout from "./screens/services/ServiceLayout";
 import UserLayout from "./screens/services/ServiceLayout";
+import { Box, CircularProgress } from "@mui/material";
 
 const DashboardLayout = () => {
   const match = useRouteMatch();
@@ -111,9 +112,12 @@ const DashboardLayout = () => {
       </Switch>
     </>
   ) : (
-    <Center h="100vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
-    </Center>
+    // <Center h="100vh" w="100%">
+    //   <Spinner size="xl" color="#F8B916" />
+    // </Center>
+    <Box sx={{ display: 'flex', height: "100vh", justifyContent: 'center', alignItems: 'center' }}>
+      <CircularProgress color="info" />
+    </Box>
   );
 };
 
