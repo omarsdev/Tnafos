@@ -18,6 +18,7 @@
     "@v1v2/chakra": "^1.1.0",
     "axios": "^0.21.4",
     "chroma-js": "^2.4.2",
+    "country-list": "^2.2.0",
     "feather-icons": "^4.28.0",
     "focus-visible": "^5.2.0",
     "formik": "^2.2.9",
