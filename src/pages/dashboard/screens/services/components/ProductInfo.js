@@ -13,8 +13,11 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { AlertContext } from "../../../../../context/AlertContext";
+
+import { useForm } from "react-hook-form";
 import { AxiosInstance } from "../../../../../api/AxiosInstance";
 
 // @mui material components
@@ -29,14 +32,29 @@ import SuiTypography from "components/SuiTypography";
 import FormField from "./FormField";
 
 function ProductInfo() {
+  const { alertProviderValue } = useContext(AlertContext);
+  const { setAlert } = alertProviderValue;
   const [service, setService] = useState(null);
+
   const { uuid } = useParams();
   const history = useHistory();
+
+  const { register, handleSubmit, reset, control } = useForm();
+
+  const [errors, setErrors] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const resetHooksForm = (data) => {
+    reset({
+      price: data.price,
+      type: data.type,
+    });
+  };
 
   const getMyService = async () => {
     try {
       const res = await AxiosInstance.get(`/api/dashboard/service/${uuid}`);
-      //   resetHooksForm(res.data.data);
+      resetHooksForm(res.data.data);
       setService(res.data.data);
     } catch (err) {
       history.push("/dashboard/service");

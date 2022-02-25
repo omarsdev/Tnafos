@@ -62,16 +62,17 @@ const EditService = () => {
     }
   };
   return (
-    <SuiBox my={3}>
+    <SuiBox my={4}>
       <SuiBox mb={3}>
-        <Grid container spacing={3} alignItems="center">
+        <Grid container spacing={3} alignItems="center" mt={2}>
           <Grid item xs={12} lg={6}>
             <SuiTypography variant="h4" fontWeight="medium">
-              Make the changes below to update service
+              Make the changes below to update service.
             </SuiTypography>
           </Grid>
+
           <Grid item xs={12} lg={6}>
-            <SuiBox display="flex" justifyContent="flex-end">
+            <SuiBox display="flex" justifyContent="flex-end" mr={2}>
               <SuiButton
                 variant="gradient"
                 buttonColor="info"
@@ -83,30 +84,34 @@ const EditService = () => {
           </Grid>
         </Grid>
       </SuiBox>
+
       <Grid container spacing={3}>
-        <Card className="h-100">
-          <SuiBox p={3}>
-            <SuiTypography variant="h5" fontWeight="bold">
-              Service Image
-            </SuiTypography>
-            <SuiBox
-              component="img"
-              src={"https://bit.ly/sage-adebayo"}
-              alt="Segun Adebayo"
-              borderRadius="lg"
-              boxShadow="lg"
-              width="100%"
-              my={3}
-            />
-            <SuiBox display="flex">
-              <SuiBox mr={1}>
-                <SuiButton variant="gradient" buttonColor="info" size="small">
-                  edit
-                </SuiButton>
+        <Grid item xs={12} lg={4}>
+          <Card className="h-100">
+            <SuiBox p={3}>
+              <SuiTypography variant="h5" fontWeight="bold">
+                Service Image
+              </SuiTypography>
+              <SuiBox
+                component="img"
+                src={"https://bit.ly/sage-adebayo"}
+                alt="Segun Adebayo"
+                borderRadius="lg"
+                boxShadow="lg"
+                width="100%"
+                my={3}
+              />
+              <SuiBox display="flex">
+                <SuiBox mr={1}>
+                  <SuiButton variant="gradient" buttonColor="info" size="small">
+                    edit
+                  </SuiButton>
+                </SuiBox>
               </SuiBox>
             </SuiBox>
-          </SuiBox>
-        </Card>
+          </Card>
+        </Grid>
+
         <Grid item xs={12} lg={8}>
           <ProductInfo />
         </Grid>
