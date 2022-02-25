@@ -45,8 +45,6 @@ const UserForm = () => {
   const history = useHistory();
   const match = useRouteMatch();
 
-  const [countryList, setCountryList] = useState(null);
-
   const [agreement, setAgreemnet] = useState(true);
   const handleSetAgremment = () => setAgreemnet(!agreement);
 
@@ -336,7 +334,7 @@ const UserForm = () => {
               <SuiButton
                 variant="gradient"
                 buttonColor="dark"
-                onClick={handleSubmit(addUser)}
+                onClick={addUser}
               >
                 add user
               </SuiButton>
