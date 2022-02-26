@@ -1,6 +1,6 @@
 // TODO purchase for incoming and outgoing
 
-import React, { useState, useEffect, useContext, useLayoutEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   useRouteMatch,
   Route,
@@ -11,7 +11,6 @@ import {
 import { AxiosInstance } from "../../api";
 
 import { UserDataContext, useSize } from "context";
-import { Center, HStack, Spinner } from "@chakra-ui/react";
 import {
   useSoftUIController,
   setMiniSidenav,
@@ -38,7 +37,8 @@ const DashboardLayout = () => {
   const match = useRouteMatch();
 
   const [controller, dispatch] = useSoftUIController();
-  const { miniSidenav, direction, layout, openConfigurator, sidenavColor } = controller;
+  const { miniSidenav, direction, layout, openConfigurator, sidenavColor } =
+    controller;
 
   const { dataProviderValue } = useContext(UserDataContext);
   const { userData, setUserData } = dataProviderValue;
@@ -68,7 +68,7 @@ const DashboardLayout = () => {
   };
 
   useEffect(() => {
-    setTransparentSidenav(dispatch, false)
+    setTransparentSidenav(dispatch, false);
     if (userData) return;
     fetchTokenMe();
     removeForwardSlashFromUrl();
@@ -105,16 +105,18 @@ const DashboardLayout = () => {
         <Route path={`${match.path}/company`} component={CompanyLayout} />
         <Route path={`${match.path}/user`} component={UserLayout} />
         <Route path={`${match.path}/service`} component={ServiceLayout} />
-        <Route path={`${match.path}/purchase-requests`} component={PurchaseRequestsLayout} />
+        <Route
+          path={`${match.path}/purchase-requests`}
+          component={PurchaseRequestsLayout}
+        />
         <Route path={`${match.path}/estimates`} component={EstimateLayout} />
         <Route path={`${match.path}/invoices`} component={InvoicesLayout} />
       </Switch>
     </>
-  ) : (
-    <Center h="100vh" w="100%">
-      <Spinner size="xl" color="#F8B916" />
-    </Center>
-  );
+  ) : null;
+  // <Center h="100vh" w="100%">
+  //   <Spinner size="xl" color="#F8B916" />
+  // </Center>
 };
 
 export default DashboardLayout;
