@@ -93,27 +93,27 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <ErrorBoundary FallbackComponent={FallBack} onError={errorHandler}>
-        <ChakraProvider theme={chakraTheme}>
-          <UserDataContextProvider>
-            <AlertContextProvider>
-              <SizeContextProvider>
-                <Router>
-                  <Switch>
-                    <Route exact path="/" component={Homepage} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
-                    <Route path="/dashboard" component={DashboardLayout} />
-                    <Route path="/:search" component={SearchLayout} />
-                    {/* 
+        {/* <ChakraProvider theme={chakraTheme}> */}
+        <UserDataContextProvider>
+          <AlertContextProvider>
+            <SizeContextProvider>
+              <Router>
+                <Switch>
+                  <Route exact path="/" component={Homepage} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/register" component={Register} />
+                  <Route path="/dashboard" component={DashboardLayout} />
+                  <Route path="/:search" component={SearchLayout} />
+                  {/* 
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />
                   <Route path="*" component={E404} /> */}
-                  </Switch>
-                </Router>
-              </SizeContextProvider>
-            </AlertContextProvider>
-          </UserDataContextProvider>
-        </ChakraProvider>
+                </Switch>
+              </Router>
+            </SizeContextProvider>
+          </AlertContextProvider>
+        </UserDataContextProvider>
+        {/* </ChakraProvider> */}
       </ErrorBoundary>
     </ThemeProvider>
   );
