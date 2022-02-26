@@ -79,14 +79,14 @@ const Register = () => {
         validationSchema={validation[0]}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, isSubmitting, handleChange }) => (
+        {({ values, errors, touched, isSubmitting }) => (
           <Form id={formId} autoComplete="off">
             <FormData formData={{
               values,
               touched,
               formField,
               errors,
-            }} handleChange={handleChange} />
+            }} />
             <SuiBox display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
               <SuiTypography
