@@ -16,7 +16,7 @@ import {
 import { Link, useHistory } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 
-import { SecondaryButton, PrimaryButton } from "../../../components";
+import { SecondaryButton, PrimaryButton } from "components/button";
 import { UserDataContext } from "../../../context";
 import { removeUserSession } from "../../../utils";
 
