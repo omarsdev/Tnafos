@@ -28,10 +28,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
+import SuiSelect from "components/SuiSelect";
 import SuiButton from "components/SuiButton";
 
-import { Typography } from "@mui/material";
+import { getNameList } from "country-list";
 
 import { checkout, initialValue, validation } from "./schema/form";
 import FormField from "./FormField";
@@ -144,75 +144,76 @@ const UserForm = () => {
               />
             </SuiBox>
           </SuiBox>
-          <SuiBox>
-            <FormField
-              type={phone_number.type}
-              label={phone_number.label}
-              name={phone_number.name}
-              value={phoneNumberV}
-              placeholder={phone_number.placeholder}
-              error={errors.phone_number && touched.phone_number}
-              success={phoneNumberV.length > 0 && !errors.phone_number}
-            />
-            <FormField
-              type={email.type}
-              label={email.label}
-              name={email.name}
-              value={emailV}
-              placeholder={email.placeholder}
-              error={errors.email && touched.email}
-              success={emailV.length > 0 && !errors.email}
-            />
-            <FormField
-              type={password.type}
-              label={password.label}
-              name={password.name}
-              value={passwordV}
-              placeholder={password.placeholder}
-              error={errors.password && touched.password}
-              success={passwordV.length > 0 && !errors.password}
-            />
-            <FormField
-              type={password_confirmation.type}
-              label={password_confirmation.label}
-              name={password_confirmation.name}
-              value={passwordConfirmationV}
-              placeholder={password_confirmation.placeholder}
-              error={
-                errors.password_confirmation && touched.password_confirmation
-              }
-              success={
-                passwordConfirmationV.length > 0 &&
-                !errors.password_confirmation
-              }
-            />
+
+          <SuiBox display="flex" flexDirection="row" width="100%">
+            <SuiBox mr={1} width="100%">
+              <FormField
+                type={phone_number.type}
+                label={phone_number.label}
+                name={phone_number.name}
+                value={phoneNumberV}
+                placeholder={phone_number.placeholder}
+                error={errors.phone_number && touched.phone_number}
+                success={phoneNumberV.length > 0 && !errors.phone_number}
+              />
+            </SuiBox>
+
+            <SuiBox mr={1} width="100%">
+              <FormField
+                type={email.type}
+                label={email.label}
+                name={email.name}
+                value={emailV}
+                placeholder={email.placeholder}
+                error={errors.email && touched.email}
+                success={emailV.length > 0 && !errors.email}
+              />
+            </SuiBox>
           </SuiBox>
 
-          {/* <SuiBox mt={2}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <SuiBox mb={3}>
-                <SuiBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
-                  <SuiTypography
-                    component="label"
-                    variant="caption"
-                    fontWeight="bold"
-                    textTransform="capitalize"
-                  >
-                    Country Code
-                  </SuiTypography>
-                </SuiBox>
-                <SuiSelect
-                  defaultValue={{
-                    value: "short_name",
-                    label: "Select Country Code : ex SA",
-                  }}
-                  options={countryList}
-                />
-              </SuiBox>
-            </Grid>
-          </Grid>
-        </SuiBox> */}
+          <SuiBox display="flex" flexDirection="row" width="100%">
+            <SuiBox mr={1} width="100%">
+              <FormField
+                type={password.type}
+                label={password.label}
+                name={password.name}
+                value={passwordV}
+                placeholder={password.placeholder}
+                error={errors.password && touched.password}
+                success={passwordV.length > 0 && !errors.password}
+              />
+            </SuiBox>
+
+            <SuiBox mr={1} width="100%">
+              <FormField
+                type={password_confirmation.type}
+                label={password_confirmation.label}
+                name={password_confirmation.name}
+                value={passwordConfirmationV}
+                placeholder={password_confirmation.placeholder}
+                error={
+                  errors.password_confirmation && touched.password_confirmation
+                }
+                success={
+                  passwordConfirmationV.length > 0 &&
+                  !errors.password_confirmation
+                }
+              />
+            </SuiBox>
+          </SuiBox>
+
+          <SuiBox display="flex" flexDirection="row" width="100%">
+            <SuiBox mr={1} width="100%">
+              <SuiSelect
+                name="country_code"
+                options={Object.keys(getNameList()).map((entry) => ({
+                  value: getNameList()[entry],
+                  label: entry,
+                }))}
+                label="country code"
+              />
+            </SuiBox>
+          </SuiBox>
         </SuiBox>
       </>
     );
@@ -224,7 +225,7 @@ const UserForm = () => {
       validationSchema={validation[0]}
       onSubmit={addUser}
     >
-      {({ values, errors, touched, isSubmitting }) => (
+      {({ values, errors, touched, isSubmitting, handleChange }) => (
         <Form id={formId} autoComplete="off">
           <FormData
             formData={{
@@ -233,6 +234,7 @@ const UserForm = () => {
               formField,
               errors,
             }}
+            handleChange={handleChange}
           />
 
           <SuiBox

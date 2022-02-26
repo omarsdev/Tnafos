@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
 // @mui material components
 import Checkbox from "@mui/material/Checkbox";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
@@ -26,8 +26,7 @@ import RegisterCover from "assets/images/register.jpg";
 
 import { getNameList } from "country-list";
 
-import { checkout, initialValue, validation } from "./schema/form"
-
+import { checkout, initialValue, validation } from "./schema/form";
 
 const Register = () => {
   const { formId, formField } = checkout;
@@ -39,8 +38,8 @@ const Register = () => {
   const handleSetAgremment = () => setAgreemnet(!agreement);
 
   const handleSubmit = async (values, actions) => {
-    let value = values
-    value.country_code = values.country_code.value
+    let value = values;
+    value.country_code = values.country_code.value;
 
     const res = await apiAuth(value, "register");
     if (res.success) {
@@ -51,11 +50,11 @@ const Register = () => {
       setUserSession(res.token, maxAge);
       history.push("/dashboard/company/create");
     } else {
-      let error = {}
+      let error = {};
       for (const key in res.error.errors) {
-        let msg = ''
-        res.error.errors[key].forEach(element => {
-          msg += element + " "
+        let msg = "";
+        res.error.errors[key].forEach((element) => {
+          msg += element + " ";
         });
         error[key] = msg;
       }
@@ -97,7 +96,13 @@ const Register = () => {
               >
                 &nbsp;&nbsp;I agree the&nbsp;
               </SuiTypography>
-              <SuiTypography component="a" href="#" variant="button" fontWeight="bold" textGradient>
+              <SuiTypography
+                component="a"
+                href="#"
+                variant="button"
+                fontWeight="bold"
+                textGradient
+              >
                 Terms and Conditions
               </SuiTypography>
             </SuiBox>
@@ -136,12 +141,20 @@ const Register = () => {
         )}
       </Formik>
     </IllustrationLayout>
-  )
-}
+  );
+};
 
 const FormData = ({ formData }) => {
   const { formField, values, errors, touched } = formData;
-  const { first_name, last_name, phone_number, email, password, password_confirmation, country_code } = formField;
+  const {
+    first_name,
+    last_name,
+    phone_number,
+    email,
+    password,
+    password_confirmation,
+    country_code,
+  } = formField;
   const {
     first_name: firstNameV,
     last_name: lastNameV,
@@ -149,7 +162,7 @@ const FormData = ({ formData }) => {
     email: emailV,
     password: passwordV,
     password_confirmation: passwordConfirmationV,
-    country_code: countryCodeV
+    country_code: countryCodeV,
   } = values;
 
   return (
@@ -179,14 +192,14 @@ const FormData = ({ formData }) => {
         </SuiBox>
       </SuiBox>
       <SuiBox>
-
-
-
         <SuiBox display="flex" flexDirection="row" width="100%">
           <SuiBox mr={1} width="100%">
             <SuiSelect
               name="country_code"
-              options={Object.keys(getNameList()).map((entry) => ({ value: getNameList()[entry], label: entry }))}
+              options={Object.keys(getNameList()).map((entry) => ({
+                value: getNameList()[entry],
+                label: entry,
+              }))}
               label="country code"
             />
           </SuiBox>
@@ -228,12 +241,13 @@ const FormData = ({ formData }) => {
           value={passwordConfirmationV}
           placeholder={password_confirmation.placeholder}
           error={errors.password_confirmation && touched.password_confirmation}
-          success={passwordConfirmationV.length > 0 && !errors.password_confirmation}
+          success={
+            passwordConfirmationV.length > 0 && !errors.password_confirmation
+          }
         />
       </SuiBox>
     </>
-  )
-}
+  );
+};
 
-
-export default Register
+export default Register;

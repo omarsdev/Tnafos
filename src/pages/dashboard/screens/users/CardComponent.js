@@ -47,7 +47,7 @@ const CardComponent = ({ userData }) => {
         </Grid>
       </SuiBox>
 
-      <SuiBox m={0} pl={4} mb={2}>
+      <SuiBox m={0} mb={2}>
         <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
           <SuiTypography
             variant="body2"
@@ -70,7 +70,10 @@ const CardComponent = ({ userData }) => {
             justifyContent="center"
             textAlign="center"
           >
-            <IoIosMail />
+            <span>
+              <IoIosMail />
+            </span>
+
             {userData?.email}
           </SuiTypography>
         </SuiBox>
@@ -82,7 +85,9 @@ const CardComponent = ({ userData }) => {
             justifyContent="center"
             textAlign="center"
           >
-            <BsFillTelephoneFill />
+            <span>
+              <BsFillTelephoneFill />
+            </span>
             {userData.phone_number}
           </SuiTypography>
         </SuiBox>
