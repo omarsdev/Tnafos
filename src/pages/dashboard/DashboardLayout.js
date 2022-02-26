@@ -32,7 +32,7 @@ import PurchaseRequestsLayout from "./screens/purchaseRequests/PurchaseRequestsL
 import EstimateLayout from "./screens/estimates/EstimateLayout";
 import InvoicesLayout from "./screens/invoices/InvoicesLayout";
 import ServiceLayout from "./screens/services/ServiceLayout";
-import UserLayout from "./screens/services/ServiceLayout";
+import UserLayout from "./screens/users/UserLayout";
 import { Box, CircularProgress } from "@mui/material";
 
 const DashboardLayout = () => {
