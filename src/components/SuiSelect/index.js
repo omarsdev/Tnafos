@@ -28,24 +28,63 @@ import colors from "assets/theme/base/colors";
 
 // Custom styles for SuiSelect
 import styles from "components/SuiSelect/styles";
+import { ErrorMessage, useField } from 'formik';
+import SuiBox from 'components/SuiBox';
+import SuiTypography from 'components/SuiTypography';
 
-const SuiSelect = forwardRef(({ size, error, success, ...rest }, ref) => {
+const SuiSelect = forwardRef(({ name, size, error, success, label, ...rest }, ref) => {
+  const [field, meta, helpers] = useField(name)
   const { light } = colors;
 
   return (
-    <Select
-      {...rest}
-      ref={ref}
-      styles={styles(size, error, success)}
-      theme={(theme) => ({
-        ...theme,
-        colors: {
-          ...theme.colors,
-          primary25: light.main,
-          primary: light.main,
-        },
-      })}
-    />
+    // <Select
+    //   {...rest}
+    //   ref={ref}
+    //   styles={styles(size, error, success)}
+    //   theme={(theme) => ({
+    //     ...theme,
+    //     colors: {
+    //       ...theme.colors,
+    //       primary25: light.main,
+    //       primary: light.main,
+    //     },
+    //   })}
+    // />
+    <SuiBox>
+      <SuiBox ml={0.5} lineHeight={0} display="inline-block">
+        <SuiTypography
+          component="label"
+          variant="caption"
+          fontWeight="bold"
+          textTransform="capitalize"
+        >
+          {label}
+        </SuiTypography>
+      </SuiBox>
+      <Select
+        {...rest}
+        name={name}
+        value={field.value}
+        onChange={(value) => helpers.setValue(value)}
+        // options={options}
+        onBlur={() => helpers.setTouched(true)}
+        // ref={ref}
+        styles={styles(size, error, success)}
+        theme={(theme) => ({
+          ...theme,
+          colors: {
+            ...theme.colors,
+            primary25: light.main,
+            primary: light.main,
+          },
+        })}
+      />
+      <SuiBox mt={0.5}>
+        <SuiTypography component="div" variant="caption" color="error">
+          <ErrorMessage name={name} />
+        </SuiTypography>
+      </SuiBox>
+    </SuiBox>
   );
 });
 

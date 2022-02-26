@@ -51,6 +51,13 @@ export const checkout = {
       errorMsg: "Password is required.",
       invalidMsg: "Your password doesn't match.",
     },
+    country_code: {
+      name: "country_code",
+      label: "Country",
+      type: "text",
+      errorMsg: "Country is required.",
+      invalidMsg: "Your country doesn't match.",
+    },
   },
 }
 
@@ -62,6 +69,7 @@ const {
     phone_number,
     password,
     password_confirmation,
+    country_code
   },
 } = checkout;
 
@@ -72,6 +80,7 @@ export const initialValue = {
   [email.name]: "",
   [password.name]: "",
   [password_confirmation.name]: "",
+  [country_code.name]: ""
 };
 
 export const validation = [

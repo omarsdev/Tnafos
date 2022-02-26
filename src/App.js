@@ -13,7 +13,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import { AlertContextProvider } from "./context/AlertContext";
-import { SizeContextProvider, UserDataContextProvider } from "./context";
+import { UserDataContextProvider } from "./context";
 import { ErrorBoundary } from "react-error-boundary";
 import { FallBack } from "./components/FallBack";
 
@@ -32,21 +32,21 @@ const App = () => {
         {/* <ChakraProvider> */}
         <UserDataContextProvider>
           <AlertContextProvider>
-            <SizeContextProvider>
-              <Router>
-                <Switch>
-                  <Route exact path="/" component={Homepage} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/register" component={Register} />
-                  <Route path="/dashboard" component={DashboardLayout} />
-                  {/* 
+            {/* <SizeContextProvider>x */}
+            <Router>
+              <Switch>
+                <Route exact path="/" component={Homepage} />
+                <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
+                <Route path="/dashboard" component={DashboardLayout} />
+                {/* 
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />
                   <Route path="/:search" component={SearchLayout} />
                   <Route path="*" component={E404} /> */}
-                </Switch>
-              </Router>
-            </SizeContextProvider>
+              </Switch>
+            </Router>
+            {/* </SizeContextProvider> */}
           </AlertContextProvider>
         </UserDataContextProvider>
         {/* </ChakraProvider> */}

@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard PRO React - v2.0.0
+* Soft UI Dashboard PRO React - v3.0.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -13,7 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React from "react";
+import React from 'react'
+
 // react-routers components
 import { Link } from "react-router-dom";
 
@@ -44,10 +45,7 @@ function ProfileInfoCard({ title, description, info, social, action }) {
   Object.keys(info).forEach((el) => {
     if (el.match(/[A-Z\s]+/)) {
       const uppercaseLetter = Array.from(el).find((i) => i.match(/[A-Z]+/));
-      const newElement = el.replace(
-        uppercaseLetter,
-        ` ${uppercaseLetter.toLowerCase()}`
-      );
+      const newElement = el.replace(uppercaseLetter, ` ${uppercaseLetter.toLowerCase()}`);
 
       labels.push(newElement);
     } else {
@@ -61,41 +59,64 @@ function ProfileInfoCard({ title, description, info, social, action }) {
   // Render the card info items
   const renderItems = labels.map((label, key) => (
     <SuiBox key={label} display="flex" py={1} pr={2}>
-      <SuiTypography
-        variant="button"
-        fontWeight="bold"
-        textTransform="capitalize"
-      >
+      <SuiTypography variant="button" fontWeight="bold" textTransform="capitalize">
         {label}: &nbsp;
       </SuiTypography>
-      <SuiTypography variant="button" fontWeight="regular" textColor="text">
+      <SuiTypography variant="button" fontWeight="regular" color="text">
         &nbsp;{values[key]}
       </SuiTypography>
     </SuiBox>
   ));
 
+  // Render the card social media icons
+  // const renderSocial = social.map(({ link, icon, color }) => (
+  //   <SuiBox
+  //     key={color}
+  //     component="a"
+  //     href={link}
+  //     target="_blank"
+  //     rel="noreferrer"
+  //     fontSize={size.lg}
+  //     color={socialMediaColors[color].main}
+  //     pr={1}
+  //     pl={0.5}
+  //     lineHeight={1}
+  //   >
+  //     {icon}
+  //   </SuiBox>
+  // ));
+
   return (
-    <Card className="h-100">
-      <SuiBox
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        pt={2}
-        px={2}
-      >
-        <SuiTypography
-          variant="h6"
-          fontWeight="medium"
-          textTransform="capitalize"
-        >
+    <Card sx={{ height: "100%" }}>
+      <SuiBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
+        <SuiTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
+        </SuiTypography>
+        <SuiTypography component={Link} to={action.route} variant="body2" color="secondary">
+          <Tooltip title={action.tooltip} placement="top">
+            <Icon>edit</Icon>
+          </Tooltip>
         </SuiTypography>
       </SuiBox>
       <SuiBox p={2}>
+        <SuiBox mb={2} lineHeight={1}>
+          <SuiTypography variant="button" color="text" fontWeight="regular">
+            {description}
+          </SuiTypography>
+        </SuiBox>
         <SuiBox opacity={0.3}>
           <Divider />
         </SuiBox>
-        <SuiBox>{renderItems}</SuiBox>
+        <SuiBox>
+          {renderItems}
+          {/* <SuiBox display="flex" py={1} pr={2}>
+            <SuiTypography variant="button" fontWeight="bold" textTransform="capitalize">
+              social: &nbsp;
+            </SuiTypography>
+            {renderSocial}
+          </SuiBox>
+        */}
+        </SuiBox>
       </SuiBox>
     </Card>
   );
@@ -106,6 +127,7 @@ ProfileInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   info: PropTypes.objectOf(PropTypes.string).isRequired,
+  // social: PropTypes.arrayOf(PropTypes.object).isRequired,
   action: PropTypes.shape({
     route: PropTypes.string.isRequired,
     tooltip: PropTypes.string.isRequired,

@@ -11,20 +11,22 @@ import CircularProgress from '@mui/material/CircularProgress';
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
 import SuiButton from "components/SuiButton";
+import FormField from "components/FormField";
+import SuiSelect from "components/SuiSelect";
+
+import { apiAuth } from "api";
+import { setUserSession } from "utils";
 
 // Authentication layout components
 import IllustrationLayout from "../../components/IllustrationLayout";
 
 // Images
 import RegisterCover from "assets/images/register.jpg";
-import { apiAuth } from "api";
-import { setUserSession } from "utils";
-import { Typography } from "@mui/material";
+
+import { getNameList } from "country-list";
 
 import { checkout, initialValue, validation } from "./schema/form"
-import FormField from "components/FormField";
 
 
 const Register = () => {
@@ -37,7 +39,10 @@ const Register = () => {
   const handleSetAgremment = () => setAgreemnet(!agreement);
 
   const handleSubmit = async (values, actions) => {
-    const res = await apiAuth(values, "register");
+    let value = values
+    value.country_code = values.country_code.value
+
+    const res = await apiAuth(value, "register");
     if (res.success) {
       let maxAge = 2;
       // if (values.rememberMe) {
@@ -74,14 +79,14 @@ const Register = () => {
         validationSchema={validation[0]}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, isSubmitting }) => (
+        {({ values, errors, touched, isSubmitting, handleChange }) => (
           <Form id={formId} autoComplete="off">
             <FormData formData={{
               values,
               touched,
               formField,
               errors,
-            }} />
+            }} handleChange={handleChange} />
             <SuiBox display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
               <SuiTypography
@@ -97,7 +102,13 @@ const Register = () => {
               </SuiTypography>
             </SuiBox>
             <SuiBox mt={4} mb={1}>
-              <SuiButton variant="gradient" color="info" size="large" fullWidth type="submit">
+              <SuiButton
+                variant="gradient"
+                color="info"
+                size="large"
+                fullWidth
+                type="submit"
+              >
                 Register
                 {isSubmitting && (
                   <SuiBox ml={1}>
@@ -130,7 +141,7 @@ const Register = () => {
 
 const FormData = ({ formData }) => {
   const { formField, values, errors, touched } = formData;
-  const { first_name, last_name, phone_number, email, password, password_confirmation } = formField;
+  const { first_name, last_name, phone_number, email, password, password_confirmation, country_code } = formField;
   const {
     first_name: firstNameV,
     last_name: lastNameV,
@@ -138,6 +149,7 @@ const FormData = ({ formData }) => {
     email: emailV,
     password: passwordV,
     password_confirmation: passwordConfirmationV,
+    country_code: countryCodeV
   } = values;
 
   return (
@@ -166,16 +178,31 @@ const FormData = ({ formData }) => {
           />
         </SuiBox>
       </SuiBox>
-      <SuiBox >
-        <FormField
-          type={phone_number.type}
-          label={phone_number.label}
-          name={phone_number.name}
-          value={phoneNumberV}
-          placeholder={phone_number.placeholder}
-          error={errors.phone_number && touched.phone_number}
-          success={phoneNumberV.length > 0 && !errors.phone_number}
-        />
+      <SuiBox>
+
+
+
+        <SuiBox display="flex" flexDirection="row" width="100%">
+          <SuiBox mr={1} width="100%">
+            <SuiSelect
+              name="country_code"
+              options={Object.keys(getNameList()).map((entry) => ({ value: getNameList()[entry], label: entry }))}
+              label="country code"
+            />
+          </SuiBox>
+          <SuiBox ml={1} width="100%">
+            <FormField
+              type={phone_number.type}
+              label={phone_number.label}
+              name={phone_number.name}
+              value={phoneNumberV}
+              placeholder={phone_number.placeholder}
+              error={errors.phone_number && touched.phone_number}
+              success={phoneNumberV.length > 0 && !errors.phone_number}
+            />
+          </SuiBox>
+        </SuiBox>
+
         <FormField
           type={email.type}
           label={email.label}
@@ -207,5 +234,6 @@ const FormData = ({ formData }) => {
     </>
   )
 }
+
 
 export default Register

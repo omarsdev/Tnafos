@@ -31,7 +31,8 @@ import PurchaseRequestsLayout from "./screens/purchaseRequests/PurchaseRequestsL
 import EstimateLayout from "./screens/estimates/EstimateLayout";
 import InvoicesLayout from "./screens/invoices/InvoicesLayout";
 import ServiceLayout from "./screens/services/ServiceLayout";
-import UserLayout from "./screens/services/ServiceLayout";
+import UserLayout from "./screens/users/UserLayout";
+import { Box, CircularProgress } from "@mui/material";
 
 const DashboardLayout = () => {
   const match = useRouteMatch();
@@ -113,10 +114,18 @@ const DashboardLayout = () => {
         <Route path={`${match.path}/invoices`} component={InvoicesLayout} />
       </Switch>
     </>
-  ) : null;
-  // <Center h="100vh" w="100%">
-  //   <Spinner size="xl" color="#F8B916" />
-  // </Center>
+  ) : (
+    <Box
+      sx={{
+        display: "flex",
+        height: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <CircularProgress color="info" />
+    </Box>
+  );
 };
 
 export default DashboardLayout;
