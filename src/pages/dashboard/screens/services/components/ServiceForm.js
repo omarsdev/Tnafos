@@ -47,13 +47,15 @@ const ServiceForm = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const createService = async (data) => {
+  const createService = async (values, actions) => {
+    let data = values;
+    data.category_id = values.category_id.value;
+
     try {
       const res = await AxiosInstance.post(
         "/api/dashboard/service/create",
         data
       );
-
       setAlert({
         message: "new service has been added!",
         type: "success",
@@ -65,6 +67,15 @@ const ServiceForm = () => {
         message: `${err.response.data.message}`,
         type: "error",
       });
+
+      //   for (const key in res.error.errors) {
+      //     let msg = "";
+      //     res.error.errors[key].forEach((element) => {
+      //       msg += element + " ";
+      //     });
+      //     error[key] = msg;
+      //   }
+      //   actions.setErrors(error);
     }
   };
 
