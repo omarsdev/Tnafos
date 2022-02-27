@@ -3,7 +3,7 @@ import React from "react";
 import * as Yup from "yup";
 
 export const checkout = {
-  formId: "register-form",
+  formId: "adduser-form",
   formField: {
     first_name: {
       name: "first_name",

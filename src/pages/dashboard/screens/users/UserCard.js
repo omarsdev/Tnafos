@@ -139,7 +139,7 @@ const UserCard = () => {
                       history.push(`${match.path}/edituser`);
                     }}
                   >
-                    ASDASDASD
+                    Edit user
                   </SuiButton>
                 </Grid>
               </SuiBox>

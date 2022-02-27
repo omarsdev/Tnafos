@@ -70,7 +70,6 @@ const UserHome = () => {
                 variant="gradient"
                 buttonColor={"#F8B916"}
                 size="small"
-                // on_Hover={{ buttonColor: "#F8B916" }}
               >
                 + new user
               </SuiButton>
