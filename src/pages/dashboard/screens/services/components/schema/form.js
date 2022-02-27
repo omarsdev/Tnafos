@@ -62,6 +62,6 @@ export const validation = [
     [name.name]: Yup.string().required(name.errorMsg),
     [description.name]: Yup.string().required(description.errorMsg),
     [type.name]: Yup.string().required(type.errorMsg),
-    [price.name]: Yup.string().required(price.errorMsg).price(price.invalidMsg),
+    [price.name]: Yup.string().required(price.errorMsg),
   }),
 ];
