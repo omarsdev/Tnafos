@@ -27,6 +27,7 @@ import RegisterCover from "assets/images/register.jpg";
 import { getNameList } from "country-list";
 
 import { checkout, initialValue, validation } from "./schema/form";
+import { object } from "prop-types";
 
 const Register = () => {
   const { formId, formField } = checkout;

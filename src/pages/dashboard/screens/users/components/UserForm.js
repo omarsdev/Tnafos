@@ -106,6 +106,7 @@ const UserForm = () => {
       email,
       password,
       password_confirmation,
+      country_code,
     } = formField;
     const {
       first_name: firstNameV,
@@ -114,6 +115,7 @@ const UserForm = () => {
       email: emailV,
       password: passwordV,
       password_confirmation: passwordConfirmationV,
+      country_code: countryCodeV,
     } = values;
 
     return (
