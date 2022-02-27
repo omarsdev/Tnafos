@@ -35,8 +35,8 @@ export const checkout = {
       errorMsg: "type is required.",
       invalidMsg: "type is invalid",
     },
-    categoru_id: {
-      name: "categoru_id",
+    category_id: {
+      name: "category_id",
       label: "Category",
       type: "text",
       errorMsg: "Category is required.",
@@ -46,7 +46,7 @@ export const checkout = {
 };
 
 const {
-  formField: { name, description, price, type, categoru_id },
+  formField: { name, description, price, type, category_id },
 } = checkout;
 
 export const initialValue = {
