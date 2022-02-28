@@ -13,6 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import React from "react";
+
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
@@ -43,14 +45,14 @@ function DocsMenu({ routes, open, close, mobileMenu }) {
             onClick={mobileMenu ? undefined : close}
           >
             <SuiBox display="flex" py={0.25}>
-              {typeof icon === "string" ? <Icon>{icon}</Icon> : <SuiBox mt={0.5}>{icon}</SuiBox>}
+              {/* {typeof icon === "string" ? <Icon>{icon}</Icon> : <SuiBox mt={0.5}>{icon}</SuiBox>} */}
               <SuiBox pl={2} lineHeight={0}>
                 <SuiTypography variant="h6" fontWeight="bold">
                   {name}
                 </SuiTypography>
-                <SuiTypography variant="button" fontWeight="regular" color="text">
+                {/* <SuiTypography variant="button" fontWeight="regular" color="text">
                   {description}
-                </SuiTypography>
+                </SuiTypography> */}
               </SuiBox>
             </SuiBox>
           </MenuItem>

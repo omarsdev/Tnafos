@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard PRO React - v3.0.0
+* Soft UI Dashboard PRO React - v2.0.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -36,11 +36,11 @@ import DefaultNavbarMenu from "examples/Navbars/DefaultNavbar/DefaultNavbarMenu"
 import curved8 from "assets/images/curved-images/curved8.jpg";
 
 function AuthenticationMenu({ routes, open, close, mobileMenu }) {
+  const [menu, setMenu] = useState(false);
   const renderAuthenticationMenuRoute = (routeName) =>
     routes.map(({ key, name, collapse }) => {
       let template;
 
-      const [menu, setMenu] = useState(false);
       const openMenu = ({ currentTarget }) => setMenu(currentTarget);
       const closeMenu = () => setMenu(false);
 
@@ -48,23 +48,25 @@ function AuthenticationMenu({ routes, open, close, mobileMenu }) {
         template = (
           <MenuItem key={key} onMouseEnter={openMenu} onMouseLeave={closeMenu}>
             {name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Icon sx={{ fontWeight: "bold", ml: "auto" }}>chevron_right</Icon>
+            <Icon className=" font-bold ml-auto">chevron_right</Icon>
             <DefaultNavbarMenu
               placement="right-start"
               open={menu}
               close={closeMenu}
               style={{ paddingLeft: "1.25rem" }}
             >
-              {collapse.map(({ key: collapseKey, name: collapseName, route }) => (
-                <MenuItem
-                  component={Link}
-                  to={route}
-                  key={collapseKey}
-                  onClick={mobileMenu ? undefined : close}
-                >
-                  {collapseName}
-                </MenuItem>
-              ))}
+              {collapse.map(
+                ({ key: collapseKey, name: collapseName, route }) => (
+                  <MenuItem
+                    component={Link}
+                    to={route}
+                    key={collapseKey}
+                    onClick={mobileMenu ? undefined : close}
+                  >
+                    {collapseName}
+                  </MenuItem>
+                )
+              )}
             </DefaultNavbarMenu>
           </MenuItem>
         );
@@ -120,36 +122,31 @@ function AuthenticationMenu({ routes, open, close, mobileMenu }) {
             width="100%"
             height="100%"
             opacity={0.8}
-            bgColor="info"
-            variant="gradient"
+            backgroundColor="info"
+            backgroundGradient
           />
           <SuiBox position="relative" textAlign="center">
             <SuiBox
-              bgColor="white"
+              backgroundColor="white"
               width="3rem"
               height="3rem"
               borderRadius="50%"
-              shadow="md"
+              shadow="regular"
               display="flex"
               justifyContent="center"
               alignItems="center"
               mx="auto"
               mb={1}
             >
-              <Icon
-                sx={({ functions: { linearGradient }, palette: { gradients, transparent } }) => ({
-                  backgroundImage: `${linearGradient(
-                    gradients.info.main,
-                    gradients.info.state
-                  )} !important`,
-                  WebkitBackgroundClip: "text !important",
-                  WebkitTextFillColor: `${transparent.main} !important`,
-                })}
-              >
+              <Icon className=" text-gradient-info" fontSize="default">
                 star
               </Icon>
             </SuiBox>
-            <SuiTypography variant="body1" fontWeight="medium" color="white">
+            <SuiTypography
+              variant="body1"
+              fontWeight="medium"
+              textColor="white"
+            >
               Explore our utilities pages
             </SuiTypography>
           </SuiBox>

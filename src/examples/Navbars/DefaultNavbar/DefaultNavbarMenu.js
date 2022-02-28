@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -66,10 +66,13 @@ DefaultNavbarMenu.defaultProps = {
 // Typechecking props for the DefaultNavbarMenu
 DefaultNavbarMenu.propTypes = {
   open: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
-  close: PropTypes.oneOfType([PropTypes.func, PropTypes.bool, PropTypes.object]).isRequired,
+  close: PropTypes.oneOfType([PropTypes.func, PropTypes.bool, PropTypes.object])
+    .isRequired,
   placement: PropTypes.string,
   children: PropTypes.node.isRequired,
-  style: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  style: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
 };
 
 export default DefaultNavbarMenu;

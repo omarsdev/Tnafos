@@ -47,6 +47,8 @@ const ServiceForm = () => {
   const [err, setErr] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
+  //   const [categoriesList, setCategoriesList] = useState(null);
+
   const createService = async (values, actions) => {
     let data = values;
     data.category_id = values.category_id.value;
@@ -165,6 +167,26 @@ const ServiceForm = () => {
 
           <SuiBox display="flex" flexDirection="row" width="100%">
             <SuiBox mr={1} width="100%">
+              {/* <SuiBox mb={3}>
+                <SuiBox mb={1} ml={0.5} lineHeight={0} display="inline-block">
+                  <SuiTypography
+                    component="label"
+                    variant="caption"
+                    fontWeight="bold"
+                    textTransform="capitalize"
+                  >
+                    Category id
+                  </SuiTypography>
+                </SuiBox>
+                <SuiSelect
+                  defaultValue={{
+                    value: `${categoriesList?.uuid}`,
+                    label: `${categoriesList?.name}`,
+                  }}
+                  options={categoriesList}
+                />
+              </SuiBox> */}
+
               {/* <SuiSelect
                 name="category_id"
                 options={Object.keys(getNameList()).map((entry) => ({
