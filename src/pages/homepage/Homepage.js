@@ -10,6 +10,9 @@ import SuiTypography from "components/SuiTypography";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
+// Custom styles for the BaiseLayout
+import styles from "layouts/authentication/components/BasicLayout/styles";
+
 // Soft UI Dashboard PRO React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
@@ -20,7 +23,8 @@ import { UserDataContext } from "../../context";
 import { getToken } from "../../utils";
 import { TnafosHomeLogo } from "../../assets/icons";
 
-const Homepage = () => {
+const Homepage = ({ image }) => {
+  const classes = styles({ image });
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
   const { setUserData } = dataProviderValue;
@@ -62,7 +66,7 @@ const Homepage = () => {
   return (
     <PageLayout background="white">
       <Navbar />
-      <Card>
+      <SuiBox customClass={classes.basicLayout}>
         <SuiBox p={3} mb={1} textAlign="center">
           <TnafosHomeLogo />
         </SuiBox>
@@ -112,7 +116,7 @@ const Homepage = () => {
             <Text>GitHub</Text>
           </SimpleGrid> */}
         </SuiBox>
-      </Card>
+      </SuiBox>
     </PageLayout>
     // <h1>Home Page</h1>
   );
