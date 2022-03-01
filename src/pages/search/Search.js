@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-// import  Navbar  from "./components/navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 
 // import Company from "./screens/Company";
 // import Service from "./screens/Service";
@@ -9,14 +9,15 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 // import { Navbar, CardItem, MyList, MainCompany } from "./components";
 
-import { SearchDataContextProvider } from "../../context";
+import { SearchDataContextProvider } from "../../context/SearchDataContext";
 
 const Search = () => {
   let match = useRouteMatch();
 
   return (
     <SearchDataContextProvider>
-      {/* <Navbar /> */}
+      <Navbar />
+      <h1> ggg</h1>
 
       {/* <Box h={"100vh"} w={"100%"}>
         <Navbar />
