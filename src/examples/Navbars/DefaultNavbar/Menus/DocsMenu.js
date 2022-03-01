@@ -45,14 +45,22 @@ function DocsMenu({ routes, open, close, mobileMenu }) {
             onClick={mobileMenu ? undefined : close}
           >
             <SuiBox display="flex" py={0.25}>
-              {/* {typeof icon === "string" ? <Icon>{icon}</Icon> : <SuiBox mt={0.5}>{icon}</SuiBox>} */}
+              {typeof icon === "string" ? (
+                <Icon>{icon}</Icon>
+              ) : (
+                <SuiBox mt={0.5}>{icon}</SuiBox>
+              )}
               <SuiBox pl={2} lineHeight={0}>
                 <SuiTypography variant="h6" fontWeight="bold">
                   {name}
                 </SuiTypography>
-                {/* <SuiTypography variant="button" fontWeight="regular" color="text">
+                <SuiTypography
+                  variant="button"
+                  fontWeight="regular"
+                  color="text"
+                >
                   {description}
-                </SuiTypography> */}
+                </SuiTypography>
               </SuiBox>
             </SuiBox>
           </MenuItem>
