@@ -5,13 +5,15 @@ import { useHistory } from "react-router-dom";
 // Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
+import SuiInput from "components/SuiInput";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
 
 // Custom styles for the BaiseLayout
-import styles from "layouts/authentication/components/BasicLayout/styles";
+import styles from "layouts/authentication/components/styles";
 
 // Soft UI Dashboard PRO React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
@@ -25,6 +27,7 @@ import { TnafosHomeLogo } from "../../assets/icons";
 
 const Homepage = ({ image }) => {
   const classes = styles({ image });
+  // const classes = styles({ transparentNavbar, absolute, light, isMini });
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
   const { setUserData } = dataProviderValue;
@@ -66,59 +69,82 @@ const Homepage = ({ image }) => {
   return (
     <PageLayout background="white">
       <Navbar />
-      <SuiBox customClass={classes.basicLayout}>
-        <SuiBox p={3} mb={1} textAlign="center">
-          <TnafosHomeLogo />
+
+      <SuiBox p={3} mb={1} textAlign="center">
+        <TnafosHomeLogo />
+      </SuiBox>
+      <SuiBox p={3} mb={1} textAlign="center">
+        <SuiBox pr={1}>
+          <SuiInput
+            placeholder="Type here..."
+            withIcon={{ icon: "search", direction: "left" }}
+            customClass={classes.navbar_input}
+            onKeyPress={handleKeypress}
+          />
+          <Icon className={"text-dark"} onClick={searchHandler} />
         </SuiBox>
-        <SuiBox p={3} mb={1} textAlign="center">
-          {/* <InputGroup alignItems={"center"} justifyContent={"center"} size="lg">
-            <Input
-              width={{
-                base: "18em",
-                sm: "22em",
-                md: "28em",
-                lg: "32em",
-              }}
-              borderBottomLeftRadius={"99em"}
-              borderTopLeftRadius={"99em"}
-              focusBorderColor="#F8B916"
-              borderColor="#AEAEAE"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              onKeyPress={handleKeypress}
-            />
-            <InputRightAddon
-              // children={<SearchIcon color="white" />}
-              cursor={"pointer"}
-              borderBottomRightRadius={"99em"}
-              borderTopRightRadius={"99em"}
-              bgColor={"#F8B916"}
-              borderColor={"#F8B916"}
-              onClick={searchHandler}
-            />
-          </InputGroup> */}
-        </SuiBox>
-        <SuiBox p={3} mb={1} textAlign="center">
-          {/* <SimpleGrid
-            columns={{ sm: 2, md: 4, lg: 5 }}
-            spacing={8}
-            // direction={["column", "row"]}
-            // justify={"center"}
-            justifyContent={"center"}
-            justifyItems={"center"}
-            justifySelf={"center"}
-            alignItems={"center"}
-          >
-            <Text>Products</Text>
-            <Text>Services</Text>
-            <Text>Categories</Text>
-            <Text>Blog</Text>
-            <Text>GitHub</Text>
-          </SimpleGrid> */}
+
+        <SuiBox
+          display="flex"
+          justifyContent="center"
+          flexWrap="wrap"
+          mb={3}
+          mt={1}
+        >
+          <SuiBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              Products
+            </SuiTypography>
+          </SuiBox>
+          <SuiBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              Services
+            </SuiTypography>
+          </SuiBox>
+          <SuiBox mr={{ xs: 0, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              Categories
+            </SuiTypography>
+          </SuiBox>
+          <SuiBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              Blog
+            </SuiTypography>
+          </SuiBox>
+          <SuiBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              GitHub
+            </SuiTypography>
+          </SuiBox>
         </SuiBox>
       </SuiBox>
+      <SuiBox p={3} mb={1} textAlign="center"></SuiBox>
     </PageLayout>
-    // <h1>Home Page</h1>
   );
 };
 
