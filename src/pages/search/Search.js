@@ -1,13 +1,13 @@
 import React from "react";
-
-import { Box, Flex, VStack } from "@chakra-ui/react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import Company from "./screens/Company";
-import Service from "./screens/Service";
-import Vender from "./screens/Vender";
+// import  Navbar  from "./components/navbar/Navbar";
 
-import { Navbar, CardItem, MyList, MainCompany } from "./components";
+// import Company from "./screens/Company";
+// import Service from "./screens/Service";
+// import Vender from "./screens/Vender";
+
+// import { Navbar, CardItem, MyList, MainCompany } from "./components";
 
 import { SearchDataContextProvider } from "../../context";
 
@@ -16,7 +16,9 @@ const Search = () => {
 
   return (
     <SearchDataContextProvider>
-      <Box h={"100vh"} w={"100%"}>
+      {/* <Navbar /> */}
+
+      {/* <Box h={"100vh"} w={"100%"}>
         <Navbar />
         <Box h={48} w="full" backgroundColor={"blue.300"} />
         <Flex flexDirection={{ base: "column-reverse", md: "row" }}>
@@ -60,8 +62,8 @@ const Search = () => {
             </Flex>
           </Box>
         </Flex>
-        {/* </Box> */}
-      </Box>
+        
+      </Box> */}
     </SearchDataContextProvider>
   );
 };
