@@ -6,8 +6,7 @@ import Register from "./pages/auth/screens/register/Register";
 import Homepage from "./pages/homepage/Homepage";
 import DashboardLayout from "./pages/dashboard/DashboardLayout";
 // import E404 from "./pages/common/E404";
-// import SearchLayout from "./pages/search/SearchLayout";
-
+import Search from "./pages/search/Search";
 
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -39,6 +38,7 @@ const App = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/dashboard" component={DashboardLayout} />
+                <Route path="/:search" component={Search} />
                 {/* 
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />

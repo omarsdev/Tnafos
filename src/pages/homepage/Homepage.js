@@ -7,16 +7,11 @@ import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 import SuiInput from "components/SuiInput";
 
-// @mui material components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
+import { CircularProgress, Icon } from "@mui/material";
 
 // Custom styles for the BaiseLayout
 import styles from "layouts/authentication/components/styles";
 
-// Soft UI Dashboard PRO React example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 import { Navbar } from "./components";
 
@@ -64,7 +59,19 @@ const Homepage = ({ image }) => {
     }
   }, []);
 
-  if (loading) return <h1>Spinner </h1>;
+  if (loading)
+    return (
+      <SuiBox
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress color="info" />
+      </SuiBox>
+    );
 
   return (
     <PageLayout background="white">
