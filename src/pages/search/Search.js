@@ -2,69 +2,74 @@ import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
+import MyList from "./components/MyList";
 
-// import Company from "./screens/Company";
-// import Service from "./screens/Service";
-// import Vender from "./screens/Vender";
+import Company from "./screens/Company";
+import Service from "./screens/Service";
+import Vender from "./screens/Vender";
 
-// import { Navbar, CardItem, MyList, MainCompany } from "./components";
+import Grid from "@mui/material/Grid";
+
+import SuiBox from "components/SuiBox";
+
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 
 import { SearchDataContextProvider } from "../../context/SearchDataContext";
 
 const Search = () => {
-  let match = useRouteMatch();
+  let match = useRouteMatch({ stickyNavbar });
 
   return (
     <SearchDataContextProvider>
-      <Navbar />
-      <h1> ggg</h1>
-
-      {/* <Box h={"100vh"} w={"100%"}>
+      <DashboardLayout>
         <Navbar />
-        <Box h={48} w="full" backgroundColor={"blue.300"} />
-        <Flex flexDirection={{ base: "column-reverse", md: "row" }}>
-          <Box flex="1" m="10">
-            <Switch>
-              <Route exact path={`${match.path}`} component={Service} />
-              <Route
-                path={`${match.path}/:serviceId/:companyId`}
-                component={Company}
-              />
-              <Route path={`${match.path}/:serviceId`} component={Vender} />
-            </Switch>
-          </Box>
-          <Box mt="10">
-            <Flex>
-              <Box
-                display={{ base: "none", md: "flex" }}
-                w="2px"
-                h="700px"
-                backgroundColor={"brand.black"}
-              />
-              <Flex w="100%" m="10" justifyContent="center">
-                <Switch>
-                  <Route exact path={`${match.path}`}>
-                    <MyList />
-                  </Route>
-                  <Route path={`${match.path}/:serviceId/:companyId`}>
-                    <MainCompany />
-                  </Route>
-                  <Route path={`${match.path}/:serviceId`}>
-                    <Flex
-                      flexDirection={{ base: "column-reverse", md: "column" }}
-                    >
-                      <CardItem isSelected={true} />
-                      <Box h="1rem" />
-                      <MyList />
-                    </Flex>
-                  </Route>
-                </Switch>
-              </Flex>
-            </Flex>
-          </Box>
-        </Flex>
-        
-      </Box> */}
+        <SuiBox mt={4}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={3}>
+              <Switch>
+                <Route exact path={`${match.path}`}>
+                  <MyList />
+                </Route>
+                <Route path={`${match.path}/:serviceId/:companyId`}>
+                  <MainCompany />
+                </Route>
+                <Route path={`${match.path}/:serviceId`}>
+                  <SuiBox mb={3}>
+                    <Grid container spacing={3}>
+                      <Grid item xs={12}>
+                        <CardItem isSelected={true} />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <MyList />
+                      </Grid>
+                    </Grid>
+                  </SuiBox>
+                </Route>
+              </Switch>
+            </Grid>
+
+            <Grid item xs={12} lg={9}>
+              <SuiBox mb={3}>
+                <Grid container spacing={3}>
+                  <Grid item xs={12}>
+                    <Switch>
+                      <Route exact path={`${match.path}`} component={Service} />
+                      <Route
+                        path={`${match.path}/:serviceId/:companyId`}
+                        component={Company}
+                      />
+                      <Route
+                        path={`${match.path}/:serviceId`}
+                        component={Vender}
+                      />
+                    </Switch>
+                  </Grid>
+                </Grid>
+              </SuiBox>
+            </Grid>
+          </Grid>
+        </SuiBox>
+      </DashboardLayout>
     </SearchDataContextProvider>
   );
 };
