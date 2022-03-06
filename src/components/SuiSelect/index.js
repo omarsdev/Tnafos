@@ -36,22 +36,22 @@ const SuiSelect = forwardRef(({ name, size, error, success, label, options, ...r
   const [field, meta, helpers] = useField(name)
   const { light } = colors;
 
-  const [optionsData, setOptionsData] = useState(null)
+  // const [optionsData, setOptionsData] = useState(null)
 
-  useEffect(() => {
-    let newData = [];
-    options.forEach(element => {
-      if (typeof element !== 'object' || element === null) {
-        newData.push({ label: element, value: element })
-      }
-    });
-    if (newData.length === 0)
-      setOptionsData(options);
-    else
-      setOptionsData(newData);
-  }, [])
+  // useEffect(() => {
+  //   let newData = [];
+  //   options.forEach(element => {
+  //     if (typeof element !== 'object' || element === null) {
+  //       newData.push({ label: element, value: element })
+  //     }
+  //   });
+  //   if (newData.length === 0)
+  //     setOptionsData(options);
+  //   else
+  //     setOptionsData(newData);
+  // }, [options])
 
-  return optionsData && (
+  return (
     // <Select
     //   {...rest}
     //   ref={ref}
@@ -83,7 +83,7 @@ const SuiSelect = forwardRef(({ name, size, error, success, label, options, ...r
         onChange={(value) => {
           helpers.setValue(value);
         }}
-        options={optionsData}
+        options={options}
         onBlur={() => helpers.setTouched(true)}
         ref={ref}
         styles={styles(size, error, success)}
