@@ -57,7 +57,6 @@ const Outgoing = () => {
         rows: rowData
       });
     } catch (err) {
-      console.log(err);
     }
   };
 

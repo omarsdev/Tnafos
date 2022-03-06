@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { forwardRef } from "react";
 
@@ -32,11 +32,26 @@ import { ErrorMessage, useField } from 'formik';
 import SuiBox from 'components/SuiBox';
 import SuiTypography from 'components/SuiTypography';
 
-const SuiSelect = forwardRef(({ name, size, error, success, label, ...rest }, ref) => {
+const SuiSelect = forwardRef(({ name, size, error, success, label, options, ...rest }, ref) => {
   const [field, meta, helpers] = useField(name)
   const { light } = colors;
 
-  return (
+  const [optionsData, setOptionsData] = useState(null)
+
+  useEffect(() => {
+    let newData = [];
+    options.forEach(element => {
+      if (typeof element !== 'object' || element === null) {
+        newData.push({ label: element, value: element })
+      }
+    });
+    if (newData.length === 0)
+      setOptionsData(options);
+    else
+      setOptionsData(newData);
+  }, [])
+
+  return optionsData && (
     // <Select
     //   {...rest}
     //   ref={ref}
@@ -65,10 +80,12 @@ const SuiSelect = forwardRef(({ name, size, error, success, label, ...rest }, re
         {...rest}
         name={name}
         value={field.value}
-        onChange={(value) => helpers.setValue(value)}
-        // options={options}
+        onChange={(value) => {
+          helpers.setValue(value);
+        }}
+        options={optionsData}
         onBlur={() => helpers.setTouched(true)}
-        // ref={ref}
+        ref={ref}
         styles={styles(size, error, success)}
         theme={(theme) => ({
           ...theme,

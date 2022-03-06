@@ -61,11 +61,11 @@ const EditUser = () => {
   const getUser = async () => {
     try {
       const res = await AxiosInstance.get(`/api/dashboard/user/${uuid}`);
-      console.log(res);
+
       resetHooksForm(res.data.data);
       setCard(res.data.data);
     } catch (err) {
-      console.log(err.response.data);
+
       history.push("/dashboard/user");
     }
   };
@@ -78,7 +78,6 @@ const EditUser = () => {
         `/api/dashboard/user/${uuid}/update`,
         data
       );
-      console.log(res);
       setIsUpdating(false);
       setAlert({
         message: "User Has Been Updated!",
@@ -106,7 +105,6 @@ const EditUser = () => {
       const res = await AxiosInstance.get("/api/country");
       setCountryList(res.data.data);
     } catch (err) {
-      console.log(err.response);
     }
   };
 

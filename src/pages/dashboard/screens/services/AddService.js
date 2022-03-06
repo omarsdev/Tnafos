@@ -82,7 +82,6 @@ const AddService = () => {
       const res = await AxiosInstance.get("/api/category");
       setCategoriesList(res.data.data);
     } catch (err) {
-      console.log(err.response);
       history.push("/dashboard/service");
     }
   };

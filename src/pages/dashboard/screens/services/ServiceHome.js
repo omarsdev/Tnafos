@@ -40,7 +40,7 @@ const ServiceHome = () => {
       const res = await AxiosInstance.get("/api/dashboard/service");
       setServicesList(res.data.data);
     } catch (err) {
-      console.log(err);
+
     }
   };
 

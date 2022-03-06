@@ -69,7 +69,6 @@ const UserForm = () => {
       });
       history.push("/dashboard/user");
     } catch (error) {
-      console.log(error.response.data);
       setErr(error.response.data.errors);
       setAlert({
         message: `${error.response.data.message}`,
@@ -89,7 +88,6 @@ const UserForm = () => {
       const res = await AxiosInstance.get("/api/country");
       setCountryList(res.data.data);
     } catch (err) {
-      console.log(err.response);
     }
   };
 

@@ -21,7 +21,6 @@ const CompanyLayout = () => {
     await AxiosInstance.get("/api/dashboard/company")
       .then((res) => {
         setCompany(res.data.data);
-        console.log(res.data.data);
       })
       .catch((err) => { });
   };

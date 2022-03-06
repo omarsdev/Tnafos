@@ -43,7 +43,6 @@ export const CardItem = ({ data, isSelected, isCompany }) => {
     if (match.params.serviceId) {
       if (myListData.findIndex((x) => x.uuid === vendorsList?.uuid) !== -1) {
         setAddedToMyList(true);
-        console.log(vendorsList.uuid);
       }
     } else {
       if (myListData.findIndex((x) => x.uuid === data.uuid) !== -1) {

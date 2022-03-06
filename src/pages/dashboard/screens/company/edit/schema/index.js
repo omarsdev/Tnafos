@@ -109,12 +109,19 @@ export const checkout = {
       placeholder: "eg. home",
       errorMsg: "Location is required.",
     },
+    total_employees: {
+      name: "total_employees",
+      label: "total employees",
+      type: "text",
+      placeholder: "eg. 5",
+      errorMsg: "employees number is required.",
+    }
   },
 }
 
 const {
   formField: {
-    address, bio, city, cr, email, establishment_year, fax, location, name, po_box, telephone, type, vat, website, zip_code
+    address, bio, city, cr, email, establishment_year, fax, location, name, po_box, telephone, type, vat, website, zip_code, total_employees
   },
 } = checkout;
 
@@ -151,7 +158,8 @@ export const validation = [
     [location.name]: Yup.string().required(location.errorMsg),
     [name.name]: Yup.string().required(name.errorMsg),
     [po_box.name]: Yup.string().required(po_box.errorMsg),
-    [type.name]: Yup.string().required(type.errorMsg),
+    [total_employees.name]: Yup.string().required(total_employees.errorMsg),
+    // [type.name]: Yup.required(type.errorMsg),
     [vat.name]: Yup.string().required(vat.errorMsg),
     [website.name]: Yup.string().required(website.errorMsg),
     [zip_code.name]: Yup.string().required(zip_code.errorMsg),

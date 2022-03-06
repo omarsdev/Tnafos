@@ -21,9 +21,9 @@ export const Service = () => {
       .then((res) => {
         if (!res.data.links.next) setHasMore(false);
         setSearchResult((arr) => arr.concat(res.data.data));
-        // console.log(res.data.data);
+
       })
-      .catch((e) => console.log(e));
+    // .catch((e) => );
     setCurrentPage(currentPage + 1);
   };
 
@@ -42,7 +42,6 @@ export const Service = () => {
   return (
     <>
       <Text fontSize="35px">Services</Text>
-      {/* <button onClick={() => console.log(searchResult)}>Click me</button> */}
       {/* <InfiniteScroll
         dataLength={searchResult.length}
         next={handleNextPage}
@@ -73,7 +72,7 @@ export const Service = () => {
         </SimpleGrid>
       </InfiniteScroll>
       {/* <Box mt="40px"></Box> */}
-      {/* <button onClick={() => console.log(searchResult)}>Click me</button> */}
+
       {/* <Box mt="40px"> */}
       {/* <InfiniteScroll
           dataLength={searchResult.length}

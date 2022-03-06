@@ -46,11 +46,11 @@ const UserCard = () => {
   const getUser = async () => {
     try {
       const res = await AxiosInstance.get(`/api/dashboard/user/${uuid}`);
-      console.log(res);
+
       // resetHooksForm(res.data.data);
       setCard(res.data.data);
     } catch (err) {
-      console.log(err.response.data);
+
       history.push("/dashboard/user");
     }
   };
@@ -58,8 +58,6 @@ const UserCard = () => {
   useEffect(() => {
     getUser();
   }, []);
-
-  console.log(match)
 
   return (
     !card ? null : (

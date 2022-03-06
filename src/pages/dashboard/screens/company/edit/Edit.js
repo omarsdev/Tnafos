@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { Form, Formik } from 'formik'
 import SuiBox from 'components/SuiBox'
-import { Checkbox, CircularProgress } from '@mui/material'
+import { Checkbox, CircularProgress, Grid } from '@mui/material'
 import SuiTypography from 'components/SuiTypography'
 import SuiButton from 'components/SuiButton'
 import FormField from 'components/FormField'
@@ -14,6 +14,12 @@ import SuiSelect from 'components/SuiSelect'
 import { apiGetData } from 'api/getData/getData'
 
 import { getNameList } from "country-list";
+
+import SideNav from './components/SideNav'
+import Header from './components/Header'
+import BasicInfo from './components/BasicInfo'
+
+import { companyTypeAsArray } from "constants/company"
 
 
 const Edit = ({ company, setCompany }) => {
@@ -63,7 +69,6 @@ const Edit = ({ company, setCompany }) => {
       setCompany(res.data.data)
       history.push("/dashboard/company");
     }).catch((err) => {
-      // console.log(err.response.data.errors)
       let error = {}
       for (const key in err.response.data.errors) {
         let msg = ''
@@ -80,42 +85,103 @@ const Edit = ({ company, setCompany }) => {
     getApiCategory();
   }, [])
 
+  // return category && country && (
+  //   <Formik
+  //     initialValues={initialValue(company)}
+  //     validationSchema={validation[0]}
+  //     onSubmit={handleSubmit}
+  //   >
+  //     {({ values, errors, touched, isSubmitting }) => (
+  //       <Form id={formId} autoComplete="off">
+
+  //         <FormData formData={{
+  //           values,
+  //           touched,
+  //           formField,
+  //           errors,
+  //         }} category={category} country={country} />
+
+  //         <SuiBox mt={4} mb={1}>
+  //           <SuiButton
+  //             variant="gradient"
+  //             color="info"
+  //             size="large"
+  //             fullWidth
+  //             type="submit"
+  //           >
+  //             Register
+  //             {isSubmitting && (
+  //               <SuiBox ml={1}>
+  //                 <CircularProgress size={20} />
+  //               </SuiBox>
+  //             )}
+  //           </SuiButton>
+  //         </SuiBox>
+
+  //       </Form>
+  //     )}
+  //   </Formik>
+  // )
   return category && country && (
-    <Formik
-      initialValues={initialValue(company)}
-      validationSchema={validation[0]}
-      onSubmit={handleSubmit}
-    >
-      {({ values, errors, touched, isSubmitting }) => (
-        <Form id={formId} autoComplete="off">
+    <SuiBox mt={4}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} lg={3}>
+          <SideNav />
+        </Grid>
+        <Grid item xs={12} lg={9}>
+          <Formik
+            initialValues={initialValue(company)}
+            validationSchema={validation[0]}
+            onSubmit={handleSubmit}>
+            {({ values, errors, touched, isSubmitting }) => {
+              return (
+                <Form id={formId} autoComplete="off">
 
-          <FormData formData={{
-            values,
-            touched,
-            formField,
-            errors,
-          }} category={category} country={country} />
-
-          <SuiBox mt={4} mb={1}>
-            <SuiButton
-              variant="gradient"
-              color="info"
-              size="large"
-              fullWidth
-              type="submit"
-            >
-              Register
-              {isSubmitting && (
-                <SuiBox ml={1}>
-                  <CircularProgress size={20} />
-                </SuiBox>
-              )}
-            </SuiButton>
-          </SuiBox>
-
-        </Form>
-      )}
-    </Formik>
+                  <SuiBox mb={3}>
+                    <Grid container spacing={3}>
+                      <Grid item xs={12}>
+                        <Header />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <BasicInfo formData={{
+                          values,
+                          touched,
+                          formField,
+                          errors,
+                        }}
+                          category={category} country={country}
+                          companyType={companyTypeAsArray}
+                        />
+                        {/* <h1>asdasd</h1> */}
+                      </Grid>
+                      {/* 
+                  <Grid item xs={12}>
+                    <ChangePassword />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Authentication />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Accounts />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Notifications />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Sessions />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <DeleteAccount />
+                  </Grid> */}
+                    </Grid>
+                  </SuiBox>
+                </Form>
+              )
+            }}
+          </Formik>
+        </Grid>
+      </Grid>
+    </SuiBox >
   )
 }
 
