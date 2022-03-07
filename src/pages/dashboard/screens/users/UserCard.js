@@ -34,7 +34,6 @@ import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
 
 import { AxiosInstance } from "../../../../api";
-import EditUser from "./EditUser";
 
 const UserCard = () => {
   const history = useHistory();
@@ -135,10 +134,10 @@ const UserCard = () => {
                       buttonColor="info"
                       fullWidth
                       onClick={() => {
-                        history.push(`${match.path}/edituser`);
+                        history.push(`${match.url}/edituser`);
                       }}
                     >
-                      ASDASDASD
+                      Edit
                     </SuiButton>
                   </Grid>
                 </SuiBox>

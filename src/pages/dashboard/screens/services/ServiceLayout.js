@@ -17,9 +17,9 @@ const ServiceLayout = () => {
       <DashboardNavbar />
       <Switch>
         <Route exact path={`${match.path}`} component={ServiceHome} />
-        <Route path={`${match.path}/addservice`} component={AddService} />
+        <Route path={`${match.path}/add-service`} component={AddService} />
         <Route
-          path={`${match.path}/:uuid/editservice`}
+          path={`${match.path}/:uuid/edit-service`}
           component={EditService}
         />
         <Route path={`${match.path}/:uuid`} component={MyService} />

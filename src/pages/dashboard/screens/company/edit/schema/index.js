@@ -129,7 +129,9 @@ export const initialValue = (company) => {
   const init = {};
   for (const key in company) {
     if (typeof (company[key]) === "string") {
-      init[key] = company[key];
+      if (key === "type")
+        init[key] = { value: company[key], label: company[key] }
+      else init[key] = company[key];
     } else {
       if (key === "category")
         init.category_id = {

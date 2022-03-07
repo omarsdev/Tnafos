@@ -1,22 +1,5 @@
-/**
-=========================================================
-* Soft UI Dashboard PRO React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import React from "react";
 import { useRouteMatch, useHistory } from "react-router-dom";
-
-import { BsCurrencyDollar } from "react-icons/bs";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -30,6 +13,10 @@ import SuiButton from "components/SuiButton";
 const ServiceCard = ({ info }) => {
   const match = useRouteMatch();
   const history = useHistory();
+
+  const navigateViewScreen = () => {
+    history.push(`${match.url}/${info.uuid}`);
+  }
 
   return (
     <Card className="overflow-visible">
@@ -55,7 +42,7 @@ const ServiceCard = ({ info }) => {
             justifyContent="center"
             textAlign="center"
           >
-            <strong>{info?.name}</strong>{" "}
+            <strong>{info.name}</strong>
           </SuiTypography>
         </SuiBox>
         <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
@@ -65,7 +52,7 @@ const ServiceCard = ({ info }) => {
             justifyContent="center"
             textAlign="center"
           >
-            {info?.type}
+            {info.type}
           </SuiTypography>
         </SuiBox>
 
@@ -76,7 +63,7 @@ const ServiceCard = ({ info }) => {
             justifyContent="center"
             textAlign="center"
           >
-            $ {info?.price}
+            $ {info.price}
           </SuiTypography>
         </SuiBox>
 
@@ -90,11 +77,9 @@ const ServiceCard = ({ info }) => {
           <SuiButton
             buttonColor="light"
             alignItems="center"
-            onClick={() => {
-              history.push(`${match.url}/${info.uuid}`);
-            }}
+            onClick={navigateViewScreen}
           >
-            view{" "}
+            view
           </SuiButton>
         </SuiBox>
       </SuiBox>

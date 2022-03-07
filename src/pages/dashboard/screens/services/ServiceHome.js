@@ -64,7 +64,7 @@ const ServiceHome = () => {
           </SuiBox>
 
           <Stack spacing={1} direction="row">
-            <Link to={`${match.url}/addservice`} className="decoration-none">
+            <Link to={`${match.url}/add-service`} className="decoration-none">
               <SuiButton variant="gradient" buttonColor="info" size="small">
                 + new service
               </SuiButton>
