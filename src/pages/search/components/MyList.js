@@ -18,7 +18,7 @@ const MyList = () => {
   const { myListData } = myListDataProviderValue;
 
   return (
-    <Card dark>
+    <Card dark className="h-100">
       <SuiBox p={3}>
         <SuiTypography variant="h5" fontWeight="bold">
           My List

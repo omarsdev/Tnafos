@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import Navbar from "./components/navbar/Navbar";
+import DashboardNavbar from "./components/navbar/DashboardNavbar";
 import MyList from "./components/MyList";
 import MainCompany from "./components/MainCompany";
 import CardItem from "./components/CardItem";
@@ -24,10 +24,10 @@ const Search = () => {
   return (
     <SearchDataContextProvider>
       {/* <DashboardLayout> */}
-      <Navbar />
-
-      <SuiBox mt={4} px={4}>
-        <Grid container spacing={3}>
+      <DashboardNavbar />
+      <SuiBox px={4} my={4}>
+        <Grid container spacing={3} alignItems="baseline" mt={15}>
+          {/*page side's content */}
           <Grid item xs={12} sm={4} lg={3}>
             <Switch>
               <Route exact path={`${match.path}`}>
@@ -50,29 +50,22 @@ const Search = () => {
               </Route>
             </Switch>
           </Grid>
+
           <Divider />
+
+          {/* page content */}
           <Grid item xs={12} sm={8} lg={9}>
-            <SuiBox mb={3}>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Switch>
-                    <Route exact path={`${match.path}`} component={Service} />
-                    <Route
-                      path={`${match.path}/:serviceId/:companyId`}
-                      component={Company}
-                    />
-                    <Route
-                      path={`${match.path}/:serviceId`}
-                      component={Vender}
-                    />
-                  </Switch>
-                </Grid>
-              </Grid>
-            </SuiBox>
+            <Switch>
+              <Route exact path={`${match.path}`} component={Service} />
+              <Route
+                path={`${match.path}/:serviceId/:companyId`}
+                component={Company}
+              />
+              <Route path={`${match.path}/:serviceId`} component={Vender} />
+            </Switch>
           </Grid>
         </Grid>
       </SuiBox>
-
       {/* </DashboardLayout> */}
     </SearchDataContextProvider>
   );
