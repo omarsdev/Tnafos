@@ -27,7 +27,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 import PropTypes from "prop-types";
 
 // Custom styles for DashboardNavbar
-import styles from "examples/Navbars/DefaultNavbar/styles/defaultNavbar";
+// import styles from "examples/Navbars/DefaultNavbar/styles/defaultNavbar";
 
 // DefaultNavbar dropdown menus
 // import DocsMenu from "examples/Navbars/DefaultNavbar/Menus/DocsMenu";
