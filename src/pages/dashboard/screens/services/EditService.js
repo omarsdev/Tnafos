@@ -109,7 +109,7 @@ const EditService = () => {
                               variant="gradient"
                               color="dark"
                             >
-                              {isSubmitting ? "Loading..." : "Create"}
+                              {isSubmitting ? "Loading..." : "Update"}
                             </SuiButton>
 
                           </Grid>
