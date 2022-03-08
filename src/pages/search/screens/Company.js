@@ -20,7 +20,7 @@ const Company = () => {
     <Card>
       <SuiBox pt={2} px={2}>
         <SuiBox mb={0.5}>
-          <SuiTypography variant="h6" fontWeight="medium">
+          <SuiTypography variant="h5" fontWeight="bold">
             Projects
           </SuiTypography>
         </SuiBox>

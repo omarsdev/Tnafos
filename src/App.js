@@ -38,12 +38,9 @@ const App = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
                 <Route path="/dashboard" component={DashboardLayout} />
-                <Route path="/search" component={Search} />
-                {/* 
-                  <Route path="/register" component={Register} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/:search" component={SearchLayout} />
-                  <Route path="*" component={E404} /> */}
+                <Route path="/:search" component={Search} />
+
+                {/* <Route path="*" component={E404} />  */}
               </Switch>
             </Router>
             {/* </SizeContextProvider> */}

@@ -26,7 +26,7 @@ const Search = () => {
       {/* <DashboardLayout> */}
       <DashboardNavbar />
       <SuiBox px={4} my={4}>
-        <Grid container spacing={3} alignItems="baseline" mt={15}>
+        <Grid container spacing={3} mt={15}>
           {/*page side's content */}
           <Grid item xs={12} sm={4} lg={3}>
             <Switch>

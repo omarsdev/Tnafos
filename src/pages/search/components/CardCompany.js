@@ -4,9 +4,12 @@ import { Link, useRouteMatch } from "react-router-dom";
 
 import Login from "../../../assets/images/login.jpg";
 
+import { BsTelephone } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
+
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
+import Divider from "@mui/material/Divider";
 
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
@@ -16,31 +19,32 @@ const CardCompany = ({ data }) => {
   const match = useRouteMatch();
   return (
     <SuiBox py={3}>
-      <Card className="overflow-visible" outlined>
-        <SuiBox p={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={6} xl={5}>
+      <Card width="100">
+        <SuiBox px={2}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} lg={3}>
               <SuiBox
                 component="img"
                 src={Login}
                 alt="Segun Adebayo"
-                // objectFit="cover"
+                objectFit="cover"
                 // rounded="3xl"
                 boxShadow="lg"
                 borderRadius="lg"
                 width="100%"
+                hight="50%"
               />
             </Grid>
-            <Grid item xs={12} lg={5} className="mx-auto">
+            <Grid item xs={12} lg={9}>
               <SuiBox>
                 <SuiBox mb={1}>
-                  <SuiTypography variant="h3" fontWeight="bold">
-                    {data.companyName}
+                  <SuiTypography variant="h5" fontWeight="bold">
+                    {data.name}
                   </SuiTypography>
                 </SuiBox>
 
-                <SuiBox mt={3} mb={1} ml={0.5}>
-                  <SuiTypography variant="caption" fontWeight="bold">
+                <SuiBox mt={2} mb={1} ml={0.5}>
+                  <SuiTypography variant="caption" fontWeight="normal">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Voluptatum aut minima eaque repellat quia labore officia
                     placeat nobis maiores tempora, reiciendis deserunt cum
@@ -51,111 +55,63 @@ const CardCompany = ({ data }) => {
               </SuiBox>
 
               <SuiBox mt={3}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} lg={2}>
-                    <SuiBox
-                      mb={1}
-                      ml={0.5}
-                      lineHeight={0}
-                      display="inline-block"
-                    >
-                      <SuiBox mt={1}>
-                        <SuiTypography variant="h6" fontWeight="medium">
-                          5+
-                        </SuiTypography>
-                      </SuiBox>
-                      <SuiBox mb={1}>
-                        <SuiTypography variant="h5" fontWeight="medium">
-                          Years
-                        </SuiTypography>
-                      </SuiBox>
-                    </SuiBox>
+                <Grid container spacing={0.5} justifyContent="center">
+                  <Grid item xs={12} md={2}>
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      5+
+                    </SuiTypography>
+
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      Years
+                    </SuiTypography>
                   </Grid>
-                  <Grid item xs={12} lg={2}>
-                    <SuiBox
-                      mb={1}
-                      ml={0.5}
-                      lineHeight={0}
-                      display="inline-block"
-                    >
-                      <SuiBox mt={1}>
-                        <SuiTypography variant="h6" fontWeight="medium">
-                          4.6 <Icon className="">star</Icon>
-                        </SuiTypography>
-                      </SuiBox>
-                      <SuiBox mb={1}>
-                        <SuiTypography variant="h5" fontWeight="medium">
-                          Review
-                        </SuiTypography>
-                      </SuiBox>
-                    </SuiBox>
+                  <Divider dark />
+                  <Grid item xs={12} md={2}>
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      4.6 <AiFillStar />
+                    </SuiTypography>
+
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      Review
+                    </SuiTypography>
                   </Grid>
-                  <Grid item xs={12} lg={2}>
-                    <SuiBox
-                      mb={1}
-                      ml={0.5}
-                      lineHeight={0}
-                      display="inline-block"
-                    >
-                      <SuiBox mt={1}>
-                        <SuiTypography variant="h6" fontWeight="medium">
-                          60+
-                        </SuiTypography>
-                      </SuiBox>
-                      <SuiBox mb={1}>
-                        <SuiTypography variant="h5" fontWeight="medium">
-                          Client
-                        </SuiTypography>
-                      </SuiBox>
+                  <Grid item xs={12} md={2}>
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      60+
+                    </SuiTypography>
+                    <SuiBox mb={1}>
+                      <SuiTypography variant="h6" fontWeight="medium">
+                        Client
+                      </SuiTypography>
                     </SuiBox>
                   </Grid>
 
-                  <Grid item xs={12} lg={2}>
-                    <SuiBox
-                      mb={1}
-                      ml={0.5}
-                      lineHeight={0}
-                      display="inline-block"
-                    >
-                      <SuiBox mt={1}>
-                        <SuiTypography variant="h6" fontWeight="medium">
-                          97
-                        </SuiTypography>
-                      </SuiBox>
-                      <SuiBox mb={1}>
-                        <SuiTypography variant="h5" fontWeight="medium">
-                          Project
-                        </SuiTypography>
-                      </SuiBox>
+                  <Grid item xs={12} md={2}>
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      97
+                    </SuiTypography>
+                    <SuiBox mb={1}>
+                      <SuiTypography variant="h6" fontWeight="medium">
+                        Project
+                      </SuiTypography>
                     </SuiBox>
                   </Grid>
 
-                  <Grid item xs={12} lg={5} container>
+                  <Grid item xs={12} md={3}>
                     <Link to={`${match.url}/${data.uuid}`}>
-                      <SuiButton
-                        variant="gradient"
-                        buttonColor="info"
-                        fullWidth
-                      >
+                      <SuiButton variant="gradient" color="info" size="small">
                         VIEW PROFILE
                       </SuiButton>
                     </Link>
                   </Grid>
 
-                  <Grid item xs={12} lg={2}>
-                    <SuiBox
-                      mb={1}
-                      ml={0.5}
-                      lineHeight={0}
-                      display="inline-block"
-                    >
-                      <SuiBox mt={1}>
-                        <Icon className="">star</Icon>
+                  <Grid item xs={12} md={1}>
+                    <Link to="#">
+                      <SuiBox py={1} lineHeight={0} ml={1}>
+                        <BsTelephone />
                       </SuiBox>
-                    </SuiBox>
+                    </Link>
                   </Grid>
-
-                  {/* <PhoneCall w="5" h="5" /> */}
                 </Grid>
               </SuiBox>
             </Grid>

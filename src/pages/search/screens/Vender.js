@@ -32,29 +32,29 @@ const Vender = () => {
     handleShowServiceApi();
   }, [match.params.serviceId, setVendorsList]);
   return (
-    <SuiBox my={3}>
-      <Card>
-        <SuiBox lineHeight={1}>
-          <SuiTypography variant="h5" fontWeight="medium">
-            List of all venders
-          </SuiTypography>
-        </SuiBox>
+    // <SuiBox>
+    <Card className="overflow-visible">
+      <SuiBox lineHeight={1} p={3}>
+        <SuiTypography variant="h5" fontWeight="medium">
+          List of all venders
+        </SuiTypography>
+      </SuiBox>
 
-        <Card mb={3}>
-          {!vendorsList ? (
-            <CircularProgress color="info" />
-          ) : (
-            <Grid container spacing={3}>
-              {vendorsList.companies.map((e, i) => (
-                <Grid item xs={12} lg={8} key={i}>
-                  <CardCompany data={e} />
-                </Grid>
-              ))}
-            </Grid>
-          )}
-        </Card>
+      <Card mb={3}>
+        {!vendorsList ? (
+          <CircularProgress color="info" />
+        ) : (
+          <Grid container spacing={3}>
+            {vendorsList.companies.map((e, i) => (
+              <Grid item xs={12} key={i}>
+                <CardCompany data={e} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Card>
-    </SuiBox>
+    </Card>
+    // </SuiBox>
   );
 };
 

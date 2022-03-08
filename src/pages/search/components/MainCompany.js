@@ -1,22 +1,31 @@
 import React from "react";
 
-// import { Linkedin, Twitter, Link, Mail, Phone } from "react-feather";
+import { FiLinkedin, FiTwitter, FiMail } from "react-icons/fi";
+import { BsLink45Deg, BsFillTelephoneFill } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
 
 import Login from "../../../assets/images/login.jpg";
 
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
+import SuiBadge from "components/SuiBadge";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
+
 import Divider from "@mui/material/Divider";
+// import SuiBadge from "components/SuiBadge";
 
 const MainCompany = () => {
   return (
-    <SuiBox mb={3}>
-      <Card>
+    <SuiBox>
+      <Card
+        backgroundColor="dark"
+        borderRadius="xl"
+        position="relative"
+        backgroundGradient
+      >
         <SuiBox p={3}>
           <SuiBox
             component="img"
@@ -26,11 +35,11 @@ const MainCompany = () => {
             width="100%"
           />
 
-          <SuiBox p={3}>
-            <SuiTypography variant="h5" fontWeight="bold">
+          <SuiBox p={2} textAlign="center">
+            <SuiTypography variant="h5" fontWeight="bold" mb={1}>
               Company Name
             </SuiTypography>
-            <SuiBox mb={3}>
+            <SuiBox mb={2} textAlign="center">
               <SuiTypography variant="body2" textColor="text">
                 Personal profiles are the perfect way for you to grab their
                 attention and persuade recruiters to continue reading your CV
@@ -42,8 +51,8 @@ const MainCompany = () => {
 
           <Divider />
 
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
+          <Grid container spacing={3} textAlign="center">
+            <Grid item xs={12} md={6} textAlign="center">
               <SuiBox mt={1}>
                 <SuiTypography variant="h6" fontWeight="medium">
                   5+
@@ -56,10 +65,10 @@ const MainCompany = () => {
               </SuiBox>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} textAlign="center">
               <SuiBox mt={1}>
                 <SuiTypography variant="h6" fontWeight="medium">
-                  4.6 <Icon className="">star</Icon>
+                  4.6 <AiFillStar />
                 </SuiTypography>
               </SuiBox>
               <SuiBox mb={1}>
@@ -69,7 +78,7 @@ const MainCompany = () => {
               </SuiBox>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} textAlign="center">
               <SuiBox mt={1}>
                 <SuiTypography variant="h6" fontWeight="medium">
                   60+
@@ -82,7 +91,7 @@ const MainCompany = () => {
               </SuiBox>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} textAlign="center">
               <SuiBox mt={1}>
                 <SuiTypography variant="h6" fontWeight="medium">
                   97
@@ -96,27 +105,31 @@ const MainCompany = () => {
             </Grid>
           </Grid>
 
-          <SuiTypography variant="h4" textColor="text">
-            <Icon className="">
-              linkedin
-              {/* <Linkedin /> */}
-            </Icon>
-            <Icon className="">
-              twitter
-              {/* <TwitterIcon /> */}
-            </Icon>
-            <Icon className="">
-              mail
-              {/* <Mail /> */}
-            </Icon>
-            <Icon className="">
-              link
-              {/* <Link /> */}
-            </Icon>
-          </SuiTypography>
+          <SuiBox
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            py={2}
+          >
+            <SuiBox size="md" circular color="info" mx={2}>
+              <FiLinkedin />
+            </SuiBox>
+            <SuiBox size="md" circular color="info" mx={2}>
+              <FiTwitter />
+            </SuiBox>
+            <SuiBox size="md" circular color="info" mx={2}>
+              <FiMail />
+            </SuiBox>
+            <SuiBox size="md" circular color="info" mx={2}>
+              <BsLink45Deg />
+            </SuiBox>
+          </SuiBox>
 
-          <SuiButton variant="gradient" buttonColor="info">
-            <Icon>phone</Icon> call us
+          <SuiButton variant="gradient" color="info" fullWidth>
+            call us{" "}
+            <SuiBox ml={2} color="white">
+              <BsFillTelephoneFill />
+            </SuiBox>
           </SuiButton>
         </SuiBox>
       </Card>

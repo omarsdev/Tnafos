@@ -13,153 +13,55 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import React from "react";
 // @mui material components
 import { makeStyles } from "@mui/styles";
 
-export default makeStyles(
-  ({
-    palette,
-    boxShadows,
-    functions,
-    transitions,
-    breakpoints,
-    borders,
-    typography,
-  }) => {
-    const { dark, white, text, transparent } = palette;
-    const { navbarBoxShadow } = boxShadows;
-    const { rgba, pxToRem } = functions;
-    const { borderRadius } = borders;
-    const { size } = typography;
+export default makeStyles(({ palette, functions }) => {
+  const { transparent, white } = palette;
+  const { pxToRem } = functions;
 
-    return {
-      navbar: {
-        boxShadow: ({ transparentNavbar, absolute }) =>
-          transparentNavbar || absolute ? "none" : navbarBoxShadow,
-        backdropFilter: ({ transparentNavbar, absolute }) =>
-          transparentNavbar || absolute
-            ? "none"
-            : `saturate(200%) blur(${pxToRem(30)})`,
-        backgroundColor: ({ transparentNavbar, absolute }) =>
-          transparentNavbar || absolute
-            ? transparent.main
-            : rgba(white.main, 0.8),
+  return {
+    automotiveMonitor_input: {
+      backgroundColor: transparent.main,
+      borderColor: transparent.main,
 
-        color: ({ transparentNavbar, light }) => {
-          let color;
+      "& .MuiInputBase-root": {
+        backgroundColor: transparent.main,
+        color: white.main,
 
-          if (light) {
-            color = white.main;
-          } else if (transparentNavbar) {
-            color = text.main;
-          } else {
-            color = dark.main;
-          }
-
-          return color;
-        },
-        top: ({ absolute }) => (absolute ? 0 : pxToRem(12)),
-        minHeight: pxToRem(75),
-        display: "grid",
-        alignItems: "center",
-        borderRadius: borderRadius.xl,
-        paddingTop: pxToRem(8),
-        paddingBottom: pxToRem(8),
-        paddingRight: ({ absolute }) => (absolute ? pxToRem(8) : 0),
-        paddingLeft: ({ absolute }) => (absolute ? pxToRem(16) : 0),
-
-        "& > *": {
-          transition: transitions.create("all", {
-            easing: transitions.easing.easeInOut,
-            duration: transitions.duration.standard,
-          }),
-        },
-
-        "& .MuiToolbar-root": {
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-
-          [breakpoints.up("sm")]: {
-            minHeight: "auto",
-            padding: `${pxToRem(4)} ${pxToRem(16)}`,
+        "& input": {
+          "&::-webkit-input-placeholder": {
+            color: white.main,
+            opacity: 0.8,
           },
         },
       },
 
-      navbar_container: {
-        flexDirection: "column",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
-        paddingTop: pxToRem(4),
-        paddingBottom: pxToRem(4),
-
-        [breakpoints.up("md")]: {
-          flexDirection: "row",
-          alignItems: "center",
-          paddingTop: "0",
-          paddingBottom: "0",
-        },
+      "& .material-icons, .material-icons-round": {
+        color: white.main,
+        fontSize: pxToRem(24),
       },
+    },
 
-      navbar_row: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        width: "100%",
+    automotiveMonitor_button: {
+      margin: `0 ${pxToRem(12)}`,
 
-        [breakpoints.up("md")]: {
-          justifyContent: ({ isMini }) =>
-            isMini ? "space-between" : "stretch",
-          width: ({ isMini }) => (isMini ? "100%" : "max-content"),
-        },
-
-        [breakpoints.up("xl")]: {
-          justifyContent: "stretch !important",
-          width: "max-content !important",
-        },
+      "& .material-icons": {
+        fontSize: pxToRem(32),
       },
+    },
 
-      navbar_icon_button: {
-        padding: `0 ${pxToRem(6)}`,
+    automotiveMonitor_slider: {
+      padding: `${pxToRem(10)} 0`,
 
-        "& .material-icons, .material-icons-round": {
-          fontSize: `${size.regular} !important`,
-        },
-
-        "& .MuiTypography-root": {
-          display: "none",
-
-          [breakpoints.up("sm")]: {
-            display: "inline-block",
-            lineHeight: 1.2,
-            marginLeft: pxToRem(4),
-          },
-        },
+      "& .MuiSlider-rail": {
+        opacity: 1,
       },
+    },
 
-      navbar_desktop_menu: {
-        display: ({ isMini }) => (isMini ? "inline-block" : "none"),
-        cursor: "pointer",
-
-        [breakpoints.up("xl")]: {
-          display: "inline-block !important",
-        },
-      },
-
-      navbar_mobile_menu: {
-        display: "inline-block",
-
-        [breakpoints.up("xl")]: {
-          display: "none",
-        },
-      },
-
-      navbar_input: {
-        "& .material-icons, .material-icons-round": {
-          color: text.main,
-        },
-      },
-    };
-  }
-);
+    automotiveMonitor_lastGrid: {
+      marginLeft: "auto",
+    },
+  };
+});

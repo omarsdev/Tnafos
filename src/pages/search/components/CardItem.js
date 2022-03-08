@@ -8,6 +8,7 @@ import { CircularProgress } from "@mui/material";
 import SuiBox from "components/SuiBox";
 import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
+import SuiBadge from "components/SuiBadge";
 
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -54,8 +55,8 @@ const CardItem = ({ data, isSelected, isCompany }) => {
   return !vendorsList && isSelected ? (
     <CircularProgress color="info" />
   ) : (
-    <Card className="overflow-visible">
-      <SuiBox p={2} mt={3}>
+    <Card className="overflow-visible" raised>
+      <SuiBox p={2} mt={2}>
         <Grid container alignItems="center">
           <SuiBox
             component="img"
@@ -70,13 +71,13 @@ const CardItem = ({ data, isSelected, isCompany }) => {
         </Grid>
       </SuiBox>
 
-      <SuiBox m={0} mb={2}>
+      <SuiBox m={0} mb={2} px={2}>
         <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
           <SuiTypography
             variant="body2"
             textColor="text"
             my={1}
-            // display="flex"
+            display="flex"
             justifyContent="center"
             textAlign="center"
           >
@@ -110,6 +111,7 @@ const CardItem = ({ data, isSelected, isCompany }) => {
             display="flex"
             width="100%"
             my={2}
+            px="5%"
             justifyContent="center"
             alignItems="center"
           >
@@ -118,22 +120,22 @@ const CardItem = ({ data, isSelected, isCompany }) => {
                 <Link to={`${match.url}/${data.uuid}`}>
                   <SuiButton
                     variant="gradient"
-                    buttonColor="info"
+                    color="info"
                     size="small"
                     onClick={() => setVendorsList(null)}
                   >
-                    view
+                    view more info
                   </SuiButton>
                 </Link>
               </SuiBox>
             )}
             <SuiButton
               variant="outlined"
-              buttonColor="dark"
+              color="dark"
               size="small"
               onClick={addToMyListHandler}
             >
-              {addedToMyList ? "Added" : "Add To List"}
+              {addedToMyList ? "Added" : "Add to list"}
             </SuiButton>
           </SuiBox>
         ) : (
@@ -145,14 +147,19 @@ const CardItem = ({ data, isSelected, isCompany }) => {
             alignItems="center"
           >
             {" "}
-            <SuiTypography
+            {/* <SuiTypography
               variant="h5"
               fontWeight="medium"
               justifyContent="center"
               textAlign="center"
-            >
-              Starting from 7500 SAR
-            </SuiTypography>
+            > */}
+            <SuiBadge
+              variant="contained"
+              color="success"
+              badgeContent="Starting from 7500 SAR"
+              container
+            />
+            {/* </SuiTypography> */}
           </SuiBox>
         )}
       </SuiBox>
