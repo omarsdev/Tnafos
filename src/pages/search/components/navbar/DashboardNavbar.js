@@ -33,29 +33,22 @@ const DashboardNavbar = () => {
   };
 
   return (
-    <AppBar color="dark">
-      {/* //   <Toolbar>
-    // <SuiBox
-    //   color="dark"
-    //   //   borderRadius="xl"
-    //   position="relative"
-    //   backgroundGradient
-    //   //   color="inherit"
-    // > */}
+    <AppBar color="dark" position="relative">
+      {/* <Toolbar> */}
       <SuiBox p={1}>
         <Grid
           container
           spacing={3}
-          justifyContent="space-between"
+          justifyContent="baseline"
           alignItems="center"
         >
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={4}>
             <SuiBox pr={1} py={1}>
               <TnafosSearchLogo />
             </SuiBox>
           </Grid>
 
-          <Grid item xs={12} md={6} lg={6} my="auto" ml="auto">
+          <Grid item xs={12} md={6} my="auto" ml="auto" mr={3}>
             <SuiBox
               display="flex"
               justifyContent="flex-end"
@@ -111,8 +104,7 @@ const DashboardNavbar = () => {
           </Grid>
         </Grid>
       </SuiBox>
-      {/* </SuiBox> */}
-      {/* //   </Toolbar> */}
+      {/* </Toolbar> */}
     </AppBar>
   );
 };
