@@ -162,6 +162,19 @@ const routes = [
       },
     ],
   },
+  {
+    type: "collapse",
+    name: "Customer",
+    key: "customer",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Customer",
+        key: "customer",
+        route: "/dashboard/customer"
+      },
+    ],
+  },
   { type: "divider", key: "divider-2" },
   { type: "title", title: "Documents", key: "title-2" },
   {
