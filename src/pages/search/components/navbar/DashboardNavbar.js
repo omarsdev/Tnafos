@@ -33,16 +33,16 @@ const DashboardNavbar = () => {
   };
 
   return (
-    // <AppBar color="dark">
-    //   <Toolbar>
-    <SuiBox
-      backgroundColor="dark"
-      //   borderRadius="xl"
-      position="relative"
-      backgroundGradient
-      //   color="inherit"
-    >
-      <SuiBox p={2}>
+    <AppBar color="dark">
+      {/* //   <Toolbar>
+    // <SuiBox
+    //   color="dark"
+    //   //   borderRadius="xl"
+    //   position="relative"
+    //   backgroundGradient
+    //   //   color="inherit"
+    // > */}
+      <SuiBox p={1}>
         <Grid
           container
           spacing={3}
@@ -111,9 +111,9 @@ const DashboardNavbar = () => {
           </Grid>
         </Grid>
       </SuiBox>
-    </SuiBox>
-    //   {/* </Toolbar> */}
-    //  {/* </AppBar> */}
+      {/* </SuiBox> */}
+      {/* //   </Toolbar> */}
+    </AppBar>
   );
 };
 
