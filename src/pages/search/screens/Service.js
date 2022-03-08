@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
-import { Box, Grid, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { CardItem } from "../components";
+import CardItem from "../components/CardItem";
 
-import { AxiosInstance } from "../../../api";
+import { AxiosInstance } from "../../../api/AxiosInstance";
 
-export const Service = () => {
+import SuiBox from "components/SuiBox";
+import SuiTypography from "components/SuiTypography";
+
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import { CircularProgress } from "@mui/material";
+
+const Service = () => {
   const match = useRouteMatch();
   const [searchResult, setSearchResult] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,9 +26,9 @@ export const Service = () => {
       .then((res) => {
         if (!res.data.links.next) setHasMore(false);
         setSearchResult((arr) => arr.concat(res.data.data));
-
+        // console.log(res.data.data);
       })
-    // .catch((e) => );
+      .catch((e) => console.log(e));
     setCurrentPage(currentPage + 1);
   };
 
@@ -31,69 +36,43 @@ export const Service = () => {
     handleSearchApi();
   }, []);
 
-  // useEffect(() => {
-  //   // handleSearchApi();
-  // }, [match.params.search, currentPage]);
-
-  // const handleNextPage = () => {
-  //   setCurrentPage(currentPage + 1);
-  // };
-
   return (
-    <>
-      <Text fontSize="35px">Services</Text>
-      {/* <InfiniteScroll
-        dataLength={searchResult.length}
-        next={handleNextPage}
-        hasMore={true}
-        loader={<Spinner size="xl" color="#F8B916" />}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
+    <Card>
+      <SuiBox
+        display="flex"
+        justifyContent="start"
+        alignItems="flex-start"
+        p={3}
       >
-      </InfiniteScroll> */}
-      <InfiniteScroll
-        dataLength={searchResult.length}
-        next={handleSearchApi}
-        hasMore={hasMore}
-        loader={<Spinner size="xl" color="#F8B916" />}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        <SimpleGrid minChildWidth={"260px"} gap={8}>
-          {searchResult.map((e, i) => (
-            <CardItem key={i} data={e} />
-          ))}
-        </SimpleGrid>
-      </InfiniteScroll>
-      {/* <Box mt="40px"></Box> */}
+        <SuiBox lineHeight={1}>
+          <SuiTypography variant="h5" fontWeight="medium">
+            <strong>Services</strong>
+          </SuiTypography>
+        </SuiBox>
 
-      {/* <Box mt="40px"> */}
-      {/* <InfiniteScroll
+        <InfiniteScroll
           dataLength={searchResult.length}
-          next={handleNextPage}
-          hasMore={true}
-          loader={<Spinner size="xl" color="#F8B916" />}
+          next={handleSearchApi}
+          hasMore={hasMore}
+          loader={<CircularProgress color="info" />}
           endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>Yay! You have seen it all</b>
-            </p>
+            <SuiBox style={{ textAlign: "center" }}>
+              Yay! You have seen it all
+            </SuiBox>
           }
         >
-          <Grid templateColumns="repeat(3, 1fr)" gap={10}>
-            {searchResult.map((e, i) => (
-              <CardItem key={i} data={e} />
-            ))}
-          </Grid>
-        </InfiniteScroll> */}
-      {/* </Box> */}
-    </>
+          <SuiBox p={3}>
+            <Grid container spacing={3}>
+              {searchResult.map((e, i) => (
+                <Grid item xs={12} lg={4} key={i}>
+                  <CardItem key={i} data={e} />
+                </Grid>
+              ))}
+            </Grid>
+          </SuiBox>
+        </InfiniteScroll>
+      </SuiBox>
+    </Card>
   );
 };
-
 export default Service;

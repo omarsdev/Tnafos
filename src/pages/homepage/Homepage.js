@@ -1,30 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 
-
 import { useHistory } from "react-router-dom";
 
-import {
-  Box,
-  Stack,
-  Center,
-  InputGroup,
-  Input,
-  InputRightAddon,
-  VStack,
-  Spinner,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+// Soft UI Dashboard PRO React components
+import SuiBox from "components/SuiBox";
+import SuiTypography from "components/SuiTypography";
+import SuiInput from "components/SuiInput";
 
+import { CircularProgress, Icon } from "@mui/material";
+
+// Custom styles for the BaiseLayout
+import styles from "layouts/authentication/components/styles";
+
+import PageLayout from "examples/LayoutContainers/PageLayout";
 import { Navbar } from "./components";
 
 import { AxiosInstance } from "../../api";
 import { UserDataContext } from "../../context";
 import { getToken } from "../../utils";
 import { TnafosHomeLogo } from "../../assets/icons";
-import { SearchIcon } from "@chakra-ui/icons";
 
-const Homepage = () => {
+const Homepage = ({ image }) => {
+  const classes = styles({ image });
+  // const classes = styles({ transparentNavbar, absolute, light, isMini });
   const { tokenProviderValue, dataProviderValue } = useContext(UserDataContext);
   const { userToken } = tokenProviderValue;
   const { setUserData } = dataProviderValue;
@@ -63,60 +61,97 @@ const Homepage = () => {
 
   if (loading)
     return (
-      <h1>Spinner </h1>
+      <SuiBox
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress color="info" />
+      </SuiBox>
     );
 
   return (
-    <Box h={"100vh"}>
+    <PageLayout background="white">
       <Navbar />
-      <Center h="92vh">
-        <VStack spacing={10}>
-          <TnafosHomeLogo />
-          <InputGroup alignItems={"center"} justifyContent={"center"} size="lg">
-            <Input
-              width={{
-                base: "18em",
-                sm: "22em",
-                md: "28em",
-                lg: "32em",
-              }}
-              borderBottomLeftRadius={"99em"}
-              borderTopLeftRadius={"99em"}
-              focusBorderColor="#F8B916"
-              borderColor="#AEAEAE"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              onKeyPress={handleKeypress}
-            />
-            <InputRightAddon
-              children={<SearchIcon color="white" />}
-              cursor={"pointer"}
-              borderBottomRightRadius={"99em"}
-              borderTopRightRadius={"99em"}
-              bgColor={"#F8B916"}
-              borderColor={"#F8B916"}
-              onClick={searchHandler}
-            />
-          </InputGroup>
-          <SimpleGrid
-            columns={{ sm: 2, md: 4, lg: 5 }}
-            spacing={8}
-            // direction={["column", "row"]}
-            // justify={"center"}
-            justifyContent={"center"}
-            justifyItems={"center"}
-            justifySelf={"center"}
-            alignItems={"center"}
-          >
-            <Text>Products</Text>
-            <Text>Services</Text>
-            <Text>Categories</Text>
-            <Text>Blog</Text>
-            <Text>GitHub</Text>
-          </SimpleGrid>
-        </VStack>
-      </Center>
-    </Box>
+
+      <SuiBox p={3} mb={1} textAlign="center">
+        <TnafosHomeLogo />
+      </SuiBox>
+      <SuiBox p={3} mb={1} textAlign="center">
+        <SuiBox pr={1}>
+          <SuiInput
+            placeholder="Type here..."
+            withIcon={{ icon: "search", direction: "left" }}
+            customClass={classes.navbar_input}
+            onKeyPress={handleKeypress}
+          />
+          <Icon className={"text-dark"} onClick={searchHandler} />
+        </SuiBox>
+
+        <SuiBox
+          display="flex"
+          justifyContent="center"
+          flexWrap="wrap"
+          mb={3}
+          mt={1}
+        >
+          <SuiBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              Products
+            </SuiTypography>
+          </SuiBox>
+          <SuiBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              Services
+            </SuiTypography>
+          </SuiBox>
+          <SuiBox mr={{ xs: 0, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              Categories
+            </SuiTypography>
+          </SuiBox>
+          <SuiBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              Blog
+            </SuiTypography>
+          </SuiBox>
+          <SuiBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+            <SuiTypography
+              component="a"
+              href="#"
+              variant="body2"
+              textColor="secondary"
+            >
+              GitHub
+            </SuiTypography>
+          </SuiBox>
+        </SuiBox>
+      </SuiBox>
+      <SuiBox p={3} mb={1} textAlign="center"></SuiBox>
+    </PageLayout>
   );
 };
 

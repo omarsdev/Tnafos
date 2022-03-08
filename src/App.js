@@ -5,7 +5,7 @@ import Login from "./pages/auth/screens/Login";
 import Register from "./pages/auth/screens/register/Register";
 import Homepage from "./pages/homepage/Homepage";
 import DashboardLayout from "./pages/dashboard/DashboardLayout";
-import SearchLayout from "./pages/search/SearchLayout";
+import Search from "./pages/search/Search";
 // import E404 from "./pages/common/E404";
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
@@ -103,7 +103,7 @@ const App = () => {
                   <Route path="/login" component={Login} />
                   <Route path="/register" component={Register} />
                   <Route path="/dashboard" component={DashboardLayout} />
-                  <Route path="/:search" component={SearchLayout} />
+                  <Route path="/:search" component={Search} />
                   {/* 
                   <Route path="/register" component={Register} />
                   <Route path="/login" component={Login} />

@@ -1,153 +1,139 @@
 import React from "react";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
-import { Linkedin, Twitter, Link, Mail, Phone } from "react-feather";
+import { FiLinkedin, FiTwitter, FiMail } from "react-icons/fi";
+import { BsLink45Deg, BsFillTelephoneFill } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
 
-import { PrimaryButton } from "components/button";
 import Login from "../../../assets/images/login.jpg";
 
-export const MainCompany = () => {
+import SuiBox from "components/SuiBox";
+import SuiTypography from "components/SuiTypography";
+import SuiButton from "components/SuiButton";
+import SuiBadge from "components/SuiBadge";
+
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+
+import Divider from "@mui/material/Divider";
+// import SuiBadge from "components/SuiBadge";
+
+const MainCompany = () => {
   return (
-    <Box
-      // w="300px"
-      w={{ base: "auto", md: "300px" }}
-      px="20px"
-      py="20px"
-      shadow="2xl"
-      rounded="3xl"
-    >
-      <Image
-        src={Login}
-        w="100%"
-        height="280px"
-        rounded="3xl"
-        objectFit="cover"
-      />
-      <Text fontSize="22px" mt="30px">
-        Company Name
-      </Text>
-      <Text fontSize="18px" mt="30px">
-        React Native combines the best parts of native development with React, a
-        best-in-class JavaScript library for building user interfaces. React
-        Native combines the best parts of native development with React, a
-        best-in-class JavaScript library for building user interfaces.
-      </Text>
-      <Box h="1px" w="full" bgColor="#AEAEAE" mt="15px" />
-      <Box mt="15px">
-        <Flex direction="row">
-          <Box
-            borderRightWidth="1px"
-            borderRightColor="#AEAEAE"
+    <SuiBox>
+      <Card
+        backgroundColor="dark"
+        borderRadius="xl"
+        position="relative"
+        backgroundGradient
+      >
+        <SuiBox p={3}>
+          <SuiBox
+            component="img"
+            src={Login}
+            boxShadow="lg"
+            borderRadius="xl"
+            width="100%"
+          />
+
+          <SuiBox p={2} textAlign="center">
+            <SuiTypography variant="h5" fontWeight="bold" mb={1}>
+              Company Name
+            </SuiTypography>
+            <SuiBox mb={2} textAlign="center">
+              <SuiTypography variant="body2" textColor="text">
+                Personal profiles are the perfect way for you to grab their
+                attention and persuade recruiters to continue reading your CV
+                because you’re telling them from the off exactly why they should
+                hire you.
+              </SuiTypography>
+            </SuiBox>
+          </SuiBox>
+
+          <Divider />
+
+          <Grid container spacing={3} textAlign="center">
+            <Grid item xs={12} md={6} textAlign="center">
+              <SuiBox mt={1}>
+                <SuiTypography variant="h6" fontWeight="medium">
+                  5+
+                </SuiTypography>
+              </SuiBox>
+              <SuiBox mb={1}>
+                <SuiTypography variant="h5" fontWeight="medium">
+                  Years
+                </SuiTypography>
+              </SuiBox>
+            </Grid>
+
+            <Grid item xs={12} md={6} textAlign="center">
+              <SuiBox mt={1}>
+                <SuiTypography variant="h6" fontWeight="medium">
+                  4.6 <AiFillStar />
+                </SuiTypography>
+              </SuiBox>
+              <SuiBox mb={1}>
+                <SuiTypography variant="h5" fontWeight="medium">
+                  Review
+                </SuiTypography>
+              </SuiBox>
+            </Grid>
+
+            <Grid item xs={12} md={6} textAlign="center">
+              <SuiBox mt={1}>
+                <SuiTypography variant="h6" fontWeight="medium">
+                  60+
+                </SuiTypography>
+              </SuiBox>
+              <SuiBox mb={1}>
+                <SuiTypography variant="h5" fontWeight="medium">
+                  Client
+                </SuiTypography>
+              </SuiBox>
+            </Grid>
+
+            <Grid item xs={12} md={6} textAlign="center">
+              <SuiBox mt={1}>
+                <SuiTypography variant="h6" fontWeight="medium">
+                  97
+                </SuiTypography>
+              </SuiBox>
+              <SuiBox mb={1}>
+                <SuiTypography variant="h5" fontWeight="medium">
+                  Project
+                </SuiTypography>
+              </SuiBox>
+            </Grid>
+          </Grid>
+
+          <SuiBox
             display="flex"
-            flex={1}
-            flexDirection="column"
-            justifyContent="center"
             alignItems="center"
-          >
-            <Text color="brand.primary" fontSize="25px">
-              5+
-            </Text>
-            <Text fontSize="24px">Year</Text>
-          </Box>
-          <Box
-            display="flex"
-            flex={1}
-            flexDirection="column"
             justifyContent="center"
-            alignItems="center"
+            py={2}
           >
-            <Text color="brand.primary" fontSize="25px">
-              4.6
-            </Text>
-            <Text fontSize="24px">Review</Text>
-          </Box>
-        </Flex>
-      </Box>
-      <Box h="1px" w="full" bgColor="#AEAEAE" mt="15px" />
-      <Box mt="15px">
-        <Flex direction="row">
-          <Box
-            borderRightWidth="1px"
-            borderRightColor="#AEAEAE"
-            display="flex"
-            flex={1}
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text color="brand.primary" fontSize="25px">
-              60+
-            </Text>
-            <Text fontSize="24px">Client</Text>
-          </Box>
-          <Box
-            display="flex"
-            flex={1}
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text color="brand.primary" fontSize="25px">
-              97
-            </Text>
-            <Text fontSize="24px">Project</Text>
-          </Box>
-        </Flex>
-      </Box>
-      <Box h="1px" w="full" bgColor="#AEAEAE" mt="15px" />
-      <Flex justifyContent="space-between" mt="30px">
-        <Box
-          w="50px"
-          h="50px"
-          rounded="full"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          borderColor="brand.primary"
-          borderWidth="1px"
-        >
-          <Linkedin w="5" h="5" />
-        </Box>
-        <Box
-          w="50px"
-          h="50px"
-          rounded="full"
-          borderColor="brand.primary"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          borderWidth="1px"
-        >
-          <Twitter w="5" h="5" />
-        </Box>
-        <Box
-          w="50px"
-          h="50px"
-          rounded="full"
-          borderColor="brand.primary"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          borderWidth="1px"
-        >
-          <Mail w="5" h="5" />
-        </Box>
-        <Box
-          w="50px"
-          h="50px"
-          rounded="full"
-          borderColor="brand.primary"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          borderWidth="1px"
-        >
-          <Link w="5" h="5" />
-        </Box>
-      </Flex>
-      <Box mt="15px">
-        <PrimaryButton width="100%" name="CALL US" Logo={Phone} />
-      </Box>
-    </Box>
+            <SuiBox size="md" circular color="info" mx={2}>
+              <FiLinkedin />
+            </SuiBox>
+            <SuiBox size="md" circular color="info" mx={2}>
+              <FiTwitter />
+            </SuiBox>
+            <SuiBox size="md" circular color="info" mx={2}>
+              <FiMail />
+            </SuiBox>
+            <SuiBox size="md" circular color="info" mx={2}>
+              <BsLink45Deg />
+            </SuiBox>
+          </SuiBox>
+
+          <SuiButton variant="gradient" color="info" fullWidth>
+            call us{" "}
+            <SuiBox ml={2} color="white">
+              <BsFillTelephoneFill />
+            </SuiBox>
+          </SuiButton>
+        </SuiBox>
+      </Card>
+    </SuiBox>
   );
 };
+export default MainCompany;

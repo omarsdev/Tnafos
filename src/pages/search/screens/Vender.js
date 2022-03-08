@@ -1,14 +1,20 @@
 import React, { useContext, useEffect } from "react";
 
-import { Box, Grid, Text, VStack, Spinner } from "@chakra-ui/react";
 import { useRouteMatch } from "react-router-dom";
+import { AxiosInstance } from "../../../api/AxiosInstance";
+import { SearchDataContext } from "../../../context/SearchDataContext";
 
-import { CardCompany } from "../components";
+import CardCompany from "../components/CardCompany";
 
-import { AxiosInstance } from "../../../api";
-import { SearchDataContext } from "../../../context";
+import { CircularProgress } from "@mui/material";
 
-export const Vender = () => {
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+
+import SuiBox from "components/SuiBox";
+import SuiTypography from "components/SuiTypography";
+
+const Vender = () => {
   const match = useRouteMatch();
 
   const { vendorsListProviderValue } = useContext(SearchDataContext);
@@ -25,22 +31,30 @@ export const Vender = () => {
 
     handleShowServiceApi();
   }, [match.params.serviceId, setVendorsList]);
-
   return (
-    <>
-      <Text fontSize="35px">List of vendors</Text>
-      <Box mt="40px">
+    // <SuiBox>
+    <Card className="overflow-visible">
+      <SuiBox lineHeight={1} p={3}>
+        <SuiTypography variant="h5" fontWeight="medium">
+          List of all venders
+        </SuiTypography>
+      </SuiBox>
+
+      <Card mb={3}>
         {!vendorsList ? (
-          <Spinner size="xl" color="#F8B916" />
+          <CircularProgress color="info" />
         ) : (
-          <VStack spacing="50px">
+          <Grid container spacing={3}>
             {vendorsList.companies.map((e, i) => (
-              <CardCompany key={i} data={e} />
+              <Grid item xs={12} key={i}>
+                <CardCompany data={e} />
+              </Grid>
             ))}
-          </VStack>
+          </Grid>
         )}
-      </Box>
-    </>
+      </Card>
+    </Card>
+    // </SuiBox>
   );
 };
 

@@ -1,145 +1,124 @@
 import React from "react";
-import {
-  Box,
-  HStack,
-  Image,
-  Text,
-  VStack,
-  useMediaQuery,
-  Flex,
-  Center,
-  Spacer,
-} from "@chakra-ui/react";
-import { PhoneCall } from "react-feather";
+
 import { Link, useRouteMatch } from "react-router-dom";
 
 import Login from "../../../assets/images/login.jpg";
-import { PrimaryButton } from "components/button";
 
-export const CardCompany = ({ data }) => {
+import { BsTelephone } from "react-icons/bs";
+import { AiFillStar } from "react-icons/ai";
+
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
+
+import SuiBox from "components/SuiBox";
+import SuiTypography from "components/SuiTypography";
+import SuiButton from "components/SuiButton";
+
+const CardCompany = ({ data }) => {
   const match = useRouteMatch();
-  const [isMobile] = useMediaQuery("(max-width: 1200px)");
-
   return (
-    <Flex
-      rounded="3xl"
-      borderColor="brand.primary"
-      shadow="xl"
-      h={!isMobile ? "56" : "auto"}
-      w="full"
-      flexDirection={{ lg: "row", base: "column" }}
-    >
-      <Flex flex="1">
-        <Image
-          src={Login}
-          alt="Segun Adebayo"
-          objectFit="cover"
-          rounded="3xl"
-          w="100%"
-          h={{ lg: "100%", base: "200px" }}
-        />
-      </Flex>
-      <Flex flex="3">
-        <Box h="full" w="100%">
-          <Text mt=".5rem" ml=".8rem">
-            Company Name
-          </Text>
-          <Box h="20" overflow="hidden">
-            <Text mt=".5rem" ml=".8rem">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptatum aut minima eaque repellat quia labore officia placeat
-              nobis maiores tempora, reiciendis deserunt cum reprehenderit
-              explicabo itaque, voluptates repellendus expedita obcaecati!
-            </Text>
-          </Box>
-          <Flex w="100%" mt="5" flexDirection={isMobile && "column"}>
-            <HStack
-              w={
-                isMobile
-                  ? { base: "100%", lg: "100%" }
-                  : { base: "100%", lg: "90%" }
-              }
-            >
-              <VStack
-                width="25%"
-                spacing="0px"
-                borderRightWidth="1px"
-                borderColor="brand.black"
-              >
-                <Text
-                  color="brand.primary"
-                  fontSize={{ md: "21px", base: "16px" }}
-                >
-                  5+
-                </Text>
-                <Text fontSize={{ md: "21px", base: "16px" }}>Years</Text>
-              </VStack>
-              <VStack
-                width="25%"
-                spacing="0px"
-                borderRightWidth="1px"
-                borderColor="brand.black"
-              >
-                <Text
-                  color="brand.primary"
-                  fontSize={{ md: "21px", base: "16px" }}
-                >
-                  4.6
-                </Text>
-                <Text fontSize={{ md: "21px", base: "16px" }}>Review</Text>
-              </VStack>
-              <VStack
-                width="25%"
-                spacing="0px"
-                borderRightWidth="1px"
-                borderColor="brand.black"
-              >
-                <Text
-                  color="brand.primary"
-                  fontSize={{ md: "21px", base: "16px" }}
-                >
-                  60+
-                </Text>
-                <Text fontSize={{ md: "21px", base: "16px" }}>Client</Text>
-              </VStack>
-              <VStack width="25%" spacing="0px">
-                <Text
-                  color="brand.primary"
-                  fontSize={{ md: "21px", base: "16px" }}
-                >
-                  97
-                </Text>
-                <Text fontSize={{ md: "21px", base: "16px" }}>Project</Text>
-              </VStack>
-            </HStack>
+    <SuiBox py={3}>
+      <Card width="100">
+        <SuiBox px={2}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} lg={3}>
+              <SuiBox
+                component="img"
+                src={Login}
+                alt="Segun Adebayo"
+                objectFit="cover"
+                // rounded="3xl"
+                boxShadow="lg"
+                borderRadius="lg"
+                width="100%"
+                hight="50%"
+              />
+            </Grid>
+            <Grid item xs={12} lg={9}>
+              <SuiBox>
+                <SuiBox mb={1}>
+                  <SuiTypography variant="h5" fontWeight="bold">
+                    {data.name}
+                  </SuiTypography>
+                </SuiBox>
 
-            <Center
-              h="100%"
-              my="1rem"
-              px={isMobile ? "10%" : "1rem"}
-              w={isMobile ? { md: "100%" } : { md: "100%", lg: "auto" }}
-            >
-              <Link to={`${match.url}/${data.uuid}`}>
-                <PrimaryButton name="View Profile" height="50px" />
-              </Link>
-              {!isMobile && <Box w="20px" />}
-              <Spacer />
-              <Box
-                w="50px"
-                h="50px"
-                rounded="full"
-                borderColor="brand.primary"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                borderWidth="1px"
-              >
-                <PhoneCall w="5" h="5" />
-              </Box>
-            </Center>
-          </Flex>
-        </Box>
-      </Flex>
-    </Flex>
+                <SuiBox mt={2} mb={1} ml={0.5}>
+                  <SuiTypography variant="caption" fontWeight="normal">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Voluptatum aut minima eaque repellat quia labore officia
+                    placeat nobis maiores tempora, reiciendis deserunt cum
+                    reprehenderit explicabo itaque, voluptates repellendus
+                    expedita obcaecati!
+                  </SuiTypography>
+                </SuiBox>
+              </SuiBox>
+
+              <SuiBox mt={3}>
+                <Grid container spacing={0.5} justifyContent="center">
+                  <Grid item xs={12} md={2}>
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      5+
+                    </SuiTypography>
+
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      Years
+                    </SuiTypography>
+                  </Grid>
+                  <Divider dark />
+                  <Grid item xs={12} md={2}>
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      4.6 <AiFillStar />
+                    </SuiTypography>
+
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      Review
+                    </SuiTypography>
+                  </Grid>
+                  <Grid item xs={12} md={2}>
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      60+
+                    </SuiTypography>
+                    <SuiBox mb={1}>
+                      <SuiTypography variant="h6" fontWeight="medium">
+                        Client
+                      </SuiTypography>
+                    </SuiBox>
+                  </Grid>
+
+                  <Grid item xs={12} md={2}>
+                    <SuiTypography variant="h6" fontWeight="medium">
+                      97
+                    </SuiTypography>
+                    <SuiBox mb={1}>
+                      <SuiTypography variant="h6" fontWeight="medium">
+                        Project
+                      </SuiTypography>
+                    </SuiBox>
+                  </Grid>
+
+                  <Grid item xs={12} md={3}>
+                    <Link to={`${match.url}/${data.uuid}`}>
+                      <SuiButton variant="gradient" color="info" size="small">
+                        VIEW PROFILE
+                      </SuiButton>
+                    </Link>
+                  </Grid>
+
+                  <Grid item xs={12} md={1}>
+                    <Link to="#">
+                      <SuiBox py={1} lineHeight={0} ml={1}>
+                        <BsTelephone />
+                      </SuiBox>
+                    </Link>
+                  </Grid>
+                </Grid>
+              </SuiBox>
+            </Grid>
+          </Grid>
+        </SuiBox>
+      </Card>
+    </SuiBox>
   );
 };
+export default CardCompany;
