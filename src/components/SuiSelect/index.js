@@ -32,7 +32,7 @@ import { ErrorMessage, useField } from 'formik';
 import SuiBox from 'components/SuiBox';
 import SuiTypography from 'components/SuiTypography';
 
-const SuiSelect = forwardRef(({ name, size, error, success, label, options, ...rest }, ref) => {
+const SuiSelect = forwardRef(({ name, size, error, success, label, options, onChange, value, ...rest }, ref) => {
   const [field, meta, helpers] = useField(name)
   const { light } = colors;
 
@@ -66,7 +66,7 @@ const SuiSelect = forwardRef(({ name, size, error, success, label, options, ...r
         name={name}
         value={field.value}
         // value={field.value.value}
-        onChange={(value) => {
+        onChange={onChange ? onChange : (value) => {
           helpers.setValue(value);
           // helpers.setValue(value.value);
         }}
