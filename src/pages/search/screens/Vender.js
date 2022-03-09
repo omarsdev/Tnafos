@@ -46,7 +46,7 @@ const Vender = () => {
         ) : (
           <Grid container spacing={3}>
             {vendorsList.companies.map((e, i) => (
-              <Grid item xs={12} key={i}>
+              <Grid item xs={12} key={i} m={2}>
                 <CardCompany data={e} />
               </Grid>
             ))}

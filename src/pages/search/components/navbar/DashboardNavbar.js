@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 
 import { TnafosSearchLogo } from "../../../../assets/icons/svg/TnafosSearchLogo";
 
-// import styles from "pages/search/components/navbar/styles";
+import { AiOutlineSearch } from "react-icons/ai";
 
 import AppBar from "@mui/material/AppBar";
 import SuiBox from "components/SuiBox";
@@ -15,7 +15,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Stack from "@mui/material/Stack";
 
 const DashboardNavbar = () => {
-  //   const classes = styles();
   let { search } = useParams();
 
   const history = useHistory();
@@ -35,7 +34,7 @@ const DashboardNavbar = () => {
   return (
     <AppBar color="dark" position="relative">
       {/* <Toolbar> */}
-      <SuiBox p={1}>
+      <SuiBox p={0.5}>
         <Grid
           container
           spacing={3}
@@ -54,16 +53,32 @@ const DashboardNavbar = () => {
               justifyContent="flex-end"
               alignItems="center"
             >
-              <SuiBox lineHeight={0} ml={{ xs: 1, sm: 2 }}>
+              <SuiBox
+                lineHeight={0}
+                ml={{ xs: 1, sm: 2 }}
+                display="flex"
+                alignItems="center"
+              >
+                <SuiBox
+                  color="white"
+                  backgroundColor="transparent"
+                  cursor={"pointer"}
+                  // borderBottomRightRadius={20}
+                  // borderTopRightRadius={20}
+                  bgColor={"transparent"}
+                  mr={0.5}
+                  py={2}
+                  onClick={searchHandler}
+                >
+                  <AiOutlineSearch />
+                </SuiBox>
                 <SuiInput
                   size="small"
-                  withIcon={{ icon: "search", direction: "left" }}
                   placeholder="Search anything..."
-                  //   customClass={classes.automotiveMonitor_input}
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   onKeyPress={handleKeypress}
-                />
+                ></SuiInput>
               </SuiBox>
 
               <SuiBox color="white" lineHeight={0} ml={{ xs: 1, sm: 2 }}>

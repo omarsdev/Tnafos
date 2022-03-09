@@ -19,120 +19,118 @@ import Divider from "@mui/material/Divider";
 
 const MainCompany = () => {
   return (
-    <SuiBox>
-      <Card
-        backgroundColor="dark"
-        borderRadius="xl"
-        position="relative"
-        backgroundGradient
-      >
-        <SuiBox p={3}>
-          <SuiBox
-            component="img"
-            src={Login}
-            boxShadow="lg"
-            borderRadius="xl"
-            width="100%"
-          />
+    <SuiBox
+      borderRadius="xl"
+      position="relative"
+      bgColor="dark"
+      variant="gradient"
+    >
+      <SuiBox p={3}>
+        <SuiBox
+          component="img"
+          src={Login}
+          boxShadow="lg"
+          borderRadius="xl"
+          width="100%"
+        />
 
-          <SuiBox p={2} textAlign="center">
-            <SuiTypography variant="h5" fontWeight="bold" mb={1}>
-              Company Name
+        <SuiBox p={2} textAlign="center">
+          <SuiTypography variant="h5" fontWeight="bold" mb={1} color="white">
+            Company Name
+          </SuiTypography>
+          <SuiBox mb={2} textAlign="center">
+            <SuiTypography variant="body2" color="white">
+              Personal profiles are the perfect way for you to grab their
+              attention and persuade recruiters to continue reading your CV
+              because you’re telling them from the off exactly why they should
+              hire you.
             </SuiTypography>
-            <SuiBox mb={2} textAlign="center">
-              <SuiTypography variant="body2" textColor="text">
-                Personal profiles are the perfect way for you to grab their
-                attention and persuade recruiters to continue reading your CV
-                because you’re telling them from the off exactly why they should
-                hire you.
+          </SuiBox>
+        </SuiBox>
+
+        <Divider />
+
+        <Grid container spacing={3} textAlign="center">
+          <Grid item xs={12} md={6} textAlign="center">
+            <SuiBox mt={1}>
+              <SuiTypography variant="h6" fontWeight="medium" color="white">
+                5+
               </SuiTypography>
             </SuiBox>
-          </SuiBox>
-
-          <Divider />
-
-          <Grid container spacing={3} textAlign="center">
-            <Grid item xs={12} md={6} textAlign="center">
-              <SuiBox mt={1}>
-                <SuiTypography variant="h6" fontWeight="medium">
-                  5+
-                </SuiTypography>
-              </SuiBox>
-              <SuiBox mb={1}>
-                <SuiTypography variant="h5" fontWeight="medium">
-                  Years
-                </SuiTypography>
-              </SuiBox>
-            </Grid>
-
-            <Grid item xs={12} md={6} textAlign="center">
-              <SuiBox mt={1}>
-                <SuiTypography variant="h6" fontWeight="medium">
-                  4.6 <AiFillStar />
-                </SuiTypography>
-              </SuiBox>
-              <SuiBox mb={1}>
-                <SuiTypography variant="h5" fontWeight="medium">
-                  Review
-                </SuiTypography>
-              </SuiBox>
-            </Grid>
-
-            <Grid item xs={12} md={6} textAlign="center">
-              <SuiBox mt={1}>
-                <SuiTypography variant="h6" fontWeight="medium">
-                  60+
-                </SuiTypography>
-              </SuiBox>
-              <SuiBox mb={1}>
-                <SuiTypography variant="h5" fontWeight="medium">
-                  Client
-                </SuiTypography>
-              </SuiBox>
-            </Grid>
-
-            <Grid item xs={12} md={6} textAlign="center">
-              <SuiBox mt={1}>
-                <SuiTypography variant="h6" fontWeight="medium">
-                  97
-                </SuiTypography>
-              </SuiBox>
-              <SuiBox mb={1}>
-                <SuiTypography variant="h5" fontWeight="medium">
-                  Project
-                </SuiTypography>
-              </SuiBox>
-            </Grid>
+            <SuiBox mb={1}>
+              <SuiTypography variant="h5" fontWeight="medium" color="white">
+                Years
+              </SuiTypography>
+            </SuiBox>
           </Grid>
 
-          <SuiBox
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            py={2}
-          >
-            <SuiBox size="md" circular color="info" mx={2}>
-              <FiLinkedin />
+          <Grid item xs={12} md={6} textAlign="center">
+            <SuiBox mt={1}>
+              <SuiTypography variant="h6" fontWeight="medium" color="white">
+                4.6 <AiFillStar />
+              </SuiTypography>
             </SuiBox>
-            <SuiBox size="md" circular color="info" mx={2}>
-              <FiTwitter />
+            <SuiBox mb={1}>
+              <SuiTypography variant="h5" fontWeight="medium" color="white">
+                Review
+              </SuiTypography>
             </SuiBox>
-            <SuiBox size="md" circular color="info" mx={2}>
-              <FiMail />
-            </SuiBox>
-            <SuiBox size="md" circular color="info" mx={2}>
-              <BsLink45Deg />
-            </SuiBox>
-          </SuiBox>
+          </Grid>
 
-          <SuiButton variant="gradient" color="info" fullWidth>
-            call us{" "}
-            <SuiBox ml={2} color="white">
-              <BsFillTelephoneFill />
+          <Grid item xs={12} md={6} textAlign="center">
+            <SuiBox mt={1}>
+              <SuiTypography variant="h6" fontWeight="medium" color="white">
+                60+
+              </SuiTypography>
             </SuiBox>
-          </SuiButton>
+            <SuiBox mb={1}>
+              <SuiTypography variant="h5" fontWeight="medium" color="white">
+                Client
+              </SuiTypography>
+            </SuiBox>
+          </Grid>
+
+          <Grid item xs={12} md={6} textAlign="center">
+            <SuiBox mt={1}>
+              <SuiTypography variant="h6" fontWeight="medium" color="white">
+                97
+              </SuiTypography>
+            </SuiBox>
+            <SuiBox mb={1}>
+              <SuiTypography variant="h5" fontWeight="medium" color="white">
+                Project
+              </SuiTypography>
+            </SuiBox>
+          </Grid>
+        </Grid>
+
+        <SuiBox
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          py={2}
+        >
+          <SuiBox size="md" circular color="warning" mx={2}>
+            <FiLinkedin />
+          </SuiBox>
+          <SuiBox size="md" circular color="warning" mx={2}>
+            <FiTwitter />
+          </SuiBox>
+          <SuiBox size="md" circular color="warning" mx={2}>
+            <FiMail />
+          </SuiBox>
+          <SuiBox size="md" circular color="warning" mx={2}>
+            <BsLink45Deg />
+          </SuiBox>
         </SuiBox>
-      </Card>
+
+        <SuiButton variant="gradient" color="warning" fullWidth>
+          call us{" "}
+          <SuiBox ml={2} color="white">
+            <BsFillTelephoneFill />
+          </SuiBox>
+        </SuiButton>
+      </SuiBox>
     </SuiBox>
   );
 };

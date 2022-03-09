@@ -55,7 +55,7 @@ const CardItem = ({ data, isSelected, isCompany }) => {
   return !vendorsList && isSelected ? (
     <CircularProgress color="info" />
   ) : (
-    <Card className="overflow-visible" raised>
+    <Card className="overflow-visible">
       <SuiBox p={2} mt={2}>
         <Grid container alignItems="center">
           <SuiBox
@@ -108,29 +108,31 @@ const CardItem = ({ data, isSelected, isCompany }) => {
 
         {!isCompany ? (
           <SuiBox
-            display="flex"
             width="100%"
-            my={2}
-            px="5%"
+            px="3%"
             justifyContent="center"
             alignItems="center"
+            display="grid"
+            mt={2}
           >
             {!isSelected && (
-              <SuiBox mr={1}>
-                <Link to={`${match.url}/${data.uuid}`}>
-                  <SuiButton
-                    variant="gradient"
-                    color="info"
-                    size="small"
-                    onClick={() => setVendorsList(null)}
-                  >
-                    view more info
-                  </SuiButton>
-                </Link>
+              <SuiBox mb={1}>
+                <SuiButton
+                  component={Link}
+                  width="100%"
+                  to={`${match.url}/${data.uuid}`}
+                  variant="gradient"
+                  color="warning"
+                  size="small"
+                  onClick={() => setVendorsList(null)}
+                >
+                  view more info
+                </SuiButton>
               </SuiBox>
             )}
             <SuiButton
-              variant="outlined"
+              variant="gradient"
+              component={Link}
               color="dark"
               size="small"
               onClick={addToMyListHandler}
@@ -147,19 +149,12 @@ const CardItem = ({ data, isSelected, isCompany }) => {
             alignItems="center"
           >
             {" "}
-            {/* <SuiTypography
-              variant="h5"
-              fontWeight="medium"
-              justifyContent="center"
-              textAlign="center"
-            > */}
             <SuiBadge
               variant="contained"
-              color="success"
+              color="warning"
               badgeContent="Starting from 7500 SAR"
               container
             />
-            {/* </SuiTypography> */}
           </SuiBox>
         )}
       </SuiBox>
