@@ -23,7 +23,6 @@ const CreatePRFrom = ({ formData, services }) => {
     lines: linesV,
   } = values;
 
-  console.log(linesV)
 
   return (
     <Card id="basic-info" sx={{ overflow: "visible" }}>
