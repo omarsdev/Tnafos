@@ -162,6 +162,32 @@ const routes = [
       },
     ],
   },
+  {
+    type: "collapse",
+    name: "Customer",
+    key: "customer",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Customer",
+        key: "customer",
+        route: "/dashboard/customer"
+      },
+    ],
+  },
+  {
+    type: "collapse",
+    name: "Contact",
+    key: "contact",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Contact",
+        key: "contact",
+        route: "/dashboard/contact"
+      },
+    ],
+  },
   { type: "divider", key: "divider-2" },
   { type: "title", title: "Documents", key: "title-2" },
   {
@@ -179,6 +205,11 @@ const routes = [
         name: "Outgoing",
         key: "purchase-requests-outgoing",
         route: "/dashboard/purchase-requests/outgoing"
+      },
+      {
+        name: "Create",
+        key: "purchase-requests-create",
+        route: "/dashboard/purchase-requests/create"
       },
     ],
   },

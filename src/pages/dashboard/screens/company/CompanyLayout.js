@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import Create from "./Create";
-import Edit from "./Edit";
+import Edit from "./edit/Edit";
 import Home from "./Home";
 
 import { AxiosInstance } from "api";
@@ -20,7 +21,6 @@ const CompanyLayout = () => {
     await AxiosInstance.get("/api/dashboard/company")
       .then((res) => {
         setCompany(res.data.data);
-        console.log(res.data.data);
       })
       .catch((err) => { });
   };

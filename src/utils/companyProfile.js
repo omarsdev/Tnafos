@@ -4,7 +4,6 @@ export const companyProfile = () => {
       .then((res) => {
         setcompanyInfo(res.data.data);
         let company = res.data.data;
-        console.log(company);
         delete company.country;
         delete company.admin;
         delete company.category;

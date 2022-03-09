@@ -1,9 +1,9 @@
 /**
 =========================================================
-* Soft UI Dashboard PRO React - v2.0.0
+* Soft UI Dashboard PRO React - v3.0.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
@@ -37,10 +37,10 @@ import curved8 from "assets/images/curved-images/curved8.jpg";
 
 function AuthenticationMenu({ routes, open, close, mobileMenu }) {
   const [menu, setMenu] = useState(false);
+
   const renderAuthenticationMenuRoute = (routeName) =>
     routes.map(({ key, name, collapse }) => {
       let template;
-
       const openMenu = ({ currentTarget }) => setMenu(currentTarget);
       const closeMenu = () => setMenu(false);
 
@@ -48,25 +48,23 @@ function AuthenticationMenu({ routes, open, close, mobileMenu }) {
         template = (
           <MenuItem key={key} onMouseEnter={openMenu} onMouseLeave={closeMenu}>
             {name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Icon className=" font-bold ml-auto">chevron_right</Icon>
+            <Icon sx={{ fontWeight: "bold", ml: "auto" }}>chevron_right</Icon>
             <DefaultNavbarMenu
               placement="right-start"
               open={menu}
               close={closeMenu}
               style={{ paddingLeft: "1.25rem" }}
             >
-              {collapse.map(
-                ({ key: collapseKey, name: collapseName, route }) => (
-                  <MenuItem
-                    component={Link}
-                    to={route}
-                    key={collapseKey}
-                    onClick={mobileMenu ? undefined : close}
-                  >
-                    {collapseName}
-                  </MenuItem>
-                )
-              )}
+              {collapse.map(({ key: collapseKey, name: collapseName, route }) => (
+                <MenuItem
+                  component={Link}
+                  to={route}
+                  key={collapseKey}
+                  onClick={mobileMenu ? undefined : close}
+                >
+                  {collapseName}
+                </MenuItem>
+              ))}
             </DefaultNavbarMenu>
           </MenuItem>
         );
@@ -122,31 +120,36 @@ function AuthenticationMenu({ routes, open, close, mobileMenu }) {
             width="100%"
             height="100%"
             opacity={0.8}
-            backgroundColor="info"
-            backgroundGradient
+            bgColor="info"
+            variant="gradient"
           />
           <SuiBox position="relative" textAlign="center">
             <SuiBox
-              backgroundColor="white"
+              bgColor="white"
               width="3rem"
               height="3rem"
               borderRadius="50%"
-              shadow="regular"
+              shadow="md"
               display="flex"
               justifyContent="center"
               alignItems="center"
               mx="auto"
               mb={1}
             >
-              <Icon className=" text-gradient-info" fontSize="default">
+              <Icon
+                sx={({ functions: { linearGradient }, palette: { gradients, transparent } }) => ({
+                  backgroundImage: `${linearGradient(
+                    gradients.info.main,
+                    gradients.info.state
+                  )} !important`,
+                  WebkitBackgroundClip: "text !important",
+                  WebkitTextFillColor: `${transparent.main} !important`,
+                })}
+              >
                 star
               </Icon>
             </SuiBox>
-            <SuiTypography
-              variant="body1"
-              fontWeight="medium"
-              textColor="white"
-            >
+            <SuiTypography variant="body1" fontWeight="medium" color="white">
               Explore our utilities pages
             </SuiTypography>
           </SuiBox>

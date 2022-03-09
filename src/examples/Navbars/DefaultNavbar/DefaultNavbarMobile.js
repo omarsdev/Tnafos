@@ -112,8 +112,7 @@ function DefaultNavbarMobile({ routes, open, close }) {
 DefaultNavbarMobile.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
   open: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
-  close: PropTypes.oneOfType([PropTypes.func, PropTypes.bool, PropTypes.object])
-    .isRequired,
+  close: PropTypes.oneOfType([PropTypes.func, PropTypes.bool, PropTypes.object]).isRequired,
 };
 
 export default DefaultNavbarMobile;

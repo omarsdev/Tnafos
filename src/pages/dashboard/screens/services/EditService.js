@@ -1,122 +1,126 @@
-/**
-=========================================================
-* Soft UI Dashboard PRO React - v2.0.0
-=========================================================
+import React, { useState, useEffect } from 'react'
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+import { Form, Formik } from 'formik';
+import { useHistory, useParams } from 'react-router-dom';
 
-Coded by www.creative-tim.com
+import { Card, Grid } from '@mui/material';
 
- =========================================================
+import SuiBox from 'components/SuiBox';
+import SuiButton from 'components/SuiButton';
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-import React, { useState, useContext } from "react";
-import { AlertContext } from "../../../../context/AlertContext";
-import { AxiosInstance, media } from "../../../../api";
-import { useHistory, useParams } from "react-router-dom";
-// @mui material components
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import { checkout, initialValue, validation } from "./components/schema/updateServiceSchema";
+import ServiceForm from './components/ServiceForm';
 
-// Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import { AxiosInstance } from 'api';
 
-// EditProduct page components
-import ProductInfo from "./components/ProductInfo";
+import { apiGetData } from 'api/getData/getData';
+import { arrayConvertSelector } from 'utils/arrayConvertSelector';
+
+import { serviceTypeAsArray } from 'constants/service';
+
 
 const EditService = () => {
-  const [errors, setErrors] = useState(null);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const { alertProviderValue } = useContext(AlertContext);
-  const { setAlert } = alertProviderValue;
+  const { formId, formField } = checkout;
 
   const { uuid } = useParams();
   const history = useHistory();
 
-  const onUpdateService = async (dataToBeUpdataed) => {
-    setErrors(null);
-    setIsUpdating(true);
-    try {
-      const res = await AxiosInstance.put(
-        `/api/dashboard/service/${uuid}/update`,
-        dataToBeUpdataed
-      );
+  const [service, setService] = useState(null);
+  const [category, setCategory] = useState(null);
 
-      setIsUpdating(false);
-      setAlert({
-        message: "Service Has Been Updated!",
-        type: "info",
+  const getCategoryApi = async () => {
+    const res = await apiGetData('category');
+    if (res.success) {
+      const newData = [];
+      res.data.forEach(element => {
+        newData.push({
+          value: element.uuid,
+          label: element.name,
+        })
       });
-      history.push(`/dashboard/service`);
-    } catch (err) {
-      setIsUpdating(false);
-      setErrors(err.response.data.errors);
-      setAlert({
-        message: `${err.response.data.message}`,
-        type: "error",
-      });
+      setCategory(newData);
     }
+  }
+
+  const getService = async () => {
+    await AxiosInstance.get(`/api/dashboard/service/${uuid}`).then((res) => {
+      setService(res.data.data);
+    }).catch((err) => {
+      history.push('/dashboard/service')
+    })
+  }
+
+  const handleSubmit = async (values, actions) => {
+    let newData = values;
+
+    for (const key in values) {
+      if (typeof (values[key]) === "object")
+        newData[key] = values[key].value
+    }
+
+    await AxiosInstance.put(`/api/dashboard/service/${uuid}/update`, newData).then((res) => {
+      history.push(`/dashboard/service/${uuid}`);
+    }).catch((err) => {
+      let error = {}
+      for (const key in err.response.data.errors) {
+        let msg = ''
+        err.response.data.errors[key].forEach(element => {
+          msg += element + " "
+        });
+        error[key] = msg;
+      }
+      actions.setErrors(error);
+    })
   };
-  return (
-    <SuiBox my={4} mt={2}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} lg={4}>
-          <Card className="h-100">
-            <SuiBox p={3}>
-              <SuiTypography variant="h5" fontWeight="bold">
-                Service Image
-              </SuiTypography>
-              <SuiBox
-                component="img"
-                src={"https://bit.ly/sage-adebayo"}
-                alt="Segun Adebayo"
-                borderRadius="lg"
-                boxShadow="lg"
-                width="100%"
-                my={3}
-              />
-              <SuiBox
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <SuiBox mr={1}>
-                  <SuiButton variant="gradient" buttonColor="info" size="small">
-                    edit
-                  </SuiButton>
-                </SuiBox>
-              </SuiBox>
+
+  useEffect(() => {
+    getService();
+    getCategoryApi();
+  }, [])
+
+  return service && category && (
+    <SuiBox mt={1} mb={20}>
+      <Grid container justifyContent="center">
+        <Grid item xs={12} lg={8}>
+          <Card className="overflow-visible">
+            <SuiBox p={2}>
+              <Formik
+                initialValues={initialValue(service)}
+                validationSchema={validation[0]}
+                onSubmit={handleSubmit}>
+                {({ values, errors, touched, isSubmitting }) => {
+                  return (
+                    <Form id={formId} autoComplete="off">
+
+                      <SuiBox mb={3}>
+                        <Grid container spacing={3}>
+
+                          <Grid item xs={12}>
+                            <ServiceForm formData={{
+                              values,
+                              touched,
+                              formField,
+                              errors,
+                            }} category={category} serviceType={arrayConvertSelector(serviceTypeAsArray)} />
+
+                            <SuiButton
+                              disabled={isSubmitting}
+                              type="submit"
+                              variant="gradient"
+                              color="dark"
+                            >
+                              {isSubmitting ? "Loading..." : "Update"}
+                            </SuiButton>
+
+                          </Grid>
+                        </Grid>
+                      </SuiBox>
+                    </Form>
+                  )
+                }}
+              </Formik>
             </SuiBox>
           </Card>
-        </Grid>
-
-        <Grid item xs={12} lg={8}>
-          <SuiBox mb={3}>
-            <Grid container spacing={3} alignItems="center">
-              <Grid item xs={12} lg={6}>
-                <SuiTypography variant="h4" fontWeight="medium">
-                  Make the changes below to update service.
-                </SuiTypography>
-              </Grid>
-
-              <Grid item xs={12} lg={6}>
-                <SuiBox display="flex" justifyContent="flex-end" mr={2}>
-                  <SuiButton
-                    variant="gradient"
-                    buttonColor="info"
-                    onClick={onUpdateService}
-                  >
-                    save
-                  </SuiButton>
-                </SuiBox>
-              </Grid>
-            </Grid>
-          </SuiBox>
-          <ProductInfo />
         </Grid>
       </Grid>
     </SuiBox>

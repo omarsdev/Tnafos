@@ -13,7 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React from "react";
+import React from 'react'
+
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
@@ -45,10 +46,7 @@ function ApplicationsMenu({ routes, open, close, mobileMenu }) {
             <SuiBox display="flex" alignItems="center" py={0.25}>
               {typeof icon === "string" ? (
                 <Icon
-                  sx={({
-                    functions: { linearGradient },
-                    palette: { gradients, transparent },
-                  }) => ({
+                  sx={({ functions: { linearGradient }, palette: { gradients, transparent } }) => ({
                     backgroundImage: `${linearGradient(
                       gradients.info.main,
                       gradients.info.state

@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { forwardRef } from "react";
 
@@ -32,7 +32,7 @@ import { ErrorMessage, useField } from 'formik';
 import SuiBox from 'components/SuiBox';
 import SuiTypography from 'components/SuiTypography';
 
-const SuiSelect = forwardRef(({ name, size, error, success, label, ...rest }, ref) => {
+const SuiSelect = forwardRef(({ name, size, error, success, label, options, onChange, value, ...rest }, ref) => {
   const [field, meta, helpers] = useField(name)
   const { light } = colors;
 
@@ -65,10 +65,14 @@ const SuiSelect = forwardRef(({ name, size, error, success, label, ...rest }, re
         {...rest}
         name={name}
         value={field.value}
-        onChange={(value) => helpers.setValue(value)}
-        // options={options}
+        // value={field.value.value}
+        onChange={onChange ? onChange : (value) => {
+          helpers.setValue(value);
+          // helpers.setValue(value.value);
+        }}
+        options={options}
         onBlur={() => helpers.setTouched(true)}
-        // ref={ref}
+        ref={ref}
         styles={styles(size, error, success)}
         theme={(theme) => ({
           ...theme,

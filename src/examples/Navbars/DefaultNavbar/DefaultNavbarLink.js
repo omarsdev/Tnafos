@@ -13,7 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React from "react";
+import React from 'react'
+
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -57,9 +58,7 @@ function DefaultNavbarLink({
           {name}
         </SuiTypography>
         <SuiTypography variant="body2" color={light ? "white" : "dark"}>
-          <Icon sx={{ fontWeight: "bold", verticalAlign: "middle" }}>
-            keyboard_arrow_down
-          </Icon>
+          <Icon sx={{ fontWeight: "bold", verticalAlign: "middle" }}>keyboard_arrow_down</Icon>
         </SuiTypography>
       </SuiBox>
       {children && (

@@ -11,9 +11,7 @@ export const media = async (id, type, file) => {
       "/api/dashboard/media/store",
       formData
     );
-
-    console.log(res.data.data);
   } catch (err) {
-    console.log(err.response.data);
+
   }
 };

@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -55,19 +55,15 @@ function DefaultNavbar({ routes, transparent, light, action }) {
 
   const openPagesMenu = ({ currentTarget }) => setPagesMenu(currentTarget);
   const closePagesMenu = () => setPagesMenu(false);
-  const openAuthenticationMenu = ({ currentTarget }) =>
-    setAuthenticationMenu(currentTarget);
+  const openAuthenticationMenu = ({ currentTarget }) => setAuthenticationMenu(currentTarget);
   const closeAuthenticationMenu = () => setAuthenticationMenu(false);
-  const openEcommerceMenu = ({ currentTarget }) =>
-    setEcommerceMenu(currentTarget);
+  const openEcommerceMenu = ({ currentTarget }) => setEcommerceMenu(currentTarget);
   const closeEcommerceMenu = () => setEcommerceMenu(false);
-  const openApplicationsMenu = ({ currentTarget }) =>
-    setApplicationsMenu(currentTarget);
+  const openApplicationsMenu = ({ currentTarget }) => setApplicationsMenu(currentTarget);
   const closeApplicationsMenu = () => setApplicationsMenu(false);
   const openDocsMenu = ({ currentTarget }) => setDocsMenu(currentTarget);
   const closeDocsMenu = () => setDocsMenu(false);
-  const openMobileNavbar = ({ currentTarget }) =>
-    setMobileNavbar(currentTarget.parentNode);
+  const openMobileNavbar = ({ currentTarget }) => setMobileNavbar(currentTarget.parentNode);
   const closeMobileNavbar = () => setMobileNavbar(false);
 
   useEffect(() => {
@@ -99,11 +95,7 @@ function DefaultNavbar({ routes, transparent, light, action }) {
     <Container>
       <SuiBox
         py={1}
-        px={{
-          xs: transparent ? 4 : 5,
-          sm: transparent ? 2 : 5,
-          lg: transparent ? 0 : 5,
-        }}
+        px={{ xs: transparent ? 4 : 5, sm: transparent ? 2 : 5, lg: transparent ? 0 : 5 }}
         my={2}
         mx={3}
         width="calc(100% - 48px)"
@@ -116,36 +108,17 @@ function DefaultNavbar({ routes, transparent, light, action }) {
         position="absolute"
         left={0}
         zIndex={3}
-        sx={({
-          palette: { transparent: transparentColor, white },
-          functions: { rgba },
-        }) => ({
-          backgroundColor: transparent
-            ? transparentColor.main
-            : rgba(white.main, 0.8),
+        sx={({ palette: { transparent: transparentColor, white }, functions: { rgba } }) => ({
+          backgroundColor: transparent ? transparentColor.main : rgba(white.main, 0.8),
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <SuiBox
-          component={Link}
-          to="/"
-          py={transparent ? 1.5 : 0.75}
-          lineHeight={1}
-        >
-          <SuiTypography
-            variant="button"
-            fontWeight="bold"
-            color={light ? "white" : "dark"}
-          >
+        <SuiBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
+          <SuiTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
             Soft UI Dashboard PRO
           </SuiTypography>
         </SuiBox>
-        <SuiBox
-          color="inherit"
-          display={{ xs: "none", lg: "flex" }}
-          m={0}
-          p={0}
-        >
+        <SuiBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
           <DefaultNavbarLink
             name="pages"
             openHandler={openPagesMenu}
@@ -226,23 +199,11 @@ function DefaultNavbar({ routes, transparent, light, action }) {
         open={authenticationMenu}
         close={closeAuthenticationMenu}
       />
-      <EcommerceMenu
-        routes={routes}
-        open={ecommerceMenu}
-        close={closeEcommerceMenu}
-      />
-      <ApplicationsMenu
-        routes={routes}
-        open={applicationsMenu}
-        close={closeApplicationsMenu}
-      />
+      <EcommerceMenu routes={routes} open={ecommerceMenu} close={closeEcommerceMenu} />
+      <ApplicationsMenu routes={routes} open={applicationsMenu} close={closeApplicationsMenu} />
       <DocsMenu routes={routes} open={docsMenu} close={closeDocsMenu} />
       {mobileView && (
-        <DefaultNavbarMobile
-          routes={routes}
-          open={mobileNavbar}
-          close={closeMobileNavbar}
-        />
+        <DefaultNavbarMobile routes={routes} open={mobileNavbar} close={closeMobileNavbar} />
       )}
     </Container>
   );

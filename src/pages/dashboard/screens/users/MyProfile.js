@@ -14,10 +14,10 @@ const MyProfile = () => {
   const showProfile = async () => {
     try {
       const res = await AxiosInstance.get("/api/dashboard/user/my-profile/");
-      console.log(res.data.data);
+
       setProfile(res.data.data);
     } catch (err) {
-      console.log(err);
+
     }
   };
 

@@ -53,7 +53,6 @@ const Login = () => {
       history.push("/dashboard");
     } else {
       setError(res.error);
-      console.log(res.error)
       setLoadingButton(false);
     }
   }

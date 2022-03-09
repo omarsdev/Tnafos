@@ -3,7 +3,7 @@ import React from "react";
 import * as Yup from "yup";
 
 export const checkout = {
-  formId: "adduser-form",
+  formId: "update-user-form",
   formField: {
     first_name: {
       name: "first_name",
@@ -53,11 +53,11 @@ export const checkout = {
     },
     country_code: {
       name: "country_code",
-      label: "Country",
+      label: "Country Code",
       type: "text",
-      errorMsg: "Country is required.",
-      invalidMsg: "Your country doesn't match.",
-    },
+      placeholder: "Country Code Ex SA",
+      errorMsg: "Country code is required",
+    }
   },
 };
 
@@ -69,19 +69,20 @@ const {
     phone_number,
     password,
     password_confirmation,
-    country_code,
+    country_code
   },
 } = checkout;
 
+
 export const initialValue = {
-  [first_name.name]: "",
-  [last_name.name]: "",
-  [phone_number.name]: "",
-  [email.name]: "",
-  [password.name]: "",
-  [password_confirmation.name]: "",
-  [country_code.name]: "",
-};
+  first_name: "",
+  last_name: "",
+  email: "",
+  phone_number: "",
+  password: "",
+  password_confirmation: "",
+  country_code: "",
+}
 
 export const validation = [
   Yup.object().shape({
@@ -90,10 +91,10 @@ export const validation = [
     [phone_number.name]: Yup.string().required(phone_number.errorMsg),
     [email.name]: Yup.string().required(email.errorMsg).email(email.invalidMsg),
     [password.name]: Yup.string()
-      .required(password.errorMsg)
-      .min(6, password.invalidMsg),
+      .min(8, password.invalidMsg)
+      .required(password.errorMsg),
     [password_confirmation.name]: Yup.string()
-      .required(password_confirmation.errorMsg)
-      .oneOf([Yup.ref("password"), null], password_confirmation.invalidMsg),
+      .oneOf([Yup.ref("password"), null], password_confirmation.invalidMsg).required(password_confirmation.errorMsg),
+    // [country_code.name]: Yup.string().required(country_code.errorMsg),
   }),
 ];

@@ -41,7 +41,6 @@ const UserHome = () => {
       const res = await AxiosInstance.get("/api/dashboard/user");
       setUsersList(res.data.data);
     } catch (err) {
-      console.log(err);
     }
   };
 
@@ -70,6 +69,7 @@ const UserHome = () => {
                 variant="gradient"
                 buttonColor={"#F8B916"}
                 size="small"
+              // on_Hover={{ buttonColor: "#F8B916" }}
               >
                 + new user
               </SuiButton>

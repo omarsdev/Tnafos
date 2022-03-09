@@ -1,239 +1,108 @@
-/**
-=========================================================
-* Soft UI Dashboard PRO React - v2.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-material-ui
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
-// @mui material components
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import { Form, Formik } from "formik";
 
-import { useForm } from "react-hook-form";
-import { AlertContext } from "../../../../context/AlertContext";
-import { AxiosInstance } from "../../../../api/AxiosInstance";
-
-// Soft UI Dashboard PRO React components
 import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
 import SuiButton from "components/SuiButton";
-import SuiSelect from "components/SuiSelect";
 
-// NewProduct page components
-import FormField from "./components/FormField";
+import { AxiosInstance } from "api/AxiosInstance";
+import UserForm from "./components/UserForm";
+
+import { checkout, initialValue, validation } from "./components/schema/updateSchema";
 
 const EditUser = () => {
-  const { alertProviderValue } = useContext(AlertContext);
-  const { setAlert } = alertProviderValue;
+  const { formId, formField } = checkout;
 
   const { uuid } = useParams();
   const history = useHistory();
 
-  const { register, handleSubmit, reset, control } = useForm();
-  const [errors, setErrors] = useState(null);
-  const [countryList, setCountryList] = useState(null);
-
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [card, setCard] = useState(null);
-
-  const resetHooksForm = (data) => {
-    reset({
-      first_name: data.first_name,
-      last_name: data.last_name,
-      phone_number: data.phone_number,
-      email: data.email,
-      uuid: data.uuid,
-      country_code: data.country_code,
-    });
-  };
+  const [user, setUser] = useState(null);
 
   const getUser = async () => {
     try {
       const res = await AxiosInstance.get(`/api/dashboard/user/${uuid}`);
-      console.log(res);
-      resetHooksForm(res.data.data);
-      setCard(res.data.data);
-    } catch (err) {
-      console.log(err.response.data);
-      history.push("/dashboard/user");
-    }
+      setUser(res.data.data);
+    } catch (err) { }
   };
 
-  const onUpdateUserInfo = async (data) => {
-    setErrors(null);
-    setIsUpdating(true);
-    try {
-      const res = await AxiosInstance.put(
-        `/api/dashboard/user/${uuid}/update`,
-        data
-      );
-      console.log(res);
-      setIsUpdating(false);
-      setAlert({
-        message: "User Has Been Updated!",
-        type: "info",
-      });
-      history.push(`/dashboard/user`);
-    } catch (err) {
-      setIsUpdating(false);
-      setErrors(err.response.data);
-      setAlert({
-        message: `${err.response.data.message}`,
-        type: "error",
-      });
-    }
-  };
+  const handleSubmit = async (values, actions) => {
+    let newData = values;
 
-  const onCancelHandler = () => {
-    if (isUpdating) return;
-    resetHooksForm(card);
-    setErrors(null);
-  };
-
-  const getAllCountry = async () => {
-    try {
-      const res = await AxiosInstance.get("/api/country");
-      setCountryList(res.data.data);
-    } catch (err) {
-      console.log(err.response);
+    for (const key in values) {
+      if (typeof (values[key]) === "object")
+        newData[key] = values[key].value
     }
+
+    await AxiosInstance.put(`/api/dashboard/user/${uuid}/update`, newData).then((res) => {
+      setUser(res.data.data)
+      history.push("/dashboard/company");
+    }).catch((err) => {
+      let error = {}
+      for (const key in err.response.data.errors) {
+        let msg = ''
+        err.response.data.errors[key].forEach(element => {
+          msg += element + " "
+        });
+        error[key] = msg;
+      }
+      actions.setErrors(error);
+    })
   };
 
   useEffect(() => {
-    getAllCountry();
     getUser();
   }, []);
 
-  return !card ? null : (
+  return user && (
     <SuiBox mt={2} mb={20}>
       <Grid container justifyContent="center">
         <Grid item xs={12} lg={8}>
-          <Card className="overflow-visible">
-            <SuiBox p={2}>
-              <SuiBox>
-                <SuiTypography variant="h5">
-                  <strong>Fill up the fields below to update user</strong>
-                </SuiTypography>
+          {/* <Card className="overflow-visible"> */}
 
-                <SuiBox mt={4}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
-                      <FormField
-                        type="text"
-                        label="first name "
-                        defaultValue={card.first_name}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <FormField
-                        type="text"
-                        label="last name"
-                        defaultValue={card.last_name}
-                      />
-                    </Grid>
-                  </Grid>
-                </SuiBox>
+          <Formik
+            initialValues={initialValue(user)}
+            validationSchema={validation[0]}
+            onSubmit={handleSubmit}>
+            {({ values, errors, touched, isSubmitting }) => {
+              return (
+                <Form id={formId} autoComplete="off">
 
-                <SuiBox mt={3}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
-                      <FormField
-                        type="text"
-                        label="email"
-                        defaultValue={card.email}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <FormField
-                        type="text"
-                        label="phone number"
-                        defaultValue={card.phone_number}
-                      />
-                    </Grid>
-                  </Grid>
-                </SuiBox>
+                  <SuiBox mb={3}>
+                    <Grid container spacing={3}>
 
-                <SuiBox mt={3}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
-                      <FormField
-                        type="text"
-                        label="uuid"
-                        defaultValue={card.uuid}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <SuiBox mb={3}>
-                        <SuiBox
-                          mb={1}
-                          ml={0.5}
-                          lineHeight={0}
-                          display="inline-block"
+                      <Grid item xs={12}>
+                        <UserForm formData={{
+                          values,
+                          touched,
+                          formField,
+                          errors,
+                        }} />
+
+                        <SuiButton
+                          disabled={isSubmitting}
+                          type="submit"
+                          variant="gradient"
+                          color="dark"
                         >
-                          <SuiTypography
-                            component="label"
-                            variant="caption"
-                            fontWeight="bold"
-                            textTransform="capitalize"
-                          >
-                            Country Code
-                          </SuiTypography>
-                        </SuiBox>
-                        <SuiSelect
-                          defaultValue={{
-                            value: "short_name",
-                            label: "Select Country Code : ex SA",
-                          }}
-                          options={countryList}
-                        />
-                      </SuiBox>
+                          Update
+                        </SuiButton>
+
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </SuiBox>
-
-                <SuiBox
-                  display="flex"
-                  width="100%"
-                  my={2}
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <SuiBox mr={1}>
-                    <SuiButton
-                      variant="gradient"
-                      buttonColor="dark"
-                      onClick={handleSubmit(onUpdateUserInfo)}
-                    >
-                      add user
-                    </SuiButton>
                   </SuiBox>
+                </Form>
+              )
+            }}
+          </Formik>
 
-                  <SuiButton
-                    variant="gradient"
-                    buttonColor="secondary"
-                    onClick={onCancelHandler}
-                  >
-                    cancel
-                  </SuiButton>
-                </SuiBox>
-              </SuiBox>
-            </SuiBox>
-          </Card>
+          {/* </Card> */}
+
         </Grid>
       </Grid>
     </SuiBox>
-  );
-};
+  )
+}
 
-export default EditUser;
+export default EditUser

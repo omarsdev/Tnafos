@@ -1,7 +1,7 @@
 import { AxiosInstance } from "../AxiosInstance";
 
 export const apiAuth = async (data, type) => {
-  console.log(data)
+
   try {
     const res = await AxiosInstance.post(`/api/${type}`, data);
     return {
