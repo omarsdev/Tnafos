@@ -66,8 +66,8 @@ export const validation = [
   Yup.object().shape({
     [name.name]: Yup.string().required(name.errorMsg),
     [description.name]: Yup.string().required(description.errorMsg),
-    [category_id.name]: Yup.string().required(category_id.errorMsg),
+    [category_id.name]: Yup.object().required(category_id.errorMsg),
     [price.name]: Yup.string().required(price.errorMsg),
-    [type.name]: Yup.string().required(type.errorMsg),
+    [type.name]: Yup.object().required(type.errorMsg),
   }),
 ];
