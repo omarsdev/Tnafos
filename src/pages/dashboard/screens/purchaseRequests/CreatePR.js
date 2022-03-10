@@ -12,6 +12,7 @@ import { checkout, initialValue, validation } from "./components/schema/createPR
 import ContactForm from './components/CreatePRFrom';
 
 import { AxiosInstance } from 'api';
+import { VscLightbulb } from 'react-icons/vsc';
 
 const Create = () => {
   const { formId, formField } = checkout;
@@ -34,28 +35,31 @@ const Create = () => {
   }
 
   const handleSubmit = async (values, actions) => {
-    let newData = values;
+    const newData = {};
+    newData.lines = [];
 
+    values.lines.map((e) => {
+      newData.lines.push(e.value)
+    })
     for (const key in values) {
-      if (typeof (values[key]) === "object")
-        newData[key] = values[key].value
+      if (typeof (values[key]) !== "object")
+        newData[key] = values[key]
     }
 
-    console.log(newData)
-
-    // await AxiosInstance.post(`/api/dashboard/contact/create`, newData).then((res) => {
-    //   history.push("/dashboard/contact");
-    // }).catch((err) => {
-    //   let error = {}
-    //   for (const key in err.response.data.errors) {
-    //     let msg = ''
-    //     err.response.data.errors[key].forEach(element => {
-    //       msg += element + " "
-    //     });
-    //     error[key] = msg;
-    //   }
-    //   actions.setErrors(error);
-    // })
+    await AxiosInstance.post(`/api/dashboard/purchase-request/create`, newData).then((res) => {
+      history.push("/dashboard/purchase-request/incoming");
+    }).catch((err) => {
+      console.log(err.response)
+      let error = {}
+      for (const key in err.response.data.errors) {
+        let msg = ''
+        err.response.data.errors[key].forEach(element => {
+          msg += element + " "
+        });
+        error[key] = msg;
+      }
+      actions.setErrors(error);
+    })
   };
 
   useEffect(() => {

@@ -46,6 +46,6 @@ export const validation = [
   Yup.object().shape({
     [date.name]: Yup.date().required(date.errorMsg),
     [details.name]: Yup.string().required(details.errorMsg),
-    [lines.name]: Yup.array().required(lines.errorMsg),
+    // [lines.name]: Yup.array().required(lines.errorMsg),
   }),
 ];

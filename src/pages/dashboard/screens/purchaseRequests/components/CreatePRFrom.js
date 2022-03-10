@@ -60,11 +60,9 @@ const CreatePRFrom = ({ formData, services }) => {
             name="lines"
             options={services}
             label="Services List"
-            onChange={(value) => {
-              // const newData = linesV;
-              // newData.push(value)
-              setFieldValue("lines", value)
-            }}
+            // onChange={(value) => {
+            //   setFieldValue("lines", value)
+            // }}
             isMulti
           />
         </Grid>
