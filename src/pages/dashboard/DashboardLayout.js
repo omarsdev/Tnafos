@@ -72,7 +72,7 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     setTransparentSidenav(dispatch, false);
-    if (userData) return;
+    if (userData) { setLoading(false); return };
     fetchTokenMe();
     removeForwardSlashFromUrl();
   }, []);
