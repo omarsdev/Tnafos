@@ -33,8 +33,12 @@ import SuiBox from 'components/SuiBox';
 import SuiTypography from 'components/SuiTypography';
 
 const SuiSelect = forwardRef(({ name, size, error, success, label, options, onChange, value, ...rest }, ref) => {
-  const [field, meta, helpers] = useField(name)
+  const [field, meta, helpers] = useField(name);
   const { light } = colors;
+
+  useEffect(() => {
+    helpers.setTouched(false)
+  }, [field.value])
 
   return (
     // <Select
@@ -68,7 +72,6 @@ const SuiSelect = forwardRef(({ name, size, error, success, label, options, onCh
         // value={field.value.value}
         onChange={onChange ? onChange : (value) => {
           helpers.setValue(value);
-          // helpers.setValue(value.value);
         }}
         options={options}
         onBlur={() => helpers.setTouched(true)}

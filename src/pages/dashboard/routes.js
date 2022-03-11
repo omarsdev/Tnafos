@@ -229,6 +229,11 @@ const routes = [
         key: "estimates-outgoing",
         route: "/dashboard/estimates/outgoing"
       },
+      {
+        name: "Create",
+        key: "create",
+        route: "/dashboard/estimates/create"
+      },
     ],
   },
   {

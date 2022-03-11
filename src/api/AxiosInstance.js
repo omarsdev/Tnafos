@@ -19,6 +19,7 @@ AxiosInstance.interceptors.response.use(
     return Promise.resolve(response);
   },
   function (error) {
+    console.log(error.response)
     if (
       error.response?.data?.message?.toLowerCase() === "unauthorized" ||
       error.response?.data?.message?.toLowerCase() === "unauthenticated."
