@@ -188,6 +188,32 @@ const routes = [
       },
     ],
   },
+  {
+    type: "collapse",
+    name: "Lead",
+    key: "lead",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Lead",
+        key: "lead",
+        route: "/dashboard/lead"
+      },
+    ],
+  },
+  {
+    type: "collapse",
+    name: "Lead Source",
+    key: "lead-source",
+    icon: <Shop size="12px" />,
+    collapse: [
+      {
+        name: "Lead Source",
+        key: "lead-source",
+        route: "/dashboard/lead-source"
+      },
+    ],
+  },
   { type: "divider", key: "divider-2" },
   { type: "title", title: "Documents", key: "title-2" },
   {

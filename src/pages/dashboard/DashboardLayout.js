@@ -35,6 +35,8 @@ import UserLayout from "./screens/users/UserLayout";
 import { Box, CircularProgress } from "@mui/material";
 import CustomerLayout from "./screens/customer/CustomerLayout";
 import ContactLayout from "./screens/contact/ContactLayout";
+import LeadsLayout from "./screens/leads/LeadsLayout";
+import LeadSourceCreate from "./screens/leadSource/LeadSourceLayout";
 
 const DashboardLayout = () => {
   const match = useRouteMatch();
@@ -116,6 +118,8 @@ const DashboardLayout = () => {
         <Route path={`${match.path}/invoices`} component={InvoicesLayout} />
         <Route path={`${match.path}/customer`} component={CustomerLayout} />
         <Route path={`${match.path}/contact`} component={ContactLayout} />
+        <Route path={`${match.path}/lead`} component={LeadsLayout} />
+        <Route path={`${match.path}/lead-source`} component={LeadSourceCreate} />
       </Switch>
     </>
   ) : (

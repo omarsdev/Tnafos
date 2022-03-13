@@ -8,15 +8,18 @@ import { Card, Grid } from '@mui/material';
 import SuiBox from 'components/SuiBox';
 import SuiButton from 'components/SuiButton';
 
-import { checkout, initialValue, validation } from "./components/schema/createSchemaContact";
-import ContactForm from './components/ContactForm';
+import { checkout, initialValue, validation } from "./components/schema/createLeadsSchema";
+import LeadsForm from './components/LeadsForm';
 
 import { AxiosInstance } from 'api';
+import { apiGetData } from 'api/getData/getData';
 
-const ContactCreate = () => {
+const LeadsCreate = () => {
   const { formId, formField } = checkout;
 
   const history = useHistory();
+
+  const [userLeadData, setUserLeadData] = useState(null)
 
   const handleSubmit = async (values, actions) => {
     let newData = { ...values };
@@ -26,7 +29,7 @@ const ContactCreate = () => {
         newData[key] = values[key].value
     }
 
-    await AxiosInstance.post(`/api/dashboard/contact/create`, newData).then((res) => {
+    await AxiosInstance.post(`/api/dashboard/lead/create`, newData).then((res) => {
       history.push("/dashboard/contact");
     }).catch((err) => {
       let error = {}
@@ -41,7 +44,48 @@ const ContactCreate = () => {
     })
   };
 
-  return (
+  const getSourceAssignedHandler = async () => {
+    const [newUserData, newLeadSourceData, newCountryData] = [[], [], []];
+
+    const userData = await apiGetData('dashboard/user');
+    const leadSourceData = await apiGetData('dashboard/lead-source');
+    const countryData = await apiGetData('country');
+
+    if (userData.success && leadSourceData.success && countryData.success) {
+      userData.data.forEach(element => {
+        newUserData.push({
+          value: element.uuid,
+          label: `${element.first_name} ${element.last_name}`,
+        })
+      });
+
+      leadSourceData.data.forEach(element => {
+        newLeadSourceData.push({
+          value: element.uuid,
+          label: element.name,
+        })
+      });
+
+      countryData.data.forEach(element => {
+        newCountryData.push({
+          value: element.uuid,
+          label: element.name,
+        })
+      });
+
+      setUserLeadData({
+        user: newUserData,
+        leadSource: newLeadSourceData,
+        country: newCountryData,
+      })
+    }
+  }
+
+  useEffect(() => {
+    getSourceAssignedHandler();
+  }, [])
+
+  return userLeadData && (
     <SuiBox mt={1} mb={20}>
       <Grid container justifyContent="center">
         <Grid item xs={12} lg={8}>
@@ -59,13 +103,13 @@ const ContactCreate = () => {
                         <Grid container spacing={3}>
 
                           <Grid item xs={12}>
-                            <ContactForm formData={{
+                            <LeadsForm formData={{
                               values,
                               touched,
                               formField,
                               errors,
                               setFieldValue,
-                            }} />
+                            }} data={userLeadData} />
 
                             <SuiButton
                               disabled={isSubmitting}
@@ -91,4 +135,4 @@ const ContactCreate = () => {
   )
 }
 
-export default ContactCreate
+export default LeadsCreate

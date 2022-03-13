@@ -8,12 +8,12 @@ import { Card, Grid } from '@mui/material';
 import SuiBox from 'components/SuiBox';
 import SuiButton from 'components/SuiButton';
 
-import { checkout, initialValue, validation } from "./components/schema/createSchemaContact";
-import ContactForm from './components/ContactForm';
+import { checkout, initialValue, validation } from "./components/schema/createLeadsSourceSchema";
+import LeadsSourceForm from './components/LeadsSourceForm';
 
 import { AxiosInstance } from 'api';
 
-const ContactCreate = () => {
+const LeadSourceCreate = () => {
   const { formId, formField } = checkout;
 
   const history = useHistory();
@@ -21,13 +21,8 @@ const ContactCreate = () => {
   const handleSubmit = async (values, actions) => {
     let newData = { ...values };
 
-    for (const key in values) {
-      if (typeof (values[key]) === "object")
-        newData[key] = values[key].value
-    }
-
-    await AxiosInstance.post(`/api/dashboard/contact/create`, newData).then((res) => {
-      history.push("/dashboard/contact");
+    await AxiosInstance.post(`/api/dashboard/lead-source/create`, newData).then((res) => {
+      history.push("/dashboard/lead-source");
     }).catch((err) => {
       let error = {}
       for (const key in err.response.data.errors) {
@@ -59,7 +54,7 @@ const ContactCreate = () => {
                         <Grid container spacing={3}>
 
                           <Grid item xs={12}>
-                            <ContactForm formData={{
+                            <LeadsSourceForm formData={{
                               values,
                               touched,
                               formField,
@@ -91,4 +86,4 @@ const ContactCreate = () => {
   )
 }
 
-export default ContactCreate
+export default LeadSourceCreate
