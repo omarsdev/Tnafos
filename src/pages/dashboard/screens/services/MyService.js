@@ -80,8 +80,8 @@ const MyService = () => {
                 </SuiBox>
                 <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>
                   <SuiTypography variant="body2" textColor="text">
-                    <strong> Category-id: </strong>
-                    {service?.category.uuid}
+                    <strong> Category: </strong>
+                    {service?.category.name}
                   </SuiTypography>
                 </SuiBox>
                 <SuiBox color="text" fontSize="1.25rem" lineHeight={1}>

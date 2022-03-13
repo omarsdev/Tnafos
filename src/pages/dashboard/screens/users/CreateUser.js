@@ -72,7 +72,7 @@ const CreateUser = () => {
                               variant="gradient"
                               color="dark"
                             >
-                              {isSubmitting ? "Loading..." : "Update"}
+                              {isSubmitting ? "Loading..." : "Create"}
                             </SuiButton>
 
                           </Grid>
