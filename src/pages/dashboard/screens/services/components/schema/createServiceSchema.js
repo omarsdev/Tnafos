@@ -29,7 +29,7 @@ export const checkout = {
     price: {
       name: "price",
       label: "Price",
-      type: "text",
+      type: "number",
       placeholder: "eg. 150",
       errorMsg: "Price is required.",
     },
